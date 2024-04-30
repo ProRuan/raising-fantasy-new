@@ -1,0 +1,2 @@
+const NATIVE_WIDTH = 960;
+const NATIVE_HEIGHT = 540;
