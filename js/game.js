@@ -3,6 +3,8 @@ let keyboard;
 let mouseClick;
 let world;
 
+const SOURCE = new Source();
+
 
 function init() {
     setCanvas();
@@ -27,14 +29,16 @@ function setWorld(canvas, keyboard) {
 
 
 function processMouseMove(event) {
-    hover(event, 'CUP_BUTTON');
-    hover(event, 'SETTINGS_BUTTON');
+    hover(event, 'cupButton');
+    hover(event, 'settingsButton');
 }
 
 
 function hover(event, name) {
-    let targeted = (isMouseEvent(event, world[name])) ? true : false;
-    setWorldButtonValue(name, 'targeted', targeted);
+    if (world) {
+        let targeted = (isMouseEvent(event, world[name])) ? true : false;
+        setWorldButtonValue(name, 'targeted', targeted);
+    }
 }
 
 
@@ -47,8 +51,8 @@ function setWorldButtonValue(name, key, value) {
 
 
 function processMouseDown(event) {
-    click(event, 'CUP_BUTTON');
-    click(event, 'SETTINGS_BUTTON');
+    click(event, 'cupButton');
+    click(event, 'settingsButton');
 }
 
 

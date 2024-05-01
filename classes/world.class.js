@@ -1,19 +1,28 @@
 class World {
-    // only for testing!!!
-
+    startScreen = new StartScreen();
 
 
     constructor(canvas, keyboard) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
-
-        // only for testing!!!
-        this.setButtons();
+        this.setStartScreen();
 
         this.draw();
         this.control();
 
+    }
+
+
+    setStartScreen() {
+        this.loadObjectValues(this.startScreen);
+    }
+
+
+    loadObjectValues(object) {
+        for (const [key, value] of Object.entries(object)) {
+            this[key] = value;
+        }
     }
 
 
@@ -45,27 +54,19 @@ class World {
     }
 
 
-    // only for testing!!!
-    setButtons() {
-        this.PATH_BACKGROUND = './img/start_screen/background.png';
-        this.BACKGROUND = new DrawableObject(this.PATH_BACKGROUND, 0, 0);
-        this.PATH_CUP_BUTTON = './img/start_screen/cup_button.png';
-        this.CUP_BUTTON = new Button(this.PATH_CUP_BUTTON, 32, 32);
-        this.PATH_SETTINGS_BUTTON = './img/start_screen/settings_button.png';
-        this.SETTINGS_BUTTON = new Button(this.PATH_SETTINGS_BUTTON, 960 - 66 - 32, 32);
-    }
-
-
     addButtonsToMap() {
-        this.drawObject(this.BACKGROUND);
+        this.drawObject(this.background);
 
 
         this.drawHeadline();
         this.drawNewGameButton();
         this.drawStoryButton();
 
-        this.drawExtraButton(this.CUP_BUTTON);
-        this.drawExtraButton(this.SETTINGS_BUTTON);
+        this.drawExtraButton(this.cupButton);
+        this.drawExtraButton(this.settingsButton);
+
+
+        // this.drawObject(this.leaderboard);    // condition + class
 
 
     }
