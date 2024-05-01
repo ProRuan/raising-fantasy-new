@@ -26,14 +26,38 @@ function setWorld(canvas, keyboard) {
 }
 
 
+function processMouseMove(event) {
+    hover(event, 'CUP_BUTTON');
+    hover(event, 'SETTINGS_BUTTON');
+}
+
+
+function hover(event, name) {
+    let targeted = (isMouseEvent(event, world[name])) ? true : false;
+    setWorldButtonValue(name, 'targeted', targeted);
+}
+
+
+function setWorldButtonValue(name, key, value) {
+    world[name][key] = value;
+}
+
+
+// Make a class MouseEvent!!!
+
+
 function processMouseDown(event) {
-    mouseClick = getMouseXY(event);
-    // Make a class MouseClick
+    click(event, 'CUP_BUTTON');
+    click(event, 'SETTINGS_BUTTON');
+}
 
 
-    console.clear();
-    console.log(isMouseEvent(event, world.CUP_BUTTON));
-    console.log(isMouseEvent(event, world.SETTINGS_BUTTON));
+function click(event, name) {
+    if (isMouseEvent(event, world[name])) {
+        setWorldButtonValue(name, 'locked', true);
+    } else {
+        setWorldButtonValue(name, 'locked', false);
+    }
 }
 
 

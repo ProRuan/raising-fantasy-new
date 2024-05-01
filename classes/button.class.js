@@ -1,7 +1,7 @@
 class Button extends DrawableObject {
     indent = 4;
     targeted = false;
-    pressed = false;
+    locked = false;
 
 
     constructor(path, x, y) {
@@ -9,15 +9,8 @@ class Button extends DrawableObject {
     }
 
 
-    // resetHover
-
-    // draw Button with and without hover
-
-
-    drawHover(ctx) {
-        if (this.isTargeted()) {
-            this.setShadow(ctx, 'yellow', 16);
-        }
+    isActivated() {
+        return this.isTargeted() || this.isLocked();
     }
 
 
@@ -26,13 +19,11 @@ class Button extends DrawableObject {
     }
 
 
-    setShadow(ctx, color, blur) {
-        ctx.shadowColor = color;
-        ctx.shadowBlur = blur;
+    isLocked() {
+        return this.locked == true;
     }
 
 
-    // methods ... ???
 
 
     // class Path

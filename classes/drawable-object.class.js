@@ -94,6 +94,7 @@ class DrawableObject {
 
 
 
+    // only for testing!!!
     drawFrame(ctx) {
         if (this instanceof Button) {
             ctx.beginPath();
