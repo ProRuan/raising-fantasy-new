@@ -1,11 +1,34 @@
 class Button extends DrawableObject {
-    hover = false;
-    selected = false;
-    active = false;
+    indent = 4;
+    targeted = false;
+    pressed = false;
 
 
     constructor(path, x, y) {
         super(path, x, y);
+    }
+
+
+    // resetHover
+
+    // draw Button with and without hover
+
+
+    drawHover(ctx) {
+        if (this.isTargeted()) {
+            this.setShadow(ctx, 'yellow', 16);
+        }
+    }
+
+
+    isTargeted() {
+        return this.targeted == true;
+    }
+
+
+    setShadow(ctx, color, blur) {
+        ctx.shadowColor = color;
+        ctx.shadowBlur = blur;
     }
 
 
