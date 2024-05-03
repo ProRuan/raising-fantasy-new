@@ -1,7 +1,8 @@
 let canvas;
 let keyboard;
-let mouseClick;
-let world;
+let mouseClick;    // to edit + to move
+let startScreen;
+let levelScreen;
 
 const SOURCE = new Source();
 
@@ -9,22 +10,33 @@ const SOURCE = new Source();
 function init() {
     setCanvas();
     setKeyboard();
-    setWorld(canvas, keyboard);
+
+    setStartScreen();
+    // setLevelScreen();
 }
 
 
+// jsdoc
 function setCanvas() {
     canvas = document.getElementById('canvas');
 }
 
 
+// jsdoc
 function setKeyboard() {
     keyboard = new Keyboard();
 }
 
 
-function setWorld(canvas, keyboard) {
-    world = new World(canvas, keyboard);
+// jsdoc
+function setStartScreen() {
+    startScreen = new StartScreen(canvas, keyboard);
+}
+
+
+// jsdoc
+function setLevelScreen() {
+    levelScreen = new LevelScreen(canvas, keyboard);
 }
 
 
@@ -35,15 +47,15 @@ function processMouseMove(event) {
 
 
 function hover(event, name) {
-    if (world) {
-        let targeted = (isMouseEvent(event, world[name])) ? true : false;
-        setWorldButtonValue(name, 'targeted', targeted);
+    if (startScreen) {
+        let targeted = (isMouseEvent(event, startScreen[name])) ? true : false;
+        setstartScreenButtonValue(name, 'targeted', targeted);
     }
 }
 
 
-function setWorldButtonValue(name, key, value) {
-    world[name][key] = value;
+function setstartScreenButtonValue(name, key, value) {
+    startScreen[name][key] = value;
 }
 
 
@@ -57,10 +69,10 @@ function processMouseDown(event) {
 
 
 function click(event, name) {
-    if (isMouseEvent(event, world[name])) {
-        setWorldButtonValue(name, 'locked', true);
+    if (isMouseEvent(event, startScreen[name])) {
+        setstartScreenButtonValue(name, 'locked', true);
     } else {
-        setWorldButtonValue(name, 'locked', false);
+        setstartScreenButtonValue(name, 'locked', false);
     }
 }
 

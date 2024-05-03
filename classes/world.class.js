@@ -1,36 +1,24 @@
 class World {
-    startScreen = new StartScreen();
 
 
     constructor(canvas, keyboard) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
-        this.setStartScreen();
 
-        this.draw();
-        this.control();
+        // this.draw();
 
     }
 
 
-    setStartScreen() {
-        this.loadObjectValues(this.startScreen);
-    }
-
-
-    loadObjectValues(object) {
-        for (const [key, value] of Object.entries(object)) {
-            this[key] = value;
-        }
-    }
-
-
-    draw() {
+    // to edit
+    draw(object) {
         this.clearCanvas();
 
+        object;
         // only for testing!!!
-        this.addButtonsToMap();
+        // this.drawObject(this.cupButton);
+        // this.addButtonsToMap();
 
         this.redraw();
     }
@@ -54,46 +42,6 @@ class World {
     }
 
 
-    addButtonsToMap() {
-        this.drawObject(this.background);
-
-
-        this.drawHeadline();
-        this.drawNewGameButton();
-        this.drawStoryButton();
-
-        this.drawExtraButton(this.cupButton);
-        this.drawExtraButton(this.settingsButton);
-
-
-        // this.drawObject(this.leaderboard);    // condition + class
-
-
-    }
-
-
-
-    drawHeadline() {
-        this.setFont('80px Arial');
-        this.setTextAlign('center');
-        this.drawText('Raising Fantasy', canvas.width / 2, canvas.height / 2);
-    }
-
-
-    drawNewGameButton() {
-        this.setFont('24px Arial');
-        this.setTextAlign('center');
-        this.drawText('New game', canvas.width / 2, canvas.height / 4 * 3 - 36);
-    }
-
-
-    drawStoryButton() {
-        this.setFont('24px Arial');
-        this.setTextAlign('center');
-        this.drawText('Story', canvas.width / 2, canvas.height / 4 * 3 + 36);
-    }
-
-
     setFont(value) {
         this.ctx.font = value;
     }
@@ -109,29 +57,18 @@ class World {
     }
 
 
-    drawExtraButton(button) {
-        this.drawButtonShadow(button, 'yellow', 16);
-        this.drawObject(button);
-        this.drawButtonShadow(button);
-    }
-
-
-    drawButtonShadow(button, color, blur) {
-        if (button.isActivated()) {
-            this.setShadow(color, blur);
-        }
-    }
-
-
     setShadow(color, blur) {
         this.ctx.shadowColor = (color) ? color : 'rgba(0, 0, 0, 0)';
         this.ctx.shadowBlur = (blur) ? blur : 0;
     }
 
 
-    control() {
-        setInterval(() => {
+    setDisplayed(logical) {
+        this.displayed = logical;
+    }
 
-        }, 1000 / 60);
+
+    isDisplayed() {
+        return this.displayed == true;
     }
 }
