@@ -41,6 +41,7 @@ function setLevelScreen() {
 
 
 function processMouseMove(event) {
+    hover(event, 'xButton');
     hover(event, 'cupButton');
     hover(event, 'settingsButton');
 }
@@ -63,17 +64,22 @@ function setstartScreenButtonValue(name, key, value) {
 
 
 function processMouseDown(event) {
-    click(event, 'cupButton');
-    click(event, 'settingsButton');
+    clickExtraButton(event, 'cupButton');
+    clickExtraButton(event, 'settingsButton');
 }
 
 
-function click(event, name) {
+function clickExtraButton(event, name) {
     if (isMouseEvent(event, startScreen[name])) {
         setstartScreenButtonValue(name, 'locked', true);
-    } else {
+    } else if (isLeaderBoardToClose(event)) {
         setstartScreenButtonValue(name, 'locked', false);
     }
+}
+
+
+function isLeaderBoardToClose(event) {
+    return !isMouseEvent(event, startScreen.leaderboard) || isMouseEvent(event, startScreen.leaderboard) && isMouseEvent(event, startScreen.xButton);
 }
 
 

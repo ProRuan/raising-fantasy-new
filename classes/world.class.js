@@ -38,7 +38,7 @@ class World {
 
     drawObject(o) {
         o.draw(this.ctx);
-        o.drawFrame(this.ctx);    // only for testing!!!
+        // o.drawFrame(this.ctx);    // only for testing!!!
     }
 
 
@@ -70,5 +70,15 @@ class World {
 
     isDisplayed() {
         return this.displayed == true;
+    }
+
+
+    getBoolean(key) {
+        return this[key];
+    }
+
+
+    setBoolean(key, value) {
+        this[key] = value;
     }
 }

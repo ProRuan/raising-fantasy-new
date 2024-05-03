@@ -13,6 +13,8 @@ class StartScreen extends World {
         this.setDrawableObject('background', 0, 0);
         this.setButton('cupButton', 32, 32);
         this.setDrawableObject('leaderboard', canvas.width / 2 - 191, canvas.height / 2 - 220.5);
+        this.setXButton();
+
         this.setButton('settingsButton', canvas.width - 98, 32);    // own method?
 
 
@@ -29,6 +31,13 @@ class StartScreen extends World {
     }
 
 
+    setXButton() {
+        let x = this.leaderboard.xRight - 35;
+        let y = 540 - this.leaderboard.yTop - 64;
+        this.setButton('xButton', x, y);
+    }
+
+
     draw() {
         this.clearCanvas();
 
@@ -39,7 +48,8 @@ class StartScreen extends World {
             this.drawStoryButton();
             this.drawExtraButton(this.cupButton);
             this.drawExtraButton(this.settingsButton);
-            this.drawLeaderBoard();
+            this.drawLeaderboard();
+            this.drawXButton();
         }
 
         this.redraw();
@@ -81,9 +91,33 @@ class StartScreen extends World {
     }
 
 
-    drawLeaderBoard() {
-        if (this.leaderboardOpened == true) {
+    drawLeaderboard() {
+        if (this.isLeaderboardOpened()) {
             this.drawObject(this.leaderboard);
         }
     }
+
+
+    isLeaderboardOpened() {
+        return this.cupButton.isLocked() || this.settingsButton.isLocked();
+    }
+
+
+    drawXButton() {
+        if (this.isLeaderboardOpened()) {
+            this.drawExtraButton(this.xButton);
+        }
+    }
+
+
+    // drawStory() {
+    //     if (this.isStoryOpened()) {
+    //         this.drawObject(this.story);
+    //     }
+    // }
+
+
+    // isStoryOpened() {
+    //     return this.storyButton.isLocked();
+    // }
 }
