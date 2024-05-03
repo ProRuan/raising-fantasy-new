@@ -4,6 +4,9 @@ let mouseClick;    // to edit + to move
 let startScreen;
 let levelScreen;
 
+let music = 4;
+let sound = 7;
+
 const SOURCE = new Source();
 
 
@@ -41,9 +44,13 @@ function setLevelScreen() {
 
 
 function processMouseMove(event) {
-    hover(event, 'xButton');
     hover(event, 'cupButton');
     hover(event, 'settingsButton');
+    hover(event, 'xButton');
+    hover(event, 'lowMusicButton');
+    hover(event, 'highMusicButton');
+    hover(event, 'lowSoundButton');
+    hover(event, 'highSoundButton');
 }
 
 
@@ -66,6 +73,10 @@ function setstartScreenButtonValue(name, key, value) {
 function processMouseDown(event) {
     clickExtraButton(event, 'cupButton');
     clickExtraButton(event, 'settingsButton');
+    clickArrowButton(event, 'lowMusicButton');
+    clickArrowButton(event, 'highMusicButton');
+    clickArrowButton(event, 'lowSoundButton');
+    clickArrowButton(event, 'highSoundButton');
 }
 
 
@@ -80,6 +91,34 @@ function clickExtraButton(event, name) {
 
 function isLeaderBoardToClose(event) {
     return !isMouseEvent(event, startScreen.leaderboard) || isMouseEvent(event, startScreen.leaderboard) && isMouseEvent(event, startScreen.xButton);
+}
+
+
+function clickArrowButton(event, name) {
+    updateVolume(event, name);
+}
+
+
+function updateVolume(event, name) {
+    if (isMouseEvent(event, startScreen[name]) && isMatch(name, 'lowMusicButton') && isLarger(0, music)) {
+        music--;
+    } else if (isMouseEvent(event, startScreen[name]) && isMatch(name, 'highMusicButton') && isLarger(music, 9)) {
+        music++;
+    } else if (isMouseEvent(event, startScreen[name]) && isMatch(name, 'lowSoundButton') && isLarger(0, sound)) {
+        sound--;
+    } else if (isMouseEvent(event, startScreen[name]) && isMatch(name, 'highSoundButton') && isLarger(sound, 9)) {
+        sound++;
+    }
+}
+
+
+function isMatch(a, b) {
+    return a == b;
+}
+
+
+function isWordMatch(word, subword) {
+    return word.includes(subword);
 }
 
 

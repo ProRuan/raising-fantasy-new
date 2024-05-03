@@ -14,10 +14,11 @@ class StartScreen extends World {
         this.setButton('cupButton', 32, 32);
         this.setDrawableObject('leaderboard', canvas.width / 2 - 191, canvas.height / 2 - 220.5);
         this.setXButton();
-
         this.setButton('settingsButton', canvas.width - 98, 32);    // own method?
-
-
+        this.setArrowButton('lowMusicButton', 'arrowLeft', 25, 145.5);
+        this.setArrowButton('highMusicButton', 'arrowRight', 125, 145.5);
+        this.setArrowButton('lowSoundButton', 'arrowLeft', 25, 193.5);
+        this.setArrowButton('highSoundButton', 'arrowRight', 125, 193.5);
     }
 
 
@@ -33,8 +34,16 @@ class StartScreen extends World {
 
     setXButton() {
         let x = this.leaderboard.xRight - 35;
-        let y = 540 - this.leaderboard.yTop - 64;
+        let y = canvas.height - this.leaderboard.yTop - 64;
         this.setButton('xButton', x, y);
+    }
+
+
+    setArrowButton(name, key, a, b) {
+        let x = this.leaderboard.xLeft + this.leaderboard.width / 2 + a;
+        let y = canvas.height - this.leaderboard.yTop - b;
+        this[name] = new Button(SOURCE.image[key], x, y);
+        this[name].indent = - 4;
     }
 
 
@@ -49,7 +58,7 @@ class StartScreen extends World {
             this.drawExtraButton(this.cupButton);
             this.drawExtraButton(this.settingsButton);
             this.drawLeaderboard();
-            this.drawXButton();
+            this.drawSettingsButtons();
             this.drawSettingsText();
         }
 
@@ -95,6 +104,7 @@ class StartScreen extends World {
     drawLeaderboard() {
         if (this.isLeaderboardOpened()) {
             this.drawObject(this.leaderboard);
+            this.drawExtraButton(this.xButton);
         }
     }
 
@@ -104,25 +114,34 @@ class StartScreen extends World {
     }
 
 
-    drawXButton() {
-        if (this.isLeaderboardOpened()) {
+    drawSettingsButtons() {
+        if (this.AreSettingsOpened()) {
             this.drawExtraButton(this.xButton);
+            this.drawExtraButton(this.lowMusicButton);
+            this.drawExtraButton(this.highMusicButton);
+            this.drawExtraButton(this.lowSoundButton);
+            this.drawExtraButton(this.highSoundButton);
         }
     }
 
 
     drawSettingsText() {
-        this.setFont('28px Arial');
-        this.setTextAlign('center');
-        this.setFillStyle('white');
+        if (this.AreSettingsOpened()) {
+            this.setFont('28px Arial');
+            this.setTextAlign('center');
+            this.setFillStyle('white');
 
-        this.cupButton.locked = true;    // Please delete!!!
+            this.setTextVolume();    // rename
+            this.drawMusicText();
+            this.drawSoundText();
 
-        this.setTextVolume();    // rename
-        this.drawMusicText();
-        this.setTextSound();    // rename
+            this.setFillStyle();
+        }
+    }
 
-        this.setFillStyle();
+
+    AreSettingsOpened() {
+        return this.settingsButton.isLocked();
     }
 
 
@@ -137,9 +156,8 @@ class StartScreen extends World {
         this.setFont('20px Arial');
         this.setTextAlign('left');
         this.drawVolumeText('Music', 64, 144);
-        this.drawVolumeText('4', 64 + this.leaderboard.width / 2, 144);
-        this.drawVolumeText('Sound', 64, 192);
-        this.drawVolumeText('7', 64 + this.leaderboard.width / 2, 192);
+        this.setTextAlign('center');
+        this.drawVolumeText(`${music}`, 80 + this.leaderboard.width / 2, 144);
     }
 
 
@@ -150,7 +168,11 @@ class StartScreen extends World {
     }
 
 
-    setTextSound() {
-
+    drawSoundText() {
+        this.setFont('20px Arial');
+        this.setTextAlign('left');
+        this.drawVolumeText('Sound', 64, 192);
+        this.setTextAlign('center');
+        this.drawVolumeText(`${sound}`, 80 + this.leaderboard.width / 2, 192);
     }
 }
