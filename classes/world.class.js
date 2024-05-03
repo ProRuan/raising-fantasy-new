@@ -52,6 +52,11 @@ class World {
     }
 
 
+    setFillStyle(value) {
+        this.ctx.fillStyle = (value) ? value : '#000000';
+    }
+
+
     drawText(text, x, y) {
         this.ctx.fillText(text, x, y);
     }

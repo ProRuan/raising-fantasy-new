@@ -50,6 +50,7 @@ class StartScreen extends World {
             this.drawExtraButton(this.settingsButton);
             this.drawLeaderboard();
             this.drawXButton();
+            this.drawSettingsText();
         }
 
         this.redraw();
@@ -110,14 +111,46 @@ class StartScreen extends World {
     }
 
 
-    // drawStory() {
-    //     if (this.isStoryOpened()) {
-    //         this.drawObject(this.story);
-    //     }
-    // }
+    drawSettingsText() {
+        this.setFont('28px Arial');
+        this.setTextAlign('center');
+        this.setFillStyle('white');
+
+        this.cupButton.locked = true;    // Please delete!!!
+
+        this.setTextVolume();    // rename
+        this.drawMusicText();
+        this.setTextSound();    // rename
+
+        this.setFillStyle();
+    }
 
 
-    // isStoryOpened() {
-    //     return this.storyButton.isLocked();
-    // }
+    setTextVolume() {
+        let x = this.leaderboard.xLeft + this.leaderboard.width / 2;
+        let y = this.leaderboard.yTop + 96;
+        this.drawText('Volume', x, y);
+    }
+
+
+    drawMusicText() {
+        this.setFont('20px Arial');
+        this.setTextAlign('left');
+        this.drawVolumeText('Music', 64, 144);
+        this.drawVolumeText('4', 64 + this.leaderboard.width / 2, 144);
+        this.drawVolumeText('Sound', 64, 192);
+        this.drawVolumeText('7', 64 + this.leaderboard.width / 2, 192);
+    }
+
+
+    drawVolumeText(text, a, b) {
+        let x = this.leaderboard.xLeft + a;
+        let y = this.leaderboard.yTop + b;
+        this.drawText(text, x, y);
+    }
+
+
+    setTextSound() {
+
+    }
 }
