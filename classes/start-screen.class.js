@@ -58,6 +58,7 @@ class StartScreen extends World {
             this.drawExtraButton(this.cupButton);
             this.drawExtraButton(this.settingsButton);
             this.drawLeaderboard();
+            this.drawHighScore();
             this.drawSettingsButtons();
             this.drawSettingsText();
         }
@@ -114,6 +115,56 @@ class StartScreen extends World {
     }
 
 
+    drawHighScore() {
+        if (this.isHighScoreOpened()) {
+            this.drawLeaderboardHeadline('gold', 'Best Result', 96);
+            this.drawResult('best', 144);
+            this.drawLeaderboardHeadline('white', 'Last Result', 272);
+            this.drawResult('last', 320);
+            this.setFillStyle();
+        }
+    }
+
+
+    isHighScoreOpened() {
+        return this.cupButton.isLocked();
+    }
+
+
+    drawLeaderboardHeadline(color, text, y) {
+        this.setFontTextAlign('28px Arial', 'center');
+        this.setFillStyle(color);
+        this.setLeaderboardHeadline(text, y);
+    }
+
+
+    setLeaderboardHeadline(text, b) {
+        let x = this.leaderboard.xLeft + this.leaderboard.width / 2;
+        let y = this.leaderboard.yTop + b;
+        this.drawText(text, x, y);
+    }
+
+
+    // to edit
+    drawResult(key, y) {
+        this.setFont('20px Arial');
+        this.drawHighScoreText('Coins:', y, result[key].coins);
+        this.drawHighScoreText('Leaves:', y + 36, result[key].leaves);
+        this.drawHighScoreText('Time:', y + 72, result[key].time);    // to edit
+    }
+
+
+    drawHighScoreText(name, y, result) {
+        this.setTextAlign('left');
+        this.drawLeaderboardText(name, 64, y);
+        this.setTextAlign('center');
+
+        // to edit (var one method up)
+        // mouse cursor:pointer
+        this.drawLeaderboardText(`${result} / 20`, 80 + this.leaderboard.width / 2, y);
+    }
+
+
     drawSettingsButtons() {
         if (this.AreSettingsOpened()) {
             this.drawExtraButton(this.xButton);
@@ -127,14 +178,10 @@ class StartScreen extends World {
 
     drawSettingsText() {
         if (this.AreSettingsOpened()) {
-            this.setFont('28px Arial');
-            this.setTextAlign('center');
-            this.setFillStyle('white');
-
-            this.setTextVolume();    // rename
-            this.drawMusicText();
-            this.drawSoundText();
-
+            this.setFontTextAlign('28px Arial', 'center');
+            this.drawLeaderboardHeadline('white', 'Volume', 96);
+            this.drawVolumeText('Music', 144, music);
+            this.drawVolumeText('Sound', 192, sound);
             this.setFillStyle();
         }
     }
@@ -145,34 +192,17 @@ class StartScreen extends World {
     }
 
 
-    setTextVolume() {
-        let x = this.leaderboard.xLeft + this.leaderboard.width / 2;
-        let y = this.leaderboard.yTop + 96;
-        this.drawText('Volume', x, y);
-    }
-
-
-    drawMusicText() {
-        this.setFont('20px Arial');
-        this.setTextAlign('left');
-        this.drawVolumeText('Music', 64, 144);
+    drawVolumeText(text, y, type) {
+        this.setFontTextAlign('20px Arial', 'left');
+        this.drawLeaderboardText(text, 64, y);
         this.setTextAlign('center');
-        this.drawVolumeText(`${music}`, 80 + this.leaderboard.width / 2, 144);
+        this.drawLeaderboardText(`${type}`, 80 + this.leaderboard.width / 2, y);
     }
 
 
-    drawVolumeText(text, a, b) {
+    drawLeaderboardText(text, a, b) {
         let x = this.leaderboard.xLeft + a;
         let y = this.leaderboard.yTop + b;
         this.drawText(text, x, y);
-    }
-
-
-    drawSoundText() {
-        this.setFont('20px Arial');
-        this.setTextAlign('left');
-        this.drawVolumeText('Sound', 64, 192);
-        this.setTextAlign('center');
-        this.drawVolumeText(`${sound}`, 80 + this.leaderboard.width / 2, 192);
     }
 }

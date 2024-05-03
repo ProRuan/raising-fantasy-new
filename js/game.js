@@ -4,6 +4,19 @@ let mouseClick;    // to edit + to move
 let startScreen;
 let levelScreen;
 
+let result = {
+    'best': {
+        'coins': 19,
+        'leaves': 17,
+        'time': '7 min 13 s'
+    },
+    'last': {
+        'coins': 17,
+        'leaves': 15,
+        'time': '9 min 31 s'
+    }
+};
+
 let music = 4;
 let sound = 7;
 

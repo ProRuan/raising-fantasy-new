@@ -38,12 +38,18 @@ class World {
 
     drawObject(o) {
         o.draw(this.ctx);
-        o.drawFrame(this.ctx);    // only for testing!!!
+        // o.drawFrame(this.ctx);    // only for testing!!!
     }
 
 
-    setFont(value) {
-        this.ctx.font = value;
+    setFontTextAlign(font, value) {
+        this.setFont(font);
+        this.setTextAlign(value);
+    }
+
+
+    setFont(font) {
+        this.ctx.font = font;
     }
 
 
