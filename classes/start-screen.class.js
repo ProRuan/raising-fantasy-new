@@ -70,7 +70,7 @@ class StartScreen extends World {
     drawMainText(font, text, y) {
         this.setFont(font);
         this.setTextAlign('center');
-        this.drawText(text, canvas.width / 2, y);
+        super.drawText(text, canvas.width / 2, y);
     }
 
 
@@ -127,7 +127,7 @@ class StartScreen extends World {
     setHeadline(text, b) {
         let x = this.leaderboard.xLeft + this.leaderboard.width / 2;
         let y = this.leaderboard.yTop + b;
-        this.drawText(text, x, y);
+        super.drawText(text, x, y);
     }
 
 
@@ -141,9 +141,9 @@ class StartScreen extends World {
 
     drawResultText(name, y, result) {
         this.setTextAlign('left');
-        this.drawLeaderboardText(name, 64, y);    // rename!!!
+        this.drawText(name, 64, y);    // rename!!!
         this.setTextAlign('center');
-        this.drawLeaderboardText(result, 80 + this.leaderboard.width / 2, y);
+        this.drawText(result, 80 + this.leaderboard.width / 2, y);
     }
 
 
@@ -176,15 +176,15 @@ class StartScreen extends World {
 
     drawVolumeText(text, y, type) {
         this.setFontTextAlign('20px Arial', 'left');
-        this.drawLeaderboardText(text, 64, y);
+        this.drawText(text, 64, y);
         this.setTextAlign('center');
-        this.drawLeaderboardText(`${type}`, 80 + this.leaderboard.width / 2, y);
+        this.drawText(`${type}`, 80 + this.leaderboard.width / 2, y);
     }
 
 
-    drawLeaderboardText(text, a, b) {
+    drawText(text, a, b) {
         let x = this.leaderboard.xLeft + a;
         let y = this.leaderboard.yTop + b;
-        this.drawText(text, x, y);
+        super.drawText(text, x, y);
     }
 }

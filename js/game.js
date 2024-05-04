@@ -62,6 +62,7 @@ function processMouseMove(event) {
     for (let i = 0; i < buttons.length; i++) {
         let button = buttons[i] + 'Button';
         hover(event, button);
+        // updateCursor(button);
     }
 }
 
@@ -70,6 +71,8 @@ function hover(event, name) {
     if (startScreen) {
         let targeted = (isMouseEvent(event, startScreen[name])) ? true : false;
         setstartScreenButtonValue(name, 'targeted', targeted);
+
+        // (startScreen.cupButton.isTargeted()) ? setCursor('pointer') : setCursor('initial');
     }
 }
 

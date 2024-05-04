@@ -6,6 +6,7 @@ class Button extends DrawableObject {
 
     constructor(path, x, y) {
         super(path, x, y);
+        // this.updateCursor();
     }
 
 
@@ -21,6 +22,13 @@ class Button extends DrawableObject {
 
     isLocked() {
         return this.locked == true;
+    }
+
+
+    updateCursor() {
+        setInterval(() => {
+            (this.isTargeted()) ? setCursor('pointer') : false;
+        }, 1000 / 60);
     }
 
 
