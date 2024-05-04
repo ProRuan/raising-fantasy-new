@@ -57,13 +57,12 @@ function setLevelScreen() {
 
 
 function processMouseMove(event) {
-    hover(event, 'cupButton');
-    hover(event, 'settingsButton');
-    hover(event, 'xButton');
-    hover(event, 'lowMusicButton');
-    hover(event, 'highMusicButton');
-    hover(event, 'lowSoundButton');
-    hover(event, 'highSoundButton');
+    let buttons = ['cup', 'settings', 'x', 'lowMusic', 'highMusic', 'lowSound', 'highSound'];
+
+    for (let i = 0; i < buttons.length; i++) {
+        let button = buttons[i] + 'Button';
+        hover(event, button);
+    }
 }
 
 
@@ -77,6 +76,11 @@ function hover(event, name) {
 
 function setstartScreenButtonValue(name, key, value) {
     startScreen[name][key] = value;
+}
+
+
+function setCursor(value) {
+    document.getElementById('canvas').style.cursor = value;
 }
 
 

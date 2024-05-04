@@ -52,9 +52,9 @@ class StartScreen extends World {
 
         if (this.isDisplayed()) {
             this.drawObject(this.background);
-            this.drawHeadline();
-            this.drawNewGameButton();
-            this.drawStoryButton();
+            this.drawMainText('80px Arial', 'Raising Fantasy', canvas.height / 2);
+            this.drawMainText('24px Arial', 'New game', canvas.height / 4 * 3 - 36);
+            this.drawMainText('24px Arial', 'Story', canvas.height / 4 * 3 + 36);
             this.drawExtraButton(this.cupButton);
             this.drawExtraButton(this.settingsButton);
             this.drawLeaderboard();
@@ -67,24 +67,10 @@ class StartScreen extends World {
     }
 
 
-    drawHeadline() {
-        this.setFont('80px Arial');
+    drawMainText(font, text, y) {
+        this.setFont(font);
         this.setTextAlign('center');
-        this.drawText('Raising Fantasy', canvas.width / 2, canvas.height / 2);
-    }
-
-
-    drawNewGameButton() {
-        this.setFont('24px Arial');
-        this.setTextAlign('center');
-        this.drawText('New game', canvas.width / 2, canvas.height / 4 * 3 - 36);
-    }
-
-
-    drawStoryButton() {
-        this.setFont('24px Arial');
-        this.setTextAlign('center');
-        this.drawText('Story', canvas.width / 2, canvas.height / 4 * 3 + 36);
+        this.drawText(text, canvas.width / 2, y);
     }
 
 
@@ -117,9 +103,9 @@ class StartScreen extends World {
 
     drawHighScore() {
         if (this.isHighScoreOpened()) {
-            this.drawLeaderboardHeadline('gold', 'Best Result', 96);
+            this.drawHeadline('gold', 'Best Result', 96);
             this.drawResult('best', 144);
-            this.drawLeaderboardHeadline('white', 'Last Result', 272);
+            this.drawHeadline('white', 'Last Result', 272);
             this.drawResult('last', 320);
             this.setFillStyle();
         }
@@ -131,47 +117,43 @@ class StartScreen extends World {
     }
 
 
-    drawLeaderboardHeadline(color, text, y) {
+    drawHeadline(color, text, y) {
         this.setFontTextAlign('28px Arial', 'center');
         this.setFillStyle(color);
-        this.setLeaderboardHeadline(text, y);
+        this.setHeadline(text, y);
     }
 
 
-    setLeaderboardHeadline(text, b) {
+    setHeadline(text, b) {
         let x = this.leaderboard.xLeft + this.leaderboard.width / 2;
         let y = this.leaderboard.yTop + b;
         this.drawText(text, x, y);
     }
 
 
-    // to edit
     drawResult(key, y) {
         this.setFont('20px Arial');
-        this.drawHighScoreText('Coins:', y, result[key].coins);
-        this.drawHighScoreText('Leaves:', y + 36, result[key].leaves);
-        this.drawHighScoreText('Time:', y + 72, result[key].time);    // to edit
+        this.drawResultText('Coins:', y, result[key].coins + ' / 20');
+        this.drawResultText('Leaves:', y + 36, result[key].leaves + ' / 18');
+        this.drawResultText('Time:', y + 72, result[key].time);
     }
 
 
-    drawHighScoreText(name, y, result) {
+    drawResultText(name, y, result) {
         this.setTextAlign('left');
-        this.drawLeaderboardText(name, 64, y);
+        this.drawLeaderboardText(name, 64, y);    // rename!!!
         this.setTextAlign('center');
-
-        // to edit (var one method up)
-        // mouse cursor:pointer
-        this.drawLeaderboardText(`${result} / 20`, 80 + this.leaderboard.width / 2, y);
+        this.drawLeaderboardText(result, 80 + this.leaderboard.width / 2, y);
     }
 
 
     drawSettingsButtons() {
         if (this.AreSettingsOpened()) {
-            this.drawExtraButton(this.xButton);
-            this.drawExtraButton(this.lowMusicButton);
-            this.drawExtraButton(this.highMusicButton);
-            this.drawExtraButton(this.lowSoundButton);
-            this.drawExtraButton(this.highSoundButton);
+            let keys = ['x', 'lowMusic', 'highMusic', 'lowSound', 'highSound'];
+            for (let i = 0; i < keys.length; i++) {
+                let key = keys[i] + 'Button';
+                this.drawExtraButton(this[key]);
+            }
         }
     }
 
@@ -179,7 +161,7 @@ class StartScreen extends World {
     drawSettingsText() {
         if (this.AreSettingsOpened()) {
             this.setFontTextAlign('28px Arial', 'center');
-            this.drawLeaderboardHeadline('white', 'Volume', 96);
+            this.drawHeadline('white', 'Volume', 96);
             this.drawVolumeText('Music', 144, music);
             this.drawVolumeText('Sound', 192, sound);
             this.setFillStyle();
