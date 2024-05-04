@@ -1,6 +1,6 @@
 class ImagePath {
     background = './img/start_screen/background.png';
-    storybg = './img/start_screen/story_bg.png';
+    storyBg = './img/start_screen/story_bg.png';
     cupButton = './img/start_screen/cup_button.png';
     leaderboard = './img/start_screen/leaderboard.png';
     xButton = './img/start_screen/x_button.png';

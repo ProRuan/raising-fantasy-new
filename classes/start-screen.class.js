@@ -8,6 +8,7 @@ class StartScreen extends World {
     }
 
 
+    // to edit
     setStartScreen() {
         this.setDisplayed(true);
         this.setDrawableObject('background', 0, 0);
@@ -19,6 +20,7 @@ class StartScreen extends World {
         this.setArrowButton('highMusicButton', 'arrowRight', 125, 145.5);
         this.setArrowButton('lowSoundButton', 'arrowLeft', 25, 193.5);
         this.setArrowButton('highSoundButton', 'arrowRight', 125, 193.5);
+        this.setDrawableObject('storyBg', canvas.width / 2 - 138, 540 - canvas.height / 2 - 166.5);
     }
 
 
@@ -61,6 +63,21 @@ class StartScreen extends World {
             this.drawHighScore();
             this.drawSettingsButtons();
             this.drawSettingsText();
+
+
+            this.drawObject(this.storyBg);
+            this.setFontTextAlign('bold 28px Arial', 'center');
+            super.drawText('Story', this.storyBg.x + this.storyBg.width / 2, 160);
+            this.setFontTextAlign('20px Arial', 'left');
+            super.drawText('Play as a knight and', this.storyBg.x + 40, 208);
+            super.drawText('explore a new world.', this.storyBg.x + 40, 238);
+
+            this.setFont('bold 20px Arial');
+            super.drawText('Quests', this.storyBg.x + 40, 298);
+            this.setFont('20px Arial');
+            super.drawText('1. Collect all coins.', this.storyBg.x + 40, 333);
+            super.drawText('2. Collect all leaves.', this.storyBg.x + 40, 363);
+            super.drawText('3. Defeat the endboss.', this.storyBg.x + 40, 393);
         }
 
         this.redraw();
