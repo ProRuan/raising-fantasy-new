@@ -4,9 +4,8 @@ class Button extends DrawableObject {
     locked = false;
 
 
-    constructor(path, x, y) {
-        super(path, x, y);
-        // this.updateCursor();
+    constructor(path, x, y, z) {
+        super(path, x, y, z);
     }
 
 

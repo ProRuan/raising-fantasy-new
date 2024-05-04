@@ -2,9 +2,8 @@ class DrawableObject {
     indent = 0;
 
 
-    constructor(path, x, y) {
-        this.setImage(path);
-        this.setPosition(x, y);
+    constructor(path, x, y, z) {
+        this.setUp(path, x, y, z);
     }
 
 
@@ -38,6 +37,16 @@ class DrawableObject {
 
     get yBottom() {
         return this.y + (this.height - this.indent);
+    }
+
+
+    setUp(path, x, y, z) {
+        if (isNaN(path)) {
+            this.setImage(path);
+            this.setPosition(x, y);
+        } else {
+            this.setBorder(path, x, y, z);
+        }
     }
 
 
@@ -84,6 +93,14 @@ class DrawableObject {
 
     setY(y) {
         this.y = canvas.height - this.height - y;
+    }
+
+
+    setBorder(x, y, width, height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
     }
 
 

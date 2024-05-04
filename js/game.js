@@ -4,7 +4,7 @@ let mouseClick;    // to edit + to move
 let startScreen;
 let levelScreen;
 
-let buttons = ['cup', 'settings', 'x', 'lowMusic', 'highMusic', 'lowSound', 'highSound'];
+let buttons = ['newGame', 'story', 'cup', 'settings', 'x', 'lowMusic', 'highMusic', 'lowSound', 'highSound'];
 let result = {
     'best': {
         'coins': 19,
@@ -111,6 +111,7 @@ function setCursor(value) {
 
 
 function processMouseDown(event) {
+    clickExtraButton(event, 'storyButton');
     clickExtraButton(event, 'cupButton');
     clickExtraButton(event, 'settingsButton');
     clickArrowButton(event, 'lowMusicButton');

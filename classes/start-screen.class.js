@@ -21,6 +21,18 @@ class StartScreen extends World {
         this.setArrowButton('lowSoundButton', 'arrowLeft', 25, 193.5);
         this.setArrowButton('highSoundButton', 'arrowRight', 125, 193.5);
         this.setDrawableObject('storyBg', canvas.width / 2 - 138, 540 - canvas.height / 2 - 166.5);
+
+        this.setMainButton('newGameButton', 68, 340);
+        this.setMainButton('storyButton', 40, 412);
+    }
+
+
+    // to move
+    setMainButton(key, a, b) {
+        let x = this.canvas.width / 2 - a;
+        let y = b;
+        let width = 2 * a;
+        this[key] = new Button(x, y, width, 44);
     }
 
 
@@ -55,7 +67,9 @@ class StartScreen extends World {
         if (this.isDisplayed()) {
             this.drawObject(this.background);
             this.drawMainText('80px Arial', 'Raising Fantasy', canvas.height / 2);
+            // this.setShadow('green', 16);
             this.drawMainText('24px Arial', 'New game', canvas.height / 4 * 3 - 36);
+            // this.setShadow();
             this.drawMainText('24px Arial', 'Story', canvas.height / 4 * 3 + 36);
             this.drawExtraButton(this.cupButton);
             this.drawExtraButton(this.settingsButton);
@@ -65,46 +79,48 @@ class StartScreen extends World {
             this.drawSettingsText();
 
 
-            this.newGameButton = {
-                'xLeft': this.canvas.width / 2 - 64,
-                'xRight': this.canvas.width / 2 + 64,
-                'yTop': 344,
-                'yBottom': 80
+            // draw xButton only on condition!!!
+
+
+            // this.drawTextFrame(this.newGameButton);
+            // this.drawTextFrame(this.storyButton);
+
+            if (this.storyButton.isLocked()) {
+                this.drawObject(this.storyBg);
+                this.setFontTextAlign('bold 28px Arial', 'center');
+                super.drawText('Story', this.storyBg.x + this.storyBg.width / 2, 160);
+                this.setFontTextAlign('20px Arial', 'left');
+                super.drawText('Play as a knight and', this.storyBg.x + 40, 208);
+                super.drawText('explore a new world.', this.storyBg.x + 40, 238);
+
+                this.setFont('bold 20px Arial');
+                super.drawText('Quests', this.storyBg.x + 40, 298);
+                this.setFont('20px Arial');
+                super.drawText('1. Collect all coins.', this.storyBg.x + 40, 333);
+                super.drawText('2. Collect all leaves.', this.storyBg.x + 40, 363);
+                super.drawText('3. Defeat the endboss.', this.storyBg.x + 40, 393);
             }
-
-
-            this.storyButton = {
-                'xLeft': this.canvas.width / 2 - 64,
-                'xRight': this.canvas.width / 2 + 64,
-                'yTop': 416,
-                'yBottom': 452
-            }
-
-
-            this.ctx.beginPath();
-            this.ctx.lineWidth = '1';
-            this.ctx.strokeStyle = 'blue';
-            this.ctx.rect(canvas.width / 2 - 64, 344, 128, 36);
-            this.ctx.rect(canvas.width / 2 - 64, 344 + 72, 132, 36);
-            this.ctx.stroke();
-
-
-            // this.drawObject(this.storyBg);
-            // this.setFontTextAlign('bold 28px Arial', 'center');
-            // super.drawText('Story', this.storyBg.x + this.storyBg.width / 2, 160);
-            // this.setFontTextAlign('20px Arial', 'left');
-            // super.drawText('Play as a knight and', this.storyBg.x + 40, 208);
-            // super.drawText('explore a new world.', this.storyBg.x + 40, 238);
-
-            // this.setFont('bold 20px Arial');
-            // super.drawText('Quests', this.storyBg.x + 40, 298);
-            // this.setFont('20px Arial');
-            // super.drawText('1. Collect all coins.', this.storyBg.x + 40, 333);
-            // super.drawText('2. Collect all leaves.', this.storyBg.x + 40, 363);
-            // super.drawText('3. Defeat the endboss.', this.storyBg.x + 40, 393);
         }
 
         this.redraw();
+    }
+
+
+    drawTextFrame(o) {
+        this.ctx.beginPath();
+        this.ctx.lineWidth = '1';
+        this.ctx.strokeStyle = 'blue';
+        this.ctx.rect(o.xLeft, o.yTop, o.xRight - o.xLeft, o.yBottom - o.yTop);
+        this.ctx.stroke();
+
+
+        // to remove!!!
+        // this.ctx.beginPath();
+        // this.ctx.lineWidth = '1';
+        // this.ctx.strokeStyle = 'blue';
+        // this.ctx.rect(canvas.width / 2 - 64, 344, 128, 36);
+        // this.ctx.rect(canvas.width / 2 - 36, 344 + 72, 72, 36);
+        // this.ctx.stroke();
     }
 
 
