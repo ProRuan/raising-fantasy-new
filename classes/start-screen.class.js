@@ -14,13 +14,16 @@ class StartScreen extends World {
         this.setDrawableObject('background', 0, 0);
         this.setButton('cupButton', 32, 32);
         this.setDrawableObject('leaderboard', canvas.width / 2 - 191, canvas.height / 2 - 220.5);
-        this.setXButton();
+
+        this.setCloseButton('xButton', this.leaderboard.xRight - 35, this.leaderboard.yTop + 64);
+
         this.setButton('settingsButton', canvas.width - 98, 32);    // own method?
         this.setArrowButton('lowMusicButton', 'arrowLeft', 25, 145.5);
         this.setArrowButton('highMusicButton', 'arrowRight', 125, 145.5);
         this.setArrowButton('lowSoundButton', 'arrowLeft', 25, 193.5);
         this.setArrowButton('highSoundButton', 'arrowRight', 125, 193.5);
         this.setDrawableObject('storyBg', canvas.width / 2 - 138, 540 - canvas.height / 2 - 166.5);
+        this.setCloseButton('coinButton', this.storyBg.xRight - 44, this.storyBg.yTop + 44);
 
         this.setMainButton('newGameButton', 68, 340);
         this.setMainButton('storyButton', 40, 412);
@@ -46,10 +49,10 @@ class StartScreen extends World {
     }
 
 
-    setXButton() {
-        let x = this.leaderboard.xRight - 35;
-        let y = canvas.height - this.leaderboard.yTop - 64;
-        this.setButton('xButton', x, y);
+    setCloseButton(name, a, b) {
+        let x = a;
+        let y = canvas.height - b;
+        this.setButton(name, x, y);
     }
 
 
@@ -67,10 +70,8 @@ class StartScreen extends World {
         if (this.isDisplayed()) {
             this.drawObject(this.background);
             this.drawMainText('80px Arial', 'Raising Fantasy', canvas.height / 2);
-            // this.setShadow('green', 16);
-            this.drawMainText('24px Arial', 'New game', canvas.height / 4 * 3 - 36);
-            // this.setShadow();
-            this.drawMainText('24px Arial', 'Story', canvas.height / 4 * 3 + 36);
+            this.drawTextButton(this.newGameButton, 'New game', canvas.height / 4 * 3 - 36);
+            this.drawTextButton(this.storyButton, 'Story', canvas.height / 4 * 3 + 36);
             this.drawExtraButton(this.cupButton);
             this.drawExtraButton(this.settingsButton);
             this.drawLeaderboard();
@@ -79,7 +80,9 @@ class StartScreen extends World {
             this.drawSettingsText();
 
 
-            // draw xButton only on condition!!!
+            // draw xButton, coinButton only on condition!!!
+            // click newGame / story / x / coinButton only if leaderboard and storybg are at the right state!!!
+            // drawExtraButton() + shadow Parm!!!
 
 
             // this.drawTextFrame(this.newGameButton);
@@ -87,6 +90,11 @@ class StartScreen extends World {
 
             if (this.storyButton.isLocked()) {
                 this.drawObject(this.storyBg);
+
+                this.drawExtraButton(this.coinButton);
+                // this.setXButton(this.storyBg.xRight - 44, this.storyBg.yTop + 44);
+                // this.drawObject(this.xButton);
+
                 this.setFontTextAlign('bold 28px Arial', 'center');
                 super.drawText('Story', this.storyBg.x + this.storyBg.width / 2, 160);
                 this.setFontTextAlign('20px Arial', 'left');
@@ -121,6 +129,13 @@ class StartScreen extends World {
         // this.ctx.rect(canvas.width / 2 - 64, 344, 128, 36);
         // this.ctx.rect(canvas.width / 2 - 36, 344 + 72, 72, 36);
         // this.ctx.stroke();
+    }
+
+
+    drawTextButton(button, name, y) {
+        this.drawButtonShadow(button, 'forestgreen', 16);
+        this.drawMainText('24px Arial', name, y);
+        this.setShadow(button);
     }
 
 

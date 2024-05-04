@@ -4,7 +4,7 @@ let mouseClick;    // to edit + to move
 let startScreen;
 let levelScreen;
 
-let buttons = ['newGame', 'story', 'cup', 'settings', 'x', 'lowMusic', 'highMusic', 'lowSound', 'highSound'];
+let buttons = ['newGame', 'story', 'coin', 'cup', 'settings', 'x', 'lowMusic', 'highMusic', 'lowSound', 'highSound'];
 let result = {
     'best': {
         'coins': 19,
@@ -111,6 +111,7 @@ function setCursor(value) {
 
 
 function processMouseDown(event) {
+    closeStoryBg(event);
     clickExtraButton(event, 'storyButton');
     clickExtraButton(event, 'cupButton');
     clickExtraButton(event, 'settingsButton');
@@ -121,12 +122,24 @@ function processMouseDown(event) {
 }
 
 
+function closeStoryBg(event) {
+    if (isStoryBgToClose(event)) {
+        setstartScreenButtonValue('storyButton', 'locked', false);
+    }
+}
+
+
 function clickExtraButton(event, name) {
     if (isMouseEvent(event, startScreen[name])) {
         setstartScreenButtonValue(name, 'locked', true);
     } else if (isLeaderBoardToClose(event)) {
         setstartScreenButtonValue(name, 'locked', false);
     }
+}
+
+
+function isStoryBgToClose(event) {
+    return !isMouseEvent(event, startScreen.storyBg) || isMouseEvent(event, startScreen.storyBg) && isMouseEvent(event, startScreen.coinButton);
 }
 
 

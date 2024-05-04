@@ -38,7 +38,7 @@ class World {
 
     drawObject(o) {
         o.draw(this.ctx);
-        // o.drawFrame(this.ctx);    // only for testing!!!
+        o.drawFrame(this.ctx);    // only for testing!!!
     }
 
 
