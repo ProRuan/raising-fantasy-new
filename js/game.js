@@ -4,6 +4,7 @@ let mouseClick;    // to edit + to move
 let startScreen;
 let levelScreen;
 
+let buttons = ['cup', 'settings', 'x', 'lowMusic', 'highMusic', 'lowSound', 'highSound'];
 let result = {
     'best': {
         'coins': 19,
@@ -19,6 +20,8 @@ let result = {
 
 let music = 4;
 let sound = 7;
+
+pointer = false;
 
 const SOURCE = new Source();
 
@@ -57,12 +60,9 @@ function setLevelScreen() {
 
 
 function processMouseMove(event) {
-    let buttons = ['cup', 'settings', 'x', 'lowMusic', 'highMusic', 'lowSound', 'highSound'];
-
     for (let i = 0; i < buttons.length; i++) {
         let button = buttons[i] + 'Button';
         hover(event, button);
-        // updateCursor(button);
     }
 }
 
@@ -71,14 +71,34 @@ function hover(event, name) {
     if (startScreen) {
         let targeted = (isMouseEvent(event, startScreen[name])) ? true : false;
         setstartScreenButtonValue(name, 'targeted', targeted);
-
-        // (startScreen.cupButton.isTargeted()) ? setCursor('pointer') : setCursor('initial');
+        updateCursor(event);
     }
 }
 
 
 function setstartScreenButtonValue(name, key, value) {
     startScreen[name][key] = value;
+}
+
+
+function updateCursor(event) {
+    pointer = getPointer(event);
+    (pointer) ? setCursor('pointer') : setCursor('default');
+}
+
+
+function getPointer(event) {
+    return (isBottonTargeted(event)) ? true : false;
+}
+
+
+function isBottonTargeted(event) {
+    for (let i = 0; i < buttons.length; i++) {
+        let button = buttons[i] + 'Button';
+        if (isMouseEvent(event, startScreen[button])) {
+            return true;
+        }
+    }
 }
 
 
