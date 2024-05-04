@@ -65,19 +65,43 @@ class StartScreen extends World {
             this.drawSettingsText();
 
 
-            this.drawObject(this.storyBg);
-            this.setFontTextAlign('bold 28px Arial', 'center');
-            super.drawText('Story', this.storyBg.x + this.storyBg.width / 2, 160);
-            this.setFontTextAlign('20px Arial', 'left');
-            super.drawText('Play as a knight and', this.storyBg.x + 40, 208);
-            super.drawText('explore a new world.', this.storyBg.x + 40, 238);
+            this.newGameButton = {
+                'xLeft': this.canvas.width / 2 - 64,
+                'xRight': this.canvas.width / 2 + 64,
+                'yTop': 344,
+                'yBottom': 80
+            }
 
-            this.setFont('bold 20px Arial');
-            super.drawText('Quests', this.storyBg.x + 40, 298);
-            this.setFont('20px Arial');
-            super.drawText('1. Collect all coins.', this.storyBg.x + 40, 333);
-            super.drawText('2. Collect all leaves.', this.storyBg.x + 40, 363);
-            super.drawText('3. Defeat the endboss.', this.storyBg.x + 40, 393);
+
+            this.storyButton = {
+                'xLeft': this.canvas.width / 2 - 64,
+                'xRight': this.canvas.width / 2 + 64,
+                'yTop': 416,
+                'yBottom': 452
+            }
+
+
+            this.ctx.beginPath();
+            this.ctx.lineWidth = '1';
+            this.ctx.strokeStyle = 'blue';
+            this.ctx.rect(canvas.width / 2 - 64, 344, 128, 36);
+            this.ctx.rect(canvas.width / 2 - 64, 344 + 72, 132, 36);
+            this.ctx.stroke();
+
+
+            // this.drawObject(this.storyBg);
+            // this.setFontTextAlign('bold 28px Arial', 'center');
+            // super.drawText('Story', this.storyBg.x + this.storyBg.width / 2, 160);
+            // this.setFontTextAlign('20px Arial', 'left');
+            // super.drawText('Play as a knight and', this.storyBg.x + 40, 208);
+            // super.drawText('explore a new world.', this.storyBg.x + 40, 238);
+
+            // this.setFont('bold 20px Arial');
+            // super.drawText('Quests', this.storyBg.x + 40, 298);
+            // this.setFont('20px Arial');
+            // super.drawText('1. Collect all coins.', this.storyBg.x + 40, 333);
+            // super.drawText('2. Collect all leaves.', this.storyBg.x + 40, 363);
+            // super.drawText('3. Defeat the endboss.', this.storyBg.x + 40, 393);
         }
 
         this.redraw();
