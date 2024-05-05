@@ -74,8 +74,10 @@ function closeStoryBg(event) {
 function clickExtraButton(event, name) {
     if (isMouseEvent(event, startScreen[name])) {
         setstartScreenButtonValue(name, 'locked', true);
+        // setstartScreenButtonValue(name, 'selected', true);
     } else if (isLeaderBoardToClose(event)) {
         setstartScreenButtonValue(name, 'locked', false);
+        // setstartScreenButtonValue(name, 'selected', false);
     }
 }
 

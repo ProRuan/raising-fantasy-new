@@ -30,12 +30,15 @@ class StartScreen extends World {
     }
 
 
-    // to move
+    // to edit + to move
     setMainButton(key, a, b) {
         let x = this.canvas.width / 2 - a;
         let y = b;
         let width = 2 * a;
         this[key] = new Button(x, y, width, 44);
+        if (key == 'newGameButton') {
+            this[key].selected = true;
+        }
     }
 
 

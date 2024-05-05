@@ -2,6 +2,7 @@ class Button extends DrawableObject {
     indent = 4;
     reachable = true;
     targeted = false;
+    selected = false;
     locked = false;
 
 
@@ -21,7 +22,7 @@ class Button extends DrawableObject {
 
 
     isTargeted() {
-        return this.targeted == true;
+        return this.targeted == true || this.selected == true;
     }
 
 

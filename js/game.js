@@ -59,6 +59,9 @@ function setLevelScreen() {
 }
 
 
+let mainButtons = ['newGameButton', 'storyButton', 'cupButton', 'settingsButton'];
+let mainButtonCounter = 0;
+
 
 function processKeydown(event) {
     if (startScreen.displayed) {
@@ -68,6 +71,63 @@ function processKeydown(event) {
         console.log(startScreen.keyboard[code].keydown);
         startScreen.keyboard[code].keydown = true;
         console.log(startScreen.keyboard[code].keydown);
+
+        if (code == 'arrowDown' && mainButtonCounter < mainButtons.length - 1) {
+            startScreen[mainButtons[mainButtonCounter]].selected = false;
+            mainButtonCounter++;
+            startScreen[mainButtons[mainButtonCounter]].selected = true;
+            console.log(mainButtonCounter, mainButtons[mainButtonCounter]);
+        }
+
+        if (code == 'arrowUp' && 0 < mainButtonCounter) {
+            startScreen[mainButtons[mainButtonCounter]].selected = false;
+            mainButtonCounter--;
+            startScreen[mainButtons[mainButtonCounter]].selected = true;
+            console.log(mainButtonCounter, mainButtons[mainButtonCounter]);
+        }
+
+
+        if (code == 'enter' && startScreen.newGameButton.selected == true) {
+            console.log('start new game ...');
+            // startScreen.newGameButton.locked = true;
+        }
+        if (code == 'enter' && startScreen.storyButton.selected == true) {
+            if (startScreen.cupButton.locked == true) {
+                startScreen.cupButton.locked = false;
+            }
+            if (startScreen.settingsButton.locked == true) {
+                startScreen.settingsButton.locked = false;
+            }
+            startScreen.storyButton.locked = true;
+        }
+        if (code == 'enter' && startScreen.cupButton.selected == true) {
+            if (startScreen.storyButton.locked == true) {
+                startScreen.storyButton.locked = false;
+            }
+            if (startScreen.settingsButton.locked == true) {
+                startScreen.settingsButton.locked = false;
+            }
+            startScreen.cupButton.locked = true;
+        }
+        if (code == 'enter' && startScreen.settingsButton.selected == true) {
+            if (startScreen.storyButton.locked == true) {
+                startScreen.storyButton.locked = false;
+            }
+            if (startScreen.cupButton.locked == true) {
+                startScreen.cupButton.locked = false;
+            }
+            startScreen.settingsButton.locked = true;
+        }
+        if ((code == 'backspace' || code == 'escape' || code == 'keyX') && startScreen.storyButton.locked == true) {
+            startScreen.storyButton.locked = false;
+        }
+        if ((code == 'backspace' || code == 'escape' || code == 'keyX') && startScreen.cupButton.locked == true) {
+            startScreen.cupButton.locked = false;
+        }
+        if ((code == 'backspace' || code == 'escape' || code == 'keyX') && startScreen.settingsButton.locked == true) {
+            startScreen.settingsButton.locked = false;
+        }
+
     }
 }
 
@@ -80,6 +140,7 @@ function processKeyup(event) {
         console.log(startScreen.keyboard[code].keydown);
         startScreen.keyboard[code].keydown = false;
         console.log(startScreen.keyboard[code].keydown);
+
     }
 }
 
