@@ -77,14 +77,14 @@ function processKeydown(event) {
         console.log(startScreen.keyboard[code].keydown);
 
 
-        if (code == 'arrowDown' && mainButtonCounter < mainButtons.length - 1) {
+        if (code == 'arrowDown' && mainButtonCounter < mainButtons.length - 1 && !startScreen.isStoryBgOpened() && !startScreen.isLeaderboardOpened()) {
             startScreen[mainButtons[mainButtonCounter]].selected = false;
             mainButtonCounter++;
             startScreen[mainButtons[mainButtonCounter]].selected = true;
             console.log(mainButtonCounter, mainButtons[mainButtonCounter]);
         }
 
-        if (code == 'arrowUp' && 0 < mainButtonCounter) {
+        if (code == 'arrowUp' && 0 < mainButtonCounter && !startScreen.isStoryBgOpened() && !startScreen.isLeaderboardOpened()) {
             startScreen[mainButtons[mainButtonCounter]].selected = false;
             mainButtonCounter--;
             startScreen[mainButtons[mainButtonCounter]].selected = true;
