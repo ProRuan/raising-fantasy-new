@@ -72,8 +72,8 @@ class StartScreen extends World {
             this.drawMainText('80px Arial', 'Raising Fantasy', canvas.height / 2);
             this.drawTextButton(this.newGameButton, 'New game', canvas.height / 4 * 3 - 36);
             this.drawTextButton(this.storyButton, 'Story', canvas.height / 4 * 3 + 36);
-            this.drawExtraButton(this.cupButton);
-            this.drawExtraButton(this.settingsButton);
+            this.drawExtraButton(this.cupButton, 'yellow');
+            this.drawExtraButton(this.settingsButton, 'yellow');
             this.drawLeaderboard();
             this.drawHighScore();
             this.drawSettingsButtons();
@@ -94,7 +94,7 @@ class StartScreen extends World {
 
                 this.drawObject(this.storyBg);
 
-                this.drawExtraButton(this.coinButton);
+                this.drawExtraButton(this.coinButton, 'red');
                 // this.setXButton(this.storyBg.xRight - 44, this.storyBg.yTop + 44);
                 // this.drawObject(this.xButton);
 
@@ -172,8 +172,8 @@ class StartScreen extends World {
     }
 
 
-    drawExtraButton(button) {
-        this.drawButtonShadow(button, 'yellow', 16);
+    drawExtraButton(button, color) {
+        this.drawButtonShadow(button, color, 16);
         this.drawObject(button);
         this.drawButtonShadow(button);
     }
@@ -195,7 +195,7 @@ class StartScreen extends World {
             this.highSoundButton.reachable = true;
 
             this.drawObject(this.leaderboard);
-            this.drawExtraButton(this.xButton);
+            this.drawExtraButton(this.xButton, 'yellow');
         } else {
             this.xButton.reachable = false;
             this.lowMusicButton.reachable = false;
@@ -260,10 +260,10 @@ class StartScreen extends World {
 
     drawSettingsButtons() {
         if (this.AreSettingsOpened()) {
-            let keys = ['x', 'lowMusic', 'highMusic', 'lowSound', 'highSound'];
+            let keys = ['lowMusic', 'highMusic', 'lowSound', 'highSound'];
             for (let i = 0; i < keys.length; i++) {
                 let key = keys[i] + 'Button';
-                this.drawExtraButton(this[key]);
+                this.drawExtraButton(this[key], 'white');
             }
         }
     }

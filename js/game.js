@@ -70,16 +70,16 @@ function processMouseMove(event) {
 function hover(event, name) {
     if (startScreen) {
         let targeted = (isMouseEvent(event, startScreen[name])) ? true : false;
-        setstartScreenButtonValue(name, 'targeted', targeted);
+        if (startScreen[name].isReachable()) {
+            setstartScreenButtonValue(name, 'targeted', targeted);
+        }
         updateCursor(event);
     }
 }
 
 
 function setstartScreenButtonValue(name, key, value) {
-    if (startScreen[name].isReachable()) {
-        startScreen[name][key] = value;
-    }
+    startScreen[name][key] = value;
 }
 
 
