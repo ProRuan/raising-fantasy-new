@@ -68,7 +68,7 @@ function processMouseMove(event) {
 
 
 function hover(event, name) {
-    if (startScreen) {
+    if (startScreen.displayed) {
         let targeted = (isMouseEvent(event, startScreen[name])) ? true : false;
         if (startScreen[name].isReachable()) {
             setstartScreenButtonValue(name, 'targeted', targeted);
@@ -113,20 +113,17 @@ function setCursor(value) {
 
 
 function processMouseDown(event) {
-    clickArrowButton(event, 'lowMusicButton');
-    clickArrowButton(event, 'highMusicButton');
-    clickArrowButton(event, 'lowSoundButton');
-    clickArrowButton(event, 'highSoundButton');
-
-
-    closeStoryBg(event);
-
-    clickExtraButton(event, 'cupButton');
-    clickExtraButton(event, 'settingsButton');
-
-    clickExtraButton(event, 'storyButton');
-
-
+    if (startScreen.displayed) {
+        clickArrowButton(event, 'lowMusicButton');
+        clickArrowButton(event, 'highMusicButton');
+        clickArrowButton(event, 'lowSoundButton');
+        clickArrowButton(event, 'highSoundButton');
+        closeStoryBg(event);
+        clickExtraButton(event, 'cupButton');
+        clickExtraButton(event, 'settingsButton');
+        clickExtraButton(event, 'storyButton');
+        // newGameButton still missing ...
+    }
 }
 
 
