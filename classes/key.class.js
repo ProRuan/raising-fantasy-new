@@ -1,4 +1,5 @@
 class Key {
+    name;
     code;
     keydown = false;
     timeStamp = new Date().getTime();
@@ -6,7 +7,8 @@ class Key {
     doubleClick = false;    // in use?
 
 
-    constructor(code) {
+    constructor(name, code) {
+        this.name = name;
         this.code = code;
     }
 }
