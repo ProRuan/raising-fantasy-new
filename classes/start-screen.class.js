@@ -94,7 +94,7 @@ class StartScreen extends World {
 
                 this.drawObject(this.storyBg);
 
-                this.drawExtraButton(this.coinButton, 'red');
+                this.drawExtraButton(this.coinButton, 'olive');
                 // this.setXButton(this.storyBg.xRight - 44, this.storyBg.yTop + 44);
                 // this.drawObject(this.xButton);
 
@@ -195,7 +195,7 @@ class StartScreen extends World {
             this.highSoundButton.reachable = true;
 
             this.drawObject(this.leaderboard);
-            this.drawExtraButton(this.xButton, 'yellow');
+            this.drawExtraButton(this.xButton, 'lightcyan');
         } else {
             this.xButton.reachable = false;
             this.lowMusicButton.reachable = false;
