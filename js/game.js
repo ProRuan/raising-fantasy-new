@@ -4,7 +4,8 @@ let mouseClick;    // to edit + to move
 let startScreen;
 let levelScreen;
 
-let buttons = ['newGame', 'story', 'coin', 'cup', 'settings', 'x', 'lowMusic', 'highMusic', 'lowSound', 'highSound'];
+let counter = 0;
+let buttons = ['newGame', 'story', 'cup', 'settings', 'coin', 'x', 'lowMusic', 'highMusic', 'lowSound', 'highSound'];
 let result = {
     'best': {
         'coins': 19,

@@ -8,6 +8,12 @@ class Button extends DrawableObject {
 
     constructor(path, x, y, z) {
         super(path, x, y, z);
+        this.setId();
+    }
+
+
+    setId() {
+        this.id = counter++;
     }
 
 
