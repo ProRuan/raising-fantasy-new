@@ -88,7 +88,10 @@ class StartScreen extends World {
             // this.drawTextFrame(this.newGameButton);
             // this.drawTextFrame(this.storyButton);
 
-            if (this.storyButton.isLocked()) {
+
+            if (this.isStoryBgOpened()) {
+                this.coinButton.reachable = true;
+
                 this.drawObject(this.storyBg);
 
                 this.drawExtraButton(this.coinButton);
@@ -107,10 +110,33 @@ class StartScreen extends World {
                 super.drawText('1. Collect all coins.', this.storyBg.x + 40, 333);
                 super.drawText('2. Collect all leaves.', this.storyBg.x + 40, 363);
                 super.drawText('3. Defeat the endboss.', this.storyBg.x + 40, 393);
+            } else {
+                this.coinButton.reachable = false;
             }
+
+            this.setNewGameAndStoryButton();
+
+
         }
 
         this.redraw();
+    }
+
+
+    // plus condition isDisplayed() for all buttons!!!
+    setNewGameAndStoryButton() {
+        if (this.isStoryBgOpened() || this.isLeaderboardOpened()) {
+            this.newGameButton.reachable = false;
+            this.storyButton.reachable = false;
+        } else {
+            this.newGameButton.reachable = true;
+            this.storyButton.reachable = true;
+        }
+    }
+
+
+    isStoryBgOpened() {
+        return this.storyButton.isLocked();
     }
 
 
@@ -162,8 +188,21 @@ class StartScreen extends World {
 
     drawLeaderboard() {
         if (this.isLeaderboardOpened()) {
+            this.xButton.reachable = true;
+            this.lowMusicButton.reachable = true;
+            this.highMusicButton.reachable = true;
+            this.lowSoundButton.reachable = true;
+            this.highSoundButton.reachable = true;
+
             this.drawObject(this.leaderboard);
             this.drawExtraButton(this.xButton);
+        } else {
+            this.xButton.reachable = false;
+            this.lowMusicButton.reachable = false;
+            this.highMusicButton.reachable = false;
+            this.lowSoundButton.reachable = false;
+            this.highSoundButton.reachable = false;
+
         }
     }
 

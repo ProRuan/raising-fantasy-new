@@ -1,11 +1,17 @@
 class Button extends DrawableObject {
     indent = 4;
+    reachable = true;
     targeted = false;
     locked = false;
 
 
     constructor(path, x, y, z) {
         super(path, x, y, z);
+    }
+
+
+    isReachable() {
+        return this.reachable == true;
     }
 
 

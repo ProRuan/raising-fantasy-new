@@ -77,7 +77,9 @@ function hover(event, name) {
 
 
 function setstartScreenButtonValue(name, key, value) {
-    startScreen[name][key] = value;
+    if (startScreen[name].isReachable()) {
+        startScreen[name][key] = value;
+    }
 }
 
 
@@ -95,7 +97,7 @@ function getPointer(event) {
 function isBottonTargeted(event) {
     for (let i = 0; i < buttons.length; i++) {
         let button = buttons[i] + 'Button';
-        if (isMouseEvent(event, startScreen[button])) {
+        if (startScreen[button].isReachable() && isMouseEvent(event, startScreen[button])) {
             return true;
         }
     }
@@ -111,14 +113,20 @@ function setCursor(value) {
 
 
 function processMouseDown(event) {
-    closeStoryBg(event);
-    clickExtraButton(event, 'storyButton');
-    clickExtraButton(event, 'cupButton');
-    clickExtraButton(event, 'settingsButton');
     clickArrowButton(event, 'lowMusicButton');
     clickArrowButton(event, 'highMusicButton');
     clickArrowButton(event, 'lowSoundButton');
     clickArrowButton(event, 'highSoundButton');
+
+
+    closeStoryBg(event);
+
+    clickExtraButton(event, 'cupButton');
+    clickExtraButton(event, 'settingsButton');
+
+    clickExtraButton(event, 'storyButton');
+
+
 }
 
 
@@ -139,10 +147,11 @@ function clickExtraButton(event, name) {
 
 
 function isStoryBgToClose(event) {
-    return !isMouseEvent(event, startScreen.storyBg) || isMouseEvent(event, startScreen.storyBg) && isMouseEvent(event, startScreen.coinButton);
+    return !isMouseEvent(event, startScreen.storyBg) && startScreen.storyButton.isLocked() || isMouseEvent(event, startScreen.storyBg) && isMouseEvent(event, startScreen.coinButton);
 }
 
 
+// cupButton or settingsButton must be locked (condition)!!!
 function isLeaderBoardToClose(event) {
     return !isMouseEvent(event, startScreen.leaderboard) || isMouseEvent(event, startScreen.leaderboard) && isMouseEvent(event, startScreen.xButton);
 }
