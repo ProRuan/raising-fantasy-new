@@ -62,6 +62,9 @@ function setLevelScreen() {
 
 let mainButtons = ['newGameButton', 'storyButton', 'cupButton', 'settingsButton'];
 let mainButtonCounter = 0;
+let volumeButtons = ['lowMusicButton', 'highMusicButton', 'lowSoundButton', 'highSoundButton'];
+let volumeButtonsId = 0;
+let musicButtons = true;
 
 
 function processKeydown(event) {
@@ -72,6 +75,7 @@ function processKeydown(event) {
         console.log(startScreen.keyboard[code].keydown);
         startScreen.keyboard[code].keydown = true;
         console.log(startScreen.keyboard[code].keydown);
+
 
         if (code == 'arrowDown' && mainButtonCounter < mainButtons.length - 1) {
             startScreen[mainButtons[mainButtonCounter]].selected = false;
@@ -118,8 +122,14 @@ function processKeydown(event) {
                 startScreen.cupButton.locked = false;
             }
             startScreen.settingsButton.locked = true;
+
+            // double code!!!
+            startScreen[volumeButtons[volumeButtonsId]].selected = false;
+            volumeButtonsId = 0;
+            musicButtons = true;
         }
-        if ((code == 'backspace' || code == 'escape' || code == 'keyX') && startScreen.storyButton.locked == true) {
+
+        if ((code == 'backspace' || code == 'escape' || code == 'space' || code == 'keyX') && startScreen.storyButton.locked == true) {
             startScreen.storyButton.locked = false;
         }
         if ((code == 'backspace' || code == 'escape' || code == 'keyX') && startScreen.cupButton.locked == true) {
@@ -127,6 +137,45 @@ function processKeydown(event) {
         }
         if ((code == 'backspace' || code == 'escape' || code == 'keyX') && startScreen.settingsButton.locked == true) {
             startScreen.settingsButton.locked = false;
+        }
+
+        if (code == 'arrowLeft' && startScreen.settingsButton.isLocked()) {
+            startScreen[volumeButtons[volumeButtonsId]].selected = false;
+            volumeButtonsId = (musicButtons) ? 0 : 2;
+            startScreen[volumeButtons[volumeButtonsId]].selected = true;
+            if (volumeButtonsId == 0 && isLarger(0, music)) {
+                music--;
+            }
+            if (volumeButtonsId == 2 && isLarger(0, sound)) {
+                sound--;
+            }
+        }
+        if (code == 'arrowRight' && startScreen.settingsButton.isLocked()) {
+            startScreen[volumeButtons[volumeButtonsId]].selected = false;
+            volumeButtonsId = (musicButtons) ? 1 : 3;
+            startScreen[volumeButtons[volumeButtonsId]].selected = true;
+            if (volumeButtonsId == 1 && isLarger(music, 9)) {
+                music++;
+            }
+            if (volumeButtonsId == 3 && isLarger(sound, 9)) {
+                sound++;
+            }
+        }
+        if (code == 'arrowDown' && startScreen.settingsButton.isLocked()) {
+            if (musicButtons == true) {
+                musicButtons = false;
+                startScreen[volumeButtons[volumeButtonsId]].selected = false;
+                volumeButtonsId = (volumeButtonsId == 0) ? 2 : 3;
+                startScreen[volumeButtons[volumeButtonsId]].selected = true;
+            }
+        }
+        if (code == 'arrowUp' && startScreen.settingsButton.isLocked()) {
+            if (musicButtons == false) {
+                musicButtons = true;
+                startScreen[volumeButtons[volumeButtonsId]].selected = false;
+                volumeButtonsId = (volumeButtonsId == 2) ? 0 : 1;
+                startScreen[volumeButtons[volumeButtonsId]].selected = true;
+            }
         }
 
     }

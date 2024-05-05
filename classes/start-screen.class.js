@@ -159,7 +159,7 @@ class StartScreen extends World {
 
 
     drawTextButton(button, name, y) {
-        this.drawButtonShadow(button, 'forestgreen', 16);
+        this.drawButtonShadow(button, 'forestgreen', 12);
         this.drawMainText('24px Arial', name, y);
         this.setShadow(button);
     }

@@ -67,6 +67,10 @@ function processMouseDown(event) {
 function closeStoryBg(event) {
     if (isStoryBgToClose(event)) {
         setstartScreenButtonValue('storyButton', 'locked', false);
+
+        startScreen[mainButtons[mainButtonCounter]].selected = false;
+        mainButtonCounter = 1;
+        startScreen[mainButtons[mainButtonCounter]].selected = true;
     }
 }
 
@@ -78,6 +82,11 @@ function clickExtraButton(event, name) {
     } else if (isLeaderBoardToClose(event)) {
         setstartScreenButtonValue(name, 'locked', false);
         // setstartScreenButtonValue(name, 'selected', false);
+
+        // double code!!!
+        startScreen[volumeButtons[volumeButtonsId]].selected = false;
+        volumeButtonsId = 0;
+        musicButtons = true;
     }
 }
 
