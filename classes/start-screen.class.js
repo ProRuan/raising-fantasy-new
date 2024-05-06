@@ -11,6 +11,11 @@ class StartScreen extends World {
     // to edit
     setStartScreen() {
         this.setDisplayed(true);
+
+        // only for testing!!!
+        this.avatarImage = new AvatarImage();
+        this.avatarFrame = new AvatarFrame();
+
         this.setDrawableObject('background', 0, 0);
         this.setMainButton('newGameButton', 68, 340);
         this.setMainButton('storyButton', 40, 412);
@@ -69,6 +74,11 @@ class StartScreen extends World {
 
         if (this.isDisplayed()) {
             this.drawObject(this.background);
+
+            // only for testing!!!
+            this.drawObject(this.avatarImage);
+            this.drawObject(this.avatarFrame);
+
             this.drawMainText('80px Arial', 'Raising Fantasy', canvas.height / 2);
             this.drawTextButton(this.newGameButton, 'New game', canvas.height / 4 * 3 - 36);
             this.drawTextButton(this.storyButton, 'Story', canvas.height / 4 * 3 + 36);

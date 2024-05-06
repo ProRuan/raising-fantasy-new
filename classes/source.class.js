@@ -16,6 +16,11 @@ class Source {
     star = './img/objects_animated/star.png';
     web = './img/objects_animated/web.png';
 
+
+    avatarImage = './img/inner_interface/avatar_image.png';
+    avatarFrame = './img/inner_interface/avatar_frame.png';
+
+
     constructor() {
         this.loadImagePaths();
     }
