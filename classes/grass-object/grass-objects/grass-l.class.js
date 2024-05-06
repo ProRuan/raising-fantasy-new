@@ -1,9 +1,9 @@
-class FlyingGrassLeft extends GrassObject {
+class GrassL extends GrassObject {
 
 
     // jsdoc
     constructor(x, y) {
-        super(SOURCE.flyingGrassLeft, x, y);
+        super(SOURCE.grassL, x, y);
     }
 
 
@@ -16,11 +16,5 @@ class FlyingGrassLeft extends GrassObject {
     // jsdoc
     get xCenter() {
         return this.x + this.indent + (this.width - this.indent) / 2;
-    }
-
-
-    // jsdoc
-    get yBottom() {
-        return this.y + (this.height - this.indent);
     }
 }

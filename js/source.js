@@ -59,6 +59,16 @@ const FLIP_BOOK_SHAMAN = [
 ];
 
 
-// MAGIC ...
+const FLIP_BOOK_ANIMATED_OBJECTS = [
+    './img/objects_animated/bird/bird8.png',
+    './img/objects_animated/bomb/bomb11.png',
+    './img/objects_animated/coin/coin10.png',
+    './img/objects_animated/crystal/crystal10.png',
+    './img/objects_animated/heart/heart10.png',
+    './img/objects_animated/hit_point/hit_point10.png',
+    './img/objects_animated/star/star10.png',
+    './img/objects_animated/web/web5.png'
+];
 
-// ANIMATED OBJECTS ...
+
+// MAGIC ...

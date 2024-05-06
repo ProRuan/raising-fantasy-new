@@ -1,10 +1,10 @@
-class FlyingGrassCenter extends GrassObject {
+class FlyGrassC extends GrassObject {
     indentY = 44;
 
 
     // jsdoc
     constructor(x, y) {
-        super(SOURCE.flyingGrassCenter, x, y);
+        super(SOURCE.flyGrassC, x, y);
     }
 
 

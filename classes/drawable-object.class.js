@@ -104,6 +104,32 @@ class DrawableObject {
     }
 
 
+    loadImages() {
+        this.setCurrentImage(0);
+        this.setImageCache();
+        this.setImages();
+    }
+
+
+    setCurrentImage(n) {
+        this.currentImage = n;
+    }
+
+
+    setImageCache() {
+        this.imageCache = [];
+    }
+
+
+    setImages() {
+        this.flipBook.forEach(chapter => {
+            let img = new Image();
+            img.src = chapter;
+            this.imageCache[chapter] = img;
+        });
+    }
+
+
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }

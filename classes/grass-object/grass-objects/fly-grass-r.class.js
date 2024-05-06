@@ -1,9 +1,9 @@
-class FlyingGrassRight extends GrassObject {
+class FlyGrassR extends GrassObject {
 
 
     // jsdoc
     constructor(x, y) {
-        super(SOURCE.flyingGrassRight, x, y);
+        super(SOURCE.flyGrassR, x, y);
     }
 
     // jsdoc

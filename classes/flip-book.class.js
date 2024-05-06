@@ -1,5 +1,6 @@
 class FlipBook {
-    pattern = /([A-Z]?[a-z]+\_?[A-z]?[a-z]*)(\d+)/;
+    patFile = /([A-Z]?[a-z]+\_?[A-z]?[a-z]*)(\d+)/;
+    patId = /\d+/;
 
 
     // jsdoc
@@ -27,7 +28,7 @@ class FlipBook {
 
     // jsdoc
     getFile(chapter) {
-        let file = chapter.match(this.pattern);
+        let file = chapter.match(this.patFile);
         return [file[1], file[2]];
     }
 
@@ -41,7 +42,7 @@ class FlipBook {
     // jsdoc
     createPages(chapter, name, number) {
         for (let i = 0; i < number; i++) {
-            let img = chapter.replace(this.pattern, i + 1);
+            let img = chapter.replace(this.patId, i + 1);
             this[name][i] = img;
         }
     }
@@ -49,6 +50,7 @@ class FlipBook {
 
     // jsdoc
     deletePattern() {
-        delete this.pattern;
+        delete this.patFile;
+        delete this.patId;
     }
 }
