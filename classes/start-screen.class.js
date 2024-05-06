@@ -13,14 +13,15 @@ class StartScreen extends World {
         this.setDisplayed(true);
 
         // only for testing!!!
-        this.avatarImage = new AvatarImage();
-        this.avatarFrame = new AvatarFrame();
+        this.avatarImage = new AvatarInfo(SOURCE.avatarImage);
+        this.avatarFrame = new AvatarInfo(SOURCE.avatarFrame);
+
         this.hpBar = new HpBar();
         this.energyBar = new EnergyBar();
         this.staminaBar = new StaminaBar();
-        this.itemBg = new ItemBg();
-        this.itemBomb = new ItemBomb();
-        this.itemBorder = new ItemBorder();
+        this.itemBg = new AvatarInfo(SOURCE.itemBg);
+        this.itemBomb = new AvatarInfo(SOURCE.itemBomb);
+        this.itemBorder = new AvatarInfo(SOURCE.itemBorder);
 
         this.setDrawableObject('background', 0, 0);
         this.setMainButton('newGameButton', 68, 340);

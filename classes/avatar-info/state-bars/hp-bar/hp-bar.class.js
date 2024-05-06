@@ -1,8 +1,8 @@
 class HpBar extends StateBarObject {
     name = 'hp';
     max = 120;
-    bg = new HpBarBg();
-    border = new HpBarBorder();
+    bg = new AvatarInfo(SOURCE.hpBarBg);
+    border = new AvatarInfo(SOURCE.hpBarBorder);
 
 
     constructor() {

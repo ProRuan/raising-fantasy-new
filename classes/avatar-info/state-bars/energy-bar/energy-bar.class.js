@@ -2,8 +2,8 @@ class EnergyBar extends StateBarObject {
     name = 'energy';
     max = 100;
     ms = 48;
-    bg = new EnergyBarBg();
-    border = new EnergyBarBorder();
+    bg = new AvatarInfo(SOURCE.energyBarBg);
+    border = new AvatarInfo(SOURCE.energyBarBorder);
 
 
     constructor() {
