@@ -1,12 +1,8 @@
 class GrassLeft extends GrassObject {
-    path = './img/tiles/grass1.png';
-
-
-    // Set this.path in DrawableObject!!!
 
 
     constructor(x, y) {
-        super(path, x, y);
+        super(SOURCE.grassLeft, x, y);
     }
 
 
@@ -16,6 +12,6 @@ class GrassLeft extends GrassObject {
 
 
     get xCenter() {
-        return this.x + (this.width - this.indent) / 2 + this.indent;
+        return this.x + this.indent + (this.width - this.indent) / 2;
     }
 }
