@@ -15,6 +15,9 @@ class StartScreen extends World {
         // only for testing!!!
         this.avatarImage = new AvatarImage();
         this.avatarFrame = new AvatarFrame();
+        this.itemBg = new ItemBg();
+        this.itemBomb = new ItemBomb();
+        this.itemBorder = new ItemBorder();
 
         this.setDrawableObject('background', 0, 0);
         this.setMainButton('newGameButton', 68, 340);
@@ -78,6 +81,9 @@ class StartScreen extends World {
             // only for testing!!!
             this.drawObject(this.avatarImage);
             this.drawObject(this.avatarFrame);
+            this.drawObject(this.itemBg);
+            this.drawObject(this.itemBomb);
+            this.drawObject(this.itemBorder);
 
             this.drawMainText('80px Arial', 'Raising Fantasy', canvas.height / 2);
             this.drawTextButton(this.newGameButton, 'New game', canvas.height / 4 * 3 - 36);

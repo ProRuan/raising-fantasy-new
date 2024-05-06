@@ -19,6 +19,16 @@ class Source {
 
     avatarImage = './img/inner_interface/avatar_image.png';
     avatarFrame = './img/inner_interface/avatar_frame.png';
+    hpBarBg = './img/inner_interface/hp_bar_bg.png';
+    hpPoint = './img/inner_interface/hp_point.png';
+    hpBarBorder = './img/inner_interface/hp_bar_border.png';
+    stateBarBg = './img/inner_interface/state_bar_bg.png';
+    energyPoint = './img/inner_interface/energy_point.png';
+    staminaPoint = './img/inner_interface/stamina_point.png';
+    stateBarBorder = './img/inner_interface/state_bar_border.png';
+    itemBg = './img/inner_interface/item_bg.png';
+    itemBomb = './img/inner_interface/item_bomb.png';
+    itemBorder = './img/inner_interface/item_border.png';
 
 
     constructor() {
