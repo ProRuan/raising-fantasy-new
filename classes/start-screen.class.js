@@ -15,6 +15,9 @@ class StartScreen extends World {
         // only for testing!!!
         this.avatarImage = new AvatarImage();
         this.avatarFrame = new AvatarFrame();
+        this.hpBar = new HpBar();
+        this.energyBar = new EnergyBar();
+        this.staminaBar = new StaminaBar();
         this.itemBg = new ItemBg();
         this.itemBomb = new ItemBomb();
         this.itemBorder = new ItemBorder();
@@ -81,6 +84,16 @@ class StartScreen extends World {
             // only for testing!!!
             this.drawObject(this.avatarImage);
             this.drawObject(this.avatarFrame);
+
+            this.drawObject(this.hpBar.bg);
+            // this.drawObject(this.hpBar.points);
+            this.drawObject(this.hpBar.border);
+            this.drawObject(this.energyBar.bg);
+            // this.drawObjectGroup(this.energyBar.points);
+            this.drawObject(this.energyBar.border);
+            this.drawObject(this.staminaBar.bg);
+            // this.drawObjectGroup(this.staminaBar.points);
+            this.drawObject(this.staminaBar.border);
             this.drawObject(this.itemBg);
             this.drawObject(this.itemBomb);
             this.drawObject(this.itemBorder);

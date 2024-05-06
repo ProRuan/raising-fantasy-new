@@ -26,6 +26,8 @@ pointer = false;
 
 const SOURCE = new Source();
 
+intervalIds = [];
+
 
 function init() {
     setCanvas();

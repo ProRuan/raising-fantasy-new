@@ -147,4 +147,12 @@ class DrawableObject {
             ctx.stroke();
         }
     }
+
+
+
+
+    setStoppableInterval(subfunction, interval) {
+        let id = setInterval(subfunction, interval);
+        intervalIds.push(id);
+    }
 }
