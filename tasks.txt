@@ -26,6 +26,7 @@ Clean Coding (15/?)
 
   - class AvatarInfo ...
       - class AvatarInfo - simpleCheck
+      - ...
       - class EnergyBar - simpleCheck
       - class EnergyPoint - simpleCheck
       - class HpBar - simpleCheck
