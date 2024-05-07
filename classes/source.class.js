@@ -37,7 +37,13 @@ class Source {
     itemBorder = { path: './img/inner_interface/item_border.png', x: 20, y: 409 };
 
 
+    tree = './img/objects/tree.png';
     leaf = './img/leaves/leaf1.png';
+
+
+    ladderB = './img/objects/ladder1.png';
+    ladderC = './img/objects/ladder2.png';
+    ladderT = './img/objects/ladder3.png';
 
 
     blade = './img/bosses/magic/blade.png';
