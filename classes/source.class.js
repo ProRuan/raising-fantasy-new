@@ -21,27 +21,20 @@ class Source {
     avatarFrame = { path: './img/inner_interface/avatar_frame.png', x: 16, y: 445 };
 
     hpBarBg = { path: './img/inner_interface/hp_bar_bg.png', x: 95, y: 503 };
+    hpPoint = { path: './img/inner_interface/hp_point.png', y: 506 };
     hpBarBorder = { path: './img/inner_interface/hp_bar_border.png', x: 92, y: 500 };
 
     energyBarBg = { path: './img/inner_interface/state_bar_bg.png', x: 94.5, y: 484 };
+    energyPoint = { path: './img/inner_interface/energy_point.png', y: 486 };
     energyBarBorder = { path: './img/inner_interface/state_bar_border.png', x: 92, y: 482 };
 
     staminaBarBg = { path: './img/inner_interface/state_bar_bg.png', x: 94.5, y: 466 };
+    staminaPoint = { path: './img/inner_interface/stamina_point.png', y: 468 };
     staminaBarBorder = { path: './img/inner_interface/state_bar_border.png', x: 92, y: 464 };
 
     itemBg = { path: './img/inner_interface/item_bg.png', x: 23, y: 411.5 };
     itemBomb = { path: './img/inner_interface/item_bomb.png', x: 22.5, y: 411.5 };
     itemBorder = { path: './img/inner_interface/item_border.png', x: 20, y: 409 };
-
-
-
-    // to edit
-    hpPoint = './img/inner_interface/hp_point.png';
-    energyPoint = './img/inner_interface/energy_point.png';
-    staminaPoint = './img/inner_interface/stamina_point.png';
-
-    // folder hp + energy + stamina
-
 
 
     constructor() {

@@ -17,6 +17,15 @@ class StateBarObject extends DrawableObject {
     }
 
 
+    // setStateBar(name, max, ms) {
+    //     this.name = name;    // getNameFromPath()
+    //     this.max = max;
+    //     this.ms = ms;
+    //     bg = new AvatarInfo(SOURCE[name + 'barBg']);
+    //     border = new AvatarInfo(SOURCE[name + 'barBorder']);
+    // }
+
+
     fill() {
         for (let i = 0; i < this.max; i++) {
             this.addNewPoint();
@@ -38,11 +47,11 @@ class StateBarObject extends DrawableObject {
 
     getPointType(x) {
         if (this.name == 'hp') {
-            return new HpPoint(x);
+            return new DrawableObject(SOURCE.hpPoint.path, x, SOURCE.hpPoint.y);
         } else if (this.name == 'energy') {
-            return new EnergyPoint(x);
+            return new DrawableObject(SOURCE.energyPoint.path, x, SOURCE.energyPoint.y);
         } else if (this.name == 'stamina') {
-            return new StaminaPoint(x);
+            return new DrawableObject(SOURCE.staminaPoint.path, x, SOURCE.staminaPoint.y);
         }
     }
 
