@@ -6,9 +6,8 @@ class EnergyBar extends StateBarObject {
     border = new AvatarInfo(SOURCE.energyBarBorder);
 
 
+    // jsdoc
     constructor() {
         super();
-        this.fill();
-        this.setStoppableInterval(() => this.regenerate(), this.ms);
     }
 }

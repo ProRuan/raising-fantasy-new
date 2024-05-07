@@ -3,7 +3,7 @@ class StateBarObject extends DrawableObject {
 
 
     constructor() {
-        super(0, 0, 203, 79);    // width and height necessary???
+        super(0, 0, 203, 79);
     }
 
 

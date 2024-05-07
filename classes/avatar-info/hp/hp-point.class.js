@@ -1,7 +1,8 @@
 class HpPoint extends DrawableObject {
 
 
+    // jsdoc
     constructor(x) {
-        super(SOURCE.hpPointx, 506);
+        super(SOURCE.hpPoint, x, 506);
     }
 }

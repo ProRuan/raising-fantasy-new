@@ -20,11 +20,19 @@ Tasks
   - levelScreen keys ...
 
 
-Clean Coding (8/?)
+Clean Coding (15/?)
 ------------
   - class AnimatedObjects ...
-  - class AvatarFrame ...
-  - class AvatarImage ...
+
+  - class AvatarInfo ...
+      - class AvatarInfo - simpleCheck
+      - class EnergyBar - simpleCheck
+      - class EnergyPoint - simpleCheck
+      - class HpBar - simpleCheck
+      - class HpPoint - simpleCheck
+      - class StaminaBar - simpleCheck
+      - class StaminaPoint - simpleCheck
+
   - class Button
   - class DrawableObject ...
   - class FlipBook - simpleCheck

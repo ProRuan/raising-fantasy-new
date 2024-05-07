@@ -6,9 +6,8 @@ class StaminaBar extends StateBarObject {
     border = new AvatarInfo(SOURCE.staminaBarBorder);
 
 
+    // jsdoc
     constructor() {
         super();
-        this.fill();
-        this.setStoppableInterval(() => this.regenerate(), this.ms);
     }
 }
