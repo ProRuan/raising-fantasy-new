@@ -15,10 +15,9 @@ class StartScreen extends World {
         // only for testing!!!
         this.avatarImage = new AvatarInfo(SOURCE.avatarImage);
         this.avatarFrame = new AvatarInfo(SOURCE.avatarFrame);
-
-        this.hpBar = new HpBar();
-        this.energyBar = new EnergyBar();
-        this.staminaBar = new StaminaBar();
+        this.hpBar = new StateBar(SOURCE.hpPoint.path, 120, 1 / 60);
+        this.energyBar = new StateBar(SOURCE.energyPoint.path, 100, 48);
+        this.staminaBar = new StateBar(SOURCE.staminaPoint.path, 100, 16);
         this.itemBg = new AvatarInfo(SOURCE.itemBg);
         this.itemBomb = new AvatarInfo(SOURCE.itemBomb);
         this.itemBorder = new AvatarInfo(SOURCE.itemBorder);
