@@ -6,6 +6,7 @@ class StateBar extends DrawableObject {
         super(path, 0, 0);
         this.setStateBar(path, max, ms);
         this.fill();
+        this.setStoppableInterval(() => this.regenerate(), this.ms);
         // this.regenerate();    // stoppable interval!!!
     }
 
@@ -45,7 +46,7 @@ class StateBar extends DrawableObject {
 
 
     calculateX() {
-        return (this.translation + this.points.length * 1) / 64;
+        return (this.translation + this.points.length * 1);
     }
 
 
@@ -61,7 +62,7 @@ class StateBar extends DrawableObject {
 
 
     isName(name) {
-        return this.name = name;
+        return this.name == name;
     }
 
 
@@ -82,10 +83,15 @@ class StateBar extends DrawableObject {
 
 
     regenerate() {
-        let condition = this.getCondition();
-        if (this.points.length < this.max && condition) {    // condition!!!
+        if (this.points.length < this.max) {    // condition!!!
             this.addNewPoint();
         }
+
+
+        // let condition = this.getCondition();
+        // if (this.points.length < this.max && condition) {    // condition!!!
+        //     this.addNewPoint();
+        // }
     }
 
 

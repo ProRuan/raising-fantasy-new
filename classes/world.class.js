@@ -42,6 +42,13 @@ class World {
     }
 
 
+    drawObjectGroup(group) {
+        group.forEach((o) => {
+            this.drawObject(o);
+        });
+    }
+
+
     setFontTextAlign(font, value) {
         this.setFont(font);
         this.setTextAlign(value);
