@@ -37,6 +37,9 @@ class Source {
     itemBorder = { path: './img/inner_interface/item_border.png', x: 20, y: 409 };
 
 
+    leaf = './img/leaves/leaf1.png';
+
+
     constructor() {
         this.loadImagePaths();
     }
