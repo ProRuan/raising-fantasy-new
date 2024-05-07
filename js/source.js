@@ -71,4 +71,8 @@ const FLIP_BOOK_ANIMATED_OBJECTS = [
 ];
 
 
-// MAGIC ...
+const FLIP_BOOK_MAGIC = [
+    './img/bosses/magic/blade/blade7.png',
+    './img/bosses/magic/fire/fire10.png',
+    './img/bosses/magic/lightning/lightning9.png'
+];

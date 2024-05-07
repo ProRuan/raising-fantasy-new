@@ -40,6 +40,11 @@ class Source {
     leaf = './img/leaves/leaf1.png';
 
 
+    blade = './img/bosses/magic/blade.png';
+    fire = './img/bosses/magic/fire.png';
+    lightning = './img/bosses/magic/lightning.png';
+
+
     constructor() {
         this.loadImagePaths();
     }
