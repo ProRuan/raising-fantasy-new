@@ -1,15 +1,15 @@
-class StartScreen extends World {
+class StartWorld extends World {
 
 
     constructor(canvas, keyboard) {
         super(canvas, keyboard);
-        this.setStartScreen();    // rename
+        this.setStartWorld();    // rename
         this.draw();
     }
 
 
     // to edit
-    setStartScreen() {
+    setStartWorld() {
         this.setDisplayed(true);
 
         this.setDrawableObject('background', 0, 0);

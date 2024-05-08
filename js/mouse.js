@@ -7,16 +7,16 @@ function processMouseMove(event) {
 
 
 function hover(event, name) {
-    let targeted = (isMouseEvent(event, screen[name])) ? true : false;
-    if (screen[name].isReachable()) {
-        setstartScreenButtonValue(name, 'targeted', targeted);
+    let targeted = (isMouseEvent(event, world[name])) ? true : false;
+    if (world[name].isReachable()) {
+        setstartWorldButtonValue(name, 'targeted', targeted);
     }
     updateCursor(event);
 }
 
 
-function setstartScreenButtonValue(name, key, value) {
-    screen[name][key] = value;
+function setstartWorldButtonValue(name, key, value) {
+    world[name][key] = value;
 }
 
 
@@ -34,7 +34,7 @@ function getPointer(event) {
 function isBottonTargeted(event) {
     for (let i = 0; i < buttons.length; i++) {
         let button = buttons[i] + 'Button';
-        if (screen[button].isReachable() && isMouseEvent(event, screen[button])) {
+        if (world[button].isReachable() && isMouseEvent(event, world[button])) {
             return true;
         }
     }
@@ -62,25 +62,25 @@ function processMouseDown(event) {
 
 function closeStoryBg(event) {
     if (isStoryBgToClose(event)) {
-        setstartScreenButtonValue('storyButton', 'locked', false);
+        setstartWorldButtonValue('storyButton', 'locked', false);
 
-        screen[mainButtons[mainButtonCounter]].selected = false;
+        world[mainButtons[mainButtonCounter]].selected = false;
         mainButtonCounter = 1;
-        screen[mainButtons[mainButtonCounter]].selected = true;
+        world[mainButtons[mainButtonCounter]].selected = true;
     }
 }
 
 
 function clickExtraButton(event, name) {
-    if (isMouseEvent(event, screen[name])) {
-        setstartScreenButtonValue(name, 'locked', true);
-        // setstartScreenButtonValue(name, 'selected', true);
+    if (isMouseEvent(event, world[name])) {
+        setstartWorldButtonValue(name, 'locked', true);
+        // setstartWorldButtonValue(name, 'selected', true);
     } else if (isLeaderBoardToClose(event)) {
-        setstartScreenButtonValue(name, 'locked', false);
-        // setstartScreenButtonValue(name, 'selected', false);
+        setstartWorldButtonValue(name, 'locked', false);
+        // setstartWorldButtonValue(name, 'selected', false);
 
         // double code!!!
-        screen[volumeButtons[volumeButtonsId]].selected = false;
+        world[volumeButtons[volumeButtonsId]].selected = false;
         volumeButtonsId = 0;
         musicButtons = true;
     }
@@ -88,13 +88,13 @@ function clickExtraButton(event, name) {
 
 
 function isStoryBgToClose(event) {
-    return !isMouseEvent(event, screen.storyBg) && screen.storyButton.isLocked() || isMouseEvent(event, screen.storyBg) && isMouseEvent(event, screen.coinButton);
+    return !isMouseEvent(event, world.storyBg) && world.storyButton.isLocked() || isMouseEvent(event, world.storyBg) && isMouseEvent(event, world.coinButton);
 }
 
 
 // cupButton or settingsButton must be locked (condition)!!!
 function isLeaderBoardToClose(event) {
-    return !isMouseEvent(event, screen.leaderboard) || isMouseEvent(event, screen.leaderboard) && isMouseEvent(event, screen.xButton);
+    return !isMouseEvent(event, world.leaderboard) || isMouseEvent(event, world.leaderboard) && isMouseEvent(event, world.xButton);
 }
 
 
@@ -104,13 +104,13 @@ function clickArrowButton(event, name) {
 
 
 function updateVolume(event, name) {
-    if (isMouseEvent(event, screen[name]) && isMatch(name, 'lowMusicButton') && isLarger(0, music)) {
+    if (isMouseEvent(event, world[name]) && isMatch(name, 'lowMusicButton') && isLarger(0, music)) {
         music--;
-    } else if (isMouseEvent(event, screen[name]) && isMatch(name, 'highMusicButton') && isLarger(music, 9)) {
+    } else if (isMouseEvent(event, world[name]) && isMatch(name, 'highMusicButton') && isLarger(music, 9)) {
         music++;
-    } else if (isMouseEvent(event, screen[name]) && isMatch(name, 'lowSoundButton') && isLarger(0, sound)) {
+    } else if (isMouseEvent(event, world[name]) && isMatch(name, 'lowSoundButton') && isLarger(0, sound)) {
         sound--;
-    } else if (isMouseEvent(event, screen[name]) && isMatch(name, 'highSoundButton') && isLarger(sound, 9)) {
+    } else if (isMouseEvent(event, world[name]) && isMatch(name, 'highSoundButton') && isLarger(sound, 9)) {
         sound++;
     }
 }

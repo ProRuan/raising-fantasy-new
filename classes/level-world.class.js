@@ -1,19 +1,19 @@
-class LevelScreen extends World {
+class LevelWorld extends World {
 
 
-    // Create an upper class LevelScreenKit!!!
+    // Create an upper class LevelWorldKit!!!
 
 
     constructor(canvas, keyboard) {
         super(canvas, keyboard);
 
 
-        this.setLevelScreen();
+        this.setLevelWorld();
         this.draw();
     }
 
 
-    setLevelScreen() {
+    setLevelWorld() {
 
 
         // only for testing!!!
