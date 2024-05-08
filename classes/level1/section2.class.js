@@ -2,13 +2,18 @@ class Section2 {
 
 
     constructor() {
+        this.set();
+    }
+
+
+    set() {
         this.setTrees();
         this.setLeaves();
         this.setFlyGrass();
         this.setGrass();
         this.setCoins();
         this.setHitPoints();
-        this.setEnemies();
+        // this.setEnemies();
     }
 
 
@@ -49,7 +54,7 @@ class Section2 {
 
 
     setHitPoints() {
-        this.hitPoitns = [new HitPoint(8.25, 3.125)];
+        this.hitPoints = [new HitPoint(8.25, 3.125)];
     }
 
 
