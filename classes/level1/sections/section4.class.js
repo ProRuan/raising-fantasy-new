@@ -8,6 +8,7 @@ class Section4 {
         this.setGrass();
         this.setLadders();
         this.setCoins();
+        this.setHearts();
         this.setHitPoints();
         // this.setEnemies();
     }
@@ -69,9 +70,17 @@ class Section4 {
 
 
     // jsdoc
+    setHearts() {
+        this.hearts = [
+            new Heart(7.25, 6.625)
+        ];
+    }
+
+
+    // jsdoc
     setHitPoints() {
         this.hitPoints = [
-            new HitPoint(7.25, 6.625), new HitPoint(7.25, 3.125)
+            new HitPoint(7.25, 3.125)
         ];
     }
 

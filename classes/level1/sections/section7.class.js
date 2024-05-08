@@ -6,7 +6,7 @@ class Section7 {
         this.setGrass();
         this.setCoins();
         this.setCrystals();
-        this.setHitPoints();
+        this.setHearts();
         // this.setEnemies();
     }
 
@@ -47,10 +47,9 @@ class Section7 {
 
 
     // jsdoc
-    setHitPoints() {
-        this.hitPoints = [
-            new HitPoint(3.25, 3.125), new HitPoint(4.25, 3.125), new HitPoint(5.25, 3.125), new HitPoint(9.25, 3.125),
-            new HitPoint(10.25, 3.125), new HitPoint(11.25, 3.125)
+    setHearts() {
+        this.hearts = [
+            new Heart(5.25, 3.125), new Heart(9.25, 3.125)
         ];
     }
 

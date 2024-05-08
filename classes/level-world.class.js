@@ -18,16 +18,21 @@ class LevelWorld extends World {
 
         // only for testing!!!
 
-        this.level = new Level1();
-        this.setLevel();    // move to class Knihgt!?!
+
 
         // ready!!!
+        this.setLevel();
+        this.setLevelObjects();    // move to class Knight!?!
         this.setAvatarInfo();
-
     }
 
 
     setLevel() {
+        this.level = new Level1();
+    }
+
+
+    setLevelObjects() {
         for (const [key, value] of Object.entries(this.level)) {
             this[key] = value;
         }
@@ -61,12 +66,15 @@ class LevelWorld extends World {
     }
 
 
+    // Please take care of x, y and UNIT!!!
+
+
     draw() {    // double code!!!
         this.clearCanvas();
 
 
         // only for testing!!!
-       
+        
 
 
         // ready!!!

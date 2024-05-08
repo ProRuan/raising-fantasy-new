@@ -3,21 +3,32 @@ class Level1 {
 
     // jsdoc
     constructor() {
-        this.loadAllBackgrounds();
+        this.loadBackgrounds();    // review!!!
+        this.loadClouds();    // review!!!
 
         this.loadAllSections();
     }
 
 
-    // to edit and/or to move!!!
-    loadAllBackgrounds() {
+    // to edit and/or to move to levelWorld!!!
+    loadBackgrounds() {
         this.background = [];
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 8; i++) {    // levelSize!!!
             let bg = new Background(i);
             bg.layers.forEach((layer) => {
                 layer.x = i * canvas.width;
                 this.background.push(layer);
             });
+        }
+    }
+
+
+    // to edit and/or to move to levelWorld!!!
+    loadClouds() {
+        this.clouds = [];    // set random number (1 of 8)
+        for (let i = 0; i < 8 + 1; i++) {    // levelSize!!!
+            let cloud = new Cloud(i);
+            this.clouds.push(cloud);
         }
     }
 
@@ -28,10 +39,10 @@ class Level1 {
         this.loadSection(new Section2(), 1);
         this.loadSection(new Section3(), 2);
         this.loadSection(new Section4(), 3);
-        this.loadSection(new Section5(), 4);
+        this.loadSection(new Section5(), 5);
         this.loadSection(new Section6(), 5);
         this.loadSection(new Section7(), 6);
-        this.loadSection(new Section8(), 7);
+        this.loadSection(new Section8(), 8);
     }
 
 
@@ -40,12 +51,6 @@ class Level1 {
 
     // jsdoc
     loadSection(section, t) {
-        this.loadSectionObjects(section, t);
-    }
-
-
-    // jsdoc
-    loadSectionObjects(section, t) {
         for (const [key] of Object.entries(section)) {
             this.setObjectGroup(key);
             this.loadObjectGroup(section, t, key);
