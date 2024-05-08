@@ -7,13 +7,11 @@ function processMouseMove(event) {
 
 
 function hover(event, name) {
-    if (screen.displayed) {
-        let targeted = (isMouseEvent(event, screen[name])) ? true : false;
-        if (screen[name].isReachable()) {
-            setstartScreenButtonValue(name, 'targeted', targeted);
-        }
-        updateCursor(event);
+    let targeted = (isMouseEvent(event, screen[name])) ? true : false;
+    if (screen[name].isReachable()) {
+        setstartScreenButtonValue(name, 'targeted', targeted);
     }
+    updateCursor(event);
 }
 
 
@@ -50,17 +48,15 @@ function setCursor(value) {
 
 // Please sort the subsequent functions + rename!!!
 function processMouseDown(event) {
-    if (screen.displayed) {
-        clickArrowButton(event, 'lowMusicButton');
-        clickArrowButton(event, 'highMusicButton');
-        clickArrowButton(event, 'lowSoundButton');
-        clickArrowButton(event, 'highSoundButton');
-        closeStoryBg(event);
-        clickExtraButton(event, 'cupButton');
-        clickExtraButton(event, 'settingsButton');
-        clickExtraButton(event, 'storyButton');
-        // newGameButton still missing ...
-    }
+    clickArrowButton(event, 'lowMusicButton');
+    clickArrowButton(event, 'highMusicButton');
+    clickArrowButton(event, 'lowSoundButton');
+    clickArrowButton(event, 'highSoundButton');
+    closeStoryBg(event);
+    clickExtraButton(event, 'cupButton');
+    clickExtraButton(event, 'settingsButton');
+    clickExtraButton(event, 'storyButton');
+    // newGameButton still missing ...
 }
 
 
@@ -121,7 +117,5 @@ function updateVolume(event, name) {
 
 
 function processMouseUp() {
-    if (screen.displayed) {
-        mouseClick = null;
-    }
+    mouseClick = null;
 }

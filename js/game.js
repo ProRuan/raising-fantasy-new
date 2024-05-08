@@ -83,130 +83,124 @@ let musicButtons = true;
 
 
 function processKeydown(event) {
-    if (screen.displayed) {
-        console.log(event);
-        let code = event.code;
-        code = code.replace(code[0], code[0].toLowerCase());
-        console.log(screen.keyboard[code].keydown);
-        screen.keyboard[code].keydown = true;
-        console.log(screen.keyboard[code].keydown);
+    console.log(event);
+    let code = event.code;
+    code = code.replace(code[0], code[0].toLowerCase());
+    console.log(screen.keyboard[code].keydown);
+    screen.keyboard[code].keydown = true;
+    console.log(screen.keyboard[code].keydown);
 
 
-        if (code == 'arrowDown' && mainButtonCounter < mainButtons.length - 1 && !screen.isStoryBgOpened() && !screen.isLeaderboardOpened()) {
-            screen[mainButtons[mainButtonCounter]].selected = false;
-            mainButtonCounter++;
-            screen[mainButtons[mainButtonCounter]].selected = true;
-            console.log(mainButtonCounter, mainButtons[mainButtonCounter]);
-        }
+    if (code == 'arrowDown' && mainButtonCounter < mainButtons.length - 1 && !screen.isStoryBgOpened() && !screen.isLeaderboardOpened()) {
+        screen[mainButtons[mainButtonCounter]].selected = false;
+        mainButtonCounter++;
+        screen[mainButtons[mainButtonCounter]].selected = true;
+        console.log(mainButtonCounter, mainButtons[mainButtonCounter]);
+    }
 
-        if (code == 'arrowUp' && 0 < mainButtonCounter && !screen.isStoryBgOpened() && !screen.isLeaderboardOpened()) {
-            screen[mainButtons[mainButtonCounter]].selected = false;
-            mainButtonCounter--;
-            screen[mainButtons[mainButtonCounter]].selected = true;
-            console.log(mainButtonCounter, mainButtons[mainButtonCounter]);
-        }
+    if (code == 'arrowUp' && 0 < mainButtonCounter && !screen.isStoryBgOpened() && !screen.isLeaderboardOpened()) {
+        screen[mainButtons[mainButtonCounter]].selected = false;
+        mainButtonCounter--;
+        screen[mainButtons[mainButtonCounter]].selected = true;
+        console.log(mainButtonCounter, mainButtons[mainButtonCounter]);
+    }
 
 
-        if (code == 'enter' && screen.newGameButton.selected == true) {
-            console.log('start new game ...');
-            // screen.newGameButton.locked = true;
-        }
-        if (code == 'enter' && screen.storyButton.selected == true) {
-            if (screen.cupButton.locked == true) {
-                screen.cupButton.locked = false;
-            }
-            if (screen.settingsButton.locked == true) {
-                screen.settingsButton.locked = false;
-            }
-            screen.storyButton.locked = true;
-        }
-        if (code == 'enter' && screen.cupButton.selected == true) {
-            if (screen.storyButton.locked == true) {
-                screen.storyButton.locked = false;
-            }
-            if (screen.settingsButton.locked == true) {
-                screen.settingsButton.locked = false;
-            }
-            screen.cupButton.locked = true;
-        }
-        if (code == 'enter' && screen.settingsButton.selected == true) {
-            if (screen.storyButton.locked == true) {
-                screen.storyButton.locked = false;
-            }
-            if (screen.cupButton.locked == true) {
-                screen.cupButton.locked = false;
-            }
-            screen.settingsButton.locked = true;
-
-            // double code!!!
-            screen[volumeButtons[volumeButtonsId]].selected = false;
-            volumeButtonsId = 0;
-            musicButtons = true;
-        }
-
-        if ((code == 'backspace' || code == 'escape' || code == 'space' || code == 'keyX') && screen.storyButton.locked == true) {
-            screen.storyButton.locked = false;
-        }
-        if ((code == 'backspace' || code == 'escape' || code == 'keyX') && screen.cupButton.locked == true) {
+    if (code == 'enter' && screen.newGameButton.selected == true) {
+        console.log('start new game ...');
+        // screen.newGameButton.locked = true;
+    }
+    if (code == 'enter' && screen.storyButton.selected == true) {
+        if (screen.cupButton.locked == true) {
             screen.cupButton.locked = false;
         }
-        if ((code == 'backspace' || code == 'escape' || code == 'keyX') && screen.settingsButton.locked == true) {
+        if (screen.settingsButton.locked == true) {
             screen.settingsButton.locked = false;
         }
+        screen.storyButton.locked = true;
+    }
+    if (code == 'enter' && screen.cupButton.selected == true) {
+        if (screen.storyButton.locked == true) {
+            screen.storyButton.locked = false;
+        }
+        if (screen.settingsButton.locked == true) {
+            screen.settingsButton.locked = false;
+        }
+        screen.cupButton.locked = true;
+    }
+    if (code == 'enter' && screen.settingsButton.selected == true) {
+        if (screen.storyButton.locked == true) {
+            screen.storyButton.locked = false;
+        }
+        if (screen.cupButton.locked == true) {
+            screen.cupButton.locked = false;
+        }
+        screen.settingsButton.locked = true;
 
-        if (code == 'arrowLeft' && screen.settingsButton.isLocked()) {
-            screen[volumeButtons[volumeButtonsId]].selected = false;
-            volumeButtonsId = (musicButtons) ? 0 : 2;
-            screen[volumeButtons[volumeButtonsId]].selected = true;
-            if (volumeButtonsId == 0 && isLarger(0, music)) {
-                music--;
-            }
-            if (volumeButtonsId == 2 && isLarger(0, sound)) {
-                sound--;
-            }
-        }
-        if (code == 'arrowRight' && screen.settingsButton.isLocked()) {
-            screen[volumeButtons[volumeButtonsId]].selected = false;
-            volumeButtonsId = (musicButtons) ? 1 : 3;
-            screen[volumeButtons[volumeButtonsId]].selected = true;
-            if (volumeButtonsId == 1 && isLarger(music, 9)) {
-                music++;
-            }
-            if (volumeButtonsId == 3 && isLarger(sound, 9)) {
-                sound++;
-            }
-        }
-        if (code == 'arrowDown' && screen.settingsButton.isLocked()) {
-            if (musicButtons == true) {
-                musicButtons = false;
-                screen[volumeButtons[volumeButtonsId]].selected = false;
-                volumeButtonsId = (volumeButtonsId == 0) ? 2 : 3;
-                screen[volumeButtons[volumeButtonsId]].selected = true;
-            }
-        }
-        if (code == 'arrowUp' && screen.settingsButton.isLocked()) {
-            if (musicButtons == false) {
-                musicButtons = true;
-                screen[volumeButtons[volumeButtonsId]].selected = false;
-                volumeButtonsId = (volumeButtonsId == 2) ? 0 : 1;
-                screen[volumeButtons[volumeButtonsId]].selected = true;
-            }
-        }
+        // double code!!!
+        screen[volumeButtons[volumeButtonsId]].selected = false;
+        volumeButtonsId = 0;
+        musicButtons = true;
+    }
 
+    if ((code == 'backspace' || code == 'escape' || code == 'space' || code == 'keyX') && screen.storyButton.locked == true) {
+        screen.storyButton.locked = false;
+    }
+    if ((code == 'backspace' || code == 'escape' || code == 'keyX') && screen.cupButton.locked == true) {
+        screen.cupButton.locked = false;
+    }
+    if ((code == 'backspace' || code == 'escape' || code == 'keyX') && screen.settingsButton.locked == true) {
+        screen.settingsButton.locked = false;
+    }
+
+    if (code == 'arrowLeft' && screen.settingsButton.isLocked()) {
+        screen[volumeButtons[volumeButtonsId]].selected = false;
+        volumeButtonsId = (musicButtons) ? 0 : 2;
+        screen[volumeButtons[volumeButtonsId]].selected = true;
+        if (volumeButtonsId == 0 && isLarger(0, music)) {
+            music--;
+        }
+        if (volumeButtonsId == 2 && isLarger(0, sound)) {
+            sound--;
+        }
+    }
+    if (code == 'arrowRight' && screen.settingsButton.isLocked()) {
+        screen[volumeButtons[volumeButtonsId]].selected = false;
+        volumeButtonsId = (musicButtons) ? 1 : 3;
+        screen[volumeButtons[volumeButtonsId]].selected = true;
+        if (volumeButtonsId == 1 && isLarger(music, 9)) {
+            music++;
+        }
+        if (volumeButtonsId == 3 && isLarger(sound, 9)) {
+            sound++;
+        }
+    }
+    if (code == 'arrowDown' && screen.settingsButton.isLocked()) {
+        if (musicButtons == true) {
+            musicButtons = false;
+            screen[volumeButtons[volumeButtonsId]].selected = false;
+            volumeButtonsId = (volumeButtonsId == 0) ? 2 : 3;
+            screen[volumeButtons[volumeButtonsId]].selected = true;
+        }
+    }
+    if (code == 'arrowUp' && screen.settingsButton.isLocked()) {
+        if (musicButtons == false) {
+            musicButtons = true;
+            screen[volumeButtons[volumeButtonsId]].selected = false;
+            volumeButtonsId = (volumeButtonsId == 2) ? 0 : 1;
+            screen[volumeButtons[volumeButtonsId]].selected = true;
+        }
     }
 }
 
 
 function processKeyup(event) {
-    if (screen.displayed) {
-        console.log(event);
-        let code = event.code;
-        code = code.replace(code[0], code[0].toLowerCase());
-        console.log(screen.keyboard[code].keydown);
-        screen.keyboard[code].keydown = false;
-        console.log(screen.keyboard[code].keydown);
-
-    }
+    console.log(event);
+    let code = event.code;
+    code = code.replace(code[0], code[0].toLowerCase());
+    console.log(screen.keyboard[code].keydown);
+    screen.keyboard[code].keydown = false;
+    console.log(screen.keyboard[code].keydown);
 }
 
 

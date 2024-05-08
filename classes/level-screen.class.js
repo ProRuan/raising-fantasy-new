@@ -11,7 +11,7 @@ class LevelScreen extends World {
 
 
     setLevelScreen() {
-        this.setDisplayed(true);
+
 
         // only for testing!!!
         this.avatarImage = new AvatarInfo(SOURCE.avatarImage);
@@ -28,26 +28,24 @@ class LevelScreen extends World {
     draw() {    // double code!!!
         this.clearCanvas();
 
-        if (this.isDisplayed()) {
 
+        // only for testing!!!
+        this.drawObject(this.avatarImage);
+        this.drawObject(this.avatarFrame);
 
-            // only for testing!!!
-            this.drawObject(this.avatarImage);
-            this.drawObject(this.avatarFrame);
+        this.drawObject(this.hpBar.bg);
+        this.drawObjectGroup(this.hpBar.points);
+        this.drawObject(this.hpBar.border);
+        this.drawObject(this.energyBar.bg);
+        this.drawObjectGroup(this.energyBar.points);
+        this.drawObject(this.energyBar.border);
+        this.drawObject(this.staminaBar.bg);
+        this.drawObjectGroup(this.staminaBar.points);
+        this.drawObject(this.staminaBar.border);
+        this.drawObject(this.itemBg);
+        this.drawObject(this.itemBomb);
+        this.drawObject(this.itemBorder);
 
-            this.drawObject(this.hpBar.bg);
-            this.drawObjectGroup(this.hpBar.points);
-            this.drawObject(this.hpBar.border);
-            this.drawObject(this.energyBar.bg);
-            this.drawObjectGroup(this.energyBar.points);
-            this.drawObject(this.energyBar.border);
-            this.drawObject(this.staminaBar.bg);
-            this.drawObjectGroup(this.staminaBar.points);
-            this.drawObject(this.staminaBar.border);
-            this.drawObject(this.itemBg);
-            this.drawObject(this.itemBomb);
-            this.drawObject(this.itemBorder);
-        }
 
         this.redraw();
     }
