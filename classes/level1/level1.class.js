@@ -9,7 +9,7 @@ class Level1 {
     }
 
 
-    // to edit
+    // to edit and/or to move!!!
     loadAllBackgrounds() {
         this.background = [];
         for (let i = 0; i < 8; i++) {
@@ -83,6 +83,6 @@ class Level1 {
 
     // jsdoc
     setObjectX(t, object) {
-        object.x = object.x * 64 + t * canvas.width;    // to edit
+        object.x += t * canvas.width;    // to edit (translation)
     }
 }

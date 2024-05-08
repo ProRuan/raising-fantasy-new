@@ -1,6 +1,6 @@
 const NATIVE_WIDTH = 960;
 const NATIVE_HEIGHT = 540;
-const UNIT = NATIVE_WIDTH / 16;
+const UNIT = NATIVE_WIDTH / 15;
 
 
 const LEVEL_SIZE = 8;

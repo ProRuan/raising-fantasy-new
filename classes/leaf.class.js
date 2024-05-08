@@ -5,7 +5,7 @@ class Leaf extends DrawableObject {
 
     // jsdoc
     constructor(x, y, i) {
-        super(SOURCE.leaf, x, y);
+        super(SOURCE.leaf, x * UNIT, y * UNIT);
         this.setLeafType(i);
     }
 

@@ -4,7 +4,7 @@ class AnimatedObject extends DrawableObject {
 
 
     constructor(path, x, y) {
-        super(path, x, y * UNIT);
+        super(path, x * UNIT, y * UNIT);
         this.setFlipBook();
         this.loadImages();
     }

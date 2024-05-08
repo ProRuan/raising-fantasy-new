@@ -4,7 +4,7 @@ class GrassObject extends DrawableObject {
 
     // jsdoc
     constructor(path, x, y) {
-        super(path, x, y);
+        super(path, x * UNIT, y * UNIT);
     }
 
 

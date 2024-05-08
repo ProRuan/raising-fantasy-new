@@ -1,6 +1,7 @@
 class Section5 {
 
 
+    // jsdoc
     constructor() {
         this.setTrees();
         this.setLeaves();
@@ -11,6 +12,7 @@ class Section5 {
     }
 
 
+    // jsdoc
     setTrees() {
         this.trees = [
             new Tree(5.5, 2)
@@ -18,6 +20,7 @@ class Section5 {
     }
 
 
+    // jsdoc
     setLeaves() {
         this.leaves = [
             new Leaf(6.625, 4, 4), new Leaf(7.25, 4.5, 4), new Leaf(7.75, 4, 4)
@@ -25,6 +28,7 @@ class Section5 {
     }
 
 
+    // jsdoc
     setFlyGrass() {
         this.flyGrass = [
             new FlyGrassL(5, 2), new FlyGrassC(6, 2), new FlyGrassC(7, 2), new FlyGrassC(8, 2),
@@ -34,6 +38,7 @@ class Section5 {
     }
 
 
+    // jsdoc
     setGrass() {
         this.grass = [
             new GrassC(0, 0), new GrassC(1, 0), new GrassC(2, 0), new GrassR(3, 0)
@@ -41,6 +46,7 @@ class Section5 {
     }
 
 
+    // jsdoc
     setCoins() {
         this.coins = [
             new Coin(3.25, 1.125), new Coin(5.25, 3.125), new Coin(9.25, 3.125), new Coin(11.25, 5.125)
@@ -48,6 +54,7 @@ class Section5 {
     }
 
 
+    // jsdoc
     setHitPoints() {
         this.hitPoints = [
             new HitPoint(6.25, 3.125), new HitPoint(8.25, 3.125), new HitPoint(13.75, 5.125)
