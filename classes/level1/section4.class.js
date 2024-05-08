@@ -14,7 +14,9 @@ class Section4 {
 
 
     setTrees() {
-        this.trees = [new Tree(2.5, 3.5)];
+        this.trees = [
+            new Tree(2.5, 3.5)
+        ];
     }
 
 

@@ -12,7 +12,9 @@ class Section3 {
 
 
     setTrees() {
-        this.trees = [new Tree(8, 0)];
+        this.trees = [
+            new Tree(8, 0)
+        ];
     }
 
 
@@ -41,11 +43,15 @@ class Section3 {
 
 
     setHitPoints() {
-        this.hitPoints = [new HitPoint(3.75, 3.125)];
+        this.hitPoints = [
+            new HitPoint(3.75, 3.125)
+        ];
     }
 
 
     setEnemies() {
-        this.enemies = [new Ent(10.859375, 1.625)];
+        this.enemies = [
+            new Ent(10.859375, 1.625)
+        ];
     }
 }

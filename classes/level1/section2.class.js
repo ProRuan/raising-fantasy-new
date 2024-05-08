@@ -13,7 +13,9 @@ class Section2 {
 
 
     setTrees() {
-        this.trees = [new Tree(5.5, 2)];
+        this.trees = [
+            new Tree(5.5, 2)
+        ];
     }
 
 
@@ -49,11 +51,15 @@ class Section2 {
 
 
     setHitPoints() {
-        this.hitPoints = [new HitPoint(8.25, 3.125)];
+        this.hitPoints = [
+            new HitPoint(8.25, 3.125)
+        ];
     }
 
 
     setEnemies() {
-        this.enemies = [new Dino(0.875, 0.25), new Dino(11.8125, 0.25)];
+        this.enemies = [
+            new Dino(0.875, 0.25), new Dino(11.8125, 0.25)
+        ];
     }
 }
