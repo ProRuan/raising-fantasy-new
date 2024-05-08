@@ -121,5 +121,7 @@ function updateVolume(event, name) {
 
 
 function processMouseUp() {
-    mouseClick = null;
+    if (startScreen.displayed) {
+        mouseClick = null;
+    }
 }
