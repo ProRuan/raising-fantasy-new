@@ -2,17 +2,12 @@ class Section3 {
 
 
     constructor() {
-        this.set();
-    }
-
-
-    set() {
         this.setTrees();
         this.setLeaves();
         this.setGrass();
         this.setCoins();
         this.setHitPoints();
-        // this.setEnemies();
+        // this.setEnemies();   
     }
 
 

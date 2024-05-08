@@ -2,11 +2,6 @@ class Section1 {
 
 
     constructor() {
-        this.set();
-    }
-
-
-    set() {
         this.setGrass();
         this.setCoins();
     }

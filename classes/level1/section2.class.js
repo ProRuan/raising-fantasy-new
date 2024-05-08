@@ -2,11 +2,6 @@ class Section2 {
 
 
     constructor() {
-        this.set();
-    }
-
-
-    set() {
         this.setTrees();
         this.setLeaves();
         this.setFlyGrass();
