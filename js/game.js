@@ -3,7 +3,7 @@ let keyboard;
 let mouseClick;    // to edit + to move
 
 let screen;
-let inPlay = false;
+let inPlay = true;    // set to false!!!
 
 let counter = 0;
 let buttons = ['newGame', 'story', 'cup', 'settings', 'coin', 'x', 'lowMusic', 'highMusic', 'lowSound', 'highSound'];
