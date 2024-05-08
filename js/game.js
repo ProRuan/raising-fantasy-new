@@ -2,9 +2,8 @@ let canvas;
 let keyboard;
 let mouseClick;    // to edit + to move
 
-let screen;
 let startScreen;
-let levelScreen;
+let inPlay = false;
 
 let counter = 0;
 let buttons = ['newGame', 'story', 'cup', 'settings', 'coin', 'x', 'lowMusic', 'highMusic', 'lowSound', 'highSound'];
@@ -35,8 +34,20 @@ function init() {
     setCanvas();
     setKeyboard();
 
-    setStartScreen();
-    setLevelScreen();
+    switchScreen();
+}
+
+
+function switchScreen() {
+    setInterval(() => {
+        if (inPlay == true) {
+            startScreen = new LevelScreen(canvas, keyboard);
+            inPlay = null;
+        } else if (inPlay == false) {
+            startScreen = new StartScreen(canvas, keyboard);
+            inPlay = null;
+        }
+    }, 1000 / 60);
 }
 
 
