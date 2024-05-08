@@ -20,6 +20,6 @@ class Section1 {
     setCoins() {
         this.coins = [
             new Coin(9.25, 1.125), new Coin(10.25, 1.125), new Coin(11.25, 1.125)
-        ]
+        ];
     }
 }
