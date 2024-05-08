@@ -48,4 +48,11 @@ class Section7 {
             new HitPoint(10.25, 3.125), new HitPoint(11.25, 3.125)
         ];
     }
+
+
+    setEnemies() {
+        return [
+            new Spider(1.25, 0.1875)
+        ];
+    }
 }

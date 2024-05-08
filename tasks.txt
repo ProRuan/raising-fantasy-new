@@ -20,15 +20,16 @@ Tasks
   - levelScreen keys ...
 
 
-Clean Coding (19/48)
+Clean Coding (27/58)
 ------------
   - class AnimatedObjects ...
+      - class ... (8x)
   - class Grass - simpleCheck
       - class GrassLeft, GrassCenter, GrassRight - simpleCheck (3x)
       - class FlyingGrassLeft, FlyingGrassCenter, FlyingGrassRight - simpleCheck (3x)
-  - class (level1) ...
+  - class (level1)
       - class Level1 - simpleCheck
-      - class Section* ... (8x)
+      - class Section* - simpleCheck*    * check enemies + endboss!
   - class MagicObject - simpleCheck
       - class Blade ...
       - class Fire ...

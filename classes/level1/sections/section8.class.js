@@ -36,7 +36,7 @@ class Section8 {
 
     setEnemies() {
         this.enemies = [
-            // new Shaman(12, 2.09375)    // to edit!!!
+            new Shaman(12, 2.09375)    // to edit!!!
         ];
     }
 }
