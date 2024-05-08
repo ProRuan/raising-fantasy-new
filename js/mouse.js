@@ -7,9 +7,9 @@ function processMouseMove(event) {
 
 
 function hover(event, name) {
-    if (startScreen.displayed) {
-        let targeted = (isMouseEvent(event, startScreen[name])) ? true : false;
-        if (startScreen[name].isReachable()) {
+    if (screen.displayed) {
+        let targeted = (isMouseEvent(event, screen[name])) ? true : false;
+        if (screen[name].isReachable()) {
             setstartScreenButtonValue(name, 'targeted', targeted);
         }
         updateCursor(event);
@@ -18,7 +18,7 @@ function hover(event, name) {
 
 
 function setstartScreenButtonValue(name, key, value) {
-    startScreen[name][key] = value;
+    screen[name][key] = value;
 }
 
 
@@ -36,7 +36,7 @@ function getPointer(event) {
 function isBottonTargeted(event) {
     for (let i = 0; i < buttons.length; i++) {
         let button = buttons[i] + 'Button';
-        if (startScreen[button].isReachable() && isMouseEvent(event, startScreen[button])) {
+        if (screen[button].isReachable() && isMouseEvent(event, screen[button])) {
             return true;
         }
     }
@@ -50,7 +50,7 @@ function setCursor(value) {
 
 // Please sort the subsequent functions + rename!!!
 function processMouseDown(event) {
-    if (startScreen.displayed) {
+    if (screen.displayed) {
         clickArrowButton(event, 'lowMusicButton');
         clickArrowButton(event, 'highMusicButton');
         clickArrowButton(event, 'lowSoundButton');
@@ -68,15 +68,15 @@ function closeStoryBg(event) {
     if (isStoryBgToClose(event)) {
         setstartScreenButtonValue('storyButton', 'locked', false);
 
-        startScreen[mainButtons[mainButtonCounter]].selected = false;
+        screen[mainButtons[mainButtonCounter]].selected = false;
         mainButtonCounter = 1;
-        startScreen[mainButtons[mainButtonCounter]].selected = true;
+        screen[mainButtons[mainButtonCounter]].selected = true;
     }
 }
 
 
 function clickExtraButton(event, name) {
-    if (isMouseEvent(event, startScreen[name])) {
+    if (isMouseEvent(event, screen[name])) {
         setstartScreenButtonValue(name, 'locked', true);
         // setstartScreenButtonValue(name, 'selected', true);
     } else if (isLeaderBoardToClose(event)) {
@@ -84,7 +84,7 @@ function clickExtraButton(event, name) {
         // setstartScreenButtonValue(name, 'selected', false);
 
         // double code!!!
-        startScreen[volumeButtons[volumeButtonsId]].selected = false;
+        screen[volumeButtons[volumeButtonsId]].selected = false;
         volumeButtonsId = 0;
         musicButtons = true;
     }
@@ -92,13 +92,13 @@ function clickExtraButton(event, name) {
 
 
 function isStoryBgToClose(event) {
-    return !isMouseEvent(event, startScreen.storyBg) && startScreen.storyButton.isLocked() || isMouseEvent(event, startScreen.storyBg) && isMouseEvent(event, startScreen.coinButton);
+    return !isMouseEvent(event, screen.storyBg) && screen.storyButton.isLocked() || isMouseEvent(event, screen.storyBg) && isMouseEvent(event, screen.coinButton);
 }
 
 
 // cupButton or settingsButton must be locked (condition)!!!
 function isLeaderBoardToClose(event) {
-    return !isMouseEvent(event, startScreen.leaderboard) || isMouseEvent(event, startScreen.leaderboard) && isMouseEvent(event, startScreen.xButton);
+    return !isMouseEvent(event, screen.leaderboard) || isMouseEvent(event, screen.leaderboard) && isMouseEvent(event, screen.xButton);
 }
 
 
@@ -108,20 +108,20 @@ function clickArrowButton(event, name) {
 
 
 function updateVolume(event, name) {
-    if (isMouseEvent(event, startScreen[name]) && isMatch(name, 'lowMusicButton') && isLarger(0, music)) {
+    if (isMouseEvent(event, screen[name]) && isMatch(name, 'lowMusicButton') && isLarger(0, music)) {
         music--;
-    } else if (isMouseEvent(event, startScreen[name]) && isMatch(name, 'highMusicButton') && isLarger(music, 9)) {
+    } else if (isMouseEvent(event, screen[name]) && isMatch(name, 'highMusicButton') && isLarger(music, 9)) {
         music++;
-    } else if (isMouseEvent(event, startScreen[name]) && isMatch(name, 'lowSoundButton') && isLarger(0, sound)) {
+    } else if (isMouseEvent(event, screen[name]) && isMatch(name, 'lowSoundButton') && isLarger(0, sound)) {
         sound--;
-    } else if (isMouseEvent(event, startScreen[name]) && isMatch(name, 'highSoundButton') && isLarger(sound, 9)) {
+    } else if (isMouseEvent(event, screen[name]) && isMatch(name, 'highSoundButton') && isLarger(sound, 9)) {
         sound++;
     }
 }
 
 
 function processMouseUp() {
-    if (startScreen.displayed) {
+    if (screen.displayed) {
         mouseClick = null;
     }
 }
