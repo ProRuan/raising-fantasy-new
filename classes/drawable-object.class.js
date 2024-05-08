@@ -151,6 +151,37 @@ class DrawableObject {
 
 
 
+    // to check, clean and move!!!
+    setSpeed(s) {
+        this.speed = s / 60;
+    }
+
+
+    floatPermanently() {
+        this.float();
+        this.keep();
+    }
+
+
+    float() {
+        this.x -= this.speed;
+    }
+
+
+    // to edit
+    keep() {
+        if (this.x < -this.width) {
+            this.x = 1 * canvasWidth;
+            // this.x = LEVEL_SIZE * world.canvas.width;    // level size
+        }
+    }
+
+
+    move(subfunction) {
+        this.setStoppableInterval(subfunction, 1000 / 60);
+    }
+
+
     setStoppableInterval(subfunction, interval) {
         let id = setInterval(subfunction, interval);
         intervalIds.push(id);

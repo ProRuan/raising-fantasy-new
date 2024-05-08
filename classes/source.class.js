@@ -1,5 +1,6 @@
 class Source {
-    background = './img/background/background6.png';
+    background = './img/background/background5.png';
+    cloud = './img/background/background6.png';
 
     grassL = './img/tiles/grass1.png';
     grassC = './img/tiles/grass2.png';

@@ -2,6 +2,12 @@ const NATIVE_WIDTH = 960;
 const NATIVE_HEIGHT = 540;
 
 
+const OBJECTS_TO_COUNT = [
+    'bird', 'bomb', 'coin', 'crystal', 'heart',
+    'hit_point', 'leaf', 'star', 'web'
+];
+
+
 const IMAGE_KNIGHT = './img/characters/knight/knight.png';
 const FLIP_BOOK_KNIGHT = [
     './img/characters/knight/attack/attack4.png',
