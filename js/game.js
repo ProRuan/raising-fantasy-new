@@ -1,6 +1,8 @@
 let canvas;
 let keyboard;
 let mouseClick;    // to edit + to move
+
+let screen;
 let startScreen;
 let levelScreen;
 

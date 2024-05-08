@@ -11,7 +11,7 @@ class LevelScreen extends World {
 
 
     setLevelScreen() {
-        this.setDisplayed(false);
+        this.setDisplayed(true);
 
         // only for testing!!!
         this.avatarImage = new AvatarInfo(SOURCE.avatarImage);
