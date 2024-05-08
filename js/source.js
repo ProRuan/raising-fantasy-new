@@ -1,5 +1,9 @@
 const NATIVE_WIDTH = 960;
 const NATIVE_HEIGHT = 540;
+const UNIT = NATIVE_WIDTH / 16;
+
+
+const LEVEL_SIZE = 8;
 
 
 const OBJECTS_TO_COUNT = [

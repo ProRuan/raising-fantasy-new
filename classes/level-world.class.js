@@ -17,13 +17,20 @@ class LevelWorld extends World {
 
 
         // only for testing!!!
-        this.background = new Background(0);
 
         this.level = new Level1();
+        this.setLevel();    // move to class Knihgt!?!
 
         // ready!!!
         this.setAvatarInfo();
 
+    }
+
+
+    setLevel() {
+        for (const [key, value] of Object.entries(this.level)) {
+            this[key] = value;
+        }
     }
 
 
@@ -59,12 +66,11 @@ class LevelWorld extends World {
 
 
         // only for testing!!!
-        this.drawObjectGroup(this.background.layers);
-
-        this.drawLevel();
+       
 
 
         // ready!!!
+        this.drawLevel();
         this.drawAvatarInfo();
 
 

@@ -3,27 +3,44 @@ class Level1 {
 
     // jsdoc
     constructor() {
-        this.loadSection(Section1, 0);
-        this.loadSection(Section2, 1);
-        this.loadSection(Section3, 2);
-        this.loadSection(Section4, 3);
-        this.loadSection(Section5, 4);
-        this.loadSection(Section6, 5);
-        this.loadSection(Section7, 6);
-        this.loadSection(Section8, 7);
+        this.loadAllBackgrounds();
+
+        this.loadAllSections();
+    }
+
+
+    // to edit
+    loadAllBackgrounds() {
+        this.background = [];
+        for (let i = 0; i < 8; i++) {
+            let bg = new Background(i);
+            bg.layers.forEach((layer) => {
+                layer.x = i * canvas.width;
+                this.background.push(layer);
+            });
+        }
     }
 
 
     // jsdoc
-    loadSection(Section, t) {
-        let section = this.getSection(Section);
+    loadAllSections() {
+        this.loadSection(new Section1(), 0);
+        this.loadSection(new Section2(), 1);
+        this.loadSection(new Section3(), 2);
+        this.loadSection(new Section4(), 3);
+        this.loadSection(new Section5(), 4);
+        this.loadSection(new Section6(), 5);
+        this.loadSection(new Section7(), 6);
+        this.loadSection(new Section8(), 7);
+    }
+
+
+    // review subsequent methods!!!
+
+
+    // jsdoc
+    loadSection(section, t) {
         this.loadSectionObjects(section, t);
-    }
-
-
-    // jsdoc
-    getSection(Section) {
-        return new Section();
     }
 
 
