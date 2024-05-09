@@ -29,7 +29,7 @@ class FlipBook {
     // jsdoc
     getFile(chapter) {
         let file = chapter.match(this.patFile);
-        return [file[1], file[2]];
+        return [formatSplitWord(file[1]), file[2]];
     }
 
 

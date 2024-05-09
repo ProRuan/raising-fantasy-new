@@ -12,6 +12,7 @@ class AnimatedObject extends DrawableObject {
 
     setFlipBook() {
         let chapter = this.getChapter();
+        chapter = formatSplitWord(chapter);
         this.createFlipBook(chapter);
     }
 

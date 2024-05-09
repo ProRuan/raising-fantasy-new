@@ -183,7 +183,7 @@ class DrawableObject {
     // to edit
     keep() {
         if (this.x < -this.width) {
-            this.x = 1 * canvasWidth;
+            this.x = 1 * canvas.width;
             // this.x = LEVEL_SIZE * world.canvas.width;    // level size
         }
     }

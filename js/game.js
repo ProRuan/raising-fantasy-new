@@ -284,7 +284,7 @@ function isLarger(a, b, tolerant) {
 }
 
 
-function removeLowLine(text) {
+function formatSplitWord(text) {
     if (text.includes('_')) {
         text = text.split('_');
         let secondInitial = text[1][0].toUpperCase();
