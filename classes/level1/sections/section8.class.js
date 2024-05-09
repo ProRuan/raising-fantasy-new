@@ -5,6 +5,7 @@ class Section8 {
         this.setFlyGrass();
         this.setGrass();
         this.setLadders();
+        this.setCoins();
         // this.setEnemies();
     }
 
@@ -13,7 +14,7 @@ class Section8 {
     setFlyGrass() {
         this.flyGrass = [
             new FlyGrassL(3, 3.5), new FlyGrassC(4, 3.5), new FlyGrassC(5, 3.5), new FlyGrassR(6, 3.5),
-            new FlyGrassL(8, -5), new FlyGrassC(9, -5), new FlyGrassR(10, -5)
+            new FlyGrassL(8, -4), new FlyGrassC(9, -4), new FlyGrassR(10, -4)
         ];
     }
 
@@ -33,6 +34,14 @@ class Section8 {
         this.ladders = [
             new LadderB(4.25, 0.875), new LadderC(4.25, 1.375), new LadderC(4.25, 1.875), new LadderC(4.25, 2.375),
             new LadderC(4.25, 2.875), new LadderC(4.25, 3.375), new LadderT(4.25, 3.875)
+        ];
+    }
+
+
+    // jsdoc
+    setCoins() {
+        this.coins = [
+            new Coin(9.25, -3.875)
         ];
     }
 
