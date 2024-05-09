@@ -78,23 +78,31 @@ class Knight extends MoveableObject {
             if (this.world.keyboard.keyA.keydown) {
 
             }
+
+
+            // this.world.camera_x = -this.x + 4 * 64 + 28;    // + 4 * 64 + 28
         }, 1000 / 60);
 
 
         setInterval(() => {
-            if (this.world.keyboard.arrowLeft.keydown || this.world.keyboard.arrowRight.keydown) {
-                this.playAnimation(this.flipBook.walk);
-            } else if (this.world.keyboard.keyA.keydown) {
-                this.playAnimation(this.flipBook.attack);
-            } else {
-                this.img.src = this.cover;
-            }
+            new KnightAnimator(this);
+            // if (this.world.keyboard.arrowLeft.keydown || this.world.keyboard.arrowRight.keydown) {
+            //     this.playAnimation(this.flipBook.walk);
+            // } else if (this.world.keyboard.keyA.keydown) {
+            //     this.playAnimation(this.flipBook.attack);
+            // } else {
+            //     this.img.src = this.cover;
+            // }
         }, 100);
     }
 
-    isWalking(key) {
-        if (this.world.keyboard[key].keydown) {
-            return true;
-        }
+
+    isWalking() {
+        return isKey('arrowLeft') || isKey('arrowRight');
+    }
+
+
+    isAttacking() {
+        return isKey('keyA');
     }
 }

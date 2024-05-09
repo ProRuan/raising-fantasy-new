@@ -87,7 +87,7 @@ class LevelWorld extends World {
 
     draw() {    // double code!!!
         this.clearCanvas();
-
+        this.translateCamera(284, 0);
 
         // only for testing!!!
 
@@ -99,8 +99,13 @@ class LevelWorld extends World {
 
         this.drawObject(this.hero);
 
-
+        this.translateCamera(-284, 0);
         this.redraw();
+    }
+
+
+    translateCamera(x, y) {
+        this.ctx.translate(x, y);
     }
 
 

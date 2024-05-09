@@ -5,20 +5,17 @@ class KnightAnimator {
 
     constructor(knight) {
         this.knight = knight;
-        this.setConditionWalk();
-        this.giveResponse();
+        this.setConditions();
+        // this.giveResponse();    // to delete
         this.playAnimationSuper();
     }
 
 
-    setConditionWalk() {
-        this.walk = this.knight.isWalking('arrowLeft') || this.knight.isWalking('arrowRight');
-        this.addCondition(this.walk);
+    setConditions() {
+        this.addCondition(this.knight.isWalking());
         this.addFlipBook(this.knight.flipBook.walk);
 
-
-        this.attack = this.knight.isWalking('keyA');
-        this.addCondition(this.attack);
+        this.addCondition(this.knight.isAttacking());
         this.addFlipBook(this.knight.flipBook.attack);
     }
 
@@ -33,6 +30,7 @@ class KnightAnimator {
     }
 
 
+    // to delete
     giveResponse() {
         if (this.walk) {
             console.log('knight is walking', this.knight.playAnimation, this.flipBook[0]);
@@ -45,8 +43,8 @@ class KnightAnimator {
     playAnimationSuper() {
         for (let i = 0; i < this.condition.length; i++) {
             if (this.condition[i]) {
-                // this.knight.playAnimation(this.flipBook[i]);
-                console.log(i);
+                this.knight.playAnimation(this.flipBook[i]);
+                // console.log(i);
                 break;
             }
         }

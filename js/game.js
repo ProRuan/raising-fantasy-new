@@ -87,12 +87,12 @@ let musicButtons = true;
 
 function processKeydown(event) {
 
-    console.log(event);
+    // console.log(event);
     let code = event.code;
     code = code.replace(code[0], code[0].toLowerCase());
-    console.log(world.keyboard[code].keydown);
+    // console.log(world.keyboard[code].keydown);
     world.keyboard[code].keydown = true;
-    console.log(world.keyboard[code].keydown);
+    // console.log(world.keyboard[code].keydown);
 
     if (this.currentWorld == 'start') {
         if (code == 'arrowDown' && mainButtonCounter < mainButtons.length - 1 && !world.isStoryBgOpened() && !world.isLeaderboardOpened()) {
@@ -200,12 +200,17 @@ function processKeydown(event) {
 
 
 function processKeyup(event) {
-    console.log(event);
+    // console.log(event);
     let code = event.code;
     code = code.replace(code[0], code[0].toLowerCase());
-    console.log(world.keyboard[code].keydown);
+    // console.log(world.keyboard[code].keydown);
     world.keyboard[code].keydown = false;
-    console.log(world.keyboard[code].keydown);
+    // console.log(world.keyboard[code].keydown);
+}
+
+
+function isKey(key, subkey) {
+   return (subkey) ? keyboard[key][subkey] : keyboard[key].keydown;
 }
 
 
