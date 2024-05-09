@@ -92,6 +92,11 @@ function processKeydown(event) {
     code = code.replace(code[0], code[0].toLowerCase());
     // console.log(world.keyboard[code].keydown);
     world.keyboard[code].keydown = true;
+    world.keyboard[code].timeStamp = new Date().getTime();
+    if (world.time - world.keyboard[code].lastTimeStamp < 500) {
+        world.keyboard[code].doubleClick = true;
+    }
+    world.keyboard[code].lastTimeStamp = world.keyboard[code].timeStamp;
     // console.log(world.keyboard[code].keydown);
 
     if (this.currentWorld == 'start') {
@@ -206,11 +211,14 @@ function processKeyup(event) {
     // console.log(world.keyboard[code].keydown);
     world.keyboard[code].keydown = false;
     // console.log(world.keyboard[code].keydown);
+    if (world.keyboard[code].doubleClick) {
+        world.keyboard[code].doubleClick = false;
+    }
 }
 
 
 function isKey(key, subkey) {
-   return (subkey) ? keyboard[key][subkey] : keyboard[key].keydown;
+    return (subkey) ? keyboard[key][subkey] : keyboard[key].keydown;
 }
 
 
@@ -273,4 +281,16 @@ function isIncluded(a, b, c) {
 // jsdoc
 function isLarger(a, b, tolerant) {
     return (!tolerant) ? a < b : a <= b;
+}
+
+
+function removeLowLine(text) {
+    if (text.includes('_')) {
+        text = text.split('_');
+        let secondInitial = text[1][0].toUpperCase();
+        text[1] = text[1].replace(text[1][0], secondInitial);
+        return text[0] + text[1];
+    } else {
+        return text;
+    }
 }

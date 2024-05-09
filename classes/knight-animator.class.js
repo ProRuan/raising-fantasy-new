@@ -12,10 +12,19 @@ class KnightAnimator {
 
 
     setConditions() {
-        this.addCondition(this.knight.isWalking());
+        this.addCondition(this.knight.isRunAttack());
+        this.addFlipBook(this.knight.flipBook.run_attack);    // to edit
+
+        this.addCondition(this.knight.isRun());
+        this.addFlipBook(this.knight.flipBook.run);
+
+        this.addCondition(this.knight.isWalkAttack());
+        this.addFlipBook(this.knight.flipBook.walk_attack);    // to edit
+
+        this.addCondition(this.knight.isWalk());
         this.addFlipBook(this.knight.flipBook.walk);
 
-        this.addCondition(this.knight.isAttacking());
+        this.addCondition(this.knight.isAttack());
         this.addFlipBook(this.knight.flipBook.attack);
     }
 

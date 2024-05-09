@@ -97,12 +97,27 @@ class Knight extends MoveableObject {
     }
 
 
-    isWalking() {
+    isRunAttack() {
+        return this.isRun() && this.isAttack();
+    }
+
+
+    isRun() {
+        return isKey('arrowLeft', 'doubleClick') || isKey('arrowRight', 'doubleClick');
+    }
+
+
+    isWalkAttack() {
+        return this.isWalk() && this.isAttack();
+    }
+
+
+    isWalk() {
         return isKey('arrowLeft') || isKey('arrowRight');
     }
 
 
-    isAttacking() {
+    isAttack() {
         return isKey('keyA');
     }
 }
