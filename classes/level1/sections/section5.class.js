@@ -49,7 +49,7 @@ class Section5 {
     // jsdoc
     setCoins() {
         this.coins = [
-            new Coin(3.25, 1.125), new Coin(5.25, 3.125), new Coin(9.25, 3.125), new Coin(11.25, 5.125)
+            new Coin(3.25, 1.125), new Coin(11.25, 5.125)
         ];
     }
 
@@ -57,7 +57,7 @@ class Section5 {
     // jsdoc
     setHitPoints() {
         this.hitPoints = [
-            new HitPoint(6.25, 3.125), new HitPoint(8.25, 3.125), new HitPoint(13.75, 5.125)
+            new HitPoint(5.25, 3.125), new HitPoint(9.25, 3.125), new HitPoint(13.75, 5.125)
         ];
 
     }

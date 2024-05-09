@@ -246,7 +246,7 @@ class StartWorld extends World {
 
     drawResult(key, y) {
         this.setFont('20px Arial');
-        this.drawResultText('Coins:', y, result[key].coins + ' / 20');
+        this.drawResultText('Coins:', y, result[key].coins + ' / 18');
         this.drawResultText('Leaves:', y + 36, result[key].leaves + ' / 18');
         this.drawResultText('Time:', y + 72, result[key].time);
     }

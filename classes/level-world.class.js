@@ -23,7 +23,6 @@ class LevelWorld extends World {
 
         // ready!!!
         this.setLevel();
-        this.setLevelObjects();    // move to class Knight!?!
         this.setAvatarInfo();
 
 
@@ -33,6 +32,7 @@ class LevelWorld extends World {
 
     setLevel() {
         this.level = new Level1();
+        this.setLevelObjects();
     }
 
 
@@ -87,7 +87,7 @@ class LevelWorld extends World {
 
     draw() {    // double code!!!
         this.clearCanvas();
-        this.translateCamera(284, 0);
+        // this.translateCamera(284, 0);
 
         // only for testing!!!
 
@@ -99,7 +99,7 @@ class LevelWorld extends World {
 
         this.drawObject(this.hero);
 
-        this.translateCamera(-284, 0);
+        // this.translateCamera(-284, 0);
         this.redraw();
     }
 
