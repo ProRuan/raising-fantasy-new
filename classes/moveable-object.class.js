@@ -45,4 +45,9 @@ class MoveableObject extends DrawableObject {
         this.img = this.imageCache[path];
         this.currentImage++;
     }
+
+
+    playSound(sound) {
+        new Audio(sound).play();    // set sound volume factor!!!
+    }
 }

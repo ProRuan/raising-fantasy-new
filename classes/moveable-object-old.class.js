@@ -164,9 +164,4 @@ class MoveableObject extends DrawableObject {
     //     let caseWalk = this.currentFlipBook == this.flipBook.WALK && flipBook == this.flipBook.WALK_ATTACK;
     //     return caseRunAttack || caseRun || caseWalkAttack || caseWalk;
     // }
-
-
-    // playSound(sound) {
-    //     new Audio(sound).play();
-    // }
 }

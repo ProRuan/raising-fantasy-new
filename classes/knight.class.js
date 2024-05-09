@@ -1,6 +1,10 @@
 class Knight extends MoveableObject {
 
 
+    // only for testing!!!
+    swordDraw = SOURCE.swordDraw;
+
+
     constructor(x, y) {
         super(IMAGE_KNIGHT, x, y);
         this.setCover();
@@ -120,4 +124,11 @@ class Knight extends MoveableObject {
     isAttack() {
         return isKey('keyA');
     }
+
+
+    // playSwordDraw() {
+    //     if (this.img.src.includes('attack2')) {
+    //         this.playSound(this.swordDraw);
+    //     }
+    // }
 }

@@ -5,31 +5,27 @@ class KnightAnimator {
 
     constructor(knight) {
         this.knight = knight;
-        this.setConditions();
+        this.setSource(SOURCE.knightAnimation);
+        this.setConditions(this.source);    // rename!!!
         // this.giveResponse();    // to delete
         this.playAnimationSuper();
     }
 
 
-    setConditions() {
-        this.setAnimationValues(SOURCE.knightRun);
-
-        this.addCondition(this.knight.isRun());
-        this.addFlipBook(this.knight.flipBook.run);
-
-        this.addCondition(this.knight.isWalkAttack());
-        this.addFlipBook(this.knight.flipBook.walkAttack);    // to edit
-
-        this.addCondition(this.knight.isWalk());
-        this.addFlipBook(this.knight.flipBook.walk);
-
-        this.addCondition(this.knight.isAttack());
-        this.addFlipBook(this.knight.flipBook.attack);
+    setSource(source) {
+        this.source = source;
     }
 
 
-    setAnimationValues(key) {
-        this.addCondition(this.knight[key.method]());
+    setConditions() {
+        for (let i = 0; i < this.source.length; i++) {
+            this.setAnimation(this.source[i]);
+        }
+    }
+
+
+    setAnimation(key) {
+        this.addCondition(this.knight[key.condition]());
         this.addFlipBook(this.knight.flipBook[key.chapter]);
     }
 
@@ -58,9 +54,24 @@ class KnightAnimator {
         for (let i = 0; i < this.condition.length; i++) {
             if (this.condition[i]) {
                 this.knight.playAnimation(this.flipBook[i]);
-                // console.log(i);
-                break;
+
+                // if (i) {
+                //     console.log(this.knight.img.src);
+                // }
+
+                // if (this.flipBook[i] == this.knight.flipBook.attack) {
+                //     console.log(this.knight.img.src.includes('attack2'), this.knight.flipBook.attack[1]);
+                //     if (this.knight.img.src.includes('attack2')) {
+                //         this.knight.playSound(this.knight.swordDraw);
+                //     }
+                //     // this.knight.playSound(this.knight.swordDraw);
+                // }
+
+
+                return true;
             }
         }
+        this.knight.img.src = this.knight.cover;
+        // return false;
     }
 }

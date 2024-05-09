@@ -54,7 +54,25 @@ class Source {
     lightning = './img/bosses/magic/lightning.png';
 
 
-    knightRun = { method: 'isRunAttack', chapter: 'runAttack' };
+    knightAnimation = [
+        { condition: 'isRunAttack', chapter: 'runAttack' },
+        { condition: 'isRun', chapter: 'run' },
+        { condition: 'isWalkAttack', chapter: 'walkAttack' },
+        { condition: 'isWalk', chapter: 'walk' },
+        { condition: 'isAttack', chapter: 'attack' }
+    ];
+
+    knightRunAttack = { condition: 'isRunAttack', chapter: 'runAttack' };
+    knightRun = { condition: 'isRun', chapter: 'run' };
+    knightWalkAttack = { condition: 'isWalkAttack', chapter: 'walkAttack' };
+    knightWalk = { condition: 'isWalk', chapter: 'walk' };
+    knightAttack = { condition: 'isAttack', chapter: 'attack' };
+
+
+
+
+    // audio
+    swordDraw = './audio/attacks_and_creatures/blade_draw.wav';
 
 
     constructor() {
