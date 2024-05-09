@@ -54,6 +54,9 @@ class Source {
     lightning = './img/bosses/magic/lightning.png';
 
 
+    knightRun = { method: 'isRunAttack', chapter: 'runAttack' };
+
+
     constructor() {
         this.loadImagePaths();
     }

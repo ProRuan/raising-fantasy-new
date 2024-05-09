@@ -12,8 +12,7 @@ class KnightAnimator {
 
 
     setConditions() {
-        this.addCondition(this.knight.isRunAttack());
-        this.addFlipBook(this.knight.flipBook.runAttack);    // to edit
+        this.setAnimationValues(SOURCE.knightRun);
 
         this.addCondition(this.knight.isRun());
         this.addFlipBook(this.knight.flipBook.run);
@@ -26,6 +25,12 @@ class KnightAnimator {
 
         this.addCondition(this.knight.isAttack());
         this.addFlipBook(this.knight.flipBook.attack);
+    }
+
+
+    setAnimationValues(key) {
+        this.addCondition(this.knight[key.method]());
+        this.addFlipBook(this.knight.flipBook[key.chapter]);
     }
 
 
