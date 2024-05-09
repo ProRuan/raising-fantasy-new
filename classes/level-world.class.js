@@ -9,6 +9,7 @@ class LevelWorld extends World {
 
 
         this.setLevelWorld();
+        this.runTime();
         this.draw();
     }
 
@@ -71,6 +72,13 @@ class LevelWorld extends World {
 
     connectWorld() {
         this.hero.world = this;
+    }
+
+
+    runTime() {
+        setInterval(() => {
+            this.time = new Date().getTime();
+        }, 1000 / 60);
     }
 
 

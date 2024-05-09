@@ -1,4 +1,5 @@
 class MoveableObject extends DrawableObject {
+    otherDirection = false;
 
 
     constructor(path, x, y) {
@@ -14,6 +15,7 @@ class MoveableObject extends DrawableObject {
 
     moveLeft() {
         if (keyboard.arrowLeft.keydown) {
+            this.otherDirection = true;
             this.x -= this.speed;
         }
         // if (keyboard.arrowLeft.doubleClick && keyboard.arrowLeft.keydown) {
@@ -26,6 +28,7 @@ class MoveableObject extends DrawableObject {
 
     moveRight() {
         if (keyboard.arrowRight.keydown) {
+            this.otherDirection = false;
             this.x += this.speed;
         }
         // if (keyboard.arrowRight.doubleClick && keyboard.arrowRight.keydown) {

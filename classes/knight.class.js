@@ -1,9 +1,11 @@
 class Knight extends MoveableObject {
-    
+
 
     constructor(x, y) {
         super(IMAGE_KNIGHT, x, y);
+        this.setCover();
         this.setFlipBook(FLIP_BOOK_KNIGHT);
+        this.loadImages();
         this.setSpeed(128, 256);
         this.animate();
     }
@@ -39,11 +41,38 @@ class Knight extends MoveableObject {
     }
 
 
+    setCover() {
+        this.cover = this.img.src;
+    }
+
+
+    setImages() {
+        for (const [key] of Object.entries(this.flipBook)) {
+            let chapter = this.flipBook[key];
+            chapter.forEach((c) => {
+                let img = new Image();
+                img.src = c;
+                this.imageCache[c] = img;
+            })
+        }
+    }
+
+
     animate() {
         setInterval(() => {
+            // only for testing!!!
+            if (this.world.keyboard.keyQ.keydown) {
+                this.otherDirection = true;
+            }
+            if (this.world.keyboard.keyE.keydown) {
+                this.otherDirection = false;
+            }
+
+
             if (this.world.keyboard.arrowLeft.keydown) {
                 this.move(false);
-            } else if (this.world.keyboard.arrowRight.keydown) {
+            }
+            if (this.world.keyboard.arrowRight.keydown) {
                 this.move(true);
             }
         }, 1000 / 60);
@@ -52,6 +81,8 @@ class Knight extends MoveableObject {
         setInterval(() => {
             if (this.world.keyboard.arrowLeft.keydown || this.world.keyboard.arrowRight.keydown) {
                 this.playAnimation(this.flipBook.walk);
+            } else {
+                this.img.src = this.cover;
             }
         }, 100);
     }

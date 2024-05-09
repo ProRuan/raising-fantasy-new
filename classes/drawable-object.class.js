@@ -40,6 +40,11 @@ class DrawableObject {
     }
 
 
+    get radDispl() {
+        return this.width - (this.xCenter - this.x);
+    }
+
+
     setUp(path, x, y, z) {
         if (isNaN(path)) {
             this.setImage(path);

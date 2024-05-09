@@ -37,8 +37,33 @@ class World {
 
 
     drawObject(o) {
+        this.flipImageMaster(o, () => this.flipImage(o));
         o.draw(this.ctx);
-        // o.drawFrame(this.ctx);    // only for testing!!!
+        o.drawFrame(this.ctx);    // only for testing!!!
+        this.flipImageMaster(o, () => this.flipImageBack(o));
+    }
+
+
+    flipImageMaster(mo, subfunction) {
+        if (mo.otherDirection) {
+            subfunction(mo);
+        }
+    }
+
+
+    // to edit
+    flipImage(mo) {    // set mo.object!!!
+        this.ctx.save();
+        this.ctx.translate(mo.radDispl, 0);    // k + 24, d + 40
+        console.log(mo.radDispl);
+        this.ctx.scale(-1, 1);
+        mo.x *= -1;
+    }
+
+
+    flipImageBack(mo) {
+        mo.x *= -1;
+        this.ctx.restore();
     }
 
 
