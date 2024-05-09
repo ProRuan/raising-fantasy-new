@@ -130,6 +130,11 @@ class DrawableObject {
     }
 
 
+    setFlipBook(source) {
+        this.flipBook = new FlipBook(source);
+    }
+
+
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
@@ -139,10 +144,11 @@ class DrawableObject {
 
     // only for testing!!!
     drawFrame(ctx) {
-        if (this instanceof Button) {
+        if (this instanceof Knight) {
             ctx.beginPath();
             ctx.lineWidth = '1';
             ctx.strokeStyle = 'blue';
+            ctx.rect(this.xCenter, this.yTop, 0, this.yBottom - this.yTop);
             ctx.rect(this.xLeft, this.yTop, this.xRight - this.xLeft, this.yBottom - this.yTop);
             ctx.stroke();
         }
@@ -152,8 +158,9 @@ class DrawableObject {
 
 
     // to check, clean and move!!!
-    setSpeed(s) {
+    setSpeed(s, r) {
         this.speed = s / 60;
+        (r) ? this.speedRun = r / 60 : false;
     }
 
 

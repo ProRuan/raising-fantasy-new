@@ -17,13 +17,16 @@ class LevelWorld extends World {
 
 
         // only for testing!!!
-
+        this.hero = new Knight(64, 39);
 
 
         // ready!!!
         this.setLevel();
         this.setLevelObjects();    // move to class Knight!?!
         this.setAvatarInfo();
+
+
+        this.connectWorld();
     }
 
 
@@ -66,6 +69,11 @@ class LevelWorld extends World {
     }
 
 
+    connectWorld() {
+        this.hero.world = this;
+    }
+
+
     // Please take care of x, y and UNIT!!!
 
 
@@ -74,12 +82,14 @@ class LevelWorld extends World {
 
 
         // only for testing!!!
-        
 
 
         // ready!!!
         this.drawLevel();
         this.drawAvatarInfo();
+
+
+        this.drawObject(this.hero);
 
 
         this.redraw();

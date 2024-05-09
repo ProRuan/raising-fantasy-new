@@ -1,7 +1,9 @@
 function processMouseMove(event) {
-    for (let i = 0; i < buttons.length; i++) {
-        let button = buttons[i] + 'Button';
-        hover(event, button);
+    if (currentWorld == 'start') {
+        for (let i = 0; i < buttons.length; i++) {
+            let button = buttons[i] + 'Button';
+            hover(event, button);
+        }
     }
 }
 
@@ -48,15 +50,17 @@ function setCursor(value) {
 
 // Please sort the subsequent functions + rename!!!
 function processMouseDown(event) {
-    clickArrowButton(event, 'lowMusicButton');
-    clickArrowButton(event, 'highMusicButton');
-    clickArrowButton(event, 'lowSoundButton');
-    clickArrowButton(event, 'highSoundButton');
-    closeStoryBg(event);
-    clickExtraButton(event, 'cupButton');
-    clickExtraButton(event, 'settingsButton');
-    clickExtraButton(event, 'storyButton');
-    // newGameButton still missing ...
+    if (currentWorld == 'start') {
+        clickArrowButton(event, 'lowMusicButton');
+        clickArrowButton(event, 'highMusicButton');
+        clickArrowButton(event, 'lowSoundButton');
+        clickArrowButton(event, 'highSoundButton');
+        closeStoryBg(event);
+        clickExtraButton(event, 'cupButton');
+        clickExtraButton(event, 'settingsButton');
+        clickExtraButton(event, 'storyButton');
+        // newGameButton still missing ...
+    }
 }
 
 
@@ -117,5 +121,7 @@ function updateVolume(event, name) {
 
 
 function processMouseUp() {
-    mouseClick = null;
+    if (currentWorld == 'start') {
+        mouseClick = null;
+    }
 }

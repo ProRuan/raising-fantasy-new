@@ -51,6 +51,7 @@ Clean Coding (26/58)
   - class AvatarInfo - simpleCheck
   - class Background - simpleCheck
   - class Button ...
+  - class Character ...
   - class Cloud - simpleCheck
   - class CoordinateSystem ... ???
   - class Counter - simpleCheck

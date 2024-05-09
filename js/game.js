@@ -4,6 +4,7 @@ let mouseClick;    // to edit + to move
 
 let world;
 let inPlay = true;    // set to false!!!
+let currentWorld = 'level';    // condition for mouse and keyboard!!!
 
 let counter = 0;
 let buttons = ['newGame', 'story', 'cup', 'settings', 'coin', 'x', 'lowMusic', 'highMusic', 'lowSound', 'highSound'];
@@ -43,9 +44,11 @@ function switchWorld() {
         if (inPlay == true) {
             world = new LevelWorld(canvas, keyboard);
             inPlay = null;
+            currentWorld = 'level';
         } else if (inPlay == false) {
             world = new StartWorld(canvas, keyboard);
             inPlay = null;
+            currentWorld = 'start';
         }
     }, 1000 / 60);
 }
@@ -83,6 +86,7 @@ let musicButtons = true;
 
 
 function processKeydown(event) {
+
     console.log(event);
     let code = event.code;
     code = code.replace(code[0], code[0].toLowerCase());
@@ -90,105 +94,106 @@ function processKeydown(event) {
     world.keyboard[code].keydown = true;
     console.log(world.keyboard[code].keydown);
 
+    if (this.currentWorld == 'start') {
+        if (code == 'arrowDown' && mainButtonCounter < mainButtons.length - 1 && !world.isStoryBgOpened() && !world.isLeaderboardOpened()) {
+            world[mainButtons[mainButtonCounter]].selected = false;
+            mainButtonCounter++;
+            world[mainButtons[mainButtonCounter]].selected = true;
+            console.log(mainButtonCounter, mainButtons[mainButtonCounter]);
+        }
 
-    if (code == 'arrowDown' && mainButtonCounter < mainButtons.length - 1 && !world.isStoryBgOpened() && !world.isLeaderboardOpened()) {
-        world[mainButtons[mainButtonCounter]].selected = false;
-        mainButtonCounter++;
-        world[mainButtons[mainButtonCounter]].selected = true;
-        console.log(mainButtonCounter, mainButtons[mainButtonCounter]);
-    }
-
-    if (code == 'arrowUp' && 0 < mainButtonCounter && !world.isStoryBgOpened() && !world.isLeaderboardOpened()) {
-        world[mainButtons[mainButtonCounter]].selected = false;
-        mainButtonCounter--;
-        world[mainButtons[mainButtonCounter]].selected = true;
-        console.log(mainButtonCounter, mainButtons[mainButtonCounter]);
-    }
+        if (code == 'arrowUp' && 0 < mainButtonCounter && !world.isStoryBgOpened() && !world.isLeaderboardOpened()) {
+            world[mainButtons[mainButtonCounter]].selected = false;
+            mainButtonCounter--;
+            world[mainButtons[mainButtonCounter]].selected = true;
+            console.log(mainButtonCounter, mainButtons[mainButtonCounter]);
+        }
 
 
-    if (code == 'enter' && world.newGameButton.selected == true) {
-        console.log('start new game ...');
-        // world.newGameButton.locked = true;
-    }
-    if (code == 'enter' && world.storyButton.selected == true) {
-        if (world.cupButton.locked == true) {
-            world.cupButton.locked = false;
+        if (code == 'enter' && world.newGameButton.selected == true) {
+            console.log('start new game ...');
+            // world.newGameButton.locked = true;
         }
-        if (world.settingsButton.locked == true) {
-            world.settingsButton.locked = false;
+        if (code == 'enter' && world.storyButton.selected == true) {
+            if (world.cupButton.locked == true) {
+                world.cupButton.locked = false;
+            }
+            if (world.settingsButton.locked == true) {
+                world.settingsButton.locked = false;
+            }
+            world.storyButton.locked = true;
         }
-        world.storyButton.locked = true;
-    }
-    if (code == 'enter' && world.cupButton.selected == true) {
-        if (world.storyButton.locked == true) {
-            world.storyButton.locked = false;
+        if (code == 'enter' && world.cupButton.selected == true) {
+            if (world.storyButton.locked == true) {
+                world.storyButton.locked = false;
+            }
+            if (world.settingsButton.locked == true) {
+                world.settingsButton.locked = false;
+            }
+            world.cupButton.locked = true;
         }
-        if (world.settingsButton.locked == true) {
-            world.settingsButton.locked = false;
-        }
-        world.cupButton.locked = true;
-    }
-    if (code == 'enter' && world.settingsButton.selected == true) {
-        if (world.storyButton.locked == true) {
-            world.storyButton.locked = false;
-        }
-        if (world.cupButton.locked == true) {
-            world.cupButton.locked = false;
-        }
-        world.settingsButton.locked = true;
+        if (code == 'enter' && world.settingsButton.selected == true) {
+            if (world.storyButton.locked == true) {
+                world.storyButton.locked = false;
+            }
+            if (world.cupButton.locked == true) {
+                world.cupButton.locked = false;
+            }
+            world.settingsButton.locked = true;
 
-        // double code!!!
-        world[volumeButtons[volumeButtonsId]].selected = false;
-        volumeButtonsId = 0;
-        musicButtons = true;
-    }
-
-    if ((code == 'backspace' || code == 'escape' || code == 'space' || code == 'keyX') && world.storyButton.locked == true) {
-        world.storyButton.locked = false;
-    }
-    if ((code == 'backspace' || code == 'escape' || code == 'keyX') && world.cupButton.locked == true) {
-        world.cupButton.locked = false;
-    }
-    if ((code == 'backspace' || code == 'escape' || code == 'keyX') && world.settingsButton.locked == true) {
-        world.settingsButton.locked = false;
-    }
-
-    if (code == 'arrowLeft' && world.settingsButton.isLocked()) {
-        world[volumeButtons[volumeButtonsId]].selected = false;
-        volumeButtonsId = (musicButtons) ? 0 : 2;
-        world[volumeButtons[volumeButtonsId]].selected = true;
-        if (volumeButtonsId == 0 && isLarger(0, music)) {
-            music--;
-        }
-        if (volumeButtonsId == 2 && isLarger(0, sound)) {
-            sound--;
-        }
-    }
-    if (code == 'arrowRight' && world.settingsButton.isLocked()) {
-        world[volumeButtons[volumeButtonsId]].selected = false;
-        volumeButtonsId = (musicButtons) ? 1 : 3;
-        world[volumeButtons[volumeButtonsId]].selected = true;
-        if (volumeButtonsId == 1 && isLarger(music, 9)) {
-            music++;
-        }
-        if (volumeButtonsId == 3 && isLarger(sound, 9)) {
-            sound++;
-        }
-    }
-    if (code == 'arrowDown' && world.settingsButton.isLocked()) {
-        if (musicButtons == true) {
-            musicButtons = false;
+            // double code!!!
             world[volumeButtons[volumeButtonsId]].selected = false;
-            volumeButtonsId = (volumeButtonsId == 0) ? 2 : 3;
-            world[volumeButtons[volumeButtonsId]].selected = true;
-        }
-    }
-    if (code == 'arrowUp' && world.settingsButton.isLocked()) {
-        if (musicButtons == false) {
+            volumeButtonsId = 0;
             musicButtons = true;
+        }
+
+        if ((code == 'backspace' || code == 'escape' || code == 'space' || code == 'keyX') && world.storyButton.locked == true) {
+            world.storyButton.locked = false;
+        }
+        if ((code == 'backspace' || code == 'escape' || code == 'keyX') && world.cupButton.locked == true) {
+            world.cupButton.locked = false;
+        }
+        if ((code == 'backspace' || code == 'escape' || code == 'keyX') && world.settingsButton.locked == true) {
+            world.settingsButton.locked = false;
+        }
+
+        if (code == 'arrowLeft' && world.settingsButton.isLocked()) {
             world[volumeButtons[volumeButtonsId]].selected = false;
-            volumeButtonsId = (volumeButtonsId == 2) ? 0 : 1;
+            volumeButtonsId = (musicButtons) ? 0 : 2;
             world[volumeButtons[volumeButtonsId]].selected = true;
+            if (volumeButtonsId == 0 && isLarger(0, music)) {
+                music--;
+            }
+            if (volumeButtonsId == 2 && isLarger(0, sound)) {
+                sound--;
+            }
+        }
+        if (code == 'arrowRight' && world.settingsButton.isLocked()) {
+            world[volumeButtons[volumeButtonsId]].selected = false;
+            volumeButtonsId = (musicButtons) ? 1 : 3;
+            world[volumeButtons[volumeButtonsId]].selected = true;
+            if (volumeButtonsId == 1 && isLarger(music, 9)) {
+                music++;
+            }
+            if (volumeButtonsId == 3 && isLarger(sound, 9)) {
+                sound++;
+            }
+        }
+        if (code == 'arrowDown' && world.settingsButton.isLocked()) {
+            if (musicButtons == true) {
+                musicButtons = false;
+                world[volumeButtons[volumeButtonsId]].selected = false;
+                volumeButtonsId = (volumeButtonsId == 0) ? 2 : 3;
+                world[volumeButtons[volumeButtonsId]].selected = true;
+            }
+        }
+        if (code == 'arrowUp' && world.settingsButton.isLocked()) {
+            if (musicButtons == false) {
+                musicButtons = true;
+                world[volumeButtons[volumeButtonsId]].selected = false;
+                volumeButtonsId = (volumeButtonsId == 2) ? 0 : 1;
+                world[volumeButtons[volumeButtonsId]].selected = true;
+            }
         }
     }
 }
