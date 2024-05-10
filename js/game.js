@@ -35,11 +35,13 @@ function init() {
     setCanvas();
     setKeyboard();
 
-    switchWorld();
+    world = new LevelWorld(canvas, keyboard);
+    currentWorld = 'level';
+    // switchWorld();    // necessary? --> menu control!
 }
 
 
-function switchWorld() {
+function switchWorld() {    // only for testing?
     setInterval(() => {
         if (inPlay == true) {
             world = new LevelWorld(canvas, keyboard);
@@ -85,7 +87,7 @@ let volumeButtonsId = 0;
 let musicButtons = true;
 
 
-function processKeydown(event) {
+function processKeydown(event) {    // check doubleClick!!!
 
     // console.log(event);
     let code = event.code;

@@ -28,6 +28,11 @@ Tasks
 
   - Think about a random factor for clouds (8 - 1) ...
 
+  - switch world by buttons - not by interval - simpleCheck
+  - check mouse event for speed ...
+  - knight animator: set conditions directly by methods ...
+  - check draw method of world and start / level world - simpleCheck
+
 
 Clean Coding (26/58)
 ------------

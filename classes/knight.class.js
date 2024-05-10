@@ -89,7 +89,7 @@ class Knight extends MoveableObject {
 
 
         setInterval(() => {
-            new KnightAnimator(this);
+            this.knightAnimator = new KnightAnimator(this);
             // if (this.world.keyboard.arrowLeft.keydown || this.world.keyboard.arrowRight.keydown) {
             //     this.playAnimation(this.flipBook.walk);
             // } else if (this.world.keyboard.keyA.keydown) {

@@ -4,11 +4,10 @@ class KnightAnimator {
 
 
     constructor(knight) {
-        this.knight = knight;
         this.setSource(SOURCE.knightAnimation);
-        this.setConditions(this.source);    // rename!!!
+        this.setConditions(knight, this.source);    // rename!!!
         // this.giveResponse();    // to delete
-        this.playAnimationSuper();
+        this.playAnimationSuper(knight);
     }
 
 
@@ -17,16 +16,16 @@ class KnightAnimator {
     }
 
 
-    setConditions() {
+    setConditions(knight) {
         for (let i = 0; i < this.source.length; i++) {
-            this.setAnimation(this.source[i]);
+            this.setAnimation(knight, this.source[i]);
         }
     }
 
 
-    setAnimation(key) {
-        this.addCondition(this.knight[key.condition]());
-        this.addFlipBook(this.knight.flipBook[key.chapter]);
+    setAnimation(knight, key) {
+        this.addCondition(knight[key.condition]());
+        this.addFlipBook(knight.flipBook[key.chapter]);
     }
 
 
@@ -43,17 +42,18 @@ class KnightAnimator {
     // to delete
     giveResponse() {
         if (this.walk) {
-            console.log('knight is walking', this.knight.playAnimation, this.flipBook[0]);
+            console.log('knight is walking', knight.playAnimation, this.flipBook[0]);
         } else {
             console.log('knight is lazy');
         }
     }
 
 
-    playAnimationSuper() {
+    playAnimationSuper(knight) {
         for (let i = 0; i < this.condition.length; i++) {
             if (this.condition[i]) {
-                this.knight.playAnimation(this.flipBook[i]);
+                knight.playAnimation(this.flipBook[i]);
+                console.log(knight.img.src);
 
                 // if (i) {
                 //     console.log(this.knight.img.src);
@@ -71,7 +71,7 @@ class KnightAnimator {
                 return true;
             }
         }
-        this.knight.img.src = this.knight.cover;
+        knight.img.src = knight.cover;
         // return false;
     }
 }
