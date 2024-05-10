@@ -5,23 +5,20 @@ class World {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
-
-        // this.draw();
-
     }
 
 
-    // to edit
-    draw(object) {
-        this.clearCanvas();
+    // // to edit
+    // draw(object) {
+    //     this.clearCanvas();
 
-        object;
-        // only for testing!!!
-        // this.drawObject(this.cupButton);
-        // this.addButtonsToMap();
+    //     object;
+    //     // only for testing!!!
+    //     // this.drawObject(this.cupButton);
+    //     // this.addButtonsToMap();
 
-        this.redraw();
-    }
+    //     this.redraw();
+    // }
 
 
     clearCanvas() {

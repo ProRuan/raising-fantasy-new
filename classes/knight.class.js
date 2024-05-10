@@ -2,6 +2,7 @@ class Knight extends MoveableObject {
 
 
     // only for testing!!!
+    currentChapter;
     swordDraw = SOURCE.swordDraw;
 
 
@@ -11,6 +12,7 @@ class Knight extends MoveableObject {
         this.setFlipBook(FLIP_BOOK_KNIGHT);
         this.loadImages();
         this.setSpeed(128, 256);
+        this.setChapters();
         this.animate();
     }
 
@@ -42,6 +44,13 @@ class Knight extends MoveableObject {
 
     get yBottom() {
         return this.y + 110;
+    }
+
+
+    setChapters() {
+        this.chapters = [
+            this.flipBook['runAttack'], this.flipBook['run'], this.flipBook['walkAttack'], this.flipBook['walk'], this.flipBook['attack']
+        ];
     }
 
 
@@ -84,12 +93,20 @@ class Knight extends MoveableObject {
             }
 
 
+            this.setConditions();
+            this.setCurrentChapter();
+
+
             // this.world.camera_x = -this.x + 4 * 64 + 28;    // + 4 * 64 + 28
         }, 1000 / 60);
 
 
         setInterval(() => {
-            this.knightAnimator = new KnightAnimator(this);
+            this.playCurrentChapter();
+           
+            // this.playAnimationSuper();
+            // this.knightAnimator = new KnightAnimator(this);
+
             // if (this.world.keyboard.arrowLeft.keydown || this.world.keyboard.arrowRight.keydown) {
             //     this.playAnimation(this.flipBook.walk);
             // } else if (this.world.keyboard.keyA.keydown) {
@@ -98,6 +115,13 @@ class Knight extends MoveableObject {
             //     this.img.src = this.cover;
             // }
         }, 100);
+    }
+
+
+    setConditions() {
+        this.conditions = [
+            this.isRunAttack(), this.isRun(), this.isWalkAttack(), this.isWalk(), this.isAttack()
+        ];
     }
 
 
@@ -126,9 +150,43 @@ class Knight extends MoveableObject {
     }
 
 
-    // playSwordDraw() {
-    //     if (this.img.src.includes('attack2')) {
-    //         this.playSound(this.swordDraw);
-    //     }
-    // }
+    setCurrentChapter() {
+        for (let i = 0; i < this.conditions.length; i++) {
+            if (this.conditions[i]) {
+                this.currentChapter = this.chapters[i];
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    playCurrentChapter() {
+        if (this.setCurrentChapter()) {
+            this.playAnimation(this.currentChapter);
+        } else {
+            this.img.src = this.cover;
+        }
+        console.log(this.img.src);
+    }
+
+
+    playAnimationSuper() {
+        for (let i = 0; i < this.conditions.length; i++) {
+            if (this.conditions[i]) {
+                this.playAnimation(this.chapters[i]);
+                console.log(this.img.src);
+                return true;
+            }
+        }
+        this.img.src = this.cover;
+        return false;
+    }
+
+
+    playSwordDraw() {
+        if (this.img.src.includes('/attack2')) {
+            this.playSound(this.swordDraw);
+        }
+    }
 }
