@@ -14,6 +14,8 @@ class Knight extends MoveableObject {
         this.setSpeed(128, 256);
         this.setChapters();
         this.animate();
+
+        console.log('Knight: ', this);
     }
 
 
@@ -167,7 +169,7 @@ class Knight extends MoveableObject {
         } else {
             this.img.src = this.cover;
         }
-        console.log(this.img.src);
+        // console.log(this.img.src);
     }
 
 

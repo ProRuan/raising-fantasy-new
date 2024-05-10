@@ -11,6 +11,7 @@ class LevelWorld extends World {
         this.setLevelWorld();
         this.runTime();
         this.draw();
+        console.log('LevelWorld: ', this);
     }
 
 
