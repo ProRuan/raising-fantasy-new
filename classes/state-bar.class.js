@@ -78,7 +78,7 @@ class StateBar extends DrawableObject {
 
 
     createPoint(name, x) {
-        return new DrawableObject(source[name].path, x, source[name].y);
+        return new DrawableObject(source[name], x, source[name].y);
     }
 
 

@@ -24,7 +24,7 @@ class LevelWorld extends World {
 
         // ready!!!
         this.setLevel();
-        // this.setAvatarInfo();
+        this.setAvatarInfo();
 
 
         this.connectWorld();
@@ -95,7 +95,7 @@ class LevelWorld extends World {
 
         // ready!!!
         this.drawLevel();
-        // this.drawAvatarInfo();
+        this.drawAvatarInfo();
         this.drawObject(this.hero);
 
         // this.translateCamera(-284, 0);
