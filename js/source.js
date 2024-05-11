@@ -12,7 +12,6 @@ const OBJECTS_TO_COUNT = [
 ];
 
 
-const IMAGE_KNIGHT = './img/characters/knight/knight.png';
 const FLIP_BOOK_KNIGHT = [
     './img/characters/knight/attack/attack4.png',
     './img/characters/knight/climb/climb4.png',
@@ -27,7 +26,6 @@ const FLIP_BOOK_KNIGHT = [
 ];
 
 
-const IMAGE_DINO = './img/enemies/dino/dino.png';
 const FLIP_BOOK_DINO = [
     './img/enemies/dino/attack/attack5.png',
     './img/enemies/dino/death/death6.png',
@@ -37,7 +35,6 @@ const FLIP_BOOK_DINO = [
 ];
 
 
-const IMAGE_ENT = './img/enemies/ent/ent.png';
 const FLIP_BOOK_ENT = [
     './img/enemies/ent/attack/attack5.png',
     './img/enemies/ent/death/death7.png',
@@ -47,7 +44,6 @@ const FLIP_BOOK_ENT = [
 ];
 
 
-const IMAGE_SPIDER = './img/enemies/spider/spider.png';
 const FLIP_BOOK_SPIDER = [
     './img/enemies/spider/attack/attack3.png',
     './img/enemies/spider/death/death4.png',
@@ -57,7 +53,6 @@ const FLIP_BOOK_SPIDER = [
 ];
 
 
-const IMAGE_SHAMAN = './img/bosses/shaman/shaman.png';
 const FLIP_BOOK_SHAMAN = [
     './img/bosses/shaman/anger/anger5.png',
     './img/bosses/shaman/cast_blade/cast_blade4.png',

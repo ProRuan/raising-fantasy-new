@@ -57,11 +57,7 @@ class Source {
     constructor() {
         this.loadImagePaths();    // to think about!!!
 
-        this.setBackground();
-        this.setGrass();
-        this.setSimpleObjects();
-        this.setAnimatedObjects();
-        this.setLeaf();
+        this.setLevel();
         this.setHero();
     }
 
@@ -75,12 +71,26 @@ class Source {
     }
 
 
+    // jsdoc
+    setLevel() {
+        this.setBackground();
+        this.setGrass();
+        this.setSimpleObjects();
+        this.setAnimatedObjects();
+        this.setLeaf();
+        this.setEndboss();
+        this.setEnemies();
+    }
+
+
+    // jsdoc
     setBackground() {
         this.setSource('background', './img/background/background5.png', 960, 540);
         this.setSource('cloud', './img/background/background6.png', 960, 540);
     }
 
 
+    // jsdoc
     setGrass() {
         this.setSource('grassL', './img/tiles/grass1.png', 64);
         this.setSource('grassC', './img/tiles/grass2.png', 64);
@@ -91,6 +101,7 @@ class Source {
     }
 
 
+    // jsdoc
     setSimpleObjects() {
         this.setSource('tree', './img/objects/tree.png', 256);
         this.setSource('ladderB', './img/objects/ladder1.png', 32);
@@ -99,6 +110,7 @@ class Source {
     }
 
 
+    // jsdoc
     setAnimatedObjects() {
         this.setSource('bird', './img/objects_animated/bird.png', 64);
         this.setSource('bomb', './img/objects_animated/bomb.png', 256);
@@ -111,11 +123,27 @@ class Source {
     }
 
 
+    // jsdoc
     setLeaf() {
         this.setSource('leaf', './img/leaves/leaf1.png', 32);
     }
 
 
+    // jsdoc
+    setEndboss() {
+        this.setSource('shaman', './img/bosses/shaman/shaman.png', 256);
+    }
+
+
+    // jsdoc
+    setEnemies() {
+        this.setSource('dino', './img/enemies/dino/dino.png', 128);
+        this.setSource('ent', './img/enemies/ent/ent.png', 256);
+        this.setSource('spider', './img/enemies/spider/spider.png', 128);
+    }
+
+
+    // jsdoc
     setHero() {
         this.setSource('knight', './img/characters/knight/knight.png', 128, 128);
     }
