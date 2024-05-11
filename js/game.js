@@ -92,14 +92,8 @@ function processKeydown(event) {    // check doubleClick!!!
     // console.log(event);
     let code = event.code;
     code = code.replace(code[0], code[0].toLowerCase());
-    // console.log(world.keyboard[code].keydown);
     world.keyboard[code].keydown = true;
-    world.keyboard[code].timeStamp = new Date().getTime();
-    if (world.time - world.keyboard[code].lastTimeStamp < 500) {
-        world.keyboard[code].doubleClick = true;
-    }
-    world.keyboard[code].lastTimeStamp = world.keyboard[code].timeStamp;
-    // console.log(world.keyboard[code].keydown);
+
 
     if (this.currentWorld == 'start') {
         if (code == 'arrowDown' && mainButtonCounter < mainButtons.length - 1 && !world.isStoryBgOpened() && !world.isLeaderboardOpened()) {
@@ -210,12 +204,7 @@ function processKeyup(event) {
     // console.log(event);
     let code = event.code;
     code = code.replace(code[0], code[0].toLowerCase());
-    // console.log(world.keyboard[code].keydown);
     world.keyboard[code].keydown = false;
-    // console.log(world.keyboard[code].keydown);
-    if (world.keyboard[code].doubleClick) {
-        world.keyboard[code].doubleClick = false;
-    }
 }
 
 
