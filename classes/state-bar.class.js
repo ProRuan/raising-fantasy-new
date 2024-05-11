@@ -2,12 +2,13 @@ class StateBar extends DrawableObject {
     points = [];
 
 
-    constructor(path, max, ms) {
-        super(path, 0, 0);
-        this.setStateBar(path, max, ms);
+    constructor(source, max, ms) {
+        super(source, 0, 0);
+        this.setStateBar(source.path, max, ms);
         this.fill();
         this.setStoppableInterval(() => this.regenerate(), this.ms);
         // this.regenerate();    // stoppable interval!!!
+        console.log(this.img.src);
     }
 
 

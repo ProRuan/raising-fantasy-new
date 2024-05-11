@@ -14,8 +14,6 @@ class Knight extends MoveableObject {
         this.setSpeed(128, 256);
         this.setChapters();
         this.animate();
-
-        console.log('Knight: ', this);
     }
 
 

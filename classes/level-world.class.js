@@ -11,7 +11,6 @@ class LevelWorld extends World {
         this.setLevelWorld();
         this.runTime();
         this.draw();
-        console.log('LevelWorld: ', this);
     }
 
 
@@ -58,9 +57,9 @@ class LevelWorld extends World {
 
 
     setInfoStateBar() {
-        // this.hpBar = new StateBar(source.hpPoint.path, 120, 600);
-        // this.energyBar = new StateBar(source.energyPoint.path, 100, 48);
-        // this.staminaBar = new StateBar(source.staminaPoint.path, 100, 16);
+        this.hpBar = new StateBar(source.hpPoint, 120, 600);
+        this.energyBar = new StateBar(source.energyPoint, 100, 48);
+        this.staminaBar = new StateBar(source.staminaPoint, 100, 16);
     }
 
 
@@ -95,7 +94,7 @@ class LevelWorld extends World {
 
         // ready!!!
         this.drawLevel();
-        // this.drawAvatarInfo();
+        this.drawAvatarInfo();
         this.drawObject(this.hero);
 
         // this.translateCamera(-284, 0);

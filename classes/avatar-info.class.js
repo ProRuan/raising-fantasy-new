@@ -2,9 +2,9 @@ class AvatarInfo extends DrawableObject {
 
 
     // jsdoc
-    constructor(o) {
-        super(o, o.x, o.y);
-        this.setTranslation(o.x);
+    constructor(source) {
+        super(source, source.x, source.y);
+        this.setTranslation(source.x);
     }
 
 

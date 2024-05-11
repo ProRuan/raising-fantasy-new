@@ -5,7 +5,6 @@ class World {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
-        console.log('World: ', this);
     }
 
 
