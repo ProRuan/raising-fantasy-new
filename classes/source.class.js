@@ -1,10 +1,7 @@
 class Source {
 
-
-    // rename class Source to Source1
-    // rename SOURCE to source
+    
     // edit all source files
-    // edit offsetX {left, center, right}
 
 
     // to give to method below

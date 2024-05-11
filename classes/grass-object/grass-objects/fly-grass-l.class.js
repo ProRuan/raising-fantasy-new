@@ -3,7 +3,7 @@ class FlyGrassL extends GrassObject {
 
     // jsdoc
     constructor(x, y) {
-        super(SOURCE.flyGrassL, x, y);
+        super(source.flyGrassL, x, y);
     }
 
 

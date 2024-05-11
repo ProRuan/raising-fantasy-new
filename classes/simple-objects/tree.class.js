@@ -3,6 +3,6 @@ class Tree extends DrawableObject {
 
     // jsdoc
     constructor(x, y) {
-        super(SOURCE.tree, x * UNIT, y * UNIT);
+        super(source.tree, x * UNIT, y * UNIT);
     }
 }

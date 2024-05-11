@@ -52,22 +52,22 @@ class LevelWorld extends World {
 
 
     setInfoAvatar() {
-        this.avatarImage = new AvatarInfo(SOURCE.avatarImage);
-        this.avatarFrame = new AvatarInfo(SOURCE.avatarFrame);
+        this.avatarImage = new AvatarInfo(source.avatarImage);
+        this.avatarFrame = new AvatarInfo(source.avatarFrame);
     }
 
 
     setInfoStateBar() {
-        this.hpBar = new StateBar(SOURCE.hpPoint.path, 120, 600);
-        this.energyBar = new StateBar(SOURCE.energyPoint.path, 100, 48);
-        this.staminaBar = new StateBar(SOURCE.staminaPoint.path, 100, 16);
+        this.hpBar = new StateBar(source.hpPoint.path, 120, 600);
+        this.energyBar = new StateBar(source.energyPoint.path, 100, 48);
+        this.staminaBar = new StateBar(source.staminaPoint.path, 100, 16);
     }
 
 
     setInfoItem() {
-        this.itemBg = new AvatarInfo(SOURCE.itemBg);
-        this.itemBomb = new AvatarInfo(SOURCE.itemBomb);
-        this.itemBorder = new AvatarInfo(SOURCE.itemBorder);
+        this.itemBg = new AvatarInfo(source.itemBg);
+        this.itemBomb = new AvatarInfo(source.itemBomb);
+        this.itemBorder = new AvatarInfo(source.itemBorder);
     }
 
 

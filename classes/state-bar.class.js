@@ -26,8 +26,8 @@ class StateBar extends DrawableObject {
         this.name = path.match(/([a-z]+)_point/)[1];
         this.max = max;
         this.ms = ms;
-        this.bg = new AvatarInfo(SOURCE[this.name + 'BarBg']);
-        this.border = new AvatarInfo(SOURCE[this.name + 'BarBorder']);
+        this.bg = new AvatarInfo(source[this.name + 'BarBg']);
+        this.border = new AvatarInfo(source[this.name + 'BarBorder']);
     }
 
 
@@ -78,7 +78,7 @@ class StateBar extends DrawableObject {
 
 
     createPoint(name, x) {
-        return new DrawableObject(SOURCE[name].path, x, SOURCE[name].y);
+        return new DrawableObject(source[name].path, x, source[name].y);
     }
 
 

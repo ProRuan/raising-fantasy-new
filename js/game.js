@@ -26,7 +26,7 @@ let sound = 7;
 
 pointer = false;
 
-const SOURCE = new Source();
+let source = new Source();
 
 intervalIds = [];
 

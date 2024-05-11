@@ -2,6 +2,6 @@ class Star extends AnimatedObject {
 
 
     constructor(x, y) {
-        super(SOURCE.star, x, y);
+        super(source.star, x, y);
     }
 }

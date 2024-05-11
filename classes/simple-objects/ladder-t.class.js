@@ -3,7 +3,7 @@ class LadderT extends DrawableObject {
 
     // jsdoc
     constructor(x, y) {
-        super(SOURCE.ladderT, x * UNIT, y * UNIT);
+        super(source.ladderT, x * UNIT, y * UNIT);
     }
 
 

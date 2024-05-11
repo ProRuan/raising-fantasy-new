@@ -3,11 +3,11 @@ class Knight extends MoveableObject {
 
     // only for testing!!!
     currentChapter;
-    // swordDraw = SOURCE.swordDraw;
+    // swordDraw = source.swordDraw;
 
 
     constructor(x, y) {
-        super(SOURCE.knight, x, y);
+        super(source.knight, x, y);
         this.setCover();
         this.setFlipBook(FLIP_BOOK_KNIGHT);
         this.loadImages();

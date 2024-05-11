@@ -41,12 +41,12 @@ class StartWorld extends World {
 
 
     setDrawableObject(name, x, y) {
-        this[name] = new DrawableObject(SOURCE.image[name], x, y);
+        this[name] = new DrawableObject(source.image[name], x, y);
     }
 
 
     setButton(name, x, y) {
-        this[name] = new Button(SOURCE.image[name], x, y);
+        this[name] = new Button(source.image[name], x, y);
     }
 
 
@@ -60,7 +60,7 @@ class StartWorld extends World {
     setArrowButton(name, key, a, b) {
         let x = this.leaderboard.xLeft + this.leaderboard.width / 2 + a;
         let y = canvas.height - this.leaderboard.yTop - b;
-        this[name] = new Button(SOURCE.image[key], x, y);
+        this[name] = new Button(source.image[key], x, y);
         this[name].indent = - 4;
     }
 

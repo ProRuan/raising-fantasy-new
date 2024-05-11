@@ -5,7 +5,7 @@ class Background extends DrawableObject {
 
     // jsdoc
     constructor(x) {
-        super(SOURCE.background, x, 0);
+        super(source.background, x, 0);
         this.loadLayers();
     }
 
