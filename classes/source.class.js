@@ -1,25 +1,13 @@
 class Source {
-    background = './img/background/background5.png';
-    cloud = './img/background/background6.png';
-
-    grassL = './img/tiles/grass1.png';
-    grassC = './img/tiles/grass2.png';
-    grassR = './img/tiles/grass3.png';
-    flyGrassL = './img/tiles/flying_grass1.png';
-    flyGrassC = './img/tiles/flying_grass2.png';
-    flyGrassR = './img/tiles/flying_grass3.png';
 
 
-    bird = './img/objects_animated/bird.png';
-    bomb = './img/objects_animated/bomb.png';
-    coin = './img/objects_animated/coin.png';
-    crystal = './img/objects_animated/crystal.png';
-    heart = './img/objects_animated/heart.png';
-    hitPoint = './img/objects_animated/hit_point.png';
-    star = './img/objects_animated/star.png';
-    web = './img/objects_animated/web.png';
+    // rename class Source to Source1
+    // rename SOURCE to source
+    // edit all source files
+    // edit offsetX {left, center, right}
 
 
+    // to give to method below
     avatarImage = { path: './img/inner_interface/avatar_image.png', x: 24, y: 452.5 };
     avatarFrame = { path: './img/inner_interface/avatar_frame.png', x: 16, y: 445 };
 
@@ -40,46 +28,103 @@ class Source {
     itemBorder = { path: './img/inner_interface/item_border.png', x: 20, y: 409 };
 
 
-    tree = './img/objects/tree.png';
-    leaf = './img/leaves/leaf1.png';
-
-
-    ladderB = './img/objects/ladder1.png';
-    ladderC = './img/objects/ladder2.png';
-    ladderT = './img/objects/ladder3.png';
-
-
     blade = './img/bosses/magic/blade.png';
     fire = './img/bosses/magic/fire.png';
     lightning = './img/bosses/magic/lightning.png';
 
 
-    knightAnimation = [
-        { condition: 'isRunAttack', chapter: 'runAttack' },
-        { condition: 'isRun', chapter: 'run' },
-        { condition: 'isWalkAttack', chapter: 'walkAttack' },
-        { condition: 'isWalk', chapter: 'walk' },
-        { condition: 'isAttack', chapter: 'attack' }
-    ];
 
-    knightRunAttack = { condition: 'isRunAttack', chapter: 'runAttack' };
-    knightRun = { condition: 'isRun', chapter: 'run' };
-    knightWalkAttack = { condition: 'isWalkAttack', chapter: 'walkAttack' };
-    knightWalk = { condition: 'isWalk', chapter: 'walk' };
-    knightAttack = { condition: 'isAttack', chapter: 'attack' };
+
+    // knightAnimation = [
+    //     { condition: 'isRunAttack', chapter: 'runAttack' },
+    //     { condition: 'isRun', chapter: 'run' },
+    //     { condition: 'isWalkAttack', chapter: 'walkAttack' },
+    //     { condition: 'isWalk', chapter: 'walk' },
+    //     { condition: 'isAttack', chapter: 'attack' }
+    // ];
+
+    // knightRunAttack = { condition: 'isRunAttack', chapter: 'runAttack' };
+    // knightRun = { condition: 'isRun', chapter: 'run' };
+    // knightWalkAttack = { condition: 'isWalkAttack', chapter: 'walkAttack' };
+    // knightWalk = { condition: 'isWalk', chapter: 'walk' };
+    // knightAttack = { condition: 'isAttack', chapter: 'attack' };
 
 
 
 
     // audio
-    swordDraw = './audio/attacks_and_creatures/blade_draw.wav';
+
+    // swordDraw = './audio/attacks_and_creatures/blade_draw.wav';
 
 
     constructor() {
-        this.loadImagePaths();
+        this.loadImagePaths();    // to think about!!!
+
+        this.setBackground();
+        this.setGrass();
+        this.setSimpleObjects();
+        this.setAnimatedObjects();
+        this.setLeaf();
+        this.setHero();
     }
 
 
+    setSource(name, path, width, height) {
+        if (height) {
+            this[name] = { path: path, width: width, height: height };
+        } else {
+            this[name] = { path: path, size: width };
+        }
+    }
+
+
+    setBackground() {
+        this.setSource('background', './img/background/background5.png', 960, 540);
+        this.setSource('cloud', './img/background/background6.png', 960, 540);
+    }
+
+
+    setGrass() {
+        this.setSource('grassL', './img/tiles/grass1.png', 64);
+        this.setSource('grassC', './img/tiles/grass2.png', 64);
+        this.setSource('grassR', './img/tiles/grass3.png', 64);
+        this.setSource('flyGrassL', './img/tiles/flying_grass1.png', 64);
+        this.setSource('flyGrassC', './img/tiles/flying_grass2.png', 64);
+        this.setSource('flyGrassR', './img/tiles/flying_grass3.png', 64);
+    }
+
+
+    setSimpleObjects() {
+        this.setSource('tree', './img/objects/tree.png', 256);
+        this.setSource('ladderB', './img/objects/ladder1.png', 32);
+        this.setSource('ladderC', './img/objects/ladder2.png', 32);
+        this.setSource('ladderT', './img/objects/ladder3.png', 32);
+    }
+
+
+    setAnimatedObjects() {
+        this.setSource('bird', './img/objects_animated/bird.png', 64);
+        this.setSource('bomb', './img/objects_animated/bomb.png', 256);
+        this.setSource('coin', './img/objects_animated/coin.png', 32);
+        this.setSource('crystal', './img/objects_animated/crystal.png', 32);
+        this.setSource('heart', './img/objects_animated/heart.png', 32);
+        this.setSource('hitPoint', './img/objects_animated/hit_point.png', 32);
+        this.setSource('star', './img/objects_animated/star.png', 32);
+        this.setSource('web', './img/objects_animated/web.png', 32);
+    }
+
+
+    setLeaf() {
+        this.setSource('leaf', './img/leaves/leaf1.png', 32);
+    }
+
+
+    setHero() {
+        this.setSource('knight', './img/characters/knight/knight.png', 128, 128);
+    }
+
+
+    // to think about!!!
     loadImagePaths() {
         this.image = new ImagePath();
     }

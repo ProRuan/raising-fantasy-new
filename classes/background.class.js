@@ -41,6 +41,13 @@ class Background extends DrawableObject {
 
     // jsdoc
     createLayer(path) {
-        return new DrawableObject(path, this.x, this.y);
+        let source = this.getSource(path);
+        return new DrawableObject(source, this.x, this.y);
+    }
+
+
+    // jsdoc
+    getSource(path) {
+        return { path: path, width: this.width, height: this.height };
     }
 }

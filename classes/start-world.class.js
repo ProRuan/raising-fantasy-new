@@ -4,7 +4,7 @@ class StartWorld extends World {
     constructor(canvas, keyboard) {
         super(canvas, keyboard);
         this.setStartWorld();    // rename
-        this.draw();
+        // this.draw();
     }
 
 
@@ -12,19 +12,19 @@ class StartWorld extends World {
     setStartWorld() {
         this.setDisplayed(true);
 
-        this.setDrawableObject('background', 0, 0);
-        this.setMainButton('newGameButton', 68, 340);
-        this.setMainButton('storyButton', 40, 412);
-        this.setButton('cupButton', 32, 32);
-        this.setButton('settingsButton', canvas.width - 98, 32);    // own method?
-        this.setDrawableObject('storyBg', canvas.width / 2 - 138, 540 - canvas.height / 2 - 166.5);
-        this.setCloseButton('coinButton', this.storyBg.xRight - 44, this.storyBg.yTop + 44);
-        this.setDrawableObject('leaderboard', canvas.width / 2 - 191, canvas.height / 2 - 220.5);
-        this.setCloseButton('xButton', this.leaderboard.xRight - 35, this.leaderboard.yTop + 64);
-        this.setArrowButton('lowMusicButton', 'arrowLeft', 25, 145.5);
-        this.setArrowButton('highMusicButton', 'arrowRight', 125, 145.5);
-        this.setArrowButton('lowSoundButton', 'arrowLeft', 25, 193.5);
-        this.setArrowButton('highSoundButton', 'arrowRight', 125, 193.5);
+        // this.setDrawableObject('background', 0, 0);
+        // this.setMainButton('newGameButton', 68, 340);
+        // this.setMainButton('storyButton', 40, 412);
+        // this.setButton('cupButton', 32, 32);
+        // this.setButton('settingsButton', canvas.width - 98, 32);    // own method?
+        // this.setDrawableObject('storyBg', canvas.width / 2 - 138, 540 - canvas.height / 2 - 166.5);
+        // this.setCloseButton('coinButton', this.storyBg.xRight - 44, this.storyBg.yTop + 44);
+        // this.setDrawableObject('leaderboard', canvas.width / 2 - 191, canvas.height / 2 - 220.5);
+        // this.setCloseButton('xButton', this.leaderboard.xRight - 35, this.leaderboard.yTop + 64);
+        // this.setArrowButton('lowMusicButton', 'arrowLeft', 25, 145.5);
+        // this.setArrowButton('highMusicButton', 'arrowRight', 125, 145.5);
+        // this.setArrowButton('lowSoundButton', 'arrowLeft', 25, 193.5);
+        // this.setArrowButton('highSoundButton', 'arrowRight', 125, 193.5);
     }
 
 

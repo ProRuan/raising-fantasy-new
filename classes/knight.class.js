@@ -3,11 +3,11 @@ class Knight extends MoveableObject {
 
     // only for testing!!!
     currentChapter;
-    swordDraw = SOURCE.swordDraw;
+    // swordDraw = SOURCE.swordDraw;
 
 
     constructor(x, y) {
-        super(IMAGE_KNIGHT, x, y);
+        super(SOURCE.knight, x, y);
         this.setCover();
         this.setFlipBook(FLIP_BOOK_KNIGHT);
         this.loadImages();
@@ -105,7 +105,7 @@ class Knight extends MoveableObject {
 
         setInterval(() => {
             this.playCurrentChapter();
-           
+
             // this.playAnimationSuper();
             // this.knightAnimator = new KnightAnimator(this);
 

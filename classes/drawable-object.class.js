@@ -2,8 +2,8 @@ class DrawableObject {
     indent = 0;
 
 
-    constructor(path, x, y, z) {
-        this.setUp(path, x, y, z);
+    constructor(source, x, y) {
+        this.setUp(source, x, y);
     }
 
 
@@ -45,42 +45,38 @@ class DrawableObject {
     }
 
 
-    setUp(path, x, y, z) {
-        if (isNaN(path)) {
-            this.setImage(path);
-            this.setPosition(x, y);
-        } else {
-            this.setBorder(path, x, y, z);
-        }
+    setUp(source, x, y) {
+        this.setImage(source);
+        this.setPosition(x, y);
     }
 
 
-    setImage(path) {
-        this.setPath(path);
-        this.setSize();
+    setImage(source) {
+        this.setPath(source);
+        this.setSize(source);
     }
 
 
-    setPath(path) {
+    setPath(source) {
         this.img = new Image();
-        this.img.src = path;
+        this.img.src = source.path;
     }
 
 
-    setSize() {
-        this.setWidth();
-        this.setHeight();
+    setSize(source) {
+        this.setWidth(source);
+        this.setHeight(source);
     }
 
 
-    setWidth() {
+    setWidth(source) {
         let scaleFactor = canvas.width / NATIVE_WIDTH;
-        this.width = this.img.width * scaleFactor;
+        this.width = (source.height) ? source.width * scaleFactor : source.size * scaleFactor;
     }
 
 
-    setHeight() {
-        let aspectRatio = this.img.height / this.img.width;
+    setHeight(source) {
+        let aspectRatio = (source.height) ? source.height / this.width : source.size / this.width;
         this.height = this.width * aspectRatio;
     }
 
