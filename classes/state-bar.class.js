@@ -8,7 +8,6 @@ class StateBar extends DrawableObject {
         this.fill();
         this.setStoppableInterval(() => this.regenerate(), this.ms);
         // this.regenerate();    // stoppable interval!!!
-        console.log(this.img.src);
     }
 
 

@@ -5,31 +5,10 @@ class Source {
 
 
     // to give to method below
-    avatarImage = { path: './img/inner_interface/avatar_image.png', size: 64, x: 24, y: 452.5 };
-    avatarFrame = { path: './img/inner_interface/avatar_frame.png', width: 76, height: 79, x: 16, y: 445 };
-
-    hpBarBg = { path: './img/inner_interface/hp_bar_bg.png', width: 121, height: 14, x: 95, y: 503 };
-    hpPoint = { path: './img/inner_interface/hp_point.png', width: 1, height: 12, y: 506 };
-    hpBarBorder = { path: './img/inner_interface/hp_bar_border.png', width: 127, height: 20, x: 92, y: 500 };
-
-    energyBarBg = { path: './img/inner_interface/state_bar_bg.png', width: 97, height: 13, x: 94.5, y: 484 };
-    energyPoint = { path: './img/inner_interface/energy_point.png', width: 1, height: 10, y: 486 };
-    energyBarBorder = { path: './img/inner_interface/state_bar_border.png', width: 102, height: 18, x: 92, y: 482 };
-
-    staminaBarBg = { path: './img/inner_interface/state_bar_bg.png', width: 97, height: 13, x: 94.5, y: 466 };
-    staminaPoint = { path: './img/inner_interface/stamina_point.png', width: 1, height: 10, y: 468 };
-    staminaBarBorder = { path: './img/inner_interface/state_bar_border.png', width: 102, height: 18, x: 92, y: 464 };
-
-    itemBg = { path: './img/inner_interface/item_bg.png', width: 34, height: 35, x: 23, y: 411.5 };
-    itemBomb = { path: './img/inner_interface/item_bomb.png', size: 35, x: 22.5, y: 411.5 };
-    itemBorder = { path: './img/inner_interface/item_border.png', size: 40, x: 20, y: 409 };
-
 
     blade = './img/bosses/magic/blade.png';
     fire = './img/bosses/magic/fire.png';
     lightning = './img/bosses/magic/lightning.png';
-
-
 
 
     // knightAnimation = [
@@ -47,8 +26,6 @@ class Source {
     // knightAttack = { condition: 'isAttack', chapter: 'attack' };
 
 
-
-
     // audio
 
     // swordDraw = './audio/attacks_and_creatures/blade_draw.wav';
@@ -58,16 +35,8 @@ class Source {
         this.loadImagePaths();    // to think about!!!
 
         this.setLevel();
+        this.setAvatarInfo();
         this.setHero();
-    }
-
-
-    setSource(name, path, width, height) {
-        if (height) {
-            this[name] = { path: path, width: width, height: height };
-        } else {
-            this[name] = { path: path, size: width };
-        }
     }
 
 
@@ -87,6 +56,12 @@ class Source {
     setBackground() {
         this.setSource('background', './img/background/background5.png', 960, 540);
         this.setSource('cloud', './img/background/background6.png', 960, 540);
+    }
+
+
+    // jsdoc
+    setSource(name, path, width, height) {
+        this[name] = (height) ? { path: path, width: width, height: height } : { path: path, size: width };
     }
 
 
@@ -144,9 +119,66 @@ class Source {
 
 
     // jsdoc
+    setAvatarInfo() {
+        this.setAvatar();
+        this.setHpBar();
+        this.setEnergyBar();
+        this.setStaminaBar();
+        this.setItem();
+    }
+
+
+    // jsdoc
+    setAvatar() {
+        this.avatarImage = this.getSource('./img/inner_interface/avatar_image.png', 64, 64, 24, 452.5);
+        this.avatarFrame = this.getSource('./img/inner_interface/avatar_frame.png', 76, 79, 16, 445);
+    }
+
+
+    // jsdoc
+    getSource(path, width, height, x, y) {
+        return { path: path, width: width, height: height, x: x, y: y };
+    }
+
+
+    // jsdoc
+    setHpBar() {
+        this.hpBarBg = this.getSource('./img/inner_interface/hp_bar_bg.png', 121, 14, 95, 503);
+        this.hpPoint = this.getSource('./img/inner_interface/hp_point.png', 1, 12, 0, 506);
+        this.hpBarBorder = this.getSource('./img/inner_interface/hp_bar_border.png', 127, 20, 92, 500);
+    }
+
+
+    // jsdoc
+    setEnergyBar() {
+        this.energyBarBg = this.getSource('./img/inner_interface/state_bar_bg.png', 97, 13, 94.5, 484);
+        this.energyPoint = this.getSource('./img/inner_interface/energy_point.png', 1, 10, 0, 486);
+        this.energyBarBorder = this.getSource('./img/inner_interface/state_bar_border.png', 102, 18, 92, 482);
+    }
+
+
+    // jsdoc
+    setStaminaBar() {
+        this.staminaBarBg = this.getSource('./img/inner_interface/state_bar_bg.png', 97, 13, 94.5, 466);
+        this.staminaPoint = this.getSource('./img/inner_interface/stamina_point.png', 1, 10, 0, 468);
+        this.staminaBarBorder = this.getSource('./img/inner_interface/state_bar_border.png', 102, 18, 92, 464);
+    }
+
+
+    // jsdoc
+    setItem() {
+        this.itemBg = this.getSource('./img/inner_interface/item_bg.png', 34, 35, 23, 411.5);
+        this.itemBomb = this.getSource('./img/inner_interface/item_bomb.png', 35, 35, 22.5, 411.5);
+        this.itemBorder = this.getSource('./img/inner_interface/item_border.png', 40, 40, 20, 409);
+    }
+
+
+    // jsdoc
     setHero() {
         this.setSource('knight', './img/characters/knight/knight.png', 128, 128);
     }
+
+
 
 
     // to think about!!!
