@@ -1,7 +1,5 @@
 class Knight extends MoveableObject {
-
-
-    currentChapter = 'cover';
+    chapter = 'cover';
     chapters = ['walkAttack', 'walk', 'attack', 'cover'];
 
 
@@ -84,14 +82,14 @@ class Knight extends MoveableObject {
 
             }
 
-            this.setCurrentChapter();
+            this.setChapter();
 
             // this.world.camera_x = -this.x + 4 * 64 + 28;    // + 4 * 64 + 28
         }, 1000 / 60);
 
 
         setInterval(() => {
-            this.playCurrentAnimation();
+            this.playAnimation();
         }, 100);
     }
 
@@ -106,34 +104,40 @@ class Knight extends MoveableObject {
     }
 
 
+    // jsdoc
     isWalkAttack() {
         return this.isWalk() && this.isAttack();
     }
 
 
+    // jsdoc
     isWalk() {
         return isKey('arrowLeft') || isKey('arrowRight');
     }
 
 
+    // jsdoc
     isAttack() {
         return isKey('keyA');
     }
 
 
+    // jsdoc
     isCover() {
         return true;
     }
 
 
-    setCurrentChapter() {
-        this.currentChapter = this.getCurrentChapter();
+    // jsdoc
+    setChapter() {
+        this.chapter = this.getChapter();
     }
 
 
-    getCurrentChapter() {
+    // jsdoc
+    getChapter() {
         for (let i = 0; i < this.chapters.length; i++) {
-            let condition = this.getCurrentCondition(i);
+            let condition = this.getCondition(i);
             if (this.isChapter(condition)) {
                 return this.chapters[i];
             }
@@ -141,19 +145,22 @@ class Knight extends MoveableObject {
     }
 
 
-    getCurrentCondition(i) {
+    // jsdoc
+    getCondition(i) {
         let condition = this.chapters[i];
         let initial = condition[0];
-        return condition.replace(initial, 'is' + initial.toUpperCase());
+        return 'is' + condition.replace(initial, initial.toUpperCase());
     }
 
 
+    // jsdoc
     isChapter(condition) {
         return this[condition]();
     }
 
 
-    playCurrentAnimation() {
-        this.playAnimation(this.flipBook[this.currentChapter]);
+    // jsdoc
+    playAnimation() {
+        super.playAnimation(this.flipBook[this.chapter]);
     }
 }
