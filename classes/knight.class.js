@@ -1,18 +1,18 @@
 class Knight extends MoveableObject {
 
 
-    // only for testing!!!
-    currentChapter;
-    // swordDraw = source.swordDraw;
+    currentChapter = 'cover';
+    conditions = ['isWalkAttack', 'isWalk', 'isAttack', 'isCover'];
+    chapters = ['walkAttack', 'walk', 'attack', 'cover'];
+
 
 
     constructor(x, y) {
         super(source.knight, x, y);
-        this.setCover();
         this.setFlipBook(FLIP_BOOK_KNIGHT);
+        this.setCover();
         this.loadImages();
         this.setSpeed(128, 256);
-        this.setChapters();
         this.animate();
     }
 
@@ -47,15 +47,8 @@ class Knight extends MoveableObject {
     }
 
 
-    setChapters() {
-        this.chapters = [
-            this.flipBook['runAttack'], this.flipBook['run'], this.flipBook['walkAttack'], this.flipBook['walk'], this.flipBook['attack']
-        ];
-    }
-
-
     setCover() {
-        this.cover = this.img.src;
+        this.flipBook['cover'] = [this.img.src];
     }
 
 
@@ -92,36 +85,17 @@ class Knight extends MoveableObject {
 
             }
 
-
-            this.setConditions();
-            this.setCurrentChapter();
-
+            this.currentChapter = this.getCurrentChapter();
 
             // this.world.camera_x = -this.x + 4 * 64 + 28;    // + 4 * 64 + 28
         }, 1000 / 60);
 
 
         setInterval(() => {
-            this.playCurrentChapter();
+            this.playAnimation(this.flipBook[this.currentChapter]);
 
-            // this.playAnimationSuper();
-            // this.knightAnimator = new KnightAnimator(this);
-
-            // if (this.world.keyboard.arrowLeft.keydown || this.world.keyboard.arrowRight.keydown) {
-            //     this.playAnimation(this.flipBook.walk);
-            // } else if (this.world.keyboard.keyA.keydown) {
-            //     this.playAnimation(this.flipBook.attack);
-            // } else {
-            //     this.img.src = this.cover;
-            // }
+            console.log(this.img.src);
         }, 100);
-    }
-
-
-    setConditions() {
-        this.conditions = [
-            this.isRunAttack(), this.isRun(), this.isWalkAttack(), this.isWalk(), this.isAttack()
-        ];
     }
 
 
@@ -150,43 +124,16 @@ class Knight extends MoveableObject {
     }
 
 
-    setCurrentChapter() {
+    isCover() {
+        return true;
+    }
+
+
+    getCurrentChapter() {
         for (let i = 0; i < this.conditions.length; i++) {
-            if (this.conditions[i]) {
-                this.currentChapter = this.chapters[i];
-                return true;
+            if (this[this.conditions[i]]()) {
+                return this.chapters[i];
             }
-        }
-        return false;
-    }
-
-
-    playCurrentChapter() {
-        if (this.setCurrentChapter()) {
-            this.playAnimation(this.currentChapter);
-        } else {
-            this.img.src = this.cover;
-        }
-        // console.log(this.img.src);
-    }
-
-
-    playAnimationSuper() {
-        for (let i = 0; i < this.conditions.length; i++) {
-            if (this.conditions[i]) {
-                this.playAnimation(this.chapters[i]);
-                console.log(this.img.src);
-                return true;
-            }
-        }
-        this.img.src = this.cover;
-        return false;
-    }
-
-
-    playSwordDraw() {
-        if (this.img.src.includes('/attack2')) {
-            this.playSound(this.swordDraw);
         }
     }
 }
