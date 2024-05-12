@@ -130,46 +130,61 @@ class Source {
 
     // jsdoc
     setAvatar() {
-        this.avatarImage = this.getSource('./img/inner_interface/avatar_image.png', 64, 64, 24, 452.5);
-        this.avatarFrame = this.getSource('./img/inner_interface/avatar_frame.png', 76, 79, 16, 445);
+        this.setSource('avatarImage', './img/inner_interface/avatar_image.png', 64);
+        this.setSource('avatarFrame', './img/inner_interface/avatar_frame.png', 76, 79);
+        this.setSourcePosition('avatarImage', 24, 452.5);
+        this.setSourcePosition('avatarFrame', 16, 445);
     }
 
 
     // jsdoc
-    getSource(path, width, height, x, y) {
-        return { path: path, width: width, height: height, x: x, y: y };
+    setSourcePosition(key, x, y) {
+        this[key].x = x;
+        this[key].y = y;
     }
 
 
     // jsdoc
     setHpBar() {
-        this.hpBarBg = this.getSource('./img/inner_interface/hp_bar_bg.png', 121, 14, 95, 503);
-        this.hpPoint = this.getSource('./img/inner_interface/hp_point.png', 1, 12, 0, 506);
-        this.hpBarBorder = this.getSource('./img/inner_interface/hp_bar_border.png', 127, 20, 92, 500);
+        this.setSource('hpBarBg', './img/inner_interface/hp_bar_bg.png', 121, 14);
+        this.setSource('hpPoint', './img/inner_interface/hp_point.png', 1, 12);
+        this.setSource('hpBarBorder', './img/inner_interface/hp_bar_border.png', 127, 20);
+        this.setSourcePosition('hpBarBg', 95, 503);
+        this.setSourcePosition('hpPoint', 0, 506);
+        this.setSourcePosition('hpBarBorder', 92, 500);
     }
 
 
     // jsdoc
     setEnergyBar() {
-        this.energyBarBg = this.getSource('./img/inner_interface/state_bar_bg.png', 97, 13, 94.5, 484);
-        this.energyPoint = this.getSource('./img/inner_interface/energy_point.png', 1, 10, 0, 486);
-        this.energyBarBorder = this.getSource('./img/inner_interface/state_bar_border.png', 102, 18, 92, 482);
+        this.setSource('energyBarBg', './img/inner_interface/state_bar_bg.png', 97, 13);
+        this.setSource('energyPoint', './img/inner_interface/energy_point.png', 1, 10);
+        this.setSource('energyBarBorder', './img/inner_interface/state_bar_border.png', 102, 18);
+        this.setSourcePosition('energyBarBg', 94.5, 484);
+        this.setSourcePosition('energyPoint', 0, 486);
+        this.setSourcePosition('energyBarBorder', 92, 482);
     }
 
 
     // jsdoc
     setStaminaBar() {
-        this.staminaBarBg = this.getSource('./img/inner_interface/state_bar_bg.png', 97, 13, 94.5, 466);
-        this.staminaPoint = this.getSource('./img/inner_interface/stamina_point.png', 1, 10, 0, 468);
-        this.staminaBarBorder = this.getSource('./img/inner_interface/state_bar_border.png', 102, 18, 92, 464);
+        this.setSource('staminaBarBg', './img/inner_interface/state_bar_bg.png', 97, 13);
+        this.setSource('staminaPoint', './img/inner_interface/stamina_point.png', 1, 10);
+        this.setSource('staminaBarBorder', './img/inner_interface/state_bar_border.png', 102, 18);
+        this.setSourcePosition('staminaBarBg', 94.5, 466);
+        this.setSourcePosition('staminaPoint', 0, 468);
+        this.setSourcePosition('staminaBarBorder', 92, 464);
     }
 
 
     // jsdoc
     setItem() {
-        this.itemBg = this.getSource('./img/inner_interface/item_bg.png', 34, 35, 23, 411.5);
-        this.itemBomb = this.getSource('./img/inner_interface/item_bomb.png', 35, 35, 22.5, 411.5);
-        this.itemBorder = this.getSource('./img/inner_interface/item_border.png', 40, 40, 20, 409);
+        this.setSource('itemBg', './img/inner_interface/item_bg.png', 34, 35);
+        this.setSourcePosition('itemBg', 23, 411.5);
+        this.setSource('itemBomb', './img/inner_interface/item_bomb.png', 35);
+        this.setSourcePosition('itemBomb', 22.5, 411.5);
+        this.setSource('itemBorder', './img/inner_interface/item_border.png', 40);
+        this.setSourcePosition('itemBorder', 20, 409);
     }
 
 
