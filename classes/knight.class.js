@@ -2,6 +2,8 @@ class Knight extends MoveableObject {
     chapter = 'cover';
     chapters = ['runAttack', 'run', 'walkAttack', 'walk', 'attack', 'cover'];
 
+    footStep = source.footStep;
+    swordDraw = source.swordDraw;
 
 
     constructor(x, y) {
@@ -90,15 +92,19 @@ class Knight extends MoveableObject {
 
         setInterval(() => {
             this.playAnimation();
+            this.playSound();
+            this.controlSounds();
         }, 100);
     }
 
 
+    // jsdoc
     isRunAttack() {
         return this.isRun() && this.isAttack();
     }
 
 
+    // jsdoc
     isRun() {
         return isKey('arrowLeft', 'doubleClick') || isKey('arrowRight', 'doubleClick');
     }
@@ -162,5 +168,66 @@ class Knight extends MoveableObject {
     // jsdoc
     playAnimation() {
         super.playAnimation(this.flipBook[this.chapter]);
+    }
+
+
+    // jsdoc
+    playSound() {
+        this.playSoundOnTrigger('_attack2', this.swordDraw);
+        this.playSoundOnTrigger('/attack1', this.swordDraw);
+    }
+
+
+    // playFootStep() {
+    //     if (this.img.src.includes(FLIP_BOOK_HERO.WALK[2])) {
+    //         this.playSound(this.FOOTSTEP);
+    //     }
+    //     if (this.img.src.includes(FLIP_BOOK_HERO.WALK[5])) {
+    //         this.playSound(this.FOOTSTEP);
+    //     }
+    // }
+
+
+    // jsdoc
+    playSoundOnTrigger(key, sound) {
+        if (this.img.src.includes(key)) {
+            super.playSound(sound);
+        }
+    }
+
+
+    controlSounds() {
+        if (this.isAnySoundPlaying()) {
+            this.stopSounds();
+            this.removeSounds();
+        }
+    }
+
+
+    stopSounds() {    // add other sounds!!!
+        if (!this.img.src.includes('attack')) {
+            this.muteSounds();
+        }
+    }
+
+
+    muteSounds() {
+        this.sounds.forEach((sound) => {    // double code!!!
+            sound.muted = true;
+        })
+    }
+
+
+    removeSounds() {
+        this.sounds.forEach((sound) => {
+            if (sound.ended) {
+                this.sounds.splice(0, 1);
+            }
+        })
+    }
+
+
+    isAnySoundPlaying() {
+        return this.sounds.length > 0
     }
 }

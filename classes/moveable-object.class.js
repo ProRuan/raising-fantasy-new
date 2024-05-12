@@ -1,5 +1,6 @@
 class MoveableObject extends DrawableObject {
     otherDirection = false;
+    sounds = [];
 
 
     constructor(path, x, y) {
@@ -52,7 +53,9 @@ class MoveableObject extends DrawableObject {
     }
 
 
-    playSound(sound) {
-        new Audio(sound).play();    // set sound volume factor!!!
+    playSound(path) {    // set sound volume factor!!!
+        let sound = new Audio(path);
+        this.sounds.push(sound);
+        sound.play();
     }
 }
