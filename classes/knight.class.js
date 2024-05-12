@@ -2,7 +2,6 @@ class Knight extends MoveableObject {
 
 
     currentChapter = 'cover';
-    conditions = ['isWalkAttack', 'isWalk', 'isAttack', 'isCover'];
     chapters = ['walkAttack', 'walk', 'attack', 'cover'];
 
 
@@ -67,11 +66,11 @@ class Knight extends MoveableObject {
     animate() {
         setInterval(() => {
             // only for testing!!!
-            if (this.world.keyboard.keyQ.keydown) {
-                this.otherDirection = true;
+            if (isKey('keyQ')) {
+                this.setOtherDirection(true);
             }
-            if (this.world.keyboard.keyE.keydown) {
-                this.otherDirection = false;
+            if (isKey('keyE')) {
+                this.setOtherDirection(false);
             }
 
 
@@ -85,16 +84,14 @@ class Knight extends MoveableObject {
 
             }
 
-            this.currentChapter = this.getCurrentChapter();
+            this.setCurrentChapter();
 
             // this.world.camera_x = -this.x + 4 * 64 + 28;    // + 4 * 64 + 28
         }, 1000 / 60);
 
 
         setInterval(() => {
-            this.playAnimation(this.flipBook[this.currentChapter]);
-
-            console.log(this.img.src);
+            this.playCurrentAnimation();
         }, 100);
     }
 
@@ -129,11 +126,34 @@ class Knight extends MoveableObject {
     }
 
 
+    setCurrentChapter() {
+        this.currentChapter = this.getCurrentChapter();
+    }
+
+
     getCurrentChapter() {
-        for (let i = 0; i < this.conditions.length; i++) {
-            if (this[this.conditions[i]]()) {
+        for (let i = 0; i < this.chapters.length; i++) {
+            let condition = this.getCurrentCondition(i);
+            if (this.isChapter(condition)) {
                 return this.chapters[i];
             }
         }
+    }
+
+
+    getCurrentCondition(i) {
+        let condition = this.chapters[i];
+        let initial = condition[0];
+        return condition.replace(initial, 'is' + initial.toUpperCase());
+    }
+
+
+    isChapter(condition) {
+        return this[condition]();
+    }
+
+
+    playCurrentAnimation() {
+        this.playAnimation(this.flipBook[this.currentChapter]);
     }
 }

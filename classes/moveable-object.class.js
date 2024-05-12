@@ -39,6 +39,11 @@ class MoveableObject extends DrawableObject {
     }
 
 
+    setOtherDirection(logical) {
+        this.otherDirection = logical;
+    }
+
+
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
