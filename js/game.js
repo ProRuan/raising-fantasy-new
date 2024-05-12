@@ -90,9 +90,10 @@ let musicButtons = true;
 function processKeydown(event) {    // check doubleClick!!!
 
     // console.log(event);
-    let code = event.code;
-    code = code.replace(code[0], code[0].toLowerCase());
-    world.keyboard[code].keydown = true;
+    let code = getCode(event.code);
+    setKey(code, 'keydown', true);
+    setKey(code, 'timeStamp', getTime());
+    verifyDoubleClick(code);
 
 
     if (this.currentWorld == 'start') {
@@ -201,15 +202,17 @@ function processKeydown(event) {    // check doubleClick!!!
 
 
 function processKeyup(event) {
-    // console.log(event);
-    let code = event.code;
-    code = code.replace(code[0], code[0].toLowerCase());
-    world.keyboard[code].keydown = false;
+    // console.log(event);    // to delete!!!
+    let code = getCode(event.code);
+    setKey(code, 'keydown', false);
+    setKey(code, 'doubleClick', false);
+    setKey(code, 'lastKeyUp', getTime());
 }
 
 
-function isKey(key, subkey) {
-    return (subkey) ? keyboard[key][subkey] : keyboard[key].keydown;
+// jsdoc
+function getTime() {
+    return new Date().getTime();
 }
 
 

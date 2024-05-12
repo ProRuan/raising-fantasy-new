@@ -3,7 +3,7 @@ class Key {
     code;
     keydown = false;
     timeStamp = new Date().getTime();
-    lastTimeStamp = 0;    // in use?
+    lastKeyUp = 0;    // in use?
     doubleClick = false;    // in use?
 
 

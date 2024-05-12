@@ -1,6 +1,6 @@
 class Knight extends MoveableObject {
     chapter = 'cover';
-    chapters = ['walkAttack', 'walk', 'attack', 'cover'];
+    chapters = ['runAttack', 'run', 'walkAttack', 'walk', 'attack', 'cover'];
 
 
 
