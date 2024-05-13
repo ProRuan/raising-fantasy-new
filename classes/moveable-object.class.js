@@ -1,5 +1,12 @@
 class MoveableObject extends DrawableObject {
     otherDirection = false;
+
+    speedY = 0;
+    acceleration = 0.5;
+    groundLevel = 484;
+    grounded = true;
+    climbing = false;
+
     sounds = [];
 
 
@@ -16,6 +23,12 @@ class MoveableObject extends DrawableObject {
 
 
     // jsdoc
+    setObjectValue(key, value) {
+        this[key] = value;
+    }
+
+
+    // jsdoc + setBoolean() above!!!
     setOtherDirection(logical) {
         this.otherDirection = logical;
     }
@@ -49,5 +62,57 @@ class MoveableObject extends DrawableObject {
         let sound = new Audio(path);
         this.sounds.push(sound);
         sound.play();
+    }
+
+
+    applyGravity() {
+        setInterval(() => {
+            if (!this.climbing) {
+                if (this.isAboveGround() || this.speedY > 0) {
+                    this.y -= this.speedY;
+                    this.speedY -= this.acceleration;
+                    if (this.y > this.groundLevel - (this.yBottom - this.y)) {
+                        // console.log(this.y);
+                        this.y = this.groundLevel - (this.yBottom - this.y);
+                    }
+                } else {
+                    this.speedY = 0;
+                }
+            }
+        }, 1000 / 60);
+    }
+
+
+    isAboveGround() {
+        return this.yBottom < this.groundLevel || !this.grounded;
+    }
+
+
+    jump() {
+        this.setObjectValue('speedY', 12.5);
+        this.setObjectValue('isJumpStart', true);
+        this.setObjectValue('isJumping', true);
+        this.setObjectValue('isFallStart', true);
+        this.setObjectValue('isFalling', true);
+    }
+
+
+    playAnimationJumpStart(flipBook) {
+        let path = flipBook[0];
+        this.img = this.imageCache[path];
+        setTimeout(() => {
+            path = flipBook[1];
+            this.img = this.imageCache[path];
+        }, 100);
+    }
+
+
+    playAnimationFallStart(flipBook) {
+        let path = flipBook[3];
+        this.img = this.imageCache[path];
+        setTimeout(() => {
+            path = flipBook[4];
+            this.img = this.imageCache[path];
+        }, 100);
     }
 }

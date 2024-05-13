@@ -263,8 +263,6 @@ class Knight extends MoveableObject {
 
                     if (this.isKey('keydown', 'arrowUp', 'arrowDown') && this.climbing) {
                         this.playAnimation(FLIP_BOOK_HERO.CLIMB);    // still to edit
-                    } else if (this.isKey('keydown', 'keyD')) {
-                        this.playAnimation(FLIP_BOOK_HERO.EXTRA_ATTACK);
                     } else if (this.isJumpStart && this.speedY > 0) {
                         this.playAnimationJumpStart(FLIP_BOOK_HERO.JUMP);
                         this.isJumpStart = false;

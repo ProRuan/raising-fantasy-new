@@ -17,6 +17,7 @@ class Knight extends MoveableObject {
         this.loadImages();
         this.setSpeed(128, 256);
         this.animate();
+        this.applyGravity();
     }
 
 
@@ -78,6 +79,11 @@ class Knight extends MoveableObject {
             }
 
 
+            if (isKey('space') && !this.isAboveGround()) {
+                this.jump();
+            }
+
+
             if (isKey('arrowLeft')) {
                 this.move(true, 'arrowLeft');
             }
@@ -96,9 +102,56 @@ class Knight extends MoveableObject {
 
 
         setInterval(() => {
-            this.playAnimation();
-            this.playSound();
-            this.controlSounds();
+
+            if (this.isJumpStart && this.speedY > 0) {
+                this.playAnimationJumpStart(this.flipBook.jump);
+                this.isJumpStart = false;
+            } else if (this.isJumping && this.speedY > 0) {
+                this.img.src = this.flipBook.jump[2];
+                // this.loadImage(this.flipBook.jump[2]);
+            } else if (this.isFallStart && this.speedY <= 0) {
+                this.playAnimationFallStart(this.flipBook.jump);
+                this.isJumping = false;
+                this.isFallStart = false;
+            } else if (this.isFalling && this.speedY < 0) {
+                this.img.src = this.flipBook.jump[5];
+                // this.loadImage(this.flipBook.jump[5]);
+            } else if (this.isFalling && this.speedY == 0) {
+                this.img.src = this.flipBook.jump[6];
+                // this.loadImage(this.flipBook.jump[6]);
+                this.isFalling = false;
+            }
+
+
+            // is working ...
+
+            // if (this.isJumpStart && this.speedY > 0) {
+            //     this.playAnimationJumpStart(this.flipBook.jump);
+            //     this.isJumpStart = false;
+            // } else if (this.isJumping && this.speedY > 0) {
+            //     this.img.src = this.flipBook.jump[2];
+            //     // this.loadImage(this.flipBook.jump[2]);
+            // } else if (this.isFallStart && this.speedY <= 0) {
+            //     this.playAnimationFallStart(this.flipBook.jump);
+            //     this.isJumping = false;
+            //     this.isFallStart = false;
+            // } else if (this.isFalling && this.speedY < 0) {
+            //     this.img.src = this.flipBook.jump[5];
+            //     // this.loadImage(this.flipBook.jump[5]);
+            // } else if (this.isFalling && this.speedY == 0) {
+            //     this.img.src = this.flipBook.jump[6];
+            //     // this.loadImage(this.flipBook.jump[6]);
+            //     this.isFalling = false;
+            // } else {
+            //     this.img.src = this.flipBook.cover;
+            // }
+
+
+            // is ready!!!
+
+            // this.playAnimation();
+            // this.playSound();
+            // this.controlSounds();
 
             this.collect('coins');
             this.collect('crystals');

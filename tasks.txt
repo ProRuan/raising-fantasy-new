@@ -33,6 +33,8 @@ Tasks
   - knight animator: set conditions directly by methods ...
   - check draw method of world and start / level world - simpleCheck
 
+  - favicon ...
+
 
 Clean Coding (29/58)
 ------------
