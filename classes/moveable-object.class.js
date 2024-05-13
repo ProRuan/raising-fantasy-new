@@ -89,7 +89,7 @@ class MoveableObject extends DrawableObject {
 
 
     jump() {
-        this.setObjectValue('speedY', 12.5);
+        this.setObjectValue('speedY', 12.5);    // y value!!!
         this.setObjectValue('isJumpStart', true);
         this.setObjectValue('isJumping', true);
         this.setObjectValue('isFallStart', true);
@@ -97,22 +97,9 @@ class MoveableObject extends DrawableObject {
     }
 
 
-    playAnimationJumpStart(flipBook) {
-        let path = flipBook[0];
+    // in use?
+    loadImage(flipBook, i) {
+        let path = flipBook[i];
         this.img = this.imageCache[path];
-        setTimeout(() => {
-            path = flipBook[1];
-            this.img = this.imageCache[path];
-        }, 100);
-    }
-
-
-    playAnimationFallStart(flipBook) {
-        let path = flipBook[3];
-        this.img = this.imageCache[path];
-        setTimeout(() => {
-            path = flipBook[4];
-            this.img = this.imageCache[path];
-        }, 100);
     }
 }

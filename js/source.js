@@ -26,6 +26,33 @@ const FLIP_BOOK_KNIGHT = [
 ];
 
 
+// const FLIP_BOOK_KNIGHT_JUMP_A = [
+//     './img/characters/knight/jump/jump1.png',
+//     './img/characters/knight/jump/jump2.png',
+// ];
+
+
+// const FLIP_BOOK_KNIGHT_JUMP_B = [
+//     './img/characters/knight/jump/jump3.png',
+// ];
+
+
+// const FLIP_BOOK_KNIGHT_JUMP_C = [
+//     './img/characters/knight/jump/jump4.png',
+//     './img/characters/knight/jump/jump5.png',
+// ];
+
+
+// const FLIP_BOOK_KNIGHT_JUMP_D = [
+//     './img/characters/knight/jump/jump6.png',
+// ];
+
+
+// const FLIP_BOOK_KNIGHT_JUMP_E = [
+//     './img/characters/knight/jump/jump7.png',
+// ];
+
+
 const FLIP_BOOK_DINO = [
     './img/enemies/dino/attack/attack5.png',
     './img/enemies/dino/death/death6.png',

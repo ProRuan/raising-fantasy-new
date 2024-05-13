@@ -13,7 +13,7 @@ class Knight extends MoveableObject {
     constructor(x, y) {
         super(source.knight, x, y);
         this.setFlipBook(FLIP_BOOK_KNIGHT);
-        this.setCover();
+        this.setCover();    // Give it to flip book source!!!
         this.loadImages();
         this.setSpeed(128, 256);
         this.animate();
@@ -97,30 +97,38 @@ class Knight extends MoveableObject {
             this.setChapter();
             // this.setSound();    // maybe?
 
+            console.log(this.img.src, getTime());
+
             // this.world.camera_x = -this.x + 4 * 64 + 28;    // + 4 * 64 + 28
         }, 1000 / 60);
 
 
         setInterval(() => {
+            // give flip book jump part in array
+            // enable jump for key up
 
             if (this.isJumpStart && this.speedY > 0) {
-                this.playAnimationJumpStart(this.flipBook.jump);
+                super.playAnimation([this.flipBook.jump[0]]);
+                setTimeout(() => super.playAnimation([this.flipBook.jump[1]]), 200 / 6);
                 this.isJumpStart = false;
             } else if (this.isJumping && this.speedY > 0) {
-                this.img.src = this.flipBook.jump[2];
-                // this.loadImage(this.flipBook.jump[2]);
+                super.playAnimation([this.flipBook.jump[2]]);
             } else if (this.isFallStart && this.speedY <= 0) {
-                this.playAnimationFallStart(this.flipBook.jump);
+                super.playAnimation([this.flipBook.jump[3]]);
+                setTimeout(() => super.playAnimation([this.flipBook.jump[4]]), 200 / 6);
                 this.isJumping = false;
                 this.isFallStart = false;
             } else if (this.isFalling && this.speedY < 0) {
-                this.img.src = this.flipBook.jump[5];
-                // this.loadImage(this.flipBook.jump[5]);
+                super.playAnimation([this.flipBook.jump[5]]);
             } else if (this.isFalling && this.speedY == 0) {
-                this.img.src = this.flipBook.jump[6];
-                // this.loadImage(this.flipBook.jump[6]);
+                super.playAnimation([this.flipBook.jump[6]]);
                 this.isFalling = false;
+            } else {
+                this.img.src = this.flipBook.cover
             }
+
+
+
 
 
             // is working ...
