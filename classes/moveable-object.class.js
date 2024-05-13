@@ -18,7 +18,7 @@ class MoveableObject extends DrawableObject {
     // jsdoc
     move(logical, key) {
         this.setOtherDirection(logical);
-        this.addSpeed(logical, key);
+        this.applySpeed(logical, key);
     }
 
 
@@ -35,18 +35,24 @@ class MoveableObject extends DrawableObject {
 
 
     // jsdoc
-    addSpeed(logical, key) {
+    applySpeed(logical, key) {
         if (isKey(key, 'doubleClick')) {
-            this.addSpeedType(logical, 'runSpeed');
+            this.applySpeedType('x', logical, 'runSpeed');
         } else if (isKey(key)) {
-            this.addSpeedType(logical, 'speed');
+            this.applySpeedType('x', logical, 'speed');
         }
     }
 
 
     // jsdoc
-    addSpeedType(logical, key) {
-        this.x += (logical) ? -this[key] : this[key];
+    applySpeedType(key, logical, type) {
+        this[key] += (logical) ? -this[type] : this[type];
+    }
+
+
+    // jsdoc
+    climb(logical) {
+        this.applySpeedType('y', logical, 'speed');
     }
 
 

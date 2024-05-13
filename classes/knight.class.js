@@ -79,11 +79,16 @@ class Knight extends MoveableObject {
                 this.setOtherDirection(false);
             }
 
+            // condition for climbing is still missing!!!
+            if (isKey('arrowUp')) {
+                this.climb(true);
+            } else if (isKey('arrowDown')) {
+                this.climb(false);
+            }
 
             if (isKey('space') && !this.isAboveGround()) {
                 this.jump();
             }
-
 
             if (isKey('arrowLeft')) {
                 this.move(true, 'arrowLeft');
@@ -91,12 +96,14 @@ class Knight extends MoveableObject {
             if (isKey('arrowRight')) {
                 this.move(false, 'arrowRight');
             }
+
             if (isKey('keyA')) {
 
             }
 
             this.setChapter();
             // this.setSound();    // maybe?
+
 
             // this.world.camera_x = -this.x + 4 * 64 + 28;    // + 4 * 64 + 28
         }, 1000 / 60);
@@ -166,6 +173,11 @@ class Knight extends MoveableObject {
             this.collect('leaves');
         }, 100);
     }
+
+
+    // isClimbing(x, y) {
+    //     return isIncluded(this.xLeft, x, this.xRight) && this.isIncluded(this.yTop, y, this.yTop);
+    // }
 
 
     // jsdoc
