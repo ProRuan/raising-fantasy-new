@@ -76,17 +76,18 @@ class Knight extends MoveableObject {
             }
 
 
-            if (this.world.keyboard.arrowLeft.keydown) {
-                this.move(false);
+            if (isKey('arrowLeft')) {
+                this.move(true, 'arrowLeft');
             }
-            if (this.world.keyboard.arrowRight.keydown) {
-                this.move(true);
+            if (isKey('arrowRight')) {
+                this.move(false, 'arrowRight');
             }
-            if (this.world.keyboard.keyA.keydown) {
+            if (isKey('keyA')) {
 
             }
 
             this.setChapter();
+            // this.setSound();    // maybe?
 
             // this.world.camera_x = -this.x + 4 * 64 + 28;    // + 4 * 64 + 28
         }, 1000 / 60);
@@ -238,7 +239,7 @@ class Knight extends MoveableObject {
         if (object) {
             this.removeObject(key, object);
             this.increaseCounter(key);
-            // this.playSound(object.sound);
+            super.playSound(object.sound);
 
 
             // if (object instanceof Crystal) {
@@ -257,6 +258,7 @@ class Knight extends MoveableObject {
     }
 
 
+    // jsdoc
     isCollected(o) {
         let touchedLeft = this.xLeft < o.xLeft && o.xLeft < this.xRight;
         let touchedRight = this.xLeft < o.xRight && o.xRight < this.xRight;
@@ -266,17 +268,20 @@ class Knight extends MoveableObject {
     }
 
 
+    // jsdoc
     removeObject(key, object) {
         let objectId = world[key].findIndex(o => this.getId(o, object));
         world[key].splice(objectId, 1);
     }
 
 
+    // jsdoc
     getId(o, object) {
         return o.xCenter == object.xCenter && o.yCenter == object.yCenter;
     }
 
 
+    // jsdoc
     increaseCounter(item) {
         this[item]++;
     }

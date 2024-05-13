@@ -8,7 +8,7 @@ const LEVEL_SIZE = 8;
 
 const OBJECTS_TO_COUNT = [
     'bird', 'bomb', 'coin', 'crystal', 'heart',
-    'hit_point', 'leaf', 'star', 'web'
+    'hitPoint', 'leaf', 'star', 'web'
 ];
 
 

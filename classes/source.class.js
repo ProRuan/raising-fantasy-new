@@ -96,12 +96,23 @@ class Source {
         this.setSource('hitPoint', './img/objects_animated/hit_point.png', 32);
         this.setSource('star', './img/objects_animated/star.png', 32);
         this.setSource('web', './img/objects_animated/web.png', 32);
+
+        // to edit or to move!!!
+        this.addSourceSound('coin', './audio/collect/coin.wav');
+        this.addSourceSound('crystal', './audio/collect/crystal.wav');
+        this.addSourceSound('hitPoint', './audio/collect/hit_point.wav');
+    }
+
+
+    addSourceSound(key, path) {
+        this[key].sound = path;
     }
 
 
     // jsdoc
     setLeaf() {
         this.setSource('leaf', './img/leaves/leaf1.png', 32);
+        this.addSourceSound('leaf', './audio/collect/leaf.wav');
     }
 
 

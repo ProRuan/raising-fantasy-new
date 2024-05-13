@@ -6,7 +6,7 @@ let world;
 let inPlay = true;    // set to false!!!
 let currentWorld = 'level';    // condition for mouse and keyboard!!!
 
-let counter = 0;
+// let counter = 0;
 let buttons = ['newGame', 'story', 'cup', 'settings', 'coin', 'x', 'lowMusic', 'highMusic', 'lowSound', 'highSound'];
 let result = {
     'best': {
@@ -27,6 +27,7 @@ let sound = 7;
 pointer = false;
 
 let source = new Source();
+let counter = new Counter();
 
 intervalIds = [];
 

@@ -34,10 +34,13 @@ Tasks
   - check draw method of world and start / level world - simpleCheck
 
 
-Clean Coding (26/58)
+Clean Coding (29/58)
 ------------
   - class AnimatedObjects ...
-      - class ... (8x)
+      - class ... (5x)
+      - class Coin - simpleCheck
+      - class Crystals - simpleCheck
+      - class HitPoint - simpleCheck
   - class Grass - simpleCheck
       - class GrassLeft, GrassCenter, GrassRight - simpleCheck (3x)
       - class FlyingGrassLeft, FlyingGrassCenter, FlyingGrassRight - simpleCheck (3x)

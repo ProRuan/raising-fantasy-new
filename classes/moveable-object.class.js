@@ -9,39 +9,31 @@ class MoveableObject extends DrawableObject {
 
 
     // jsdoc
-    move(locigal) {
-        (locigal) ? this.moveRight() : this.moveLeft();
+    move(logical, key) {
+        this.setOtherDirection(logical);
+        this.addSpeed(logical, key);
     }
 
 
-    moveLeft() {
-        if (keyboard.arrowLeft.keydown) {
-            this.otherDirection = true;
-            this.x -= this.speed;
-        }
-        // if (keyboard.arrowLeft.doubleClick && keyboard.arrowLeft.keydown) {
-        //     this.x -= this.speedRun;
-        // } else if (keyboard.arrowLeft.keydown) {
-        //     this.x -= this.speed;
-        // }
-    }
-
-
-    moveRight() {
-        if (keyboard.arrowRight.keydown) {
-            this.otherDirection = false;
-            this.x += this.speed;
-        }
-        // if (keyboard.arrowRight.doubleClick && keyboard.arrowRight.keydown) {
-        //     this.x += this.speedRun;
-        // } else if (keyboard.arrowRight.keydown) {
-        //     this.x += this.speed;
-        // }
-    }
-
-
+    // jsdoc
     setOtherDirection(logical) {
         this.otherDirection = logical;
+    }
+
+
+    // jsdoc
+    addSpeed(logical, key) {
+        if (isKey(key, 'doubleClick')) {
+            this.addSpeedType(logical, 'runSpeed');
+        } else if (isKey(key)) {
+            this.addSpeedType(logical, 'speed');
+        }
+    }
+
+
+    // jsdoc
+    addSpeedType(logical, key) {
+        this.x += (logical) ? -this[key] : this[key];
     }
 
 
