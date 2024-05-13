@@ -232,14 +232,14 @@ function isWordMatch(word, subword) {
 // jsdoc
 function isMouseEvent(m, o) {
     if (m) {
-        let mouse = getMouseXY(m);
-        let object = getObjectXY(o);
+        let mouse = getMouseXY(m);    // necessary???
+        let object = getObjectXY(o);    // necessary???
         return isIncluded2D(mouse, object);
     }
 }
 
 
-// jsdoc
+// jsdoc (necessary???)
 function getMouseXY(m) {
     return {
         'x': m.offsetX,
@@ -248,7 +248,7 @@ function getMouseXY(m) {
 }
 
 
-// jsdoc
+// jsdoc (necessary???)
 function getObjectXY(o) {
     return {
         'xLeft': o.xLeft,
@@ -256,6 +256,24 @@ function getObjectXY(o) {
         'yTop': o.yTop,
         'yBottom': o.yBottom
     };
+}
+
+
+// jsdoc
+function isCollided(a, b) {
+    return isCollidedX(a, b) && isCollidedY(a, b);
+}
+
+
+// jsdoc
+function isCollidedX(a, b) {
+    return isIncluded(a.xLeft, b.xLeft, a.xRight) || isIncluded(a.xLeft, b.xRight, a.xRight);
+}
+
+
+// jsdoc
+function isCollidedY(a, b) {
+    return isIncluded(a.yTop, b.yTop, a.yBottom) || isIncluded(a.yTop, b.yBottom, a.yBottom);
 }
 
 

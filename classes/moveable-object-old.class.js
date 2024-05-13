@@ -9,20 +9,11 @@ class MoveableObject extends DrawableObject {
 
     // speed = 0.15;
     // otherDirection = false;
-    // speedY = 0;
-    speedJump = 10;
-    speedHighJump = 13;
-    acceleration = 0.5;
-    jumpHeightMax = 540;
-    grounded = true;
+
     // energy = 100;
     // lastHit = 0;
 
-    radDispl = 0;
     radDisplAttack = 0;
-
-
-    // TO EDIT!!!
 
 
     constructor(path, x, y) {
@@ -86,61 +77,6 @@ class MoveableObject extends DrawableObject {
         }
     }
 
-
-
-
-    // to check
-
-    applyGravity() {
-        setInterval(() => {
-            if (!this.climbing) {
-                if (this.isAboveGround() || this.speedY > 0) {
-                    this.y -= this.speedY;
-                    this.speedY -= this.acceleration;
-                    if (this.y > this.groundLevel - (this.yBottom - this.y)) {
-                        // console.log(this.y);
-                        this.y = this.groundLevel - (this.yBottom - this.y);
-                    }
-                } else {
-                    this.speedY = 0;
-                }
-            }
-        }, 1000 / 60);
-    }
-
-
-    isAboveGround() {
-        return this.yBottom < this.groundLevel || !this.grounded;
-    }
-
-
-    jump() {
-        this.speedY = 12.5;    // jump height 160
-        this.isJumpStart = true;
-        this.isJumping = true;
-        this.isFallStart = true;
-        this.isFalling = true;
-    }
-
-
-    playAnimationJumpStart(flipBook) {
-        let path = flipBook[0];
-        this.img = this.imageCache[path];
-        setTimeout(() => {
-            path = flipBook[1];
-            this.img = this.imageCache[path];
-        }, 100);
-    }
-
-
-    playAnimationFallStart(flipBook) {
-        let path = flipBook[3];
-        this.img = this.imageCache[path];
-        setTimeout(() => {
-            path = flipBook[4];
-            this.img = this.imageCache[path];
-        }, 100);
-    }
 
 
     removeDeadEnemies() {

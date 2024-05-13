@@ -18,7 +18,7 @@ class LevelWorld extends World {
 
 
         // only for testing!!!
-        this.hero = new Knight(64, 39);
+        this.hero = new Knight(64, 38);
 
 
         // ready!!!

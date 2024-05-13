@@ -22,12 +22,12 @@ class Knight extends MoveableObject {
 
 
     get xLeft() {
-        return this.x + 28
+        return this.x + 28;
     }
 
 
     get xCenter() {
-        return this.x + 44
+        return this.x + 44;
     }
 
 
@@ -70,6 +70,7 @@ class Knight extends MoveableObject {
 
     animate() {
         setInterval(() => {
+
             // only for testing!!!
             if (isKey('keyQ')) {
                 this.setOtherDirection(true);
@@ -97,14 +98,12 @@ class Knight extends MoveableObject {
             this.setChapter();
             // this.setSound();    // maybe?
 
-            console.log(this.img.src, getTime());
-
             // this.world.camera_x = -this.x + 4 * 64 + 28;    // + 4 * 64 + 28
         }, 1000 / 60);
 
 
         setInterval(() => {
-            // give flip book jump part in array
+
             // enable jump for key up
 
             if (this.isJumpStart && this.speedY > 0) {
@@ -320,17 +319,7 @@ class Knight extends MoveableObject {
 
     // use object id directly!!!
     getObject(key) {
-        return world[key].find(o => this.isCollected(o));
-    }
-
-
-    // jsdoc
-    isCollected(o) {
-        let touchedLeft = this.xLeft < o.xLeft && o.xLeft < this.xRight;
-        let touchedRight = this.xLeft < o.xRight && o.xRight < this.xRight;
-        let touchedTop = this.yTop < o.yTop && o.yTop < this.yBottom;
-        let touchedBottom = this.yTop < o.yBottom && o.yBottom < this.yBottom;
-        return (touchedLeft || touchedRight) && (touchedTop || touchedBottom);
+        return world[key].find(o => isCollided(this, o));
     }
 
 

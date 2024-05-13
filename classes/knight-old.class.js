@@ -139,9 +139,6 @@ class Knight extends MoveableObject {
                 this.move(true);
                 this.setOtherDirection(false);
             }
-            if (this.isKey('keydown', 'space') && !this.isAboveGround()) {
-                this.jump();
-            }
             if (this.isKey('keydown', 'keyQ')) {
                 this.setOtherDirection(true);
                 // this.world.dino.otherDirection = true;
@@ -263,21 +260,8 @@ class Knight extends MoveableObject {
 
                     if (this.isKey('keydown', 'arrowUp', 'arrowDown') && this.climbing) {
                         this.playAnimation(FLIP_BOOK_HERO.CLIMB);    // still to edit
-                    } else if (this.isJumpStart && this.speedY > 0) {
-                        this.playAnimationJumpStart(FLIP_BOOK_HERO.JUMP);
-                        this.isJumpStart = false;
-                    } else if (this.isJumping && this.speedY > 0) {
-                        this.loadImage(FLIP_BOOK_HERO.JUMP[2]);
-                    } else if (this.isFallStart && this.speedY <= 0) {
-                        this.playAnimationFallStart(FLIP_BOOK_HERO.JUMP);
-                        this.isJumping = false;
-                        this.isFallStart = false;
-                    } else if (this.isFalling && this.speedY < 0) {
-                        this.loadImage(FLIP_BOOK_HERO.JUMP[5]);
-                    } else if (this.isFalling && this.speedY == 0) {
-                        this.loadImage(FLIP_BOOK_HERO.JUMP[6]);
-                        this.isFalling = false;
                     }
+                    
                     else if (!keyboard.keydown) {
                         let currentTime = new Date().getTime();
                         if (currentTime - this.lastIdle > 6000) {
