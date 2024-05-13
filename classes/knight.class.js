@@ -1,4 +1,6 @@
 class Knight extends MoveableObject {
+    coins = 0;
+
     chapter = 'cover';
     chapters = ['runAttack', 'run', 'walkAttack', 'walk', 'attack', 'cover'];
 
@@ -94,6 +96,8 @@ class Knight extends MoveableObject {
             this.playAnimation();
             this.playSound();
             this.controlSounds();
+
+            this.collect('coins');
         }, 100);
     }
 
@@ -171,21 +175,18 @@ class Knight extends MoveableObject {
     }
 
 
-    // jsdoc
-    playSound() {
+    playSound() {    // add sound volume factor!!!
+        this.playSoundOnTrigger('run_attack2', this.footStep);
+        this.playSoundOnTrigger('run_attack6', this.footStep);
+        this.playSoundOnTrigger('run2', this.footStep);
+        this.playSoundOnTrigger('run6', this.footStep);
+        this.playSoundOnTrigger('walk_attack2', this.footStep);
+        this.playSoundOnTrigger('walk_attack5', this.footStep);
+        this.playSoundOnTrigger('walk2', this.footStep);
+        this.playSoundOnTrigger('walk5', this.footStep);
         this.playSoundOnTrigger('_attack2', this.swordDraw);
         this.playSoundOnTrigger('/attack1', this.swordDraw);
     }
-
-
-    // playFootStep() {
-    //     if (this.img.src.includes(FLIP_BOOK_HERO.WALK[2])) {
-    //         this.playSound(this.FOOTSTEP);
-    //     }
-    //     if (this.img.src.includes(FLIP_BOOK_HERO.WALK[5])) {
-    //         this.playSound(this.FOOTSTEP);
-    //     }
-    // }
 
 
     // jsdoc
@@ -205,16 +206,15 @@ class Knight extends MoveableObject {
 
 
     stopSounds() {    // add other sounds!!!
-        if (!this.img.src.includes('attack')) {
-            this.muteSounds();
+        if (!this.img.src.includes('attack') && !this.img.src.includes('walk') && !this.img.src.includes('run')) {
+            this.muteLastSound();
         }
     }
 
 
-    muteSounds() {
-        this.sounds.forEach((sound) => {    // double code!!!
-            sound.muted = true;
-        })
+    muteLastSound() {
+        let lastId = this.sounds.length - 1;
+        this.sounds[lastId].muted = true;
     }
 
 
@@ -230,4 +230,55 @@ class Knight extends MoveableObject {
     isAnySoundPlaying() {
         return this.sounds.length > 0
     }
+
+
+    // to edit (this and subsequent methods)!!!
+    collect(key) {
+        let object = this.getObject(key);
+        if (object) {
+            this.removeObject(key, object);
+            this.increaseCounter(key);
+            // this.playSound(object.sound);
+
+
+            // if (object instanceof Crystal) {
+            //     this.bombSkillUnlocked = true;
+            //     this.playSound(this.soundUpgrade);
+            //     this.world.level.setXLevelEnd();
+            //     this.world.level.setXLevelStartCrystal();
+            // }
+        }
+    }
+
+
+    // use object id directly!!!
+    getObject(key) {
+        return world[key].find(o => this.isCollected(o));
+    }
+
+
+    isCollected(o) {
+        let touchedLeft = this.xLeft < o.xLeft && o.xLeft < this.xRight;
+        let touchedRight = this.xLeft < o.xRight && o.xRight < this.xRight;
+        let touchedTop = this.yTop < o.yTop && o.yTop < this.yBottom;
+        let touchedBottom = this.yTop < o.yBottom && o.yBottom < this.yBottom;
+        return (touchedLeft || touchedRight) && (touchedTop || touchedBottom);
+    }
+
+
+    removeObject(key, object) {
+        let objectId = world[key].findIndex(o => this.getId(o, object));
+        world[key].splice(objectId, 1);
+    }
+
+
+    getId(o, object) {
+        return o.xCenter == object.xCenter && o.yCenter == object.yCenter;
+    }
+
+
+    increaseCounter(item) {
+        this[item]++;
+    }
+
 }

@@ -428,39 +428,8 @@ class Knight extends MoveableObject {
                     } else if (this.isFalling && this.speedY == 0) {
                         this.loadImage(FLIP_BOOK_HERO.JUMP[6]);
                         this.isFalling = false;
-                    } else if (this.isKey('doubleClick', 'arrowLeft', 'arrowRight') && this.isKey('keydown', 'keyA')) {
-                        this.playAnimation(FLIP_BOOK_HERO.RUN_ATTACK);
-                        if (this.img.src.includes(FLIP_BOOK_HERO.RUN_ATTACK[2])) {
-                            this.playSound(this.FOOTSTEP);
-                        }
-                        if (this.img.src.includes(FLIP_BOOK_HERO.RUN_ATTACK[6])) {
-                            this.playSound(this.FOOTSTEP);
-                        }
-                    } else if (this.isKey('doubleClick', 'arrowLeft', 'arrowRight')) {
-                        this.playAnimation(FLIP_BOOK_HERO.RUN);
-                        if (this.img.src.includes(FLIP_BOOK_HERO.RUN[2])) {
-                            this.playSound(this.FOOTSTEP);
-                        }
-                        if (this.img.src.includes(FLIP_BOOK_HERO.RUN[6])) {
-                            this.playSound(this.FOOTSTEP);
-                        }
-                    } else if (this.isKey('keydown', 'arrowLeft', 'arrowRight') && this.isKey('keydown', 'keyA')) {
-                        this.playAnimation(FLIP_BOOK_HERO.WALK_ATTACK);
-                        if (this.img.src.includes(FLIP_BOOK_HERO.WALK_ATTACK[2])) {
-                            this.playSound(this.FOOTSTEP);
-                        }
-                        if (this.img.src.includes(FLIP_BOOK_HERO.WALK_ATTACK[5])) {
-                            this.playSound(this.FOOTSTEP);
-                        }
-                    } else if (this.isKey('keydown', 'arrowLeft', 'arrowRight')) {
-                        this.playAnimation(FLIP_BOOK_HERO.WALK);
-                        if (this.img.src.includes(FLIP_BOOK_HERO.WALK[2])) {
-                            this.playSound(this.FOOTSTEP);
-                        }
-                        if (this.img.src.includes(FLIP_BOOK_HERO.WALK[5])) {
-                            this.playSound(this.FOOTSTEP);
-                        }
-                    } else if (!keyboard.keydown) {
+                    } 
+                    else if (!keyboard.keydown) {
                         let currentTime = new Date().getTime();
                         if (currentTime - this.lastIdle > 6000) {
                             this.playAnimation(FLIP_BOOK_HERO.IDLE);
@@ -600,69 +569,12 @@ class Knight extends MoveableObject {
     }
 
 
-    isPushing() {
-        return this.pushing !== undefined && this.pushing;
-    }
-
-
     hit() {
         if (this.isIncluding(this.world.blade.xCenter, this.world.blade.yCenter)) {
             // console.log('blade hit');
             // this.playAnimation(FLIP_BOOK_HERO.HURT);
             return true;
         };
-    }
-
-
-    collect(item) {
-        let key = this.getKey(item);
-        let object = this.getObject(key);
-        if (object) {
-            this.removeObject(key, object);
-            this.increaseCounter(item);
-            this.playSound(object.sound);
-            if (object instanceof Crystal) {
-                this.bombSkillUnlocked = true;
-                this.playSound(this.soundUpgrade);
-                this.world.level.setXLevelEnd();
-                this.world.level.setXLevelStartCrystal();
-            }
-        }
-    }
-
-
-    getKey(item) {
-        return item.toUpperCase();
-    }
-
-
-    getObject(key) {
-        return world[key].find(o => this.isCollecting(o));
-    }
-
-
-    isCollecting(o) {
-        let touchingLeft = this.xLeft < o.xLeft && o.xLeft < this.xRight;
-        let touchingRight = this.xLeft < o.xRight && o.xRight < this.xRight;
-        let touchingTop = this.yTop < o.yTop && o.yTop < this.yBottom;
-        let touchingBottom = this.yTop < o.yBottom && o.yBottom < this.yBottom;
-        return (touchingLeft || touchingRight) && (touchingTop || touchingBottom);
-    }
-
-
-    removeObject(key, object) {
-        let objectId = world[key].findIndex(o => this.getId(o, object));
-        world[key].splice(objectId, 1);
-    }
-
-
-    getId(o, object) {
-        return o.xCenter == object.xCenter && o.yCenter == object.yCenter;
-    }
-
-
-    increaseCounter(item) {
-        this[item]++;
     }
 
 
