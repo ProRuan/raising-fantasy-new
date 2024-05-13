@@ -7,6 +7,7 @@ class Knight extends MoveableObject {
 
     footStep = source.footStep;
     swordDraw = source.swordDraw;
+    // edit sound structure and methods!!!
 
 
     constructor(x, y) {
@@ -274,14 +275,7 @@ class Knight extends MoveableObject {
 
     // jsdoc
     removeObject(key, object) {
-        let objectId = world[key].findIndex(o => this.getId(o, object));
-        world[key].splice(objectId, 1);
-    }
-
-
-    // jsdoc
-    getId(o, object) {
-        return o.xCenter == object.xCenter && o.yCenter == object.yCenter;
+        world[key].splice(object.getId(key), 1);
     }
 
 

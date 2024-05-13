@@ -5,21 +5,14 @@ class AnimatedObject extends DrawableObject {
 
     constructor(path, x, y) {
         super(path, x * UNIT, y * UNIT);
-        this.setId();
         this.setFlipBook();
         this.loadImages();
         this.setSound();
     }
 
 
-    setId() {
-        let chapter = this.getChapter();
-        this.id = this.getId(chapter);
-    }
-
-
-    getId(chapter) {
-        return counter[chapter]++;
+    getId(key) {
+        return world[key].findIndex(o => o == this);
     }
 
 

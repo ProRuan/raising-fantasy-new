@@ -6,21 +6,14 @@ class Leaf extends DrawableObject {
     // jsdoc
     constructor(x, y, i) {
         super(source.leaf, x * UNIT, y * UNIT);
-        this.setId();
         this.setLeafType(i);
         this.setSound();
     }
 
 
-    // jsdoc
-    setId() {
-        this.id = this.getId();
-    }
-
-
-    // jsdoc
-    getId() {
-        return counter.leaf++;
+    // jsdoc    // double code!!!
+    getId(key) {
+        return world[key].findIndex(o => o == this);
     }
 
 
