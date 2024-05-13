@@ -1,5 +1,6 @@
 class Knight extends MoveableObject {
     coins = 0;
+    leaves = 0;
 
     chapter = 'cover';
     chapters = ['runAttack', 'run', 'walkAttack', 'walk', 'attack', 'cover'];
@@ -99,6 +100,9 @@ class Knight extends MoveableObject {
             this.controlSounds();
 
             this.collect('coins');
+            this.collect('crystals');
+            this.collect('hitPoints');
+            this.collect('leaves');
         }, 100);
     }
 
@@ -187,7 +191,7 @@ class Knight extends MoveableObject {
         this.playSoundOnTrigger('walk5', this.footStep);
         this.playSoundOnTrigger('_attack2', this.swordDraw);
         this.playSoundOnTrigger('/attack1', this.swordDraw);
-    }
+    }    // remove sound footstep?!?
 
 
     // jsdoc
@@ -200,7 +204,7 @@ class Knight extends MoveableObject {
 
     controlSounds() {
         if (this.isAnySoundPlaying()) {
-            this.stopSounds();
+            // this.stopSounds();
             this.removeSounds();
         }
     }
@@ -238,7 +242,7 @@ class Knight extends MoveableObject {
         let object = this.getObject(key);
         if (object) {
             this.removeObject(key, object);
-            this.increaseCounter(key);
+            this.increaseCounter(key, object);
             super.playSound(object.sound);
 
 
@@ -282,8 +286,21 @@ class Knight extends MoveableObject {
 
 
     // jsdoc
-    increaseCounter(item) {
-        this[item]++;
+    increaseCounter(item, object) {
+        if (this.isCollectableItem(object)) {
+            this.increaseItem(item);
+        }
     }
 
+
+    // jsdoc
+    isCollectableItem(object) {
+        return object instanceof Coin || object instanceof Leaf;
+    }
+
+
+    // jsdoc
+    increaseItem(item) {
+        this[item]++;
+    }
 }

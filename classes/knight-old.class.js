@@ -1,46 +1,27 @@
 class Knight extends MoveableObject {
-    directory = 'img/characters/knight/';
-    flipBook = FLIP_BOOK_HERO;
-    speed = 128 / 60;
-    speedExtraAttack = 0;
-    speedRun = 256 / 60;
     energy = 120;
 
     currentFlipBook = this.flipBook.IDLE;
     lastIdle = new Date().getTime();
-
-    coins = 0;
-    crystals = 0;
-    hit_points = 0;
-    leaves = 0;
 
 
     groundLevel = 484;
 
     dying = false;
     dead = false;
-    yLadderMax = 228 - 108;    // not in use, right?
-    yLadderMin = 272 + 100;    // not in use, right?
     climbing = false;
-
-    radDispl = 24;
-    // 4.4375, 0.625
 
 
     AMBIENCE_SOUND = new Audio('./audio/ambience/nature_forest_daytime.wav');
     BOSS_BATTLE = new Audio('./audio/epic_fantasy/boss_battle_lufus.wav');
-    SWORD_DRAW = './audio/attacks_and_creatures/blade_draw.wav';
     ARMOR_HIT = '.audio/attacks_and_creatures/cloth_armor_hit.wav';
-    FOOTSTEP = './audio/footsteps/grass.wav';
 
     soundUpgrade = SOUND_UPGRADE;;
 
 
     constructor() {
         super(3.75 + 0 * 15, 0.625);    // Please set!!!
-        this.setCover('knight');
         this.loadImage(this.cover);
-        this.loadFlipBookImages(this.flipBook);
         this.animate();
         this.applyGravity();
         this.removeDeadEnemies();
@@ -59,21 +40,6 @@ class Knight extends MoveableObject {
 
     get xRight() {
         return this.x + HERO_X_RIGHT;
-    }
-
-
-    get yTop() {
-        return this.y + 64;
-    }
-
-
-    get yCenter() {
-        return this.y + 88;
-    }
-
-
-    get yBottom() {
-        return this.y + 112;
     }
 
 
@@ -104,20 +70,6 @@ class Knight extends MoveableObject {
 
     attackWalk() {
         return new Sword(this).attackWalk(world.spider);
-    }
-
-
-    attackExtra() {
-        return new Sword(this).attackExtra(world.spider);
-    }
-
-
-    loadFlipBookImages(flipBook) {
-        for (const [key, value] of Object.entries(flipBook)) {
-            if (Array.isArray(value)) {
-                this.loadImages(flipBook[key]);
-            }
-        }
     }
 
 
@@ -271,12 +223,6 @@ class Knight extends MoveableObject {
 
 
             this.isOnTile();
-            this.collect('leaves');
-            this.collect('coins');
-            this.collect('crystals');
-            this.collect('hit_points');
-            // this.collectCoinNew();
-            // this.collectCoin();
             this.hit();
         }, 1000 / 60);
 
@@ -314,101 +260,6 @@ class Knight extends MoveableObject {
                     this.playSound(this.ARMOR_HIT);
                 } else
 
-                    // if (world.lightnings.length > 0 && world.lightnings[0] !== undefined && this.isIncluding(world.lightnings[0].xCenter, world.lightnings[0].yCenter)) {
-                    //     world.lightnings[0].inTouch = true;
-                    //     if (this.isIncluding(this.world.lightnings[0].xCenter, this.world.lightnings[0].yCenter)) {
-                    //         console.log('lightning touch');
-                    //     }
-                    //     if (!this.isHit) {
-                    //         this.isHit = true;
-                    //         this.energy -= 15;
-                    //         // this.energy -= 30;
-                    //         console.log(this.energy);
-                    //         this.playAnimation(FLIP_BOOK_HERO.HURT);
-                    //         setTimeout(() => {
-                    //             delete world.lightnings[0];
-                    //             // world.bombs.splice(0, 1);
-                    //             this.isHit = false;
-                    //             setTimeout(() => {
-                    //                 world.lightnings.splice(0, 1);
-                    //                 world.lightnings.push(new Lightning(4.75, 0.4));
-                    //             }, 1000);
-                    //         }, 700);
-                    //     }
-                    // } else 
-
-                    // if (world.fires.length > 0 && world.fires[0] !== undefined && this.isIncluding(world.fires[0].xCenter, world.fires[0].yCenter)) {
-                    //     world.fires[0].inTouch = true;
-                    //     if (!this.isHit) {
-                    //         this.isHit = true;
-                    //         this.energy -= 15;
-                    //         // this.energy -= 30;
-                    //         // console.log(this.energy);
-                    //         this.playAnimationOnce(FLIP_BOOK_HERO.HURT);
-                    //         setTimeout(() => {
-                    //             delete world.fires[0];
-                    //             // world.bombs.splice(0, 1);
-                    //             this.isHit = false;
-                    //             setTimeout(() => {
-                    //                 world.fires.splice(0, 1);
-                    //                 world.fires.push(new Fire(8, -0.5));
-                    //             }, 1000);
-                    //         }, 700);
-                    //     }
-                    // } else
-
-                    // if (world.blades.length > 0 && world.blades[0] !== undefined && this.isIncluding(world.blades[0].xCenter, world.blades[0].yCenter)) {
-                    //     world.blades[0].inTouch = true;
-                    //     if (!this.isHit) {
-                    //         this.isHit = true;
-                    //         this.energy -= 15;
-                    //         // this.energy -= 30;
-                    //         // console.log(this.energy);
-                    //         this.playAnimation(FLIP_BOOK_HERO.HURT);
-                    //         setTimeout(() => {
-                    //             delete world.blades[0];
-                    //             // world.bombs.splice(0, 1);
-                    //             this.isHit = false;
-                    //             setTimeout(() => {
-                    //                 world.blades.splice(0, 1);
-                    //                 world.blades.push(new Blade(10.75, -0.5));
-                    //             }, 1000);
-                    //         }, 400);
-                    //     }
-                    // } else
-
-                    // if (world.dino.attack()) {
-                    //     if (!this.isHit) {
-                    //         console.log('hit');
-                    //         this.currentImage = 0;
-                    //         this.isHit = true;
-                    //         this.energy -= 20;
-                    //         this.world.characterInfo.hpCounter -= 20;
-                    //         this.hpPoints.splice(this.hpPoints.length - 20, 20);
-                    //         this.playAnimationOnce(FLIP_BOOK_HERO.HURT);
-                    //         setTimeout(() => {
-                    //             this.isHit = false;
-                    //         }, 500);
-                    //     }
-                    // } else
-
-                    // if (this.world.webs.length > 0 && this.isIncluding(this.world.webs[0].xCenter, this.world.webs[0].yCenter)) {
-                    //     if (!this.isHit) {
-                    //         console.log('hit');
-                    //         this.currentImage = 0;
-                    //         this.isHit = true;
-                    //         this.energy -= 20;
-                    //         this.world.characterInfo.hpCounter -= 20;
-                    //         this.hpPoints.splice(this.hpPoints.length - 20, 20);
-                    //         this.playAnimationOnce(FLIP_BOOK_HERO.HURT);
-                    //         this.world.spider.webHit = true;
-                    //         this.world.webs.splice(0, 1);
-                    //         // this.world.spider.waiting = false;
-                    //         setTimeout(() => {
-                    //             this.isHit = false;
-                    //         }, 500);
-                    //     }
-                    // } else
 
                     if (this.isKey('keydown', 'arrowUp', 'arrowDown') && this.climbing) {
                         this.playAnimation(FLIP_BOOK_HERO.CLIMB);    // still to edit
@@ -428,7 +279,7 @@ class Knight extends MoveableObject {
                     } else if (this.isFalling && this.speedY == 0) {
                         this.loadImage(FLIP_BOOK_HERO.JUMP[6]);
                         this.isFalling = false;
-                    } 
+                    }
                     else if (!keyboard.keydown) {
                         let currentTime = new Date().getTime();
                         if (currentTime - this.lastIdle > 6000) {
@@ -448,37 +299,6 @@ class Knight extends MoveableObject {
                         }
                     }
         }, 100);
-    }
-
-
-    isKey(keyValue, keyCodeA, keyCodeB) {
-        if (!keyCodeB) {
-            return this.getKeyValue(keyCodeA, keyValue);
-        } else {
-            return this.getKeyValue(keyCodeA, keyValue) || this.getKeyValue(keyCodeB, keyValue);
-        }
-    }
-
-
-    getKeyValue(keyCode, keyValue) {
-        return this.world.keyboard[keyCode][keyValue];
-    }
-
-
-    setOtherDirection(locigal) {
-        this.otherDirection = (locigal) ? true : false;
-    }
-
-
-    amBoden() {
-        let tempGrass = [];
-        world.GRASS_FLYING.forEach((grass) => {
-            if (grass.y + 16 > this.yBottom && (grass.xLeft < this.xCenter && this.xCenter < grass.xRight)) {
-                tempGrass.push(grass);
-            }
-        });
-        console.log(tempGrass);
-        return tempGrass;
     }
 
 
@@ -544,16 +364,6 @@ class Knight extends MoveableObject {
     }
 
 
-    collectCoin() {
-        let coin = this.world.COINS.find(c => this.isIncluding(c.xCenter, c.yCenter));
-        if (coin) {
-            let coinId = this.world.COINS.findIndex(c => c.xCenter == coin.xCenter && c.yCenter == coin.yCenter);
-            this.world.COINS.splice(coinId, 1);
-            this.coins++;
-        }
-    }
-
-
     isIncluding(x, y) {
         return this.isHorizontalCenter(x) && this.isVerticalCenter(y);
     }
@@ -575,25 +385,6 @@ class Knight extends MoveableObject {
             // this.playAnimation(FLIP_BOOK_HERO.HURT);
             return true;
         };
-    }
-
-
-    collectCoinNew() {
-        let coin = this.world.COINS.find(c => this.isIncludingCoin(c));
-        if (coin) {
-            let coinId = this.world.COINS.findIndex(c => c.xCenter == coin.xCenter && c.yCenter == coin.yCenter);
-            this.world.COINS.splice(coinId, 1);
-            this.coins++;
-        }
-    }
-
-
-    isIncludingCoin(coin) {
-        let touchXLeft = this.xLeft < coin.xLeft && coin.xLeft < this.xRight;
-        let touchXRight = this.xLeft < coin.xRight && coin.xRight < this.xRight;
-        let touchYTop = this.yTop < coin.yTop && coin.yTop < this.yBottom;
-        let touchYBottom = this.yTop < coin.yBottom && coin.yBottom < this.yBottom;
-        return (touchXLeft || touchXRight) && (touchYTop || touchYBottom);
     }
 
 
