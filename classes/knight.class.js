@@ -94,7 +94,7 @@ class Knight extends Character {
 
             this.collect('coins');
             this.collect('crystals');
-            // this.collect('hearts');
+            this.collect('hearts');
             this.collect('hitPoints');
             this.collect('leaves');
 

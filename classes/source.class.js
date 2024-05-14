@@ -100,6 +100,7 @@ class Source {
         // to edit or to move!!!
         this.addSourceSound('coin', './audio/collect/coin.wav');
         this.addSourceSound('crystal', './audio/collect/crystal.wav');
+        this.addSourceSound('heart', './audio/collect/heart.wav');
         this.addSourceSound('hitPoint', './audio/collect/hit_point.wav');
     }
 
