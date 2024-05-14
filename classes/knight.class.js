@@ -115,12 +115,14 @@ class Knight extends MoveableObject {
             this.collect('hitPoints');
             this.collect('leaves');
 
+            console.log(this.yBottom, this.groundLevel, this.isClimbing());
+
             // this.world.camera_x = -this.x + 4 * 64 + 28;    // + 4 * 64 + 28
         }, 1000 / 60);
 
 
         setInterval(() => {
-            console.log(this.yBottom, this.groundLevel, this.isClimbing());
+
 
             // enable jump for key up
 

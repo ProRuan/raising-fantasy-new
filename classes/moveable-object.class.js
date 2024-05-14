@@ -117,18 +117,49 @@ class MoveableObject extends DrawableObject {
 
 
     isClimbingUp() {    // dobule code!!!
-        return isKey('arrowUp') && this.isAtLadder();
+        return isKey('arrowUp') && this.isAtLadderUp();
     }
 
 
     isClimbingDown() {    // dobule code!!!
-        return isKey('arrowDown') && this.isAtLadder();    // + condititon for start point and end point!!!
+        return isKey('arrowDown') && this.isAtLadderDown();    // + condititon for start point and end point!!!
+    }
+
+
+    isAtLadderUp() {
+        let ladder = this.getLadderUp();
+        return (ladder) ? true : false;
+    }
+
+
+    getLadderUp() {
+        return this.world.ladders.find(l => this.isLadderUp(l));
+    }
+
+
+    isLadderUp(l) {
+        return isIncluded(this.xLeft, l.xCenter, this.xRight) && isLarger(l.yTop, this.yBottom);
+    }
+
+
+    isAtLadderDown() {
+        let ladder = this.getLadderDown();
+        return (ladder) ? true : false;
+    }
+
+
+    getLadderDown() {
+        return this.world.ladders.find(l => this.isLadderDown(l));
+    }
+
+
+    isLadderDown(l) {
+        return isIncluded(this.xLeft, l.xCenter, this.xRight) && isLarger(this.yBottom, l.yTop);
     }
 
 
     isAtLadder() {
         let ladder = this.getLadder();
-        console.log((ladder) ? true : false);
         return (ladder) ? true : false;
     }
 
@@ -138,8 +169,8 @@ class MoveableObject extends DrawableObject {
     }
 
 
-    isLadder(t) {
-        return isIncluded(this.xLeft, t.xCenter, this.xRight) && isIncluded(this.yTop, t.yTop, this.yBottom);
+    isLadder(l) {
+        return isIncluded(this.xLeft, l.xCenter, this.xRight) && isLarger(l.yBottom, this.yBottom);
     }
 
 
