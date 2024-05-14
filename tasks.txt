@@ -36,12 +36,13 @@ Tasks
   - favicon ...
 
 
-Clean Coding (30/58)
+Clean Coding (31/58)
 ------------
   - class AnimatedObjects ...
-      - class ... (5x)
+      - class ... (4x)
       - class Coin - simpleCheck
       - class Crystals - simpleCheck
+      - class Heart - simpleCheck
       - class HitPoint - simpleCheck
   - class Grass - simpleCheck
       - class GrassLeft, GrassCenter, GrassRight - simpleCheck (3x)
