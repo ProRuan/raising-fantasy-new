@@ -138,7 +138,7 @@ class MoveableObject extends DrawableObject {
 
 
     isLadderUp(l) {
-        return isIncluded(this.xLeft, l.xCenter, this.xRight) && isLarger(l.yTop, this.yBottom);
+        return isIncluded(this.xLeft, l.xCenter, this.xRight) && isLarger(l.yTop, this.yBottom - 0.5);
     }
 
 
@@ -154,7 +154,7 @@ class MoveableObject extends DrawableObject {
 
 
     isLadderDown(l) {
-        return isIncluded(this.xLeft, l.xCenter, this.xRight) && isLarger(this.yBottom, l.yTop);
+        return isIncluded(this.xLeft, l.xCenter, this.xRight) && isLarger(this.yBottom, l.yBottom - 0.5);
     }
 
 
