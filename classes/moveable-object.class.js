@@ -4,6 +4,7 @@ class MoveableObject extends DrawableObject {
     speedY = 0;
     acceleration = 0.5;
     groundLevel = 484;
+    abyssLevel = 668;
     grounded = true;
     climbing = false;
 
@@ -90,7 +91,7 @@ class MoveableObject extends DrawableObject {
 
 
     isAboveGround() {
-        return this.yBottom < this.groundLevel || !this.grounded;
+        return this.yBottom < this.groundLevel;
     }
 
 

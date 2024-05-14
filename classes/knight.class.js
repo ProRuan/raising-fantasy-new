@@ -8,6 +8,8 @@ class Knight extends MoveableObject {
     footStep = source.footStep;
     swordDraw = source.swordDraw;
     // edit sound structure and methods!!!
+    // fix sound
+    // fix sound volume (factor)
 
 
     constructor(x, y) {
@@ -104,6 +106,7 @@ class Knight extends MoveableObject {
             this.setChapter();
             // this.setSound();    // maybe?
 
+            this.isOnTile();
 
             // this.world.camera_x = -this.x + 4 * 64 + 28;    // + 4 * 64 + 28
         }, 1000 / 60);
@@ -358,5 +361,38 @@ class Knight extends MoveableObject {
     // jsdoc
     increaseItem(item) {
         this[item]++;
+    }
+
+
+    isOnTile() {
+        let grass = this.searchGrass('flyGrass');
+        if (grass) {
+            this.groundLevel = grass.yTop;
+        } else {
+            grass = this.searchGrass('grass');
+            if (grass) {
+                this.groundLevel = grass.yTop;
+            } else {
+                this.groundLevel = this.abyssLevel;
+            }
+        }
+    }
+
+
+    // jsdoc
+    searchGrass(key) {
+        return this.world[key].find(g => this.isOnGrass(g) && this.isAboveGrass(g));
+    }
+
+
+    // jsdoc
+    isOnGrass(g) {
+        return isIncluded(g.xLeft, this.xLeft, g.xRight) || isIncluded(g.xLeft, this.xRight, g.xRight);
+    }
+
+
+    // jsdoc
+    isAboveGrass(g) {
+        return isLarger(this.yBottom, g.yTop, true);
     }
 }
