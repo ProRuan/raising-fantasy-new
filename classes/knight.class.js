@@ -10,6 +10,7 @@ class Knight extends MoveableObject {
     // edit sound structure and methods!!!
     // fix sound
     // fix sound volume (factor)
+    // choose heart sound
 
 
     constructor(x, y) {
@@ -82,9 +83,9 @@ class Knight extends MoveableObject {
             }
 
             // condition for climbing is still missing!!!
-            if (isKey('arrowUp')) {
+            if (this.isClimbingUp()) {
                 this.climb(true);
-            } else if (isKey('arrowDown')) {
+            } else if (this.isClimbingDown()) {
                 this.climb(false);
             }
 
@@ -119,6 +120,7 @@ class Knight extends MoveableObject {
 
 
         setInterval(() => {
+            console.log(this.yBottom, this.groundLevel, this.isClimbing());
 
             // enable jump for key up
 
@@ -355,7 +357,7 @@ class Knight extends MoveableObject {
     }
 
 
-    // jsdoc
+    // jsdoc + rename to getGrass()
     searchGrass(key) {
         return this.world[key].find(g => this.isOnGrass(g) && this.isAboveGrass(g));
     }

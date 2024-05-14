@@ -81,7 +81,7 @@ class MoveableObject extends DrawableObject {
 
     applyGravity() {
         setInterval(() => {
-            if (!this.climbing) {
+            if (!this.isClimbing()) {
                 if (this.isAboveGround() || this.speedY > 0) {
                     this.y -= this.speedY;
                     this.speedY -= this.acceleration;
@@ -109,6 +109,40 @@ class MoveableObject extends DrawableObject {
         this.setObjectValue('isFallStart', true);
         this.setObjectValue('isFalling', true);
     }
+
+
+    isClimbing() {
+        return this.isClimbingUp() || this.isClimbingDown();
+    }
+
+
+    isClimbingUp() {    // dobule code!!!
+        return isKey('arrowUp') && this.isAtLadder();
+    }
+
+
+    isClimbingDown() {    // dobule code!!!
+        return isKey('arrowDown') && this.isAtLadder();    // + condititon for start point and end point!!!
+    }
+
+
+    isAtLadder() {
+        let ladder = this.getLadder();
+        console.log((ladder) ? true : false);
+        return (ladder) ? true : false;
+    }
+
+
+    getLadder() {
+        return this.world.ladders.find(l => this.isLadder(l));
+    }
+
+
+    isLadder(t) {
+        return isIncluded(this.xLeft, t.xCenter, this.xRight) && isIncluded(this.yTop, t.yTop, this.yBottom);
+    }
+
+
 
 
     // in use?
