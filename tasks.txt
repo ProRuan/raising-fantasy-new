@@ -35,6 +35,9 @@ Tasks
 
   - favicon ...
 
+  - climb() is not waterproof ...
+  - clean jump() ...
+
 
 Clean Coding (31/58)
 ------------

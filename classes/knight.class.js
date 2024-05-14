@@ -3,7 +3,7 @@ class Knight extends Character {
     leaves = 0;
 
     chapter = 'cover';
-    chapters = ['climb', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'cover'];
+    chapters = ['climb', 'jump', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'cover'];
 
     footStep = source.footStep;
     swordDraw = source.swordDraw;
@@ -73,6 +73,7 @@ class Knight extends Character {
 
     animate() {
         setInterval(() => {
+            this.resetJumpCounter();
 
             // only for testing!!!
             if (isKey('keyQ')) {
@@ -98,6 +99,8 @@ class Knight extends Character {
             this.collect('hitPoints');
             this.collect('leaves');
 
+            console.log(this.chapter, this.img.src);
+
             // this.world.camera_x = -this.x + 4 * 64 + 28;    // + 4 * 64 + 28
         }, 1000 / 60);
 
@@ -105,31 +108,8 @@ class Knight extends Character {
         setInterval(() => {
 
 
-            // enable jump for key up
-
-            // if (this.isJumpStart && this.speedY > 0) {
-            //     super.playAnimation([this.flipBook.jump[0]]);
-            //     setTimeout(() => super.playAnimation([this.flipBook.jump[1]]), 200 / 6);
-            //     this.isJumpStart = false;
-            // } else if (this.isJumping && this.speedY > 0) {
-            //     super.playAnimation([this.flipBook.jump[2]]);
-            // } else if (this.isFallStart && this.speedY <= 0) {
-            //     super.playAnimation([this.flipBook.jump[3]]);
-            //     setTimeout(() => super.playAnimation([this.flipBook.jump[4]]), 200 / 6);
-            //     this.isJumping = false;
-            //     this.isFallStart = false;
-            // } else if (this.isFalling && this.speedY < 0) {
-            //     super.playAnimation([this.flipBook.jump[5]]);
-            // } else if (this.isFalling && this.speedY == 0) {
-            //     super.playAnimation([this.flipBook.jump[6]]);
-            //     this.isFalling = false;
-            // } else {
-            //     this.img.src = this.flipBook.cover
-            // }
-
-
             // is ready!!!
-
+            // -----------
             this.playAnimation();
             this.playSound();
             this.controlSounds();
@@ -152,10 +132,48 @@ class Knight extends Character {
     }
 
 
+    // footstep wood for climbing!!!
+
+
+    // enable next jump with key up!!!
+    isJump() {
+        return isLarger(-1, this.jumpCounter);
+    }
+
+
+    playAnimationJump() {    // to clean!!!
+        if (this.jumpCounter == 0 && this.speedY > 0) {
+            super.playAnimation([this.flipBook.jump[0]]);
+            setTimeout(() => super.playAnimation([this.flipBook.jump[1]]), 200 / 6);
+            this.jumpCounter++;
+        } else if (this.jumpCounter == 1 && this.speedY > 0) {
+            super.playAnimation([this.flipBook.jump[2]]);
+        } else if (this.jumpCounter == 1 && this.speedY <= 0) {
+            super.playAnimation([this.flipBook.jump[3]]);
+            setTimeout(() => super.playAnimation([this.flipBook.jump[4]]), 200 / 6);
+            this.jumpCounter++;
+        } else if (this.jumpCounter == 2 && this.speedY < 0) {
+            super.playAnimation([this.flipBook.jump[5]]);
+        } else if (this.jumpCounter == 2 && this.speedY == 0) {
+            super.playAnimation([this.flipBook.jump[6]]);
+            this.jumpCounter = -1;
+        } else {
+            this.img.src = this.flipBook.cover
+        }
+    }
+
+
     // jsdoc
     jump() {
-        if (this.isJump()) {
+        if (super.isJump()) {
             super.jump();
+        }
+    }
+
+
+    resetJumpCounter() {
+        if (this.chapter != 'jump') {
+            this.setObjectValue('jumpCounter', -1);
         }
     }
 
@@ -216,7 +234,11 @@ class Knight extends Character {
 
     // jsdoc
     playAnimation() {
-        super.playAnimation(this.flipBook[this.chapter]);
+        if (!this.isJump()) {
+            super.playAnimation(this.flipBook[this.chapter]);
+        } else {
+            this.playAnimationJump();
+        }
     }
 
 

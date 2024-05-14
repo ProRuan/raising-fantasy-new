@@ -3,10 +3,10 @@ class MoveableObject extends DrawableObject {
 
     speedY = 0;
     acceleration = 0.5;
+    jumpCounter = -1;
     basicLevel = 484;
     groundLevel = 484;
     abyssLevel = 668;
-    grounded = true;
     climbing = false;
 
     sounds = [];
@@ -52,9 +52,8 @@ class MoveableObject extends DrawableObject {
     }
 
 
-    // jsdoc
     climb(logical) {
-        this.applySpeedType('y', logical, 'speed');
+        this.applySpeedType('y', logical, 'speed');    // not waterproof!!!
     }
 
 
@@ -104,10 +103,7 @@ class MoveableObject extends DrawableObject {
 
     jump() {
         this.setObjectValue('speedY', 12.5);    // y value!!!
-        this.setObjectValue('isJumpStart', true);
-        this.setObjectValue('isJumping', true);
-        this.setObjectValue('isFallStart', true);
-        this.setObjectValue('isFalling', true);
+        this.setObjectValue('jumpCounter', 0);
     }
 
 
