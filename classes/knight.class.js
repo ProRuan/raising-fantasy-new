@@ -106,7 +106,13 @@ class Knight extends MoveableObject {
             this.setChapter();
             // this.setSound();    // maybe?
 
-            this.isOnTile();
+            this.updateGroundLevel();
+
+            this.collect('coins');
+            this.collect('crystals');
+            // this.collect('hearts');
+            this.collect('hitPoints');
+            this.collect('leaves');
 
             // this.world.camera_x = -this.x + 4 * 64 + 28;    // + 4 * 64 + 28
         }, 1000 / 60);
@@ -137,43 +143,11 @@ class Knight extends MoveableObject {
             }
 
 
-
-
-
-            // is working ...
-
-            // if (this.isJumpStart && this.speedY > 0) {
-            //     this.playAnimationJumpStart(this.flipBook.jump);
-            //     this.isJumpStart = false;
-            // } else if (this.isJumping && this.speedY > 0) {
-            //     this.img.src = this.flipBook.jump[2];
-            //     // this.loadImage(this.flipBook.jump[2]);
-            // } else if (this.isFallStart && this.speedY <= 0) {
-            //     this.playAnimationFallStart(this.flipBook.jump);
-            //     this.isJumping = false;
-            //     this.isFallStart = false;
-            // } else if (this.isFalling && this.speedY < 0) {
-            //     this.img.src = this.flipBook.jump[5];
-            //     // this.loadImage(this.flipBook.jump[5]);
-            // } else if (this.isFalling && this.speedY == 0) {
-            //     this.img.src = this.flipBook.jump[6];
-            //     // this.loadImage(this.flipBook.jump[6]);
-            //     this.isFalling = false;
-            // } else {
-            //     this.img.src = this.flipBook.cover;
-            // }
-
-
             // is ready!!!
 
             // this.playAnimation();
             // this.playSound();
             // this.controlSounds();
-
-            this.collect('coins');
-            this.collect('crystals');
-            this.collect('hitPoints');
-            this.collect('leaves');
         }, 100);
     }
 
@@ -364,18 +338,20 @@ class Knight extends MoveableObject {
     }
 
 
-    isOnTile() {
-        let grass = this.searchGrass('flyGrass');
-        if (grass) {
-            this.groundLevel = grass.yTop;
+    // jsdoc
+    updateGroundLevel(key) {
+        if (this.isUndefined(key)) {
+            this.setGroundLevel('flyGrass', this.updateGroundLevel('grass'));
         } else {
-            grass = this.searchGrass('grass');
-            if (grass) {
-                this.groundLevel = grass.yTop;
-            } else {
-                this.groundLevel = this.abyssLevel;
-            }
+            this.setGroundLevel('grass', this.setObjectValue('groundLevel', this.abyssLevel));
         }
+    }
+
+
+    // jsdoc
+    setGroundLevel(key, method) {
+        let grass = this.searchGrass(key);
+        (grass) ? this.setObjectValue('groundLevel', grass.yTop) : method;
     }
 
 

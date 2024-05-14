@@ -3,6 +3,7 @@ class MoveableObject extends DrawableObject {
 
     speedY = 0;
     acceleration = 0.5;
+    basicLevel = 484;
     groundLevel = 484;
     abyssLevel = 668;
     grounded = true;
@@ -54,6 +55,12 @@ class MoveableObject extends DrawableObject {
     // jsdoc
     climb(logical) {
         this.applySpeedType('y', logical, 'speed');
+    }
+
+
+    // jsdoc
+    isUndefined(value) {
+        return value === undefined;
     }
 
 
