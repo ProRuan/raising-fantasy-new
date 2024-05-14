@@ -81,7 +81,7 @@ class MoveableObject extends DrawableObject {
 
     applyGravity() {
         setInterval(() => {
-            if (!this.isClimbing()) {
+            if (!this.isClimb()) {
                 if (this.isAboveGround() || this.speedY > 0) {
                     this.y -= this.speedY;
                     this.speedY -= this.acceleration;
@@ -111,66 +111,41 @@ class MoveableObject extends DrawableObject {
     }
 
 
-    isClimbing() {
-        return this.isClimbingUp() || this.isClimbingDown();
+    // jsdoc
+    isClimb() {
+        return this.isClimbingLadder('arrowUp') || this.isClimbingLadder('arrowDown');
     }
 
 
-    isClimbingUp() {    // dobule code!!!
-        return isKey('arrowUp') && this.isAtLadderUp();
+    // jsdoc
+    isClimbingLadder(key) {
+        return isKey(key) && this.isAtLadder(key);
     }
 
 
-    isClimbingDown() {    // dobule code!!!
-        return isKey('arrowDown') && this.isAtLadderDown();    // + condititon for start point and end point!!!
-    }
-
-
-    isAtLadderUp() {
-        let ladder = this.getLadderUp();
+    // jsdoc
+    isAtLadder(key) {
+        let ladder = this.getLadder(key);
         return (ladder) ? true : false;
     }
 
 
-    getLadderUp() {
-        return this.world.ladders.find(l => this.isLadderUp(l));
+    // jsdoc
+    getLadder(key) {
+        return this.world.ladders.find(l => this.isLadder(key, l));
     }
 
 
-    isLadderUp(l) {
-        return isIncluded(this.xLeft, l.xCenter, this.xRight) && isLarger(l.yTop, this.yBottom - 0.5);
+    // jsdoc
+    isLadder(key, l) {
+        let [a, b] = this.getLadderParameters(key, l);
+        return isIncluded(this.xLeft, l.xCenter, this.xRight) && isLarger(a, b - 0.5);
     }
 
 
-    isAtLadderDown() {
-        let ladder = this.getLadderDown();
-        return (ladder) ? true : false;
-    }
-
-
-    getLadderDown() {
-        return this.world.ladders.find(l => this.isLadderDown(l));
-    }
-
-
-    isLadderDown(l) {
-        return isIncluded(this.xLeft, l.xCenter, this.xRight) && isLarger(this.yBottom, l.yBottom - 0.5);
-    }
-
-
-    isAtLadder() {
-        let ladder = this.getLadder();
-        return (ladder) ? true : false;
-    }
-
-
-    getLadder() {
-        return this.world.ladders.find(l => this.isLadder(l));
-    }
-
-
-    isLadder(l) {
-        return isIncluded(this.xLeft, l.xCenter, this.xRight) && isLarger(l.yBottom, this.yBottom);
+    // jsdoc
+    getLadderParameters(key, l) {
+        return (key == 'arrowUp') ? [l.yTop, this.yBottom] : [this.yBottom, l.yBottom]
     }
 
 

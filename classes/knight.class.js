@@ -3,7 +3,7 @@ class Knight extends MoveableObject {
     leaves = 0;
 
     chapter = 'cover';
-    chapters = ['runAttack', 'run', 'walkAttack', 'walk', 'attack', 'cover'];
+    chapters = ['climb', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'cover'];
 
     footStep = source.footStep;
     swordDraw = source.swordDraw;
@@ -82,27 +82,10 @@ class Knight extends MoveableObject {
                 this.setOtherDirection(false);
             }
 
-            // condition for climbing is still missing!!!
-            if (this.isClimbingUp()) {
-                this.climb(true);
-            } else if (this.isClimbingDown()) {
-                this.climb(false);
-            }
-
-            if (isKey('space') && !this.isAboveGround()) {
-                this.jump();
-            }
-
-            if (isKey('arrowLeft')) {
-                this.move(true, 'arrowLeft');
-            }
-            if (isKey('arrowRight')) {
-                this.move(false, 'arrowRight');
-            }
-
-            if (isKey('keyA')) {
-
-            }
+            this.climb();
+            this.jump();
+            this.run()
+            this.attack();    // still to write!!!
 
             this.setChapter();
             // this.setSound();    // maybe?
@@ -115,8 +98,6 @@ class Knight extends MoveableObject {
             this.collect('hitPoints');
             this.collect('leaves');
 
-            console.log(this.yBottom, this.groundLevel, this.isClimbing(), this.groundLevel - this.yBottom);
-
             // this.world.camera_x = -this.x + 4 * 64 + 28;    // + 4 * 64 + 28
         }, 1000 / 60);
 
@@ -126,39 +107,78 @@ class Knight extends MoveableObject {
 
             // enable jump for key up
 
-            if (this.isJumpStart && this.speedY > 0) {
-                super.playAnimation([this.flipBook.jump[0]]);
-                setTimeout(() => super.playAnimation([this.flipBook.jump[1]]), 200 / 6);
-                this.isJumpStart = false;
-            } else if (this.isJumping && this.speedY > 0) {
-                super.playAnimation([this.flipBook.jump[2]]);
-            } else if (this.isFallStart && this.speedY <= 0) {
-                super.playAnimation([this.flipBook.jump[3]]);
-                setTimeout(() => super.playAnimation([this.flipBook.jump[4]]), 200 / 6);
-                this.isJumping = false;
-                this.isFallStart = false;
-            } else if (this.isFalling && this.speedY < 0) {
-                super.playAnimation([this.flipBook.jump[5]]);
-            } else if (this.isFalling && this.speedY == 0) {
-                super.playAnimation([this.flipBook.jump[6]]);
-                this.isFalling = false;
-            } else {
-                this.img.src = this.flipBook.cover
-            }
+            // if (this.isJumpStart && this.speedY > 0) {
+            //     super.playAnimation([this.flipBook.jump[0]]);
+            //     setTimeout(() => super.playAnimation([this.flipBook.jump[1]]), 200 / 6);
+            //     this.isJumpStart = false;
+            // } else if (this.isJumping && this.speedY > 0) {
+            //     super.playAnimation([this.flipBook.jump[2]]);
+            // } else if (this.isFallStart && this.speedY <= 0) {
+            //     super.playAnimation([this.flipBook.jump[3]]);
+            //     setTimeout(() => super.playAnimation([this.flipBook.jump[4]]), 200 / 6);
+            //     this.isJumping = false;
+            //     this.isFallStart = false;
+            // } else if (this.isFalling && this.speedY < 0) {
+            //     super.playAnimation([this.flipBook.jump[5]]);
+            // } else if (this.isFalling && this.speedY == 0) {
+            //     super.playAnimation([this.flipBook.jump[6]]);
+            //     this.isFalling = false;
+            // } else {
+            //     this.img.src = this.flipBook.cover
+            // }
 
 
             // is ready!!!
 
-            // this.playAnimation();
-            // this.playSound();
-            // this.controlSounds();
+            this.playAnimation();
+            this.playSound();
+            this.controlSounds();
         }, 100);
     }
 
 
-    // isClimbing(x, y) {
-    //     return isIncluded(this.xLeft, x, this.xRight) && this.isIncluded(this.yTop, y, this.yTop);
-    // }
+    // jsdoc
+    climb() {
+        this.climbUp('arrowUp', true);
+        this.climbUp('arrowDown', false);
+    }
+
+
+    // jsdoc
+    climbUp(key, value) {
+        if (this.isClimbingLadder(key)) {
+            super.climb(value);
+        }
+    }
+
+
+    jump() {
+        if (isKey('space') && !this.isAboveGround()) {    // isJumping() + replace isJumping to isJump / isFall
+            super.jump();
+        }
+    }
+
+
+    // jsdoc
+    run() {
+        this.runLeft('arrowLeft', true);
+        this.runLeft('arrowRight', false);
+    }
+
+
+    // jsdoc
+    runLeft(key, value) {
+        if (isKey(key)) {
+            this.move(value, key);
+        }
+    }
+
+
+    attack() {
+        if (this.isAttack()) {
+
+        }
+    }
 
 
     // jsdoc
