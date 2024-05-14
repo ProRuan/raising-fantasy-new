@@ -109,10 +109,6 @@ class Knight extends MoveableObject {
             // }
 
 
-            if (this.yBottom > this.groundLevel) {
-                console.log('knight: ', this.yBottom, 'ground level: ', this.groundLevel);
-            }
-
             // if (this.hit()) {
             //     this.energy -= 5;
             //     // console.log(this.energy);
@@ -120,17 +116,7 @@ class Knight extends MoveableObject {
             //         this.world.blade = new Blade(10.75, -0.5);
             //     }, 500);
             // }
-            this.climbing = false;
-            if (this.isKey('keydown', 'arrowUp') && this.world.LADDERS.find(s => this.isIncluding(s.xCenter, s.yTop))) {
-                // console.log('climbing up', this.y);
-                this.climbing = true;
-                this.climb(true);
-            }
-            if (this.isKey('keydown', 'arrowDown') && this.world.LADDERS.find(s => this.isIncluding(s.xCenter, s.yCenter - 1))) {
-                // console.log('climbing down', this.y);
-                this.climbing = true;
-                this.climb(false);
-            }
+
             if (this.isKey('keydown', 'arrowLeft') && this.x > this.world.level.X_LEVEL_START) {
                 this.move(false);
                 this.setOtherDirection(true);
@@ -139,22 +125,7 @@ class Knight extends MoveableObject {
                 this.move(true);
                 this.setOtherDirection(false);
             }
-            if (this.isKey('keydown', 'keyQ')) {
-                this.setOtherDirection(true);
-                // this.world.dino.otherDirection = true;
-                // this.world.ent.otherDirection = true;
-                // this.world.spider.otherDirection = true;
-                this.world.endboss.otherDirection = true;
-                // this.world.endbossMagic.otherDirection = true;
-            }
-            if (this.isKey('keydown', 'keyE')) {
-                this.setOtherDirection(false);
-                // this.world.dino.otherDirection = false;
-                // this.world.ent.otherDirection = false;
-                // this.world.spider.otherDirection = false;
-                this.world.endboss.otherDirection = false;
-                // this.world.endbossMagic.otherDirection = false;
-            }
+
             if (this.bombSkillUnlocked && world.energyBar.points.length == 100 && this.isKey('keydown', 'keyF') && this.world.bomb === undefined) {
                 world.energyBar.points = [];
                 this.world.bomb = new Bomb((world.hero.x - 40) / 64, (540 - world.hero.y + 17) / 64);
@@ -255,109 +226,41 @@ class Knight extends MoveableObject {
                         console.log('blade hit: ', this.hpPoints.length);
                     }
                     this.playSound(this.ARMOR_HIT);
-                } else
+                }
 
-
-                    if (this.isKey('keydown', 'arrowUp', 'arrowDown') && this.climbing) {
-                        this.playAnimation(FLIP_BOOK_HERO.CLIMB);    // still to edit
-                    }
-                    
-                    else if (!keyboard.keydown) {
-                        let currentTime = new Date().getTime();
-                        if (currentTime - this.lastIdle > 6000) {
-                            this.playAnimation(FLIP_BOOK_HERO.IDLE);
-                            if (!this.idleDelaySet) {
-                                this.idleDelaySet = true;
-                                setTimeout(() => {
-                                    this.lastIdle = currentTime;
-                                    this.idleDelaySet = false;
-                                    // console.log('set idle delay');
-                                }, 1100);
-                            }
-                            // console.log(this.img);
-                        } else {
-                            this.loadImage(FLIP_BOOK_HERO.cover);
-                            this.currentFlipBook = this.flipBook.IDLE;
+                else if (!keyboard.keydown) {
+                    let currentTime = new Date().getTime();
+                    if (currentTime - this.lastIdle > 6000) {
+                        this.playAnimation(FLIP_BOOK_HERO.IDLE);
+                        if (!this.idleDelaySet) {
+                            this.idleDelaySet = true;
+                            setTimeout(() => {
+                                this.lastIdle = currentTime;
+                                this.idleDelaySet = false;
+                                // console.log('set idle delay');
+                            }, 1100);
                         }
+                        // console.log(this.img);
+                    } else {
+                        this.loadImage(FLIP_BOOK_HERO.cover);
+                        this.currentFlipBook = this.flipBook.IDLE;
                     }
+                }
         }, 100);
     }
 
 
     isOnTile() {
-        if (this.isOnGrassFlying()) {
-            if (this.isOnObjectStart('GRASS_FLYING')) {
-                this.groundLevel = this.isOnObjectStart('GRASS_FLYING').yTop;
-            } else if (this.isOnObjectCenter('GRASS_FLYING')) {
-                this.groundLevel = this.isOnObjectCenter('GRASS_FLYING').yTop;
-            } else if (this.isOnObjectEnd('GRASS_FLYING')) {
-                this.groundLevel = this.isOnObjectEnd('GRASS_FLYING').yTop;
-            }
-            this.grounded = true;
-        } else if (this.isOnObjectStart('GRASS') || this.isOnObjectCenter('GRASS') || this.isOnObjectEnd('GRASS')) {
-            if (this.isOnObjectStart('GRASS')) {
-                this.groundLevel = this.isOnObjectStart('GRASS').yTop;
-            } else if (this.isOnObjectCenter('GRASS')) {
-                this.groundLevel = this.isOnObjectCenter('GRASS').yTop;
-            } else if (this.isOnObjectEnd('GRASS')) {
-                this.groundLevel = this.isOnObjectEnd('GRASS').yTop;
-            }
-            this.grounded = true;
-        } else {
-            this.grounded = false;
-            this.groundLevel = 650;
-            if (this.otherDirection && !this.world.level.previousLevelEndOtherDirection && this.yBottom > 484) {
-                this.world.level.X_LEVEL_START = this.xLeft - 52;
-                this.world.level.previousLevelEndOtherDirection = true;
-            } else if (!this.world.level.previousLevelEnd && this.yBottom > 484) {
-                this.world.level.X_LEVEL_END = this.xLeft + 20;
-                this.world.level.previousLevelEnd = true;
-            }
+
+        // missing code ...
+        this.groundLevel = 650;
+        if (this.otherDirection && !this.world.level.previousLevelEndOtherDirection && this.yBottom > 484) {
+            this.world.level.X_LEVEL_START = this.xLeft - 52;
+            this.world.level.previousLevelEndOtherDirection = true;
+        } else if (!this.world.level.previousLevelEnd && this.yBottom > 484) {
+            this.world.level.X_LEVEL_END = this.xLeft + 20;
+            this.world.level.previousLevelEnd = true;
         }
-    }
-
-
-    isOnGrassFlying() {
-        let tempGrass = [];
-        world.GRASS_FLYING.forEach((grass) => {
-            if (grass.y + 16 > this.yBottom && (
-                this.xCenter < grass.xLeft && grass.xLeft < this.xRight ||
-                grass.xLeft < this.xCenter && this.xCenter < grass.xRight ||
-                this.xLeft < grass.xRight && grass.xRight < this.xCenter)) {
-                tempGrass.push(grass);
-            }
-        });
-        return (tempGrass.length > 0) ? true : false;
-    }
-
-
-    isOnObjectStart(key) {
-        return this.world[key].find(o => this.xCenter < o.xLeft && o.xLeft < this.xRight);
-    }
-
-
-    isOnObjectCenter(key) {
-        return this.world[key].find(o => o.xLeft < this.xCenter && this.xCenter < o.xRight);
-    }
-
-
-    isOnObjectEnd(key) {
-        return this.world[key].find(o => this.xLeft < o.xRight && o.xRight < this.xCenter);
-    }
-
-
-    isIncluding(x, y) {
-        return this.isHorizontalCenter(x) && this.isVerticalCenter(y);
-    }
-
-
-    isHorizontalCenter(x) {
-        return this.xLeft < x && x < this.xRight;
-    }
-
-
-    isVerticalCenter(y) {
-        return this.yTop < y && y < this.yBottom;
     }
 
 
