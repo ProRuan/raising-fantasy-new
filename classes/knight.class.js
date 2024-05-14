@@ -141,25 +141,42 @@ class Knight extends Character {
     }
 
 
-    playAnimationJump() {    // to clean!!!
-        if (this.jumpCounter == 0 && this.speedY > 0) {
-            super.playAnimation([this.flipBook.jump[0]]);
-            setTimeout(() => super.playAnimation([this.flipBook.jump[1]]), 200 / 6);
-            this.jumpCounter++;
-        } else if (this.jumpCounter == 1 && this.speedY > 0) {
-            super.playAnimation([this.flipBook.jump[2]]);
-        } else if (this.jumpCounter == 1 && this.speedY <= 0) {
-            super.playAnimation([this.flipBook.jump[3]]);
-            setTimeout(() => super.playAnimation([this.flipBook.jump[4]]), 200 / 6);
-            this.jumpCounter++;
-        } else if (this.jumpCounter == 2 && this.speedY < 0) {
-            super.playAnimation([this.flipBook.jump[5]]);
-        } else if (this.jumpCounter == 2 && this.speedY == 0) {
-            super.playAnimation([this.flipBook.jump[6]]);
-            this.jumpCounter = -1;
-        } else {
-            this.img.src = this.flipBook.cover
+    playJumpAnimation() {
+        if (this.isJumpPhase(0)) {
+            this.playJumpPlus(0);
+        } else if (this.isJumpPhase(1) && isLarger(0, this.speedY)) {
+            this.playJump(2);
+        } else if (this.isJumpPhase(1)) {
+            this.playJumpPlus(3);
+        } else if (this.isJumpPhase(2) && isLarger(this.speedY, 0)) {
+            this.playJump(5);
+        } else if (this.isJumpPhase(2)) {
+            this.playJump(6);
+            this.jumpCounter = -1;    // to edit!!!
         }
+    }
+
+
+    isJumpPhase(i) {
+        return this.jumpCounter == i;    // + isLarger(a, b)
+    }
+
+
+    playJumpPlus(i) {
+        this.playJump(i);
+        setTimeout(() => this.playJump(++i), 200 / 6);
+        this.increaseJumpCounter();
+    }
+
+
+    // jsdoc
+    playJump(i) {
+        super.playAnimation([this.flipBook.jump[i]]);
+    }
+
+
+    increaseJumpCounter() {    // double code!!! (use key)
+        this.jumpCounter++;
     }
 
 
@@ -237,7 +254,7 @@ class Knight extends Character {
         if (!this.isJump()) {
             super.playAnimation(this.flipBook[this.chapter]);
         } else {
-            this.playAnimationJump();
+            this.playJumpAnimation();
         }
     }
 
