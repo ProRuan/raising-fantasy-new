@@ -1,4 +1,4 @@
-class Knight extends MoveableObject {
+class Knight extends Character {
     coins = 0;
     leaves = 0;
 
@@ -146,14 +146,15 @@ class Knight extends MoveableObject {
 
     // jsdoc
     climbUp(key, value) {
-        if (this.isClimbingLadder(key)) {
+        if (this.isClimbLadder(key)) {
             super.climb(value);
         }
     }
 
 
+    // jsdoc
     jump() {
-        if (isKey('space') && !this.isAboveGround()) {    // isJumping() + replace isJumping to isJump / isFall
+        if (this.isJump()) {
             super.jump();
         }
     }
@@ -180,41 +181,6 @@ class Knight extends MoveableObject {
         }
     }
 
-
-    // jsdoc
-    isRunAttack() {
-        return this.isRun() && this.isAttack();
-    }
-
-
-    // jsdoc
-    isRun() {
-        return isKey('arrowLeft', 'doubleClick') || isKey('arrowRight', 'doubleClick');
-    }
-
-
-    // jsdoc
-    isWalkAttack() {
-        return this.isWalk() && this.isAttack();
-    }
-
-
-    // jsdoc
-    isWalk() {
-        return isKey('arrowLeft') || isKey('arrowRight');
-    }
-
-
-    // jsdoc
-    isAttack() {
-        return isKey('keyA');
-    }
-
-
-    // jsdoc
-    isCover() {
-        return true;
-    }
 
 
     // jsdoc

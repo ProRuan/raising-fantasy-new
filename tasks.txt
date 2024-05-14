@@ -36,7 +36,7 @@ Tasks
   - favicon ...
 
 
-Clean Coding (29/58)
+Clean Coding (30/58)
 ------------
   - class AnimatedObjects ...
       - class ... (5x)
@@ -61,7 +61,7 @@ Clean Coding (29/58)
   - class AvatarInfo - simpleCheck
   - class Background - simpleCheck
   - class Button ...
-  - class Character ...
+  - class Character - simpleCheck
   - class Cloud - simpleCheck
   - class CoordinateSystem ... ???
   - class Counter - simpleCheck

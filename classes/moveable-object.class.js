@@ -113,12 +113,12 @@ class MoveableObject extends DrawableObject {
 
     // jsdoc
     isClimb() {
-        return this.isClimbingLadder('arrowUp') || this.isClimbingLadder('arrowDown');
+        return this.isClimbLadder('arrowUp') || this.isClimbLadder('arrowDown');
     }
 
 
     // jsdoc
-    isClimbingLadder(key) {
+    isClimbLadder(key) {
         return isKey(key) && this.isAtLadder(key);
     }
 
