@@ -317,3 +317,9 @@ function isUndefined(value) {
 function isTrue(value) {
     return (value == true) ? true : false;
 }
+
+
+// jsdoc
+function isOnTime(current, last, value) {
+    return isLarger(value, current - last);
+}

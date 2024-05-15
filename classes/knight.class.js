@@ -5,6 +5,8 @@ class Knight extends Character {
     chapter = 'cover';
     chapters = ['climb', 'jump', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'cover'];
 
+    lastIdle = 6000 + getTime();
+
     footStep = source.footStep;
     swordDraw = source.swordDraw;
     // edit sound structure and methods!!!
@@ -89,6 +91,7 @@ class Knight extends Character {
             this.attack();    // still to write!!!
 
             this.setChapter();
+            this.resetCurrentImage();
             // this.setSound();    // maybe?
 
             this.updateGroundLevel();
@@ -114,6 +117,32 @@ class Knight extends Character {
             this.playSound();
             this.controlSounds();
         }, 100);
+    }
+
+
+
+    resetCurrentImage() {
+        if (this.lastChapter != this.chapter) {
+            this.currentImage = 0;
+        }
+    }
+
+
+    isSimilarChapter(key) {
+        return this.lastChapter.includes(key) == this.lastChapter.includes(key);
+    }
+
+
+
+    isIdle() {
+        return isOnTime(this.world.time, this.lastIdle, 6000);
+    }
+
+
+    idle() {
+        if (this.chapter == 'idle' && this.img.src.includes('idle12')) {
+            this.lastIdle = world.time + 6000;
+        }
     }
 
 
@@ -168,9 +197,8 @@ class Knight extends Character {
     }
 
 
-
-    // jsdoc
     setChapter() {
+        this.lastChapter = this.chapter;
         this.chapter = this.getChapter();
     }
 
