@@ -305,3 +305,15 @@ function formatSplitWord(text) {
         return text;
     }
 }
+
+
+// jsdoc
+function isUndefined(value) {
+    return value === undefined;
+}
+
+
+// jsdoc
+function isTrue(value) {
+    return (value == true) ? true : false;
+}
