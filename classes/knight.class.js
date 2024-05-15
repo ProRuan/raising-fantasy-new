@@ -107,7 +107,7 @@ class Knight extends Character {
 
 
         setInterval(() => {
-            console.log(this.chapter, this.currentImage, this.isSimilarChapter('run'), this.isSimilarChapter('walk'));
+            console.log(this.chapter, this.currentImage);
 
             // is ready!!!
             // -----------
@@ -120,14 +120,21 @@ class Knight extends Character {
 
 
     resetCurrentImage() {
-        if (this.lastChapter != this.chapter && !this.isSimilarChapter('run') && !this.isSimilarChapter('walk')) {
+        if (!this.isSimilarChapter()) {
             this.currentImage = 0;
         }
     }
 
 
-    isSimilarChapter(key) {
+    isSimilarChapter() {
+        let key = this.getSimilarChapter();
         return this.chapter.includes(key) && this.lastChapter.includes(key) == this.chapter.includes(key);
+    }
+
+
+    // jsdoc
+    getSimilarChapter() {
+        return this.chapter.replace(/[A-Z][a-z]+/, '');
     }
 
 
