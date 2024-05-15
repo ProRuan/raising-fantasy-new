@@ -119,16 +119,20 @@ class Knight extends Character {
 
 
 
+    // jsdoc
     resetCurrentImage() {
         if (!this.isSimilarChapter()) {
-            this.currentImage = 0;
+            this.setObjectValue('currentImage', 0);
         }
     }
 
 
+    // jsdoc
     isSimilarChapter() {
         let key = this.getSimilarChapter();
-        return this.chapter.includes(key) && this.lastChapter.includes(key) == this.chapter.includes(key);
+        let last = this.lastChapter.includes(key);
+        let current = this.chapter.includes(key);
+        return isMatch(last, current);
     }
 
 
