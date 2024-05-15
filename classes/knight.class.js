@@ -102,14 +102,12 @@ class Knight extends Character {
             this.collect('hitPoints');
             this.collect('leaves');
 
-            console.log(this.chapter, this.img.src);
-
             // this.world.camera_x = -this.x + 4 * 64 + 28;    // + 4 * 64 + 28
         }, 1000 / 60);
 
 
         setInterval(() => {
-
+            console.log(this.chapter, this.currentImage, this.isSimilarChapter('run'), this.isSimilarChapter('walk'));
 
             // is ready!!!
             // -----------
@@ -122,14 +120,14 @@ class Knight extends Character {
 
 
     resetCurrentImage() {
-        if (this.lastChapter != this.chapter) {
+        if (this.lastChapter != this.chapter && !this.isSimilarChapter('run') && !this.isSimilarChapter('walk')) {
             this.currentImage = 0;
         }
     }
 
 
     isSimilarChapter(key) {
-        return this.lastChapter.includes(key) == this.lastChapter.includes(key);
+        return this.chapter.includes(key) && this.lastChapter.includes(key) == this.chapter.includes(key);
     }
 
 
