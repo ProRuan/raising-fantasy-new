@@ -5,8 +5,8 @@ class Knight extends Character {
     chapter = 'cover';
     chapters = ['climb', 'jump', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'idle', 'cover'];
 
-    idleConstant = 1200;
-    lastIdle = this.idleConstant + getTime();
+    idleDelay = 3000;
+    lastIdle = this.idleDelay + getTime();
 
     footStep = source.footStep;
     swordDraw = source.swordDraw;
@@ -144,17 +144,29 @@ class Knight extends Character {
     }
 
 
-
-    isIdle() {
-        return isOnTime(this.world.time, this.lastIdle, this.idleConstant);
+    // jsdoc
+    idle() {
+        if (this.isIdleToUpdate()) {
+            this.setObjectValue('lastIdle', world.time + this.idleDelay);
+        }
     }
 
 
-    idle() {
-        if (this.chapter != 'idle' && this.chapter != 'cover' || this.chapter == 'idle' && this.img.src.includes('idle12')) {
-            this.lastIdle = world.time + this.idleConstant;
-            console.log('updated idle delay');
-        }
+    // jsdoc
+    isIdleToUpdate() {
+        return this.isNotIdle() || this.isIdleEnd();
+    }
+
+
+    // jsdoc
+    isNotIdle() {
+        return !isMatch(this.chapter, 'idle') && !isMatch(this.chapter, 'cover');
+    }
+
+
+    // jsdoc
+    isIdleEnd() {
+        return isMatch(this.chapter, 'idle') && this.img.src.includes('idle12');
     }
 
 

@@ -1,15 +1,7 @@
 class Knight extends MoveableObject {
     energy = 120;
-
-    currentFlipBook = this.flipBook.IDLE;
-    lastIdle = new Date().getTime();
-
-
-    groundLevel = 484;
-
     dying = false;
     dead = false;
-    climbing = false;
 
 
     AMBIENCE_SOUND = new Audio('./audio/ambience/nature_forest_daytime.wav');
@@ -226,25 +218,6 @@ class Knight extends MoveableObject {
                         console.log('blade hit: ', this.hpPoints.length);
                     }
                     this.playSound(this.ARMOR_HIT);
-                }
-
-                else if (!keyboard.keydown) {
-                    let currentTime = new Date().getTime();
-                    if (currentTime - this.lastIdle > 6000) {
-                        this.playAnimation(FLIP_BOOK_HERO.IDLE);
-                        if (!this.idleDelaySet) {
-                            this.idleDelaySet = true;
-                            setTimeout(() => {
-                                this.lastIdle = currentTime;
-                                this.idleDelaySet = false;
-                                // console.log('set idle delay');
-                            }, 1100);
-                        }
-                        // console.log(this.img);
-                    } else {
-                        this.loadImage(FLIP_BOOK_HERO.cover);
-                        this.currentFlipBook = this.flipBook.IDLE;
-                    }
                 }
         }, 100);
     }

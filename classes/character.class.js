@@ -105,6 +105,12 @@ class Character extends MoveableObject {
 
 
     // jsdoc
+    isIdle() {
+        return isOnTime(this.world.time, this.lastIdle, this.idleDelay);
+    }
+
+
+    // jsdoc
     isCover() {
         return true;
     }

@@ -321,5 +321,5 @@ function isTrue(value) {
 
 // jsdoc
 function isOnTime(current, last, value) {
-    return isLarger(value, current - last);
+    return current - last > value;
 }
