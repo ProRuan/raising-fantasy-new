@@ -150,6 +150,21 @@ class MoveableObject extends DrawableObject {
     }
 
 
+    isBattle(enemy) {
+        enemy = (enemy) ? this.verifyEnemy(this.weapon, enemy) : world.enemies.find(enemy => this.verifyEnemy(this.weapon, enemy));
+        return (enemy) ? true : false;
+    }
+
+
+    verifyEnemy(a, b) {
+        let xLeft = isIncluded(a.xLeft, b.xLeft, a.xRight) || isIncluded(b.xLeft, a.xLeft, b.xRight);
+        let xRight = isIncluded(a.xLeft, b.xRight, a.xRight) || isIncluded(b.xLeft, a.xRight, b.xRight);
+        let yTop = isIncluded(a.yTop, b.yTop, a.yBottom) || isIncluded(b.yTop, a.yTop, b.yBottom);
+        let yBottom = isIncluded(a.yTop, b.yBottom, a.yBottom) || isIncluded(b.yTop, a.yBottom, b.yBottom);
+        return (xLeft || xRight) && (yTop || yBottom);
+    }
+
+
 
 
     // in use?

@@ -66,7 +66,7 @@ class Dino extends MoveableObject {
     }
 
 
-    get bite() {
+    get weapon() {
         return {
             'xLeft': this.x + 96,
             'xRight': this.x + 124,
@@ -112,13 +112,13 @@ class Dino extends MoveableObject {
         setInterval(() => {
             if (world.hero.isAttack() && world.hero.isBattle()) {
                 if (world.time - this.lastHit > world.hero.flipBook.attack.length * 100 / 2 && world.hero.img.src.includes('/attack2')) {
-                    this.energy -= 20;
+                    // this.energy -= 20;
                     this.lastHit = world.time + world.hero.flipBook.attack.length * 100 / 2;
-                    console.log(this.energy);
+                    // console.log(this.energy);
                 }
             }
 
-            if (this.bite.xLeft < world.hero.xRight && world.hero.xRight < this.bite.xRight) {
+            if (this.isBattle(world.hero)) {
                 console.log('bite');
             }
         }, 1000 / 60);
@@ -131,6 +131,8 @@ class Dino extends MoveableObject {
                 this.playAnimation(this.flipBook.death);
             } else if (world.hero.isAttack() && world.hero.isBattle()) {
                 this.playAnimation(this.flipBook.hurt);
+            } else if (this.isBattle(world.hero)) {
+                this.playAnimation(this.flipBook.attack);
             } else {
                 this.playAnimation(this.flipBook.idle);
             }
