@@ -4,6 +4,9 @@ class Dino extends DrawableObject {
 
     constructor(x, y) {
         super(source.dino, x, y);
+        this.setFlipBook(FLIP_BOOK_DINO);
+        // this.setCover();    // Give it to flip book source!!!
+        // this.loadImages();
     }
 
 

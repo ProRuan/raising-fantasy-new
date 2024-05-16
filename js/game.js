@@ -266,9 +266,9 @@ function isCollided(a, b, attack) {
 
 
 // jsdoc
-function isCollidedX(a, b, attack) {
+function isCollidedX(a, b, attack) {    // exchange rectangels (litte, big)
     if (a.otherDirection) {
-        return isIncluded(a.xLeftAttack, b.xLeft + b.radDispl, a.xRightAttack) || isIncluded(a.xLeftAttack, b.xRight + b.radDispl, a.xRightAttack);
+        return isIncluded(a.xLeftAttack, b.xLeft + a.radDispl, a.xRightAttack) || isIncluded(a.xLeftAttack, b.xRight + a.radDispl, a.xRightAttack);
     } else if (attack) {
         return isIncluded(a.xLeftAttack, b.xLeft, a.xRightAttack) || isIncluded(a.xLeftAttack, b.xRight, a.xRightAttack);
     } else {
