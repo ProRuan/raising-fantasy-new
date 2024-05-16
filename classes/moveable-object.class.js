@@ -17,6 +17,11 @@ class MoveableObject extends DrawableObject {
     }
 
 
+    setCover(source) {
+        this.flipBook.cover = [source.path];
+    }
+
+
     // jsdoc
     move(logical, key) {
         this.setOtherDirection(logical);

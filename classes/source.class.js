@@ -124,10 +124,17 @@ class Source {
 
 
     // jsdoc
+    addSourceFlipBook(key, flipBook) {
+        this[key].flipBook = flipBook;
+    }
+
+
+    // jsdoc
     setEnemies() {
         this.setSource('dino', './img/enemies/dino/dino.png', 128);
         this.setSource('ent', './img/enemies/ent/ent.png', 256);
         this.setSource('spider', './img/enemies/spider/spider.png', 128);
+        this.addSourceFlipBook('dino', FLIP_BOOK_DINO);
     }
 
 
@@ -204,6 +211,7 @@ class Source {
     // jsdoc
     setHero() {
         this.setSource('knight', './img/characters/knight/knight.png', 128, 128);
+        this.addSourceFlipBook('knight', FLIP_BOOK_KNIGHT);
     }
 
 

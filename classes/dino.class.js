@@ -1,11 +1,11 @@
-class Dino extends DrawableObject {
+class Dino extends MoveableObject {
     otherDirection = true;
 
 
     constructor(x, y) {
         super(source.dino, x, y);
-        this.setFlipBook(FLIP_BOOK_DINO);
-        // this.setCover();    // Give it to flip book source!!!
+        this.setFlipBook(source.dino);
+        this.setCover(source.dino);
         // this.loadImages();
     }
 

@@ -18,8 +18,8 @@ class Knight extends Character {
 
     constructor(x, y) {
         super(source.knight, x, y);
-        this.setFlipBook(FLIP_BOOK_KNIGHT);
-        this.setCover();    // Give it to flip book source!!!
+        this.setFlipBook(source.knight);
+        this.setCover(source.knight);
         this.loadImages();
         this.setSpeed(128, 256);
         this.animate();
@@ -102,11 +102,6 @@ class Knight extends Character {
 
     get yBottomAttack() {
         return this.yTopAttack + 48;
-    }
-
-
-    setCover() {
-        this.flipBook['cover'] = [this.img.src];
     }
 
 

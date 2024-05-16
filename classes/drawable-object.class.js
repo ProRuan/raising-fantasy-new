@@ -132,7 +132,7 @@ class DrawableObject {
 
 
     setFlipBook(source) {
-        this.flipBook = new FlipBook(source);
+        this.flipBook = new FlipBook(source.flipBook);
     }
 
 
