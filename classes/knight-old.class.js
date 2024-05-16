@@ -237,15 +237,6 @@ class Knight extends MoveableObject {
     }
 
 
-    hit() {
-        if (this.isIncluding(this.world.blade.xCenter, this.world.blade.yCenter)) {
-            // console.log('blade hit');
-            // this.playAnimation(FLIP_BOOK_HERO.HURT);
-            return true;
-        };
-    }
-
-
     isIncludingMagic() {
         let magic = world.endbossMagic;
         let touchXLeft = this.xLeft <= magic.xLeft && magic.xLeft <= this.xRight;

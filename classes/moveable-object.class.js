@@ -8,6 +8,8 @@ class MoveableObject extends DrawableObject {
     groundLevel = 484;
     abyssLevel = 668;
     climbing = false;
+    lastHit = 0;
+    hitDelay = 500;
 
     sounds = [];
 

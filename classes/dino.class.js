@@ -1,7 +1,6 @@
 class Dino extends MoveableObject {
     otherDirection = true;
     energy = 100;
-    lastHit = 0;
 
 
     constructor(x, y) {
@@ -119,12 +118,13 @@ class Dino extends MoveableObject {
             }
 
 
-            if (world.hero.isAttack() && world.hero.isBattle()) {
-                if (world.time - this.lastHit > world.hero.flipBook.attack.length * 100 / 2 && world.hero.img.src.includes('/attack2')) {
-                    // this.energy -= 20;
-                    this.lastHit = world.time + world.hero.flipBook.attack.length * 100 / 2;
-                    // console.log(this.energy);
-                }
+            if (this.energy <= 0 && this.img.src.includes('death6') && !this.dead) {
+                this.dead = true;
+            }
+
+
+            if (this.isHurt()) {
+                this.hurt();
             }
 
             if (this.isBattle(world.hero)) {
@@ -146,5 +146,16 @@ class Dino extends MoveableObject {
                 this.playAnimation(this.flipBook.idle);
             }
         }, 100);
+    }
+
+
+    isHurt() {
+        return world.hero.isAttack() && world.hero.isBattle() && isOnTime(world.time, this.lastHit, this.hitDelay);
+    }
+
+
+    hurt() {
+        this.energy -= 20;
+        this.lastHit = world.time + this.hitDelay;
     }
 }

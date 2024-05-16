@@ -102,6 +102,8 @@ class LevelWorld extends World {
 
         this.drawObject(this.hero);
 
+        this.removeDeadEnemies();
+
         // this.translateCamera(-284, 0);
         this.redraw();
     }
@@ -132,5 +134,17 @@ class LevelWorld extends World {
         this.drawObject(this[key].bg);
         this.drawObjectGroup(this[key].points);
         this.drawObject(this[key].border);
+    }
+
+
+    removeDeadEnemies() {
+        let enemy = this.enemies.find(e => e.dead && !e.removable);
+        if (enemy) {
+            enemy.removable = true;
+            setTimeout(() => {
+                let id = world.enemies.indexOf(enemy);
+                world.enemies.splice(id, 1);
+            }, 2000);
+        }
     }
 }
