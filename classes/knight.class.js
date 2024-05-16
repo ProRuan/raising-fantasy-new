@@ -264,7 +264,9 @@ class Knight extends Character {
 
     attack() {
         if (this.isAttack()) {
-
+            if (isCollided(this, world.dino, true)) {
+                console.log('attack dino');
+            }
         }
     }
 
