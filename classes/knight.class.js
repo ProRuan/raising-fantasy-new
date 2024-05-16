@@ -239,7 +239,7 @@ class Knight extends Character {
 
     attack() {
         if (this.isAttack() && this.isBattle()) {
-            console.log('battle');
+            // console.log('battle');
         }
     }
 
