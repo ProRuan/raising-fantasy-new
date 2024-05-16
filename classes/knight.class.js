@@ -27,6 +27,24 @@ class Knight extends Character {
     }
 
 
+    get offsetX() {
+        return {
+            'left': this.x + 28,
+            'center': this.x + 44,
+            'right': this.x + 60
+        }
+    }
+
+
+    get offsetY() {
+        return {
+            'top': this.y + 62,
+            'center': this.y + 86,
+            'bottom': this.y + 110
+        }
+    }
+
+
     get xLeft() {
         return this.x + 28;
     }
@@ -54,6 +72,36 @@ class Knight extends Character {
 
     get yBottom() {
         return this.y + 110;
+    }
+
+
+    get attackRange() {
+        return {
+            'left': this.x + 68,
+            'right': this.x + 104,
+            'top': this.y + 56,
+            'bottom': this.y + 104
+        }
+    }
+
+
+    get xLeftAttack() {
+        return this.x + 68;
+    }
+
+
+    get xRightAttack() {
+        return this.xLeftAttack + 36;
+    }
+
+
+    get yTopAttack() {
+        return this.y + 56;
+    }
+
+
+    get yBottomAttack() {
+        return this.yTopAttack + 48;
     }
 
 
@@ -109,7 +157,7 @@ class Knight extends Character {
 
 
         setInterval(() => {
-            console.log(this.chapter, this.currentImage);
+            // console.log(this.chapter, this.currentImage);
 
             // is ready!!!
             // -----------

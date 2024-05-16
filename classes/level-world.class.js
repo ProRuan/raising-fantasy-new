@@ -18,6 +18,7 @@ class LevelWorld extends World {
 
 
         // only for testing!!!
+        this.dino = new Dino(256, 15);
         this.hero = new Knight(64, 38);
 
 
@@ -95,6 +96,9 @@ class LevelWorld extends World {
         // ready!!!
         this.drawLevel();
         this.drawAvatarInfo();
+
+        this.drawObject(this.dino);
+
         this.drawObject(this.hero);
 
         // this.translateCamera(-284, 0);

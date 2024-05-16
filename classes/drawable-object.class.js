@@ -151,6 +151,18 @@ class DrawableObject {
             ctx.strokeStyle = 'blue';
             ctx.rect(this.xCenter, this.yTop, 0, this.yBottom - this.yTop);
             ctx.rect(this.xLeft, this.yTop, this.xRight - this.xLeft, this.yBottom - this.yTop);
+            ctx.rect(this.xLeftAttack, this.yTopAttack, this.xRightAttack - this.xLeftAttack, this.yBottomAttack - this.yTopAttack);
+            ctx.stroke();
+        }
+
+
+        if (this instanceof Dino) {
+            ctx.beginPath();
+            ctx.lineWidth = '1';
+            ctx.strokeStyle = 'red';
+            ctx.rect(this.xCenter, this.yTop, 0, this.yBottom - this.yTop);
+            ctx.rect(this.xLeft, this.yTop, this.xRight - this.xLeft, this.yBottom - this.yTop);
+            ctx.rect(this.xLeftAttack, this.yTopAttack, this.xRightAttack - this.xLeftAttack, this.yBottomAttack - this.yTopAttack);
             ctx.stroke();
         }
     }
