@@ -260,30 +260,20 @@ function getObjectXY(o) {
 
 
 // jsdoc
-function isCollided(a, b, attack) {
-    return isCollidedX(a, b, attack) && isCollidedY(a, b, attack);
+function isCollided(a, b) {
+    return isCollidedX(a, b) && isCollidedY(a, b);
 }
 
 
 // jsdoc
-function isCollidedX(a, b, attack) {    // exchange rectangels (litte, big)
-    if (a.otherDirection) {
-        return isIncluded(a.xLeftAttack, b.xLeft + a.radDispl, a.xRightAttack) || isIncluded(a.xLeftAttack, b.xRight + a.radDispl, a.xRightAttack);
-    } else if (attack) {
-        return isIncluded(a.xLeftAttack, b.xLeft, a.xRightAttack) || isIncluded(a.xLeftAttack, b.xRight, a.xRightAttack);
-    } else {
-        return isIncluded(a.xLeft, b.xLeft, a.xRight) || isIncluded(a.xLeft, b.xRight, a.xRight);
-    }
+function isCollidedX(a, b) {
+    return isIncluded(a.xLeft, b.xLeft, a.xRight) || isIncluded(a.xLeft, b.xRight, a.xRight);
 }
 
 
 // jsdoc
-function isCollidedY(a, b, attack) {
-    if (!attack) {
-        return isIncluded(a.yTop, b.yTop, a.yBottom) || isIncluded(a.yTop, b.yBottom, a.yBottom);
-    } else {
-        return isIncluded(a.yTopAttack, b.yTop, a.yBottomAttack) || isIncluded(a.yTopAttack, b.yBottom, a.yBottomAttack);
-    }
+function isCollidedY(a, b) {
+    return isIncluded(a.yTop, b.yTop, a.yBottom) || isIncluded(a.yTop, b.yBottom, a.yBottom);
 }
 
 

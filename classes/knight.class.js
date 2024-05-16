@@ -75,12 +75,12 @@ class Knight extends Character {
     }
 
 
-    get attackRange() {
+    get sword() {
         return {
-            'left': this.x + 68,
-            'right': this.x + 104,
-            'top': this.y + 56,
-            'bottom': this.y + 104
+            'xLeft': (this.otherDirection) ? this.x + 68 - this.radDispl : this.x + 68,
+            'xRight': (this.otherDirection) ? this.x + 104 - this.radDispl : this.x + 104,
+            'yTop': this.y + 56,
+            'yBottom': this.y + 104
         }
     }
 
@@ -259,7 +259,7 @@ class Knight extends Character {
 
     attack() {
         if (this.isAttack()) {
-            if (isCollided(this, world.dino, true)) {
+            if (isCollided(this.sword, world.dino)) {
                 console.log('attack dino');
             }
         }
