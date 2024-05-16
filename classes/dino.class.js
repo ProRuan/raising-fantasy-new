@@ -6,6 +6,11 @@ class Dino extends MoveableObject {
         super(source.dino, x, y);
         this.setFlipBook(source.dino);
         this.setCover(source.dino);
+
+        this.setCurrentImage(0);
+        this.setImageCache();
+        // this.setImages();
+
         // this.loadImages();
     }
 
@@ -59,7 +64,7 @@ class Dino extends MoveableObject {
 
 
     get radDispl() {
-        return this.width - (this.xCenter - this.x) + 28;
+        return this.width - (this.xCenter - this.x) + 28;    // hero xLeft???
     }
 
 

@@ -85,26 +85,6 @@ class Knight extends Character {
     }
 
 
-    get xLeftAttack() {
-        return this.x + 68;
-    }
-
-
-    get xRightAttack() {
-        return this.xLeftAttack + 36;
-    }
-
-
-    get yTopAttack() {
-        return this.y + 56;
-    }
-
-
-    get yBottomAttack() {
-        return this.yTopAttack + 48;
-    }
-
-
     setImages() {
         for (const [key] of Object.entries(this.flipBook)) {
             let chapter = this.flipBook[key];
@@ -258,11 +238,40 @@ class Knight extends Character {
 
 
     attack() {
-        if (this.isAttack()) {
-            if (isCollided(this.sword, world.dino)) {
-                console.log('attack dino');
-            }
+        if (this.isAttack() && this.isBattle()) {
+            console.log('battle');
         }
+    }
+
+
+    // jsdoc
+    isBattle() {
+        return this.isBattleX() && this.isBattleY();
+    }
+
+
+    // jsdoc
+    isBattleX() {
+        return this.isIncludedDouble('xLeft', 'xLeft', 'xRight') || this.isIncludedDouble('xLeft', 'xRight', 'xRight');
+    }
+
+
+    // jsdoc
+    isBattleY() {
+        return this.isIncludedDouble('yTop', 'yTop', 'yBottom') || this.isIncludedDouble('yTop', 'yBottom', 'yBottom');
+    }
+
+
+    isIncludedDouble(keyA, keyB, keyC) {
+        let enemy = this.world.enemies.find(e => this.isInvolved(e, keyA, keyB, keyC));
+        return (enemy) ? true : false;
+        // let enemy = this.world.dino;    // variable!!! (find enemy!)
+        // return isIncluded(this.sword[keyA], enemy[keyB], this.sword[keyC]) || isIncluded(enemy[keyA], this.sword[keyB], enemy[keyC]);
+    }
+
+
+    isInvolved(enemy, keyA, keyB, keyC) {
+        return isIncluded(this.sword[keyA], enemy[keyB], this.sword[keyC]) || isIncluded(enemy[keyA], this.sword[keyB], enemy[keyC]);
     }
 
 
