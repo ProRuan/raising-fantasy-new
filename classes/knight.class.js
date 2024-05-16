@@ -75,6 +75,11 @@ class Knight extends Character {
     }
 
 
+    get radDispl() {
+        return this.width / 2 + 20;
+    }
+
+
     get weapon() {
         return {
             'xLeft': (this.otherDirection) ? this.x + 68 - this.radDispl : this.x + 68,

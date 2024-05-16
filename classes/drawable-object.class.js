@@ -40,11 +40,6 @@ class DrawableObject {
     }
 
 
-    get radDispl() {
-        return this.width - (this.xCenter - this.x);
-    }
-
-
     setUp(source, x, y) {
         this.setImage(source);
         this.setPosition(x, y);

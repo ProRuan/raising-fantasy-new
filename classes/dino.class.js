@@ -62,14 +62,14 @@ class Dino extends MoveableObject {
 
 
     get radDispl() {
-        return this.width - (this.xCenter - this.x) + 28;    // hero xLeft???
+        return this.width / 2 + 40;
     }
 
 
     get weapon() {
         return {
-            'xLeft': this.x + 96,
-            'xRight': this.x + 124,
+            'xLeft': (this.otherDirection) ? this.x + 96 - this.radDispl - 12 : this.x + 96 + 6,
+            'xRight': (this.otherDirection) ? this.x + 124 - this.radDispl - 12 : this.x + 124 + 6,
             'yTop': this.y + 52,
             'yBottom': this.y + 80
         }
@@ -110,6 +110,15 @@ class Dino extends MoveableObject {
 
     animate() {
         setInterval(() => {
+            // only for testing!!!
+            if (world.keyboard.keyQ.keydown) {
+                this.otherDirection = true;
+            }
+            if (world.keyboard.keyE.keydown) {
+                this.otherDirection = false;
+            }
+
+
             if (world.hero.isAttack() && world.hero.isBattle()) {
                 if (world.time - this.lastHit > world.hero.flipBook.attack.length * 100 / 2 && world.hero.img.src.includes('/attack2')) {
                     // this.energy -= 20;
@@ -119,7 +128,7 @@ class Dino extends MoveableObject {
             }
 
             if (this.isBattle(world.hero)) {
-                console.log('bite');
+                console.log('bite: ', this.weapon.xLeft - this.xLeft, this.xCenter, this.weapon.xRight - this.xRight);
             }
         }, 1000 / 60);
 
