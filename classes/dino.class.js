@@ -1,6 +1,7 @@
 class Dino extends MoveableObject {
     otherDirection = true;
     energy = 100;
+    pursuitStop = 0;
 
 
     constructor(x, y) {
@@ -171,21 +172,26 @@ class Dino extends MoveableObject {
     isPursuing() {
         if (this.isTracking(this.xCenter, world.hero.xCenter)) {
             this.setObjectValue('otherDirection', true);
+            this.pursuitStop = world.time;
             return true;
         } else if (this.isTracking(world.hero.xCenter, this.xCenter)) {
             this.setObjectValue('otherDirection', false);
+            this.pursuitStop = world.time;
             return true;
-        } else if (!isLarger(world.hero.xCenter + 80, this.xCenter) && isLarger(world.hero.xCenter - 320, this.xCenter)) {
+        } else if (!isLarger(world.hero.xCenter + 80, this.xCenter) && isLarger(world.hero.xCenter - 320, this.xCenter) && isIncluded(this.yTop, world.hero.yCenter, this.yBottom)) {
+            this.pursuitStop = world.time;
             return true;
-        } else {
+        } else if (isOnTime(world.time, this.pursuitStop, 5000)) {
             return false;
+        } else {
+            return true;
         }
     }
 
 
     isTracking(valueA, valueB) {
         let difference = valueA - valueB - 80;
-        return isIncluded(0, difference, 320);
+        return isIncluded(0, difference, 320) && isIncluded(this.yTop, world.hero.yCenter, this.yBottom);
     }
 
 
