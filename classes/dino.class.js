@@ -1,4 +1,4 @@
-class Dino extends MoveableObject {
+class Dino extends Enemy {
     otherDirection = true;
     energy = 100;
     pursuitStop = 0;
@@ -14,59 +14,26 @@ class Dino extends MoveableObject {
     }
 
 
-    get offsetX() {
+    // jsdoc
+    get body() {
         return {
-            'left': this.x + 4,
-            'center': this.x + 52,
-            'right': this.x + 100
+            'xLeft': this.x + 4,
+            'xCenter': this.x + 52,
+            'xRight': this.x + 100,
+            'yTop': this.y + 43,
+            'yCenter': this.y + 65,
+            'yBottom': this.y + 87
         }
     }
 
 
-    get offsetY() {
-        return {
-            'top': this.y + 43,
-            'center': this.y + 65,
-            'bottom': this.y + 87
-        }
-    }
-
-
-    get xLeft() {
-        return this.x + 4;
-    }
-
-
-    get xCenter() {
-        return this.x + 52;
-    }
-
-
-    get xRight() {
-        return this.x + 100;
-    }
-
-
-    get yTop() {
-        return this.y + 43;
-    }
-
-
-    get yCenter() {
-        return this.y + 65;
-    }
-
-
-    get yBottom() {
-        return this.y + 87;
-    }
-
-
+    // think about value!!!
     get radDispl() {
         return this.width / 2 + 40;
     }
 
 
+    // jsdoc
     get weapon() {
         return {
             'xLeft': (this.otherDirection) ? this.x + 96 - this.radDispl - 12 : this.x + 96 + 6,
@@ -74,26 +41,6 @@ class Dino extends MoveableObject {
             'yTop': this.y + 52,
             'yBottom': this.y + 80
         }
-    }
-
-
-    get xLeftAttack() {
-        return this.x + 96;
-    }
-
-
-    get xRightAttack() {
-        return this.x + 124;
-    }
-
-
-    get yTopAttack() {
-        return this.y + 52;
-    }
-
-
-    get yBottomAttack() {
-        return this.y + 80;
     }
 
 
@@ -111,16 +58,7 @@ class Dino extends MoveableObject {
 
     animate() {
         setInterval(() => {
-            // only for testing!!!
-            if (world.keyboard.keyQ.keydown) {
-                this.otherDirection = true;
-            }
-            if (world.keyboard.keyE.keydown) {
-                this.otherDirection = false;
-            }
-
-
-            if (this.energy <= 0 && this.img.src.includes('death6') && !this.dead) {
+            if (this.isDead()) {
                 this.dead = true;
             }
 
@@ -155,6 +93,18 @@ class Dino extends MoveableObject {
                 this.playAnimation(this.flipBook.idle);
             }
         }, 100);
+    }
+
+
+    // jsdoc
+    isDead() {
+        return !isLarger(0, this.energy) && this.isFileName('death6') && isUndefined(this.dead);    // 'death?'
+    }
+
+
+    // jsdoc
+    isFileName(value) {
+        return this.img.src.includes(value);
     }
 
 
