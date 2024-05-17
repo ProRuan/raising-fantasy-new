@@ -90,18 +90,6 @@ class Knight extends Character {
     }
 
 
-    setImages() {
-        for (const [key] of Object.entries(this.flipBook)) {
-            let chapter = this.flipBook[key];
-            chapter.forEach((c) => {
-                let img = new Image();
-                img.src = c;
-                this.imageCache[c] = img;
-            })
-        }
-    }
-
-
     animate() {
         setInterval(() => {
             this.resetJumpCounter();

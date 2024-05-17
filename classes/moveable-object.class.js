@@ -24,6 +24,23 @@ class MoveableObject extends DrawableObject {
     }
 
 
+    setImages() {    // double code ( setImages() )
+        for (const [key] of Object.entries(this.flipBook)) {
+            let chapter = this.flipBook[key];
+            this.fillImageCache(chapter);
+        }
+    }
+
+
+    fillImageCache(images) {
+        images.forEach((path) => {
+            let img = new Image();
+            img.src = path;
+            this.imageCache[path] = img;
+        })
+    }
+
+
     // jsdoc
     move(logical, key) {
         this.setOtherDirection(logical);
@@ -153,7 +170,7 @@ class MoveableObject extends DrawableObject {
 
 
     isBattle(enemy) {
-        enemy = (enemy) ? this.verifyEnemy(this.weapon, enemy) : world.enemies.find(enemy => this.verifyEnemy(this.weapon, enemy));
+        enemy = (enemy) ? this.verifyEnemy(this.weapon, enemy) : world.enemies.find(enemy => this.verifyEnemy(this.weapon, enemy.body));
         return (enemy) ? true : false;
     }
 

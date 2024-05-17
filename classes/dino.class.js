@@ -1,39 +1,19 @@
 class Dino extends Enemy {
-    otherDirection = true;
     energy = 100;
     pursuitStop = 0;
+    radDispl = 104;
+    offsetX = { left: 4, center: 52, right: 100 };
+    offsetY = { top: 43, center: 65, bottom: 87 };
 
 
     constructor(x, y) {
         super(source.dino, x, y);
-        this.setFlipBook(source.dino);
-        this.setCover(source.dino);
-        this.loadImages();
-        this.setSpeed(64);
-        this.animate();
+        this.setSpeed(64);    // to move?
+        this.animate();    // to move?
     }
 
 
-    // jsdoc
-    get body() {
-        return {
-            'xLeft': this.x + 4,
-            'xCenter': this.x + 52,
-            'xRight': this.x + 100,
-            'yTop': this.y + 43,
-            'yCenter': this.y + 65,
-            'yBottom': this.y + 87
-        }
-    }
-
-
-    // think about value!!!
-    get radDispl() {
-        return this.width / 2 + 40;
-    }
-
-
-    // jsdoc
+    // jsdoc + move?!?
     get weapon() {
         return {
             'xLeft': (this.otherDirection) ? this.x + 96 - this.radDispl - 12 : this.x + 96 + 6,
@@ -44,46 +24,25 @@ class Dino extends Enemy {
     }
 
 
-    setImages() {    // double code (knight)!!!
-        for (const [key] of Object.entries(this.flipBook)) {
-            let chapter = this.flipBook[key];
-            chapter.forEach((c) => {
-                let img = new Image();
-                img.src = c;
-                this.imageCache[c] = img;
-            })
-        }
-    }
-
-
     animate() {
         setInterval(() => {
-            if (this.isDead()) {
-                this.dead = true;
-            }
-
-
-            if (this.isHurt()) {
-                this.hurt();
-            }
-
-
-            this.walk();
-
-
+            this.passAway();
+            this.hurt();
 
             // if (this.isBattle(world.hero)) {
             //     console.log('bite: ', this.weapon.xLeft - this.xLeft, this.xCenter, this.weapon.xRight - this.xRight);
             // }
+
+            this.walk();
         }, 1000 / 60);
 
 
         setInterval(() => {
-            if (this.energy <= 0 && this.img.src.includes('death6')) {
+            if (this.isDead()) {
                 this.img.src = this.flipBook.death[this.flipBook.death.length - 1];
             } else if (this.energy <= 0) {
                 this.playAnimation(this.flipBook.death);
-            } else if (world.hero.isAttack() && world.hero.isBattle()) {
+            } else if (this.isHurt()) {
                 this.playAnimation(this.flipBook.hurt);
             } else if (this.isBattle(world.hero)) {
                 this.playAnimation(this.flipBook.attack);
@@ -96,9 +55,16 @@ class Dino extends Enemy {
     }
 
 
-    // jsdoc
     isDead() {
-        return !isLarger(0, this.energy) && this.isFileName('death6') && isUndefined(this.dead);    // 'death?'
+        return !isLarger(0, this.energy) && this.isFileName('death6');    // 'death?'
+    }
+
+
+    // jsdoc
+    passAway() {
+        if (this.isDead() && isUndefined(this.dead)) {
+            this.setObjectValue('dead', true);
+        }
     }
 
 
@@ -109,13 +75,15 @@ class Dino extends Enemy {
 
 
     isHurt() {
-        return world.hero.isAttack() && world.hero.isBattle() && isOnTime(world.time, this.lastHit, this.hitDelay);
+        return world.hero.isAttack() && world.hero.isBattle();
     }
 
 
     hurt() {
-        this.energy -= 20;
-        this.lastHit = world.time + this.hitDelay;
+        if (this.isHurt() && isOnTime(world.time, this.lastHit, this.hitDelay)) {
+            this.energy -= 20;
+            this.lastHit = world.time + this.hitDelay;
+        }
     }
 
 
@@ -167,7 +135,7 @@ class Dino extends Enemy {
 
 
     walk() {
-        if (this.isWalking()) {
+        if (this.isWalking() && !this.isHurt()) {
             this.x += (this.otherDirection) ? -this.speed : this.speed;
         }
     }
