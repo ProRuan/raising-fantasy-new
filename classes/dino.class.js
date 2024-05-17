@@ -134,9 +134,9 @@ class Dino extends MoveableObject {
 
 
 
-            if (this.isBattle(world.hero)) {
-                console.log('bite: ', this.weapon.xLeft - this.xLeft, this.xCenter, this.weapon.xRight - this.xRight);
-            }
+            // if (this.isBattle(world.hero)) {
+            //     console.log('bite: ', this.weapon.xLeft - this.xLeft, this.xCenter, this.weapon.xRight - this.xRight);
+            // }
         }, 1000 / 60);
 
 
@@ -169,22 +169,18 @@ class Dino extends MoveableObject {
     }
 
 
+    // jsdoc
     isPursuing() {
         if (this.isTracking(this.xCenter, world.hero.xCenter)) {
-            this.setObjectValue('otherDirection', true);
-            this.pursuitStop = world.time;
-            return true;
+            return this.updatePursuitParameters(true);
         } else if (this.isTracking(world.hero.xCenter, this.xCenter)) {
-            this.setObjectValue('otherDirection', false);
-            this.pursuitStop = world.time;
+            return this.updatePursuitParameters(false);
+        } else if (this.isToReposition()) {
+            return this.updatePursuitParameters();
+        } else if (!this.isSearching()) {
             return true;
-        } else if (!isLarger(world.hero.xCenter + 80, this.xCenter) && isLarger(world.hero.xCenter - 320, this.xCenter) && isIncluded(this.yTop, world.hero.yCenter, this.yBottom)) {
-            this.pursuitStop = world.time;
-            return true;
-        } else if (isOnTime(world.time, this.pursuitStop, 5000)) {
-            return false;
         } else {
-            return true;
+            return false;
         }
     }
 
@@ -192,6 +188,26 @@ class Dino extends MoveableObject {
     isTracking(valueA, valueB) {
         let difference = valueA - valueB - 80;
         return isIncluded(0, difference, 320) && isIncluded(this.yTop, world.hero.yCenter, this.yBottom);
+    }
+
+
+    updatePursuitParameters(logical) {
+        this.pursuitStop = world.time;
+        if (!isUndefined(logical)) {
+            this.otherDirection = logical;
+        }
+        return true;
+    }
+
+
+    isToReposition() {
+        return !isLarger(world.hero.xCenter + 80, this.xCenter) && isLarger(world.hero.xCenter - 320, this.xCenter) && isIncluded(this.yTop, world.hero.yCenter, this.yBottom);
+    }
+
+
+    // jsdoc
+    isSearching() {
+        return isOnTime(world.time, this.pursuitStop, 5000);
     }
 
 
