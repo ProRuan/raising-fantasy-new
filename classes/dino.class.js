@@ -8,6 +8,7 @@ class Dino extends MoveableObject {
         this.setFlipBook(source.dino);
         this.setCover(source.dino);
         this.loadImages();
+        this.setSpeed(64);
         this.animate();
     }
 
@@ -127,6 +128,11 @@ class Dino extends MoveableObject {
                 this.hurt();
             }
 
+
+            this.walk();
+
+
+
             if (this.isBattle(world.hero)) {
                 console.log('bite: ', this.weapon.xLeft - this.xLeft, this.xCenter, this.weapon.xRight - this.xRight);
             }
@@ -142,6 +148,8 @@ class Dino extends MoveableObject {
                 this.playAnimation(this.flipBook.hurt);
             } else if (this.isBattle(world.hero)) {
                 this.playAnimation(this.flipBook.attack);
+            } else if (this.isWalking()) {
+                this.playAnimation(this.flipBook.walk);
             } else {
                 this.playAnimation(this.flipBook.idle);
             }
@@ -157,5 +165,41 @@ class Dino extends MoveableObject {
     hurt() {
         this.energy -= 20;
         this.lastHit = world.time + this.hitDelay;
+    }
+
+
+    isPursuing() {
+        if (this.isTracking(this.xCenter, world.hero.xCenter)) {
+            this.setObjectValue('otherDirection', true);
+            console.log('case a');
+            return true;
+        } else if (this.isTracking(world.hero.xCenter, this.xCenter)) {
+            this.setObjectValue('otherDirection', false);
+            console.log('case b');
+            return true;
+        } else if (!isLarger(world.hero.xCenter + 80, this.xCenter)) {
+            console.log('case c');
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    isTracking(valueA, valueB) {
+        let difference = valueA - valueB - 80;
+        return isIncluded(0, difference, 320);
+    }
+
+
+    isWalking() {
+        return this.isPursuing() && !this.isBattle(world.hero);
+    }
+
+
+    walk() {
+        if (this.isWalking()) {
+            this.x += (this.otherDirection) ? -this.speed : this.speed;
+        }
     }
 }
