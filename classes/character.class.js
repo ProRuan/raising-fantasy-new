@@ -1,8 +1,31 @@
 class Character extends MoveableObject {
+    chapter = 'cover';
+    idleDelay = 3000;
+    lastIdle = this.idleDelay + getTime();
+    coins = 0;
+    leaves = 0;
 
 
     constructor(source, x, y) {
         super(source, x, y);
+        this.setFlipBook(source);
+        this.setCover(source);
+        this.loadImages();
+    }
+
+
+    get hpPoints() {
+        return this.world.hpBar.points;
+    }
+
+
+    get energyPoints() {
+        return this.world.energyBar.points;
+    }
+
+
+    get staminaPoints() {
+        return this.world.staminaBar.points;
     }
 
 

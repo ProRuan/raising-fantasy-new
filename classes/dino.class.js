@@ -40,7 +40,7 @@ class Dino extends Enemy {
         setInterval(() => {
             if (this.isDead()) {
                 this.img.src = this.flipBook.death[this.flipBook.death.length - 1];
-            } else if (this.energy <= 0) {
+            } else if (this.energy <= 0) {    // to edit!!!
                 this.playAnimation(this.flipBook.death);
             } else if (this.isHurt()) {
                 this.playAnimation(this.flipBook.hurt);

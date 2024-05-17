@@ -1,12 +1,9 @@
 class Knight extends Character {
-    coins = 0;
-    leaves = 0;
+    radDispl = 84;
+    offsetX = { left: 28, center: 44, right: 60 };
+    offsetY = { top: 62, center: 86, bottom: 110 };
+    chapters = ['death', 'hurt', 'climb', 'jump', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'idle', 'cover'];
 
-    chapter = 'cover';
-    chapters = ['climb', 'jump', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'idle', 'cover'];
-
-    idleDelay = 3000;
-    lastIdle = this.idleDelay + getTime();
 
     footStep = source.footStep;
     swordDraw = source.swordDraw;
@@ -18,33 +15,13 @@ class Knight extends Character {
 
     constructor(x, y) {
         super(source.knight, x, y);
-        this.setFlipBook(source.knight);
-        this.setCover(source.knight);
-        this.loadImages();
         this.setSpeed(128, 256);
         this.animate();
         this.applyGravity();
     }
 
 
-    get offsetX() {
-        return {
-            'left': this.x + 28,
-            'center': this.x + 44,
-            'right': this.x + 60
-        }
-    }
-
-
-    get offsetY() {
-        return {
-            'top': this.y + 62,
-            'center': this.y + 86,
-            'bottom': this.y + 110
-        }
-    }
-
-
+    // to edit / to delete!!!
     get xLeft() {
         return this.x + 28;
     }
@@ -72,11 +49,6 @@ class Knight extends Character {
 
     get yBottom() {
         return this.y + 110;
-    }
-
-
-    get radDispl() {
-        return this.width / 2 + 20;
     }
 
 
@@ -127,6 +99,7 @@ class Knight extends Character {
         setInterval(() => {
             // console.log(this.chapter, this.currentImage);
 
+
             // is ready!!!
             // -----------
             this.playAnimation();
@@ -135,6 +108,26 @@ class Knight extends Character {
         }, 100);
     }
 
+
+    // isPassedAway() / isGone() / ...
+
+
+    isDeath() {
+        return !isLarger(0, this.hpPoints.length);
+    }
+
+
+    isHurt() {
+        let enemy = this.world.enemies.find(e => e.isBattle(this));
+        if (enemy) {    // variable!!!
+            this.hpPoints.splice(this.hpPoints.length - 1, 1);
+            console.log('hit');
+            return true;
+        }
+    }
+
+
+    // hurt()
 
 
     // jsdoc
