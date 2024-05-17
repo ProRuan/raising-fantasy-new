@@ -171,14 +171,11 @@ class Dino extends MoveableObject {
     isPursuing() {
         if (this.isTracking(this.xCenter, world.hero.xCenter)) {
             this.setObjectValue('otherDirection', true);
-            console.log('case a');
             return true;
         } else if (this.isTracking(world.hero.xCenter, this.xCenter)) {
             this.setObjectValue('otherDirection', false);
-            console.log('case b');
             return true;
-        } else if (!isLarger(world.hero.xCenter + 80, this.xCenter)) {
-            console.log('case c');
+        } else if (!isLarger(world.hero.xCenter + 80, this.xCenter) && isLarger(world.hero.xCenter - 320, this.xCenter)) {
             return true;
         } else {
             return false;
