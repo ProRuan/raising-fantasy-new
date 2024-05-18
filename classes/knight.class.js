@@ -341,9 +341,10 @@ class Knight extends Character {
     collect(key) {
         let object = this.getObject(key);
         if (object) {
+            object.effect();
             this.removeObject(key, object);
-            this.increaseCounter(key, object);
-            super.playSound(object.sound);
+            // this.increaseCounter(key, object);
+            // super.playSound(object.sound);
 
 
             // if (object instanceof Crystal) {

@@ -30,6 +30,12 @@ class Leaf extends DrawableObject {
 
 
     // jsdoc
+    triggerEffect() {
+        world.hero.leaves++;
+    }
+
+
+    // as audio now!?!
     setSound() {
         this.sound = source.leaf.sound;
     }

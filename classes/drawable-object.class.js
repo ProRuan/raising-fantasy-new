@@ -202,4 +202,16 @@ class DrawableObject {
         let id = setInterval(subfunction, interval);
         intervalIds.push(id);
     }
+
+
+    // jsdoc
+    effect() {
+        this.triggerEffect();
+        this.playSound(this.sound);
+    }
+
+
+    playSound(path) {    // double code!!!
+        new Audio(path).play();
+    }
 }
