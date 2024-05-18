@@ -23,26 +23,24 @@ class Ent extends Enemy {
     // jsdoc + move?!?
     get weapon() {    // verified!!! + check for dino!!!
         return {
-            'xLeft': (this.otherDirection) ? this.body.xCenter - 124 : this.body.xCenter + 52,    // give it to xLeft and xRight???
-            'xRight': (this.otherDirection) ? this.body.xCenter - 52 : this.body.xCenter + 124,    // give it to xLeft and xRight???
-            'yTop': this.y + 112,
-            'yBottom': this.y + 176
+            'xLeft': (this.otherDirection) ? this.xCenter - this.weaponXY.right : this.xCenter + this.weaponXY.left,    // give it to xLeft and xRight???
+            'xRight': (this.otherDirection) ? this.xCenter - this.weaponXY.left : this.xCenter + this.weaponXY.right,    // give it to xLeft and xRight???
+            'yTop': this.y + this.weaponXY.top,
+            'yBottom': this.y + this.weaponXY.bottom
         }
     }
 
 
     animate() {
         setInterval(() => {
-
+            console.log(this.xLeft, this.xCenter, this.xRight, this.weapon.xLeft, this.weapon.xRight);
 
             // only for testing!!1
             if (isKey('keyQ')) {
                 this.setObjectValue('otherDirection', true);
-                console.log(this.body.xCenter, this.weapon.xLeft, this.weapon.xRight, this.xCenter - this.xLeft, this.xRight - this.xCenter);
             }
             if (isKey('keyE')) {
                 this.setObjectValue('otherDirection', false);
-                console.log(this.body.xCenter, this.weapon.xLeft, this.weapon.xRight, this.xCenter - this.xLeft, this.xRight - this.xCenter);
             }
 
 

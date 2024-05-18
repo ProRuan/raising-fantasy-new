@@ -155,8 +155,8 @@ class DrawableObject {
             ctx.beginPath();
             ctx.lineWidth = '1';
             ctx.strokeStyle = 'red';
-            ctx.rect(this.body.xCenter, this.body.yTop, 0, this.body.yBottom - this.body.yTop);
-            ctx.rect(this.body.xLeft, this.body.yTop, this.body.xRight - this.body.xLeft, this.body.yBottom - this.body.yTop);
+            ctx.rect(this.xCenter, this.yTop, 0, this.yBottom - this.yTop);
+            ctx.rect(this.xLeft, this.yTop, this.xRight - this.xLeft, this.yBottom - this.yTop);
             ctx.rect(this.weapon.xLeft, this.weapon.yTop, this.weapon.xRight - this.weapon.xLeft, this.weapon.yBottom - this.weapon.yTop);
             // ctx.rect(this.x - 240 + 232, this.weapon.yTop, (this.weapon.xRight - 168 + 232) - (this.x - 240 + 232), this.weapon.yBottom - this.weapon.yTop);
             ctx.stroke();

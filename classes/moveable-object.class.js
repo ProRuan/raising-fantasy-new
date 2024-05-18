@@ -19,22 +19,33 @@ class MoveableObject extends DrawableObject {
     }
 
 
-    // jsdoc
-    get radDispl() {
-        return this.radDispl;
+    get xLeft() {
+        return this.x + this.offsetX.left;
     }
 
 
-    // jsdoc
-    get body() {
-        return {
-            'xLeft': this.getOffset('x', 'offsetX', 'left'),
-            'xCenter': this.getOffset('x', 'offsetX', 'center'),
-            'xRight': this.getOffset('x', 'offsetX', 'right'),
-            'yTop': this.getOffset('y', 'offsetY', 'top'),
-            'yCenter': this.getOffset('y', 'offsetY', 'center'),
-            'yBottom': this.getOffset('y', 'offsetY', 'bottom')
-        };
+    get xCenter() {
+        return this.x + this.offsetX.center;
+    }
+
+
+    get xRight() {
+        return this.x + this.offsetX.right;
+    }
+
+
+    get yTop() {
+        return this.y + this.offsetY.top;
+    }
+
+
+    get yCenter() {
+        return this.y + this.offsetY.center;
+    }
+
+
+    get yBottom() {
+        return this.y + this.offsetY.bottom;
     }
 
 
@@ -200,7 +211,7 @@ class MoveableObject extends DrawableObject {
 
 
     isBattle(enemy) {
-        enemy = (enemy) ? this.verifyEnemy(this.weapon, enemy) : world.enemies.find(enemy => this.verifyEnemy(this.weapon, enemy.body));
+        enemy = (enemy) ? this.verifyEnemy(this.weapon, enemy) : world.enemies.find(enemy => this.verifyEnemy(this.weapon, enemy));
         return (enemy) ? true : false;
     }
 
