@@ -2,7 +2,7 @@ class Knight extends Character {
     radDispl = 84;
     offsetX = { left: 28, center: 44, right: 60 };
     offsetY = { top: 62, center: 86, bottom: 110 };
-    chapters = ['death', 'hurt', 'climb', 'jump', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'idle', 'cover'];
+    chapters = ['epilog', 'death', 'hurt', 'climb', 'jump', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'idle', 'cover'];
 
 
     footStep = source.footStep;
@@ -92,6 +92,11 @@ class Knight extends Character {
             this.collect('hitPoints');
             this.collect('leaves');
 
+
+            if (isKey('keyA')) {    // set condition and move method call!?!
+                this.staminaPoints.splice(this.staminaPoints.length - 2, 2);
+            }
+
             // this.world.camera_x = -this.x + 4 * 64 + 28;    // + 4 * 64 + 28
         }, 1000 / 60);
 
@@ -112,6 +117,11 @@ class Knight extends Character {
     // isPassedAway() / isGone() / ...
 
 
+    isEpilog() {
+        return this.isDeath() && this.img.src.includes('death10');
+    }
+
+
     isDeath() {
         return !isLarger(0, this.hpPoints.length);
     }
@@ -121,7 +131,6 @@ class Knight extends Character {
         let enemy = this.world.enemies.find(e => e.isBattle(this));
         if (enemy) {    // variable!!!
             this.hpPoints.splice(this.hpPoints.length - 1, 1);
-            console.log('hit');
             return true;
         }
     }

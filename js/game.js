@@ -323,3 +323,9 @@ function isTrue(value) {
 function isOnTime(current, last, value) {
     return current - last > value;
 }
+
+
+// jsdoc
+function getLastIndex(array) {
+    return array.length - 1;
+}

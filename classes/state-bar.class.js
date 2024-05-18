@@ -83,7 +83,7 @@ class StateBar extends DrawableObject {
 
 
     regenerate() {
-        if (this.points.length < this.max) {    // condition!!!
+        if (!world.hero.isDeath() && this.points.length < this.max) {    // condition!!!
             this.addNewPoint();
         }
 

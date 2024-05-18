@@ -49,6 +49,11 @@ class MoveableObject extends DrawableObject {
     }
 
 
+    setEpilog() {
+        this.flipBook.epilog = [this.flipBook.death[getLastIndex(this.flipBook.death)]];
+    }
+
+
     setImages() {    // double code ( setImages() )
         for (const [key] of Object.entries(this.flipBook)) {
             let chapter = this.flipBook[key];

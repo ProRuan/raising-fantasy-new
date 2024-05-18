@@ -44,7 +44,7 @@ class Dino extends Enemy {
                 this.playAnimation(this.flipBook.death);
             } else if (this.isHurt()) {
                 this.playAnimation(this.flipBook.hurt);
-            } else if (this.isBattle(world.hero)) {
+            } else if (this.isBattle(world.hero) && !world.hero.isDeath()) {
                 this.playAnimation(this.flipBook.attack);
             } else if (this.isWalking()) {
                 this.playAnimation(this.flipBook.walk);
@@ -95,7 +95,7 @@ class Dino extends Enemy {
             return this.updatePursuitParameters(false);
         } else if (this.isToReposition()) {
             return this.updatePursuitParameters();
-        } else if (!this.isSearching()) {
+        } else if (this.isSearching()) {
             return true;
         } else {
             return false;
@@ -125,7 +125,7 @@ class Dino extends Enemy {
 
     // jsdoc
     isSearching() {
-        return isOnTime(world.time, this.pursuitStop, 5000);
+        return !isOnTime(world.time, this.pursuitStop, 5000);
     }
 
 
@@ -135,7 +135,7 @@ class Dino extends Enemy {
 
 
     walk() {
-        if (this.isWalking() && !this.isHurt()) {
+        if (this.isWalking() && !this.isHurt() && !this.isDead()) {
             this.x += (this.otherDirection) ? -this.speed : this.speed;
         }
     }
