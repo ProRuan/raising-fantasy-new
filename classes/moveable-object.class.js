@@ -20,6 +20,19 @@ class MoveableObject extends DrawableObject {
 
 
     // jsdoc
+    get body() {
+        return {
+            'xLeft': this.getOffset('x', 'xLeft'),
+            'xCenter': this.getOffset('x', 'xCenter'),
+            'xRight': this.getOffset('x', 'xRight'),
+            'yTop': this.getOffset('y', 'yTop'),
+            'yCenter': this.getOffset('y', 'yCenter'),
+            'yBottom': this.getOffset('y', 'yBottom')
+        }
+    }
+
+
+    // jsdoc
     get xLeft() {
         return this.getOffset('x', 'xLeft');
     }
@@ -62,7 +75,7 @@ class MoveableObject extends DrawableObject {
             'xRight': this.getWeapon('xCenter', 'xRight', 'xLeft'),
             'yTop': this.getWeapon('y', 'yTop'),
             'yBottom': this.getWeapon('y', 'yBottom')
-        }
+        };
     }
 
 
