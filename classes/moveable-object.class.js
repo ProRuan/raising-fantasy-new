@@ -33,42 +33,6 @@ class MoveableObject extends DrawableObject {
 
 
     // jsdoc
-    get xLeft() {
-        return this.getOffset('x', 'xLeft');
-    }
-
-
-    // jsdoc
-    get xCenter() {
-        return this.getOffset('x', 'xCenter');
-    }
-
-
-    // jsdoc
-    get xRight() {
-        return this.getOffset('x', 'xRight');
-    }
-
-
-    // jsdoc
-    get yTop() {
-        return this.getOffset('y', 'yTop');
-    }
-
-
-    // jsdoc
-    get yCenter() {
-        return this.getOffset('y', 'yCenter');
-    }
-
-
-    // jsdoc
-    get yBottom() {
-        return this.getOffset('y', 'yBottom');
-    }
-
-
-    // jsdoc
     get weapon() {
         return {
             'xLeft': this.getWeapon('xCenter', 'xLeft', 'xRight'),
@@ -197,9 +161,9 @@ class MoveableObject extends DrawableObject {
                 if (this.isAboveGround() || this.speedY > 0) {
                     this.y -= this.speedY;
                     this.speedY -= this.acceleration;
-                    if (this.y > this.groundLevel - (this.yBottom - this.y)) {
+                    if (this.y > this.groundLevel - (this.body.yBottom - this.y)) {
                         // console.log(this.y);
-                        this.y = this.groundLevel - (this.yBottom - this.y);
+                        this.y = this.groundLevel - (this.body.yBottom - this.y);
                     }
                 } else {
                     this.speedY = 0;
@@ -210,7 +174,7 @@ class MoveableObject extends DrawableObject {
 
 
     isAboveGround() {
-        return this.yBottom < this.groundLevel;
+        return this.body.yBottom < this.groundLevel;
     }
 
 
@@ -254,12 +218,12 @@ class MoveableObject extends DrawableObject {
 
     // jsdoc
     getLadderParameters(key, l) {
-        return (key == 'arrowUp') ? [l.yTop, this.yBottom] : [this.yBottom, l.yBottom]
+        return (key == 'arrowUp') ? [l.yTop, this.body.yBottom] : [this.body.yBottom, l.yBottom]
     }
 
 
     isBattle(enemy) {
-        enemy = (enemy) ? this.verifyEnemy(this.weapon, enemy) : world.enemies.find(enemy => this.verifyEnemy(this.weapon, enemy));
+        enemy = (enemy) ? this.verifyEnemy(this.weapon, enemy.body) : world.enemies.find(enemy => this.verifyEnemy(this.weapon, enemy.body));
         return (enemy) ? true : false;
     }
 

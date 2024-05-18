@@ -327,7 +327,7 @@ class Knight extends Character {
 
     // use object id directly!!!
     getObject(key) {
-        return world[key].find(o => isCollided(this, o));
+        return world[key].find(o => isCollided(this.body, o));
     }
 
 
@@ -382,12 +382,12 @@ class Knight extends Character {
 
     // jsdoc
     isOnGrass(g) {
-        return isIncluded(g.xLeft, this.xLeft, g.xRight) || isIncluded(g.xLeft, this.xRight, g.xRight);
+        return isIncluded(g.xLeft, this.body.xLeft, g.xRight) || isIncluded(g.xLeft, this.body.xRight, g.xRight);
     }
 
 
     // jsdoc
     isAboveGrass(g) {
-        return isLarger(this.yBottom, g.yTop, true);
+        return isLarger(this.body.yBottom, g.yTop, true);
     }
 }
