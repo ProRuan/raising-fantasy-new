@@ -2,8 +2,7 @@ class Dino extends Enemy {
     energy = 100;
     pursuitStop = 0;
     radDispl = 104;
-    offsetX = { left: 4, center: 52, right: 100 };
-    offsetY = { top: 43, center: 65, bottom: 87 };
+    offsetXY = { xLeft: 4, xCenter: 52, xRight: 100, yTop: 43, yCenter: 65, yBottom: 87 };
 
     chapters = ['epilog', 'death', 'hurt', 'attack', 'walk', 'idle'];
 

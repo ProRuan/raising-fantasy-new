@@ -19,39 +19,74 @@ class MoveableObject extends DrawableObject {
     }
 
 
+    // jsdoc
     get xLeft() {
-        return this.x + this.offsetX.left;
-    }
-
-
-    get xCenter() {
-        return this.x + this.offsetX.center;
-    }
-
-
-    get xRight() {
-        return this.x + this.offsetX.right;
-    }
-
-
-    get yTop() {
-        return this.y + this.offsetY.top;
-    }
-
-
-    get yCenter() {
-        return this.y + this.offsetY.center;
-    }
-
-
-    get yBottom() {
-        return this.y + this.offsetY.bottom;
+        return this.getOffset('x', 'xLeft');
     }
 
 
     // jsdoc
-    getOffset(axis, key, subkey) {
-        return this[axis] + this[key][subkey];
+    get xCenter() {
+        return this.getOffset('x', 'xCenter');
+    }
+
+
+    // jsdoc
+    get xRight() {
+        return this.getOffset('x', 'xRight');
+    }
+
+
+    // jsdoc
+    get yTop() {
+        return this.getOffset('y', 'yTop');
+    }
+
+
+    // jsdoc
+    get yCenter() {
+        return this.getOffset('y', 'yCenter');
+    }
+
+
+    // jsdoc
+    get yBottom() {
+        return this.getOffset('y', 'yBottom');
+    }
+
+
+    // jsdoc
+    get weapon() {
+        return {
+            'xLeft': this.getWeapon('xCenter', 'xLeft', 'xRight'),
+            'xRight': this.getWeapon('xCenter', 'xRight', 'xLeft'),
+            'yTop': this.getWeapon('y', 'yTop'),
+            'yBottom': this.getWeapon('y', 'yBottom')
+        }
+    }
+
+
+    // jsdoc
+    getOffset(key, subkey) {
+        return this[key] + this.offsetXY[subkey];
+    }
+
+
+    // jsdoc
+    getWeapon(key, subkeyA, subkeyB) {
+        return (isUndefined(subkeyB)) ? this.getWeaponValue(key, subkeyA) : this.getWeaponX(key, subkeyA, subkeyB);
+    }
+
+
+    // jsdoc
+    getWeaponX(key, subkeyA, subkeyB) {
+        return (!isTrue(this.otherDirection)) ? this.getWeaponValue(key, subkeyA, true) : this.getWeaponValue(key, subkeyB, false);
+    }
+
+
+    // jsdoc
+    getWeaponValue(key, subkey, logical) {
+        return (isUndefined(logical) || isTrue(logical)) ? this[key] + this.weaponXY[subkey] : this[key] - this.weaponXY[subkey];
     }
 
 

@@ -1,7 +1,6 @@
 class Knight extends Character {
     radDispl = 84;
-    offsetX = { left: 28, center: 44, right: 60 };
-    offsetY = { top: 62, center: 86, bottom: 110 };
+    offsetXY = { xLeft: 28, xCenter: 44, xRight: 60, yTop: 62, yCenter: 86, yBottom: 110 };
     chapters = ['epilog', 'death', 'hurt', 'climb', 'jump', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'idle', 'cover'];
 
 
@@ -18,37 +17,6 @@ class Knight extends Character {
         this.setSpeed(128, 256);
         this.animate();
         this.applyGravity();
-    }
-
-
-    // to edit / to delete!!!
-    get xLeft() {
-        return this.x + 28;
-    }
-
-
-    get xCenter() {
-        return this.x + 44;
-    }
-
-
-    get xRight() {
-        return this.x + 60;
-    }
-
-
-    get yTop() {
-        return this.y + 62;
-    }
-
-
-    get yCenter() {
-        return this.y + 86;
-    }
-
-
-    get yBottom() {
-        return this.y + 110;
     }
 
 
