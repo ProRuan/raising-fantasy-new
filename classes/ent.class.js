@@ -4,6 +4,7 @@ class Ent extends Enemy {
     radDispl = 232;
     offsetX = { left: 76, center: 116, right: 156 };
     offsetY = { top: 92, center: 134, bottom: 176 };
+    weaponXY = { left: 52, top: 112, right: 124, bottom: 176 };
 
     chapters = ['epilog', 'death', 'hurt', 'attack', 'walk', 'idle'];
 
