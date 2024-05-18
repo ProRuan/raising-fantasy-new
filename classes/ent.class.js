@@ -20,10 +20,10 @@ class Ent extends Enemy {
 
 
     // jsdoc + move?!?
-    get weapon() {
+    get weapon() {    // verified!!! + check for dino!!!
         return {
-            'xLeft': (this.otherDirection) ? this.x + 168 - this.radDispl + 40 : this.x + 168,
-            'xRight': (this.otherDirection) ? this.x + 240 - this.radDispl + 40 : this.x + 240,
+            'xLeft': (this.otherDirection) ? this.body.xCenter - 124 : this.body.xCenter + 52,    // give it to xLeft and xRight???
+            'xRight': (this.otherDirection) ? this.body.xCenter - 52 : this.body.xCenter + 124,    // give it to xLeft and xRight???
             'yTop': this.y + 112,
             'yBottom': this.y + 176
         }
