@@ -11,6 +11,18 @@ class AnimatedObject extends DrawableObject {
     }
 
 
+    // jsdoc
+    get max() {
+        return world.hpBar.max;
+    }
+
+
+    // jsdoc
+    get hpPoints() {
+        return world.hpBar.points.length;
+    }
+
+
     getId(key) {
         return world[key].findIndex(o => o == this);
     }
@@ -30,6 +42,25 @@ class AnimatedObject extends DrawableObject {
 
     createFlipBook(chapter) {
         this.flipBook = new FlipBook(FLIP_BOOK_ANIMATED_OBJECTS)[chapter];
+    }
+
+
+    // jsdoc
+    getNewMax() {
+        let newMax = this.calculateNewMax();
+        return getVerifiedValue(this.max, newMax);
+    }
+
+
+    // jsdoc
+    calculateNewMax() {
+        return this.hpPoints + this.max * this.fillFactor;
+    }
+
+
+    // jsdoc
+    restore(newMax) {
+        world.hpBar.fill(newMax);
     }
 
 

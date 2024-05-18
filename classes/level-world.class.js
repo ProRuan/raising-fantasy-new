@@ -127,7 +127,7 @@ class LevelWorld extends World {
         this.drawStateBar('hpBar');
         this.drawStateBar('energyBar');
         this.drawStateBar('staminaBar');
-        this.drawObjectGroup([this.itemBg, this.itemBomb, this.itemBorder]);
+        this.drawThrowableItem();
     }
 
 
@@ -135,6 +135,18 @@ class LevelWorld extends World {
         this.drawObject(this[key].bg);
         this.drawObjectGroup(this[key].points);
         this.drawObject(this[key].border);
+    }
+
+
+    // jsdoc
+    drawThrowableItem() {
+        if (this.hero.bombUnlocked) {
+            this.drawObject(this.itemBg);
+            if (isMatch(this.hero.energyPoints.length, this.energyBar.max)) {
+                this.drawObject(this.itemBomb);
+            }
+            this.drawObject(this.itemBorder);
+        }
     }
 
 
