@@ -1,5 +1,6 @@
 class Enemy extends MoveableObject {
     otherDirection = true;
+    chapter = 'idle';
 
 
     // jsdoc

@@ -94,7 +94,7 @@ class Knight extends Character {
 
 
             if (isKey('keyA')) {    // set condition and move method call!?!
-                this.staminaPoints.splice(this.staminaPoints.length - 2, 2);
+                this.staminaPoints.splice(this.staminaPoints.length - 1, 1);
             }
 
             // this.world.camera_x = -this.x + 4 * 64 + 28;    // + 4 * 64 + 28

@@ -124,7 +124,7 @@ class Character extends MoveableObject {
 
     // jsdoc
     isAttack() {
-        return isKey('keyA');
+        return isKey('keyA') && isLarger(0, world.hero.staminaPoints.length);
     }
 
 

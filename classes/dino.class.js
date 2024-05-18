@@ -5,6 +5,8 @@ class Dino extends Enemy {
     offsetX = { left: 4, center: 52, right: 100 };
     offsetY = { top: 43, center: 65, bottom: 87 };
 
+    chapters = ['epilog', 'death', 'hurt', 'attack', 'walk', 'idle'];
+
 
     constructor(x, y) {
         super(source.dino, x, y);
@@ -34,37 +36,34 @@ class Dino extends Enemy {
             // }
 
             this.walk();
+
+            this.setChapter();
+            this.resetCurrentImage();
+
         }, 1000 / 60);
 
 
         setInterval(() => {
-            if (this.isDead()) {
-                this.img.src = this.flipBook.death[this.flipBook.death.length - 1];
-            } else if (this.energy <= 0) {    // to edit!!!
-                this.playAnimation(this.flipBook.death);
-            } else if (this.isHurt()) {
-                this.playAnimation(this.flipBook.hurt);
-            } else if (this.isBattle(world.hero) && !world.hero.isDeath()) {
-                this.playAnimation(this.flipBook.attack);
-            } else if (this.isWalking()) {
-                this.playAnimation(this.flipBook.walk);
-            } else {
-                this.playAnimation(this.flipBook.idle);
-            }
+            this.playAnimation();
         }, 100);
-    }
-
-
-    isDead() {
-        return !isLarger(0, this.energy) && this.isFileName('death6');    // 'death?'
     }
 
 
     // jsdoc
     passAway() {
-        if (this.isDead() && isUndefined(this.dead)) {
+        if (this.isEpilog() && isUndefined(this.dead)) {
             this.setObjectValue('dead', true);
         }
+    }
+
+
+    isEpilog() {
+        return this.isDeath() && this.img.src.includes('death6');
+    }
+
+
+    isDeath() {
+        return !isLarger(0, this.energy);    // 'death?'
     }
 
 
@@ -84,6 +83,11 @@ class Dino extends Enemy {
             this.energy -= 20;
             this.lastHit = world.time + this.hitDelay;
         }
+    }
+
+
+    isAttack() {
+        return this.isBattle(world.hero) && !world.hero.isDeath();
     }
 
 
@@ -129,14 +133,81 @@ class Dino extends Enemy {
     }
 
 
-    isWalking() {
+    isWalk() {
         return this.isPursuing() && !this.isBattle(world.hero);
     }
 
 
     walk() {
-        if (this.isWalking() && !this.isHurt() && !this.isDead()) {
+        if (this.isWalk() && !this.isHurt() && !this.isDeath()) {
             this.x += (this.otherDirection) ? -this.speed : this.speed;
         }
+    }
+
+
+    isIdle() {
+        return true;
+    }
+
+
+
+
+    // jsdoc
+    resetCurrentImage() {
+        if (!this.isSimilarChapter()) {
+            this.setObjectValue('currentImage', 0);
+        }
+    }
+
+
+    // jsdoc
+    isSimilarChapter() {
+        let key = this.getSimilarChapter();
+        let last = this.lastChapter.includes(key);
+        let current = this.chapter.includes(key);
+        return isMatch(last, current);
+    }
+
+
+    // jsdoc
+    getSimilarChapter() {
+        return this.chapter.replace(/[A-Z][a-z]+/, '');
+    }
+
+
+    setChapter() {
+        this.lastChapter = this.chapter;
+        this.chapter = this.getChapter();
+    }
+
+
+    // jsdoc
+    getChapter() {
+        for (let i = 0; i < this.chapters.length; i++) {
+            let condition = this.getCondition(i);
+            if (this.isChapter(condition)) {
+                return this.chapters[i];
+            }
+        }
+    }
+
+
+    // jsdoc
+    getCondition(i) {
+        let condition = this.chapters[i];
+        let initial = condition[0];
+        return 'is' + condition.replace(initial, initial.toUpperCase());
+    }
+
+
+    // jsdoc
+    isChapter(condition) {
+        return this[condition]();
+    }
+
+
+    // jsdoc
+    playAnimation() {
+        super.playAnimation(this.flipBook[this.chapter]);
     }
 }
