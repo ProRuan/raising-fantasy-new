@@ -151,13 +151,14 @@ class DrawableObject {
         }
 
 
-        if (this instanceof Dino) {
+        if (this instanceof Ent) {
             ctx.beginPath();
             ctx.lineWidth = '1';
             ctx.strokeStyle = 'red';
             ctx.rect(this.body.xCenter, this.body.yTop, 0, this.body.yBottom - this.body.yTop);
             ctx.rect(this.body.xLeft, this.body.yTop, this.body.xRight - this.body.xLeft, this.body.yBottom - this.body.yTop);
             ctx.rect(this.weapon.xLeft, this.weapon.yTop, this.weapon.xRight - this.weapon.xLeft, this.weapon.yBottom - this.weapon.yTop);
+            // ctx.rect(this.weapon.xLeft, this.weapon.yTop, this.weapon.xRight - this.weapon.xLeft, this.weapon.yBottom - this.weapon.yTop);
             ctx.stroke();
         }
     }

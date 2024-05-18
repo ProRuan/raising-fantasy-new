@@ -18,8 +18,9 @@ class LevelWorld extends World {
 
 
         // only for testing!!!
-        this.dino = new Dino(256, 15);
-        this.enemies = [this.dino];
+        // this.dino = new Dino(256, 15);
+        this.ent = new Ent(320, -24);
+        this.enemies = [this.ent];
         this.hero = new Knight(64, 38);
 
 

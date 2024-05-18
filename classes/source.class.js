@@ -135,6 +135,7 @@ class Source {
         this.setSource('ent', './img/enemies/ent/ent.png', 256);
         this.setSource('spider', './img/enemies/spider/spider.png', 128);
         this.addSourceFlipBook('dino', FLIP_BOOK_DINO);
+        this.addSourceFlipBook('ent', FLIP_BOOK_ENT);
     }
 
 
