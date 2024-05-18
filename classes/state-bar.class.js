@@ -83,7 +83,7 @@ class StateBar extends DrawableObject {
 
 
     regenerate() {
-        if (!world.hero.isDeath() && this.points.length < this.max) {    // condition!!!
+        if (this.getCondition() && this.points.length < this.max) {    // condition!!!
             this.addNewPoint();
         }
 
@@ -97,8 +97,10 @@ class StateBar extends DrawableObject {
 
     // to edit
     getCondition() {
-        if (this.name == 'stamina') {
-            return !world.hero.isKey('keydown', 'keyA');
+        if (this.name == 'hp') {    // condition 'energy' is missing!!!
+            return !world.hero.isDeath();
+        } else if (this.name == 'stamina') {
+            return !world.hero.isDeath() && !isKey('keyA');
         } else {
             return true;
         }
