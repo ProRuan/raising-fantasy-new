@@ -329,3 +329,9 @@ function isOnTime(current, last, value) {
 function getLastIndex(array) {
     return array.length - 1;
 }
+
+
+// jsdoc
+function getVerifiedValue(valueA, valueB) {
+    return isLarger(valueA, valueB) ? valueA : valueB;
+}

@@ -31,8 +31,9 @@ class StateBar extends DrawableObject {
     }
 
 
-    fill() {
-        for (let i = 0; i < this.max; i++) {
+    fill(newMax) {
+        newMax = (!newMax) ? this.max : newMax;
+        for (let i = this.points.length; i < newMax; i++) {
             this.addNewPoint();
         }
     }
