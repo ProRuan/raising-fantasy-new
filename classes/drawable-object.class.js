@@ -173,6 +173,16 @@ class DrawableObject {
             // ctx.rect(this.x - 240 + 232, this.weapon.yTop, (this.weapon.xRight - 168 + 232) - (this.x - 240 + 232), this.weapon.yBottom - this.weapon.yTop);
             ctx.stroke();
         }
+
+
+        if (this instanceof Web) {
+            ctx.beginPath();
+            ctx.lineWidth = '1';
+            ctx.strokeStyle = 'red';
+            ctx.rect(this.x + 4, this.y + 4, this.width - 8, this.height - 8);
+            // ctx.rect(this.x - 240 + 232, this.weapon.yTop, (this.weapon.xRight - 168 + 232) - (this.x - 240 + 232), this.weapon.yBottom - this.weapon.yTop);
+            ctx.stroke();
+        }
     }
 
 

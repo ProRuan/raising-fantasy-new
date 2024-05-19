@@ -22,6 +22,7 @@ class LevelWorld extends World {
         // this.ent = new Ent(480 - 116, -24);
         this.spider = new Spider(576, 12 + 224);
         this.enemies = [this.spider];
+        this.webs = [];
         this.hero = new Knight(64, 38);
 
 
@@ -103,6 +104,8 @@ class LevelWorld extends World {
         this.drawObjectGroup(this.enemies)
 
         this.drawObject(this.hero);
+
+        this.drawObjectGroup(this.webs);
 
         this.removeDeadEnemies();
 
