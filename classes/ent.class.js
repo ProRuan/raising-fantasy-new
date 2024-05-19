@@ -7,6 +7,7 @@ class Ent extends Enemy {
     lastTurn = 0;
 
 
+    // jsdoc
     constructor(x, y) {
         super(source.ent, x, y);
         this.setStateValues(120, 48);
@@ -26,13 +27,13 @@ class Ent extends Enemy {
     // jsdoc
     patrol() {
         if (this.isPatrol(this.xWest, this.xCenter, true)) {
-            this.updateParameter(-this.speed, this.otherDirection);
+            this.updateParameters(-this.speed, this.otherDirection);
         } else if (this.isTurn(true)) {
-            this.updateParameter(0, false);
+            this.updateParameters(0, false);
         } else if (this.isPatrol(this.xCenter, this.xEast, false)) {
-            this.updateParameter(this.speed, this.otherDirection);
+            this.updateParameters(this.speed, this.otherDirection);
         } else if (this.isTurn(false)) {
-            this.updateParameter(0, true);
+            this.updateParameters(0, true);
         }
     }
 
@@ -44,7 +45,7 @@ class Ent extends Enemy {
 
 
     // jsdoc
-    updateParameter(speed, logical) {
+    updateParameters(speed, logical) {
         this.lastTurn = getTime();
         if (this.isFine()) {
             this.x += speed;

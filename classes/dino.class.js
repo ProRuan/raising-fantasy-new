@@ -2,9 +2,12 @@ class Dino extends Enemy {
     radDispl = 104;
     bodyXY = { xLeft: 4, xCenter: 52, xRight: 100, yTop: 43, yCenter: 65, yBottom: 87 };
     weaponXY = { xLeft: 48, xRight: 68, yTop: 52, yBottom: 80 };
+    biteDistance = 80;
+    pursuitDistance = 320;
     pursuitStop = 0;
 
 
+    // jsdoc
     constructor(x, y) {
         super(source.dino, x, y);
         this.setStateValues(90, 64);
@@ -18,6 +21,12 @@ class Dino extends Enemy {
         if (this.isWalk() && this.isFine()) {
             this.applySpeedType('x', this.otherDirection, 'speed');
         }
+    }
+
+
+    // jsdoc
+    isWalk() {
+        return this.isPursuing();
     }
 
 
@@ -37,34 +46,55 @@ class Dino extends Enemy {
     }
 
 
-    isTracking(valueA, valueB) {
-        let difference = valueA - valueB - 80;
-        return isIncluded(0, difference, 320) && isIncluded(this.yTop, world.hero.yCenter, this.yBottom);
+    // jsdoc
+    isTracking(a, b) {
+        let biteX = this.getBiteX(a, b);
+        return isIncluded(0, biteX, this.pursuitDistance) && isIncluded(this.yTop, world.hero.yCenter, this.yBottom);
     }
 
 
+    // jsdoc
+    getBiteX(a, b) {
+        return a - b - this.biteDistance;
+    }
+
+
+    // jsdoc
     updatePursuitParameters(logical) {
-        this.pursuitStop = world.time;
-        if (!isUndefined(logical)) {
-            this.otherDirection = logical;
-        }
+        this.pursuitStop = getTime();
+        this.setOtherDirection(logical);
         return true;
     }
 
 
+    // jsdoc
+    setOtherDirection(logical) {
+        if (!isUndefined(logical)) {
+            this.otherDirection = logical;
+        }
+    }
+
+
+    // jsdoc
     isToReposition() {
-        return !isLarger(world.hero.xCenter + 80, this.xCenter) && isLarger(world.hero.xCenter - 320, this.xCenter) && isIncluded(this.yTop, world.hero.yCenter, this.yBottom);
+        return this.isTrigger(true) && this.isTrigger(false) && isIncluded(this.yTop, world.hero.yCenter, this.yBottom);
+    }
+
+
+    // jsdoc
+    isTrigger(logical) {
+        if (isTrue(logical)) {
+            let heroX = getSum(world.hero.xCenter, this.biteDistance);
+            return !isLarger(heroX, this.xCenter);
+        } else if (!isTrue(logical)) {
+            let heroX = getSum(world.hero.xCenter, -this.biteDistance);
+            return isLarger(heroX, this.xCenter);
+        }
     }
 
 
     // jsdoc
     isSearching() {
         return !isOnTime(world.time, this.pursuitStop, 5000);
-    }
-
-
-    // jsdoc
-    isWalk() {
-        return this.isPursuing();
     }
 }

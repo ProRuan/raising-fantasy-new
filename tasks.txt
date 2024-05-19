@@ -64,7 +64,7 @@ Tasks
   - clean coding: use method by key ( this[method]() ) ...
 
 
-Clean Coding (33/59)
+Clean Coding (34/59)
 ------------
   - class AnimatedObjects ...
       - class ... (4x)
@@ -94,7 +94,7 @@ Clean Coding (33/59)
   - class Cloud - simpleCheck
   - class CoordinateSystem ... ???
   - class Counter - simpleCheck
-  - class Dino ...
+  - class Dino - simpleCheck
   - class DrawableObject ...
   - class Enemy - simpleCheck
   - class Ent - simpleCheck
