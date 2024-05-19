@@ -335,3 +335,9 @@ function getLastIndex(array) {
 function getVerifiedValue(valueA, valueB) {
     return isLarger(valueA, valueB) ? valueA : valueB;
 }
+
+
+// jsdoc
+function getSum(summandA, summandB) {
+    return summandA + summandB;
+}

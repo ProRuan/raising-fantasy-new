@@ -22,6 +22,29 @@ class Enemy extends MoveableObject {
 
 
     // jsdoc
+    setAct(method) {
+        this.act = this[method];
+    }
+
+
+    // jsdoc
+    animate() {
+        this.setStoppableInterval(() => this.live(), 1000 / 60);
+        this.setStoppableInterval(() => this.playAnimation(), 100);
+    }
+
+
+    // jsdoc
+    live() {
+        this.passAway();
+        this.hurt();
+        this.act();
+        this.setChapter();
+        this.resetCurrentImage();
+    }
+
+
+    // jsdoc
     passAway() {
         if (this.isEpilog() && isUndefined(this.dead)) {
             this.setObjectValue('dead', true);
@@ -49,7 +72,7 @@ class Enemy extends MoveableObject {
 
     hurt() {
         if (this.isHurt() && isOnTime(world.time, this.lastHit, this.hitDelay)) {
-            this.hp -= 20;
+            this.hp -= 30;
             this.lastHit = world.time + this.hitDelay;
         }
     }

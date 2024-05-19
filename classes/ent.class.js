@@ -2,7 +2,7 @@ class Ent extends Enemy {
     radDispl = 232;
     bodyXY = { xLeft: 100, xCenter: 116, xRight: 132, yTop: 92, yCenter: 134, yBottom: 176 };
     weaponXY = { xLeft: 52, xRight: 124, yTop: 112, yBottom: 176 };
-    patrolX = { xWest: -160, xEast: 160 };
+    patrolDistance = 160;
     patrolBreak = 2500;
     lastTurn = 0;
 
@@ -10,35 +10,21 @@ class Ent extends Enemy {
     constructor(x, y) {
         super(source.ent, x, y);
         this.setStateValues(120, 48);
-        this.setPatrolX();
+        this.setAct('patrol');
+        this.setPatrolEndpoints();
         this.animate();    // to move?
     }
 
 
-    setPatrolX() {    // to edit!
-        this.xWest = this.xCenter + this.patrolX.xWest;
-        this.xEast = this.xCenter + this.patrolX.xEast;
-    }
-
-
-    animate() {    // to move?
-        this.setStoppableInterval(() => this.live(), 1000 / 60);
-        this.setStoppableInterval(() => this.playAnimation(), 100);
+    // jsdoc
+    setPatrolEndpoints() {
+        this.xWest = getSum(this.xCenter, -this.patrolDistance);
+        this.xEast = getSum(this.xCenter, this.patrolDistance)
     }
 
 
     // jsdoc
-    live() {
-        this.passAway();
-        this.hurt();
-        this.walk()
-        this.setChapter();
-        this.resetCurrentImage();
-    }
-
-
-    // jsdoc
-    walk() {
+    patrol() {
         if (this.isPatrol(this.xWest, this.xCenter, true)) {
             this.updateParameter(-this.speed, this.otherDirection);
         } else if (this.isTurn(true)) {
