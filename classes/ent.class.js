@@ -1,6 +1,4 @@
 class Ent extends Enemy {
-    energy = 100;    // to set or defense!!!
-
     radDispl = 232;
     bodyXY = { xLeft: 100, xCenter: 116, xRight: 132, yTop: 92, yCenter: 134, yBottom: 176 };
     weaponXY = { xLeft: 52, xRight: 124, yTop: 112, yBottom: 176 };
@@ -11,7 +9,7 @@ class Ent extends Enemy {
 
     constructor(x, y) {
         super(source.ent, x, y);
-        this.setSpeed(48);
+        this.setStateValues(120, 48);
         this.setPatrolX();
         this.animate();    // to move?
     }

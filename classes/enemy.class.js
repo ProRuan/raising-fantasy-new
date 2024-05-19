@@ -15,6 +15,13 @@ class Enemy extends MoveableObject {
 
 
     // jsdoc
+    setStateValues(hp, speed) {
+        this.hp = hp;
+        this.setSpeed(speed);
+    }
+
+
+    // jsdoc
     passAway() {
         if (this.isEpilog() && isUndefined(this.dead)) {
             this.setObjectValue('dead', true);
@@ -30,7 +37,7 @@ class Enemy extends MoveableObject {
 
     // jsdoc
     isDeath() {
-        return !isLarger(0, this.energy);
+        return !isLarger(0, this.hp);
     }
 
 
@@ -42,7 +49,7 @@ class Enemy extends MoveableObject {
 
     hurt() {
         if (this.isHurt() && isOnTime(world.time, this.lastHit, this.hitDelay)) {
-            this.energy -= 20;
+            this.hp -= 20;
             this.lastHit = world.time + this.hitDelay;
         }
     }
