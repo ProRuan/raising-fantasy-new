@@ -1,5 +1,5 @@
 class Dino extends Enemy {
-    energy = 100;
+    energy = 100;    // to set or defense!!!
     pursuitStop = 0;
     radDispl = 104;
     bodyXY = { xLeft: 4, xCenter: 52, xRight: 100, yTop: 43, yCenter: 65, yBottom: 87 };
@@ -9,7 +9,7 @@ class Dino extends Enemy {
     constructor(x, y) {
         super(source.dino, x, y);
         this.setSpeed(64);    // to move? + value!
-        this.animate();    // to move? + to activate!
+        // this.animate();    // to move? + to activate!
     }
 
 
@@ -42,11 +42,6 @@ class Dino extends Enemy {
         setInterval(() => {
             this.playAnimation();
         }, 100);
-    }
-
-
-    isAttack() {
-        return this.isBattle(world.hero) && !world.hero.isDeath();
     }
 
 
@@ -101,72 +96,5 @@ class Dino extends Enemy {
         if (this.isWalk() && !this.isHurt() && !this.isDeath()) {
             this.x += (this.otherDirection) ? -this.speed : this.speed;
         }
-    }
-
-
-    isIdle() {
-        return true;
-    }
-
-
-
-
-    // jsdoc
-    resetCurrentImage() {
-        if (!this.isSimilarChapter()) {
-            this.setObjectValue('currentImage', 0);
-        }
-    }
-
-
-    // jsdoc
-    isSimilarChapter() {
-        let key = this.getSimilarChapter();
-        let last = this.lastChapter.includes(key);
-        let current = this.chapter.includes(key);
-        return isMatch(last, current);
-    }
-
-
-    // jsdoc
-    getSimilarChapter() {
-        return this.chapter.replace(/[A-Z][a-z]+/, '');
-    }
-
-
-    setChapter() {
-        this.lastChapter = this.chapter;
-        this.chapter = this.getChapter();
-    }
-
-
-    // jsdoc
-    getChapter() {
-        for (let i = 0; i < this.chapters.length; i++) {
-            let condition = this.getCondition(i);
-            if (this.isChapter(condition)) {
-                return this.chapters[i];
-            }
-        }
-    }
-
-
-    // jsdoc
-    getCondition(i) {
-        let condition = this.chapters[i];
-        let initial = condition[0];
-        return 'is' + condition.replace(initial, initial.toUpperCase());
-    }
-
-
-    // jsdoc
-    isChapter(condition) {
-        return this[condition]();
-    }
-
-
-    // jsdoc
-    playAnimation() {
-        super.playAnimation(this.flipBook[this.chapter]);
     }
 }

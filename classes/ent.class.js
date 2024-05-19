@@ -1,16 +1,12 @@
 class Ent extends Enemy {
-    energy = 100;
-    pursuitStop = 0;
+    energy = 100;    // to set or defense!!!
     radDispl = 232;
-    bodyXY = { xLeft: 76, xCenter: 116, xRight: 156, yTop: 92, yCenter: 134, yBottom: 176 };
+    bodyXY = { xLeft: 100, xCenter: 116, xRight: 132, yTop: 92, yCenter: 134, yBottom: 176 };
     weaponXY = { xLeft: 52, xRight: 124, yTop: 112, yBottom: 176 };
 
-    // only for testing!!!
-    chapters = ['epilog', 'death', 'hurt'];
 
     constructor(x, y) {
         super(source.ent, x, y);
-
         this.setSpeed(64);    // to move? + value!
         this.animate();    // to move?
     }
@@ -30,12 +26,25 @@ class Ent extends Enemy {
             this.passAway();
             this.hurt();
 
+            // if (this.isBattle(world.hero)) {
+            //     console.log('bite: ', this.weapon.xLeft - this.xLeft, this.xCenter, this.weapon.xRight - this.xRight);
+            // }
+
+            // this.walk();
+
+            this.setChapter();
+            this.resetCurrentImage();
 
         }, 1000 / 60);
 
 
-        // setInterval(() => {
-        //     this.playAnimation();
-        // }, 100);
+        setInterval(() => {
+            this.playAnimation();
+        }, 100);
+    }
+
+
+    isWalk() {    // to edit!!!
+        return false;
     }
 }

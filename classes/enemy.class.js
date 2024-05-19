@@ -52,4 +52,22 @@ class Enemy extends MoveableObject {
     isHurt() {
         return world.hero.isAttack() && world.hero.isBattle(this);
     }
+
+
+    // jsdoc
+    isAttack() {
+        return this.isBattle(world.hero) && !world.hero.isDeath();
+    }
+
+
+    // jsdoc
+    isIdle() {
+        return true;
+    }
+
+
+    // jsdoc
+    playAnimation() {
+        super.playAnimation(this.flipBook[this.chapter]);
+    }
 }

@@ -245,6 +245,62 @@ class MoveableObject extends DrawableObject {
 
 
 
+    // jsdoc
+    resetCurrentImage() {
+        if (!this.isSimilarChapter()) {
+            this.setObjectValue('currentImage', 0);
+        }
+    }
+
+
+    // jsdoc
+    isSimilarChapter() {
+        let key = this.getSimilarChapter();
+        let last = this.lastChapter.includes(key);
+        let current = this.chapter.includes(key);
+        return isMatch(last, current);
+    }
+
+
+    // jsdoc
+    getSimilarChapter() {
+        return this.chapter.replace(/[A-Z][a-z]+/, '');
+    }
+
+
+    setChapter() {
+        this.lastChapter = this.chapter;
+        this.chapter = this.getChapter();
+    }
+
+
+    // jsdoc
+    getChapter() {
+        for (let i = 0; i < this.chapters.length; i++) {
+            let condition = this.getCondition(i);
+            if (this.isChapter(condition)) {
+                return this.chapters[i];
+            }
+        }
+    }
+
+
+    // jsdoc
+    getCondition(i) {
+        let condition = this.chapters[i];
+        let initial = condition[0];
+        return 'is' + condition.replace(initial, initial.toUpperCase());
+    }
+
+
+    // jsdoc
+    isChapter(condition) {
+        return this[condition]();
+    }
+
+
+
+
     // in use?
     loadImage(flipBook, i) {
         let path = flipBook[i];
