@@ -8,34 +8,18 @@ class Dino extends Enemy {
 
     constructor(x, y) {
         super(source.dino, x, y);
-        this.setSpeed(64);    // to move? + value!
-        // this.animate();    // to move? + to activate!
+        this.setSpeed(64);
+        this.animate();    // to move? + to activate!
     }
 
 
     animate() {
         setInterval(() => {
-            // only for testing!!1
-            if (isKey('keyQ')) {
-                this.setObjectValue('otherDirection', true);
-            }
-            if (isKey('keyE')) {
-                this.setObjectValue('otherDirection', false);
-            }
-
-
             this.passAway();
             this.hurt();
-
-            // if (this.isBattle(world.hero)) {
-            //     console.log('bite: ', this.weapon.xLeft - this.xLeft, this.xCenter, this.weapon.xRight - this.xRight);
-            // }
-
             this.walk();
-
             this.setChapter();
             this.resetCurrentImage();
-
         }, 1000 / 60);
 
 
