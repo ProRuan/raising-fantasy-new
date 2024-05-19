@@ -1,6 +1,7 @@
 class Knight extends Character {
     radDispl = 84;
-    offsetXY = { xLeft: 28, xCenter: 44, xRight: 60, yTop: 62, yCenter: 86, yBottom: 110 };
+    bodyXY = { xLeft: 28, xCenter: 44, xRight: 60, yTop: 62, yCenter: 86, yBottom: 110 };
+    weaponXY = { xLeft: 24, xRight: 60, yTop: 56, yBottom: 104 };
     chapters = ['epilog', 'death', 'hurt', 'climb', 'jump', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'idle', 'cover'];
 
 
@@ -17,16 +18,6 @@ class Knight extends Character {
         this.setSpeed(128, 256);
         this.animate();
         this.applyGravity();
-    }
-
-
-    get weapon() {
-        return {
-            'xLeft': (this.otherDirection) ? this.x + 68 - this.radDispl : this.x + 68,
-            'xRight': (this.otherDirection) ? this.x + 104 - this.radDispl : this.x + 104,
-            'yTop': this.y + 56,
-            'yBottom': this.y + 104
-        }
     }
 
 

@@ -2,7 +2,8 @@ class Dino extends Enemy {
     energy = 100;
     pursuitStop = 0;
     radDispl = 104;
-    offsetXY = { xLeft: 4, xCenter: 52, xRight: 100, yTop: 43, yCenter: 65, yBottom: 87 };
+    bodyXY = { xLeft: 4, xCenter: 52, xRight: 100, yTop: 43, yCenter: 65, yBottom: 87 };
+    weaponXY = { xLeft: 48, xRight: 68, yTop: 52, yBottom: 80 };
 
     chapters = ['epilog', 'death', 'hurt', 'attack', 'walk', 'idle'];
 
@@ -14,19 +15,17 @@ class Dino extends Enemy {
     }
 
 
-    // jsdoc + move?!?
-    get weapon() {
-        return {
-            'xLeft': (this.otherDirection) ? this.x + 96 - this.radDispl - 12 : this.x + 96 + 6,
-            'xRight': (this.otherDirection) ? this.x + 124 - this.radDispl - 12 : this.x + 124 + 6,
-            'yTop': this.y + 52,
-            'yBottom': this.y + 80
-        }
-    }
-
-
     animate() {
         setInterval(() => {
+            // only for testing!!1
+            if (isKey('keyQ')) {
+                this.setObjectValue('otherDirection', true);
+            }
+            if (isKey('keyE')) {
+                this.setObjectValue('otherDirection', false);
+            }
+
+
             this.passAway();
             this.hurt();
 

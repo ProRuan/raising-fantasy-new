@@ -22,12 +22,12 @@ class MoveableObject extends DrawableObject {
     // jsdoc
     get body() {
         return {
-            'xLeft': this.getOffset('x', 'xLeft'),
-            'xCenter': this.getOffset('x', 'xCenter'),
-            'xRight': this.getOffset('x', 'xRight'),
-            'yTop': this.getOffset('y', 'yTop'),
-            'yCenter': this.getOffset('y', 'yCenter'),
-            'yBottom': this.getOffset('y', 'yBottom')
+            'xLeft': this.getBody('x', 'xLeft'),
+            'xCenter': this.getBody('x', 'xCenter'),
+            'xRight': this.getBody('x', 'xRight'),
+            'yTop': this.getBody('y', 'yTop'),
+            'yCenter': this.getBody('y', 'yCenter'),
+            'yBottom': this.getBody('y', 'yBottom')
         }
     }
 
@@ -44,8 +44,8 @@ class MoveableObject extends DrawableObject {
 
 
     // jsdoc
-    getOffset(key, subkey) {
-        return this[key] + this.offsetXY[subkey];
+    getBody(key, subkey) {
+        return this[key] + this.bodyXY[subkey];
     }
 
 
@@ -63,7 +63,13 @@ class MoveableObject extends DrawableObject {
 
     // jsdoc
     getWeaponValue(key, subkey, logical) {
-        return (isUndefined(logical) || isTrue(logical)) ? this[key] + this.weaponXY[subkey] : this[key] - this.weaponXY[subkey];
+        if (isUndefined(logical)) {
+            return this[key] + this.weaponXY[subkey];
+        } else if (isTrue(logical)) {
+            return this.body[key] + this.weaponXY[subkey];
+        } else {
+            return this.body[key] - this.weaponXY[subkey];
+        }
     }
 
 
