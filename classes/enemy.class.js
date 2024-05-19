@@ -67,6 +67,12 @@ class Enemy extends MoveableObject {
 
 
     // jsdoc
+    isFine() {
+        return !(this.isDeath() || this.isHurt() || this.isAttack());
+    }
+
+
+    // jsdoc
     playAnimation() {
         super.playAnimation(this.flipBook[this.chapter]);
     }
