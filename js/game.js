@@ -290,7 +290,7 @@ function isIncluded(a, b, c) {
 
 
 // jsdoc
-function isLarger(a, b, tolerant) {
+function isLarger(a, b, tolerant) {    // rename to isGreater()
     return (!tolerant) ? a < b : a <= b;
 }
 

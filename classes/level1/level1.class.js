@@ -36,9 +36,9 @@ class Level1 {
     // jsdoc
     loadAllSections() {
         this.loadSection(new Section1(), 8);
-        this.loadSection(new Section2(), 0);
+        this.loadSection(new Section2(), 1);
         this.loadSection(new Section3(), 2);
-        this.loadSection(new Section4(), 3);
+        this.loadSection(new Section4(), 0);
         this.loadSection(new Section5(), 4);
         this.loadSection(new Section6(), 5);
         this.loadSection(new Section7(), 6);

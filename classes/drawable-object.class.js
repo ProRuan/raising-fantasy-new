@@ -163,7 +163,7 @@ class DrawableObject {
         }
 
 
-        if (this instanceof Ent) {
+        if (this instanceof Spider) {
             ctx.beginPath();
             ctx.lineWidth = '1';
             ctx.strokeStyle = 'red';
