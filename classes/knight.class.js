@@ -89,7 +89,7 @@ class Knight extends Character {
     isHurt() {
         let enemy = this.world.enemies.find(e => e.isBattle(this));
         if (enemy) {    // variable!!!
-            this.hpPoints.splice(this.hpPoints.length - 1, 1);
+            // this.hpPoints.splice(this.hpPoints.length - 1, 1);    // to activate!
             return true;
         }
     }

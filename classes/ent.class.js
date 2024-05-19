@@ -5,12 +5,13 @@ class Ent extends Enemy {
     bodyXY = { xLeft: 76, xCenter: 116, xRight: 156, yTop: 92, yCenter: 134, yBottom: 176 };
     weaponXY = { xLeft: 52, xRight: 124, yTop: 112, yBottom: 176 };
 
-    chapters = ['epilog', 'death', 'hurt', 'attack', 'walk', 'idle'];
-
+    // only for testing!!!
+    chapters = ['epilog', 'death', 'hurt'];
 
     constructor(x, y) {
         super(source.ent, x, y);
-        // this.setSpeed(64);    // to move?
+
+        this.setSpeed(64);    // to move? + value!
         this.animate();    // to move?
     }
 
@@ -26,6 +27,15 @@ class Ent extends Enemy {
             }
 
 
+            this.passAway();
+            this.hurt();
+
+
         }, 1000 / 60);
+
+
+        // setInterval(() => {
+        //     this.playAnimation();
+        // }, 100);
     }
 }

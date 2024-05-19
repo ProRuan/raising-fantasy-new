@@ -5,13 +5,11 @@ class Dino extends Enemy {
     bodyXY = { xLeft: 4, xCenter: 52, xRight: 100, yTop: 43, yCenter: 65, yBottom: 87 };
     weaponXY = { xLeft: 48, xRight: 68, yTop: 52, yBottom: 80 };
 
-    chapters = ['epilog', 'death', 'hurt', 'attack', 'walk', 'idle'];
-
 
     constructor(x, y) {
         super(source.dino, x, y);
-        this.setSpeed(64);    // to move?
-        this.animate();    // to move?
+        this.setSpeed(64);    // to move? + value!
+        this.animate();    // to move? + to activate!
     }
 
 
@@ -44,43 +42,6 @@ class Dino extends Enemy {
         setInterval(() => {
             this.playAnimation();
         }, 100);
-    }
-
-
-    // jsdoc
-    passAway() {
-        if (this.isEpilog() && isUndefined(this.dead)) {
-            this.setObjectValue('dead', true);
-        }
-    }
-
-
-    isEpilog() {
-        return this.isDeath() && this.img.src.includes('death6');
-    }
-
-
-    isDeath() {
-        return !isLarger(0, this.energy);    // 'death?'
-    }
-
-
-    // jsdoc
-    isFileName(value) {
-        return this.img.src.includes(value);
-    }
-
-
-    isHurt() {
-        return world.hero.isAttack() && world.hero.isBattle();
-    }
-
-
-    hurt() {
-        if (this.isHurt() && isOnTime(world.time, this.lastHit, this.hitDelay)) {
-            this.energy -= 20;
-            this.lastHit = world.time + this.hitDelay;
-        }
     }
 
 

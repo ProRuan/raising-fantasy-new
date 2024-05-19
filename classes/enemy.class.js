@@ -1,6 +1,7 @@
 class Enemy extends MoveableObject {
     otherDirection = true;
     chapter = 'idle';
+    chapters = ['epilog', 'death', 'hurt', 'attack', 'walk', 'idle'];
 
 
     // jsdoc
@@ -10,5 +11,45 @@ class Enemy extends MoveableObject {
         this.setCover(source);    // double code???
         this.setEpilog();    // double code???
         this.loadImages();    // double code???
+    }
+
+
+    // jsdoc
+    passAway() {
+        if (this.isEpilog() && isUndefined(this.dead)) {
+            this.setObjectValue('dead', true);
+        }
+    }
+
+
+    // jsdoc
+    isEpilog() {
+        return this.isDeath() && this.isEpilogImage();
+    }
+
+
+    // jsdoc
+    isDeath() {
+        return !isLarger(0, this.energy);
+    }
+
+
+    // jsdoc
+    isEpilogImage() {
+        return this.img.src.includes('death' + this.flipBook.death.length);
+    }
+
+
+    hurt() {
+        if (this.isHurt() && isOnTime(world.time, this.lastHit, this.hitDelay)) {
+            this.energy -= 20;
+            this.lastHit = world.time + this.hitDelay;
+        }
+    }
+
+
+    // jsdoc
+    isHurt() {
+        return world.hero.isAttack() && world.hero.isBattle(this);
     }
 }
