@@ -1,30 +1,23 @@
 class Dino extends Enemy {
-    pursuitStop = 0;
     radDispl = 104;
     bodyXY = { xLeft: 4, xCenter: 52, xRight: 100, yTop: 43, yCenter: 65, yBottom: 87 };
     weaponXY = { xLeft: 48, xRight: 68, yTop: 52, yBottom: 80 };
+    pursuitStop = 0;
 
 
     constructor(x, y) {
         super(source.dino, x, y);
         this.setStateValues(90, 64);
-        this.animate();    // to move? + to activate!
+        this.setAct('pursue');
+        this.animate();
     }
 
 
-    animate() {
-        setInterval(() => {
-            this.passAway();
-            this.hurt();
-            this.walk();
-            this.setChapter();
-            this.resetCurrentImage();
-        }, 1000 / 60);
-
-
-        setInterval(() => {
-            this.playAnimation();
-        }, 100);
+    // jsdoc
+    pursue() {
+        if (this.isWalk() && this.isFine()) {
+            this.applySpeedType('x', this.otherDirection, 'speed');
+        }
     }
 
 
@@ -70,14 +63,8 @@ class Dino extends Enemy {
     }
 
 
+    // jsdoc
     isWalk() {
-        return this.isPursuing() && !this.isBattle(world.hero);
-    }
-
-
-    walk() {
-        if (this.isWalk() && !this.isHurt() && !this.isDeath()) {
-            this.x += (this.otherDirection) ? -this.speed : this.speed;
-        }
+        return this.isPursuing();
     }
 }

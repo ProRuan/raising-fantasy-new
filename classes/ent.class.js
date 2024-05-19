@@ -12,7 +12,7 @@ class Ent extends Enemy {
         this.setStateValues(120, 48);
         this.setAct('patrol');
         this.setPatrolEndpoints();
-        this.animate();    // to move?
+        this.animate();
     }
 
 
