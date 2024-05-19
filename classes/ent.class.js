@@ -27,13 +27,13 @@ class Ent extends Enemy {
     // jsdoc
     patrol() {
         if (this.isPatrol(this.xWest, this.xCenter, true)) {
-            this.updateParameters(-this.speed, this.otherDirection);
+            this.updateParameters(this.otherDirection, -this.speed);
         } else if (this.isTurn(true)) {
-            this.updateParameters(0, false);
+            this.updateParameters(false, 0);
         } else if (this.isPatrol(this.xCenter, this.xEast, false)) {
-            this.updateParameters(this.speed, this.otherDirection);
+            this.updateParameters(this.otherDirection, this.speed);
         } else if (this.isTurn(false)) {
-            this.updateParameters(0, true);
+            this.updateParameters(true, 0);
         }
     }
 
@@ -45,11 +45,17 @@ class Ent extends Enemy {
 
 
     // jsdoc
-    updateParameters(speed, logical) {
+    updateParameters(logical, speed) {
+        this.otherDirection = logical;
         this.lastTurn = getTime();
+        this.updateSpeed(speed);
+    }
+
+
+    // jsdoc
+    updateSpeed(speed) {
         if (this.isFine()) {
             this.x += speed;
-            this.otherDirection = logical;
         }
     }
 
