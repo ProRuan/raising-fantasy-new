@@ -11,13 +11,24 @@ class Spider extends Enemy {
     // jsdoc
     constructor(x, y) {
         super(source.spider, x, y);
-        this.throwMaxLeft = this.weapon.xLeft;
-        this.otherDirection = false;
-        this.throwMaxRight = this.weapon.xRight;
-        this.otherDirection = true;
         this.setStateValues(60, 80);
+        this.setThrowMax();
         this.setAct('throw');
         this.animate();
+    }
+
+
+    // jsdoc
+    setThrowMax() {
+        this.throwMaxRight = this.getThrowMax(false, 'xRight');
+        this.throwMaxLeft = this.getThrowMax(true, 'xLeft');
+    }
+
+
+    // jsdoc
+    getThrowMax(value, key) {
+        this.otherDirection = value;
+        return this.weapon[key];
     }
 
 
