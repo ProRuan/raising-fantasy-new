@@ -33,16 +33,11 @@ class Spider extends Enemy {
 
 
     throw() {
-        if (!isLarger(this.body.xCenter, world.hero.body.xCenter)) {
-            this.otherDirection = true;
-        } else {
-            this.otherDirection = false;
-        }
+        this.track();
 
-        if (
-            (world.webs[this.webId] !== undefined && world.webs[this.webId].otherDirection == true && world.webs[this.webId].x < this.throwMaxLeft) ||
-            (world.webs[this.webId] !== undefined && world.webs[this.webId].otherDirection == false && this.throwMaxRight < world.webs[this.webId].x + world.webs[this.webId].width)
-        ) {
+        let web = this.getWeb();
+
+        if (this.isThrowMax(web, true) || this.isThrowMax(web, false)) {
             console.log('too far', world.webs[this.webId].otherDirection, this.throwMaxRight);
             world.webs.splice(this.webId, 1);
             this.thrown = false;
@@ -82,6 +77,40 @@ class Spider extends Enemy {
 
             // for class Web!!!
             // world.webs[0].img.src = world.webs[0].flipBook[2];
+        }
+    }
+
+
+    // jsdoc
+    track() {
+        let thisX = this.body.xCenter;
+        let heroX = world.hero.body.xCenter;
+        this.otherDirection = (!isLarger(thisX, heroX)) ? true : false;
+    }
+
+
+    // jsdoc
+    getWeb() {
+        return world.webs[this.webId];
+    }
+
+
+    // jsdoc
+    isThrowMax(web, logical) {
+        if (isTrue(logical)) {
+            return this.isWebExisting(web, true) && isLarger(web.x, this.throwMaxLeft);
+        } else if (!isTrue(logical)) {
+            return this.isWebExisting(web, false) && isLarger(this.throwMaxRight, web.x + web.width);
+        }
+    }
+
+
+    // jsdoc
+    isWebExisting(web, logical) {
+        if (isTrue(logical)) {
+            return !isUndefined(web) && isTrue(web.otherDirection);
+        } else if (!isTrue(logical)) {
+            return !isUndefined(web) && !isTrue(web.otherDirection);
         }
     }
 
