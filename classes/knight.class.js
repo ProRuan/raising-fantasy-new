@@ -62,6 +62,9 @@ class Knight extends Character {
 
         setInterval(() => {
             // console.log(this.chapter, this.currentImage);
+            if (this.chapter == 'hurt') {
+                console.log(this.img.src, world.webs[0].img.src);
+            }
 
 
             // is ready!!!
@@ -88,8 +91,12 @@ class Knight extends Character {
 
     isHurt() {
         let enemy = this.world.enemies.find(e => e.isBattle(this));
-        if (enemy) {    // variable!!!
+        if (enemy && !enemy instanceof Spider) {    // variable!!!, is it working for dino and ent?
             // this.hpPoints.splice(this.hpPoints.length - 1, 1);    // to activate!
+            return true;
+        }
+        let web = this.world.webs.find(w => isCollided(this.body, w));
+        if (web) {
             return true;
         }
     }

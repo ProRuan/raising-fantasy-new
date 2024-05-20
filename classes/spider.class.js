@@ -3,6 +3,7 @@ class Spider extends Enemy {
     bodyXY = { xLeft: 40, xCenter: 64, xRight: 88, yTop: 46, yCenter: 65, yBottom: 84 };
     weaponXY = { xLeft: 36, xRight: 424, yTop: 52, yBottom: 76 };
     thrown = false;
+    removeableWeb = false;
     nextThrow = 2500 + getTime();
 
 
@@ -25,10 +26,16 @@ class Spider extends Enemy {
             this.thrown = false;
             this.nextThrow = 250 + getTime();
         } else if (world.webs[this.webId] !== undefined && world.webs[this.webId].collided && world.webs[this.webId].img.src.includes('web5')) {
-            world.webs.splice(this.webId, 1);
-            console.log('collided');
-            this.thrown = false;
-            this.nextThrow = 250 + getTime();
+            if (this.removeableWeb == false && world.webs[this.webId].img.src.includes('web5')) {
+                this.removeableWeb = true;
+                setTimeout(() => {
+                    world.webs.splice(this.webId, 1);
+                    console.log('collided');
+                    this.thrown = false;
+                    this.nextThrow = 250 + getTime();
+                    this.removeableWeb = false;
+                }, 75);
+            }
         } else if (this.isAttack() && this.thrown == false && isLarger(this.nextThrow, world.time)) {
             this.thrown = true;
             // let web = new Web((this.weapon.xLeft) / 64, (this.weapon.yBottom + 32) / 64);    // oDir false

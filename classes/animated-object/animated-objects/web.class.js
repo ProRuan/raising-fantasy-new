@@ -51,7 +51,9 @@ class Web extends AnimatedObject {
 
 
     playAnimation() {
-        if (isTrue(this.collided)) {
+        if (isTrue(this.collided && this.img.src.includes('web5'))) {
+            this.img.src = this.flipBook[this.flipBook.length - 1];
+        } else if (isTrue(this.collided)) {
             super.playAnimation(this.flipBook.epilog);
         } else if (isTrue(this.thrown)) {
             super.playAnimation(this.flipBook.throw);
@@ -65,6 +67,10 @@ class Web extends AnimatedObject {
     verifyCollision() {
         if (isCollided(world.hero.body, this)) {
             this.collided = true;
+            if (!this.currentImageSet) {
+                this.currentImageSet = true;
+                this.currentImage = 0;
+            }
         }
     }
 }
