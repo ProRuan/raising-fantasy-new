@@ -38,30 +38,24 @@ class Spider extends Enemy {
         let web = this.getWeb();
 
         if (this.isThrowMax(web, true) || this.isThrowMax(web, false)) {
-            console.log('too far', world.webs[this.webId].otherDirection, this.throwMaxRight);
             world.webs.splice(this.webId, 1);
             this.thrown = false;
             this.nextThrow = 500 + getTime();
-        } else if (world.webs[this.webId] !== undefined && world.webs[this.webId].collided && world.webs[this.webId].img.src.includes('web5')) {
-            if (this.removeableWeb == false && world.webs[this.webId].img.src.includes('web5')) {
-                this.removeableWeb = true;
-                setTimeout(() => {
-                    world.webs.splice(this.webId, 1);
-                    console.log('collided');
-                    this.thrown = false;
-                    this.nextThrow = 500 + getTime();
-                    this.removeableWeb = false;
-                }, 100 / 3);
-            }
+        } else if (!isUndefined(web) && isTrue(web.collided) && this.isFinalImage(web) && !isTrue(this.removeableWeb)) {
+            this.removeableWeb = true;
+            setTimeout(() => {
+                world.webs.splice(this.webId, 1);
+                this.thrown = false;
+                this.nextThrow = 500 + getTime();
+                this.removeableWeb = false;
+            }, 100 / 3);
         } else if (super.isAttack() && this.thrown == false && isLarger(this.nextThrow, world.time)) {
             this.thrown = true;
             this.throwDone = false;
             setTimeout(() => {
                 this.throwDone = true;
             }, this.flipBook.attack.length * 100);
-            // let web = new Web((this.weapon.xLeft) / 64, (this.weapon.yBottom + 32) / 64);    // oDir false
-            // let web = new Web((this.weapon.xRight - 32) / 64, (this.weapon.yBottom + 32) / 64);    // oDir true
-            // let web = new Web((this.weapon.xLeft), (this.weapon.yBottom + 32));    // oDir true (left end)
+
             let web;
             if (isTrue(this.otherDirection)) {
                 web = new Web((this.weapon.xRight - 24), (this.weapon.yBottom + 32));    // oDir true (left end)
@@ -115,6 +109,11 @@ class Spider extends Enemy {
     }
 
 
+    isFinalImage(web) {    // double code?!?
+        return web.img.src.includes('web5');
+    }
+
+
     isAttack() {    // maybe with counter + fix spider attack!!!
         return super.isAttack() && this.throwDone == false;
     }
@@ -123,4 +122,15 @@ class Spider extends Enemy {
     isWalk() {    // to edit!
         return false;
     }
+
+
+
+
+    // ideas
+    // -----
+
+    // Save web at object spider (not at level world) ...
+
+    // super.isEpilog(value) + this.isEpilog() --> super.isEpilog('web5')
+    // super.effect(value) + this.effect
 }
