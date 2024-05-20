@@ -40,7 +40,8 @@ class Web extends AnimatedObject {
 
     animate() {
         setInterval(() => {
-            this.x -= 2;
+            (this.otherDirection) ? this.x -= 2 : this.x += 2;
+            // this.x -= 2;
             this.verifyCollision();
         }, 1000 / 60);
 
