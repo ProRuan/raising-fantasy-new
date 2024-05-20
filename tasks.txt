@@ -64,6 +64,8 @@ Tasks
   - enemies sounds ...
   - enemies x + y for all sections ...
 
+  - use new includes function (double code!!!) ... (notice class Web)
+
   - this notes ... ... ...
 
   - clean coding: use if else for long statements ...
@@ -71,14 +73,15 @@ Tasks
   - clean coding: use method by key ( this[method]() ) ...
 
 
-Clean Coding (35/59)
+Clean Coding (36/59)
 ------------
   - class AnimatedObjects ...
-      - class ... (4x)
+      - class ... (3x)
       - class Coin - simpleCheck
       - class Crystals - simpleCheck
       - class Heart - simpleCheck
       - class HitPoint - simpleCheck
+      - class Web - simpleCheck
   - class Grass - simpleCheck
       - class GrassLeft, GrassCenter, GrassRight - simpleCheck (3x)
       - class FlyingGrassLeft, FlyingGrassCenter, FlyingGrassRight - simpleCheck (3x)

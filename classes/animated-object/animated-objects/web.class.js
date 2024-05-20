@@ -78,9 +78,10 @@ class Web extends AnimatedObject {
     }
 
 
+    // jsdoc
     playAnimation() {
-        if (isTrue(this.collided && this.img.src.includes('web5'))) {
-            this.img.src = this.flipBook[this.flipBook.length - 1];
+        if (this.isFinalImage()) {
+            this.setFinalImage();
         } else if (isTrue(this.collided)) {
             super.playAnimation(this.flipBook.epilog);
         } else if (isTrue(this.thrown)) {
@@ -89,5 +90,17 @@ class Web extends AnimatedObject {
             super.playAnimation(this.flipBook.prolog);
             this.thrown = true;
         }
+    }
+
+
+    // jsdoc
+    isFinalImage() {
+        return isTrue(this.collided) && includes(this.img.src, 'web5');
+    }
+
+
+    // jsdoc
+    setFinalImage() {
+        this.img.src = getLastElement(this.flipBook);
     }
 }

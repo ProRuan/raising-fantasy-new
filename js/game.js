@@ -326,6 +326,12 @@ function isOnTime(current, last, value) {
 
 
 // jsdoc
+function getLastElement(array) {
+    return array[array.length - 1];
+}
+
+
+// jsdoc
 function getLastIndex(array) {
     return array.length - 1;
 }
@@ -340,4 +346,10 @@ function getVerifiedValue(valueA, valueB) {
 // jsdoc
 function getSum(summandA, summandB) {
     return summandA + summandB;
+}
+
+
+// jsdoc
+function includes(object, text) {
+    return object['includes'](text);
 }
