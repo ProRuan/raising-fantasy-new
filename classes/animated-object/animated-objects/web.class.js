@@ -1,53 +1,80 @@
 class Web extends AnimatedObject {
     radDispl = 32;
+    speed = 2;
     thrown = false;
     collided = false;
 
 
-    constructor(x, y) {
+    // jsdoc
+    constructor(x, y, otherDirection) {
         super(source.web, x / UNIT, y / UNIT);
-
+        this.setParameters(otherDirection);
         this.splitFlipBook();
         this.animate();
     }
 
 
+    // jsdoc
+    setParameters(otherDirection) {
+        this.otherDirection = otherDirection;
+        this.speed = (otherDirection) ? -this.speed : this.speed;
+    }
+
+
+    // jsdoc
     splitFlipBook() {
-        this.setProlog();
-        this.setThrow();
-        this.setEpilog();
+        this.flipBook.prolog = this.getPages(0, 1);
+        this.flipBook.throw = this.getPages(1, 2);
+        this.flipBook.epilog = this.getPages(2, 5);
     }
 
 
-    setProlog() {
-        this.flipBook.prolog = [this.flipBook[0]];
+    // jsdoc
+    getPages(i, max) {
+        let pages = [];
+        this.addPages(i, max, pages);
+        return pages;
     }
 
 
-    setThrow() {
-        this.flipBook.throw = [this.flipBook[1]];
-    }
-
-
-    setEpilog() {
-        this.flipBook.epilog = [];
-        for (let i = 2; i < this.flipBook.length; i++) {
-            let chapter = this.flipBook[i];
-            this.flipBook.epilog.push(chapter);
+    // jsdoc
+    addPages(i, max, pages) {
+        for (; i < max; i++) {
+            let page = this.flipBook[i];
+            pages.push(page);
         }
     }
 
 
+    // jsdoc
     animate() {
-        setInterval(() => {
-            (this.otherDirection) ? this.x -= 2 : this.x += 2;
-            // this.x -= 2;
-            this.verifyCollision();
-        }, 1000 / 60);
+        this.setStoppableInterval(() => this.throw(), 1000 / 60);
+        this.setStoppableInterval(() => this.playAnimation(), 100);
+    }
 
-        setInterval(() => {
-            this.playAnimation();
-        }, 100);
+
+    // jsdoc
+    throw() {
+        this.x += this.speed;
+        this.verifyCollision();
+    }
+
+
+    // jsdoc
+    verifyCollision() {
+        if (isCollided(world.hero.body, this)) {
+            this.collided = true;
+            this.resetCurrentImage();
+        }
+    }
+
+
+    // jsdoc
+    resetCurrentImage() {
+        if (!this.currentImageSet) {
+            this.currentImageSet = true;
+            this.currentImage = 0;
+        }
     }
 
 
@@ -63,23 +90,4 @@ class Web extends AnimatedObject {
             this.thrown = true;
         }
     }
-
-
-    verifyCollision() {
-        if (isCollided(world.hero.body, this)) {
-            this.collided = true;
-            if (!this.currentImageSet) {
-                this.currentImageSet = true;
-                this.currentImage = 0;
-            }
-        }
-    }
-
-
-
-
-    // ideas
-    // -----
-    // super.isEpilog(value) + this.isEpilog() --> super.isEpilog('web5')
-    // super.effect(value) + this.effect
 }

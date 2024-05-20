@@ -56,7 +56,7 @@ class Spider extends Enemy {
             this.processWebBurst();
         } else if (this.isThrowTime()) {
             this.processWebThrow();
-            this.adjustWeb();
+            this.setWeb();
         }
     }
 
@@ -152,17 +152,10 @@ class Spider extends Enemy {
 
 
     // jsdoc
-    adjustWeb() {
-        this.web = this.getWeb();
-        this.web.otherDirection = this.otherDirection;
-    }
-
-
-    // jsdoc
-    getWeb() {
+    setWeb() {
         let x = this.getWebX(this.otherDirection);
         let y = this.getWebY(this.otherDirection);
-        return new Web(x, y);
+        this.web = new Web(x, y, this.otherDirection);
     }
 
 
