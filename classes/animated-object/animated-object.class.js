@@ -64,6 +64,15 @@ class AnimatedObject extends DrawableObject {
     }
 
 
+
+    playAnimation(images) {    // double code!!!
+        let i = this.currentImage % images.length;
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+    }
+
+
     setSound() {
         let chapter = this.getChapter();
         if (source[chapter].sound) {
