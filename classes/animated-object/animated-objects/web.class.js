@@ -74,4 +74,12 @@ class Web extends AnimatedObject {
             }
         }
     }
+
+
+
+
+    // ideas
+    // -----
+    // super.isEpilog(value) + this.isEpilog() --> super.isEpilog('web5')
+    // super.effect(value) + this.effect
 }
