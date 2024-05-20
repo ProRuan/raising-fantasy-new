@@ -19,7 +19,17 @@ class Spider extends Enemy {
 
 
     throw() {
-        if (this.thrown == false && isLarger(this.nextThrow, world.time)) {
+        if (world.webs[this.webId] !== undefined && world.webs[this.webId].x < this.weapon.xLeft) {
+            world.webs.splice(this.webId, 1);
+            console.log('too far');
+            this.thrown = false;
+            this.nextThrow = 250 + getTime();
+        } else if (world.webs[this.webId] !== undefined && world.webs[this.webId].collided && world.webs[this.webId].img.src.includes('web5')) {
+            world.webs.splice(this.webId, 1);
+            console.log('collided');
+            this.thrown = false;
+            this.nextThrow = 250 + getTime();
+        } else if (this.isAttack() && this.thrown == false && isLarger(this.nextThrow, world.time)) {
             this.thrown = true;
             // let web = new Web((this.weapon.xLeft) / 64, (this.weapon.yBottom + 32) / 64);    // oDir false
             // let web = new Web((this.weapon.xRight - 32) / 64, (this.weapon.yBottom + 32) / 64);    // oDir true
@@ -33,24 +43,11 @@ class Spider extends Enemy {
 
             // for class Web!!!
             // world.webs[0].img.src = world.webs[0].flipBook[2];
-        } else if (world.webs[this.webId] !== undefined) {
-            if (world.webs[this.webId].collided && world.webs[this.webId].img.src.includes('web5')) {
-                world.webs.splice(this.webId, 1);
-                console.log('deleted');
-                this.thrown = false;
-                this.nextThrow = 1000 + getTime();
-            }
-            if (world.webs[this.webId].x < this.weapon.xLeft) {
-                world.webs.splice(this.webId, 1);
-                console.log('too far');
-                this.thrown = false;
-                this.nextThrow = 1000 + getTime();
-            }
         }
     }
 
 
-    // isAttack() {
+    // isAttack() {    // maybe with counter + fix spider attack!!!
 
     // }
 
