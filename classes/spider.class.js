@@ -109,7 +109,7 @@ class Spider extends Enemy {
 
     // jsdoc
     isWebBroken() {
-        return this.isFinalImage(this.web) && !isTrue(this.webBroken);
+        return !isTrue(this.webBroken);
     }
 
 
@@ -119,7 +119,7 @@ class Spider extends Enemy {
         setTimeout(() => {
             this.resetThrowParameters();
             this.webBroken = false;
-        }, 100 / 3);
+        }, 300);
     }
 
 
@@ -176,15 +176,6 @@ class Spider extends Enemy {
     getWebY() {
         return this.weapon.yBottom + 32;
     }
-
-
-
-
-    isFinalImage(web) {    // double code?!?
-        return web.img.src.includes('web5');
-    }
-
-
 
 
     // jsdoc
