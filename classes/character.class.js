@@ -69,7 +69,7 @@ class Character extends MoveableObject {
     // jsdoc
     playJumpNext(i) {
         if (isMatch(i, 0) || isMatch(i, 3)) {
-            setTimeout(() => this.playJump(++i), 200 / 6);
+            setTimeout(() => this.playJump(++i), 100 / 3);
         }
     }
 

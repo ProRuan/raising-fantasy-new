@@ -3,6 +3,7 @@ class Spider extends Enemy {
     bodyXY = { xLeft: 40, xCenter: 64, xRight: 88, yTop: 46, yCenter: 65, yBottom: 84 };
     weaponXY = { xLeft: 36, xRight: 424, yTop: 52, yBottom: 76 };
     thrown = false;
+    throwDone = true;
     removeableWeb = false;
     nextThrow = 2500 + getTime();
 
@@ -34,10 +35,14 @@ class Spider extends Enemy {
                     this.thrown = false;
                     this.nextThrow = 250 + getTime();
                     this.removeableWeb = false;
-                }, 75);
+                }, 100 / 3);
             }
-        } else if (this.isAttack() && this.thrown == false && isLarger(this.nextThrow, world.time)) {
+        } else if (super.isAttack() && this.thrown == false && isLarger(this.nextThrow, world.time)) {
             this.thrown = true;
+            this.throwDone = false;
+            setTimeout(() => {
+                this.throwDone = true;
+            }, this.flipBook.attack.length * 100);
             // let web = new Web((this.weapon.xLeft) / 64, (this.weapon.yBottom + 32) / 64);    // oDir false
             // let web = new Web((this.weapon.xRight - 32) / 64, (this.weapon.yBottom + 32) / 64);    // oDir true
             // let web = new Web((this.weapon.xLeft), (this.weapon.yBottom + 32));    // oDir true (left end)
@@ -54,9 +59,9 @@ class Spider extends Enemy {
     }
 
 
-    // isAttack() {    // maybe with counter + fix spider attack!!!
-
-    // }
+    isAttack() {    // maybe with counter + fix spider attack!!!
+        return super.isAttack() && this.throwDone == false;
+    }
 
 
     isWalk() {    // to edit!
