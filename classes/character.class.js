@@ -40,11 +40,11 @@ class Character extends MoveableObject {
     playJumpAnimation() {
         if (this.isJumpPhase(0)) {
             this.playJump(0, true);
-        } else if (this.isJumpPhase(1) && isLarger(0, this.speedY)) {
+        } else if (this.isJumpPhase(1) && isGreater(0, this.speedY)) {
             this.playJump(2);
         } else if (this.isJumpPhase(1)) {
             this.playJump(3, true);
-        } else if (this.isJumpPhase(2) && isLarger(this.speedY, 0)) {
+        } else if (this.isJumpPhase(2) && isGreater(this.speedY, 0)) {
             this.playJump(5);
         } else if (this.isJumpPhase(2)) {
             this.playJump(6, false);
@@ -124,7 +124,7 @@ class Character extends MoveableObject {
 
     // jsdoc
     isAttack() {
-        return isKey('keyA') && isLarger(0, world.hero.staminaPoints.length);
+        return isKey('keyA') && isGreater(0, world.hero.staminaPoints.length);
     }
 
 

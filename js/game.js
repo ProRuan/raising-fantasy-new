@@ -162,10 +162,10 @@ function processKeydown(event) {    // check doubleClick!!!
             world[volumeButtons[volumeButtonsId]].selected = false;
             volumeButtonsId = (musicButtons) ? 0 : 2;
             world[volumeButtons[volumeButtonsId]].selected = true;
-            if (volumeButtonsId == 0 && isLarger(0, music)) {
+            if (volumeButtonsId == 0 && isGreater(0, music)) {
                 music--;
             }
-            if (volumeButtonsId == 2 && isLarger(0, sound)) {
+            if (volumeButtonsId == 2 && isGreater(0, sound)) {
                 sound--;
             }
         }
@@ -173,10 +173,10 @@ function processKeydown(event) {    // check doubleClick!!!
             world[volumeButtons[volumeButtonsId]].selected = false;
             volumeButtonsId = (musicButtons) ? 1 : 3;
             world[volumeButtons[volumeButtonsId]].selected = true;
-            if (volumeButtonsId == 1 && isLarger(music, 9)) {
+            if (volumeButtonsId == 1 && isGreater(music, 9)) {
                 music++;
             }
-            if (volumeButtonsId == 3 && isLarger(sound, 9)) {
+            if (volumeButtonsId == 3 && isGreater(sound, 9)) {
                 sound++;
             }
         }
@@ -285,12 +285,12 @@ function isIncluded2D(m, o) {
 
 // jsdoc
 function isIncluded(a, b, c) {
-    return isLarger(a, b) && isLarger(b, c);
+    return isGreater(a, b) && isGreater(b, c);
 }
 
 
 // jsdoc
-function isLarger(a, b, tolerant) {    // rename to isGreater()
+function isGreater(a, b, tolerant) {    // rename to isGreater()
     return (!tolerant) ? a < b : a <= b;
 }
 
@@ -339,7 +339,7 @@ function getLastIndex(array) {
 
 // jsdoc
 function getVerifiedValue(valueA, valueB) {
-    return isLarger(valueA, valueB) ? valueA : valueB;
+    return isGreater(valueA, valueB) ? valueA : valueB;
 }
 
 

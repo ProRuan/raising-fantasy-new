@@ -40,7 +40,7 @@ class Ent extends Enemy {
 
     // jsdoc
     isPatrol(valueA, valueB, logical) {
-        return isLarger(valueA, valueB) && this.isOtherDirection(logical);
+        return isGreater(valueA, valueB) && this.isOtherDirection(logical);
     }
 
 

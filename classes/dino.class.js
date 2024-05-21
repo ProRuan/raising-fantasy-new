@@ -85,10 +85,10 @@ class Dino extends Enemy {
     isTrigger(logical) {
         if (isTrue(logical)) {
             let heroX = getSum(world.hero.xCenter, this.biteDistance);
-            return !isLarger(heroX, this.xCenter);
+            return !isGreater(heroX, this.xCenter);
         } else if (!isTrue(logical)) {
             let heroX = getSum(world.hero.xCenter, -this.biteDistance);
-            return isLarger(heroX, this.xCenter);
+            return isGreater(heroX, this.xCenter);
         }
     }
 

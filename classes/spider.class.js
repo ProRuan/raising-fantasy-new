@@ -44,7 +44,7 @@ class Spider extends Enemy {
     track() {
         let thisX = this.body.xCenter;
         let heroX = world.hero.body.xCenter;
-        this.otherDirection = (!isLarger(thisX, heroX)) ? true : false;
+        this.otherDirection = (!isGreater(thisX, heroX)) ? true : false;
     }
 
 
@@ -70,9 +70,9 @@ class Spider extends Enemy {
     // jsdoc
     isThrowMax(web, logical) {
         if (isTrue(logical)) {
-            return this.isWebExisting(web, true) && isLarger(web.x, this.throwMaxLeft);
+            return this.isWebExisting(web, true) && isGreater(web.x, this.throwMaxLeft);
         } else if (!isTrue(logical)) {
-            return this.isWebExisting(web, false) && isLarger(this.throwMaxRight, web.x + web.width);
+            return this.isWebExisting(web, false) && isGreater(this.throwMaxRight, web.x + web.width);
         }
     }
 
@@ -131,7 +131,7 @@ class Spider extends Enemy {
 
     // jsdoc
     isThrowReady() {
-        return !isTrue(this.thrown) && isLarger(this.nextThrow, world.time);
+        return !isTrue(this.thrown) && isGreater(this.nextThrow, world.time);
     }
 
 

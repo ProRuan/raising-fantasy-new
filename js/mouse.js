@@ -108,13 +108,13 @@ function clickArrowButton(event, name) {
 
 
 function updateVolume(event, name) {
-    if (isMouseEvent(event, world[name]) && isMatch(name, 'lowMusicButton') && isLarger(0, music)) {
+    if (isMouseEvent(event, world[name]) && isMatch(name, 'lowMusicButton') && isGreater(0, music)) {
         music--;
-    } else if (isMouseEvent(event, world[name]) && isMatch(name, 'highMusicButton') && isLarger(music, 9)) {
+    } else if (isMouseEvent(event, world[name]) && isMatch(name, 'highMusicButton') && isGreater(music, 9)) {
         music++;
-    } else if (isMouseEvent(event, world[name]) && isMatch(name, 'lowSoundButton') && isLarger(0, sound)) {
+    } else if (isMouseEvent(event, world[name]) && isMatch(name, 'lowSoundButton') && isGreater(0, sound)) {
         sound--;
-    } else if (isMouseEvent(event, world[name]) && isMatch(name, 'highSoundButton') && isLarger(sound, 9)) {
+    } else if (isMouseEvent(event, world[name]) && isMatch(name, 'highSoundButton') && isGreater(sound, 9)) {
         sound++;
     }
 }

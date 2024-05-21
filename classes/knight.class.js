@@ -83,7 +83,7 @@ class Knight extends Character {
 
 
     isDeath() {
-        return !isLarger(0, this.hpPoints.length);
+        return !isGreater(0, this.hpPoints.length);
     }
 
 
@@ -147,7 +147,7 @@ class Knight extends Character {
 
     // jsdoc
     isJump() {
-        return isLarger(-1, this.jumpCounter);
+        return isGreater(-1, this.jumpCounter);
     }
 
 
@@ -331,6 +331,6 @@ class Knight extends Character {
 
     // jsdoc
     isAboveGrass(g) {
-        return isLarger(this.body.yBottom, g.yTop, true);
+        return isGreater(this.body.yBottom, g.yTop, true);
     }
 }

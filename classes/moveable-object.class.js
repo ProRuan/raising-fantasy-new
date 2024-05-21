@@ -218,7 +218,7 @@ class MoveableObject extends DrawableObject {
     // jsdoc
     isLadder(key, l) {
         let [a, b] = this.getLadderParameters(key, l);
-        return isIncluded(this.body.xLeft, l.xCenter, this.body.xRight) && isLarger(a, b - 0.5);
+        return isIncluded(this.body.xLeft, l.xCenter, this.body.xRight) && isGreater(a, b - 0.5);
     }
 
 

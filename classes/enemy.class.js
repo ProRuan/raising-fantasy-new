@@ -60,7 +60,7 @@ class Enemy extends MoveableObject {
 
     // jsdoc
     isDeath() {
-        return !isLarger(0, this.hp);
+        return !isGreater(0, this.hp);
     }
 
 
