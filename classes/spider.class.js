@@ -13,7 +13,6 @@ class Spider extends Enemy {
     constructor(x, y) {
         super(source.spider, x, y);
         this.setStateValues(60, 80);
-        this.setThrowMax();
         this.setAct('throw');
         this.animate();
     }
@@ -21,8 +20,18 @@ class Spider extends Enemy {
 
     // jsdoc
     setThrowMax() {
-        this.throwMaxRight = this.getThrowMax(false, 'xRight');
-        this.throwMaxLeft = this.getThrowMax(true, 'xLeft');
+        if (isUndefined(this.throwMaxRight)) {
+            this.throwMaxRight = this.getThrowMax(false, 'xRight');
+            this.throwMaxLeft = this.getThrowMax(true, 'xLeft');
+        }
+    }
+
+
+    // jsdoc
+    throw() {
+        this.setThrowMax();
+        this.track();
+        this.trigger();
     }
 
 
@@ -30,13 +39,6 @@ class Spider extends Enemy {
     getThrowMax(value, key) {
         this.otherDirection = value;
         return this.weapon[key];
-    }
-
-
-    // jsdoc
-    throw() {
-        this.track();
-        this.trigger();
     }
 
 

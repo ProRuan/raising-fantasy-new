@@ -42,7 +42,7 @@ class Section3 {
     // jsdoc
     setCoins() {
         this.coins = [
-            new Coin(2, 1.125), new Coin(5.5, 1.125), new Coin(14, 1.125)
+            new Coin(2, 1.125), new Coin(5.5, 1.125), new Coin(8.25, 1.125), new Coin(11.25, 1.125)
         ];
     }
 

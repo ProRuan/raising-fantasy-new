@@ -7,6 +7,7 @@ class Knight extends Character {
 
     footStep = source.footStep;
     swordDraw = source.swordDraw;
+    testAudio = new Audio(this.swordDraw);
 
 
     constructor(x, y) {
@@ -19,6 +20,16 @@ class Knight extends Character {
 
     animate() {
         setInterval(() => {
+
+            if (isKey('keyA')) {
+                this.testAudio.currentTime = 0.2;
+                this.testAudio.play();
+                console.log(this.testAudio.currentTime);
+            }
+            if (this.testAudio.currentTime > 0.6) {
+                this.testAudio.pause();
+            }
+
             this.resetJumpCounter();
 
             // only for testing!!!
@@ -59,6 +70,9 @@ class Knight extends Character {
         setInterval(() => {
             // console.log(this.chapter, this.currentImage);
 
+            if (!this.testAudio.ended) {
+                console.log(this.testAudio.currentTime);
+            }
 
             // is ready!!!
             // -----------

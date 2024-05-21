@@ -12,20 +12,13 @@ class Ent extends Enemy {
         super(source.ent, x, y);
         this.setStateValues(120, 48);
         this.setAct('patrol');
-        this.setPatrolEndpoints();
         this.animate();
     }
 
 
     // jsdoc
-    setPatrolEndpoints() {
-        this.xWest = getSum(this.xCenter, -this.patrolDistance);
-        this.xEast = getSum(this.xCenter, this.patrolDistance)
-    }
-
-
-    // jsdoc
     patrol() {
+        this.setPatrolEndpoints();
         if (this.isPatrol(this.xWest, this.xCenter, true)) {
             this.updateParameters(this.otherDirection, -this.speed);
         } else if (this.isTurn(true)) {
@@ -34,6 +27,15 @@ class Ent extends Enemy {
             this.updateParameters(this.otherDirection, this.speed);
         } else if (this.isTurn(false)) {
             this.updateParameters(true, 0);
+        }
+    }
+
+
+    // jsdoc
+    setPatrolEndpoints() {
+        if (isUndefined(this.xWest)) {
+            this.xWest = getSum(this.xCenter, -this.patrolDistance);
+            this.xEast = getSum(this.xCenter, this.patrolDistance);
         }
     }
 
