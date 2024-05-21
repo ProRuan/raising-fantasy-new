@@ -11,8 +11,6 @@ class MoveableObject extends DrawableObject {
     lastHit = 0;
     hitDelay = 500;
 
-    sounds = [];
-
 
     constructor(path, x, y) {
         super(path, x, y);
@@ -151,13 +149,6 @@ class MoveableObject extends DrawableObject {
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
-    }
-
-
-    playSound(path) {    // set sound volume factor!!!
-        let sound = new Audio(path);
-        this.sounds.push(sound);
-        sound.play();
     }
 
 

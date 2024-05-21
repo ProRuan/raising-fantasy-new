@@ -7,10 +7,6 @@ class Knight extends Character {
 
     footStep = source.footStep;
     swordDraw = source.swordDraw;
-    // edit sound structure and methods!!!
-    // fix sound
-    // fix sound volume (factor)
-    // choose heart sound
 
 
     constructor(x, y) {
@@ -67,8 +63,7 @@ class Knight extends Character {
             // is ready!!!
             // -----------
             this.playAnimation();
-            this.playSound();
-            this.controlSounds();
+            // this.playSound();
         }, 100);
     }
 
@@ -191,18 +186,18 @@ class Knight extends Character {
     }
 
 
-    playSound() {    // add sound volume factor!!!
-        this.playSoundOnTrigger('run_attack2', this.footStep);
-        this.playSoundOnTrigger('run_attack6', this.footStep);
-        this.playSoundOnTrigger('run2', this.footStep);
-        this.playSoundOnTrigger('run6', this.footStep);
-        this.playSoundOnTrigger('walk_attack2', this.footStep);
-        this.playSoundOnTrigger('walk_attack5', this.footStep);
-        this.playSoundOnTrigger('walk2', this.footStep);
-        this.playSoundOnTrigger('walk5', this.footStep);
-        this.playSoundOnTrigger('_attack2', this.swordDraw);
-        this.playSoundOnTrigger('/attack1', this.swordDraw);
-    }    // remove sound footstep?!?
+    // playSound() {    // add sound volume factor!!!
+    //     this.playSoundOnTrigger('run_attack2', this.footStep);
+    //     this.playSoundOnTrigger('run_attack6', this.footStep);
+    //     this.playSoundOnTrigger('run2', this.footStep);
+    //     this.playSoundOnTrigger('run6', this.footStep);
+    //     this.playSoundOnTrigger('walk_attack2', this.footStep);
+    //     this.playSoundOnTrigger('walk_attack5', this.footStep);
+    //     this.playSoundOnTrigger('walk2', this.footStep);
+    //     this.playSoundOnTrigger('walk5', this.footStep);
+    //     this.playSoundOnTrigger('_attack2', this.swordDraw);
+    //     this.playSoundOnTrigger('/attack1', this.swordDraw);
+    // }    // remove sound footstep?!?
 
 
     // jsdoc
@@ -210,41 +205,6 @@ class Knight extends Character {
         if (this.isImage(key)) {
             super.playSound(sound);
         }
-    }
-
-
-    controlSounds() {
-        if (this.isAnySoundPlaying()) {
-            // this.stopSounds();
-            this.removeSounds();
-        }
-    }
-
-
-    stopSounds() {    // add other sounds!!!
-        if (!this.isImage('attack') && !this.isImage('walk') && !this.isImage('run')) {
-            this.muteLastSound();
-        }
-    }
-
-
-    muteLastSound() {
-        let lastId = this.sounds.length - 1;
-        this.sounds[lastId].muted = true;
-    }
-
-
-    removeSounds() {
-        this.sounds.forEach((sound) => {
-            if (sound.ended) {
-                this.sounds.splice(0, 1);
-            }
-        })
-    }
-
-
-    isAnySoundPlaying() {
-        return this.sounds.length > 0
     }
 
 
