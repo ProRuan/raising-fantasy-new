@@ -56,7 +56,7 @@ class Knight extends Character {
                 this.staminaPoints.splice(this.staminaPoints.length - 1, 1);
             }
 
-            // this.world.camera_x = -this.x + 4 * 64 + 28;    // + 4 * 64 + 28
+            this.world.cameraX = -this.x + 284;    // + 4 * 64 + 28
         }, 1000 / 60);
 
 
