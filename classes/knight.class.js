@@ -76,6 +76,7 @@ class Knight extends Character {
     // isPassedAway() / isGone() / ...
 
 
+    // to edit!
     isEpilog() {
         return this.isDeath() && this.img.src.includes('death10');
     }
@@ -206,7 +207,7 @@ class Knight extends Character {
 
     // jsdoc
     playSoundOnTrigger(key, sound) {
-        if (this.img.src.includes(key)) {
+        if (this.isImage(key)) {
             super.playSound(sound);
         }
     }
@@ -221,7 +222,7 @@ class Knight extends Character {
 
 
     stopSounds() {    // add other sounds!!!
-        if (!this.img.src.includes('attack') && !this.img.src.includes('walk') && !this.img.src.includes('run')) {
+        if (!this.isImage('attack') && !this.isImage('walk') && !this.isImage('run')) {
             this.muteLastSound();
         }
     }

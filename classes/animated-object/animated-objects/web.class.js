@@ -95,7 +95,7 @@ class Web extends AnimatedObject {
 
     // jsdoc
     isFinalImage() {
-        return isTrue(this.collided) && includes(this.img.src, 'web5');
+        return isTrue(this.collided) && this.isImage('web5');
     }
 
 

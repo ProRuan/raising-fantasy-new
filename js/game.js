@@ -347,9 +347,3 @@ function getVerifiedValue(valueA, valueB) {
 function getSum(summandA, summandB) {
     return summandA + summandB;
 }
-
-
-// jsdoc
-function includes(object, text) {
-    return object['includes'](text);
-}

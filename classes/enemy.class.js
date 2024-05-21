@@ -66,8 +66,8 @@ class Enemy extends MoveableObject {
 
     // jsdoc
     isEpilogImage() {
-        let epilogImage = 'death' + this.flipBook.death.length;
-        return this.img.src.includes(epilogImage);
+        let fileName = 'death' + this.flipBook.death.length;
+        return this.isImage(fileName);
     }
 
 
