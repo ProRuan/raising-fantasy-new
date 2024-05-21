@@ -92,7 +92,7 @@ class LevelWorld extends World {
 
 
     draw() {    // double code!!!
-        this.clearCanvas();
+        this.clearCanvas();    // think about camera objects!!!
         this.translateCamera(this.cameraX, 0);
 
         // only for testing!!!
