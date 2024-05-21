@@ -5,11 +5,9 @@ class Knight extends Character {
     chapters = ['epilog', 'death', 'hurt', 'climb', 'jump', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'idle', 'cover'];
 
 
-    footStep = { path: source.footStep, startTime: 0, endTime: 0.5 };
-    footSteps = [];
-
-    swordDraw = { path: source.swordDraw, startTime: 0.3, endTime: 0.7 };
-    swordDraws = [];
+    sounds = [];
+    footStep = { path: source.footStep, startTime: 0, endTime: 0.3 };
+    swordDraw = { path: source.swordDraw, startTime: 0.3, endTime: 0.6 };
 
 
     constructor(x, y) {
@@ -62,32 +60,52 @@ class Knight extends Character {
         setInterval(() => {
             // console.log(this.chapter, this.currentImage);
 
-            if (this.img.src.includes('/attack2')) {
-                let temp = new Audio(this.swordDraw.path);
-                temp.currentTime = this.swordDraw.startTime;
-                this.swordDraws.push(temp);
-                temp.play();
-            }
+            // this.playSoundEffect('walk2', this.footStep);
+            this.playSoundEffect('/attack2', this.swordDraw);
 
-            for (let i = 0; i < this.swordDraws.length; i++) {
-                let sound = this.swordDraws[i];
-                if (isGreater(this.swordDraw.endTime, sound.currentTime)) {
-                    sound.muted = true;
-                    console.log('sound muted');
-                }
-                if (isTrue(sound.ended)) {
-                    this.swordDraws.splice(i, 1);
-                    console.log('sound ended');
-                }
-            }
-            console.log(this.swordDraws.length);
-
+            // this.removeSoundEffect(this.footStep);
+            this.removeSoundEffect(this.swordDraw);
 
             // is ready!!!
             // -----------
             this.playAnimation();
             // this.playSound();
         }, 100);
+    }
+
+
+    playSoundEffect(name, sound) {
+        if (this.isImage(name)) {
+            let audio = this.getAudio(sound);
+            this.sounds.push(audio);
+            audio.play();
+        }
+    }
+
+
+    getAudio(sound) {
+        let audio = new Audio(sound.path);
+        audio.currentTime = sound.startTime;
+        return audio;
+    }
+
+
+    removeSoundEffect(audio) {
+        for (let i = 0; i < this.sounds.length; i++) {
+            let sound = this.sounds[i];
+
+            // replace ./img und ./audio with img and audio!!!
+            // console.log(audio.path, sound.src, sound.src.includes('blade_draw'));
+
+            if (isGreater(audio.endTime, sound.currentTime)) {
+                sound.muted = true;
+                console.log('sound muted', audio.endTime);
+            }
+            if (isTrue(sound.ended)) {
+                this.sounds.splice(i, 1);
+                console.log('sound ended');
+            }
+        }
     }
 
 

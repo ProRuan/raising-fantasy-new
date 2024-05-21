@@ -138,7 +138,7 @@ class DrawableObject {
 
     // jsdoc
     isImage(fileName) {
-        this.img.src.includes(fileName);
+        return this.img.src.includes(fileName);
     }
 
 
