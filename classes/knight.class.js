@@ -5,9 +5,11 @@ class Knight extends Character {
     chapters = ['epilog', 'death', 'hurt', 'climb', 'jump', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'idle', 'cover'];
 
 
-    footStep = source.footStep;
-    swordDraw = source.swordDraw;
-    testAudio = new Audio(this.swordDraw);
+    footStep = { path: source.footStep, startTime: 0, endTime: 0.5 };
+    footSteps = [];
+
+    swordDraw = { path: source.swordDraw, startTime: 0.3, endTime: 0.7 };
+    swordDraws = [];
 
 
     constructor(x, y) {
@@ -20,16 +22,6 @@ class Knight extends Character {
 
     animate() {
         setInterval(() => {
-
-            if (isKey('keyA')) {
-                this.testAudio.currentTime = 0.2;
-                this.testAudio.play();
-                console.log(this.testAudio.currentTime);
-            }
-            if (this.testAudio.currentTime > 0.6) {
-                this.testAudio.pause();
-            }
-
             this.resetJumpCounter();
 
             // only for testing!!!
@@ -70,9 +62,26 @@ class Knight extends Character {
         setInterval(() => {
             // console.log(this.chapter, this.currentImage);
 
-            if (!this.testAudio.ended) {
-                console.log(this.testAudio.currentTime);
+            if (this.img.src.includes('/attack2')) {
+                let temp = new Audio(this.swordDraw.path);
+                temp.currentTime = this.swordDraw.startTime;
+                this.swordDraws.push(temp);
+                temp.play();
             }
+
+            for (let i = 0; i < this.swordDraws.length; i++) {
+                let sound = this.swordDraws[i];
+                if (isGreater(this.swordDraw.endTime, sound.currentTime)) {
+                    sound.muted = true;
+                    console.log('sound muted');
+                }
+                if (isTrue(sound.ended)) {
+                    this.swordDraws.splice(i, 1);
+                    console.log('sound ended');
+                }
+            }
+            console.log(this.swordDraws.length);
+
 
             // is ready!!!
             // -----------

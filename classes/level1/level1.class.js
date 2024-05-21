@@ -35,9 +35,9 @@ class Level1 {
 
     // jsdoc
     loadAllSections() {
-        this.loadSection(new Section1(), 8);
+        this.loadSection(new Section1(), 0);
         this.loadSection(new Section2(), 1);
-        this.loadSection(new Section3(), 0);    // fix ent y!
+        this.loadSection(new Section3(), 2);    // fix ent y!
         this.loadSection(new Section4(), 3);    // fix loading sequence!
         this.loadSection(new Section5(), 4);
         this.loadSection(new Section6(), 5);
