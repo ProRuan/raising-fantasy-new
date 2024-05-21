@@ -161,13 +161,13 @@ class Spider extends Enemy {
 
     // jsdoc
     getWebX(logical) {
-        return (logical) ? this.weapon.xRight - 24 : this.weapon.xLeft - 4;
+        return (logical) ? this.weapon.xRight - 28 : this.weapon.xLeft - 4;
     }
 
 
     // jsdoc
     getWebY() {
-        return this.weapon.yBottom + 32;
+        return canvas.height - this.weapon.yBottom - 4;
     }
 
 
