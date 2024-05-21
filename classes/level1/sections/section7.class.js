@@ -1,13 +1,14 @@
 class Section7 {
 
 
+    // jsdoc
     constructor() {
         this.setFlyGrass();
         this.setGrass();
         this.setCoins();
         this.setCrystals();
         this.setHearts();
-        // this.setEnemies();
+        this.setEnemies();
     }
 
 
@@ -54,9 +55,10 @@ class Section7 {
     }
 
 
+    // jsdoc
     setEnemies() {
-        return [
-            new Spider(1.25, 0.1875)
+        this.enemies = [
+            new Spider(1, 0.1875)
         ];
     }
 }

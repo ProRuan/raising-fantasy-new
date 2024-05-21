@@ -1,12 +1,12 @@
 class Section8 {
 
 
+    // jsdoc
     constructor() {
         this.setFlyGrass();
         this.setGrass();
         this.setLadders();
-        this.setCoins();
-        // this.setEnemies();
+        this.setStars();
     }
 
 
@@ -39,16 +39,9 @@ class Section8 {
 
 
     // jsdoc
-    setCoins() {
-        this.coins = [
-            new Coin(9.25, -3.875)
-        ];
-    }
-
-
-    setEnemies() {
-        this.enemies = [
-            new Shaman(12, 2.09375)    // to edit!!!
+    setStars() {
+        this.stars = [
+            new Star(9.25, -2.875)
         ];
     }
 }
