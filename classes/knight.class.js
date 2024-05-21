@@ -56,7 +56,7 @@ class Knight extends Character {
                 this.staminaPoints.splice(this.staminaPoints.length - 1, 1);
             }
 
-            this.world.cameraX = -this.x + this.speed;    // set camera x offset!!!
+            // this.world.cameraX = -this.x + this.speed;    // set camera x offset!!!
         }, 1000 / 60);
 
 

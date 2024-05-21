@@ -1,13 +1,14 @@
 class Section3 {
 
 
+    // jsdoc
     constructor() {
         this.setTrees();
         this.setLeaves();
         this.setGrass();
         this.setCoins();
         this.setHitPoints();
-        // this.setEnemies();   
+        this.setEnemies();
     }
 
 
@@ -54,9 +55,10 @@ class Section3 {
     }
 
 
+    // jsdoc
     setEnemies() {
         this.enemies = [
-            new Ent(10.859375, 1.625)
+            new Ent(10 - 1.8125, -0.375)
         ];
     }
 }

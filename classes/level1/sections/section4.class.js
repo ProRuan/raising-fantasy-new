@@ -1,6 +1,7 @@
 class Section4 {
 
 
+    // jsdoc
     constructor() {
         this.setTrees();
         this.setLeaves();
@@ -10,7 +11,7 @@ class Section4 {
         this.setCoins();
         this.setHearts();
         this.setHitPoints();
-        // this.setEnemies();
+        this.setEnemies();
     }
 
 
@@ -85,9 +86,10 @@ class Section4 {
     }
 
 
+    // jsdoc
     setEnemies() {
-        this.enemies = ENEMIES1_4 = [
-            new Spider(0.5, 0.1875), new Spider(9, 3.6875), new Spider(14.125, 0.1875)
+        this.enemies = [
+            new Spider(0.5, 0.1875), new Spider(9, 3.6875), new Spider(12.5, 0.1875)
         ];
     }
 }

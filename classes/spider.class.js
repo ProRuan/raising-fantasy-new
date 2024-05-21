@@ -11,7 +11,7 @@ class Spider extends Enemy {
 
     // jsdoc
     constructor(x, y) {
-        super(source.spider, x, y);
+        super(source.spider, x * UNIT, y * UNIT);
         this.setStateValues(60, 80);
         this.setThrowMax();
         this.setAct('throw');

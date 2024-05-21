@@ -9,10 +9,10 @@ class Dino extends Enemy {
 
     // jsdoc
     constructor(x, y) {
-        super(source.dino, x, y);
+        super(source.dino, x * UNIT, y * UNIT);
         this.setStateValues(90, 64);
         this.setAct('pursue');
-        this.animate();
+        // this.animate();
     }
 
 

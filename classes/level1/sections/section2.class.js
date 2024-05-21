@@ -1,6 +1,7 @@
 class Section2 {
 
 
+    // jsdoc
     constructor() {
         this.setTrees();
         this.setLeaves();
@@ -8,7 +9,7 @@ class Section2 {
         this.setGrass();
         this.setCoins();
         this.setHitPoints();
-        // this.setEnemies();
+        this.setEnemies();
     }
 
 
@@ -63,9 +64,10 @@ class Section2 {
     }
 
 
+    // jsdoc
     setEnemies() {
         this.enemies = [
-            new Dino(0.875, 0.25), new Dino(11.8125, 0.25)
+            new Dino(1.6875, 0.234375), new Dino(11.6875, 0.234375)
         ];
     }
 }

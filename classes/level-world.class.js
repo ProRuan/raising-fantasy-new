@@ -22,9 +22,11 @@ class LevelWorld extends World {
 
         // this.dino = new Dino(256, 15);
         // this.ent = new Ent(480 - 116, -24);
-        this.spider = new Spider(480 - 32, 12 + 224);
-        this.enemies = [this.spider];
+        // this.spider = new Spider(480 - 32, 12 + 224);
+        // this.enemies = [this.spider];
+
         this.hero = new Knight(64, 38);
+        // fix ent y (+1)!!!
 
 
         // ready!!!
@@ -93,7 +95,7 @@ class LevelWorld extends World {
 
     draw() {    // double code!!!
         this.clearCanvas();    // think about camera objects!!!
-        this.translateCamera(this.cameraX, 0);
+        // this.translateCamera(this.cameraX, 0);
 
         // only for testing!!!
 
@@ -102,7 +104,7 @@ class LevelWorld extends World {
         this.drawLevel();
         this.drawAvatarInfo();
 
-        this.drawObjectGroup(this.enemies)
+        // this.drawObjectGroup(this.enemies)
 
         this.drawObject(this.hero);
 
@@ -111,7 +113,7 @@ class LevelWorld extends World {
 
         this.removeDeadEnemies();
 
-        this.translateCamera(-this.cameraX, 0);
+        // this.translateCamera(-this.cameraX, 0);
         this.redraw();
     }
 
