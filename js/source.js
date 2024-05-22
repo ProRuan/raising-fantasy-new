@@ -5,7 +5,11 @@ const UNIT = NATIVE_WIDTH / 15;
 
 const LEVEL_SIZE = 8;
 
+let musicVolume = 0.5;
+let soundVolume = 0.5;
 
+
+// in use?
 const OBJECTS_TO_COUNT = [
     'bird', 'bomb', 'coin', 'crystal', 'heart',
     'hitPoint', 'leaf', 'star', 'web'
@@ -24,33 +28,6 @@ const FLIP_BOOK_KNIGHT = [
     './img/characters/knight/walk/walk6.png',
     './img/characters/knight/walk_attack/walk_attack6.png'
 ];
-
-
-// const FLIP_BOOK_KNIGHT_JUMP_A = [
-//     './img/characters/knight/jump/jump1.png',
-//     './img/characters/knight/jump/jump2.png',
-// ];
-
-
-// const FLIP_BOOK_KNIGHT_JUMP_B = [
-//     './img/characters/knight/jump/jump3.png',
-// ];
-
-
-// const FLIP_BOOK_KNIGHT_JUMP_C = [
-//     './img/characters/knight/jump/jump4.png',
-//     './img/characters/knight/jump/jump5.png',
-// ];
-
-
-// const FLIP_BOOK_KNIGHT_JUMP_D = [
-//     './img/characters/knight/jump/jump6.png',
-// ];
-
-
-// const FLIP_BOOK_KNIGHT_JUMP_E = [
-//     './img/characters/knight/jump/jump7.png',
-// ];
 
 
 const FLIP_BOOK_DINO = [

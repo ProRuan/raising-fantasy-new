@@ -5,13 +5,13 @@ class Knight extends Character {
     chapters = ['epilog', 'death', 'hurt', 'climb', 'jump', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'idle', 'cover'];
 
 
-    // edit source!!! + fix fall animation and sound!!!
-    goAway = { path: source.goAway, startTime: 0.375, volume: 1 };
-    armorHit = { path: source.armorHit, startTime: 0.01, volume: 0.5 };
-    staveStep = { path: source.staveStep, startTime: 0.025, volume: 0.5 };
-    grassFall = { path: source.grassStep, startTime: 0.05, volume: 0.5 };
-    grassStep = { path: source.grassStep, startTime: 0.05, volume: 0.5 };
-    swordDraw = { path: source.swordDraw, startTime: 0.3, volume: 0.5 };
+    // edit source!!!
+    // option: fix fall animation and sound!!!
+    goAway = { path: source.goAway, startTime: 0.375 };
+    armorHit = { path: source.armorHit, startTime: 0.01 };
+    staveStep = { path: source.staveStep, startTime: 0.025 };
+    grassStep = { path: source.grassStep, startTime: 0.05 };
+    swordDraw = { path: source.swordDraw, startTime: 0.3 };
 
 
     constructor(x, y) {
@@ -69,14 +69,13 @@ class Knight extends Character {
             this.playSoundEffect('hurt1', this.armorHit);    // set condition and delay!!!
             this.playSoundEffect('climb2', this.staveStep);
             this.playSoundEffect('climb4', this.staveStep);
-            this.playSoundEffect('jump7', this.grassFall);
+            this.playSoundEffect('jump7', this.grassStep);
             this.playSoundEffect('run2', this.grassStep);
             this.playSoundEffect('run6', this.grassStep);
             this.playSoundEffect('walk2', this.grassStep);
             this.playSoundEffect('walk5', this.grassStep);
             this.playSoundEffect('_attack4', this.swordDraw);
             this.playSoundEffect('/attack2', this.swordDraw);
-            // this.playSoundEffect('idle3', this.swordDraw);    // to remove or longer delay or for level end?
 
             // is ready!!!
             // -----------
@@ -90,7 +89,7 @@ class Knight extends Character {
         if (this.isImage(name)) {
             let audio = new Audio(sound.path);
             audio.currentTime = sound.startTime;
-            audio.volume = sound.volume;
+            audio.volume = soundVolume;
             audio.play();
         }
     }
