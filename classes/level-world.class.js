@@ -95,25 +95,48 @@ class LevelWorld extends World {
 
     draw() {    // double code!!!
         this.clearCanvas();    // think about camera objects!!!
-        // this.translateCamera(this.cameraX, 0);
+        if (this.hero.img.src.includes('death')) {
+            if (isUndefined(this.gameOver)) {
+                this.drawObject(this.hero);
+                if (this.hero.img.src.includes('death10') && isUndefined(this.gameOverSet)) {
+                    this.gameOverSet = true;
+                    setTimeout(() => {
+                        this.gameOver = true;
+                    }, 100);
+                }
+            }
+            if (this.gameOver) {
+                this.ctx.font = '64px Arial';
+                this.ctx.textAlign = 'center';
+                this.ctx.fillStyle = 'white';
+                this.drawText('Game Over', 480, 270);
 
-        // only for testing!!!
+                // this.ctx.font = '24px Arial';
+                // this.ctx.textAlign = 'center';
+                // this.ctx.fillStyle = 'white';
+                // this.drawText('Go back', 480, 400);
+            }
+        } else {
+            // this.translateCamera(this.cameraX, 0);
+
+            // only for testing!!!
 
 
-        // ready!!!
-        this.drawLevel();
-        this.drawAvatarInfo();
+            // ready!!!
+            this.drawLevel();
+            this.drawAvatarInfo();
 
-        // this.drawObjectGroup(this.enemies)
+            // this.drawObjectGroup(this.enemies)
 
-        this.drawObject(this.hero);
+            this.drawObject(this.hero);
 
-        this.drawSpiderWebs();
-        // this.drawObjectGroup(this.webs);
+            this.drawSpiderWebs();
+            // this.drawObjectGroup(this.webs);
 
-        this.removeDeadEnemies();
+            this.removeDeadEnemies();
 
-        // this.translateCamera(-this.cameraX, 0);
+            // this.translateCamera(-this.cameraX, 0);
+        }
         this.redraw();
     }
 

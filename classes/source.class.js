@@ -28,6 +28,7 @@ class Source {
 
     // audio
 
+    goAway = './audio/attacks_and_creatures/go_away.wav';
     armorHit = './audio/attacks_and_creatures/cloth_armor_hit.wav';
     staveStep = './audio/footsteps/dirt.wav';
     grassStep = './audio/footsteps/grass.wav';
