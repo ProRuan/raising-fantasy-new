@@ -6,7 +6,7 @@ class Knight extends Character {
 
 
     // edit source!!! + fix fall animation and sound!!!
-    staveStep = { path: source.staveStep, startTime: 0, volume: 0.5 };    // to set!!!
+    staveStep = { path: source.staveStep, startTime: 0.025, volume: 0.5 };    // to set!!!
     grassFall = { path: source.grassStep, startTime: 0.05, volume: 0.5 };
     grassStep = { path: source.grassStep, startTime: 0.05, volume: 0.5 };
     swordDraw = { path: source.swordDraw, startTime: 0.3, volume: 0.5 };
@@ -72,6 +72,7 @@ class Knight extends Character {
             this.playSoundEffect('walk5', this.grassStep);
             this.playSoundEffect('_attack4', this.swordDraw);
             this.playSoundEffect('/attack2', this.swordDraw);
+            this.playSoundEffect('idle3', this.swordDraw);
 
             // is ready!!!
             // -----------
