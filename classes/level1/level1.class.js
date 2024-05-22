@@ -38,11 +38,11 @@ class Level1 {
         this.loadSection(new Section1(), 8);
         this.loadSection(new Section2(), 1);
         this.loadSection(new Section3(), 2);    // fix ent y!
-        this.loadSection(new Section4(), 0);    // fix loading sequence!
+        this.loadSection(new Section4(), 3);    // fix loading sequence!
         this.loadSection(new Section5(), 4);
         this.loadSection(new Section6(), 5);
         this.loadSection(new Section7(), 6);    // set UNIT for class AnimatedObjects!!!
-        this.loadSection(new Section8(), 7);
+        this.loadSection(new Section8(), 0);
     }
 
 

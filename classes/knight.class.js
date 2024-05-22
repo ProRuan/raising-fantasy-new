@@ -6,9 +6,9 @@ class Knight extends Character {
 
 
     // edit source!!!
-    staveStep = { path: source.staveStep, startTime: 0 };    // to set!!!
-    grassStep = { path: source.grassStep, startTime: 0.01 };
-    swordDraw = { path: source.swordDraw, startTime: 0.3 };
+    staveStep = { path: source.staveStep, startTime: 0, volume: 0.5 };    // to set!!!
+    grassStep = { path: source.grassStep, startTime: 0, volume: 0.5 };
+    swordDraw = { path: source.swordDraw, startTime: 0.3, volume: 0.5 };
 
 
     constructor(x, y) {
@@ -61,10 +61,11 @@ class Knight extends Character {
         setInterval(() => {
             // console.log(this.chapter, this.currentImage);
 
-            // fixed 5 of 10 sounds
-            this.playSoundEffect('climb1', this.staveStep);
+            // fixed 7 of 10 sounds
+            this.playSoundEffect('climb2', this.staveStep);
+            this.playSoundEffect('climb4', this.staveStep);
             // delete climb1!!!
-            
+
             // jump
             this.playSoundEffect('run2', this.grassStep);
             this.playSoundEffect('run6', this.grassStep);
@@ -85,6 +86,7 @@ class Knight extends Character {
         if (this.isImage(name)) {
             let audio = new Audio(sound.path);
             audio.currentTime = sound.startTime;
+            audio.volume = sound.volume;
             audio.play();
         }
     }
