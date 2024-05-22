@@ -28,6 +28,7 @@ class Source {
 
     // audio
 
+    armorHit = './audio/attacks_and_creatures/cloth_armor_hit.wav';
     staveStep = './audio/footsteps/dirt.wav';
     grassStep = './audio/footsteps/grass.wav';
     swordDraw = './audio/attacks_and_creatures/blade_draw.wav';

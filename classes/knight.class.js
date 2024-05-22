@@ -6,6 +6,7 @@ class Knight extends Character {
 
 
     // edit source!!! + fix fall animation and sound!!!
+    armorHit = { path: source.armorHit, startTime: 0, volume: 0.5 };
     staveStep = { path: source.staveStep, startTime: 0.025, volume: 0.5 };    // to set!!!
     grassFall = { path: source.grassStep, startTime: 0.05, volume: 0.5 };
     grassStep = { path: source.grassStep, startTime: 0.05, volume: 0.5 };
@@ -63,6 +64,7 @@ class Knight extends Character {
             // console.log(this.chapter, this.currentImage);
 
             // fixed 7 of 10 sounds
+            // this.playSoundEffect('hurt1', this.armorHit);    // set condition
             this.playSoundEffect('climb2', this.staveStep);
             this.playSoundEffect('climb4', this.staveStep);
             this.playSoundEffect('jump7', this.grassFall);
@@ -108,7 +110,7 @@ class Knight extends Character {
 
     isHurt() {
         let enemy = this.world.enemies.find(e => e.isBattle(this));
-        if (enemy && !enemy instanceof Spider) {    // variable!!!, is it working for dino and ent?
+        if (enemy && !(enemy instanceof Spider)) {    // variable!!!, is it working for dino and ent?
             // this.hpPoints.splice(this.hpPoints.length - 1, 1);    // to activate!
             return true;
         }
