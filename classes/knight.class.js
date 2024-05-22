@@ -5,9 +5,10 @@ class Knight extends Character {
     chapters = ['epilog', 'death', 'hurt', 'climb', 'jump', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'idle', 'cover'];
 
 
-    // edit source!!!
+    // edit source!!! + fix fall animation and sound!!!
     staveStep = { path: source.staveStep, startTime: 0, volume: 0.5 };    // to set!!!
-    grassStep = { path: source.grassStep, startTime: 0, volume: 0.5 };
+    grassFall = { path: source.grassStep, startTime: 0.05, volume: 0.5 };
+    grassStep = { path: source.grassStep, startTime: 0.05, volume: 0.5 };
     swordDraw = { path: source.swordDraw, startTime: 0.3, volume: 0.5 };
 
 
@@ -64,9 +65,7 @@ class Knight extends Character {
             // fixed 7 of 10 sounds
             this.playSoundEffect('climb2', this.staveStep);
             this.playSoundEffect('climb4', this.staveStep);
-            // delete climb1!!!
-
-            // jump
+            // this.playSoundEffect('jump7', this.grassFall);
             this.playSoundEffect('run2', this.grassStep);
             this.playSoundEffect('run6', this.grassStep);
             this.playSoundEffect('walk2', this.grassStep);
