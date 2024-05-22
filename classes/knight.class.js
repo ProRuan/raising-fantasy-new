@@ -3,11 +3,8 @@ class Knight extends Character {
     bodyXY = { xLeft: 28, xCenter: 44, xRight: 60, yTop: 62, yCenter: 86, yBottom: 110 };
     weaponXY = { xLeft: 24, xRight: 60, yTop: 56, yBottom: 104 };
     chapters = ['epilog', 'death', 'hurt', 'climb', 'jump', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'idle', 'cover'];
-
-
-    sounds = [];
-    footStep = { path: source.footStep, startTime: 0, endTime: 0.3 };
-    swordDraw = { path: source.swordDraw, startTime: 0.3, endTime: 0.6 };
+    footStep = { path: source.footStep, startTime: 0.01 };
+    swordDraw = { path: source.swordDraw, startTime: 0.3 };
 
 
     constructor(x, y) {
@@ -60,11 +57,13 @@ class Knight extends Character {
         setInterval(() => {
             // console.log(this.chapter, this.currentImage);
 
-            // this.playSoundEffect('walk2', this.footStep);
+            // fixed 5 of 10 sounds
+            this.playSoundEffect('run2', this.footStep);
+            this.playSoundEffect('run6', this.footStep);
+            this.playSoundEffect('walk2', this.footStep);
+            this.playSoundEffect('walk5', this.footStep);
+            this.playSoundEffect('_attack4', this.swordDraw);
             this.playSoundEffect('/attack2', this.swordDraw);
-
-            // this.removeSoundEffect(this.footStep);
-            this.removeSoundEffect(this.swordDraw);
 
             // is ready!!!
             // -----------
@@ -76,35 +75,9 @@ class Knight extends Character {
 
     playSoundEffect(name, sound) {
         if (this.isImage(name)) {
-            let audio = this.getAudio(sound);
-            this.sounds.push(audio);
+            let audio = new Audio(sound.path);
+            audio.currentTime = sound.startTime;
             audio.play();
-        }
-    }
-
-
-    getAudio(sound) {
-        let audio = new Audio(sound.path);
-        audio.currentTime = sound.startTime;
-        return audio;
-    }
-
-
-    removeSoundEffect(audio) {
-        for (let i = 0; i < this.sounds.length; i++) {
-            let sound = this.sounds[i];
-
-            // replace ./img und ./audio with img and audio!!!
-            // console.log(audio.path, sound.src, sound.src.includes('blade_draw'));
-
-            if (isGreater(audio.endTime, sound.currentTime)) {
-                sound.muted = true;
-                console.log('sound muted', audio.endTime);
-            }
-            if (isTrue(sound.ended)) {
-                this.sounds.splice(i, 1);
-                console.log('sound ended');
-            }
         }
     }
 
