@@ -5,6 +5,9 @@ class Knight extends Character {
     chapters = ['epilog', 'death', 'hurt', 'climb', 'jump', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'idle', 'cover'];
 
 
+    // hurt: set condition + delay!!!
+
+
     // edit source!!!
     // option: fix fall animation and sound!!!
     goAway = { path: source.goAway, startTime: 0.375 };
@@ -64,34 +67,47 @@ class Knight extends Character {
         setInterval(() => {
             // console.log(this.chapter, this.currentImage);
 
-            // fixed 10 of 10 sounds
-            this.playSoundEffect('death6', this.goAway);
-            this.playSoundEffect('hurt1', this.armorHit);    // set condition and delay!!!
-            this.playSoundEffect('climb2', this.staveStep);
-            this.playSoundEffect('climb4', this.staveStep);
-            this.playSoundEffect('jump7', this.grassStep);
-            this.playSoundEffect('run2', this.grassStep);
-            this.playSoundEffect('run6', this.grassStep);
-            this.playSoundEffect('walk2', this.grassStep);
-            this.playSoundEffect('walk5', this.grassStep);
-            this.playSoundEffect('_attack4', this.swordDraw);
-            this.playSoundEffect('/attack2', this.swordDraw);
 
             // is ready!!!
             // -----------
             this.playAnimation();
-            // this.playSound();
+            this.playSoundEffects();
         }, 100);
     }
 
 
-    playSoundEffect(name, sound) {
-        if (this.isImage(name)) {
-            let audio = new Audio(sound.path);
-            audio.currentTime = sound.startTime;
-            audio.volume = soundVolume;
-            audio.play();
+    // jsdoc
+    playSoundEffects() {
+        this.playSound('death6', this.goAway);
+        this.playSound('hurt1', this.armorHit);
+        this.playSound('climb2', this.staveStep, 'climb4');
+        this.playSound('jump7', this.grassStep);
+        this.playSound('run_attack2', this.grassStep, 'run_attack6');
+        this.playSound('run_attack4', this.swordDraw);
+        this.playSound('run2', this.grassStep, 'run6');
+        this.playSound('walk_attack2', this.grassStep, 'walk_attack5');
+        this.playSound('walk_attack4', this.swordDraw);
+        this.playSound('walk2', this.grassStep, 'walk5');
+        this.playSound('/attack2', this.swordDraw);
+    }
+
+
+    // jsdoc
+    playSound(nameA, sound, nameB) {
+        if (this.isImage(nameA)) {
+            this.playAudio(sound);
+        } else if (!this.isUndefined(nameB) && this.isImage(nameB)) {
+            this.playAudio(sound);
         }
+    }
+
+
+    // jsdoc
+    playAudio(sound) {
+        let audio = new Audio(sound.path);
+        audio.currentTime = sound.startTime;
+        audio.volume = soundVolume;
+        audio.play();
     }
 
 
@@ -213,21 +229,7 @@ class Knight extends Character {
     }
 
 
-    // playSound() {    // add sound volume factor!!!
-    //     this.playSoundOnTrigger('run_attack2', this.footStep);
-    //     this.playSoundOnTrigger('run_attack6', this.footStep);
-    //     this.playSoundOnTrigger('run2', this.footStep);
-    //     this.playSoundOnTrigger('run6', this.footStep);
-    //     this.playSoundOnTrigger('walk_attack2', this.footStep);
-    //     this.playSoundOnTrigger('walk_attack5', this.footStep);
-    //     this.playSoundOnTrigger('walk2', this.footStep);
-    //     this.playSoundOnTrigger('walk5', this.footStep);
-    //     this.playSoundOnTrigger('_attack2', this.swordDraw);
-    //     this.playSoundOnTrigger('/attack1', this.swordDraw);
-    // }    // remove sound footstep?!?
-
-
-    // jsdoc
+    // to use?
     playSoundOnTrigger(key, sound) {
         if (this.isImage(key)) {
             super.playSound(sound);
