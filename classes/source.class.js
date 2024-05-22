@@ -28,7 +28,8 @@ class Source {
 
     // audio
 
-    footStep = './audio/footsteps/grass.wav';
+    staveStep = './audio/footsteps/dirt.wav';
+    grassStep = './audio/footsteps/grass.wav';
     swordDraw = './audio/attacks_and_creatures/blade_draw.wav';
 
 

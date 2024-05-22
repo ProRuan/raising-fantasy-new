@@ -3,7 +3,11 @@ class Knight extends Character {
     bodyXY = { xLeft: 28, xCenter: 44, xRight: 60, yTop: 62, yCenter: 86, yBottom: 110 };
     weaponXY = { xLeft: 24, xRight: 60, yTop: 56, yBottom: 104 };
     chapters = ['epilog', 'death', 'hurt', 'climb', 'jump', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'idle', 'cover'];
-    footStep = { path: source.footStep, startTime: 0.01 };
+
+
+    // edit source!!!
+    staveStep = { path: source.staveStep, startTime: 0 };    // to set!!!
+    grassStep = { path: source.grassStep, startTime: 0.01 };
     swordDraw = { path: source.swordDraw, startTime: 0.3 };
 
 
@@ -58,10 +62,14 @@ class Knight extends Character {
             // console.log(this.chapter, this.currentImage);
 
             // fixed 5 of 10 sounds
-            this.playSoundEffect('run2', this.footStep);
-            this.playSoundEffect('run6', this.footStep);
-            this.playSoundEffect('walk2', this.footStep);
-            this.playSoundEffect('walk5', this.footStep);
+            this.playSoundEffect('climb1', this.staveStep);
+            // delete climb1!!!
+            
+            // jump
+            this.playSoundEffect('run2', this.grassStep);
+            this.playSoundEffect('run6', this.grassStep);
+            this.playSoundEffect('walk2', this.grassStep);
+            this.playSoundEffect('walk5', this.grassStep);
             this.playSoundEffect('_attack4', this.swordDraw);
             this.playSoundEffect('/attack2', this.swordDraw);
 
