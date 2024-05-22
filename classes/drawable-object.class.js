@@ -239,6 +239,17 @@ class DrawableObject {
     }
 
 
+    playAnimation(images) {
+        if (isUndefined(images)) {
+            images = this.flipBook;
+        }
+        let i = this.currentImage % images.length;
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+    }
+
+
     playSound(path) {    // double code!!!
         new Audio(path).play();
     }

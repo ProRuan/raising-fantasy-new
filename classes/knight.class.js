@@ -64,7 +64,7 @@ class Knight extends Character {
         setInterval(() => {
             // console.log(this.chapter, this.currentImage);
 
-            // fixed 7 of 10 sounds
+            // fixed 10 of 10 sounds
             this.playSoundEffect('death6', this.goAway);
             this.playSoundEffect('hurt1', this.armorHit);    // set condition and delay!!!
             this.playSoundEffect('climb2', this.staveStep);
@@ -76,7 +76,7 @@ class Knight extends Character {
             this.playSoundEffect('walk5', this.grassStep);
             this.playSoundEffect('_attack4', this.swordDraw);
             this.playSoundEffect('/attack2', this.swordDraw);
-            this.playSoundEffect('idle3', this.swordDraw);    // to remove or longer delay or for level end?
+            // this.playSoundEffect('idle3', this.swordDraw);    // to remove or longer delay or for level end?
 
             // is ready!!!
             // -----------

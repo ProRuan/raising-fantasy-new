@@ -8,6 +8,7 @@ class AnimatedObject extends DrawableObject {
         this.setFlipBook();
         this.loadImages();
         this.setSound();
+        this.animate();
     }
 
 
@@ -64,19 +65,19 @@ class AnimatedObject extends DrawableObject {
     }
 
 
-
-    playAnimation(images) {    // double code!!!
-        let i = this.currentImage % images.length;
-        let path = images[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
-    }
-
-
     setSound() {
         let chapter = this.getChapter();
         if (source[chapter].sound) {
             this.sound = source[chapter].sound;
         }
     }
+
+
+    // to edit!!! + edit animate() for web!!!
+    animate() {
+        this.setStoppableInterval(() => this.playAnimation(), 100);
+    }
+
+
+    // edit coins, heart sounds and so on!!!
 }
