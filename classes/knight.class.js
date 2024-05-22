@@ -65,14 +65,14 @@ class Knight extends Character {
             // fixed 7 of 10 sounds
             this.playSoundEffect('climb2', this.staveStep);
             this.playSoundEffect('climb4', this.staveStep);
-            // this.playSoundEffect('jump7', this.grassFall);
+            this.playSoundEffect('jump7', this.grassFall);
             this.playSoundEffect('run2', this.grassStep);
             this.playSoundEffect('run6', this.grassStep);
             this.playSoundEffect('walk2', this.grassStep);
             this.playSoundEffect('walk5', this.grassStep);
             this.playSoundEffect('_attack4', this.swordDraw);
             this.playSoundEffect('/attack2', this.swordDraw);
-            this.playSoundEffect('idle3', this.swordDraw);
+            // this.playSoundEffect('idle3', this.swordDraw);    // to remove or longer delay or for level end?
 
             // is ready!!!
             // -----------

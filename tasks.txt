@@ -75,6 +75,8 @@ Tasks
   - clean coding: use methods just for complex statements ... ( setValue() )
   - clean coding: use method by key ( this[method]() ) ...
 
+  - option: fix jump animation for 'fall after walk' ...
+
 
 Clean Coding (36/59)
 ------------
