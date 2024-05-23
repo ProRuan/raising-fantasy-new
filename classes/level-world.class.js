@@ -1,5 +1,6 @@
 class LevelWorld extends World {
-
+    // to move!!!
+    heroX = 212;
 
     // Create an upper class LevelWorldKit!!!
 
@@ -25,7 +26,7 @@ class LevelWorld extends World {
         // this.spider = new Spider(480 - 32, 12 + 224);
         // this.enemies = [this.spider];
 
-        this.hero = new Knight(64, 38);
+        this.hero = new Knight(this.heroX, 38);
         // fix ent y (+1)!!!
 
 
@@ -117,25 +118,17 @@ class LevelWorld extends World {
                 // this.drawText('Go back', 480, 400);
             }
         } else {
-            // this.translateCamera(this.cameraX, 0);
-
-            // only for testing!!!
+            this.translateCamera(this.cameraX, 0);
 
 
             // ready!!!
             this.drawLevel();
-            this.drawAvatarInfo();
-
-            // this.drawObjectGroup(this.enemies)
-
             this.drawObject(this.hero);
-
             this.drawSpiderWebs();
-            // this.drawObjectGroup(this.webs);
+            this.translateCamera(-this.cameraX, 0);
 
+            this.drawAvatarInfo();
             this.removeDeadEnemies();
-
-            // this.translateCamera(-this.cameraX, 0);
         }
         this.redraw();
     }

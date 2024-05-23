@@ -60,7 +60,16 @@ class Knight extends Character {
                 this.staminaPoints.splice(this.staminaPoints.length - 1, 1);
             }
 
-            // this.world.cameraX = -this.x + this.speed;    // set camera x offset!!!
+            if (isGreater(960 * 7 + 212, this.x)) {
+                this.world.cameraX = -960 * 7;
+            } else if (isGreater(960 * 6 + 212, this.x) && this.world.crystals.length > 0) {
+                this.world.cameraX = -960 * 6;
+            } else if (isGreater(212, this.x)) {
+                this.world.cameraX = -this.x + 212;    // set camera x offset!!!
+            } else {
+                this.world.cameraX = 0;
+            }
+
         }, 1000 / 60);
 
 
@@ -96,7 +105,7 @@ class Knight extends Character {
     playSound(nameA, sound, nameB) {
         if (this.isImage(nameA)) {
             this.playAudio(sound);
-        } else if (!this.isUndefined(nameB) && this.isImage(nameB)) {
+        } else if (!isUndefined(nameB) && this.isImage(nameB)) {
             this.playAudio(sound);
         }
     }
