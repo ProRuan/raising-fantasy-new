@@ -60,10 +60,12 @@ class Knight extends Character {
                 this.staminaPoints.splice(this.staminaPoints.length - 1, 1);
             }
 
+
+
+            // (64, body.xCenter) + (body.xCenter, 960 - 64)
+
             if (isGreater(960 * 7 + 212, this.x)) {
                 this.world.cameraX = -960 * 7;
-            } else if (isGreater(960 * 6 + 212, this.x) && this.world.crystals.length > 0) {
-                this.world.cameraX = -960 * 6;
             } else if (isGreater(212, this.x)) {
                 this.world.cameraX = -this.x + 212;    // set camera x offset!!!
             } else {
