@@ -45,8 +45,12 @@ class Web extends AnimatedObject {
     }
 
 
-    // jsdoc
     act() {
+        this.throw();
+    }
+
+
+    throw() {
         this.x += this.speed;
         this.verifyCollision();
     }
