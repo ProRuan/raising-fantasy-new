@@ -201,6 +201,7 @@ class DrawableObject {
     }
 
 
+    // jsdoc
     floatPermanently() {
         this.float();
         this.keep();
@@ -215,8 +216,7 @@ class DrawableObject {
     // to edit
     keep() {
         if (this.x < -this.width) {
-            this.x = 1 * canvas.width;
-            // this.x = LEVEL_SIZE * world.canvas.width;    // level size
+            this.x = LEVEL_SIZE * canvas.width;    // level size
         }
     }
 

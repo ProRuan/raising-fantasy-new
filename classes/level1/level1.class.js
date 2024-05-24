@@ -3,33 +3,78 @@ class Level1 {
 
     // jsdoc
     constructor() {
-        this.loadBackgrounds();    // review!!!
-        this.loadClouds();    // review!!!
-
+        this.loadLandscape();
         this.loadAllSections();
     }
 
 
-    // to edit and/or to move to levelWorld!!!
-    loadBackgrounds() {
-        this.background = [];
-        for (let i = 0; i < 8; i++) {    // levelSize!!!
-            let bg = new Background(i);
-            bg.layers.forEach((layer) => {
-                layer.x = i * canvas.width;
-                this.background.push(layer);
-            });
+    loadLandscape() {
+        this.loadLandScapeDetail('background', 'loadBackground');
+        this.loadLandScapeDetail('clouds', 'loadCloud');
+        this.loadLandScapeDetail('birds', 'loadThisBird');
+    }
+
+
+    loadLandScapeDetail(key, method) {
+        this[key] = [];
+        for (let i = 0; i < 8; i++) {    // level size!!!
+            this[method](i);
         }
     }
 
 
-    // to edit and/or to move to levelWorld!!!
-    loadClouds() {
-        this.clouds = [];    // set random number (1 of 8)
-        for (let i = 0; i < 8 + 1; i++) {    // levelSize!!!
-            let cloud = new Cloud(i);
-            this.clouds.push(cloud);
+    loadBackground(i) {
+        let bg = new Background(i);
+        bg.layers.forEach((layer) => {
+            layer.x = i * canvas.width;
+            this.background.push(layer);
+        });
+    }
+
+
+    loadCloud(i) {
+        let cloud = new Cloud(i);
+        this.clouds.push(cloud);
+    }
+
+
+    loadThisBird(i) {
+        let number = this.getBirdNumber();
+        for (let j = 0; j < number; j++) {
+            this.loadBird(i);
         }
+    }
+
+
+    loadBirdSwarm(i) {
+        this.birds = [];
+        let number = this.getBirdNumber();
+        for (let j = 0; j < number; j++) {
+            this.loadBird(i);
+        }
+    }
+
+
+    loadBird(i) {
+        let x = this.getBirdX(i);
+        let y = this.getBirdY();
+        let bird = new Bird(x, y);
+        this.birds.push(bird);
+    }
+
+
+    getBirdNumber() {
+        return 3 - Math.round(Math.random() * 2)
+    }
+
+
+    getBirdX(i) {
+        return 13.75 - Math.round(Math.random() * 12) + i * 960 / 64;
+    }
+
+
+    getBirdY() {
+        return 7.415 - Math.round(Math.random() * 4);
     }
 
 
