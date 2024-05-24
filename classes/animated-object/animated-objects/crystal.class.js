@@ -10,7 +10,7 @@ class Crystal extends AnimatedObject {
     // jsdoc
     triggerEffect() {
         world.hero.bombUnlocked = true;
-        world.hero.xStopLeft = source.crystalCollectedX;
         world.hero.xStopRight = source.endX;
+        world.hero.xStopLeft = source.crystalCollectedX;
     }
 }

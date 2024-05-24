@@ -5,11 +5,6 @@ class Bird extends AnimatedObject {
     constructor(x, y) {
         super(source.bird, x, y);
         this.setSpeed(32);
-    }
-
-
-    // jsdoc
-    act() {
-        this.floatPermanently();
+        this.move(() => this.floatPermanently());
     }
 }

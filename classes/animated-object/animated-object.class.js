@@ -8,7 +8,7 @@ class AnimatedObject extends DrawableObject {
         this.setFlipBook();
         this.loadImages();
         this.setSound();
-        this.animate();
+        this.playAnimation();
     }
 
 
@@ -80,12 +80,14 @@ class AnimatedObject extends DrawableObject {
     }
 
 
+    setAct(method) {
+        this.act = this[method];
+    }
+
+
     // to edit!!! + edit animate() for web!!!
-    animate() {
-        if (!isUndefined(this.act)) {
-            this.setStoppableInterval(() => this.act(), 1000 / 60);
-        }
-        this.setStoppableInterval(() => this.playAnimation(), 100);
+    playAnimation() {
+        this.setStoppableInterval(() => super.playAnimation(), 100);
     }
 
 

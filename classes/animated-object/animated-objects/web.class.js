@@ -10,6 +10,7 @@ class Web extends AnimatedObject {
         super(source.web, x / UNIT, y / UNIT);
         this.setParameters(otherDirection);
         this.splitFlipBook();
+        this.move(() => this.throw());
     }
 
 
