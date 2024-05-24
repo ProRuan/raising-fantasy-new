@@ -46,14 +46,7 @@ class Web extends AnimatedObject {
 
 
     // jsdoc
-    animate() {
-        this.setStoppableInterval(() => this.throw(), 1000 / 60);
-        this.setStoppableInterval(() => this.playAnimation(), 100);
-    }
-
-
-    // jsdoc
-    throw() {
+    act() {
         this.x += this.speed;
         this.verifyCollision();
     }

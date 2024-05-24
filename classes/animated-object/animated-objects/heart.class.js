@@ -10,7 +10,6 @@ class Heart extends AnimatedObject {
 
     // jsdoc
     triggerEffect() {
-        let newMax = this.getNewMax();
-        this.restore(newMax);
+        this.restoreHp();
     }
 }

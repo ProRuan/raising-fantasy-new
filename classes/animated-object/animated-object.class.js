@@ -47,6 +47,13 @@ class AnimatedObject extends DrawableObject {
 
 
     // jsdoc
+    restoreHp() {
+        let newMax = this.getNewMax();
+        this.restore(newMax);
+    }
+
+
+    // jsdoc
     getNewMax() {
         let newMax = this.calculateNewMax();
         return getVerifiedValue(this.max, newMax);
@@ -75,9 +82,14 @@ class AnimatedObject extends DrawableObject {
 
     // to edit!!! + edit animate() for web!!!
     animate() {
+        if (!isUndefined(this.act)) {
+            this.setStoppableInterval(() => this.act(), 1000 / 60);
+        }
         this.setStoppableInterval(() => this.playAnimation(), 100);
     }
 
 
-    // edit coins, heart sounds and so on!!!
+    // I. edit coins, heart sounds and so on ...
+    // II. edit class AnimatedObject ...
+    // III. remove double code: coin, crystal, heart, hitPoint ... (4/8)
 }
