@@ -5,7 +5,6 @@ class Source {
     crystalCollectedX = 5984;
     bossBattleX = 6780;
     endX = 7620;
-    bossBattleStarted = false;
 
 
     // edit all source files

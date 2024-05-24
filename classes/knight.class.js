@@ -63,19 +63,21 @@ class Knight extends Character {
             }
 
 
-            if (isGreater(6932, this.body.xCenter) && isUndefined(this.bossBattleStarted)) {
+            if (isGreater(6932, this.x) && isUndefined(this.bossBattleStarted)) {
                 this.bossBattleStarted = true;
                 this.xStopLeft = source.bossBattleX;
             }
 
             // (64, body.xCenter) + (body.xCenter, 960 - 64)
 
-            if (isGreater(960 * 7 + 212, this.x)) {
-                this.world.cameraX = -960 * 7;
-            } else if (isGreater(212, this.x)) {
-                this.world.cameraX = -this.x + 212;    // set camera x offset!!!
-            } else {
-                this.world.cameraX = 0;
+            if (isUndefined(this.bossBattleStarted)) {
+                if (isGreater(960 * 7 + 212, this.x)) {
+                    this.world.cameraX = -960 * 7;
+                } else if (isGreater(212, this.x)) {
+                    this.world.cameraX = -this.x + 212;    // set camera x offset!!!
+                } else {
+                    this.world.cameraX = 0;
+                }
             }
 
         }, 1000 / 60);
