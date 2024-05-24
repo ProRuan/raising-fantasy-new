@@ -1,10 +1,12 @@
 class Source {
     // to edit and/or move!!!
-    xStart = 60;
-    levelSize = LEVEL_SIZE;
-    xEnd = LEVEL_SIZE * NATIVE_WIDTH - this.xStart;
-    crystalXLeft = LEVEL_SIZE * NATIVE_WIDTH + this.xStart;
-    crystalXRight = LEVEL_SIZE * NATIVE_WIDTH - this.xStart;
+    startX = 60;
+    crystalXCenter = 6240;
+    crystalCollectedX = 5984;
+    bossBattleX = 6780;
+    endX = 7620;
+    bossBattleStarted = false;
+
 
     // edit all source files
 

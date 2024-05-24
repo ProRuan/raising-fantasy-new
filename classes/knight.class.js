@@ -4,6 +4,8 @@ class Knight extends Character {
     weaponXY = { xLeft: 24, xRight: 60, yTop: 56, yBottom: 104 };
     chapters = ['epilog', 'death', 'hurt', 'climb', 'jump', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'idle', 'cover'];
 
+    xStopLeft = source.startX;
+    xStopRight = source.crystalXCenter;
 
     // hurt: set condition + delay!!!
 
@@ -61,6 +63,10 @@ class Knight extends Character {
             }
 
 
+            if (isGreater(6932, this.body.xCenter) && isUndefined(this.bossBattleStarted)) {
+                this.bossBattleStarted = true;
+                this.xStopLeft = source.bossBattleX;
+            }
 
             // (64, body.xCenter) + (body.xCenter, 960 - 64)
 
@@ -210,17 +216,25 @@ class Knight extends Character {
 
     // jsdoc
     run() {
-        if (!isUndefined(this.world.crystals[0]) && isGreater(source.xStart, this.body.xCenter)) {    // level xStart
+        if (isGreater(this.xStopLeft, this.body.xCenter)) {
             this.runLeft('arrowLeft', true);
-        } else if (isGreater(5760 + 192 + 32, this.body.xCenter)) {
-            this.runLeft('arrowLeft', true);
+        }
+        if (isGreater(this.body.xCenter, this.xStopRight)) {
+            this.runLeft('arrowRight', false);
         }
 
-        if (isGreater(this.body.xCenter, 6240)) {    // level xEnd
-            this.runLeft('arrowRight', false);
-        } else if (isUndefined(this.world.crystals[0]) && isGreater(this.body.xCenter, source.xEnd)) {    // level xEnd
-            this.runLeft('arrowRight', false);
-        }
+
+        // if (!isUndefined(this.world.crystals[0]) && isGreater(source.xStart, this.body.xCenter)) {    // level xStart
+        //     this.runLeft('arrowLeft', true);
+        // } else if (isGreater(5760 + 192 + 32, this.body.xCenter)) {
+        //     this.runLeft('arrowLeft', true);
+        // }
+
+        // if (isGreater(this.body.xCenter, 6240)) {    // level xEnd
+        //     this.runLeft('arrowRight', false);
+        // } else if (isUndefined(this.world.crystals[0]) && isGreater(this.body.xCenter, source.xEnd)) {    // level xEnd
+        //     this.runLeft('arrowRight', false);
+        // }
     }
 
 
