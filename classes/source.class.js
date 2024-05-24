@@ -1,5 +1,10 @@
 class Source {
-
+    // to edit and/or move!!!
+    xStart = 60;
+    levelSize = LEVEL_SIZE;
+    xEnd = LEVEL_SIZE * NATIVE_WIDTH - this.xStart;
+    crystalXLeft = LEVEL_SIZE * NATIVE_WIDTH + this.xStart;
+    crystalXRight = LEVEL_SIZE * NATIVE_WIDTH - this.xStart;
 
     // edit all source files
 

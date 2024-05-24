@@ -210,8 +210,17 @@ class Knight extends Character {
 
     // jsdoc
     run() {
-        this.runLeft('arrowLeft', true);
-        this.runLeft('arrowRight', false);
+        if (!isUndefined(this.world.crystals[0]) && isGreater(source.xStart, this.body.xCenter)) {    // level xStart
+            this.runLeft('arrowLeft', true);
+        } else if (isGreater(5760 + 192 + 32, this.body.xCenter)) {
+            this.runLeft('arrowLeft', true);
+        }
+
+        if (isGreater(this.body.xCenter, 6240)) {    // level xEnd
+            this.runLeft('arrowRight', false);
+        } else if (isUndefined(this.world.crystals[0]) && isGreater(this.body.xCenter, source.xEnd)) {    // level xEnd
+            this.runLeft('arrowRight', false);
+        }
     }
 
 
