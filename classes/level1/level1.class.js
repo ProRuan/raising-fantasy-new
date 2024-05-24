@@ -3,28 +3,39 @@ class Level1 {
 
     // jsdoc
     constructor() {
-        this.loadLandscape();
+        this.loadScenery();
         this.loadAllSections();
     }
 
 
-    loadLandscape() {
-        this.loadLandScapeDetail('background', 'loadBackground');
-        this.loadLandScapeDetail('clouds', 'loadCloud');
-        this.loadLandScapeDetail('birds', 'loadThisBird');
+    // jsdoc
+    loadScenery() {
+        this.loadScenicDetail('background');
+        this.loadScenicDetail('clouds');
+        this.loadScenicDetail('birds');
     }
 
 
-    loadLandScapeDetail(key, method) {
+    loadScenicDetail(key) {
         this[key] = [];
         for (let i = 0; i < 8; i++) {    // level size!!!
+            let initial = key[0];
+            key = key.replace(initial, initial.toUpperCase());
+            let method = 'load' + key;
             this[method](i);
         }
     }
 
 
+    // jsdoc
     loadBackground(i) {
         let bg = new Background(i);
+        this.loadLayers(i, bg);
+    }
+
+
+    // jsdoc
+    loadLayers(i, bg) {
         bg.layers.forEach((layer) => {
             layer.x = i * canvas.width;
             this.background.push(layer);
@@ -32,39 +43,43 @@ class Level1 {
     }
 
 
-    loadCloud(i) {
+    // jsdoc
+    loadClouds(i) {
+        let number = this.getRandomNumber(8, 7);
+        if (isGreater(4, number)) {
+            this.loadCloudField(i);
+        }
+    }
+
+
+    // jsdoc
+    getRandomNumber(max, dev) {
+        return max - Math.round(Math.random() * dev);
+    }
+
+
+    // jsdoc
+    loadCloudField(i) {
         let cloud = new Cloud(i);
         this.clouds.push(cloud);
     }
 
 
-    loadThisBird(i) {
-        let number = this.getBirdNumber();
+    // jsdoc
+    loadBirds(i) {
+        let number = this.getRandomNumber(3, 2);
         for (let j = 0; j < number; j++) {
             this.loadBird(i);
         }
     }
 
 
-    loadBirdSwarm(i) {
-        this.birds = [];
-        let number = this.getBirdNumber();
-        for (let j = 0; j < number; j++) {
-            this.loadBird(i);
-        }
-    }
-
-
+    // jsdoc
     loadBird(i) {
         let x = this.getBirdX(i);
         let y = this.getBirdY();
         let bird = new Bird(x, y);
         this.birds.push(bird);
-    }
-
-
-    getBirdNumber() {
-        return 3 - Math.round(Math.random() * 2)
     }
 
 
