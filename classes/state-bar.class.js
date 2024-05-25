@@ -23,7 +23,6 @@ class StateBar extends DrawableObject {
     }
 
 
-    // to edit
     setStateBar(path, max, ms) {
         this.name = path.match(this.pattern)[1];
         this.max = max;
@@ -41,79 +40,71 @@ class StateBar extends DrawableObject {
     }
 
 
+    // jsdoc
     addNewPoint() {
         let x = this.calculateX();
-        let point = this.getPointType(x);
+        let point = this.getPoint(x);
         this.points.push(point);
     }
 
 
     // jsdoc
     calculateX() {
-        return (this.translation + this.points.length * 1);
+        return this.translation + this.points.length;
     }
 
 
-    getPointType(x) {
-        if (this.isName('hp')) {
-            return this.setPointType('hp', x);
-        } else if (this.isName('energy')) {
-            return this.setPointType('energy', x);
-        } else if (this.isName('stamina')) {
-            return this.setPointType('stamina', x);
-        }
-    }
-
-
-    isName(name) {
-        return this.name == name;
-    }
-
-
-    setPointType(name, x) {
-        name = this.getPointName(name);
+    // jsdoc
+    getPoint(x) {
+        let name = this.getPointName();
         return this.createPoint(name, x);
     }
 
 
-    getPointName(name) {
-        return name + 'Point';
+    // jsdoc
+    getPointName() {
+        return this.name + 'Point';
     }
 
 
+    // jsdoc
     createPoint(name, x) {
-        return new DrawableObject(source[name], x, source[name].y);
+        let path = source[name];
+        let y = source[name].y;
+        return new DrawableObject(path, x, y);
     }
 
 
+    // jsdoc
     regenerate() {
-        if (this.getCondition() && this.points.length < this.max) {    // condition!!!
+        if (this.isCondition()) {
             this.addNewPoint();
         }
-
-
-        // let condition = this.getCondition();
-        // if (this.points.length < this.max && condition) {    // condition!!!
-        //     this.addNewPoint();
-        // }
     }
 
 
-    // to edit
+    // jsdoc
+    isCondition() {
+        return this.getCondition() && isGreater(this.points.length, this.max);
+    }
+
+
+    // jsdoc
     getCondition() {
-        if (this.name == 'hp') {    // condition 'energy' is missing!!!
-            return !world.hero.isDeath();
-        } else if (this.name == 'stamina') {
-            return !world.hero.isDeath() && !isKey('keyA');
-        } else {
-            return true;
+        if (!world.hero.isDeath()) {
+            if (this.isStateBar('hp')) {
+                return !world.hero.isHurt();
+            } else if (this.isStateBar('stamina')) {
+                return !isKey('keyA');
+            } else {
+                return true;
+            }
         }
     }
 
 
-    updatePointX() {
-        for (let i = 0; i < this.points.length; i++) {
-            this.points[i].x = world.hero.xCamera + this.translation + i;
-        }
+    // jsdoc
+    isStateBar(name) {
+        return isMatch(this.name, name);
     }
 }
