@@ -3,11 +3,12 @@ class StateBar extends DrawableObject {
     pattern = /([a-z]+)_point/;
 
 
+    // jsdoc
     constructor(source, max, ms) {
         super(source, 0, 0);
         this.setStateBar(source.path, max, ms);
         this.fill();
-        this.setStoppableInterval(() => this.regenerate(), this.ms);
+        this.regenerate();
     }
 
 
@@ -23,20 +24,47 @@ class StateBar extends DrawableObject {
     }
 
 
+    // jsdoc
     setStateBar(path, max, ms) {
-        this.name = path.match(this.pattern)[1];
-        this.max = max;
-        this.ms = ms;
-        this.bg = new AvatarInfo(source[this.name + 'BarBg']);
-        this.border = new AvatarInfo(source[this.name + 'BarBorder']);
+        this.setParameters(path, max, ms);
+        this.setStateBarFrame();
     }
 
 
+    // jsdoc
+    setParameters(path, max, ms) {
+        this.name = path.match(this.pattern)[1];
+        this.max = max;
+        this.ms = ms;
+    }
+
+
+    // jsdoc
+    setStateBarFrame() {
+        this.bg = this.getAvatarInfo('BarBg');
+        this.border = this.getAvatarInfo('BarBorder');
+    }
+
+
+    // jsdoc
+    getAvatarInfo(key) {
+        let name = this.name + key;
+        return new AvatarInfo(source[name]);
+    }
+
+
+    // jsdoc
     fill(newMax) {
-        newMax = (!newMax) ? this.max : newMax;
+        newMax = this.getMax(newMax);
         for (let i = this.points.length; i < newMax; i++) {
             this.addNewPoint();
         }
+    }
+
+
+    // jsdoc
+    getMax(newMax) {
+        return (!newMax) ? this.max : newMax;
     }
 
 
@@ -77,6 +105,12 @@ class StateBar extends DrawableObject {
 
     // jsdoc
     regenerate() {
+        this.setStoppableInterval(() => this.refill(), this.ms);
+    }
+
+
+    // jsdoc
+    refill() {
         if (this.isCondition()) {
             this.addNewPoint();
         }
