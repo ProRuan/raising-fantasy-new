@@ -15,6 +15,14 @@ class Enemy extends MoveableObject {
 
 
     // jsdoc
+    setEnemy(hp, speed, method) {
+        this.setStateValues(hp, speed);
+        this.setAct(method);
+        this.animate();
+    }
+
+
+    // jsdoc
     setStateValues(hp, speed) {
         this.hp = hp;
         this.setSpeed(speed);

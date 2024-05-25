@@ -91,7 +91,8 @@ class AnimatedObject extends DrawableObject {
     }
 
 
-    // I. edit coins, heart sounds and so on ...
+    // I. edit coins, heart sounds and so on ... (0/8)
     // II. edit class AnimatedObject ...
-    // III. remove double code: coin, crystal, heart, hitPoint ... (4/8)
+    // III.a remove double code: bird, coin, crystal, heart, hitPoint ... (5/8)
+    // III.b fix bomb, star, web ... (0/3)
 }

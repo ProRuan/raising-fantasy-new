@@ -12,9 +12,7 @@ class Spider extends Enemy {
     // jsdoc
     constructor(x, y) {
         super(source.spider, x, y);
-        this.setStateValues(60, 80);
-        this.setAct('throw');
-        this.animate();
+        this.setEnemy(60, 80, 'throw');
     }
 
 

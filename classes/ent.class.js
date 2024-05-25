@@ -10,9 +10,7 @@ class Ent extends Enemy {
     // jsdoc
     constructor(x, y) {
         super(source.ent, x, y);
-        this.setStateValues(120, 48);
-        this.setAct('patrol');
-        this.animate();
+        this.setEnemy(120, 48, 'patrol');
     }
 
 
