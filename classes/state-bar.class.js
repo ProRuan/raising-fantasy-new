@@ -1,5 +1,6 @@
 class StateBar extends DrawableObject {
     points = [];
+    pattern = /([a-z]+)_point/;
 
 
     constructor(source, max, ms) {
@@ -7,15 +8,16 @@ class StateBar extends DrawableObject {
         this.setStateBar(source.path, max, ms);
         this.fill();
         this.setStoppableInterval(() => this.regenerate(), this.ms);
-        // this.regenerate();    // stoppable interval!!!
     }
 
 
+    // jsdoc
     get points() {
         return this.points;
     }
 
 
+    // jsdoc
     get translation() {
         return this.bg.translation;
     }
@@ -23,7 +25,7 @@ class StateBar extends DrawableObject {
 
     // to edit
     setStateBar(path, max, ms) {
-        this.name = path.match(/([a-z]+)_point/)[1];
+        this.name = path.match(this.pattern)[1];
         this.max = max;
         this.ms = ms;
         this.bg = new AvatarInfo(source[this.name + 'BarBg']);
@@ -46,6 +48,7 @@ class StateBar extends DrawableObject {
     }
 
 
+    // jsdoc
     calculateX() {
         return (this.translation + this.points.length * 1);
     }
