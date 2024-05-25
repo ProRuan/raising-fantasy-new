@@ -93,6 +93,8 @@ class LevelWorld extends World {
 
     // Please take care of x, y and UNIT!!!
 
+    // Fix loading sequence!!!
+
 
     draw() {    // double code!!!
         this.clearCanvas();    // think about camera objects!!!

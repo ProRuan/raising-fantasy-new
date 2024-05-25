@@ -16,14 +16,33 @@ class Level1 {
     }
 
 
+    // jsdoc
     loadScenicDetail(key) {
+        this.setArray(key);
+        this.executeLoad(key);
+    }
+
+
+    // jsdoc
+    setArray(key) {
         this[key] = [];
-        for (let i = 0; i < 8; i++) {    // level size!!!
-            let initial = key[0];
-            key = key.replace(initial, initial.toUpperCase());
+    }
+
+
+    // jsdoc
+    executeLoad(key) {
+        for (let i = 0; i < LEVEL_SIZE; i++) {
+            key = this.formatInitial(key, 'toUpperCase');
             let method = 'load' + key;
             this[method](i);
         }
+    }
+
+
+    // jsdoc
+    formatInitial(word, method) {
+        let initial = word[0];
+        return word.replace(initial, initial[method]());
     }
 
 
@@ -77,19 +96,23 @@ class Level1 {
     // jsdoc
     loadBird(i) {
         let x = this.getBirdX(i);
-        let y = this.getBirdY();
+        let y = this.getRandomNumber(7.415, 4);
         let bird = new Bird(x, y);
         this.birds.push(bird);
     }
 
 
+    // jsdoc
     getBirdX(i) {
-        return 13.75 - Math.round(Math.random() * 12) + i * 960 / 64;
+        let number = this.getRandomNumber(13.75, 12);
+        let translation = this.getTranslation(i);
+        return number + translation;
     }
 
 
-    getBirdY() {
-        return 7.415 - Math.round(Math.random() * 4);
+    // jsdoc
+    getTranslation(i) {
+        return i * canvas.width / UNIT;
     }
 
 
@@ -97,11 +120,11 @@ class Level1 {
     loadAllSections() {
         this.loadSection(new Section1(), 0);
         this.loadSection(new Section2(), 1);
-        this.loadSection(new Section3(), 2);    // fix ent y!
-        this.loadSection(new Section4(), 3);    // fix loading sequence!
+        this.loadSection(new Section3(), 2);
+        this.loadSection(new Section4(), 3);
         this.loadSection(new Section5(), 4);
         this.loadSection(new Section6(), 5);
-        this.loadSection(new Section7(), 6);    // set UNIT for class AnimatedObjects!!!
+        this.loadSection(new Section7(), 6);
         this.loadSection(new Section8(), 7);
     }
 
