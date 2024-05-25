@@ -3,6 +3,7 @@ class AnimatedObject extends DrawableObject {
     pattern = /([A-Z]?[a-z]+\_?[A-z]?[a-z]*).png/;
 
 
+    // jsdoc
     constructor(path, x, y) {
         super(path, x * UNIT, y * UNIT);
         this.setFlipBook();
@@ -24,23 +25,27 @@ class AnimatedObject extends DrawableObject {
     }
 
 
+    // jsdoc
     getId(key) {
         return world[key].findIndex(o => o == this);
     }
 
 
+    // jsdoc
     setFlipBook() {
         let chapter = this.getChapter();
         this.createFlipBook(chapter);
     }
 
 
+    // jsdoc
     getChapter() {
         let chapter = this.img.src.match(this.pattern)[1];
         return formatSplitWord(chapter);
     }
 
 
+    // jsdoc
     createFlipBook(chapter) {
         this.flipBook = new FlipBook(FLIP_BOOK_ANIMATED_OBJECTS)[chapter];
     }
@@ -72,26 +77,24 @@ class AnimatedObject extends DrawableObject {
     }
 
 
+    // jsdoc
     setSound() {
-        let chapter = this.getChapter();
-        if (source[chapter].sound) {
-            this.sound = source[chapter].sound;
+        let sound = this.getSound();
+        if (sound) {
+            this.sound = sound;
         }
     }
 
 
-    setAct(method) {
-        this.act = this[method];
+    // jsdoc
+    getSound() {
+        let chapter = this.getChapter();
+        return source[chapter].sound;
     }
 
 
-    // to edit!!! + edit animate() for web!!!
+    // jsdoc
     animate() {
         this.setStoppableInterval(() => this.playAnimation(), 100);
     }
-
-
-    // I. edit coins, heart sounds and so on ... (0/8)
-    // II. edit class AnimatedObject ...
-    // III. fix bomb, star ... (0/2)
 }

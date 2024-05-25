@@ -11,6 +11,7 @@ class Web extends AnimatedObject {
         this.setParameters(otherDirection, 128);
         this.splitFlipBook();
         this.move(() => this.throw());
+        this.playSound(this.sound);
     }
 
 
