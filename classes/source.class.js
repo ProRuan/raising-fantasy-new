@@ -226,9 +226,9 @@ class Source {
 
     // jsdoc
     setMagic() {
-        this.setSource('blade', './img/bosses/magic/blade.png', 256, 256);
-        this.setSource('fire', './img/bosses/magic/fire.png', 256, 256);
-        this.setSource('lightning', './img/bosses/magic/lightning.png', 256, 256);
+        this.setSource('blade', './img/bosses/magic/blade.png', 256);
+        this.setSource('fire', './img/bosses/magic/fire.png', 256);
+        this.setSource('lightning', './img/bosses/magic/lightning.png', 256);
     }
 
 

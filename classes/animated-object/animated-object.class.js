@@ -1,12 +1,14 @@
 class AnimatedObject extends DrawableObject {
-    sketchBook = FLIP_BOOK_ANIMATED_OBJECTS;
+    itemBook = FLIP_BOOK_ANIMATED_OBJECTS;
+    magicBook = FLIP_BOOK_MAGIC;
     pattern = /([A-Z]?[a-z]+\_?[A-z]?[a-z]*).png/;
     indent = 4;
 
 
     // jsdoc
-    constructor(path, x, y) {
-        super(path, x * UNIT, y * UNIT);
+    constructor(source, x, y) {
+        super(source, x * UNIT, y * UNIT);
+        this.switchFlipBook(source.path);
         this.setFlipBook();
         this.loadImages();
         this.setSound();
@@ -23,6 +25,15 @@ class AnimatedObject extends DrawableObject {
     // jsdoc
     get hpPoints() {
         return world.hpBar.points.length;
+    }
+
+
+    switchFlipBook(path) {
+        if (path.includes('animated')) {
+            this.sketchBook = this.itemBook;
+        } else if (path.includes('magic')) {
+            this.sketchBook = this.magicBook;
+        }
     }
 
 
