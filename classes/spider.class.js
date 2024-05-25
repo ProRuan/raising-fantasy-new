@@ -119,7 +119,7 @@ class Spider extends Enemy {
         setTimeout(() => {
             this.resetThrowParameters();
             this.webBroken = false;
-        }, 300);
+        }, 200);
     }
 
 

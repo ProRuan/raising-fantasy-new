@@ -8,7 +8,7 @@ class AnimatedObject extends DrawableObject {
         this.setFlipBook();
         this.loadImages();
         this.setSound();
-        this.playAnimation();
+        this.animate();
     }
 
 
@@ -86,13 +86,13 @@ class AnimatedObject extends DrawableObject {
 
 
     // to edit!!! + edit animate() for web!!!
-    playAnimation() {
-        this.setStoppableInterval(() => super.playAnimation(), 100);
+    animate() {
+        this.setStoppableInterval(() => this.playAnimation(), 100);
     }
 
 
     // I. edit coins, heart sounds and so on ... (0/8)
     // II. edit class AnimatedObject ...
-    // III.a remove double code: bird, coin, crystal, heart, hitPoint ... (5/8)
-    // III.b fix bomb, star, web ... (0/3)
+    // III. fix bomb, star ... (0/2)
+    // IV. finish web ...
 }
