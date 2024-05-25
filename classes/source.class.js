@@ -12,10 +12,6 @@ class Source {
 
     // to give to method below
 
-    blade = './img/bosses/magic/blade.png';
-    fire = './img/bosses/magic/fire.png';
-    lightning = './img/bosses/magic/lightning.png';
-
 
     // knightAnimation = [
     //     { condition: 'isRunAttack', chapter: 'runAttack' },
@@ -58,6 +54,7 @@ class Source {
         this.setAnimatedObjects();
         this.setLeaf();
         this.setEndboss();
+        this.setMagic();
         this.setEnemies();
     }
 
@@ -224,6 +221,14 @@ class Source {
     setEndboss() {
         this.setSource('shaman', './img/bosses/shaman/shaman.png', 256, 256);
         this.addSourceFlipBook('shaman', FLIP_BOOK_SHAMAN);
+    }
+
+
+    // jsdoc
+    setMagic() {
+        this.setSource('blade', './img/bosses/magic/blade.png', 256, 256);
+        this.setSource('fire', './img/bosses/magic/fire.png', 256, 256);
+        this.setSource('lightning', './img/bosses/magic/lightning.png', 256, 256);
     }
 
 

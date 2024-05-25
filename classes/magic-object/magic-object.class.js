@@ -1,17 +1,12 @@
 class MagicObject extends AnimatedObject {
+    sketchBook = FLIP_BOOK_MAGIC;
     otherDirection = true;
     inTouch = false;
-    colliding = false;
+    collided = false;
 
 
     // jsdoc
     constructor(path, x, y) {
         super(path, x, y);
-    }
-
-
-    // jsdoc
-    createFlipBook(chapter) {
-        this.flipBook = new FlipBook(FLIP_BOOK_MAGIC)[chapter];
     }
 }

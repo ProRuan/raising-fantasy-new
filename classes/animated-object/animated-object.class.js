@@ -1,6 +1,7 @@
 class AnimatedObject extends DrawableObject {
-    indent = 4;
+    sketchBook = FLIP_BOOK_ANIMATED_OBJECTS;
     pattern = /([A-Z]?[a-z]+\_?[A-z]?[a-z]*).png/;
+    indent = 4;
 
 
     // jsdoc
@@ -47,7 +48,7 @@ class AnimatedObject extends DrawableObject {
 
     // jsdoc
     createFlipBook(chapter) {
-        this.flipBook = new FlipBook(FLIP_BOOK_ANIMATED_OBJECTS)[chapter];
+        this.flipBook = new FlipBook(this.sketchBook)[chapter];
     }
 
 
