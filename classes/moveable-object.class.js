@@ -127,12 +127,6 @@ class MoveableObject extends DrawableObject {
     }
 
 
-    // jsdoc
-    applySpeedType(key, logical, type) {
-        this[key] += (logical) ? -this[type] : this[type];
-    }
-
-
     climb(logical) {
         this.applySpeedType('y', logical, 'speed');    // not waterproof!!!
     }

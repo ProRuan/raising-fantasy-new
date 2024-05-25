@@ -1,6 +1,5 @@
 class Web extends AnimatedObject {
     radDispl = 32;
-    speed = 2;
     thrown = false;
     collided = false;
     chapter = 'prolog';
@@ -9,16 +8,16 @@ class Web extends AnimatedObject {
     // jsdoc
     constructor(x, y, otherDirection) {
         super(source.web, x / UNIT, y / UNIT);
-        this.setParameters(otherDirection);
+        this.setParameters(otherDirection, 128);
         this.splitFlipBook();
         this.move(() => this.throw());
     }
 
 
     // jsdoc
-    setParameters(otherDirection) {
+    setParameters(otherDirection, speed) {
         this.otherDirection = otherDirection;
-        this.speed = (otherDirection) ? -this.speed : this.speed;
+        this.setSpeed(speed);
     }
 
 
@@ -49,8 +48,9 @@ class Web extends AnimatedObject {
     }
 
 
+    // jsdoc
     throw() {
-        this.x += this.speed;
+        this.applySpeedType('x', this.otherDirection, 'speed');
         this.verifyCollision();
     }
 

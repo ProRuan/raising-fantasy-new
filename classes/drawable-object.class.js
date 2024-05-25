@@ -202,6 +202,12 @@ class DrawableObject {
 
 
     // jsdoc
+    applySpeedType(key, logical, type) {
+        this[key] += (logical) ? -this[type] : this[type];
+    }
+
+
+    // jsdoc
     floatPermanently() {
         this.float();
         this.keep();
