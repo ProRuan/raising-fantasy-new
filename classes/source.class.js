@@ -221,6 +221,13 @@ class Source {
 
 
     // jsdoc
+    setEndboss() {
+        this.setSource('shaman', './img/bosses/shaman/shaman.png', 256, 256);
+        this.addSourceFlipBook('shaman', FLIP_BOOK_SHAMAN);
+    }
+
+
+    // jsdoc
     setHero() {
         this.setSource('knight', './img/characters/knight/knight.png', 128, 128);
         this.addSourceFlipBook('knight', FLIP_BOOK_KNIGHT);

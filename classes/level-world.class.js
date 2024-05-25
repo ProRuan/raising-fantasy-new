@@ -21,10 +21,6 @@ class LevelWorld extends World {
         // only for testing!!!
         this.cameraX = 0;
 
-        // this.dino = new Dino(256, 15);
-        // this.ent = new Ent(480 - 116, -24);
-        // this.spider = new Spider(480 - 32, 12 + 224);
-        // this.enemies = [this.spider];
 
         this.hero = new Knight(this.heroX, 38);
         // fix ent y (+1)!!!

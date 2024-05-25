@@ -157,36 +157,13 @@ class DrawableObject {
         }
 
 
-        if (this instanceof Dino) {
+        if (this instanceof Shaman) {
             ctx.beginPath();
             ctx.lineWidth = '1';
             ctx.strokeStyle = 'red';
-            ctx.rect(this.body.xCenter, this.body.yTop, 0, this.body.yBottom - this.body.yTop);
+            // ctx.rect(this.body.xCenter, this.body.yTop, 0, this.body.yBottom - this.body.yTop);
             // ctx.rect(this.body.xLeft, this.body.yTop, this.body.xRight - this.body.xLeft, this.body.yBottom - this.body.yTop);
             ctx.rect(this.weapon.xLeft, this.weapon.yTop, this.weapon.xRight - this.weapon.xLeft, this.weapon.yBottom - this.weapon.yTop);
-            // ctx.rect(this.x - 240 + 232, this.weapon.yTop, (this.weapon.xRight - 168 + 232) - (this.x - 240 + 232), this.weapon.yBottom - this.weapon.yTop);
-            ctx.stroke();
-        }
-
-
-        if (this instanceof Spider) {
-            ctx.beginPath();
-            ctx.lineWidth = '1';
-            ctx.strokeStyle = 'red';
-            ctx.rect(this.body.xCenter, this.body.yTop, 0, this.body.yBottom - this.body.yTop);
-            ctx.rect(this.body.xLeft, this.body.yTop, this.body.xRight - this.body.xLeft, this.body.yBottom - this.body.yTop);
-            ctx.rect(this.weapon.xLeft, this.weapon.yTop, this.weapon.xRight - this.weapon.xLeft, this.weapon.yBottom - this.weapon.yTop);
-            // ctx.rect(this.x - 240 + 232, this.weapon.yTop, (this.weapon.xRight - 168 + 232) - (this.x - 240 + 232), this.weapon.yBottom - this.weapon.yTop);
-            ctx.stroke();
-        }
-
-
-        if (this instanceof Web) {
-            ctx.beginPath();
-            ctx.lineWidth = '1';
-            ctx.strokeStyle = 'red';
-            ctx.rect(this.x + 4, this.y + 4, this.width - 8, this.height - 8);
-            // ctx.rect(this.x - 240 + 232, this.weapon.yTop, (this.weapon.xRight - 168 + 232) - (this.x - 240 + 232), this.weapon.yBottom - this.weapon.yTop);
             ctx.stroke();
         }
     }
