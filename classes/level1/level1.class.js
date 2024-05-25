@@ -18,14 +18,8 @@ class Level1 {
 
     // jsdoc
     loadScenicDetail(key) {
-        this.setArray(key);
+        this.setObjectGroup(key);
         this.executeLoad(key);
-    }
-
-
-    // jsdoc
-    setArray(key) {
-        this[key] = [];
     }
 
 
@@ -129,9 +123,6 @@ class Level1 {
     }
 
 
-    // review subsequent methods!!!
-
-
     // jsdoc
     loadSection(section, t) {
         for (const [key] of Object.entries(section)) {
@@ -171,6 +162,6 @@ class Level1 {
 
     // jsdoc
     setObjectX(t, object) {
-        object.x += t * canvas.width;    // to edit (translation)
+        object.x += t * canvas.width;
     }
 }
