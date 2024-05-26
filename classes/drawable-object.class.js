@@ -168,10 +168,10 @@ class DrawableObject {
         }
 
 
-        if (this instanceof Blade) {
+        if (this instanceof Lightning) {
             ctx.beginPath();
             ctx.lineWidth = '1';
-            ctx.strokeStyle = 'red';
+            ctx.strokeStyle = 'yellow';
             ctx.rect(this.body.xCenter, this.body.yTop, 0, this.body.yBottom - this.body.yTop);
             ctx.rect(this.body.xLeft, this.body.yTop, this.body.xRight - this.body.xLeft, this.body.yBottom - this.body.yTop);
             ctx.stroke();
