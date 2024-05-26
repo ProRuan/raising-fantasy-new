@@ -20,7 +20,6 @@ class LevelWorld extends World {
 
         // only for testing!!!
         this.cameraX = 0;
-        this.blade = new Blade(7.5, 4.5);
 
 
         this.hero = new Knight(this.heroX, 38);
@@ -123,7 +122,9 @@ class LevelWorld extends World {
             // ready!!!
             this.drawLevel();
             this.drawObject(this.hero);
-            this.drawObject(this.blade);
+            if (this.endboss[0].magic) {
+                this.drawObject(this.endboss[0].magic);
+            }
             this.drawSpiderWebs();
             this.translateCamera(-this.cameraX, 0);
 

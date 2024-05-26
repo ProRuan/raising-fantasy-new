@@ -36,7 +36,7 @@ class World {
     drawObject(o) {
         this.flipImageMaster(o, () => this.flipImage(o));
         o.draw(this.ctx);
-        o.drawFrame(this.ctx);    // only for testing!!!
+        // o.drawFrame(this.ctx);    // only for testing!!!
         this.flipImageMaster(o, () => this.flipImageBack(o));
     }
 
