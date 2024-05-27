@@ -80,7 +80,7 @@ Tasks
   - option: fix jump animation for 'fall after walk' ...
 
 
-Clean Coding (40/58)
+Clean Coding (40/57)
 ------------
   - class AnimatedObjects - simpleCheck
       - class ... (2x)
@@ -129,7 +129,6 @@ Clean Coding (40/58)
   - class Spider - simpleCheck
   - class StartScreen ...
   - class StateBar - simpleCheck
-  - class Sword ...
   - class World ...
 
 

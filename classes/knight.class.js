@@ -2,12 +2,15 @@ class Knight extends Character {
     radDispl = 84;
     bodyXY = { xLeft: 28, xCenter: 44, xRight: 60, yTop: 62, yCenter: 86, yBottom: 110 };
     weaponXY = { xLeft: 24, xRight: 60, yTop: 56, yBottom: 104 };
+    attackXY = { xLeft: 24, xRight: 60, yTop: 56, yBottom: 104 };
+    walkAttackXY = { xLeft: 24, xRight: 50, yTop: 56, yBottom: 108 };
     chapters = ['epilog', 'death', 'hurt', 'climb', 'jump', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'idle', 'cover'];
 
     xStopLeft = source.startX;
     xStopRight = source.crystalXCenter;
 
     // hurt: set condition + delay!!!
+    // set attackXY and walkAttackXY for isBattle()!!!
 
 
     // edit source!!!
