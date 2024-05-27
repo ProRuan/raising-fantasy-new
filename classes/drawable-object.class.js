@@ -182,9 +182,10 @@ class DrawableObject {
 
 
     // to check, clean and move!!!
-    setSpeed(s, r) {
+    setSpeed(s, r, y) {
         this.speed = s / 60;
         (r) ? this.runSpeed = r / 60 : false;
+        (y) ? this.speedY = y / 60 : false;
     }
 
 

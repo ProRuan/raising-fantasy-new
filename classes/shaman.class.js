@@ -29,7 +29,7 @@ class Shaman extends Enemy {
         }
         if (this.magic && !isTrue(this.magic.collided) && isCollided(world.hero.body, this.magic.body)) {
             this.magic.collided = true;
-            world.hero.hpPoints.splice(world.hero.hpPoints.length - 10, 10);
+            world.hero.hpPoints.splice(world.hero.hpPoints.length - this.magic.damage, this.magic.damage);
             console.log(world.hero.hpPoints.length);
         }
         if (!isTrue(this.spellCast)) {
