@@ -7,7 +7,7 @@ class Lightning extends MagicObject {
 
     constructor(x, y, otherDirection) {
         super(source.lightning, x, y);
-        
+
         this.bodyXY = this.loadXY;
         this.otherDirection = otherDirection;    // necessary?
     }
@@ -17,4 +17,13 @@ class Lightning extends MagicObject {
     animate() {
         this.img.src = this.flipBook[0];
     }
+
+
+    // class Lightning
+    // class Fire ...
+    // class Blade ...
+    // class MagicObject ...
+    // class Shaman ...
+    // './img' --> 'img' ...
+    // speedXY + pagesXY ...
 }

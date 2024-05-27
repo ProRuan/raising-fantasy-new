@@ -5,7 +5,6 @@ class Fire extends MagicObject {
     bodyXY = { xLeft: 108, xCenter: 124, xRight: 140, yTop: 120, yCenter: 128, yBottom: 136 };
 
 
-    // jsdoc
     constructor(x, y, otherDirection) {
         super(source.fire, x, y);
 
@@ -16,52 +15,55 @@ class Fire extends MagicObject {
     }
 
 
-    // Think about setSpeed() of Blade and MagicObject!!!
-
-
-    // to edit!!!
+    // jsdoc
     move() {
         if (!isTrue(this.collided)) {
-            this.x -= this.speed;
-
+            this.speedAlongX();
             if (isGreater(this.endX, this.body.xLeft)) {
-
-
-                if (isGreater(this.y + 128, world.hero.body.yCenter)) {
-                    if (isGreater(world.hero.body.yCenter, this.body.yCenter + this.speedY)) {
-                        this.setTargetedY();
-                        // console.log('to low: ', this.y, this.body.yCenter, this.body.yCenter - this.y);
-                    } else {
-                        this.applySpeedType('y', false, 'speedY');
-                    }
-                }
-
-
-                if (isGreater(world.hero.body.yCenter, this.y + 128)) {
-                    if (isGreater(this.body.yCenter, world.hero.body.yCenter + this.speedY)) {
-                        this.setTargetedY();
-                        // console.log('to high: ', this.y, this.body.yCenter, this.body.yCenter - this.y);
-                    } else {
-                        this.applySpeedType('y', true, 'speedY');
-                    }
-                }
-
-
-
+                this.speedAlongY();
             }
         }
     }
 
 
-    setTargetY() {
-        this.y = world.hero.body.yCenter - (this.body.yCenter - this.y);
+    // jsdoc
+    speedAlongX() {
+        this.x -= this.speed;
     }
 
 
-    // class Fire ...
-    // class Blade ...
-    // class MagicObject ...
-    // class Shaman ...
-    // './img' --> 'img' ...
-    // speedXY + pagesXY ...
+    // jsdoc
+    speedAlongY() {
+        if (this.isDecentered(this, world.hero)) {
+            this.y += this.speedY;
+        } else if (this.isDecentered(world.hero, this)) {
+            this.y -= this.speedY;
+        } else {
+            this.setTargetedY();
+        }
+    }
+
+
+    // jsdoc
+    isDecentered(a, b) {
+        return this.isAbove(a, b) && !this.isTargetedY(b, a);
+    }
+
+
+    // jsdoc
+    isAbove(a, b) {
+        return isGreater(a.body.yCenter, b.body.yCenter);
+    }
+
+
+    // jsdoc
+    isTargetedY(a, b) {
+        return isGreater(a.body.yCenter, b.body.yCenter + this.speedY);
+    }
+
+
+    // jsdoc
+    setTargetedY() {
+        this.y = world.hero.body.yCenter - (this.body.yCenter - this.y);
+    }
 }
