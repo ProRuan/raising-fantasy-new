@@ -1,17 +1,21 @@
 class Fire extends MagicObject {
     radDispl = 248;
-    speedXY = { x: 128, y: 64 };    // to set!
     pages = { move: [0, 3], collided: [3, 9], epilog: [9, 10] };
     bodyXY = { xLeft: 108, xCenter: 124, xRight: 140, yTop: 120, yCenter: 128, yBottom: 136 };
 
 
+    // jsdoc
     constructor(x, y, otherDirection) {
         super(source.fire, x, y);
-
         this.setMagic(otherDirection, 30, 'fire9');
-        this.startX = this.body.xLeft;
-        this.endX = this.startX - 376;
-        this.setSpeed(this.speedXY.x, 0, this.speedXY.y);
+        this.setSpeed(128, 0, 64);
+        this.setEndX();
+    }
+
+
+    // jsdoc
+    setEndX() {
+        this.endX = this.body.xLeft - 376;
     }
 
 
