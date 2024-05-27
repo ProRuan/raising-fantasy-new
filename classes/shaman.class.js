@@ -29,12 +29,18 @@ class Shaman extends Enemy {
         }
         if (this.magic && !isTrue(this.magic.collided) && isCollided(world.hero.body, this.magic.body)) {
             this.magic.collided = true;
-            world.hero.hpPoints.splice(world.hero.hpPoints.length - this.magic.damage, this.magic.damage);
+            if (world.hero.hpPoints.length < this.magic.damage) {
+                world.hero.hpPoints.splice(0, world.hero.hpPoints.length);
+            } else {
+                world.hero.hpPoints.splice(world.hero.hpPoints.length - this.magic.damage, this.magic.damage);
+            }
             console.log(world.hero.hpPoints.length);
         }
         if (!isTrue(this.spellCast)) {
             this.spellCast = true;
-            this.setBlade();
+            this.setFire();
+
+            // this.setBlade();    // finished
         }
     }
 

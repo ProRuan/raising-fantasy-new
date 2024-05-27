@@ -8,7 +8,18 @@ class Blade extends MagicObject {
     // jsdoc
     constructor(x, y, otherDirection) {
         super(source.blade, x, y);
-        this.setMagic(otherDirection, 10, 'blade6');
+        this.setMagic(otherDirection, 20, 'blade6');
+        this.setSpeed();
+    }
+
+
+    // jsdoc
+    setSpeed() {
+        if (isGreater(world.hero.body.yCenter, this.body.yCenter)) {
+            super.setSpeed(this.speedXY.s, 0, this.speedXY.yUp);
+        } else {
+            super.setSpeed(this.speedXY.s, 0, this.speedXY.yDown);
+        }
     }
 
 

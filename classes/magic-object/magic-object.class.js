@@ -33,17 +33,6 @@ class MagicObject extends AnimatedObject {
         this.otherDirection = otherDirection;
         this.damage = damage;
         this.epilogKey = epilogKey
-        this.setSpeed();
-    }
-
-
-    // jsdoc
-    setSpeed() {
-        if (isGreater(world.hero.body.yCenter, this.yCenter)) {
-            super.setSpeed(this.speedXY.s, 0, this.speedXY.yUp);
-        } else {
-            super.setSpeed(this.speedXY.s, 0, this.speedXY.yDown);
-        }
     }
 
 
