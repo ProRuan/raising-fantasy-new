@@ -24,28 +24,37 @@ class Fire extends MagicObject {
         if (!isTrue(this.collided)) {
             this.x -= this.speed;
 
-            if (isGreater(this.endX, this.body.xRight)) {
-                if (this.y + 128 < world.hero.body.yCenter) {
-                    if (this.y + 128 > world.hero.body.yCenter) {
-                        this.y = world.hero.body.yCenter - 128;
+            if (isGreater(this.endX, this.body.xLeft)) {
+
+
+                if (isGreater(this.y + 128, world.hero.body.yCenter)) {
+                    if (isGreater(world.hero.body.yCenter, this.body.yCenter + this.speedY)) {
+                        this.setTargetedY();
+                        // console.log('to low: ', this.y, this.body.yCenter, this.body.yCenter - this.y);
                     } else {
-                        this.y += this.speedY;
+                        this.applySpeedType('y', false, 'speedY');
                     }
                 }
 
 
-                if (this.y + 128 > world.hero.body.yCenter) {
-                    if (this.y + 128 < world.hero.body.yCenter) {
-                        this.y = world.hero.body.yCenter - 128;
+                if (isGreater(world.hero.body.yCenter, this.y + 128)) {
+                    if (isGreater(this.body.yCenter, world.hero.body.yCenter + this.speedY)) {
+                        this.setTargetedY();
+                        // console.log('to high: ', this.y, this.body.yCenter, this.body.yCenter - this.y);
                     } else {
-                        this.y -= this.speedY;
+                        this.applySpeedType('y', true, 'speedY');
                     }
                 }
 
 
-                console.log(this.y, this.body.yCenter, this.body.yCenter - this.y);
+
             }
         }
+    }
+
+
+    setTargetY() {
+        this.y = world.hero.body.yCenter - (this.body.yCenter - this.y);
     }
 
 
