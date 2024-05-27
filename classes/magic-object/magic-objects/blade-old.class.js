@@ -14,36 +14,6 @@ class Blade extends MagicObject {
     }
 
 
-    get xCenter() {
-        return this.x + this.width / 2;
-    }
-
-
-    get xLeft() {
-        return this.xCenter - 12;
-    }
-
-
-    get xRight() {
-        return this.xCenter + 36;
-    }
-
-
-    get yCenter() {
-        return this.y + this.height / 2;
-    }
-
-
-    get yTop() {
-        return this.yCenter - 8;
-    }
-
-
-    get yBottom() {
-        return this.yCenter + 8;
-    }
-
-
     move() {
         setInterval(() => {
             if (!this.directionSet) {    // at the constructor()???

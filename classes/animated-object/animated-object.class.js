@@ -64,6 +64,23 @@ class AnimatedObject extends DrawableObject {
 
 
     // jsdoc
+    getPages(i, max) {
+        let pages = [];
+        this.addPages(i, max, pages);
+        return pages;
+    }
+
+
+    // jsdoc
+    addPages(i, max, pages) {
+        for (; i < max; i++) {
+            let page = this.flipBook[i];
+            pages.push(page);
+        }
+    }
+
+
+    // jsdoc
     restoreHp() {
         let newMax = this.getNewMax();
         this.restore(newMax);

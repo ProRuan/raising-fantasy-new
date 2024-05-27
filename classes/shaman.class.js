@@ -1,5 +1,6 @@
 class Shaman extends Enemy {
     radDispl = 144;
+    spellCast = false;
     bodyXY = { xLeft: 56, xCenter: 72, xRight: 88, yTop: 104, yCenter: 154, yBottom: 204 };
 
     weaponXY = { xLeft: 46, xRight: 94, yTop: 127, yBottom: 143 };    // to edit
@@ -13,16 +14,24 @@ class Shaman extends Enemy {
     constructor(x, y) {
         super(source.shaman, x, y);
 
-        // this.otherDirection = false;
-        this.img.src = this.flipBook.castLightning[3];
-        this.weaponXY = this.lightningXY;
+        this.weaponXY = this.bladeXY;
         // this.setLightning();
         this.setEnemy(90, 64, 'cast');
     }
 
 
     cast() {
-        this.setLightning();
+        if (!isTrue(this.spellCast)) {
+            this.spellCast = true;
+            this.setBlade();
+        }
+        if (this.magic && this.magic.x + this.magic.width < 0) {
+            this.spellCast = false;
+        }
+        if (this.magic && this.magic.removeable) {
+            this.magic = undefined;
+            this.spellCast = false;
+        }
     }
 
 

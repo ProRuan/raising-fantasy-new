@@ -158,6 +158,12 @@ class Knight extends Character {
         if (web) {
             return true;
         }
+
+        // double code
+        let magic = this.world.endboss.find(endboss => endboss.magic && isCollided(this.body, endboss.magic.body));
+        if (magic) {
+            return true;
+        }
     }
 
 
