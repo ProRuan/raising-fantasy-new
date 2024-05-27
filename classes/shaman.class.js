@@ -6,8 +6,8 @@ class Shaman extends Enemy {
     bladeXY = { xLeft: -57, xRight: 220, yTop: -284, yBottom: 0 };
     fireXY = { xLeft: -20, xRight: 228, yTop: -297, yBottom: 0 };
 
+    loadXY = { xLeft: -130, xRight: 228, yTop: -14 + 96, yBottom: 0 };   // to edit
     lightningXY = { xLeft: -130, xRight: 228, yTop: -14, yBottom: 0 };
-    loadXY = { xLeft: -130, xRight: 228, yTop: -14, yBottom: 0 };   // to edit
 
 
     constructor(x, y) {
@@ -41,8 +41,10 @@ class Shaman extends Enemy {
 
 
     setLightning() {
-        let x = (world.hero.body.xCenter + this.lightningXY.xLeft) / 64;
-        let y = (canvas.height - world.hero.yBottom + this.lightningXY.yTop) / 64;
+        let x = (world.hero.body.xCenter + this.loadXY.xLeft) / 64;
+        let y = (canvas.height - world.hero.yBottom + this.loadXY.yTop) / 64;
+        // let x = (world.hero.body.xCenter + this.lightningXY.xLeft) / 64;
+        // let y = (canvas.height - world.hero.yBottom + this.lightningXY.yTop) / 64;
         this.magic = new Lightning(x, y, this.otherDirection);
 
         console.log(world.hero.body.xCenter, this.magic.body.xCenter, world.hero.body.yBottom, this.magic.body.yBottom);
