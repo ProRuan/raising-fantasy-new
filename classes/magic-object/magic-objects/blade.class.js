@@ -36,12 +36,6 @@ class Blade extends MagicObject {
         if (!isTrue(this.collided)) {
             this.x += this.speed;
             this.y += this.speedY;
-
-
-        }
-
-        if (isCollided(this.body, world.hero.body)) {
-            this.collided = true;
         }
     }
 

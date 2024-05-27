@@ -21,16 +21,20 @@ class Shaman extends Enemy {
 
 
     cast() {
-        if (!isTrue(this.spellCast)) {
-            this.spellCast = true;
-            this.setBlade();
-        }
-        if (this.magic && this.magic.x + this.magic.width < 0) {
+        if (this.magic && this.magic.x + this.magic.width < this.x - 760) {
             this.spellCast = false;
         }
         if (this.magic && this.magic.removeable) {
-            this.magic = undefined;
             this.spellCast = false;
+        }
+        if (this.magic && !isTrue(this.magic.collided) && isCollided(world.hero.body, this.magic.body)) {
+            this.magic.collided = true;
+            world.hero.hpPoints.splice(world.hero.hpPoints.length - 10, 10);
+            console.log(world.hero.hpPoints.length);
+        }
+        if (!isTrue(this.spellCast)) {
+            this.spellCast = true;
+            this.setBlade();
         }
     }
 
