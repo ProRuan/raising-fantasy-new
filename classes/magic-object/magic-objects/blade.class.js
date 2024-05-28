@@ -1,8 +1,8 @@
 class Blade extends MagicObject {
     radDispl = 278;
-    speedXY = { s: 256, yUp: 112.8, yDown: -16.8 };
     pages = { move: 3, collided: 6, epilog: 7 };
     bodyXY = { xLeft: 115, xCenter: 139, xRight: 163, yTop: 121, yCenter: 129, yBottom: 137 };
+    step = { x: 256, yUp: 112.8, yDown: -16.8 };
 
 
     // jsdoc
@@ -16,9 +16,9 @@ class Blade extends MagicObject {
     // jsdoc
     setSpeed() {
         if (isGreater(world.hero.body.yCenter, this.body.yCenter)) {
-            super.setSpeed(this.speedXY.s, 0, this.speedXY.yUp);
+            super.setSpeed(this.step.x, 0, this.step.yUp);
         } else {
-            super.setSpeed(this.speedXY.s, 0, this.speedXY.yDown);
+            super.setSpeed(this.step.x, 0, this.step.yDown);
         }
     }
 
@@ -26,8 +26,8 @@ class Blade extends MagicObject {
     // jsdoc
     move() {
         if (!isTrue(this.collided)) {
-            this.applySpeedType('x', true, 'speed');
-            this.applySpeedType('y', true, 'speedY');
+            this.x -= this.speed;
+            this.y -= this.speedY;
         }
     }
 }

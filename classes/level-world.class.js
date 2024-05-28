@@ -20,7 +20,6 @@ class LevelWorld extends World {
 
         // only for testing!!!
         this.cameraX = 0;
-        this.lightning = new Lightning(7.5, 4, false);
 
 
         this.hero = new Knight(this.heroX, 38);
@@ -122,7 +121,6 @@ class LevelWorld extends World {
             // ready!!!
             this.drawLevel();
             this.drawObject(this.hero);
-            this.drawObject(this.lightning);
             if (this.endboss[0].magic) {
                 this.drawObject(this.endboss[0].magic);
             }

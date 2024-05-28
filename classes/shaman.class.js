@@ -38,9 +38,10 @@ class Shaman extends Enemy {
         }
         if (!isTrue(this.spellCast)) {
             this.spellCast = true;
-            this.setFire();
+            this.setLightning();
 
             // this.setBlade();    // finished
+            // this.setFire();    // finished
         }
     }
 
@@ -66,7 +67,7 @@ class Shaman extends Enemy {
         // let y = (canvas.height - world.hero.yBottom + this.lightningXY.yTop) / 64;
         this.magic = new Lightning(x, y, this.otherDirection);
 
-        console.log(world.hero.body.xCenter, this.magic.body.xCenter, world.hero.body.yBottom, this.magic.body.yBottom);
+        // console.log(world.hero.body.xCenter, this.magic.body.xCenter, world.hero.body.yBottom, this.magic.body.yBottom);
     }
 
 
