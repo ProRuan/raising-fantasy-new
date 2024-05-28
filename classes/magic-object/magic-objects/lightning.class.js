@@ -3,14 +3,14 @@ class Lightning extends MagicObject {
     pages = { move: 2, collided: 8, epilog: 9 };
     bodyXY = { xLeft: 114, xCenter: 130, xRight: 146, yTop: 32, yCenter: 128, yBottom: 224 };
     loadXY = { xLeft: 120, xCenter: 128, xRight: 136, yTop: 180, yCenter: 128, yBottom: 226 };
-    lightningXY = { xLeft: 114, xCenter: 130, xRight: 146, yTop: 32, yCenter: 128, yBottom: 224 };
+    lightningXY = { xLeft: 114, xCenter: 130, xRight: 146, yTop: 32, yCenter: 128, yBottom: 224 };    // frame -1 or +1
 
 
     constructor(x, y, otherDirection) {
         super(source.lightning, x, y);
         this.setMagic(otherDirection, 40, 'lightning8');
 
-        this.bodyXY = this.lightningXY;
+        this.bodyXY = this.loadXY;
         this.searching = true;
     }
 

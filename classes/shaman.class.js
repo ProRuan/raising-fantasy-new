@@ -27,6 +27,10 @@ class Shaman extends Enemy {
         if (this.magic && this.magic.removeable) {
             this.spellCast = false;
         }
+        if (this.magic && isCollided(world.hero.body, this.magic.body)) {
+            world.hero.hpPoints.splice(world.hero.hpPoints.length - 1, 1);
+            console.log('lightning hit shaman');
+        }
         if (this.magic && !isTrue(this.magic.collided) && isCollided(world.hero.body, this.magic.body)) {
             this.magic.collided = true;
             if (world.hero.hpPoints.length < this.magic.damage) {
