@@ -10,14 +10,40 @@ class Lightning extends MagicObject {
         super(source.lightning, x, y);
         this.setMagic(otherDirection, 40, 'lightning8');
 
-        this.searchStop = 5000 + getTime();
+        this.bodyXY = this.lightningXY;
+        this.searching = true;
     }
 
 
     move() {
-        if (isGreater(world.time, this.searchStop)) {
-            this.x = world.hero.body.xCenter - (this.body.xCenter - this.x);
+        if (isTrue(this.waiting)) {
+            if (isUndefined(this.loading)) {
+                this.loading = false;
+                setTimeout(() => {
+                    this.waiting = false;
+                    this.loading = true;
+                    this.bodyXY = this.lightningXY;
+                    this.y += 96;
+                    this.collided = true;
+                }, 3000);
+            }
         }
+        if (isTrue(this.searching)) {
+            this.x = world.hero.body.xCenter - (this.body.xCenter - this.x);
+            this.y = world.hero.y - 210;
+            if (isUndefined(this.waiting)) {
+                this.waiting = false;
+                setTimeout(() => {
+                    this.searching = false;
+                    this.waiting = true;
+                }, 3000);
+            }
+        }
+
+
+        // console.log(world.hero.y, this.y, world.hero.y - this.y);
+        // console.log(world.hero.body.yBottom, this.body.yBottom, world.hero.body.yBottom - this.body.yBottom);
+        // console.log(this.searching, this.waiting, this.loading);
     }
 
 
