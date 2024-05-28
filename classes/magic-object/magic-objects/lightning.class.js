@@ -1,32 +1,48 @@
 class Lightning extends MagicObject {
     radDispl = 260;
     pages = { move: 2, collided: 8, epilog: 9 };
-    bodyXY = { xLeft: 114, xCenter: 130, xRight: 146, yTop: 32, yCenter: 128, yBottom: 224 };
-    loadXY = { xLeft: 120, xCenter: 128, xRight: 136, yTop: 180, yCenter: 203, yBottom: 226 };
+    chargeXY = { xLeft: 120, xCenter: 128, xRight: 136, yTop: 180, yCenter: 203, yBottom: 226 };
     lightningXY = { xLeft: 114, xCenter: 130, xRight: 146, yTop: 32, yCenter: 128, yBottom: 224 };
-    counter = 0;
+    deltaY = { move: 210, collided: 96 };
+    delay = 1000;
 
 
+    // jsdoc
     constructor(x, y, otherDirection) {
         super(source.lightning, x, y);
         this.setMagic(otherDirection, 40, 'lightning8');
-
-        this.bodyXY = this.loadXY;
-        this.startTime = getTime();
-        this.searchStop = this.startTime + 1000;
-        this.collidedStart = this.searchStop + 1000;
+        this.charge();
     }
 
 
+    // jsdoc
+    charge() {
+        this.bodyXY = this.chargeXY;
+        this.targetingStop = getTime() + this.delay;
+        this.chargingStop = getTime() + 2 * this.delay;
+    }
+
+
+    // jsdoc
     move() {
-        if (isGreater(world.time, this.searchStop)) {
-            this.x = this.getHeroX();
-            this.y = this.getHeroY();
-        } else if (isGreater(this.collidedStart, world.time) && !isTrue(this.collided)) {
-            this.bodyXY = this.lightningXY;
-            this.y += 96;
-            this.collided = true;
+        if (this.isTargeting()) {
+            this.target();
+        } else if (this.isDischarge()) {
+            this.discharge();
         }
+    }
+
+
+    // jsdoc
+    isTargeting() {
+        return isGreater(world.time, this.targetingStop);
+    }
+
+
+    // jsdoc
+    target() {
+        this.x = this.getHeroX();
+        this.y = this.getHeroY();
     }
 
 
@@ -36,14 +52,22 @@ class Lightning extends MagicObject {
     }
 
 
+    // jsdoc
     getHeroY() {
-        return world.hero.y - 210;    // variable???
+        return world.hero.y - this.deltaY.move;
     }
 
 
-    // class Lightning ...
-    // class MagicObject ...
-    // class Shaman ...
-    // './img' --> 'img' ...
-    // magic soung (cast + hit) ...
+    // jsdoc
+    isDischarge() {
+        return isGreater(this.chargingStop, world.time) && !isTrue(this.collided);
+    }
+
+
+    // jsdoc
+    discharge() {
+        this.bodyXY = this.lightningXY;
+        this.y += this.deltaY.collided;
+        this.collided = true;
+    }
 }

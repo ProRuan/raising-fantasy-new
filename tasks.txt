@@ -82,7 +82,7 @@ Tasks
   - option: fix jump animation for 'fall after walk' ...
 
 
-Clean Coding (42/57)
+Clean Coding (43/57)
 ------------
   - class AnimatedObjects - simpleCheck
       - class ... (2x)
@@ -101,7 +101,7 @@ Clean Coding (42/57)
   - class MagicObject - simpleCheck
       - class Blade - simpleCheck
       - class Fire - simpleCheck
-      - class Lightning ...
+      - class Lightning - simpleCheck
   - class (SimpleObjects) ...
       - class LadderB -simpleCheck
       - class LadderC - simpleCheck

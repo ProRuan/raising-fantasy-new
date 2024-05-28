@@ -29,7 +29,6 @@ class Shaman extends Enemy {
         }
         if (this.magic && isCollided(world.hero.body, this.magic.body)) {
             world.hero.hpPoints.splice(world.hero.hpPoints.length - 1, 1);
-            console.log('lightning hit shaman');
         }
         if (this.magic && !isTrue(this.magic.collided) && isCollided(world.hero.body, this.magic.body)) {
             this.magic.collided = true;
@@ -90,4 +89,15 @@ class Shaman extends Enemy {
     isWalk() {
         return false;
     }
+
+
+
+    // class MagicObject ...
+    // class Shaman ...
+    // './img' --> 'img' ...
+    // magic soung (cast + hit) ...
+
+    // make grey pictures ('game over') ...
+
+    // think about getter body() --> get () --> return getBody() ...
 }

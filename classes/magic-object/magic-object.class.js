@@ -8,7 +8,7 @@ class MagicObject extends AnimatedObject {
     }
 
 
-    // jsdoc (double code?)
+    // jsdoc
     get body() {
         return {
             'xLeft': this.x + this.bodyXY.xLeft,
