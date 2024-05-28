@@ -1,6 +1,6 @@
 class Fire extends MagicObject {
     radDispl = 248;
-    pages = { move: [0, 3], collided: [3, 9], epilog: [9, 10] };
+    pages = { move: 3, collided: 9, epilog: 10 };
     bodyXY = { xLeft: 108, xCenter: 124, xRight: 140, yTop: 120, yCenter: 128, yBottom: 136 };
 
 
@@ -22,22 +22,22 @@ class Fire extends MagicObject {
     // jsdoc
     move() {
         if (!isTrue(this.collided)) {
-            this.speedAlongX();
+            this.applySpeedX();
             if (isGreater(this.endX, this.body.xLeft)) {
-                this.speedAlongY();
+                this.applySpeedY();
             }
         }
     }
 
 
     // jsdoc
-    speedAlongX() {
+    applySpeedX() {
         this.x -= this.speed;
     }
 
 
     // jsdoc
-    speedAlongY() {
+    applySpeedY() {
         if (this.isDecentered(this, world.hero)) {
             this.y += this.speedY;
         } else if (this.isDecentered(world.hero, this)) {

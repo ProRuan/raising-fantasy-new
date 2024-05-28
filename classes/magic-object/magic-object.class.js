@@ -1,4 +1,5 @@
 class MagicObject extends AnimatedObject {
+    firstPage = 0;
 
 
     // jsdoc
@@ -46,8 +47,9 @@ class MagicObject extends AnimatedObject {
 
     // jsdoc
     setMagicChapter(key) {
-        let pages = this.pages[key];
-        this.flipBook[key] = this.getPages(pages[0], pages[1]);
+        let lastPage = this.pages[key];
+        this.flipBook[key] = this.getPages(this.firstPage, lastPage);
+        this.firstPage = lastPage;
     }
 
 
