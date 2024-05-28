@@ -14,7 +14,7 @@ class Shaman extends Enemy {
     constructor(x, y) {
         super(source.shaman, x, y);
 
-        this.weaponXY = this.bladeXY;
+        // this.weaponXY = this.bladeXY;
         // this.setLightning();
         this.setEnemy(90, 64, 'cast');
     }
@@ -47,6 +47,8 @@ class Shaman extends Enemy {
 
 
     setBlade() {
+        this.weaponXY = this.bladeXY;
+
         let x = this.weapon.xLeft / 64;
         let y = this.weapon.yTop / 64;
         this.magic = new Blade(x, y, this.otherDirection);
@@ -54,6 +56,8 @@ class Shaman extends Enemy {
 
 
     setFire() {
+        this.weaponXY = this.fireXY;
+
         let x = this.weapon.xLeft / 64;
         let y = this.weapon.yTop / 64;
         this.magic = new Fire(x, y, this.otherDirection);

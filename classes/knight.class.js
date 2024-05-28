@@ -89,6 +89,13 @@ class Knight extends Character {
         setInterval(() => {
             // console.log(this.chapter, this.currentImage);
 
+            // if (!isUndefined(this.world.endboss[0].magic)) {
+            //     let magic = this.world.endboss[0].magic.body;
+            //     console.log('lightning: ', magic.xLeft, magic.xRight, magic.yTop, magic.yBottom);
+            //     console.log('hero: ', this.body.xLeft, this.body.xRight, this.body.yTop, this.body.yBottom);
+            //     console.log('collided x: ', isIncluded(this.body.xLeft, magic.xCenter, this.body.xRight));
+            //     console.log('collided y: ', isIncluded(magic.yTop, this.body.yCenter, magic.yBottom));
+            // }
 
             // is ready!!!
             // -----------

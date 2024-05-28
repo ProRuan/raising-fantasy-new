@@ -259,6 +259,50 @@ function getObjectXY(o) {
 }
 
 
+// --- testing ---
+// jsdoc
+function isCollidedNew(a, b) {
+    return isCollidedXNew(a, b) && isCollidedYNew(a, b);
+}
+
+
+// jsdoc
+function isCollidedXNew(a, b) {
+    return isCollidedXLeft(a, b) || isCollidedXRight(a, b);
+}
+
+
+// jsdoc
+function isCollidedYNew(a, b) {
+    return isCollidedYTop(a, b) || isCollidedYBottom(a, b);
+}
+
+
+// jsdoc
+function isCollidedXLeft(a, b) {
+    return isIncluded(a.xLeft, b.xLeft - 1, a.xRight) || isIncluded(b.xLeft - 1, a.xLeft, b.xRight + 1);
+}
+
+
+// jsdoc
+function isCollidedXRight(a, b) {
+    return isIncluded(a.xLeft, b.xRight + 1, a.xRight) || isIncluded(b.xLeft - 1, a.xRight, b.xRight + 1);
+}
+
+
+// jsdoc
+function isCollidedYTop(a, b) {
+    return isIncluded(a.yTop, b.yTop, a.yBottom) || isIncluded(b.yTop, a.yTop, b.yBottom + 1);
+}
+
+
+// jsdoc
+function isCollidedYBottom(a, b) {
+    return isIncluded(a.yop, b.yBottom + 1, a.yBottom) || isIncluded(b.yop, a.yBottom, b.yBottom + 1);
+}
+// --- testing ---
+
+
 // jsdoc
 function isCollided(a, b) {
     return isCollidedX(a, b) && isCollidedY(a, b);
@@ -273,7 +317,7 @@ function isCollidedX(a, b) {
 
 // jsdoc
 function isCollidedY(a, b) {
-    return isIncluded(a.yTop, b.yTop, a.yBottom) || isIncluded(a.yTop, b.yBottom, a.yBottom);
+    return isIncluded(a.yTop, b.yTop, a.yBottom + 1) || isIncluded(a.yTop, b.yBottom, a.yBottom + 1);
 }
 
 
