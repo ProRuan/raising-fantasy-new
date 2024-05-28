@@ -2,7 +2,7 @@ class Lightning extends MagicObject {
     radDispl = 260;
     pages = { move: 2, collided: 8, epilog: 9 };
     bodyXY = { xLeft: 114, xCenter: 130, xRight: 146, yTop: 32, yCenter: 128, yBottom: 224 };
-    loadXY = { xLeft: 120, xCenter: 128, xRight: 136, yTop: 180, yCenter: 128, yBottom: 226 };
+    loadXY = { xLeft: 120, xCenter: 128, xRight: 136, yTop: 180, yCenter: 203, yBottom: 226 };
     lightningXY = { xLeft: 114, xCenter: 130, xRight: 146, yTop: 32, yCenter: 128, yBottom: 224 };    // frame -1 or +1
 
 
@@ -29,8 +29,8 @@ class Lightning extends MagicObject {
             }
         }
         if (isTrue(this.searching)) {
-            this.x = world.hero.body.xCenter - (this.body.xCenter - this.x);
-            this.y = world.hero.y - 210;
+            this.x = this.getHeroX();
+            this.y = this.getHeroY();
             if (isUndefined(this.waiting)) {
                 this.waiting = false;
                 setTimeout(() => {
@@ -39,11 +39,17 @@ class Lightning extends MagicObject {
                 }, 3000);
             }
         }
+    }
 
 
-        // console.log(world.hero.y, this.y, world.hero.y - this.y);
-        // console.log(world.hero.body.yBottom, this.body.yBottom, world.hero.body.yBottom - this.body.yBottom);
-        // console.log(this.searching, this.waiting, this.loading);
+    // jsdoc
+    getHeroX() {
+        return world.hero.body.xCenter - (this.body.xCenter - this.x);
+    }
+
+
+    getHeroY() {
+        return world.hero.y - 210;    // variable???
     }
 
 
