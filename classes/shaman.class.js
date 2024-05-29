@@ -5,6 +5,7 @@ class Shaman extends Enemy {
     bladeXY = { xLeft: -57, xRight: 220, yTop: -284, yBottom: 0 };
     fireXY = { xLeft: -20, xRight: 228, yTop: -297, yBottom: 0 };
     lightningXY = { xLeft: -130, xRight: 228, yTop: -14 + 96, yBottom: 0 };
+    magicRange = 760;
     spellCast = false;
 
 
@@ -16,7 +17,7 @@ class Shaman extends Enemy {
 
 
     cast() {
-        if (this.magic && this.magic.x + this.magic.width < this.x - 760) {
+        if (this.isOutOfRange()) {
             this.spellCast = false;
         }
         if (this.magic && this.magic.removeable) {
@@ -36,41 +37,86 @@ class Shaman extends Enemy {
         }
         if (!isTrue(this.spellCast)) {
             this.spellCast = true;
-            this.setLightning();
 
-            // this.setBlade();    // finished
-            // this.setFire();    // finished
+            this.selectMagic('lightning');
         }
         // console.log(world.hero.body.yBottom, this.magic.body.yBottom);
     }
 
 
-    setBlade() {
-        this.weaponXY = this.bladeXY;
-
-        let x = this.weapon.xLeft / 64;
-        let y = this.weapon.yTop / 64;
-        this.magic = new Blade(x, y, this.otherDirection);
+    // jsdoc
+    isOutOfRange() {
+        if (this.magic) {
+            let outX = getSum(this.x, -this.magicRange);
+            return isGreater(this.magic.xRight, outX);
+        }
     }
 
 
-    setFire() {
-        this.weaponXY = this.fireXY;
-
-        let x = this.weapon.xLeft / 64;
-        let y = this.weapon.yTop / 64;
-        this.magic = new Fire(x, y, this.otherDirection);
+    // jsdoc
+    selectMagic(type) {
+        (!isMatch(type, 'lighting')) ? this.castMagic(type) : this.castLightning();
     }
 
 
-    setLightning() {
-        this.weaponXY = this.lightningXY;
+    // jsdoc
+    castMagic(type) {
+        this.setWeaponXY(type);
+        let x = this.getWeaponXY('xLeft');
+        let y = this.getWeaponXY('yTop');
+        this.setMagicObject(type, x, y);
+    }
 
-        let x = (world.hero.body.xCenter + this.weapon.xLeft) / 64;
-        let y = (canvas.height - world.hero.yBottom + this.weapon.yTop) / 64;
-        this.magic = new Lightning(x, y, this.otherDirection);
 
-        // console.log(world.hero.body.xCenter, this.magic.body.xCenter, world.hero.body.yBottom, this.magic.body.yBottom);
+    // jsdoc
+    setWeaponXY(type) {
+        let key = type + 'XY';
+        this.weaponXY = this[key];
+    }
+
+
+    // jsdoc
+    getWeaponXY(key) {
+        return this.weapon[key] / UNIT;
+    }
+
+
+    // jsdoc
+    setMagicObject(type, x, y) {
+        if (isMatch(type, 'blade')) {
+            this.setMagic(new Blade(x, y, this.otherDirection));
+        } else if (isMatch(type, 'fire')) {
+            this.setMagic(new Fire(x, y, this.otherDirection));
+        } else if (isMatch(type, 'lightning')) {
+            this.setMagic(new Lightning(x, y, this.otherDirection));
+        }
+    }
+
+
+    // jsdoc
+    setMagic(magic) {
+        this.magic = magic;
+    }
+
+
+    // jsdoc
+    castLightning() {
+        this.setWeaponXY('lightning')
+        let x = this.getLightningX();
+        let y = this.getLightningY();
+        this.setMagicObject('lightning', x, y);
+    }
+
+
+    // jsdoc
+    getLightningX() {
+        return (world.hero.body.xCenter + this.weapon.xLeft) / UNIT;
+    }
+
+
+    // jsdoc
+    getLightningY() {
+        return (canvas.height + (world.hero.yBottom - this.weapon.yTop)) / UNIT;
     }
 
 
