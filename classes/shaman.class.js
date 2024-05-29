@@ -5,12 +5,15 @@ class Shaman extends Enemy {
     bladeXY = { xLeft: -57, xRight: 220, yTop: -284, yBottom: 0 };
     fireXY = { xLeft: -20, xRight: 228, yTop: -297, yBottom: 0 };
     lightningXY = { xLeft: -130, xRight: 228, yTop: -14 + 96, yBottom: 0 };
+    chapters = ['epilog', 'death', 'anger', 'hurt', 'castBlade', 'castFire', 'castLightning', 'walk', 'idle'];
+    angerLevel = 0;
     magicRange = 760;
     spellCast = false;
 
 
     // tasks
     // -----
+    // set firstAngerX (world.hero.x) ...
     // double code (this.magic)!!!
     // set magic delay
     // set endboss animation
@@ -37,6 +40,7 @@ class Shaman extends Enemy {
     resetMagicCast() {
         if (this.isMagicCastReset()) {
             this.spellCast = false;
+            this.magic = undefined;    // not verified!
         }
     }
 
@@ -89,10 +93,14 @@ class Shaman extends Enemy {
 
     // jsdoc
     recast() {
-        if (!isTrue(this.spellCast)) {
-            this.spellCast = true;
-            this.updateRate();
-            this.castRandomly();
+        if (!isTrue(this.spellCast) || !this.magic) {    // yes, no
+            if (!isTrue(this.spellCast)) {
+                this.spellCast = true;    // verified
+                setTimeout(() => {
+                    this.updateRate();    // verified
+                    this.castRandomly();    // verified
+                }, 1000);
+            }
         }
     }
 
@@ -106,7 +114,7 @@ class Shaman extends Enemy {
             this.setRate(0, 3, 6);
         } else if (isGreater(10, hp)) {
             this.setRate(0, 2, 5);
-        } else if (isGreater(10, hp)) {
+        } else if (isGreater(0, hp)) {
             this.setRate(0, 1, 3);
         }
     }
@@ -126,7 +134,7 @@ class Shaman extends Enemy {
 
     // jsdoc
     castRandomly() {
-        let number = getRandomNumber(9, 9);
+        let number = getRandomNumber(9, 8);    // verified
         if (isGreater(this.rate.lightning, number)) {
             this.selectMagic('lightning');
         } else if (isGreater(this.rate.fire, number)) {
@@ -205,6 +213,63 @@ class Shaman extends Enemy {
 
 
     // add chapters, isCastBlade, castBlade and so on ...
+
+
+    // jsdoc
+    isAnger() {
+        let hp = this.getHp();
+        if (isGreater(70, hp)) {
+            return this.playAnger(0);
+        } else if (isGreater(40, hp)) {
+            return this.playAnger(1);
+        } else if (isGreater(10, hp)) {
+            return this.playAnger(2);
+        } else if (isGreater(0, hp)) {
+            return this.playAnger(3);
+        }
+    }
+
+
+    // jsdoc
+    playAnger(n) {
+        if (isMatch(this.angerLevel, n)) {
+            this.setAnger();
+            return true;
+        }
+    }
+
+
+    // jsdoc
+    setAnger() {
+        if (!isTrue(this.angry)) {
+            this.angry = true;
+            this.calm();
+        }
+    }
+
+
+    // jsdoc
+    calm() {
+        setTimeout(() => {
+            this.angerLevel++;
+            this.angry = false;
+        }, 1400);
+    }
+
+
+    isCastBlade() {
+        return false;
+    }
+
+
+    isCastFire() {
+        return false;
+    }
+
+
+    isCastLightning() {
+        return false;
+    }
 
 
     isAttack() {
