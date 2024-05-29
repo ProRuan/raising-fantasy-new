@@ -12,20 +12,16 @@ class Shaman extends Enemy {
     // jsdoc
     constructor(x, y) {
         super(source.shaman, x, y);
-        this.setEnemy(90, 64, 'cast');
+        this.setEnemy(300, 64, 'cast');
     }
 
 
     cast() {
-        if (this.isOutOfRange()) {
+        if (this.isSpellCastReset()) {
             this.spellCast = false;
         }
-        if (this.magic && this.magic.removeable) {
-            this.spellCast = false;
-        }
-        if (this.magic && isCollided(world.hero.body, this.magic.body)) {
-            world.hero.hpPoints.splice(world.hero.hpPoints.length - 1, 1);
-        }
+        this.damage();
+
         if (this.magic && !isTrue(this.magic.collided) && isCollided(world.hero.body, this.magic.body)) {
             this.magic.collided = true;
             if (world.hero.hpPoints.length < this.magic.damage) {
@@ -33,22 +29,91 @@ class Shaman extends Enemy {
             } else {
                 world.hero.hpPoints.splice(world.hero.hpPoints.length - this.magic.damage, this.magic.damage);
             }
-            console.log(world.hero.hpPoints.length);
         }
-        if (!isTrue(this.spellCast)) {
-            this.spellCast = true;
 
-            this.selectMagic('lightning');
+        this.recast();
+    }
+
+
+    isSpellCastReset() {
+        if (this.magic) {
+            return this.isOutOfRange() || this.magic.removeable;
         }
-        // console.log(world.hero.body.yBottom, this.magic.body.yBottom);
+    }
+
+
+    damage() {
+        if (this.isCollided()) {
+            this.reduceHeroHp();
+        }
+    }
+
+
+    isCollided() {
+        if (this.magic) {
+            return isCollided(world.hero.body, this.magic.body);
+        }
+    }
+
+
+    reduceHeroHp() {
+        world.hero.hpPoints.splice(world.hero.hpPoints.length - 1, 1);
     }
 
 
     // jsdoc
     isOutOfRange() {
-        if (this.magic) {
-            let outX = getSum(this.x, -this.magicRange);
-            return isGreater(this.magic.xRight, outX);
+        let outX = getSum(this.x, -this.magicRange);
+        return isGreater(this.magic.xRight, outX);
+    }
+
+
+    // jsdoc
+    recast() {
+        if (!isTrue(this.spellCast)) {
+            this.spellCast = true;
+            this.updateRate();
+            this.castRandomly();
+        }
+    }
+
+
+    // jsdoc
+    updateRate() {
+        let hp = this.getHp();
+        if (isGreater(70, hp)) {
+            this.setRate(0, 4, 7);
+        } else if (isGreater(40, hp)) {
+            this.setRate(0, 3, 6);
+        } else if (isGreater(10, hp)) {
+            this.setRate(0, 2, 5);
+        } else if (isGreater(10, hp)) {
+            this.setRate(0, 1, 3);
+        }
+    }
+
+
+    // jsdoc
+    getHp() {
+        return this.hp / 300 * 100;
+    }
+
+
+    // jsdoc
+    setRate(a, b, c) {
+        this.rate = { blade: a, fire: b, lightning: c };
+    }
+
+
+    // jsdoc
+    castRandomly() {
+        let number = getRandomNumber(9, 9);
+        if (isGreater(this.rate.lightning, number)) {
+            this.selectMagic('lightning');
+        } else if (isGreater(this.rate.fire, number)) {
+            this.selectMagic('fire');
+        } else if (isGreater(this.rate.blade, number)) {
+            this.selectMagic('blade');
         }
     }
 

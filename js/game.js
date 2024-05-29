@@ -371,3 +371,9 @@ function getVerifiedValue(valueA, valueB) {
 function getSum(summandA, summandB) {
     return summandA + summandB;
 }
+
+
+// jsdoc
+function getRandomNumber(max, dev) {
+    return max - Math.round(Math.random() * dev);
+}

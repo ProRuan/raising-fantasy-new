@@ -58,16 +58,10 @@ class Level1 {
 
     // jsdoc
     loadClouds(i) {
-        let number = this.getRandomNumber(8, 7);
+        let number = getRandomNumber(8, 7);
         if (isGreater(4, number)) {
             this.loadCloudField(i);
         }
-    }
-
-
-    // jsdoc
-    getRandomNumber(max, dev) {
-        return max - Math.round(Math.random() * dev);
     }
 
 
@@ -80,7 +74,7 @@ class Level1 {
 
     // jsdoc
     loadBirds(i) {
-        let number = this.getRandomNumber(3, 2);
+        let number = getRandomNumber(3, 2);
         for (let j = 0; j < number; j++) {
             this.loadBird(i);
         }
@@ -90,7 +84,7 @@ class Level1 {
     // jsdoc
     loadBird(i) {
         let x = this.getBirdX(i);
-        let y = this.getRandomNumber(7.415, 4);
+        let y = getRandomNumber(7.415, 4);
         let bird = new Bird(x, y);
         this.birds.push(bird);
     }
@@ -98,7 +92,7 @@ class Level1 {
 
     // jsdoc
     getBirdX(i) {
-        let number = this.getRandomNumber(13.75, 12);
+        let number = getRandomNumber(13.75, 12);
         let translation = this.getTranslation(i);
         return number + translation;
     }
