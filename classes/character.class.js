@@ -138,4 +138,15 @@ class Character extends MoveableObject {
     isCover() {
         return true;
     }
+
+
+    // jsdoc
+    damage(damage) {
+        if (isGreater(this.hpPoints.length, damage)) {
+            this.hpPoints.splice(0, this.hpPoints.length);
+        } else {
+            let currentHp = this.hpPoints.length - damage;
+            this.hpPoints.splice(currentHp, damage);
+        }
+    }
 }

@@ -9,6 +9,15 @@ class Shaman extends Enemy {
     spellCast = false;
 
 
+    // tasks
+    // -----
+    // double code (this.magic)!!!
+    // set magic delay
+    // set endboss animation
+    // set endboss battle trigger
+    // set final scene
+
+
     // jsdoc
     constructor(x, y) {
         super(source.shaman, x, y);
@@ -17,39 +26,63 @@ class Shaman extends Enemy {
 
 
     cast() {
-        if (this.isSpellCastReset()) {
-            this.spellCast = false;
-        }
+        this.resetMagicCast();
+
+        // this.damageByLightning();
+
         this.damage();
-
-        if (this.magic && !isTrue(this.magic.collided) && isCollided(world.hero.body, this.magic.body)) {
-            this.magic.collided = true;
-            if (world.hero.hpPoints.length < this.magic.damage) {
-                world.hero.hpPoints.splice(0, world.hero.hpPoints.length);
-            } else {
-                world.hero.hpPoints.splice(world.hero.hpPoints.length - this.magic.damage, this.magic.damage);
-            }
-        }
-
         this.recast();
     }
 
 
-    isSpellCastReset() {
+    // jsdoc
+    resetMagicCast() {
+        if (this.isMagicCastReset()) {
+            this.spellCast = false;
+        }
+    }
+
+
+    // jsdoc
+    isMagicCastReset() {
         if (this.magic) {
             return this.isOutOfRange() || this.magic.removeable;
         }
     }
 
 
+    // jsdoc
+    isOutOfRange() {
+        let outX = getSum(this.x, -this.magicRange);
+        return isGreater(this.magic.xRight, outX);
+    }
+
+
+    // jsdoc
     damage() {
         if (this.isCollided()) {
+            this.magic.collided = true;
+            world.hero.damage(this.magic.damage);
+        }
+    }
+
+
+    // jsdoc
+    isCollided() {
+        if (this.magic) {
+            return !isTrue(this.magic.collided) && isCollided(world.hero.body, this.magic.body);
+        }
+    }
+
+
+    damageByLightning() {
+        if (this.isCollidedLightning()) {
             this.reduceHeroHp();
         }
     }
 
 
-    isCollided() {
+    isCollidedLightning() {
         if (this.magic) {
             return isCollided(world.hero.body, this.magic.body);
         }
@@ -58,13 +91,6 @@ class Shaman extends Enemy {
 
     reduceHeroHp() {
         world.hero.hpPoints.splice(world.hero.hpPoints.length - 1, 1);
-    }
-
-
-    // jsdoc
-    isOutOfRange() {
-        let outX = getSum(this.x, -this.magicRange);
-        return isGreater(this.magic.xRight, outX);
     }
 
 
