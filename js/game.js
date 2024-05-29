@@ -377,3 +377,10 @@ function getSum(summandA, summandB) {
 function getRandomNumber(max, dev) {
     return max - Math.round(Math.random() * dev);
 }
+
+
+// jsdoc
+function formatInitial(word, method) {
+    let initial = word[0];
+    return word.replace(initial, initial[method]());
+}

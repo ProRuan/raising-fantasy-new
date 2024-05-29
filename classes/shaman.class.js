@@ -5,7 +5,7 @@ class Shaman extends Enemy {
     bladeXY = { xLeft: -57, xRight: 220, yTop: -284, yBottom: 0 };
     fireXY = { xLeft: -20, xRight: 228, yTop: -297, yBottom: 0 };
     lightningXY = { xLeft: -130, xRight: 228, yTop: -14 + 96, yBottom: 0 };
-    chapters = ['epilog', 'death', 'anger', 'hurt', 'castBlade', 'castFire', 'castLightning', 'walk', 'idle'];
+    chapters = ['epilog', 'death', 'anger', 'hurt', 'castBlade', 'castFire', 'castLightning', 'idle'];
     angerLevel = 0;
     magicRange = 760;
     spellCast = false;
@@ -25,6 +25,19 @@ class Shaman extends Enemy {
     constructor(x, y) {
         super(source.shaman, x, y);
         this.setEnemy(300, 64, 'cast');
+    }
+
+
+    // jsdoc
+    get ms() {
+        let key = this.getCastKey();
+        return this.flipBook[key].length * 100;
+    }
+
+
+    // jsdoc
+    getCastKey() {
+        return 'cast' + formatInitial(this.magicChapter, 'toUpperCase');
     }
 
 
@@ -91,7 +104,7 @@ class Shaman extends Enemy {
     }
 
 
-    // jsdoc
+
     recast() {
         if (!isTrue(this.spellCast) || !this.magic) {    // yes, no
             if (!isTrue(this.spellCast)) {
@@ -134,14 +147,28 @@ class Shaman extends Enemy {
 
     // jsdoc
     castRandomly() {
-        let number = getRandomNumber(9, 8);    // verified
+        let number = getRandomNumber(9, 8);
         if (isGreater(this.rate.lightning, number)) {
-            this.selectMagic('lightning');
+            this.setCast('lightning');
         } else if (isGreater(this.rate.fire, number)) {
-            this.selectMagic('fire');
+            this.setCast('fire');
         } else if (isGreater(this.rate.blade, number)) {
-            this.selectMagic('blade');
+            this.setCast('blade');
         }
+    }
+
+
+    // jsdoc
+    setCast(key) {
+        this.magicChapter = key;
+        setTimeout(() => this.selectMagic(key), 300);
+        setTimeout(() => this.setUndefined('magicChapter'), this.ms);
+    }
+
+
+    // jsdoc
+    setUndefined(key) {
+        this[key] = undefined;
     }
 
 
@@ -257,29 +284,23 @@ class Shaman extends Enemy {
     }
 
 
+    // jsdoc
     isCastBlade() {
-        return false;
+        return isMatch(this.magicChapter, 'blade');
     }
 
 
+    // jsdoc
     isCastFire() {
-        return false;
+        return isMatch(this.magicChapter, 'fire');
     }
 
 
+    // jsdoc
     isCastLightning() {
-        return false;
+        return isMatch(this.magicChapter, 'lightning');
     }
 
-
-    isAttack() {
-        return false;
-    }
-
-
-    isWalk() {
-        return false;
-    }
 
 
 
