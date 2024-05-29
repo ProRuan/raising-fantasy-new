@@ -25,11 +25,9 @@ class Shaman extends Enemy {
     }
 
 
+    // jsdoc
     cast() {
         this.resetMagicCast();
-
-        // this.damageByLightning();
-
         this.damage();
         this.recast();
     }
@@ -60,7 +58,9 @@ class Shaman extends Enemy {
 
     // jsdoc
     damage() {
-        if (this.isCollided()) {
+        if (this.isLightning()) {
+            this.reduceHeroHp();
+        } else if (this.isCollided()) {
             this.magic.collided = true;
             world.hero.damage(this.magic.damage);
         }
@@ -68,29 +68,22 @@ class Shaman extends Enemy {
 
 
     // jsdoc
-    isCollided() {
-        if (this.magic) {
-            return !isTrue(this.magic.collided) && isCollided(world.hero.body, this.magic.body);
-        }
+    isLightning() {
+        return this.magic && this.magic.collided && this.magic instanceof Lightning;
     }
 
 
-    damageByLightning() {
-        if (this.isCollidedLightning()) {
-            this.reduceHeroHp();
-        }
-    }
-
-
-    isCollidedLightning() {
-        if (this.magic) {
-            return isCollided(world.hero.body, this.magic.body);
-        }
-    }
-
-
+    // jsdoc
     reduceHeroHp() {
         world.hero.hpPoints.splice(world.hero.hpPoints.length - 1, 1);
+    }
+
+
+    // jsdoc
+    isCollided() {
+        if (this.magic) {
+            return !this.magic.collided && isCollided(world.hero.body, this.magic.body);
+        }
     }
 
 
