@@ -69,7 +69,7 @@ class Shaman extends Enemy {
 
     // jsdoc
     isLightning() {
-        return this.magic && this.magic.collided && this.magic instanceof Lightning;
+        return this.magic instanceof Lightning && isCollided(world.hero.body, this.magic.body);
     }
 
 
