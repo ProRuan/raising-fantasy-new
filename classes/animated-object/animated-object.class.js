@@ -126,4 +126,15 @@ class AnimatedObject extends DrawableObject {
     animate() {
         this.setStoppableInterval(() => this.playAnimation(), 100);
     }
+
+
+    // jsdoc
+    setRemoveable() {
+        if (isUndefined(this.removeableSet)) {
+            this.removeableSet = true;
+            setTimeout(() => {
+                this.removeable = true;
+            }, 100);
+        }
+    }
 }

@@ -11,6 +11,7 @@ class Keyboard {
 
     keyA = new Key('keyA', 65);
     keyE = new Key('keyE', 69);
+    keyF = new Key('keyF', 70);
     keyQ = new Key('keyQ', 81);
     keyX = new Key('keyX', 88);
 }

@@ -68,17 +68,6 @@ class MagicObject extends AnimatedObject {
 
 
     // jsdoc
-    setRemoveable() {
-        if (isUndefined(this.removeableSet)) {
-            this.removeableSet = true;
-            setTimeout(() => {
-                this.removeable = true;
-            }, 100);
-        }
-    }
-
-
-    // jsdoc
     setFinalized() {
         if (this.isImage(this.epilogKey)) {
             this.finalized = true;

@@ -124,6 +124,9 @@ class LevelWorld extends World {
             if (this.endboss[0].magic) {
                 this.drawObject(this.endboss[0].magic);
             }
+            if (this.hero.bomb) {
+                this.drawObject(this.hero.bomb);
+            }
             this.drawSpiderWebs();
             this.translateCamera(-this.cameraX, 0);
 

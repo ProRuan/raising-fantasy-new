@@ -66,6 +66,15 @@ class Knight extends Character {
             }
 
 
+            if (isKey('keyF') && !this.bomb && this.energyPoints.length == 100) {
+                this.bomb = new Bomb(7.5, 2);
+                this.energyPoints.splice(0, 100);
+            }
+            if (this.bomb.removeable) {
+                this.bomb = undefined;
+            }
+
+
             if (isGreater(6932, this.x) && isUndefined(this.bossBattleStarted)) {
                 this.bossBattleStarted = true;
                 this.xStopLeft = source.bossBattleX;
