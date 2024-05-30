@@ -13,19 +13,16 @@ class Source {
     // to give to method below
 
 
-    // knightAnimation = [
-    //     { condition: 'isRunAttack', chapter: 'runAttack' },
-    //     { condition: 'isRun', chapter: 'run' },
-    //     { condition: 'isWalkAttack', chapter: 'walkAttack' },
-    //     { condition: 'isWalk', chapter: 'walk' },
-    //     { condition: 'isAttack', chapter: 'attack' }
-    // ];
 
-    // knightRunAttack = { condition: 'isRunAttack', chapter: 'runAttack' };
-    // knightRun = { condition: 'isRun', chapter: 'run' };
-    // knightWalkAttack = { condition: 'isWalkAttack', chapter: 'walkAttack' };
-    // knightWalk = { condition: 'isWalk', chapter: 'walk' };
-    // knightAttack = { condition: 'isAttack', chapter: 'attack' };
+
+    // tasks
+    // -----
+    // ambientSound ...
+    // bomb + star ...
+
+
+    // to edit!!!
+    ambientSound = './audio/ambience/nature_forest_daytime.wav';
 
 
     // audio
@@ -40,13 +37,32 @@ class Source {
     grassStep = './audio/footsteps/grass.wav';
     swordDraw = './audio/attacks_and_creatures/blade_draw.wav';
 
+    // on progress ...
+    skillUpgrade = './audio/attacks_and_creatures/skill_upgrade.wav';
+    weaponImpact = './audio/attacks_and_creatures/weapon_impact.wav';
+
 
     constructor() {
         this.loadImagePaths();    // to think about!!!
 
+        this.loadAllSounds();
+
         this.setLevel();
         this.setAvatarInfo();
         this.setHero();
+    }
+
+
+    loadAllSounds() {
+        this.loadSound('ambience', this.ambientSound, 0);
+    }
+
+
+    loadSound(key, path, currentTime) {
+        this[key] = {
+            path: path,
+            currentTime: currentTime
+        }
     }
 
 
@@ -148,15 +164,19 @@ class Source {
         this.addSourceFlipBook('dino', FLIP_BOOK_DINO);
         this.addSourceFlipBook('ent', FLIP_BOOK_ENT);
         this.addSourceFlipBook('spider', FLIP_BOOK_SPIDER);
-        this.addSoundSource('dino', this.dinoGrowl);
-        this.addSoundSource('ent', this.entGrowl);
-        this.addSoundSource('spider', this.spiderGrowl);
+        this.addSoundSource('dino', 'growl', this.dinoGrowl);
+        this.addSoundSource('ent', 'growl', this.entGrowl);
+        this.addSoundSource('spider', 'growl', this.spiderGrowl);
+
+        this.addSoundSource('dino', 'weaponImpact', this.weaponImpact);
+        this.addSoundSource('ent', 'weaponImpact', this.weaponImpact);
+        this.addSoundSource('spider', 'weaponImpact', this.weaponImpact);
     }
 
 
     // jsdoc
-    addSoundSource(key, path) {    // similar method existing???
-        this[key].growl = path;
+    addSoundSource(key, subkey, path) {    // similar method existing???
+        this[key][subkey] = path;
     }
 
 
@@ -234,7 +254,7 @@ class Source {
     setEndboss() {
         this.setSource('shaman', './img/bosses/shaman/shaman.png', 256, 256);
         this.addSourceFlipBook('shaman', FLIP_BOOK_SHAMAN);
-        this.addSoundSource('shaman', this.shamanGrowl);
+        this.addSoundSource('shaman', 'growl', this.shamanGrowl);
     }
 
 

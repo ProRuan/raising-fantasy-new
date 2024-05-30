@@ -141,6 +141,12 @@ class Character extends MoveableObject {
 
 
     // jsdoc
+    soundUpgrade() {
+        this.playAudio(this.skillUpgrade);
+    }
+
+
+    // jsdoc
     damage(damage) {
         if (isGreater(this.hpPoints.length, damage)) {
             this.hpPoints.splice(0, this.hpPoints.length);

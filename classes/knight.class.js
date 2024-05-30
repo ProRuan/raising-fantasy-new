@@ -20,6 +20,7 @@ class Knight extends Character {
     staveStep = { path: source.staveStep, startTime: 0.025 };
     grassStep = { path: source.grassStep, startTime: 0.05 };
     swordDraw = { path: source.swordDraw, startTime: 0.3 };
+    skillUpgrade = { path: source.skillUpgrade, startTime: 0 };
 
 
     constructor(x, y) {
@@ -306,16 +307,6 @@ class Knight extends Character {
         if (object) {
             object.effect();
             this.removeObject(key, object);
-            // this.increaseCounter(key, object);
-            // super.playSound(object.sound);
-
-
-            // if (object instanceof Crystal) {
-            //     this.bombSkillUnlocked = true;
-            //     this.playSound(this.soundUpgrade);
-            //     this.world.level.setXLevelEnd();
-            //     this.world.level.setXLevelStartCrystal();
-            // }
         }
     }
 

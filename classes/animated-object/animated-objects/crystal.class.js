@@ -12,5 +12,6 @@ class Crystal extends AnimatedObject {
         world.hero.bombUnlocked = true;
         world.hero.xStopRight = source.endX;
         world.hero.xStopLeft = source.crystalCollectedX;
+        world.hero.soundUpgrade();
     }
 }

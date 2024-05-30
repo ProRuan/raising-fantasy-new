@@ -15,9 +15,9 @@ class Enemy extends MoveableObject {
     }
 
 
-    // jsdoc
-    setGrowl(source) {
+    setGrowl(source) {    // rename!!!
         this.growl = source.growl;
+        this.weaponImpact = source.weaponImpact;
     }
 
 
@@ -99,6 +99,7 @@ class Enemy extends MoveableObject {
         if (this.isHurt() && isOnTime(world.time, this.lastHit, this.hitDelay)) {
             this.hp -= 30;
             this.lastHit = world.time + this.hitDelay;
+            this.playSound(this.weaponImpact);
         }
     }
 
