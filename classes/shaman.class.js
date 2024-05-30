@@ -11,16 +11,6 @@ class Shaman extends Enemy {
     spellCast = false;
 
 
-    // tasks
-    // -----
-    // set firstAngerX (world.hero.x) ...
-    // double code (this.magic)!!!
-    // set magic delay
-    // set endboss animation
-    // set endboss battle trigger
-    // set final scene
-
-
     // jsdoc
     constructor(x, y) {
         super(source.shaman, x, y);
@@ -104,17 +94,23 @@ class Shaman extends Enemy {
     }
 
 
-
+    // jsdoc
     recast() {
-        if (!isTrue(this.spellCast) || !this.magic) {    // yes, no
+        if (!isTrue(this.spellCast) || !this.magic) {
             if (!isTrue(this.spellCast)) {
-                this.spellCast = true;    // verified
-                setTimeout(() => {
-                    this.updateRate();    // verified
-                    this.castRandomly();    // verified
-                }, 1000);
+                this.spellCast = true;
+                this.delayCast();
             }
         }
+    }
+
+
+    // jsdoc
+    delayCast() {
+        setTimeout(() => {
+            this.updateRate();
+            this.castRandomly();
+        }, 1000);
     }
 
 
@@ -239,9 +235,6 @@ class Shaman extends Enemy {
     }
 
 
-    // add chapters, isCastBlade, castBlade and so on ...
-
-
     // jsdoc
     isAnger() {
         let hp = this.getHp();
@@ -300,15 +293,4 @@ class Shaman extends Enemy {
     isCastLightning() {
         return isMatch(this.magicChapter, 'lightning');
     }
-
-
-
-
-    // class Shaman ...
-    // './img' --> 'img' ...
-    // magic soung (cast + hit) ...
-
-    // make grey pictures ('game over') ...
-
-    // think about getter body() --> get () --> return getBody() ...
 }
