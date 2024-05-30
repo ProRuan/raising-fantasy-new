@@ -18,7 +18,10 @@ class Source {
     // tasks
     // -----
     // ambientSound ...
-    // bomb + star ...
+    // bomb ...
+    // other sounds and music ...
+    // getter for star and endboss ...
+    // victory podium as section 8 array ...
 
 
     // to edit!!!
@@ -45,24 +48,9 @@ class Source {
     constructor() {
         this.loadImagePaths();    // to think about!!!
 
-        this.loadAllSounds();
-
         this.setLevel();
         this.setAvatarInfo();
         this.setHero();
-    }
-
-
-    loadAllSounds() {
-        this.loadSound('ambience', this.ambientSound, 0);
-    }
-
-
-    loadSound(key, path, currentTime) {
-        this[key] = {
-            path: path,
-            currentTime: currentTime
-        }
     }
 
 
@@ -128,6 +116,7 @@ class Source {
         this.addSourceSound('crystal', './audio/collect/crystal.wav');
         this.addSourceSound('heart', './audio/collect/heart.wav');
         this.addSourceSound('hitPoint', './audio/collect/hit_point.wav');
+        this.addSourceSound('star', './audio/collect/star.wav');
         this.addSourceSound('web', './audio/attacks_and_creatures/web_throw.wav');
     }
 

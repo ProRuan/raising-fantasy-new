@@ -15,7 +15,7 @@ class Section8 {
     setFlyGrass() {
         this.flyGrass = [
             new FlyGrassL(3, 3.5), new FlyGrassC(4, 3.5), new FlyGrassC(5, 3.5), new FlyGrassR(6, 3.5),
-            new FlyGrassL(8, -4), new FlyGrassC(9, -4), new FlyGrassR(10, -4)
+            new FlyGrassL(8, -5), new FlyGrassC(9, -5), new FlyGrassR(10, -5)
         ];
     }
 
@@ -42,7 +42,7 @@ class Section8 {
     // jsdoc
     setStars() {
         this.stars = [
-            new Star(9.25, -2.875)
+            new Star(9.25, -3.875)
         ];
     }
 

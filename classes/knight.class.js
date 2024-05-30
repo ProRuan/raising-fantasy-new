@@ -15,10 +15,10 @@ class Knight extends Character {
 
     // edit source!!!
     // option: fix fall animation and sound!!!
-    goAway = { path: source.goAway, startTime: 0.375 };
-    armorHit = { path: source.armorHit, startTime: 0.01 };
-    staveStep = { path: source.staveStep, startTime: 0.025 };
-    grassStep = { path: source.grassStep, startTime: 0.05 };
+    goAway = { path: source.goAway, startTime: 0.3 };
+    armorHit = { path: source.armorHit, startTime: 0 };
+    staveStep = { path: source.staveStep, startTime: 0 };
+    grassStep = { path: source.grassStep, startTime: 0 };
     swordDraw = { path: source.swordDraw, startTime: 0.3 };
     skillUpgrade = { path: source.skillUpgrade, startTime: 0 };
 
@@ -60,6 +60,7 @@ class Knight extends Character {
             this.collect('hearts');
             this.collect('hitPoints');
             this.collect('leaves');
+            this.collect('stars');
 
 
             if (isKey('keyA')) {    // set condition and move method call!?!
