@@ -5,7 +5,7 @@ class Shaman extends Enemy {
     bladeXY = { xLeft: -57, xRight: 220, yTop: -284, yBottom: 0 };
     fireXY = { xLeft: -20, xRight: 228, yTop: -297, yBottom: 0 };
     lightningXY = { xLeft: -130, xRight: 228, yTop: -14 + 96, yBottom: 0 };
-    chapters = ['epilog', 'death', 'anger', 'hurt', 'castBlade', 'castFire', 'castLightning', 'idle'];
+    chapters = ['epilog', 'death', 'hurt', 'anger', 'castBlade', 'castFire', 'castLightning', 'idle'];
     angerLevel = 0;
     magicRange = 760;
     spellCast = false;
@@ -33,9 +33,27 @@ class Shaman extends Enemy {
 
     // jsdoc
     cast() {
-        this.resetMagicCast();
-        this.damage();
-        this.recast();
+        if (!this.isDeath()) {
+            this.hurt();
+            this.resetMagicCast();
+            this.damage();
+            this.recast();
+        }
+    }
+
+
+    hurt() {
+        if (world.hero.bomb && isCollided(this.body, world.hero.bomb.body)) {
+            if (!world.hero.bomb.collided) {
+                world.hero.bomb.collided = true;
+                this.hp -= world.hero.bomb.damage;
+            }
+        }
+    }
+
+
+    isHurt() {
+        return world.hero.bomb && world.hero.bomb.collided;
     }
 
 

@@ -1,11 +1,25 @@
 class Bomb extends AnimatedObject {
+    damage = 30;
     collided = false;
+    bodyXY = { xLeft: 115, xCenter: 128, xRight: 141, yTop: 124, yCenter: 137, yBottom: 150 };
 
 
     constructor(x, y) {
         super(source.bomb, x, y);
         this.splitFlipBook();
-        // this.move(() => this.throw());
+        this.move(() => this.throw());
+    }
+
+
+    get body() {    // double code (triple code)!!!
+        return {
+            'xLeft': this.x + this.bodyXY.xLeft,
+            'xCenter': this.x + this.bodyXY.xCenter,
+            'xRight': this.x + this.bodyXY.xRight,
+            'yTop': this.y + this.bodyXY.yTop,
+            'yCenter': this.y + this.bodyXY.yCenter,
+            'yBottom': this.y + this.bodyXY.yBottom
+        };
     }
 
 
@@ -24,7 +38,9 @@ class Bomb extends AnimatedObject {
 
 
     throw() {
-        console.log(this.img.src);
+        if (!this.collided) {
+            this.y += 1;
+        }
     }
 
 
@@ -41,7 +57,6 @@ class Bomb extends AnimatedObject {
         } else if (!this.collided) {
             super.playAnimation(this.flipBook.throw);
         }
-        console.log(this.img.src);
     }
 
 
@@ -49,6 +64,7 @@ class Bomb extends AnimatedObject {
 
     // tasks
     // -----
+    // finish and clean shaman hurt methods ...
     // magic soung (cast + hit) ...
     // think about getter body() --> get () --> return getBody() ...
     // set firstAngerX (world.hero.x) ...
