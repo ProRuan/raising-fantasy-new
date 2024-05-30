@@ -48,6 +48,14 @@ class Shaman extends Enemy {
                 world.hero.bomb.collided = true;
                 this.hp -= world.hero.bomb.damage;
             }
+            if (isMatch(this.chapter, 'hurt')) {
+                this.currentImage = (isGreater(1, this.currentImage)) ? 1 : this.currentImage;
+            }
+            clearTimeout(this.delayId);
+            if (isUndefined(this.magic)) {
+                this.spellCast = false;
+            }
+            // console.log(this.chapter, this.currentImage, this.img.src);
         }
     }
 
@@ -125,7 +133,7 @@ class Shaman extends Enemy {
 
     // jsdoc
     delayCast() {
-        setTimeout(() => {
+        this.delayId = setTimeout(() => {
             this.updateRate();
             this.castRandomly();
         }, 1000);
@@ -281,16 +289,19 @@ class Shaman extends Enemy {
     setAnger() {
         if (!isTrue(this.angry)) {
             this.angry = true;
+            clearTimeout(this.delayId);
             this.calm();
         }
     }
 
 
-    // jsdoc
     calm() {
         setTimeout(() => {
             this.angerLevel++;
             this.angry = false;
+            if (isUndefined(this.magic)) {
+                this.spellCast = false;
+            }
         }, 1400);
     }
 
@@ -311,4 +322,27 @@ class Shaman extends Enemy {
     isCastLightning() {
         return isMatch(this.magicChapter, 'lightning');
     }
+
+
+
+
+    // tasks
+    // -----
+
+    // SET EMPTY IMAGE for all flip books!!! ...
+
+    // shaman isDeath() condition + remove magic, if hp == 0 ...
+
+    // finish and clean shaman hurt methods ...
+    // magic soung (cast + hit) ...
+
+    // get body() --> double and triple code ...
+    // think about getter body() --> get () --> return getBody() ...
+
+    // set firstAngerX (world.hero.x) ...
+    // shaman hurt bomb ...
+    // double code (this.magic)!!!
+    // set endboss animation
+    // set endboss battle trigger
+    // set final scene
 }

@@ -83,15 +83,16 @@ Tasks
   - option: fix jump animation for 'fall after walk' ...
 
 
-Clean Coding (44/57)
+Clean Coding (45/57)
 ------------
   - class AnimatedObjects - simpleCheck
-      - class ... (2x)
       - class Bird - simpleCheck
+      - class Bomb - simpleCheck
       - class Coin - simpleCheck
       - class Crystals - simpleCheck
       - class Heart - simpleCheck
       - class HitPoint - simpleCheck
+      - class Star ...
       - class Web - simpleCheck
   - class Grass - simpleCheck
       - class GrassLeft, GrassCenter, GrassRight - simpleCheck (3x)

@@ -66,11 +66,13 @@ class Knight extends Character {
             }
 
 
-            if (!this.bomb && this.energyPoints.length == 100) {
-                this.bomb = new Bomb(11, 2);
+            if (isKey('keyF') && !this.bomb && this.energyPoints.length == 100) {
+                let x = (this.x - 42) / 64;
+                let y = (canvas.height - (this.y + this.height + 62 + 13)) / 64;
+                this.bomb = new Bomb(x, y);
                 this.energyPoints.splice(0, 100);
             }
-            if (this.bomb && this.bomb.removeable) {
+            if (this.bomb && this.bomb.removeable || this.bomb && this.bomb.y > this.abyssLevel) {
                 this.bomb = undefined;
             }
 
