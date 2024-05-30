@@ -11,6 +11,13 @@ class Enemy extends MoveableObject {
         this.setCover(source);    // double code???
         this.setEpilog();    // double code???
         this.loadImages();    // double code???
+        this.setGrowl(source);
+    }
+
+
+    // jsdoc
+    setGrowl(source) {
+        this.growl = source.growl;
     }
 
 
@@ -56,7 +63,16 @@ class Enemy extends MoveableObject {
     passAway() {
         if (this.isEpilog() && isUndefined(this.dead)) {
             this.setObjectValue('dead', true);
+            this.growlTerminally();
         }
+    }
+
+
+    // jsdoc
+    growlTerminally() {
+        this.playSound(this.growl);
+        setTimeout(() => this.playSound(this.growl), 100);
+        setTimeout(() => this.playSound(this.growl), 200);
     }
 
 

@@ -18,6 +18,11 @@ class Shaman extends Enemy {
     }
 
 
+    get triggered() {
+        return world.hero.bossBattleStarted;
+    }
+
+
     // jsdoc
     get ms() {
         let key = this.getCastKey();
@@ -33,12 +38,18 @@ class Shaman extends Enemy {
 
     // jsdoc
     cast() {
-        if (!this.isDeath()) {
+        if (this.isCastReady()) {
             this.hurt();
             this.resetMagicCast();
             this.damage();
             this.recast();
         }
+    }
+
+
+    // jsdoc
+    isCastReady() {
+        return !this.isDeath() && isTrue(this.triggered);
     }
 
 
@@ -263,21 +274,29 @@ class Shaman extends Enemy {
 
     // jsdoc
     isAnger() {
-        let hp = this.getHp();
-        if (isGreater(70, hp)) {
-            return this.playAnger(0);
-        } else if (isGreater(40, hp)) {
-            return this.playAnger(1);
-        } else if (isGreater(10, hp)) {
-            return this.playAnger(2);
-        } else if (isGreater(0, hp)) {
-            return this.playAnger(3);
+        if (this.triggered) {
+            let hp = this.getHp();
+            return this.playAnger(hp);
         }
     }
 
 
     // jsdoc
-    playAnger(n) {
+    playAnger(hp) {
+        if (isGreater(70, hp)) {
+            return this.playAngerLevel(0);
+        } else if (isGreater(40, hp)) {
+            return this.playAngerLevel(1);
+        } else if (isGreater(10, hp)) {
+            return this.playAngerLevel(2);
+        } else if (isGreater(0, hp)) {
+            return this.playAngerLevel(3);
+        }
+    }
+
+
+    // jsdoc
+    playAngerLevel(n) {
         if (isMatch(this.angerLevel, n)) {
             this.setAnger();
             return true;
@@ -289,8 +308,9 @@ class Shaman extends Enemy {
     setAnger() {
         if (!isTrue(this.angry)) {
             this.angry = true;
-            clearTimeout(this.delayId);
             this.calm();
+            this.playSound(this.growl);
+            clearTimeout(this.delayId);
         }
     }
 

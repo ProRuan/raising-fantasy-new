@@ -29,6 +29,10 @@ class Source {
 
 
     // audio
+    dinoGrowl = './audio/attacks_and_creatures/dino_growl.wav';
+    entGrowl = './audio/attacks_and_creatures/ent_growl.wav';
+    spiderGrowl = './audio/attacks_and_creatures/spider_growl.wav';
+    shamanGrowl = './audio/attacks_and_creatures/shaman_growl.wav';
 
     goAway = './audio/attacks_and_creatures/go_away.wav';
     armorHit = './audio/attacks_and_creatures/cloth_armor_hit.wav';
@@ -144,6 +148,15 @@ class Source {
         this.addSourceFlipBook('dino', FLIP_BOOK_DINO);
         this.addSourceFlipBook('ent', FLIP_BOOK_ENT);
         this.addSourceFlipBook('spider', FLIP_BOOK_SPIDER);
+        this.addSoundSource('dino', this.dinoGrowl);
+        this.addSoundSource('ent', this.entGrowl);
+        this.addSoundSource('spider', this.spiderGrowl);
+    }
+
+
+    // jsdoc
+    addSoundSource(key, path) {    // similar method existing???
+        this[key].growl = path;
     }
 
 
@@ -221,6 +234,7 @@ class Source {
     setEndboss() {
         this.setSource('shaman', './img/bosses/shaman/shaman.png', 256, 256);
         this.addSourceFlipBook('shaman', FLIP_BOOK_SHAMAN);
+        this.addSoundSource('shaman', this.shamanGrowl);
     }
 
 
