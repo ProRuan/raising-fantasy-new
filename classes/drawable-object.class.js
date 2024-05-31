@@ -244,7 +244,16 @@ class DrawableObject {
     }
 
 
-    playSound(path) {    // double code!!!
-        new Audio(path).play();
+    playSound(path, currentTime) {    // double code!!!
+        let audio = new Audio(path);
+        if (currentTime) {
+            audio.currentTime = currentTime;
+        }
+        audio.play();
     }
+
+
+    // playSound(path) {    // double code!!!
+    //     new Audio(path).play();
+    // }
 }

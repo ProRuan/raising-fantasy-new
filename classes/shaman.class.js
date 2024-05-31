@@ -70,8 +70,7 @@ class Shaman extends Enemy {
     // jsdoc
     applyBombBurst() {
         if (!world.hero.bomb.collided) {
-            world.hero.bomb.collided = true;
-            this.hp -= world.hero.bomb.damage;
+            world.hero.bomb.burst(this);
         }
     }
 

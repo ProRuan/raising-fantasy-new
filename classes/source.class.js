@@ -18,8 +18,8 @@ class Source {
     // tasks
     // -----
     // ambientSound ...
-    // bomb ...
     // other sounds and music ...
+
     // getter for star and endboss ...
     // victory podium as section 8 array ...
 
@@ -51,6 +51,9 @@ class Source {
     // on progress ...
     skillUpgrade = './audio/attacks_and_creatures/skill_upgrade.wav';
     weaponImpact = './audio/attacks_and_creatures/weapon_impact.wav';
+
+    bombThrow = './audio/elemental_magic/bomb_throw.wav';
+    bombBurst = './audio/elemental_magic/bomb_burst.wav';
 
 
     constructor() {

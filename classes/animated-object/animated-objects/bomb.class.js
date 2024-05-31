@@ -4,6 +4,9 @@ class Bomb extends AnimatedObject {
     damage = 30;
     collided = false;
     bodyXY = { xLeft: 115, xCenter: 128, xRight: 141, yTop: 124, yCenter: 137, yBottom: 150 };
+    bombThrow = source.bombThrow;
+    bombBurst = source.bombBurst;
+    burstDelay = 2.7;
 
 
     // jsdoc
@@ -11,6 +14,7 @@ class Bomb extends AnimatedObject {
         super(source.bomb, x, y);
         this.splitFlipBook();
         this.move(() => this.throw());
+        this.playSound(this.bombThrow);
     }
 
 
@@ -90,5 +94,13 @@ class Bomb extends AnimatedObject {
             this.currentImageReset = true;
             this.currentImage = 0;
         }
+    }
+
+
+    // jsdoc
+    burst(enemy) {
+        this.collided = true;
+        this.playSound(this.bombBurst, this.burstDelay);
+        enemy.hp -= this.damage;
     }
 }
