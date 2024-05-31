@@ -18,8 +18,8 @@ class Source {
     // tasks
     // -----
     // ambientSound ...
-    // magic cast + spell ...
-    // other sounds and music ...
+    // music (3x) ...
+    // new game sound ....
 
     // getter for star and endboss ...
     // victory podium as section 8 array ...
@@ -271,6 +271,15 @@ class Source {
         this.setSource('blade', './img/bosses/magic/blade.png', 256);
         this.setSource('fire', './img/bosses/magic/fire.png', 256);
         this.setSource('lightning', './img/bosses/magic/lightning.png', 256);
+        this.addMagicSoundSource('blade', this.bladeCast, this.bladeHit);
+        this.addMagicSoundSource('fire', this.fireCast, this.fireHit);
+        this.addMagicSoundSource('lightning', this.lightningCast, this.lightningHit);
+    }
+
+
+    // jsdoc
+    addMagicSoundSource(key, cast, hit) {
+        this[key].sound = { cast: cast, hit: hit };
     }
 
 

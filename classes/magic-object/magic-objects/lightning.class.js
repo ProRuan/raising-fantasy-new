@@ -5,21 +5,19 @@ class Lightning extends MagicObject {
     lightningXY = { xLeft: 114, xCenter: 130, xRight: 146, yTop: 32, yCenter: 128, yBottom: 224 };
     deltaY = { move: 210, collided: 96 };
     delay = 1000;
-    cast = source.lightningCast;
-    hit = source.lightningHit;
 
 
     // jsdoc
     constructor(x, y, otherDirection) {
         super(source.lightning, x, y);
         this.setMagic(otherDirection, 40, 'lightning8');
-        this.charge();
-        this.playSound(this.cast);
+        this.setCharge();
+        this.playSound(this.sound.cast);
     }
 
 
     // jsdoc
-    charge() {
+    setCharge() {
         this.bodyXY = this.chargeXY;
         this.targetingStop = getTime() + this.delay;
         this.chargingStop = getTime() + 2 * this.delay;
@@ -27,13 +25,12 @@ class Lightning extends MagicObject {
 
 
     // jsdoc
-    move() {
+    cast() {
         if (this.isTargeting()) {
             this.target();
         } else if (this.isDischarge()) {
             this.discharge();
         }
-        this.soundHit();
     }
 
 

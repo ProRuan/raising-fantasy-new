@@ -3,8 +3,9 @@ class MagicObject extends AnimatedObject {
 
 
     // jsdoc
-    constructor(path, x, y) {
-        super(path, x, y);
+    constructor(source, x, y) {
+        super(source, x, y);
+        this.setSound(source.sound);
     }
 
 
@@ -18,6 +19,12 @@ class MagicObject extends AnimatedObject {
             'yCenter': this.y + this.bodyXY.yCenter,
             'yBottom': this.y + this.bodyXY.yBottom
         };
+    }
+
+
+    // jsdoc
+    setSound(sound) {
+        this.sound = sound;
     }
 
 
@@ -54,6 +61,13 @@ class MagicObject extends AnimatedObject {
 
 
     // jsdoc
+    move() {
+        this.cast();
+        this.soundHit();
+    }
+
+
+    // jsdoc
     playAnimation() {
         if (isTrue(this.finalized)) {
             super.playAnimation(this.flipBook.epilog);
@@ -79,7 +93,7 @@ class MagicObject extends AnimatedObject {
     soundHit() {
         if (this.isHit()) {
             this.soundPlayed = true;
-            this.playSound(this.hit);
+            this.playSound(this.sound.hit);
         }
     }
 
