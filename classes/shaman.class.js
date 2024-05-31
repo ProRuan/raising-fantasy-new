@@ -18,6 +18,7 @@ class Shaman extends Enemy {
     }
 
 
+    // jsdoc
     get triggered() {
         return world.hero.bossBattleStarted;
     }
@@ -44,6 +45,7 @@ class Shaman extends Enemy {
             this.damage();
             this.recast();
         } else if (this.isDeath()) {
+            this.setUndefined('magic');
             world.raiseVictoryPodium();
         }
     }
@@ -78,7 +80,6 @@ class Shaman extends Enemy {
     }
 
 
-    // jsdoc
     resetMagicCast() {
         if (this.isMagicCastReset()) {
             this.spellCast = false;
@@ -170,7 +171,7 @@ class Shaman extends Enemy {
 
     // jsdoc
     getHp() {
-        return this.hp / 300 * 100;
+        return this.hp / this.hpMax * 100;
     }
 
 

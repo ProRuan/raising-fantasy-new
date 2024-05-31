@@ -31,6 +31,7 @@ class Enemy extends MoveableObject {
 
     // jsdoc
     setStateValues(hp, speed) {
+        this.hpMax = hp;
         this.hp = hp;
         this.setSpeed(speed);
     }
