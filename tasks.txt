@@ -83,7 +83,7 @@ Tasks
   - option: fix jump animation for 'fall after walk' ...
 
 
-Clean Coding (45/57)
+Clean Coding (46/58)
 ------------
   - class AnimatedObjects - simpleCheck
       - class Bird - simpleCheck
@@ -111,6 +111,7 @@ Clean Coding (45/57)
       - class Tree - simpleCheck
   - class AvatarInfo - simpleCheck
   - class Background - simpleCheck
+  - class Boss - simpleCheck
   - class Button ...
   - class Character - simpleCheck
   - class Cloud - simpleCheck
