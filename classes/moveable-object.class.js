@@ -283,6 +283,13 @@ class MoveableObject extends DrawableObject {
     }
 
 
+    // jsdoc
+    setMusic(path) {
+        this.music = new Audio(path);
+        this.music.volume = music / 10;
+    }
+
+
 
 
     // in use?

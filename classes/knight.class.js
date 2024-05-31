@@ -28,11 +28,14 @@ class Knight extends Character {
         this.setSpeed(128, 256);
         this.animate();
         this.applyGravity();
+        this.setMusic(source.ambience);
     }
 
 
     animate() {
         setInterval(() => {
+            this.startAmbientSound();
+
             this.resetJumpCounter();
 
             // only for testing!!!
@@ -376,5 +379,15 @@ class Knight extends Character {
     // jsdoc
     isAboveGrass(g) {
         return isGreater(this.body.yBottom, g.yTop, true);
+    }
+
+
+    startAmbientSound() {    // double code!!! (shaman)
+        if (!this.musicStarted) {
+            this.musicStarted = true;
+            setTimeout(() => {
+                this.music.play();
+            }, 1000);
+        }
     }
 }

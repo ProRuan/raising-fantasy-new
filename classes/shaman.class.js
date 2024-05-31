@@ -15,6 +15,7 @@ class Shaman extends Enemy {
     constructor(x, y) {
         super(source.shaman, x, y);
         this.setEnemy(300, 64, 'cast');
+        this.setMusic(source.bossBattle);
     }
 
 
@@ -46,6 +47,7 @@ class Shaman extends Enemy {
             this.recast();
         } else if (this.isDeath()) {
             this.setUndefined('magic');
+            this.lowBattleMusic();
             world.raiseVictoryPodium();
         }
     }
@@ -332,13 +334,12 @@ class Shaman extends Enemy {
     }
 
 
-    // jsdoc
     setAnger() {
         if (!isTrue(this.angry)) {
             this.angry = true;
             this.calm();
             this.playSound(this.growl);
-            clearTimeout(this.delayId);
+            clearTimeout(this.delayId);    // resetDelay() or nothing?
         }
     }
 
@@ -350,6 +351,31 @@ class Shaman extends Enemy {
             this.angry = false;
             this.resetDelay();
         }, 1400);
+        this.startBattleMusic();
+    }
+
+
+    startBattleMusic() {
+        if (this.triggered && !this.musicStarted) {
+            this.musicStarted = true;
+            world.hero.music.muted = true;
+            setTimeout(() => {
+                this.music.play();
+            }, 1650);
+        }
+    }
+
+
+    lowBattleMusic() {
+        if (this.music.volume - 0.001 < 0) {
+            this.music.muted = true;
+        } else {
+            this.music.volume = this.music.volume - 0.001;
+        }
+
+        if (this.music.muted) {
+            world.hero.music.muted = false;
+        }
     }
 
 

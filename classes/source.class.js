@@ -17,9 +17,9 @@ class Source {
 
     // tasks
     // -----
-    // ambientSound ...
-    // music (3x) ...
-    // new game sound ....
+    // check code of Dino, Knight, MoveableObject, Shaman, Source ...
+    // levelWorld: pursuitMusic + bossBattleMusic + ambientSound ... (2/3)
+    // startWorld: newWorldMusic + newGameSound ... (0/2)
 
     // getter for star and endboss ...
     // victory podium as section 8 array ...
@@ -34,7 +34,7 @@ class Source {
 
 
     // to edit!!!
-    ambientSound = './audio/ambience/nature_forest_daytime.wav';
+    ambience = './audio/ambience/nature_forest_daytime.wav';
 
 
     // audio
@@ -62,6 +62,9 @@ class Source {
 
     bombThrow = './audio/elemental_magic/bomb_throw.wav';
     bombBurst = './audio/elemental_magic/bomb_burst.wav';
+
+    pursuit = './audio/epic_fantasy/pursuit_lufus.wav';
+    bossBattle = './audio/epic_fantasy/boss_battle_lufus.wav';
 
 
     constructor() {

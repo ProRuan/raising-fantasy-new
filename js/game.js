@@ -20,7 +20,7 @@ let result = {
     }
 };
 
-let music = 4;
+let music = 3;
 let sound = 7;
 
 pointer = false;
