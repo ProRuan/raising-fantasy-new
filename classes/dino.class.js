@@ -11,7 +11,6 @@ class Dino extends Enemy {
     constructor(x, y) {
         super(source.dino, x, y);
         this.setEnemy(90, 64, 'pursue');
-        this.setMusic(source.pursuit);
     }
 
 
@@ -38,7 +37,6 @@ class Dino extends Enemy {
         } else if (this.isToReposition()) {
             return this.updatePursuitParameters();
         } else if (this.isSearching()) {
-            this.lowPursuitMusic();
             return true;
         } else {
             return false;
@@ -63,7 +61,6 @@ class Dino extends Enemy {
     updatePursuitParameters(logical) {
         this.pursuitStop = getTime();
         this.setOtherDirection(logical);
-        this.startPursuitSound();
         return true;
     }
 
@@ -97,31 +94,5 @@ class Dino extends Enemy {
     // jsdoc
     isSearching() {
         return !isOnTime(world.time, this.pursuitStop, 5000);
-    }
-
-
-    startPursuitSound() {    // double code!!! (shaman)
-        if (!this.musicStarted) {
-            this.musicStarted = true;
-            if (this.music.muted) {
-                this.music.currentTime = 0;
-                this.music.volume = 0.3;
-                this.music.muted = false;
-            } else if (this.music.volume < 0.3) {
-                this.music.volume = 0.3;
-            }
-            this.music.play();
-        }
-    }
-
-
-    lowPursuitMusic() {
-        if (this.music.volume - 0.001 < 0) {
-            this.music.muted = true;
-            delete this.musicStarted;
-        } else {
-            this.music.volume = this.music.volume - 0.001;
-            this.musicStarted = false;
-        }
     }
 }

@@ -283,7 +283,7 @@ class Shaman extends Enemy {
 
     // jsdoc
     castLightning() {
-        this.setWeaponXY('lightning')
+        this.setWeaponXY('lightning');
         let x = this.getLightningX();
         let y = this.getLightningY();
         this.setMagicObject('lightning', x, y);
@@ -334,12 +334,13 @@ class Shaman extends Enemy {
     }
 
 
+    // jsdoc
     setAnger() {
         if (!isTrue(this.angry)) {
             this.angry = true;
             this.calm();
             this.playSound(this.growl);
-            clearTimeout(this.delayId);    // resetDelay() or nothing?
+            clearTimeout(this.delayId);
         }
     }
 
