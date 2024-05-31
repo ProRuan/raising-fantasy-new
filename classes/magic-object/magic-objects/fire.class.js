@@ -2,6 +2,8 @@ class Fire extends MagicObject {
     radDispl = 248;
     pages = { move: 3, collided: 9, epilog: 10 };
     bodyXY = { xLeft: 108, xCenter: 124, xRight: 140, yTop: 120, yCenter: 128, yBottom: 136 };
+    cast = source.fireCast;
+    hit = source.fireHit;
 
 
     // jsdoc
@@ -10,6 +12,7 @@ class Fire extends MagicObject {
         this.setMagic(otherDirection, 30, 'fire9');
         this.setSpeed(128, 0, 64);
         this.setEndX();
+        this.playSound(this.cast);
     }
 
 
@@ -27,6 +30,7 @@ class Fire extends MagicObject {
                 this.applySpeedY();
             }
         }
+        this.soundHit();
     }
 
 

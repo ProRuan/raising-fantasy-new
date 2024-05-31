@@ -73,4 +73,19 @@ class MagicObject extends AnimatedObject {
             this.finalized = true;
         }
     }
+
+
+    // // jsdoc
+    soundHit() {
+        if (this.isHit()) {
+            this.soundPlayed = true;
+            this.playSound(this.hit);
+        }
+    }
+
+
+    // jsdoc
+    isHit() {
+        return this.collided && !this.soundPlayed;
+    }
 }

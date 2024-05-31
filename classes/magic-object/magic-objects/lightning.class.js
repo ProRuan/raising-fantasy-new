@@ -5,6 +5,8 @@ class Lightning extends MagicObject {
     lightningXY = { xLeft: 114, xCenter: 130, xRight: 146, yTop: 32, yCenter: 128, yBottom: 224 };
     deltaY = { move: 210, collided: 96 };
     delay = 1000;
+    cast = source.lightningCast;
+    hit = source.lightningHit;
 
 
     // jsdoc
@@ -12,6 +14,7 @@ class Lightning extends MagicObject {
         super(source.lightning, x, y);
         this.setMagic(otherDirection, 40, 'lightning8');
         this.charge();
+        this.playSound(this.cast);
     }
 
 
@@ -30,6 +33,7 @@ class Lightning extends MagicObject {
         } else if (this.isDischarge()) {
             this.discharge();
         }
+        this.soundHit();
     }
 
 

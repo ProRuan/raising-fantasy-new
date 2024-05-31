@@ -18,6 +18,7 @@ class Source {
     // tasks
     // -----
     // ambientSound ...
+    // magic cast + spell ...
     // other sounds and music ...
 
     // getter for star and endboss ...
@@ -51,6 +52,13 @@ class Source {
     // on progress ...
     skillUpgrade = './audio/attacks_and_creatures/skill_upgrade.wav';
     weaponImpact = './audio/attacks_and_creatures/weapon_impact.wav';
+
+    bladeCast = './audio/elemental_magic/magic_blade_cast.wav';
+    bladeHit = './audio/elemental_magic/magic_blade_hit.wav';
+    fireCast = './audio/elemental_magic/magic_fire_cast.wav';
+    fireHit = './audio/elemental_magic/magic_fire_hit.wav';
+    lightningCast = './audio/elemental_magic/magic_lightning_cast.wav';
+    lightningHit = './audio/elemental_magic/magic_lightning_hit.wav';
 
     bombThrow = './audio/elemental_magic/bomb_throw.wav';
     bombBurst = './audio/elemental_magic/bomb_burst.wav';

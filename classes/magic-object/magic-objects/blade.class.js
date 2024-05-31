@@ -3,6 +3,8 @@ class Blade extends MagicObject {
     pages = { move: 3, collided: 6, epilog: 7 };
     bodyXY = { xLeft: 115, xCenter: 139, xRight: 163, yTop: 121, yCenter: 129, yBottom: 137 };
     step = { x: 256, yUp: 112.8, yDown: -16.8 };
+    cast = source.bladeCast;
+    hit = source.bladeHit;
 
 
     // jsdoc
@@ -10,6 +12,7 @@ class Blade extends MagicObject {
         super(source.blade, x, y);
         this.setMagic(otherDirection, 20, 'blade6');
         this.setSpeed();
+        this.playSound(this.cast);
     }
 
 
@@ -29,5 +32,6 @@ class Blade extends MagicObject {
             this.x -= this.speed;
             this.y -= this.speedY;
         }
+        this.soundHit();
     }
 }
