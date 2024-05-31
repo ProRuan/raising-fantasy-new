@@ -5,6 +5,7 @@ class Level1 {
     constructor() {
         this.loadScenery();
         this.loadAllSections();
+        this.loadVictoryPodium();
     }
 
 
@@ -157,5 +158,28 @@ class Level1 {
     // jsdoc
     setObjectX(t, object) {
         object.x += t * canvas.width;
+    }
+
+
+    // jsdoc
+    loadVictoryPodium() {
+        this.vicortyPodium = [];
+        this.addVictoryElement('flyGrass', 3);
+        this.addVictoryElement('flyGrass', 2);
+        this.addVictoryElement('flyGrass', 1);
+    }
+
+
+    // jsdoc
+    addVictoryElement(key, i) {
+        let element = this.getArrayElement(key, i);
+        this.vicortyPodium.push(element);
+    }
+
+
+    // jsdoc
+    getArrayElement(key, i) {
+        let id = this[key].length - i;
+        return this[key][id];
     }
 }

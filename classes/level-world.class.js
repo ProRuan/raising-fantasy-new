@@ -2,6 +2,7 @@ class LevelWorld extends World {
     // to move!!!
     heroX = 212;
     trophyY = 436;
+    victorySpeed = 2;
 
     // Create an upper class LevelWorldKit!!!
 
@@ -11,7 +12,6 @@ class LevelWorld extends World {
 
 
         this.setLevelWorld();
-        this.setVictoryPodium();
         this.runTime();
         this.draw();
     }
@@ -19,7 +19,7 @@ class LevelWorld extends World {
 
     // jsdoc
     get star() {
-        this.levels.stars[0];
+        return this.level.stars[0];
     }
 
 
@@ -209,25 +209,31 @@ class LevelWorld extends World {
 
 
     // jsdoc
-    setVictoryPodium() {
-        this.vicortyPodium = [];
-        this.addVictoryElement('stars', 1);
-        this.addVictoryElement('flyGrass', 3);
-        this.addVictoryElement('flyGrass', 2);
-        this.addVictoryElement('flyGrass', 1);
+    raiseVictoryPodium() {
+        if (this.isStarHidden()) {
+            this.moveStar();
+            this.moveVictoryPodium();
+        }
     }
 
 
     // jsdoc
-    addVictoryElement(key, i) {
-        let element = this.getArrayElement(key, i);
-        this.vicortyPodium.push(element);
+    isStarHidden() {
+        return this.star && isGreater(this.trophyY, this.star.y)
     }
 
 
     // jsdoc
-    getArrayElement(key, i) {
-        let id = this[key].length - i;
-        return this[key][id];
+    moveStar() {
+        this.star.y -= this.victorySpeed;
     }
+
+
+    // jsdoc
+    moveVictoryPodium() {
+        this.vicortyPodium.forEach((element) => {
+            element.y -= this.victorySpeed;
+        });
+    }
+
 }

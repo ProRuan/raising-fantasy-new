@@ -44,7 +44,7 @@ class Shaman extends Enemy {
             this.damage();
             this.recast();
         } else if (this.isDeath()) {
-            this.moveVictoryPodium();
+            world.raiseVictoryPodium();
         }
     }
 
@@ -344,17 +344,6 @@ class Shaman extends Enemy {
     isCastLightning() {
         return isMatch(this.magicChapter, 'lightning');
     }
-
-
-    // jsdoc
-    moveVictoryPodium() {
-        if (isGreater(world.trophyY, world.vicortyPodium[0].y)) {
-            world.vicortyPodium.forEach((element) => {
-                element.y -= 2;
-            });
-        }
-    }
-
 
 
 
