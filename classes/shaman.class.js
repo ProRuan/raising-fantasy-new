@@ -57,33 +57,59 @@ class Shaman extends Enemy {
     }
 
 
+    // jsdoc
     hurt() {
-        if (world.hero.bomb && isCollided(this.body, world.hero.bomb.body)) {
-            if (!world.hero.bomb.collided) {
-                world.hero.bomb.collided = true;
-                this.hp -= world.hero.bomb.damage;
-            }
-            if (isMatch(this.chapter, 'hurt')) {
-                this.currentImage = (isGreater(1, this.currentImage)) ? 1 : this.currentImage;
-            }
-            clearTimeout(this.delayId);
-            if (isUndefined(this.magic)) {
-                this.spellCast = false;
-            }
-            // console.log(this.chapter, this.currentImage, this.img.src);
+        if (this.isBombBurst()) {
+            this.applyBombBurst();
+            this.keepHurt();
+            this.resetDelay();
         }
     }
 
 
+    // jsdoc
+    applyBombBurst() {
+        if (!world.hero.bomb.collided) {
+            world.hero.bomb.collided = true;
+            this.hp -= world.hero.bomb.damage;
+        }
+    }
+
+
+    // jsdoc
+    isBombBurst() {
+        return world.hero.bomb && isCollided(this.body, world.hero.bomb.body);
+    }
+
+
+    // jsdoc
+    keepHurt() {
+        if (isMatch(this.chapter, 'hurt')) {
+            this.currentImage = (isGreater(1, this.currentImage)) ? 1 : this.currentImage;
+        }
+    }
+
+
+    // jsdoc
+    resetDelay() {
+        if (isUndefined(this.magic)) {
+            this.spellCast = false;
+            clearTimeout(this.delayId);
+        }
+    }
+
+
+    // jsdoc
     isHurt() {
         return world.hero.bomb && world.hero.bomb.collided;
     }
 
 
+    // jsdoc
     resetMagicCast() {
         if (this.isMagicCastReset()) {
             this.spellCast = false;
-            this.magic = undefined;    // not verified!
+            this.magic = undefined;
         }
     }
 
@@ -318,13 +344,12 @@ class Shaman extends Enemy {
     }
 
 
+    // jsdoc
     calm() {
         setTimeout(() => {
             this.angerLevel++;
             this.angry = false;
-            if (isUndefined(this.magic)) {
-                this.spellCast = false;
-            }
+            this.resetDelay();
         }, 1400);
     }
 
@@ -345,26 +370,4 @@ class Shaman extends Enemy {
     isCastLightning() {
         return isMatch(this.magicChapter, 'lightning');
     }
-
-
-
-    // tasks
-    // -----
-
-    // SET EMPTY IMAGE for all flip books!!! ...
-
-    // shaman isDeath() condition + remove magic, if hp == 0 ...
-
-    // finish and clean shaman hurt methods ...
-    // magic soung (cast + hit) ...
-
-    // get body() --> double and triple code ...
-    // think about getter body() --> get () --> return getBody() ...
-
-    // set firstAngerX (world.hero.x) ...
-    // shaman hurt bomb ...
-    // double code (this.magic)!!!
-    // set endboss animation
-    // set endboss battle trigger
-    // set final scene
 }
