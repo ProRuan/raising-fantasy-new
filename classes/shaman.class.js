@@ -14,7 +14,7 @@ class Shaman extends Enemy {
     // jsdoc
     constructor(x, y) {
         super(source.shaman, x, y);
-        this.setEnemy(300, 64, 'cast');
+        this.setEnemy(300, 64, 'move');
         this.setMusic(source.bossBattle);
     }
 
@@ -39,16 +39,11 @@ class Shaman extends Enemy {
 
 
     // jsdoc
-    cast() {
+    move() {
         if (this.isCastReady()) {
-            this.hurt();
-            this.resetMagicCast();
-            this.damage();
-            this.recast();
+            this.cast();
         } else if (this.isDeath()) {
-            this.setUndefined('magic');
-            this.lowBattleMusic();
-            world.raiseVictoryPodium();
+            this.win();
         }
     }
 
@@ -56,6 +51,16 @@ class Shaman extends Enemy {
     // jsdoc
     isCastReady() {
         return !this.isDeath() && isTrue(this.triggered);
+    }
+
+
+    // jsdoc
+    cast() {
+        this.hurt();
+        this.resetMagicCast();
+        this.damage();
+        this.recast();
+        this.muteAmbientSound();
     }
 
 
@@ -351,32 +356,8 @@ class Shaman extends Enemy {
             this.angerLevel++;
             this.angry = false;
             this.resetDelay();
+            this.startMusic(this.triggered, 250);
         }, 1400);
-        this.startBattleMusic();
-    }
-
-
-    startBattleMusic() {
-        if (this.triggered && !this.musicStarted) {
-            this.musicStarted = true;
-            world.hero.music.muted = true;
-            setTimeout(() => {
-                this.music.play();
-            }, 1650);
-        }
-    }
-
-
-    lowBattleMusic() {
-        if (this.music.volume - 0.001 < 0) {
-            this.music.muted = true;
-        } else {
-            this.music.volume = this.music.volume - 0.001;
-        }
-
-        if (this.music.muted) {
-            world.hero.music.muted = false;
-        }
     }
 
 
@@ -395,5 +376,41 @@ class Shaman extends Enemy {
     // jsdoc
     isCastLightning() {
         return isMatch(this.magicChapter, 'lightning');
+    }
+
+
+    // jsdoc
+    win() {
+        this.setUndefined('magic');
+        this.lowMusic();
+        world.raiseVictoryPodium();
+    }
+
+
+    // jsdoc
+    muteAmbientSound() {
+        if (this.isDeath() && this.music.muted) {
+            super.muteAmbientSound(false);
+        } else if (this.triggered && !world.hero.music.muted) {
+            super.muteAmbientSound(true);
+        }
+    }
+
+
+    // jsdoc
+    lowMusic() {
+        let lowerVolume = this.music.volume - 0.001;
+        this.setMusicVolume(lowerVolume);
+        this.muteAmbientSound();
+    }
+
+
+    // jsdoc
+    setMusicVolume(lowerVolume) {
+        if (isGreater(lowerVolume, 0)) {
+            this.music.muted = true;
+        } else {
+            this.music.volume = lowerVolume;
+        }
     }
 }

@@ -283,10 +283,26 @@ class MoveableObject extends DrawableObject {
     }
 
 
-    // jsdoc
     setMusic(path) {
         this.music = new Audio(path);
-        this.music.volume = music / 10;
+        this.music.volume = music / 10;    // to edit
+    }
+
+
+    // jsdoc
+    startMusic(condition, delay) {
+        if (condition && !this.musicStarted) {
+            this.musicStarted = true;
+            setTimeout(() => {
+                this.music.play();
+            }, delay);
+        }
+    }
+
+
+    // jsdoc
+    muteAmbientSound(logical) {
+        world.hero.music.muted = logical;
     }
 
 
