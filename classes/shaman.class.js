@@ -9,7 +9,6 @@ class Shaman extends Enemy {
     angerLevel = 0;
     magicRange = 760;
     spellCast = false;
-    trophyY = 436;
 
 
     // jsdoc
@@ -45,7 +44,7 @@ class Shaman extends Enemy {
             this.damage();
             this.recast();
         } else if (this.isDeath()) {
-            this.raiseVictoryPodium();
+            this.moveVictoryPodium();
         }
     }
 
@@ -348,40 +347,9 @@ class Shaman extends Enemy {
 
 
     // jsdoc
-    raiseVictoryPodium() {
-        this.vicortyPodium = [];
-        this.buildVictoryPodium();
-        this.moveVictoryPodium();
-    }
-
-
-    // jsdoc
-    buildVictoryPodium() {
-        this.addVictoryElement('stars', 1);
-        this.addVictoryElement('flyGrass', 3);
-        this.addVictoryElement('flyGrass', 2);
-        this.addVictoryElement('flyGrass', 1);
-    }
-
-
-    // jsdoc
-    addVictoryElement(key, i) {
-        let element = this.getArrayElement(key, i);
-        this.vicortyPodium.push(element);
-    }
-
-
-    // jsdoc
-    getArrayElement(key, i) {
-        let id = world[key].length - i;
-        return world[key][id];
-    }
-
-
-    // jsdoc
     moveVictoryPodium() {
-        if (isGreater(this.trophyY, this.vicortyPodium[0].y)) {
-            this.vicortyPodium.forEach((element) => {
+        if (isGreater(world.trophyY, world.vicortyPodium[0].y)) {
+            world.vicortyPodium.forEach((element) => {
                 element.y -= 2;
             });
         }

@@ -1,6 +1,7 @@
 class LevelWorld extends World {
     // to move!!!
     heroX = 212;
+    trophyY = 436;
 
     // Create an upper class LevelWorldKit!!!
 
@@ -10,8 +11,15 @@ class LevelWorld extends World {
 
 
         this.setLevelWorld();
+        this.setVictoryPodium();
         this.runTime();
         this.draw();
+    }
+
+
+    // jsdoc
+    get star() {
+        this.levels.stars[0];
     }
 
 
@@ -197,5 +205,29 @@ class LevelWorld extends World {
                 world.enemies.splice(id, 1);
             }, 2000);
         }
+    }
+
+
+    // jsdoc
+    setVictoryPodium() {
+        this.vicortyPodium = [];
+        this.addVictoryElement('stars', 1);
+        this.addVictoryElement('flyGrass', 3);
+        this.addVictoryElement('flyGrass', 2);
+        this.addVictoryElement('flyGrass', 1);
+    }
+
+
+    // jsdoc
+    addVictoryElement(key, i) {
+        let element = this.getArrayElement(key, i);
+        this.vicortyPodium.push(element);
+    }
+
+
+    // jsdoc
+    getArrayElement(key, i) {
+        let id = this[key].length - i;
+        return this[key][id];
     }
 }
