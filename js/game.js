@@ -39,7 +39,7 @@ function init() {
     // set class Star!!!
 
     world = new StartWorld(canvas, keyboard);
-    currentWorld = 'level';    // set start!
+    currentWorld = 'start';    // set start!
 
     // world = new LevelWorld(canvas, keyboard);    // is working
     // currentWorld = 'level';    // is working

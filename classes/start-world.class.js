@@ -14,8 +14,8 @@ class StartWorld extends World {
 
         this.background = this.getDrawableObject(source.mainBg, 0, 0);
 
-        // this.setMainButton('newGameButton', 68, 340);    // to add!!!
-        // this.setMainButton('storyButton', 40, 412);    // to add!!!
+        this.setMainButton('newGameButton', 68, 340);    // to add!!!
+        this.setMainButton('storyButton', 40, 412);    // to add!!!
 
         this.cupButton = this.getButton(source.cupButton, 32, 32);
         this.settingsButton = this.getButton(source.settingsButton, canvas.width - 98, 32);    // own method?
@@ -82,73 +82,54 @@ class StartWorld extends World {
     draw() {
         this.clearCanvas();
 
-        // only for testing!!!
-        // -------------------
         this.drawObject(this.background);
-        // this.drawObject(this.cupButton);
-        // this.drawObject(this.settingsButton);
-        // this.drawObject(this.storyBg);
-        // this.drawObject(this.coinButton);
-        // this.drawObject(this.leaderboard);
-        // this.drawObject(this.xButton);
-        // this.drawObject(this.lowMusicButton);
-        // this.drawObject(this.highMusicButton);
-        // this.drawObject(this.lowSoundButton);
-        // this.drawObject(this.highSoundButton);
+        this.drawMainText('80px Arial', 'Raising Fantasy', canvas.height / 2);
+        this.drawTextButton(this.newGameButton, 'New game', canvas.height / 4 * 3 - 36);
+        this.drawTextButton(this.storyButton, 'Story', canvas.height / 4 * 3 + 36);
 
 
-        // if (this.isDisplayed()) {
-        //     this.drawObject(this.background);
-
-        //     this.drawMainText('80px Arial', 'Raising Fantasy', canvas.height / 2);
-        //     this.drawTextButton(this.newGameButton, 'New game', canvas.height / 4 * 3 - 36);
-        //     this.drawTextButton(this.storyButton, 'Story', canvas.height / 4 * 3 + 36);
-        //     this.drawExtraButton(this.cupButton, 'yellow');
-        //     this.drawExtraButton(this.settingsButton, 'yellow');
-        //     this.drawLeaderboard();
-        //     this.drawHighScore();
-        //     this.drawSettingsButtons();
-        //     this.drawSettingsText();
+        // draw xButton, coinButton only on condition!!!
+        // click newGame / story / x / coinButton only if leaderboard and storybg are at the right state!!!
+        // drawExtraButton() + shadow Parm!!!
 
 
-        //     // draw xButton, coinButton only on condition!!!
-        //     // click newGame / story / x / coinButton only if leaderboard and storybg are at the right state!!!
-        //     // drawExtraButton() + shadow Parm!!!
+        // this.drawTextFrame(this.newGameButton);
+        // this.drawTextFrame(this.storyButton);
 
 
-        //     // this.drawTextFrame(this.newGameButton);
-        //     // this.drawTextFrame(this.storyButton);
+        this.drawExtraButton(this.cupButton, 'yellow');
+        this.drawExtraButton(this.settingsButton, 'yellow');
+        this.drawLeaderboard();
+        this.drawHighScore();
+        this.drawSettingsButtons();
+        this.drawSettingsText();
 
+        if (this.isStoryBgOpened()) {
+            this.coinButton.reachable = true;
 
-        //     if (this.isStoryBgOpened()) {
-        //         this.coinButton.reachable = true;
+            this.drawObject(this.storyBg);
 
-        //         this.drawObject(this.storyBg);
+            this.drawExtraButton(this.coinButton, 'olive');
+            // this.setXButton(this.storyBg.xRight - 44, this.storyBg.yTop + 44);
+            // this.drawObject(this.xButton);
 
-        //         this.drawExtraButton(this.coinButton, 'olive');
-        //         // this.setXButton(this.storyBg.xRight - 44, this.storyBg.yTop + 44);
-        //         // this.drawObject(this.xButton);
+            this.setFontTextAlign('bold 28px Arial', 'center');
+            super.drawText('Story', this.storyBg.x + this.storyBg.width / 2, 160);
+            this.setFontTextAlign('20px Arial', 'left');
+            super.drawText('Play as a knight and', this.storyBg.x + 40, 208);
+            super.drawText('explore a new world.', this.storyBg.x + 40, 238);
 
-        //         this.setFontTextAlign('bold 28px Arial', 'center');
-        //         super.drawText('Story', this.storyBg.x + this.storyBg.width / 2, 160);
-        //         this.setFontTextAlign('20px Arial', 'left');
-        //         super.drawText('Play as a knight and', this.storyBg.x + 40, 208);
-        //         super.drawText('explore a new world.', this.storyBg.x + 40, 238);
+            this.setFont('bold 20px Arial');
+            super.drawText('Quests', this.storyBg.x + 40, 298);
+            this.setFont('20px Arial');
+            super.drawText('1. Collect all coins.', this.storyBg.x + 40, 333);
+            super.drawText('2. Collect all leaves.', this.storyBg.x + 40, 363);
+            super.drawText('3. Defeat the endboss.', this.storyBg.x + 40, 393);
+        } else {
+            this.coinButton.reachable = false;
+        }
 
-        //         this.setFont('bold 20px Arial');
-        //         super.drawText('Quests', this.storyBg.x + 40, 298);
-        //         this.setFont('20px Arial');
-        //         super.drawText('1. Collect all coins.', this.storyBg.x + 40, 333);
-        //         super.drawText('2. Collect all leaves.', this.storyBg.x + 40, 363);
-        //         super.drawText('3. Defeat the endboss.', this.storyBg.x + 40, 393);
-        //     } else {
-        //         this.coinButton.reachable = false;
-        //     }
-
-        //     this.setNewGameAndStoryButton();
-
-
-        // }
+        this.setNewGameAndStoryButton();
 
         this.redraw();
     }
