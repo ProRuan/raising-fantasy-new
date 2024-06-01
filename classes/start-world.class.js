@@ -14,25 +14,19 @@ class StartWorld extends World {
 
         this.background = this.getDrawableObject(source.mainBg, 0, 0);
 
-        // this.setMainButton('newGameButton', 68, 340);
-        // this.setMainButton('storyButton', 40, 412);
+        // this.setMainButton('newGameButton', 68, 340);    // to add!!!
+        // this.setMainButton('storyButton', 40, 412);    // to add!!!
 
         this.cupButton = this.getButton(source.cupButton, 32, 32);
         this.settingsButton = this.getButton(source.settingsButton, canvas.width - 98, 32);    // own method?
         this.storyBg = this.getDrawableObject(source.storyBg, canvas.width / 2 - 138, 540 - canvas.height / 2 - 166.5);
-        this.coinButton = this.getButton(source.coinButton, this.storyBg.xRight - 44, this.storyBg.yTop + 44);
-        // this.setCloseButton('coinButton', this.storyBg.xRight - 44, this.storyBg.yTop + 44);
+        this.coinButton = this.getButton(source.coinButton, this.storyBg.xRight - 48, 540 - this.storyBg.yTop - 48);
         this.leaderboard = this.getDrawableObject(source.leaderboard, canvas.width / 2 - 191, canvas.height / 2 - 220.5);
-        this.xButton = this.getButton(source.xButton, this.leaderboard.xRight - 35, this.leaderboard.yTop + 64);
-        // this.setCloseButton('xButton', this.leaderboard.xRight - 35, this.leaderboard.yTop + 64);
-        this.lowMusicButton = this.getButton(source.arrowLeft, 25, 145.5);
-        this.highMusicButton = this.getButton(source.arrowRight, 125, 145.5);
-        this.lowSoundButton = this.getButton(source.arrowLeft, 25, 193.5);
-        this.highSoundButton = this.getButton(source.arrowRight, 125, 193.5);
-        // this.setArrowButton('lowMusicButton', 'arrowLeft', 25, 145.5);
-        // this.setArrowButton('highMusicButton', 'arrowRight', 125, 145.5);
-        // this.setArrowButton('lowSoundButton', 'arrowLeft', 25, 193.5);
-        // this.setArrowButton('highSoundButton', 'arrowRight', 125, 193.5);
+        this.xButton = this.getButton(source.xButton, this.leaderboard.xRight - 35, 540 - this.leaderboard.yTop - 64);
+        this.lowMusicButton = this.getButton(source.arrowLeft, this.leaderboard.xLeft + (this.leaderboard.xRight - this.leaderboard.xLeft) / 2 + 25, 540 - this.leaderboard.yTop - 145.5);
+        this.highMusicButton = this.getButton(source.arrowRight, this.leaderboard.xLeft + (this.leaderboard.xRight - this.leaderboard.xLeft) / 2 + 125, 540 - this.leaderboard.yTop - 145.5);
+        this.lowSoundButton = this.getButton(source.arrowLeft, this.leaderboard.xLeft + (this.leaderboard.xRight - this.leaderboard.xLeft) / 2 + 25, 540 - this.leaderboard.yTop - 193.5);
+        this.highSoundButton = this.getButton(source.arrowRight, this.leaderboard.xLeft + (this.leaderboard.xRight - this.leaderboard.xLeft) / 2 + 125, 540 - this.leaderboard.yTop - 193.5);
     }
 
 
@@ -89,17 +83,18 @@ class StartWorld extends World {
         this.clearCanvas();
 
         // only for testing!!!
+        // -------------------
         this.drawObject(this.background);
-        this.drawObject(this.cupButton);
-        this.drawObject(this.settingsButton);
-        this.drawObject(this.storyBg);
-        this.drawObject(this.coinButton);
-        this.drawObject(this.leaderboard);
-        this.drawObject(this.xButton);
-        this.drawObject(this.lowMusicButton);
-        this.drawObject(this.highMusicButton);
-        this.drawObject(this.lowSoundButton);
-        this.drawObject(this.highSoundButton);
+        // this.drawObject(this.cupButton);
+        // this.drawObject(this.settingsButton);
+        // this.drawObject(this.storyBg);
+        // this.drawObject(this.coinButton);
+        // this.drawObject(this.leaderboard);
+        // this.drawObject(this.xButton);
+        // this.drawObject(this.lowMusicButton);
+        // this.drawObject(this.highMusicButton);
+        // this.drawObject(this.lowSoundButton);
+        // this.drawObject(this.highSoundButton);
 
 
         // if (this.isDisplayed()) {
