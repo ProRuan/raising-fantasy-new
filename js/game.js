@@ -20,6 +20,7 @@ let result = {
     }
 };
 
+let counter = 0;    // for start world
 let music = 3;
 let sound = 7;
 
@@ -34,8 +35,15 @@ function init() {
     setCanvas();
     setKeyboard();
 
-    world = new LevelWorld(canvas, keyboard);
-    currentWorld = 'level';
+
+    // set class Star!!!
+
+    world = new StartWorld(canvas, keyboard);
+    currentWorld = 'level';    // set start!
+
+    // world = new LevelWorld(canvas, keyboard);    // is working
+    // currentWorld = 'level';    // is working
+
     // switchWorld();    // necessary? --> menu control!
 }
 

@@ -83,7 +83,7 @@ Tasks
   - option: fix jump animation for 'fall after walk' ...
 
 
-Clean Coding (46/58)
+Clean Coding (46/57)
 ------------
   - class AnimatedObjects - simpleCheck
       - class Bird - simpleCheck
@@ -122,7 +122,6 @@ Clean Coding (46/58)
   - class Enemy - simpleCheck
   - class Ent - simpleCheck
   - class FlipBook - simpleCheck
-  - class ImagePath ...
   - class Key ...
   - class Keyboard ...
   - class Knight ...

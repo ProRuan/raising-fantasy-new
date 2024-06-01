@@ -1,4 +1,15 @@
 class Source {
+    mainBg = { path: './img/start_screen/background.png', width: 960, height: 540 };
+    storyBg = { path: './img/start_screen/story_bg.png', width: 276, height: 333 };    // rename to storyboard!
+    coinButton = { path: './img/start_screen/coin_button.png', width: 27, height: 27 };
+    cupButton = { path: './img/start_screen/cup_button.png', width: 66, height: 66 };
+    leaderboard = { path: './img/start_screen/leaderboard.png', width: 382, height: 441 };
+    xButton = { path: './img/start_screen/x_button.png', width: 28, height: 28 };
+    settingsButton = { path: './img/start_screen/settings_button.png', width: 66, height: 66 };
+    arrowLeft = { path: './img/start_screen/arrow_left.png', width: 10, height: 17 };
+    arrowRight = { path: './img/start_screen/arrow_right.png', width: 10, height: 17 };
+
+
     // to edit and/or move!!!
     startX = 60;
     crystalXCenter = 6240;
@@ -70,7 +81,7 @@ class Source {
 
 
     constructor() {
-        this.loadImagePaths();    // to think about!!!
+        // this.loadImagePaths();    // to think about!!!
 
         this.setLevel();
         this.setAvatarInfo();
