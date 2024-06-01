@@ -102,6 +102,109 @@ function processKeydown(event) {    // check doubleClick!!!
     setKey(code, 'timeStamp', getTime());
     verifyDoubleClick(code);
 
+
+    if (this.currentWorld == 'start') {
+        if (code == 'arrowDown' && mainButtonCounter < mainButtons.length - 1 && !world.isStoryBgOpened() && !world.isLeaderboardOpened()) {
+            world[mainButtons[mainButtonCounter]].selected = false;
+            mainButtonCounter++;
+            world[mainButtons[mainButtonCounter]].selected = true;
+            console.log(mainButtonCounter, mainButtons[mainButtonCounter]);
+        }
+
+        if (code == 'arrowUp' && 0 < mainButtonCounter && !world.isStoryBgOpened() && !world.isLeaderboardOpened()) {
+            world[mainButtons[mainButtonCounter]].selected = false;
+            mainButtonCounter--;
+            world[mainButtons[mainButtonCounter]].selected = true;
+            console.log(mainButtonCounter, mainButtons[mainButtonCounter]);
+        }
+
+
+        if (code == 'enter' && world.newGameButton.selected == true) {
+            console.log('start new game ...');
+            // world.newGameButton.locked = true;
+        }
+        if (code == 'enter' && world.storyButton.selected == true) {
+            if (world.cupButton.locked == true) {
+                world.cupButton.locked = false;
+            }
+            if (world.settingsButton.locked == true) {
+                world.settingsButton.locked = false;
+            }
+            world.storyButton.locked = true;
+        }
+        if (code == 'enter' && world.cupButton.selected == true) {
+            if (world.storyButton.locked == true) {
+                world.storyButton.locked = false;
+            }
+            if (world.settingsButton.locked == true) {
+                world.settingsButton.locked = false;
+            }
+            world.cupButton.locked = true;
+        }
+        if (code == 'enter' && world.settingsButton.selected == true) {
+            if (world.storyButton.locked == true) {
+                world.storyButton.locked = false;
+            }
+            if (world.cupButton.locked == true) {
+                world.cupButton.locked = false;
+            }
+            world.settingsButton.locked = true;
+
+            // double code!!!
+            world[volumeButtons[volumeButtonsId]].selected = false;
+            volumeButtonsId = 0;
+            musicButtons = true;
+        }
+
+        if ((code == 'backspace' || code == 'escape' || code == 'space' || code == 'keyX') && world.storyButton.locked == true) {
+            world.storyButton.locked = false;
+        }
+        if ((code == 'backspace' || code == 'escape' || code == 'keyX') && world.cupButton.locked == true) {
+            world.cupButton.locked = false;
+        }
+        if ((code == 'backspace' || code == 'escape' || code == 'keyX') && world.settingsButton.locked == true) {
+            world.settingsButton.locked = false;
+        }
+
+        if (code == 'arrowLeft' && world.settingsButton.isLocked()) {
+            world[volumeButtons[volumeButtonsId]].selected = false;
+            volumeButtonsId = (musicButtons) ? 0 : 2;
+            world[volumeButtons[volumeButtonsId]].selected = true;
+            if (volumeButtonsId == 0 && isGreater(0, music)) {
+                music--;
+            }
+            if (volumeButtonsId == 2 && isGreater(0, sound)) {
+                sound--;
+            }
+        }
+        if (code == 'arrowRight' && world.settingsButton.isLocked()) {
+            world[volumeButtons[volumeButtonsId]].selected = false;
+            volumeButtonsId = (musicButtons) ? 1 : 3;
+            world[volumeButtons[volumeButtonsId]].selected = true;
+            if (volumeButtonsId == 1 && isGreater(music, 9)) {
+                music++;
+            }
+            if (volumeButtonsId == 3 && isGreater(sound, 9)) {
+                sound++;
+            }
+        }
+        if (code == 'arrowDown' && world.settingsButton.isLocked()) {
+            if (musicButtons == true) {
+                musicButtons = false;
+                world[volumeButtons[volumeButtonsId]].selected = false;
+                volumeButtonsId = (volumeButtonsId == 0) ? 2 : 3;
+                world[volumeButtons[volumeButtonsId]].selected = true;
+            }
+        }
+        if (code == 'arrowUp' && world.settingsButton.isLocked()) {
+            if (musicButtons == false) {
+                musicButtons = true;
+                world[volumeButtons[volumeButtonsId]].selected = false;
+                volumeButtonsId = (volumeButtonsId == 2) ? 0 : 1;
+                world[volumeButtons[volumeButtonsId]].selected = true;
+            }
+        }
+    }
 }
 
 
@@ -134,18 +237,33 @@ function isWordMatch(word, subword) {
 }
 
 
-function isMouseEvent(mouse, object) {
-    if (mouse && object) {
-        let m = getMouseXY(mouse);
-        // console.log(m, object);
-        return isIncluded2D(m, object);
+// jsdoc
+function isMouseEvent(m, o) {
+    if (m) {
+        let mouse = getMouseXY(m);    // necessary???
+        let object = getObjectXY(o);    // necessary???
+        return isIncluded2D(mouse, object);
     }
 }
 
 
-// jsdoc
+// jsdoc (necessary???)
 function getMouseXY(m) {
-    return { x: m.offsetX, y: m.offsetY };
+    return {
+        'x': m.offsetX,
+        'y': m.offsetY
+    }
+}
+
+
+// jsdoc (necessary???)
+function getObjectXY(o) {
+    return {
+        'xLeft': o.xLeft,
+        'xRight': o.xRight,
+        'yTop': o.yTop,
+        'yBottom': o.yBottom
+    };
 }
 
 

@@ -1,47 +1,41 @@
 class Button extends DrawableObject {
     indent = 4;
+
     reachable = true;
     targeted = false;
     selected = false;
     locked = false;
 
+    // previous (button)
+    // next (button)
 
-    constructor(path, x, y, z) {
-        super(path, x, y, z);
-        this.setId();
+
+    constructor(source, x, y) {
+        super(source, x, y);
     }
 
 
-    setId() {
-        this.id = counter++;
-    }
-
-
-    isReachable() {
-        return this.reachable == true;
-    }
-
-
-    isActivated() {
-        return this.isTargeted() || this.isLocked();
-    }
-
-
-    isTargeted() {
-        return this.targeted == true || this.selected == true;
-    }
-
-
+    // jsoc
     isLocked() {
         return this.locked == true;
     }
 
 
-    updateCursor() {
-        setInterval(() => {
-            (this.isTargeted()) ? setCursor('pointer') : false;
-        }, 1000 / 60);
+    // jsdoc
+    openLeaderboard(buttonA, buttonB) {
+        if (buttonA.isLocked()) {
+            world.leaderboard.opened = true;
+        } else if (!buttonB.isLocked()) {
+            world.leaderboard.opened = false;
+        }
     }
+
+
+    // updateCursor() {
+    //     setInterval(() => {
+    //         (this.isTargeted()) ? setCursor('pointer') : false;
+    //     }, 1000 / 60);
+    // }
 
 
 

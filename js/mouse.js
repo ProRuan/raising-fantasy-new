@@ -1,127 +1,56 @@
 function processMouseMove(event) {
-    if (currentWorld == 'start') {
-        for (let i = 0; i < buttons.length; i++) {
-            let button = buttons[i] + 'Button';
-            hover(event, button);
-        }
-    }
-}
 
-
-function hover(event, name) {
-    let targeted = (isMouseEvent(event, world[name])) ? true : false;
-    if (world[name].isReachable()) {
-        setstartWorldButtonValue(name, 'targeted', targeted);
-    }
-    updateCursor(event);
-}
-
-
-function setstartWorldButtonValue(name, key, value) {
-    world[name][key] = value;
-}
-
-
-function updateCursor(event) {
-    pointer = getPointer(event);
-    (pointer) ? setCursor('pointer') : setCursor('default');
-}
-
-
-function getPointer(event) {
-    return (isBottonTargeted(event)) ? true : false;
-}
-
-
-function isBottonTargeted(event) {
-    for (let i = 0; i < buttons.length; i++) {
-        let button = buttons[i] + 'Button';
-        if (world[button].isReachable() && isMouseEvent(event, world[button])) {
-            return true;
-        }
-    }
-}
-
-
-function setCursor(value) {
-    document.getElementById('canvas').style.cursor = value;
 }
 
 
 // Please sort the subsequent functions + rename!!!
 function processMouseDown(event) {
-    if (currentWorld == 'start') {
-        clickArrowButton(event, 'lowMusicButton');
-        clickArrowButton(event, 'highMusicButton');
-        clickArrowButton(event, 'lowSoundButton');
-        clickArrowButton(event, 'highSoundButton');
-        closeStoryBg(event);
-        clickExtraButton(event, 'cupButton');
-        clickExtraButton(event, 'settingsButton');
-        clickExtraButton(event, 'storyButton');
-        // newGameButton still missing ...
+    if (event && currentWorld == 'start') {
+        closeLeaderboard(event);
+        openLeaderboard(event, 'cupButton');
+        openLeaderboard(event, 'settingsButton');
     }
 }
 
 
-function closeStoryBg(event) {
-    if (isStoryBgToClose(event)) {
-        setstartWorldButtonValue('storyButton', 'locked', false);
-
-        world[mainButtons[mainButtonCounter]].selected = false;
-        mainButtonCounter = 1;
-        world[mainButtons[mainButtonCounter]].selected = true;
+function closeLeaderboard(event) {
+    if (isMouseEvent(event, world.xButton) && world.xButton.reachable) {
+        world.xButton.locked = true;
+        console.log('xButton');
     }
 }
 
 
-function clickExtraButton(event, name) {
-    if (isMouseEvent(event, world[name])) {
-        setstartWorldButtonValue(name, 'locked', true);
-        // setstartWorldButtonValue(name, 'selected', true);
-    } else if (isLeaderBoardToClose(event)) {
-        setstartWorldButtonValue(name, 'locked', false);
-        // setstartWorldButtonValue(name, 'selected', false);
-
-        // double code!!!
-        world[volumeButtons[volumeButtonsId]].selected = false;
-        volumeButtonsId = 0;
-        musicButtons = true;
+// jsdoc
+function openLeaderboard(event, key) {
+    if (isNotLeaderBoard(event, key)) {
+        world[key].locked = false;
+    } else if (isButtonLocked(event, key, true)) {
+        world[key].locked = false;
+    } else if (isButtonLocked(event, key, false)) {
+        world[key].locked = true;
     }
 }
 
 
-function isStoryBgToClose(event) {
-    return !isMouseEvent(event, world.storyBg) && world.storyButton.isLocked() || isMouseEvent(event, world.storyBg) && isMouseEvent(event, world.coinButton);
+// jsdoc
+function isNotLeaderBoard(event, key) {
+    return !isMouseEvent(event, world[key]) && !isMouseEvent(event, world.leaderboard);
 }
 
 
-// cupButton or settingsButton must be locked (condition)!!!
-function isLeaderBoardToClose(event) {
-    return !isMouseEvent(event, world.leaderboard) || isMouseEvent(event, world.leaderboard) && isMouseEvent(event, world.xButton);
-}
-
-
-function clickArrowButton(event, name) {
-    updateVolume(event, name);
-}
-
-
-function updateVolume(event, name) {
-    if (isMouseEvent(event, world[name]) && isMatch(name, 'lowMusicButton') && isGreater(0, music)) {
-        music--;
-    } else if (isMouseEvent(event, world[name]) && isMatch(name, 'highMusicButton') && isGreater(music, 9)) {
-        music++;
-    } else if (isMouseEvent(event, world[name]) && isMatch(name, 'lowSoundButton') && isGreater(0, sound)) {
-        sound--;
-    } else if (isMouseEvent(event, world[name]) && isMatch(name, 'highSoundButton') && isGreater(sound, 9)) {
-        sound++;
+// jsdoc
+function isButtonLocked(event, key, logical) {
+    if (logical) {
+        return isMouseEvent(event, world[key]) && world[key].isLocked();
+    } else {
+        return isMouseEvent(event, world[key]) && !world[key].isLocked();
     }
 }
 
 
 function processMouseUp() {
     if (currentWorld == 'start') {
-        mouseClick = null;
+
     }
 }
