@@ -1,7 +1,7 @@
 let canvas;
 let keyboard;
 let hovered = false;    // rename?
-let buttonSelected = false;
+let buttonSelected = false;    // move to StartWorld?!
 let mouseClick;    // to edit + to move
 
 let world;
@@ -97,6 +97,7 @@ let musicButtons = true;
 
 
 function processKeydown(event) {    // check doubleClick!!!
+    world.currentButton.selected = true;    // newGameButton selected?
 
     // console.log(event);
     let code = getCode(event.code);

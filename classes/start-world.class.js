@@ -99,14 +99,21 @@ class StartWorld extends World {
     }
 
 
+    // jsdoc
     selectNextButton(key, next) {
         if (isKey(key) && !isTrue(buttonSelected)) {
             let nextButton = world.currentButton[next];
-            world.currentButton.selected = false;
-            world.currentButton = world[nextButton];
-            world.currentButton.selected = true;
+            this.setNextButton(nextButton);
             buttonSelected = true;
         }
+    }
+
+
+    // jsdoc
+    setNextButton(nextButton) {
+        world.currentButton.selected = false;
+        world.currentButton = world[nextButton];
+        world.currentButton.selected = true;
     }
 
 

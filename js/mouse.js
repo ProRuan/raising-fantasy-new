@@ -31,6 +31,8 @@ function setCursor(value) {
 // Please sort the subsequent functions + rename!!!
 function processMouseDown(event) {
     if (event && currentWorld == 'start') {
+        world.currentButton.selected = false;
+
         closeLeaderboard(event);
         openLeaderboard(event, 'cupButton');
         openLeaderboard(event, 'settingsButton');
