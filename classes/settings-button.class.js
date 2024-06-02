@@ -1,4 +1,6 @@
 class SettingsButton extends Button {
+    previous = 'cupButton';
+    next = 'cupButton';
 
 
     constructor() {

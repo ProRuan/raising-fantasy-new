@@ -4,6 +4,7 @@ class StartWorld extends World {
     constructor(canvas, keyboard) {
         super(canvas, keyboard);
         this.setStartWorld();    // rename
+        this.setCurrentButton('cupButton');    // newGameButton!!!
         this.draw();
     }
 
@@ -39,8 +40,17 @@ class StartWorld extends World {
     }
 
 
+    // jsdoc
+    setCurrentButton(key) {
+        this.currentButton = this[key];
+        this.currentButton.selected = true;
+    }
+
+
     draw() {
         this.clearCanvas();
+
+        this.selectButton();
 
         this.drawObject(this.background);
         this.drawButtonWithShadow('cupButton', 'yellow', 16);
@@ -66,6 +76,26 @@ class StartWorld extends World {
             this.setShadow();
         } else {
             this.drawObject(this[key]);
+        }
+    }
+
+
+    // jsdoc
+    selectButton() {
+        this.selectNextButton('arrowLeft', 'previous');
+        this.selectNextButton('arrowUp', 'previous');
+        this.selectNextButton('arrowRight', 'next');
+        this.selectNextButton('arrowDown', 'next');
+    }
+
+
+    selectNextButton(key, next) {
+        if (isKey(key) && !isTrue(buttonSelected)) {
+            let nextButton = world.currentButton[next];
+            world.currentButton.selected = false;
+            world.currentButton = world[nextButton];
+            world.currentButton.selected = true;
+            buttonSelected = true;
         }
     }
 

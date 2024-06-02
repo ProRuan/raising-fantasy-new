@@ -17,7 +17,7 @@ class Button extends DrawableObject {
 
     // jsdoc
     isHighlighted() {
-        return this.isTargeted() || this.isLocked();
+        return this.isTargeted() || this.isLocked() || this.isSelected();
     }
 
 
@@ -30,6 +30,12 @@ class Button extends DrawableObject {
     // jsoc
     isLocked() {
         return this.locked == true;
+    }
+
+
+    // jsoc
+    isSelected() {
+        return this.selected == true;
     }
 
 

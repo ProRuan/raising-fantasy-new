@@ -1,5 +1,6 @@
 class CupButton extends Button {
-    nextButton = 'settingsButton';
+    previous = 'settingsButton';
+    next = 'settingsButton';
 
 
     constructor() {

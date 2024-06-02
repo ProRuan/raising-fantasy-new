@@ -1,6 +1,7 @@
 let canvas;
 let keyboard;
-let hovered = false;
+let hovered = false;    // rename?
+let buttonSelected = false;
 let mouseClick;    // to edit + to move
 
 let world;
@@ -107,6 +108,7 @@ function processKeydown(event) {    // check doubleClick!!!
 
 
 function processKeyup(event) {
+    buttonSelected = false;
     // console.log(event);    // to delete!!!
     let code = getCode(event.code);
     setKey(code, 'keydown', false);
