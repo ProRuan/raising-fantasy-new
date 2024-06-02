@@ -48,6 +48,27 @@ class Button extends DrawableObject {
 
 
     // jsdoc
+    setVolume(key, logical) {
+        if (this.isLocked()) {
+            this.locked = false;
+            this.setVolumeValue(key, logical);
+
+            console.log('volume', volume[key]);
+        }
+    }
+
+
+    // jsdoc
+    setVolumeValue(key, logical) {
+        if (isTrue(logical) && isGreater(volume[key], 10)) {
+            volume[key]++;
+        } else if (!isTrue(logical) && isGreater(0, volume[key])) {
+            volume[key]--;
+        }
+    }
+
+
+    // jsdoc
     openLeaderboard(buttonA, buttonB) {
         if (buttonA.isLocked()) {
             world.leaderboard.opened = true;
@@ -55,22 +76,4 @@ class Button extends DrawableObject {
             world.leaderboard.opened = false;
         }
     }
-
-
-    // updateCursor() {
-    //     setInterval(() => {
-    //         (this.isTargeted()) ? setCursor('pointer') : false;
-    //     }, 1000 / 60);
-    // }
-
-
-
-
-    // class Path
-    // sub classes AudioPath + ImagePath ...
-
-
-    // audioPath = new AudioPath();
-    // dino.sound = audioPath.dinoGrowl
-    // ...
 }

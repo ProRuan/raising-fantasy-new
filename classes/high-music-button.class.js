@@ -14,26 +14,10 @@ class HighMusicButton extends Button {
     close() {    //  to edit!!!
         setInterval(() => {
             this.setCursor();
-            this.setMusicVolume();
+            this.setVolume('music', true);
         }, 1000 / 60);
     }
 
-
-    setMusicVolume() {
-        if (this.isLocked() && this.isInRange()) {
-            this.locked = false;
-            music++;
-            console.log('high music volume', music);
-        }
-    }
-
-
-    isInRange() {
-        return isGreater(0, music, false) && isGreater(music, 10, false);
-    }
-
-
-    // work with reachable!!!
 
     // workd with next button!!!
 }

@@ -13,31 +13,11 @@ class HighSoundButton extends Button {
 
     close() {    //  to edit!!!
         setInterval(() => {
-            // this.setCursor();
-            // if (this.isLocked()) {
-            //     this.reachable = false;
-            //     this.locked = false;
-            //     world.cupButton.locked = false;
-            //     world.settingsButton.locked = false;
-
-            //     setCursor('initial');    // move?
-            // }
-
-            this.setSoundVolume();
+            this.setCursor();
+            this.setVolume('sound', true);
         }, 1000 / 60);
     }
 
-
-    setSoundVolume() {
-        if (this.isLocked()) {
-            this.locked = false;
-            // music--;
-            console.log('high sound volume', sound);
-        }
-    }
-
-
-    // work with reachable!!!
 
     // workd with next button!!!
 }

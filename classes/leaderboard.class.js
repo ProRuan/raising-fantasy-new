@@ -13,10 +13,12 @@ class Leaderboard extends DrawableObject {
         setInterval(() => {
             if (this.isOpened()) {
                 world.xButton.reachable = true;
-                world.lowMusicButton.reachable = true;
-                world.highMusicButton.reachable = true;
-                world.lowSoundButton.reachable = true;
-                world.highSoundButton.reachable = true;
+                if (world.settingsButton.isLocked()) {
+                    world.lowMusicButton.reachable = true;
+                    world.highMusicButton.reachable = true;
+                    world.lowSoundButton.reachable = true;
+                    world.highSoundButton.reachable = true;
+                }
             } else {
                 world.lowMusicButton.reachable = false;
                 world.highMusicButton.reachable = false;

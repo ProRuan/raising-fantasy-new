@@ -60,15 +60,10 @@ class StartWorld extends World {
         this.drawObject(this.background);
         this.drawButtonWithShadow('cupButton', 'yellow', 16);
         this.drawButtonWithShadow('settingsButton', 'yellow', 16);
-        if (this.leaderboard.isOpened()) {    // I. show high score or volume ...
+        if (this.leaderboard.isOpened()) {
             this.drawObject(this.leaderboard);
             this.drawButtonWithShadow('xButton', 'lightcyan', 16);
-
-            // II. set button classes!!!
-            this.drawButtonWithShadow('lowMusicButton', 'white', 16);
-            this.drawButtonWithShadow('highMusicButton', 'white', 16);
-            this.drawButtonWithShadow('lowSoundButton', 'white', 16);
-            this.drawButtonWithShadow('highSoundButton', 'white', 16);
+            this.drawVolumeButtons();
         }
 
 
@@ -76,18 +71,6 @@ class StartWorld extends World {
         this.drawButtonFrame(this.cupButton);
 
         this.redraw();
-    }
-
-
-    // jsdoc
-    drawButtonWithShadow(key, color, blur) {
-        if (this[key].isHighlighted()) {
-            this.setShadow(color, blur);
-            this.drawObject(this[key]);
-            this.setShadow();
-        } else {
-            this.drawObject(this[key]);
-        }
     }
 
 
@@ -102,9 +85,7 @@ class StartWorld extends World {
 
     // jsdoc
     selectButton() {
-        this.selectNextButton('arrowLeft', 'previous');
         this.selectNextButton('arrowUp', 'previous');
-        this.selectNextButton('arrowRight', 'next');
         this.selectNextButton('arrowDown', 'next');
     }
 
@@ -124,6 +105,29 @@ class StartWorld extends World {
         world.currentButton.selected = false;
         world.currentButton = world[nextButton];
         world.currentButton.selected = true;
+    }
+
+
+    // jsdoc
+    drawButtonWithShadow(key, color, blur) {
+        if (this[key].isHighlighted()) {
+            this.setShadow(color, blur);
+            this.drawObject(this[key]);
+            this.setShadow();
+        } else {
+            this.drawObject(this[key]);
+        }
+    }
+
+
+    // jsdoc
+    drawVolumeButtons() {
+        if (this.settingsButton.isLocked()) {
+            this.drawButtonWithShadow('lowMusicButton', 'white', 16);
+            this.drawButtonWithShadow('highMusicButton', 'white', 16);
+            this.drawButtonWithShadow('lowSoundButton', 'white', 16);
+            this.drawButtonWithShadow('highSoundButton', 'white', 16);
+        }
     }
 
 

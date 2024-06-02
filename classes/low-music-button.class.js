@@ -13,32 +13,11 @@ class LowMusicButton extends Button {
 
     close() {    //  to edit!!!
         setInterval(() => {
-            // this.setCursor();
-            // if (this.isLocked()) {
-            //     this.reachable = false;
-            //     this.locked = false;
-            //     world.cupButton.locked = false;
-            //     world.settingsButton.locked = false;
-
-            //     setCursor('initial');    // move?
-            // }
-
-
-            this.setMusicVolume();
+            this.setCursor();
+            this.setVolume('music', false);
         }, 1000 / 60);
     }
 
-
-    setMusicVolume() {
-        if (this.isLocked()) {
-            this.locked = false;
-            // music--;
-            console.log('low music volume', music);
-        }
-    }
-
-
-    // work with reachable!!!
 
     // workd with next button!!!
 }

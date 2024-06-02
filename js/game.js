@@ -22,7 +22,9 @@ let result = {
     }
 };
 
-let counter = 0;    // for start world
+let counter = 0;    // for start world (necessary?)
+
+let volume = { music: 3, sound: 7 };    // to set in level world!
 let music = 3;
 let sound = 7;
 
