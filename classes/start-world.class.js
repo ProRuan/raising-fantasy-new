@@ -43,11 +43,11 @@ class StartWorld extends World {
         this.clearCanvas();
 
         this.drawObject(this.background);
-        this.drawObject(this.cupButton);
-        this.drawObject(this.settingsButton);
+        this.drawButtonWithShadow('cupButton', 'yellow', 16);
+        this.drawButtonWithShadow('settingsButton', 'yellow', 16);
         if (this.leaderboard.isOpened()) {
             this.drawObject(this.leaderboard);
-            this.drawObject(this.xButton);
+            this.drawButtonWithShadow('xButton', 'lightcyan', 16);
         }
 
 
@@ -55,6 +55,18 @@ class StartWorld extends World {
 
 
         this.redraw();
+    }
+
+
+    // jsdoc
+    drawButtonWithShadow(key, color, blur) {
+        if (this[key].isHighlighted()) {
+            this.setShadow(color, blur);
+            this.drawObject(this[key]);
+            this.setShadow();
+        } else {
+            this.drawObject(this[key]);
+        }
     }
 
 

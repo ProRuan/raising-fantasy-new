@@ -1,5 +1,30 @@
 function processMouseMove(event) {
+    hovered = false;
+    if (event && currentWorld == 'start') {
+        hover(event, 'xButton');
+        hover(event, 'cupButton');
+        hover(event, 'settingsButton');
+    }
+    if (!isTrue(hovered)) {
+        setCursor('initial');
+    }
+}
 
+
+function hover(event, key) {
+    if (isMouseEvent(event, world[key])) {
+        world[key].targeted = true;
+        if (!isTrue(hovered)) {
+            hovered = true;
+        }
+    } else {
+        world[key].targeted = false;
+    }
+}
+
+
+function setCursor(value) {
+    document.getElementById('canvas').style.cursor = value;
 }
 
 
@@ -21,7 +46,6 @@ function closeLeaderboard(event) {
 }
 
 
-// jsdoc
 function openLeaderboard(event, key) {
     if (isNotLeaderBoard(event, key)) {
         world[key].locked = false;

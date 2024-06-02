@@ -15,9 +15,29 @@ class Button extends DrawableObject {
     }
 
 
+    // jsdoc
+    isHighlighted() {
+        return this.isTargeted() || this.isLocked();
+    }
+
+
+    // jsdoc
+    isTargeted() {
+        return this.reachable == true && this.targeted == true;
+    }
+
+
     // jsoc
     isLocked() {
         return this.locked == true;
+    }
+
+
+    // jsdoc
+    setCursor() {
+        if (this.isTargeted()) {
+            setCursor('pointer');
+        }
     }
 
 

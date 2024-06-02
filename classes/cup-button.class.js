@@ -10,6 +10,7 @@ class CupButton extends Button {
 
     open() {
         setInterval(() => {
+            this.setCursor();
             this.openLeaderboard(this, world.settingsButton);
         }, 1000 / 60);
     }

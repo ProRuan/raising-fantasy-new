@@ -1,5 +1,6 @@
 let canvas;
 let keyboard;
+let hovered = false;
 let mouseClick;    // to edit + to move
 
 let world;

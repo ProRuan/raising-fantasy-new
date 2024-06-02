@@ -10,11 +10,14 @@ class XButton extends Button {
 
     close() {
         setInterval(() => {
+            this.setCursor();
             if (this.isLocked()) {
                 this.reachable = false;
                 this.locked = false;
                 world.cupButton.locked = false;
                 world.settingsButton.locked = false;
+
+                setCursor('initial');    // move?
             }
         }, 1000 / 60);
     }
