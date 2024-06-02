@@ -50,6 +50,7 @@ class StartWorld extends World {
     draw() {
         this.clearCanvas();
 
+        this.lockButton();
         this.selectButton();
 
         this.drawObject(this.background);
@@ -76,6 +77,15 @@ class StartWorld extends World {
             this.setShadow();
         } else {
             this.drawObject(this[key]);
+        }
+    }
+
+
+    lockButton() {
+        if (isKey('enter') && keyboard.enter.locked != true && this.currentButton.selected) {
+            let locked = this.currentButton.locked;
+            this.currentButton.locked = (!locked) ? true : false;     // two different leaderboards / leaderboard.isOpened() !?!
+            keyboard.enter.locked = true;
         }
     }
 

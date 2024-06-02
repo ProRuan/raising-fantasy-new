@@ -1,11 +1,15 @@
 class SettingsButton extends Button {
     previous = 'cupButton';
-    next = 'cupButton';
-
 
     constructor() {
         super(source.settingsButton, canvas.width - 98, 32);
         this.open();
+    }
+
+
+    get next() {    // make a common method
+        let opened = world.leaderboard.isOpened();
+        return (opened) ? 'xButton' : 'cupButton';
     }
 
 

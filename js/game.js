@@ -109,6 +109,8 @@ function processKeydown(event) {    // check doubleClick!!!
 
 function processKeyup(event) {
     buttonSelected = false;
+    keyboard.enter.locked = false;
+
     // console.log(event);    // to delete!!!
     let code = getCode(event.code);
     setKey(code, 'keydown', false);

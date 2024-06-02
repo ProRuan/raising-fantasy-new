@@ -1,5 +1,7 @@
 class XButton extends Button {
     reachable = false;
+    previous = 'settingsButton';
+    next = 'cupButton';
 
 
     constructor(leaderboard) {

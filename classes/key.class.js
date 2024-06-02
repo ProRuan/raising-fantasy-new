@@ -5,6 +5,7 @@ class Key {
     timeStamp = new Date().getTime();
     lastKeyUp = 0;    // in use?
     doubleClick = false;    // in use?
+    locked = false;
 
 
     constructor(name, code) {
