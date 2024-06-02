@@ -5,16 +5,14 @@ class HighMusicButton extends Button {
     next = 'lowSoundButton';
 
 
-    constructor(leaderboard) {
-        super(source.arrowRight, leaderboard.xLeft + (leaderboard.xRight - leaderboard.xLeft) / 2 + 125, 540 - leaderboard.yTop - 145.5);
-        this.close();
+    // jsdoc
+    constructor(x, y) {
+        super(source.arrowRight, x + 125, y - 145.5);
     }
 
 
-    close() {
-        setInterval(() => {
-            this.setCursor();
-            this.setVolume('music', true);
-        }, 1000 / 60);
+    // jsdoc
+    execute() {
+        this.setVolume('music', true);
     }
 }

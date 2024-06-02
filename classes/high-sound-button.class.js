@@ -5,16 +5,14 @@ class HighSoundButton extends Button {
     next = 'cupButton';
 
 
-    constructor(leaderboard) {
-        super(source.arrowRight, leaderboard.xLeft + (leaderboard.xRight - leaderboard.xLeft) / 2 + 125, 540 - leaderboard.yTop - 193.5);
-        this.close();
+    // jsdoc
+    constructor(x, y) {
+        super(source.arrowRight, x + 125, y - 193.5);
     }
 
 
-    close() {
-        setInterval(() => {
-            this.setCursor();
-            this.setVolume('sound', true);
-        }, 1000 / 60);
+    // jsdoc
+    execute() {
+        this.setVolume('sound', true);
     }
 }

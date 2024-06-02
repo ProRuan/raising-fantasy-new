@@ -1,14 +1,35 @@
 class Button extends DrawableObject {
-    indent = 4;    // necessary???
-
     reachable = true;
     targeted = false;
     selected = false;
     locked = false;
 
 
+    // jsdoc
     constructor(source, x, y) {
         super(source, x, y);
+        this.init();
+    }
+
+
+    // jsdoc
+    init() {
+        setInterval(() => this.trigger(), 1000 / 60);
+    }
+
+
+    // jsdoc
+    trigger() {
+        this.setCursor();
+        this.execute();
+    }
+
+
+    // jsdoc
+    setCursor() {
+        if (this.isTargeted()) {
+            setCursor('pointer');
+        }
     }
 
 
@@ -37,9 +58,11 @@ class Button extends DrawableObject {
 
 
     // jsdoc
-    setCursor() {
-        if (this.isTargeted()) {
-            setCursor('pointer');
+    openLeaderboard(buttonA, buttonB) {
+        if (buttonA.isLocked()) {
+            world.leaderboard.opened = true;
+        } else if (!buttonB.isLocked()) {
+            world.leaderboard.opened = false;
         }
     }
 
@@ -49,8 +72,6 @@ class Button extends DrawableObject {
         if (this.isLocked()) {
             this.locked = false;
             this.setVolumeValue(key, logical);
-
-            console.log('volume', volume[key]);
         }
     }
 
@@ -63,20 +84,4 @@ class Button extends DrawableObject {
             volume[key]--;
         }
     }
-
-
-    // jsdoc
-    openLeaderboard(buttonA, buttonB) {
-        if (buttonA.isLocked()) {
-            world.leaderboard.opened = true;
-        } else if (!buttonB.isLocked()) {
-            world.leaderboard.opened = false;
-        }
-    }
-
-
-    // // jsdoc
-    // open() {
-    //     setStoppableInterval(() => this.execute(), 1000 / 60);
-    // }
 }

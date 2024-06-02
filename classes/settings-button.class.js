@@ -3,9 +3,9 @@ class SettingsButton extends Button {
     previous = 'cupButton';
 
 
+    // jsdoc
     constructor() {
         super(source.settingsButton, canvas.width - 98, 32);
-        this.open();
     }
 
 
@@ -21,10 +21,8 @@ class SettingsButton extends Button {
     }
 
 
-    open() {    // rename + stoppable interval!!!
-        setInterval(() => {
-            this.setCursor();
-            this.openLeaderboard(this, world.cupButton);
-        }, 1000 / 60);
+    // jsdoc
+    execute() {
+        this.openLeaderboard(this, world.cupButton);
     }
 }

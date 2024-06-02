@@ -4,9 +4,9 @@ class XButton extends Button {
     previous = 'settingsButton';
 
 
-    constructor(leaderboard) {
-        super(source.xButton, leaderboard.xRight - 35, 540 - leaderboard.yTop - 64);
-        this.close();
+    // jsdoc
+    constructor(x, y) {
+        super(source.xButton, x - 35, canvas.height - y - 64);
     }
 
 
@@ -26,22 +26,34 @@ class XButton extends Button {
     }
 
 
-    close() {
-        setInterval(() => {
-            this.setCursor();
-            if (this.isLocked()) {
-                this.reachable = false;
-                this.locked = false;
-                world.cupButton.locked = false;
-                world.settingsButton.locked = false;
-
-                setCursor('initial');    // move?
-            }
-        }, 1000 / 60);
+    // jsdoc
+    execute() {
+        this.closeLeaderboard();
     }
 
 
-    // work with reachable!!!
+    // jsdoc
+    closeLeaderboard() {
+        if (this.isLocked()) {
+            this.reset();
+            this.unlock('cupButton');
+            this.unlock('settingsButton');
+            setCursor('initial');
+        }
+    }
 
-    // workd with next button!!!
+
+    // jsdoc
+    reset() {
+        this.reachable = false;
+        this.locked = false;
+    }
+
+
+    // jsdoc
+    unlock(key) {
+        if (world[key].isLocked()) {
+            world[key].locked = false;
+        }
+    }
 }

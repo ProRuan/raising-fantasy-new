@@ -6,7 +6,6 @@ class CupButton extends Button {
     // jsdoc
     constructor() {
         super(source.cupButton, 32, 32);
-        this.open();
     }
 
 
@@ -28,10 +27,8 @@ class CupButton extends Button {
     }
 
 
-    open() {    // rename + stoppable interval!!!
-        setInterval(() => {
-            this.setCursor();
-            this.openLeaderboard(this, world.settingsButton);
-        }, 1000 / 60);
+    // jsdoc
+    execute() {
+        this.openLeaderboard(this, world.settingsButton);
     }
 }

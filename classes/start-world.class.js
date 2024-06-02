@@ -3,10 +3,16 @@ class StartWorld extends World {
 
     constructor(canvas, keyboard) {
         super(canvas, keyboard);
+        // this.setButtonCoordinates();
         this.setStartWorld();    // rename
         this.setCurrentButton('cupButton');    // newGameButton!!!
         this.draw();
     }
+
+
+    // setButtonCoordinates() {
+
+    // }
 
 
     setStartWorld() {
@@ -15,20 +21,12 @@ class StartWorld extends World {
         // this.setMainButton('newGameButton', 68, 340);    // to add!!!
         // this.setMainButton('storyButton', 40, 412);    // to add!!!
 
-        this.cupButton = new CupButton();
-        this.settingsButton = new SettingsButton();
+        this.setExtraButtons();
         // this.storyBg = this.getDrawableObject(source.storyBg, canvas.width / 2 - 138, 540 - canvas.height / 2 - 166.5);
         // this.coinButton = this.getButton(source.coinButton, this.storyBg.xRight - 48, 540 - this.storyBg.yTop - 48);
-        this.leaderboard = new Leaderboard(this.ctx);
-        this.xButton = new XButton(this.leaderboard);
-        this.lowMusicButton = new LowMusicButton(this.leaderboard);
-        this.highMusicButton = new HighMusicButton(this.leaderboard);
-        this.lowSoundButton = new LowSoundButton(this.leaderboard);
-        this.highSoundButton = new HighSoundButton(this.leaderboard);
-        // this.lowMusicButton = this.getButton(source.arrowLeft, this.leaderboard.xLeft + (this.leaderboard.xRight - this.leaderboard.xLeft) / 2 + 25, 540 - this.leaderboard.yTop - 145.5);
-        // this.highMusicButton = this.getButton(source.arrowRight, this.leaderboard.xLeft + (this.leaderboard.xRight - this.leaderboard.xLeft) / 2 + 125, 540 - this.leaderboard.yTop - 145.5);
-        // this.lowSoundButton = this.getButton(source.arrowLeft, this.leaderboard.xLeft + (this.leaderboard.xRight - this.leaderboard.xLeft) / 2 + 25, 540 - this.leaderboard.yTop - 193.5);
-        // this.highSoundButton = this.getButton(source.arrowRight, this.leaderboard.xLeft + (this.leaderboard.xRight - this.leaderboard.xLeft) / 2 + 125, 540 - this.leaderboard.yTop - 193.5);
+
+        this.setLeaderboard();
+        this.setVolumeButtons();
     }
 
 
@@ -39,8 +37,33 @@ class StartWorld extends World {
 
 
     // jsdoc
-    getButton(source, x, y) {
-        return new Button(source, x, y);
+    setExtraButtons() {
+        this.cupButton = new CupButton();
+        this.settingsButton = new SettingsButton();
+    }
+
+
+    // jsdoc
+    setLeaderboard() {
+        this.leaderboard = new Leaderboard(this.ctx);
+        this.xButton = new XButton(this.leaderboard.xRight, this.leaderboard.yTop);
+    }
+
+
+    // jsdoc
+    setVolumeButtons() {
+        this.setVolBtnCoord();
+        this.lowMusicButton = new LowMusicButton(this.volBtnX, this.volBtnY);
+        this.highMusicButton = new HighMusicButton(this.volBtnX, this.volBtnY);
+        this.lowSoundButton = new LowSoundButton(this.volBtnX, this.volBtnY);
+        this.highSoundButton = new HighSoundButton(this.volBtnX, this.volBtnY);
+    }
+
+
+    // jsdoc
+    setVolBtnCoord() {
+        this.volBtnX = this.leaderboard.xLeft + (this.leaderboard.xRight - this.leaderboard.xLeft) / 2;
+        this.volBtnY = canvas.height - this.leaderboard.yTop;
     }
 
 
