@@ -1,5 +1,5 @@
 class Button extends DrawableObject {
-    indent = 4;
+    indent = 4;    // necessary???
 
     reachable = true;
     targeted = false;

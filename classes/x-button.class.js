@@ -1,4 +1,5 @@
 class XButton extends Button {
+    indent = 2;
     reachable = false;
     previous = 'settingsButton';
     next = 'cupButton';

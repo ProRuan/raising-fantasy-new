@@ -2,6 +2,10 @@ function processMouseMove(event) {
     hovered = false;
     if (event && currentWorld == 'start') {
         hover(event, 'xButton');
+        hover(event, 'lowMusicButton');
+        hover(event, 'highMusicButton');
+        hover(event, 'lowSoundButton');
+        hover(event, 'highSoundButton');
         hover(event, 'cupButton');
         hover(event, 'settingsButton');
     }
@@ -34,6 +38,10 @@ function processMouseDown(event) {
         world.currentButton.selected = false;
 
         closeLeaderboard(event);
+        setVolume(event, 'lowMusicButton');
+        setVolume(event, 'highMusicButton');
+        setVolume(event, 'lowSoundButton');
+        setVolume(event, 'highSoundButton');
         openLeaderboard(event, 'cupButton');
         openLeaderboard(event, 'settingsButton');
     }
@@ -44,6 +52,14 @@ function closeLeaderboard(event) {
     if (isMouseEvent(event, world.xButton) && world.xButton.reachable) {
         world.xButton.locked = true;
         console.log('xButton');
+    }
+}
+
+
+function setVolume(event, key) {
+    if (isMouseEvent(event, world[key]) && world[key].reachable) {
+        world[key].locked = true;
+        console.log(world[key]);
     }
 }
 

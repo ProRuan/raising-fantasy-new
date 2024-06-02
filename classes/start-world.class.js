@@ -21,6 +21,10 @@ class StartWorld extends World {
         // this.coinButton = this.getButton(source.coinButton, this.storyBg.xRight - 48, 540 - this.storyBg.yTop - 48);
         this.leaderboard = new Leaderboard(this.ctx);
         this.xButton = new XButton(this.leaderboard);
+        this.lowMusicButton = new LowMusicButton(this.leaderboard);
+        this.highMusicButton = new HighMusicButton(this.leaderboard);
+        this.lowSoundButton = new LowSoundButton(this.leaderboard);
+        this.highSoundButton = new HighSoundButton(this.leaderboard);
         // this.lowMusicButton = this.getButton(source.arrowLeft, this.leaderboard.xLeft + (this.leaderboard.xRight - this.leaderboard.xLeft) / 2 + 25, 540 - this.leaderboard.yTop - 145.5);
         // this.highMusicButton = this.getButton(source.arrowRight, this.leaderboard.xLeft + (this.leaderboard.xRight - this.leaderboard.xLeft) / 2 + 125, 540 - this.leaderboard.yTop - 145.5);
         // this.lowSoundButton = this.getButton(source.arrowLeft, this.leaderboard.xLeft + (this.leaderboard.xRight - this.leaderboard.xLeft) / 2 + 25, 540 - this.leaderboard.yTop - 193.5);
@@ -56,14 +60,20 @@ class StartWorld extends World {
         this.drawObject(this.background);
         this.drawButtonWithShadow('cupButton', 'yellow', 16);
         this.drawButtonWithShadow('settingsButton', 'yellow', 16);
-        if (this.leaderboard.isOpened()) {
+        if (this.leaderboard.isOpened()) {    // I. show high score or volume ...
             this.drawObject(this.leaderboard);
             this.drawButtonWithShadow('xButton', 'lightcyan', 16);
+
+            // II. set button classes!!!
+            this.drawButtonWithShadow('lowMusicButton', 'white', 16);
+            this.drawButtonWithShadow('highMusicButton', 'white', 16);
+            this.drawButtonWithShadow('lowSoundButton', 'white', 16);
+            this.drawButtonWithShadow('highSoundButton', 'white', 16);
         }
 
 
+        // only for testing!!!
         this.drawButtonFrame(this.cupButton);
-
 
         this.redraw();
     }

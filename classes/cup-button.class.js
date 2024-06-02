@@ -1,4 +1,5 @@
 class CupButton extends Button {
+    indent = 6;
     next = 'settingsButton';
 
 

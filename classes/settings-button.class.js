@@ -1,4 +1,5 @@
 class SettingsButton extends Button {
+    indent = 6;
     previous = 'cupButton';
 
     constructor() {
