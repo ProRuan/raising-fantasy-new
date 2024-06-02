@@ -3,19 +3,32 @@ class CupButton extends Button {
     next = 'settingsButton';
 
 
+    // jsdoc
     constructor() {
         super(source.cupButton, 32, 32);
         this.open();
     }
 
 
-    get previous() {    // make a common method
-        let opened = world.leaderboard.isOpened();
-        return (opened) ? 'xButton' : 'settingsButton';
+    // jsdoc
+    get previous() {
+        return this.getPrevious();
     }
 
 
-    open() {
+    // jsdoc
+    getPrevious() {
+        if (world.settingsButton.isLocked()) {
+            return 'highSoundButton';
+        } else if (world.cupButton.isLocked()) {
+            return 'xButton';
+        } else {
+            return 'settingsButton';
+        }
+    }
+
+
+    open() {    // rename + stoppable interval!!!
         setInterval(() => {
             this.setCursor();
             this.openLeaderboard(this, world.settingsButton);

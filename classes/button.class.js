@@ -6,9 +6,6 @@ class Button extends DrawableObject {
     selected = false;
     locked = false;
 
-    // previous (button)
-    // next (button)
-
 
     constructor(source, x, y) {
         super(source, x, y);
@@ -76,4 +73,10 @@ class Button extends DrawableObject {
             world.leaderboard.opened = false;
         }
     }
+
+
+    // // jsdoc
+    // open() {
+    //     setStoppableInterval(() => this.execute(), 1000 / 60);
+    // }
 }

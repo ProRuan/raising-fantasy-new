@@ -1,8 +1,8 @@
 class LowSoundButton extends Button {
     indent = -6;
     reachable = false;
-    previous = 'xButton';
-    next = 'highMusicButton';    // set right / down!!!
+    previous = 'highMusicButton';
+    next = 'highSoundButton';
 
 
     constructor(leaderboard) {
@@ -11,13 +11,10 @@ class LowSoundButton extends Button {
     }
 
 
-    close() {    //  to edit!!!
+    close() {
         setInterval(() => {
             this.setCursor();
             this.setVolume('sound', false);
         }, 1000 / 60);
     }
-
-
-    // workd with next button!!!
 }
