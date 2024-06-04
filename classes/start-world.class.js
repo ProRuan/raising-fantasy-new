@@ -45,7 +45,7 @@ class StartWorld extends World {
 
     // jsdoc
     setLeaderboard() {
-        this.leaderboard = new Leaderboard(this.ctx);
+        this.leaderboard = new Leaderboard();
         this.xButton = new XButton(this.leaderboard.xRight, this.leaderboard.yTop);
     }
 
@@ -83,9 +83,17 @@ class StartWorld extends World {
         this.drawObject(this.background);
         this.drawButtonWithShadow('cupButton', 'yellow', 16);
         this.drawButtonWithShadow('settingsButton', 'yellow', 16);
+
+        // this.settingsButton.locked = true;    // to delete!
+
         if (this.leaderboard.isOpened()) {
             this.drawObject(this.leaderboard);
             this.drawButtonWithShadow('xButton', 'lightcyan', 16);
+
+
+            this.leaderboard.drawScore();
+            this.leaderboard.drawVolume();
+
             this.drawVolumeButtons();
         }
 

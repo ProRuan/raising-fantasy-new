@@ -70,6 +70,14 @@ class World {
     }
 
 
+    // jsdoc
+    setText(font, textAlign, color) {
+        this.ctx.font = font;
+        this.ctx.textAlign = textAlign;
+        this.ctx.fillStyle = color;
+    }
+
+
     setFontTextAlign(font, value) {
         this.setFont(font);
         this.setTextAlign(value);
