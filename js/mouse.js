@@ -8,6 +8,8 @@ function processMouseMove(event) {
         hover(event, 'highSoundButton');
         hover(event, 'cupButton');
         hover(event, 'settingsButton');
+        hover(event, 'storyButton');
+        hover(event, 'newGameButton');
     }
     if (!isTrue(hovered)) {
         setCursor('initial');

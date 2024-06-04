@@ -5,7 +5,7 @@ class StartWorld extends World {
         super(canvas, keyboard);
         // this.setButtonCoordinates();
         this.setStartWorld();    // rename
-        this.setCurrentButton('cupButton');    // newGameButton!!!
+        this.setCurrentButton('newGameButton');    // newGameButton!!!
         this.draw();
     }
 
@@ -18,10 +18,11 @@ class StartWorld extends World {
     setStartWorld() {
         this.background = this.getDrawableObject(source.mainBg, 0, 0);
 
-        // this.setMainButton('newGameButton', 68, 340);    // to add!!!
-        // this.setMainButton('storyButton', 40, 412);    // to add!!!
+        this.newGameButton = this.getTextButton('New Game', 340);
+        this.storyButton = this.getTextButton('Story', 412);
 
         this.setExtraButtons();
+
         // this.storyBg = this.getDrawableObject(source.storyBg, canvas.width / 2 - 138, 540 - canvas.height / 2 - 166.5);
         // this.coinButton = this.getButton(source.coinButton, this.storyBg.xRight - 48, 540 - this.storyBg.yTop - 48);
 
@@ -33,6 +34,52 @@ class StartWorld extends World {
     // jsdoc
     getDrawableObject(source, x, y) {
         return new DrawableObject(source, x, y);
+    }
+
+
+    getTextButton(text, b) {
+        let width = this.getTextWidth(text);
+        let [x, y] = this.getTextXY(width, 24, b);
+        let textSource = this.getTextSource(text, width, 24);
+        return new TextButton(textSource, x, y);
+        // if (key == 'newGameButton') {
+        //     this[key].selected = true;
+        // }
+    }
+
+
+    setTextButton(text) {
+        let width = this.getTextWidth(text);
+        let [x, y] = this.getTextXY(width, 24, 340);
+        this.newGameButton = new TextButton(text, x, y);
+        // if (key == 'newGameButton') {
+        //     this[key].selected = true;
+        // }
+    }
+
+
+    // jsdoc
+    getTextWidth(text) {
+        this.setText('24px Arial', 'left', 'black');
+        let width = this.ctx.measureText(text).width;
+
+        console.log(Math.round(width));
+
+        return Math.round(width);
+    }
+
+
+    // jsdoc
+    getTextXY(width, height, b) {
+        let x = canvas.width / 2 - width / 2;
+        let y = canvas.height - b - height;
+        return [x, y];
+    }
+
+
+    // jsdoc
+    getTextSource(text, width, height) {
+        return { text: text, width: width, height: height };
     }
 
 
@@ -83,6 +130,14 @@ class StartWorld extends World {
         this.selectButton();
 
         this.drawObject(this.background);
+
+        this.drawGameTitle('80px Arial', 'Raising Fantasy');
+
+        this.drawTextButtonWidthShadow(this.newGameButton);
+        this.drawTextButtonWidthShadow(this.storyButton);
+        // this.setText(this.newGameButton.font, this.newGameButton.textAlign, this.newGameButton.color);
+        // this.drawText(this.newGameButton.text, this.newGameButton.xCenter, this.newGameButton.yCenter + 10);
+
         this.drawButtonWithShadow('cupButton', 'yellow', 16);
         this.drawButtonWithShadow('settingsButton', 'yellow', 16);
 
@@ -138,6 +193,38 @@ class StartWorld extends World {
         world.currentButton.selected = false;
         world.currentButton = world[nextButton];
         world.currentButton.selected = true;
+    }
+
+
+    drawGameTitle(font, text) {
+        this.setText(font, 'center', 'black');
+        super.drawText(text, canvas.width / 2, canvas.height / 2 + 8);
+    }
+
+
+    drawTextButtonWidthShadow(button) {    // double code!?!
+        if (button.isHighlighted()) {
+            this.setShadow(button.shadowColor, button.shadowBlur);
+            this.drawTextButton(button);
+            this.setShadow();
+        } else {
+            this.drawTextButton(button);
+        }
+    }
+
+
+    drawTextButton(button) {
+        this.setText(button.font, button.textAlign, button.color);
+        this.drawText(button.text, button.x, button.y + 20);
+
+        this.ctx.beginPath();
+        this.ctx.lineWidth = '1';
+        this.ctx.strokeStyle = 'red';
+        this.ctx.rect(button.xLeft, button.yTop, button.xRight - button.xLeft, button.yBottom - button.yTop);
+        this.ctx.stroke();
+
+
+        // this.drawText('new game button', this.newGameButton.x, this.newGameButton.y);
     }
 
 

@@ -53,8 +53,10 @@ class DrawableObject {
 
 
     setPath(source) {
-        this.img = new Image();
-        this.img.src = source.path;
+        if (source.path) {
+            this.img = new Image();
+            this.img.src = source.path;
+        }
     }
 
 
