@@ -45,7 +45,9 @@ class StartWorld extends World {
 
     // jsdoc
     setLeaderboard() {
-        this.leaderboard = new Leaderboard();
+        let x = canvas.width / 2 - source.leaderboard.width / 2;
+        let y = canvas.height / 2 - source.leaderboard.height / 2;
+        this.leaderboard = new Leaderboard(x, y);
         this.xButton = new XButton(this.leaderboard.xRight, this.leaderboard.yTop);
     }
 
