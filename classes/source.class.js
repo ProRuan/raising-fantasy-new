@@ -1,6 +1,6 @@
 class Source {
     mainBg = { path: './img/start_screen/background.png', width: 960, height: 540 };
-    storyBg = { path: './img/start_screen/story_bg.png', width: 276, height: 333 };    // rename to storyboard!
+    questRoll = { path: './img/start_screen/quest_roll.png', width: 276, height: 333 };    // rename to storyboard!
     coinButton = { path: './img/start_screen/coin_button.png', width: 27, height: 27 };
     cupButton = { path: './img/start_screen/cup_button.png', width: 66, height: 66 };
     leaderboard = { path: './img/start_screen/leaderboard.png', width: 382, height: 441 };

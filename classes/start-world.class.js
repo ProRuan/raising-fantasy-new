@@ -1,11 +1,20 @@
 class StartWorld extends World {
 
 
+    // set coin button ...
+    // set quest text ...
+    // set button triggers ...
+    // set button mouse events ...
+    // set button key events and key sequences ...
+    // set sound ...
+
+
     constructor(canvas, keyboard) {
         super(canvas, keyboard);
         // this.setButtonCoordinates();
         this.setStartWorld();    // rename
         this.setCurrentButton('newGameButton');    // newGameButton!!!
+        // { currentButton: cb, keySelection: logical }
         this.draw();
     }
 
@@ -19,9 +28,11 @@ class StartWorld extends World {
         this.background = this.getDrawableObject(source.mainBg, 0, 0);
 
         this.newGameButton = this.getTextButton('New Game', 340);
-        this.storyButton = this.getTextButton('Story', 412);
+        this.questButton = this.getTextButton('Quest', 412);
 
         this.setExtraButtons();
+
+        this.sestQuestRoll();
 
         // this.storyBg = this.getDrawableObject(source.storyBg, canvas.width / 2 - 138, 540 - canvas.height / 2 - 166.5);
         // this.coinButton = this.getButton(source.coinButton, this.storyBg.xRight - 48, 540 - this.storyBg.yTop - 48);
@@ -42,16 +53,6 @@ class StartWorld extends World {
         let [x, y] = this.getTextXY(width, 24, b);
         let textSource = this.getTextSource(text, width, 24);
         return new TextButton(textSource, x, y);
-        // if (key == 'newGameButton') {
-        //     this[key].selected = true;
-        // }
-    }
-
-
-    setTextButton(text) {
-        let width = this.getTextWidth(text);
-        let [x, y] = this.getTextXY(width, 24, 340);
-        this.newGameButton = new TextButton(text, x, y);
         // if (key == 'newGameButton') {
         //     this[key].selected = true;
         // }
@@ -84,6 +85,21 @@ class StartWorld extends World {
 
 
     // jsdoc
+    sestQuestRoll() {
+        let [x, y] = this.getBgCoord('questRoll');
+        this.questRoll = new QuestRoll(x, y);
+    }
+
+
+    // jsdoc
+    getBgCoord(key) {
+        let x = canvas.width / 2 - source[key].width / 2;
+        let y = canvas.height / 2 - source[key].height / 2;
+        return [x, y];
+    }
+
+
+    // jsdoc
     setExtraButtons() {
         this.cupButton = new CupButton();
         this.settingsButton = new SettingsButton();
@@ -92,8 +108,7 @@ class StartWorld extends World {
 
     // jsdoc
     setLeaderboard() {
-        let x = canvas.width / 2 - source.leaderboard.width / 2;
-        let y = canvas.height / 2 - source.leaderboard.height / 2;
+        let [x, y] = this.getBgCoord('leaderboard');
         this.leaderboard = new Leaderboard(x, y);
         this.xButton = new XButton(this.leaderboard.xRight, this.leaderboard.yTop);
     }
@@ -134,14 +149,14 @@ class StartWorld extends World {
         this.drawGameTitle('80px Arial', 'Raising Fantasy');
 
         this.drawTextButtonWidthShadow(this.newGameButton);
-        this.drawTextButtonWidthShadow(this.storyButton);
+        this.drawTextButtonWidthShadow(this.questButton);
         // this.setText(this.newGameButton.font, this.newGameButton.textAlign, this.newGameButton.color);
         // this.drawText(this.newGameButton.text, this.newGameButton.xCenter, this.newGameButton.yCenter + 10);
 
         this.drawButtonWithShadow('cupButton', 'yellow', 16);
         this.drawButtonWithShadow('settingsButton', 'yellow', 16);
 
-        // this.settingsButton.locked = true;    // to delete!
+        // this.questButton.locked = true;    // to delete!
 
         if (this.leaderboard.isOpened()) {
             this.drawObject(this.leaderboard);
@@ -152,11 +167,16 @@ class StartWorld extends World {
             this.leaderboard.drawVolume();
 
             this.drawVolumeButtons();
+        } else if (this.questButton.locked) {    // set if rang and values!!!
+            this.drawObject(this.questRoll);
+            // coinButton ...
+
+            this.questRoll.drawQuest();
         }
 
 
         // only for testing!!!
-        this.drawButtonFrame(this.cupButton);
+        // this.drawButtonFrame(this.questRoll);
 
         this.redraw();
     }

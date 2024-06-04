@@ -8,7 +8,7 @@ function processMouseMove(event) {
         hover(event, 'highSoundButton');
         hover(event, 'cupButton');
         hover(event, 'settingsButton');
-        hover(event, 'storyButton');
+        hover(event, 'questButton');
         hover(event, 'newGameButton');
     }
     if (!isTrue(hovered)) {
@@ -46,6 +46,8 @@ function processMouseDown(event) {
         setVolume(event, 'highSoundButton');
         openLeaderboard(event, 'cupButton');
         openLeaderboard(event, 'settingsButton');
+
+        openQuestRoll(event, 'questButton');
     }
 }
 
@@ -90,6 +92,20 @@ function isButtonLocked(event, key, logical) {
     } else {
         return isMouseEvent(event, world[key]) && !world[key].isLocked();
     }
+}
+
+
+function openQuestRoll(event, key) {    // double code?
+    if (isNotQuestRoll(event, key)) {
+        world[key].locked = false;
+    } else if (isButtonLocked(event, key, false)) {
+        world[key].locked = true;
+    }
+}
+
+
+function isNotQuestRoll(event, key) {    // double code?
+    return !isMouseEvent(event, world[key]) && !isMouseEvent(event, world.questRoll);
 }
 
 
