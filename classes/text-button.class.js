@@ -14,6 +14,15 @@ class TextButton extends Button {
 
 
     execute() {
-        return false;
+        return this.openQuestRoll(world.questButton);
+    }
+
+
+    openQuestRoll(button) {    // double code
+        if (button.isLocked()) {
+            world.questRoll.opened = true;
+        } else {
+            world.questRoll.opened = false;
+        }
     }
 }

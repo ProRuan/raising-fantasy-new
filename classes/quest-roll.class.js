@@ -1,5 +1,5 @@
 class QuestRoll extends DrawableObject {
-    opened = false;    // necessary???
+    opened = false;
 
 
     xText = { left: 64, right: 80 };
@@ -32,14 +32,14 @@ class QuestRoll extends DrawableObject {
 
 
     isOpened() {    // double code?
-        return world.questButton.isLocked();
+        return this.opened == true;
     }
 
 
     setButtons(logical) {
         this.setReachable('newGameButton', logical);
         this.setReachable('questButton', logical);
-        // this.setReachable('xButton', true);    // coin button!
+        (!logical) ? this.setReachable('coinButton', true) : this.setReachable('coinButton', false);
     }
 
 

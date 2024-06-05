@@ -84,10 +84,11 @@ class StartWorld extends World {
     }
 
 
-    // jsdoc
     sestQuestRoll() {
         let [x, y] = this.getBgCoord('questRoll');
         this.questRoll = new QuestRoll(x, y);
+
+        this.coinButton = new CoinButton(this.questRoll.xRight, this.questRoll.yTop);
     }
 
 
@@ -106,10 +107,10 @@ class StartWorld extends World {
     }
 
 
-    // jsdoc
     setLeaderboard() {
         let [x, y] = this.getBgCoord('leaderboard');
         this.leaderboard = new Leaderboard(x, y);
+
         this.xButton = new XButton(this.leaderboard.xRight, this.leaderboard.yTop);
     }
 
@@ -162,14 +163,13 @@ class StartWorld extends World {
             this.drawObject(this.leaderboard);
             this.drawButtonWithShadow('xButton', 'lightcyan', 16);
 
-
             this.leaderboard.drawScore();
             this.leaderboard.drawVolume();
 
             this.drawVolumeButtons();
-        } else if (this.questButton.locked) {    // set if rang and values!!!
+        } else if (this.questRoll.isOpened()) {    // set if rang and values!!!
             this.drawObject(this.questRoll);
-            // coinButton ...
+            this.drawButtonWithShadow('coinButton', 'olive', 16);    // set values!
 
             this.questRoll.drawQuest();
         }

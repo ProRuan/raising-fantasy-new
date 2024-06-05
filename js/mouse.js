@@ -6,6 +6,7 @@ function processMouseMove(event) {
         hover(event, 'highMusicButton');
         hover(event, 'lowSoundButton');
         hover(event, 'highSoundButton');
+        hover(event, 'coinButton');
         hover(event, 'cupButton');
         hover(event, 'settingsButton');
         hover(event, 'questButton');
@@ -47,6 +48,7 @@ function processMouseDown(event) {
         openLeaderboard(event, 'cupButton');
         openLeaderboard(event, 'settingsButton');
 
+        closeQuestRoll(event);
         openQuestRoll(event, 'questButton');
     }
 }
@@ -91,6 +93,14 @@ function isButtonLocked(event, key, logical) {
         return isMouseEvent(event, world[key]) && world[key].isLocked();
     } else {
         return isMouseEvent(event, world[key]) && !world[key].isLocked();
+    }
+}
+
+
+function closeQuestRoll(event) {    // double code?
+    if (isMouseEvent(event, world.coinButton) && world.coinButton.reachable) {
+        world.coinButton.locked = true;
+        console.log('coinButton');
     }
 }
 
