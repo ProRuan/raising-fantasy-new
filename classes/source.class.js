@@ -46,6 +46,9 @@ class Source {
     // enemy attack / hurt delay ...
     // level word pause ...
 
+    newWorld = './audio/epic_fantasy/a_whole_new_world_luvus.wav';
+    newGame = './audio/start_screen/new_game.wav';
+
 
     // to edit!!!
     ambience = './audio/ambience/nature_forest_daytime.wav';

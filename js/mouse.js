@@ -50,6 +50,7 @@ function processMouseDown(event) {
 
         closeQuestRoll(event);
         openQuestRoll(event, 'questButton');
+        startNewGame(event);
     }
 }
 
@@ -116,6 +117,13 @@ function openQuestRoll(event, key) {    // double code?
 
 function isNotQuestRoll(event, key) {    // double code?
     return !isMouseEvent(event, world[key]) && !isMouseEvent(event, world.questRoll);
+}
+
+
+function startNewGame(event) {
+    if (isMouseEvent(event, world.newGameButton)) {
+        world.newGameButton.locked = true;
+    }
 }
 
 
