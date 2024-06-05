@@ -67,47 +67,40 @@ class TextButton extends Button {
     // jsdoc
     startNewGame() {
         if (world.newGameButton.isLocked()) {
-            this.playSound(this.sound);
             this.unlock('newGameButton');
-
-            // this.transit();
-            // world.ctx.globalAlpha = 0;
+            this.playSound(this.sound);
+            this.transit();
         }
     }
 
 
+    // move to game.js?
     transit() {
         setInterval(() => {
-            let tSpeed = 0.01;
-
-            if (world.ctx.globalAlpha != 0) {
-                if (world.ctx.globalAlpha - tSpeed < 0) {
-                    world.ctx.globalAlpha = 0;
-                } else {
-                    world.ctx.globalAlpha -= tSpeed;
-                }
-            }
-
-            if (isMatch(world.ctx.globalAlpha, 0) && !isMatch(currentWorld, 'level')) {
-                world = new LevelWorld(canvas, keyboard);
-                currentWorld = 'level';
-
-                world.ctx.globalAlpha = 1;
-            }
-
-            // if (isMatch(currentWorld, 'level') && !world.darkAlpha) {
-            //     world.darkAlpha = true;
-            //     world.ctx.globalAlpha = 0;
-            // }
-
-            // if (world.ctx.globalAlpha != 1 && world.darkAlpha) {
-            //     if (world.ctx.globalAlpha + tSpeed > 1) {
-            //         world.ctx.globalAlpha = 1;
-            //     } else {
-            //         world.ctx.globalAlpha += tSpeed;
-            //     }
-            // }
-
+            this.blackout();
+            this.setLevelWorld();
         }, 1000 / 60);
+    }
+
+
+    blackout() {
+        let tSpeed = 0.01;
+
+        if (world.ctx.globalAlpha != 0 && isMatch(currentWorld, 'start')) {
+            if (world.ctx.globalAlpha - tSpeed < 0) {
+                world.ctx.globalAlpha = 0;
+            } else {
+                world.ctx.globalAlpha -= tSpeed;
+            }
+        }
+    }
+
+
+    setLevelWorld() {
+        if (isMatch(world.ctx.globalAlpha, 0) && !isMatch(currentWorld, 'level')) {
+            world = new LevelWorld(canvas, keyboard);
+            currentWorld = 'level';
+            world.ctx.globalAlpha = 1;
+        }
     }
 }
