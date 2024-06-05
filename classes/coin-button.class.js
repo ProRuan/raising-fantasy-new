@@ -2,27 +2,12 @@ class CoinButton extends Button {
     indent = 2;
     reachable = false;
     previous = 'settingsButton';
+    next = 'cupButton';
 
 
     // jsdoc
     constructor(x, y) {
         super(source.coinButton, x - 48, canvas.height - y - 48);
-    }
-
-
-    // jsdoc
-    get next() {
-        return this.getNext();
-    }
-
-
-    // jsdoc
-    getNext() {
-        if (world.settingsButton.isLocked()) {
-            return 'lowMusicButton';
-        } else if (world.cupButton.isLocked()) {
-            return 'cupButton';
-        }
     }
 
 

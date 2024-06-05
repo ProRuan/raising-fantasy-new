@@ -37,6 +37,8 @@ class Leaderboard extends DrawableObject {
 
     // jsdoc
     setButtons() {
+        this.setReachable('newGameButton', false);
+        this.setReachable('questButton', false);
         this.setReachable('xButton', true);
         if (world.settingsButton.isLocked()) {
             this.setVolumeButtons(true);

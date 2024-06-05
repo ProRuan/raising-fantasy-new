@@ -13,6 +13,30 @@ class TextButton extends Button {
     }
 
 
+    // jsdoc
+    get previous() {
+        return this.getPrevious();
+    }
+
+
+    // jsdoc
+    get next() {
+        return this.getNext();
+    }
+
+
+    // jsdoc
+    getPrevious() {
+        return (isMatch(this.text, 'Quest')) ? 'newGameButton' : 'settingsButton';
+    }
+
+
+    // jsdoc
+    getNext() {
+        return (isMatch(this.text, 'Quest')) ? 'cupButton' : 'questButton';
+    }
+
+
     execute() {
         return this.openQuestRoll(world.questButton);
     }

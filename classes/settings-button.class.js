@@ -17,7 +17,13 @@ class SettingsButton extends Button {
 
     // jsdoc
     getNext() {
-        return (world.leaderboard.isOpened()) ? 'xButton' : 'cupButton';
+        if (world.leaderboard.isOpened()) {
+            return 'xButton';
+        } else if (world.questRoll.isOpened()) {
+            return 'coinButton';
+        } else {
+            return 'newGameButton';
+        }
     }
 
 

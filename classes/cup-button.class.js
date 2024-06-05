@@ -21,8 +21,10 @@ class CupButton extends Button {
             return 'highSoundButton';
         } else if (world.cupButton.isLocked()) {
             return 'xButton';
+        } else if (world.questButton.isLocked()) {
+            return 'coinButton';
         } else {
-            return 'settingsButton';
+            return 'questButton';
         }
     }
 
