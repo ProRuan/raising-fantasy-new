@@ -20,8 +20,10 @@ class Button extends DrawableObject {
 
     // jsdoc
     trigger() {
-        this.setCursor();
-        this.execute();
+        if (isMatch(currentWorld, 'start')) {
+            this.setCursor();
+            this.execute();
+        }
     }
 
 

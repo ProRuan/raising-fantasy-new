@@ -99,7 +99,9 @@ let musicButtons = true;
 
 
 function processKeydown(event) {    // check doubleClick!!!
-    world.currentButton.selected = true;    // newGameButton selected?
+    if (isMatch(currentWorld, 'start')) {
+        world.currentButton.selected = true;    // newGameButton selected?
+    }
 
     // console.log(event);
     let code = getCode(event.code);

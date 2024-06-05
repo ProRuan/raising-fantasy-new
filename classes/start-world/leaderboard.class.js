@@ -17,8 +17,10 @@ class Leaderboard extends DrawableObject {
 
     // jsdoc ( setStoppableInterval() ? )
     show() {
-        setInterval(() => {
-            this.showButtons();
+        setInterval(() => {    // execute() of DrawableObject!?!
+            if (isMatch(currentWorld, 'start')) {
+                this.showButtons();
+            }
         }, 1000 / 60);
     }
 
