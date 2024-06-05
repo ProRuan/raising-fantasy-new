@@ -25,18 +25,4 @@ class CoinButton extends Button {
             setCursor('initial');
         }
     }
-
-
-    reset() {
-        this.reachable = false;
-        this.locked = false;
-        console.log('reset', world.coinButton.reachable);
-    }
-
-
-    unlock(key) {    // double code!!!
-        if (world[key].isLocked()) {
-            world[key].locked = false;
-        }
-    }
 }

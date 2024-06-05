@@ -34,9 +34,6 @@ class StartWorld extends World {
 
         this.sestQuestRoll();
 
-        // this.storyBg = this.getDrawableObject(source.storyBg, canvas.width / 2 - 138, 540 - canvas.height / 2 - 166.5);
-        // this.coinButton = this.getButton(source.coinButton, this.storyBg.xRight - 48, 540 - this.storyBg.yTop - 48);
-
         this.setLeaderboard();
         this.setVolumeButtons();
     }
@@ -182,11 +179,22 @@ class StartWorld extends World {
     }
 
 
+    // jsdoc
+    setReachable(key, value) {
+        this[key].reachable = value;
+    }
+
+
     lockButton() {
         if (isKey('enter') && keyboard.enter.locked != true && this.currentButton.selected) {
             let locked = this.currentButton.locked;
             this.currentButton.locked = (!locked) ? true : false;     // two different leaderboards / leaderboard.isOpened() !?!
             keyboard.enter.locked = true;
+            if (this.currentButton == this.settingsButton) {
+                this.cupButton.locked = false;
+            } else if (this.currentButton == this.cupButton) {
+                this.settingsButton.locked = false;
+            }
         }
     }
 

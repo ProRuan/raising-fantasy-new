@@ -7,9 +7,10 @@ class TextButton extends Button {
     color = 'black';
 
 
+    // jsdoc
     constructor(source, x, y) {
-        super(source, x, y);    // variable (source)!!!
-        this.text = source.text;
+        super(source, x, y);
+        this.setText(source);
     }
 
 
@@ -26,27 +27,37 @@ class TextButton extends Button {
 
 
     // jsdoc
+    setText(source) {
+        this.text = source.text;
+    }
+
+
+    // jsdoc
     getPrevious() {
-        return (isMatch(this.text, 'Quest')) ? 'newGameButton' : 'settingsButton';
+        if (isMatch(this.text, 'Quest') && world.questButton.isLocked()) {
+            return 'coinButton';
+        } else if (isMatch(this.text, 'Quest')) {
+            return 'newGameButton';
+        } else {
+            return 'settingsButton';
+        }
     }
 
 
     // jsdoc
     getNext() {
-        return (isMatch(this.text, 'Quest')) ? 'cupButton' : 'questButton';
-    }
-
-
-    execute() {
-        return this.openQuestRoll(world.questButton);
-    }
-
-
-    openQuestRoll(button) {    // double code
-        if (button.isLocked()) {
-            world.questRoll.opened = true;
+        if (isMatch(this.text, 'Quest') && world.questButton.isLocked()) {
+            return 'coinButton';
+        } else if (isMatch(this.text, 'Quest')) {
+            return 'cupButton';
         } else {
-            world.questRoll.opened = false;
+            return 'questButton';
         }
+    }
+
+
+    // jsdoc
+    execute() {
+        return this.open(world.questButton, world.questRoll);
     }
 }

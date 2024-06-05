@@ -91,13 +91,13 @@ Tasks
   - option: fix jump animation for 'fall after walk' ...
 
 
-Clean Coding (8/11 + 47/57)
+Clean Coding (11/11 + 47/57)
 ------------
-  - class TextButton ...
+  - class TextButton - simpleCheck
   - class CupButton - simpleCheck
   - class SettingsButton - simpleCheck
-  - class QuestRoll ...
-  - class CoinButton ...
+  - class QuestRoll - simpleCheck
+  - class CoinButton - simpleCheck
   - class Leaderboard - simpleCheck
   - class XButton - simpleCheck
   - class LowMusicButton -simpleCheck

@@ -58,12 +58,18 @@ class Button extends DrawableObject {
 
 
     // jsdoc
-    openLeaderboard(buttonA, buttonB) {
+    open(buttonA, board, buttonB) {
         if (buttonA.isLocked()) {
-            world.leaderboard.opened = true;
-        } else if (!buttonB.isLocked()) {
-            world.leaderboard.opened = false;
+            board.opened = true;
+        } else if (this.isButtonB(buttonB)) {
+            board.opened = false;
         }
+    }
+
+
+    // jsdoc
+    isButtonB(button) {
+        return (button) ? !button.isLocked() : true;
     }
 
 
@@ -82,6 +88,23 @@ class Button extends DrawableObject {
             volume[key]++;
         } else if (!isTrue(logical) && isGreater(0, volume[key])) {
             volume[key]--;
+        }
+    }
+
+
+    // jsdoc
+    reset() {
+        this.reachable = false;
+        this.selected = false;
+        this.locked = false;
+    }
+
+
+    // jsdoc
+    unlock(key) {
+        if (world[key].isLocked()) {
+            world[key].locked = false;
+            world.setCurrentButton(key);
         }
     }
 }

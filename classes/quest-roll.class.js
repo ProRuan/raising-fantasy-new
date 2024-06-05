@@ -1,8 +1,8 @@
 class QuestRoll extends DrawableObject {
     opened = false;
     yHeadline = 160;
-    yStory = { first: 208, second: 238 };
     ySubheadline = 298;
+    yStory = { first: 208, second: 238 };
     yChallenge = { first: 333, second: 363, third: 393 };
 
 
@@ -25,7 +25,8 @@ class QuestRoll extends DrawableObject {
     }
 
 
-    show() {    // double code?
+    // jsdoc ( setStoppableInterval() ? )
+    show() {
         setInterval(() => {
             this.showButtons();
         }, 1000 / 60);
@@ -38,28 +39,18 @@ class QuestRoll extends DrawableObject {
     }
 
 
-    isOpened() {    // double code?
-        return this.opened == true;
-    }
-
-
     // jsdoc
     setButtons(logical) {
-        this.setReachable('newGameButton', logical);
-        this.setReachable('questButton', logical);
+        world.setReachable('newGameButton', logical);
+        world.setReachable('questButton', logical);
         this.setCoinButton(logical);
-    }
-
-
-    setReachable(key, value) {    // double code!!! (move)
-        world[key].reachable = value;
     }
 
 
     // jsdoc
     setCoinButton(logical) {
         logical = (!logical) ? true : false;
-        this.setReachable('coinButton', logical);
+        world.setReachable('coinButton', logical);
     }
 
 

@@ -15,7 +15,7 @@ class Leaderboard extends DrawableObject {
     }
 
 
-    // jsdoc
+    // jsdoc ( setStoppableInterval() ? )
     show() {
         setInterval(() => {
             this.showButtons();
@@ -30,16 +30,10 @@ class Leaderboard extends DrawableObject {
 
 
     // jsdoc
-    isOpened() {
-        return this.opened == true;
-    }
-
-
-    // jsdoc
     setButtons() {
-        this.setReachable('newGameButton', false);
-        this.setReachable('questButton', false);
-        this.setReachable('xButton', true);
+        world.setReachable('newGameButton', false);
+        world.setReachable('questButton', false);
+        world.setReachable('xButton', true);
         if (world.settingsButton.isLocked()) {
             this.setVolumeButtons(true);
         }
@@ -47,15 +41,9 @@ class Leaderboard extends DrawableObject {
 
 
     // jsdoc
-    setReachable(key, value) {
-        world[key].reachable = value;
-    }
-
-
-    // jsdoc
     setVolumeButtons(value) {
         this.volumeButtons.forEach((button) => {
-            this.setReachable(button, value);
+            world.setReachable(button, value);
         });
     }
 

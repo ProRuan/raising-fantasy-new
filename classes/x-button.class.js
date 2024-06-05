@@ -41,19 +41,4 @@ class XButton extends Button {
             setCursor('initial');
         }
     }
-
-
-    // jsdoc
-    reset() {
-        this.reachable = false;
-        this.locked = false;
-    }
-
-
-    // jsdoc
-    unlock(key) {
-        if (world[key].isLocked()) {
-            world[key].locked = false;
-        }
-    }
 }

@@ -29,6 +29,6 @@ class SettingsButton extends Button {
 
     // jsdoc
     execute() {
-        this.openLeaderboard(this, world.cupButton);
+        this.open(this, world.leaderboard, world.cupButton);
     }
 }
