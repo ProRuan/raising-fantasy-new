@@ -60,6 +60,12 @@ class TextButton extends Button {
     // jsdoc
     execute() {
         this.startNewGame();
+        this.openQuestRoll();
+    }
+
+
+    // jsdoc
+    openQuestRoll() {
         this.open(world.questButton, world.questRoll);
     }
 
@@ -69,7 +75,23 @@ class TextButton extends Button {
         if (world.newGameButton.isLocked()) {
             this.unlock('newGameButton');
             this.playSound(this.sound);
-            this.transit();
+
+            setTimeout(() => {
+                intervalIds.forEach((id) => {
+                    clearInterval(id);
+                    console.log(id);
+                })
+                // for (const [key] of Object.entries(world)) {
+                //     if (world[key] instanceof Button && key != 'currentButton') {
+                //         clearInterval(world[key].id);
+                //         console.log(key, world[key].id);
+                //     }
+                // }
+
+                world = new LevelWorld(canvas, keyboard);
+                currentWorld = 'level';
+                // this.transit();
+            }, 750);
         }
     }
 

@@ -14,7 +14,8 @@ class Button extends DrawableObject {
 
     // jsdoc
     init() {
-        setInterval(() => this.trigger(), 1000 / 60);
+        setStoppableInterval(() => this.trigger(), 1000 / 60);
+        // this.id = setInterval(() => this.trigger(), 1000 / 60);
     }
 
 
@@ -61,10 +62,12 @@ class Button extends DrawableObject {
 
     // jsdoc
     open(buttonA, board, buttonB) {
-        if (buttonA.isLocked()) {
-            board.opened = true;
-        } else if (this.isButtonB(buttonB)) {
-            board.opened = false;
+        if (isMatch(currentWorld, 'start')) {
+            if (buttonA.isLocked()) {
+                board.opened = true;
+            } else if (this.isButtonB(buttonB)) {
+                board.opened = false;
+            }
         }
     }
 

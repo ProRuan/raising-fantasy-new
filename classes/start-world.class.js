@@ -1,4 +1,5 @@
 class StartWorld extends World {
+    alpha = 1;
     sound = source.newWorld;
     // newGameSound
     // swordSound (selection)
@@ -141,6 +142,7 @@ class StartWorld extends World {
 
     draw() {
         this.clearCanvas();
+        this.ctx.globalAlpha = this.alpha;
 
         this.lockButton();
         this.selectButton();
@@ -279,6 +281,19 @@ class StartWorld extends World {
             this.drawButtonWithShadow('lowSoundButton', 'white', 16);
             this.drawButtonWithShadow('highSoundButton', 'white', 16);
         }
+    }
+
+
+    showIntervalId() {
+        intervalIds.forEach((id) => {
+            console.log(id);
+        })
+        // for (const [key] of Object.entries(this)) {
+        //     if (this[key] instanceof Button && key != 'currentButton') {
+        //         console.log(key, this[key].id);
+        //     }
+        // }
+        return 'stopped buttons';
     }
 
 

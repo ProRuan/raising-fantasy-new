@@ -7,6 +7,11 @@ class Leaderboard extends DrawableObject {
     yVolume = { music: 144, sound: 192 };
     volumeButtons = ['lowMusicButton', 'highMusicButton', 'lowSoundButton', 'highSoundButton'];
 
+    score = {
+        best: { coins: 19, leaves: 17, time: '7 min 13 s' },
+        last: { coins: 17, leaves: 15, time: '9 min 31 s' }
+    };
+
 
     // jsdoc
     constructor(x, y) {
@@ -94,7 +99,7 @@ class Leaderboard extends DrawableObject {
     // jsdoc
     drawCoins(key, y) {
         y += this.yItem.coins;
-        let score = result[key].coins + ' / 20';
+        let score = this.score[key].coins + ' / 20';
         this.drawResultText('Coins:', y, score);
     }
 
@@ -102,7 +107,7 @@ class Leaderboard extends DrawableObject {
     // jsdoc
     drawLeaves(key, y) {
         y += this.yItem.leaves;
-        let score = result[key].leaves + ' / 18';
+        let score = this.score[key].leaves + ' / 18';
         this.drawResultText('Leaves:', y, score);
     }
 
@@ -110,7 +115,7 @@ class Leaderboard extends DrawableObject {
     // jsdoc
     drawTime(key, y) {
         y += this.yItem.time;
-        let score = result[key].time;
+        let score = this.score[key].time;
         this.drawResultText('Time:', y, score);
     }
 

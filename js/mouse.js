@@ -1,3 +1,14 @@
+processMouse('move', () => processMouseMove(event));
+processMouse('down', () => processMouseDown(event));
+processMouse('up', () => processMouseUp(event));
+
+
+// jsdoc
+function processMouse(key, subfunction) {
+    return document.addEventListener(`mouse${key}`, subfunction);
+}
+
+
 function processMouseMove(event) {
     hovered = false;
     if (event && currentWorld == 'start') {

@@ -9,6 +9,22 @@ let inPlay = true;    // set to false!!!
 let currentWorld = 'level';    // condition for mouse and keyboard!!!
 
 let buttons = ['newGame', 'story', 'cup', 'settings', 'coin', 'x', 'lowMusic', 'highMusic', 'lowSound', 'highSound'];
+
+let tempScore;
+let score = {
+    'best': {
+        'coins': 19,
+        'leaves': 17,
+        'time': '7 min 13 s'
+    },
+    'last': {
+        'coins': 17,
+        'leaves': 15,
+        'time': '9 min 31 s'
+    }
+};
+
+
 let result = {
     'best': {
         'coins': 19,
@@ -31,8 +47,6 @@ let sound = 7;
 pointer = false;
 
 let source = new Source();
-
-intervalIds = [];
 
 
 function init() {

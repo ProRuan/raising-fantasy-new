@@ -33,7 +33,7 @@ class Knight extends Character {
 
 
     animate() {
-        setInterval(() => {
+        this.moveId = setInterval(() => {
             this.startAmbientSound();
 
             this.resetJumpCounter();
@@ -102,7 +102,7 @@ class Knight extends Character {
         }, 1000 / 60);
 
 
-        setInterval(() => {
+        this.playId = setInterval(() => {
             // console.log(this.chapter, this.currentImage);
 
             // if (!isUndefined(this.world.endboss[0].magic)) {
@@ -385,9 +385,14 @@ class Knight extends Character {
     startAmbientSound() {    // double code!!! (shaman)
         if (!this.musicStarted) {
             this.musicStarted = true;
-            setTimeout(() => {
-                this.music.play();
-            }, 1000);
+            this.music.play();
+            this.gameStartTime = getTime();
+            console.log(this.gameStartTime);
+            // setTimeout(() => {
+            //     this.music.play();
+            //     this.gameStartTime = getTime();
+            //     console.log(this.gameStartTime);
+            // }, 125);
         }
     }
 }

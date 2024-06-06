@@ -3,6 +3,7 @@ class LevelWorld extends World {
     heroX = 212;
     trophyY = 436;
     victorySpeed = 2;
+    alpha = 1;
 
     // Create an upper class LevelWorldKit!!!
 
@@ -100,7 +101,11 @@ class LevelWorld extends World {
 
 
     draw() {    // double code!!!
+
         this.clearCanvas();    // think about camera objects!!!
+        this.ctx.globalAlpha = this.alpha;
+        
+
         if (this.hero.img.src.includes('death')) {
             if (isUndefined(this.gameOver)) {
                 this.drawObject(this.hero);
