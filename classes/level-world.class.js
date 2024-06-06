@@ -104,7 +104,7 @@ class LevelWorld extends World {
 
         this.clearCanvas();    // think about camera objects!!!
         this.ctx.globalAlpha = this.alpha;
-        
+
 
         if (this.hero.img.src.includes('death')) {
             if (isUndefined(this.gameOver)) {
@@ -241,4 +241,21 @@ class LevelWorld extends World {
         });
     }
 
+
+
+
+    // only for testing!!! (pauseable interval)
+
+    // stopCoins() {
+    //     this.coins.forEach((coin) => {
+    //         coin.id.stopInterval();
+    //     });
+    // }
+
+
+    // playCoins() {
+    //     this.coins.forEach((coin) => {
+    //         coin.id.reactivate();
+    //     });
+    // }
 }
