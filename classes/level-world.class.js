@@ -88,7 +88,7 @@ class LevelWorld extends World {
     }
 
 
-    runTime() {
+    runTime() {    // getter worldTime?
         setInterval(() => {
             this.time = new Date().getTime();
         }, 1000 / 60);

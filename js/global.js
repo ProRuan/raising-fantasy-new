@@ -14,3 +14,21 @@ function stopIntervals() {
         clearInterval(id);
     });
 }
+
+
+// to delete later?
+
+
+
+
+// on testing ...
+
+let drawableObjects = [];
+
+function pauseGame(logical) {
+    drawableObjects.forEach((o) => {
+        if (o.interval) {
+            o.stop(logical);
+        }
+    });
+}

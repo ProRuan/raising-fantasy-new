@@ -45,8 +45,8 @@ class Enemy extends MoveableObject {
 
     // jsdoc
     animate() {
-        this.setStoppableInterval(() => this.live(), 1000 / 60);
-        this.setStoppableInterval(() => this.playAnimation(), 100);
+        this.setPauseableInterval(() => this.live(), 1000 / 60);
+        this.setPauseableInterval(() => this.playAnimation(), 100);
     }
 
 

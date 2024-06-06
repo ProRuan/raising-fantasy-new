@@ -105,7 +105,7 @@ class StateBar extends DrawableObject {
 
     // jsdoc
     regenerate() {
-        this.setStoppableInterval(() => this.refill(), this.ms);
+        this.setPauseableInterval(() => this.refill(), this.ms);
     }
 
 

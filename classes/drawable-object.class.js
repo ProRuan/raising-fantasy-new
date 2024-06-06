@@ -43,6 +43,7 @@ class DrawableObject {
     setUp(source, x, y) {
         this.setImage(source);
         this.setPosition(x, y);
+        this.addDrawableObject();
     }
 
 
@@ -91,6 +92,13 @@ class DrawableObject {
 
     setY(y) {
         this.y = canvas.height - this.height - y;
+    }
+
+
+    addDrawableObject() {    // rename and move?
+        if (currentWorld == 'start') {
+            drawableObjects.push(this);
+        }
     }
 
 
@@ -224,8 +232,9 @@ class DrawableObject {
     }
 
 
+    // jsdoc
     move(subfunction) {
-        this.setStoppableInterval(subfunction, 1000 / 60);
+        this.setPauseableInterval(subfunction, 1000 / 60);
     }
 
 
