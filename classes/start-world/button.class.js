@@ -14,8 +14,7 @@ class Button extends DrawableObject {
 
     // jsdoc
     init() {
-        setStoppableInterval(() => this.trigger(), 1000 / 60);
-        // this.id = setInterval(() => this.trigger(), 1000 / 60);
+        this.interval = new PauseableInterval(() => this.trigger(), 1000 / 60);
     }
 
 
@@ -24,6 +23,8 @@ class Button extends DrawableObject {
         if (isMatch(currentWorld, 'start')) {
             this.setCursor();
             this.execute();
+        } else {
+            this.interval.stop();
         }
     }
 

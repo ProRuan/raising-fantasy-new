@@ -25,19 +25,19 @@ class QuestRoll extends DrawableObject {
     }
 
 
-    // jsdoc ( setStoppableInterval() ? )
+    // jsdoc
     show() {
-        setInterval(() => {    // execute() of DrawableObject!?!
-            if (isMatch(currentWorld, 'start')) {
-                this.showButtons();
-            }
-        }, 1000 / 60);
+        this.interval = new PauseableInterval(() => this.showButtons(), 1000 / 60);
     }
 
 
     // jsdoc
     showButtons() {
-        (this.isOpened()) ? this.setButtons(false) : this.setButtons(true);
+        if (isMatch(currentWorld, 'start')) {
+            (this.isOpened()) ? this.setButtons(false) : this.setButtons(true);
+        } else {
+            this.interval.stop();
+        }
     }
 
 
