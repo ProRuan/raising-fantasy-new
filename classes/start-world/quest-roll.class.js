@@ -27,7 +27,7 @@ class QuestRoll extends DrawableObject {
 
     // jsdoc
     show() {
-        this.interval = new PauseableInterval(() => this.showButtons(), 1000 / 60);
+        this.setPauseableInterval(() => this.showButtons(), 1000 / 60);
     }
 
 
@@ -36,7 +36,7 @@ class QuestRoll extends DrawableObject {
         if (isMatch(currentWorld, 'start')) {
             (this.isOpened()) ? this.setButtons(false) : this.setButtons(true);
         } else {
-            this.interval.stop();
+            this.stop(true);
         }
     }
 

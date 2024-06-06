@@ -124,7 +124,7 @@ class AnimatedObject extends DrawableObject {
 
     // jsdoc
     animate() {
-        this.setStoppableInterval(() => this.playAnimation(), 100);
+        this.setPauseableInterval(() => this.playAnimation(), 100);
     }
 
 

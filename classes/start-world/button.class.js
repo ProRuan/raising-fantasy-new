@@ -14,7 +14,7 @@ class Button extends DrawableObject {
 
     // jsdoc
     init() {
-        this.interval = new PauseableInterval(() => this.trigger(), 1000 / 60);
+        this.setPauseableInterval(() => this.trigger(), 1000 / 60);
     }
 
 
@@ -24,7 +24,7 @@ class Button extends DrawableObject {
             this.setCursor();
             this.execute();
         } else {
-            this.interval.stop();
+            this.stop(true);
         }
     }
 

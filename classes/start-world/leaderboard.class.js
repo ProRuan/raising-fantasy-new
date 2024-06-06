@@ -22,7 +22,7 @@ class Leaderboard extends DrawableObject {
 
     // jsdoc
     show() {
-        this.interval = new PauseableInterval(() => this.showButtons(), 1000 / 60);
+        this.setPauseableInterval(() => this.showButtons(), 1000 / 60);
     }
 
 
@@ -31,7 +31,7 @@ class Leaderboard extends DrawableObject {
         if (isMatch(currentWorld, 'start')) {
             (this.isOpened()) ? this.setButtons() : this.setVolumeButtons(false);
         } else {
-            this.interval.stop();
+            this.stop(true);
         }
     }
 

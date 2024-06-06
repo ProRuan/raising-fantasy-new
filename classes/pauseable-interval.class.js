@@ -29,12 +29,14 @@ class PauseableInterval {
 
     // jsdoc
     play() {
+        this.stopped = false;
         this.setStoppableInterval(this.subfunction, this.ms);
     }
 
 
     // jsdoc
     stop() {
+        this.stopped = true;
         clearInterval(this.id);
     }
 }

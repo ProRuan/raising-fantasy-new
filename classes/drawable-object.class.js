@@ -229,7 +229,19 @@ class DrawableObject {
     }
 
 
-    setStoppableInterval(subfunction, interval) {
+    // jsdoc
+    setPauseableInterval(subfunction, ms) {
+        this.interval = new PauseableInterval(subfunction, ms);
+    }
+
+
+    // jsdoc
+    stop(logical) {
+        (logical) ? this.interval.stop() : this.interval.play();
+    }
+
+
+    setStoppableInterval(subfunction, interval) {    // to delete later?
         let id = setInterval(subfunction, interval);
         intervalIds.push(id);
     }
