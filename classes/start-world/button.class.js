@@ -84,6 +84,7 @@ class Button extends DrawableObject {
         if (this.isLocked()) {
             this.locked = false;
             this.setVolumeValue(key, logical);
+            save('volume');
         }
     }
 

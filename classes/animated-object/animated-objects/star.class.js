@@ -30,8 +30,8 @@ class Star extends AnimatedObject {
                 'time': delta
             }
         };
-        // score = tempScore;
-        // save();
+        score = tempScore;
+        save('score');
 
 
         intervalIds.forEach((id) => {
