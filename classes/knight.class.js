@@ -386,12 +386,12 @@ class Knight extends Character {
         if (!this.musicStarted) {
             this.musicStarted = true;
             this.music.play();
-            this.gameStartTime = getTime();
-            console.log(this.gameStartTime);
+            this.startTime = getTime();
+            console.log(this.startTime);
             // setTimeout(() => {
             //     this.music.play();
-            //     this.gameStartTime = getTime();
-            //     console.log(this.gameStartTime);
+            //     this.startTime = getTime();
+            //     console.log(this.startTime);
             // }, 125);
         }
     }

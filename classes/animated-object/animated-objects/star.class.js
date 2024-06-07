@@ -7,39 +7,14 @@ class Star extends AnimatedObject {
 
 
     triggerEffect() {    // to edit
-        world.hero.gameEndTime = getTime();
-        let delta = world.hero.gameEndTime - world.hero.gameStartTime;
-        console.log('Time required: ', delta);
-        delta = this.getTimeString(delta);
-        console.log('Time required: ', delta);
-
-        score.last.coins = world.hero.coins;
-        score.last.leaves = world.hero.leaves;
-        score.last.time = delta;
-        console.log(score);
-
-        tempScore = {
-            'best': {
-                'coins': 19,
-                'leaves': 17,
-                'time': '7 min 13 s'
-            },
-            'last': {
-                'coins': world.hero.coins,
-                'leaves': world.hero.leaves,
-                'time': delta
-            }
-        };
-        score = tempScore;
+        this.setLastScore();
+        this.setBestScore();
         save('score');
 
+        clearInterval(world.hero.moveId);    // to delete!!!
+        clearInterval(world.hero.playId);    // to delete!!!
+        pauseGame(true);
 
-        intervalIds.forEach((id) => {
-            clearInterval(id);
-        });
-        pauseGame(true);    // to edit
-        clearInterval(world.hero.moveId);
-        clearInterval(world.hero.playId);
 
         this.id = setInterval(() => {
             let tSpeed = 0.025;
@@ -80,6 +55,63 @@ class Star extends AnimatedObject {
     }
 
 
+    // jsdoc
+    setLastScore() {
+        this.setScore('coins', this.getCollectedItems('coins'));
+        this.setScore('leaves', this.getCollectedItems('leaves'));
+        this.setScore('time', this.getPlaytime());
+    }
+
+
+    // jsdoc
+    setScore(key, method) {
+        score.last[key] = method;
+    }
+
+
+    // jsdoc
+    getCollectedItems(key) {
+        return world.hero[key];
+    }
+
+
+    // jsdoc
+    getPlaytime() {
+        world.hero.endTime = getTime();
+        return getSum(world.hero.endTime, -world.hero.startTime);
+    }
+
+
+    // jsdoc
+    setBestScore() {
+        if (this.isBetter()) {
+            score.best = {
+                coins: score.last.coins,
+                leaves: score.last.leaves,
+                time: score.last.time
+            }
+        }
+    }
+
+
+    // jsdoc
+    isBetter() {
+        return this.isMore('coins') && this.isMore('leaves') && this.isFaster();
+    }
+
+
+    // jsdoc
+    isMore(key) {
+        return isGreater(score.best[key], score.last[key]);
+    }
+
+
+    // jsdoc
+    isFaster() {
+        return !isGreater(score.best.time, score.last.time, false);
+    }
+
+
     getTimeString(delta) {
         let s = delta / 1000;
         let min = Math.floor(s / 60);
@@ -94,4 +126,9 @@ class Star extends AnimatedObject {
 
         // return delta / 1000;
     }
+
+
+
+
+    // work for time, if game is paused!
 }
