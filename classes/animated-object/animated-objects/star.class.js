@@ -11,9 +11,9 @@ class Star extends AnimatedObject {
         this.setBestScore();
         save('score');
 
-        clearInterval(world.hero.moveId);    // to delete!!!
-        clearInterval(world.hero.playId);    // to delete!!!
         pauseGame(true);
+        clearInterval(world.hero.moveId);
+        clearInterval(world.hero.playId);
 
 
         this.id = setInterval(() => {
@@ -82,21 +82,20 @@ class Star extends AnimatedObject {
     }
 
 
-    // jsdoc
     setBestScore() {
-        if (this.isBetter()) {
+        if (this.isHighScore()) {
             score.best = {
                 coins: score.last.coins,
                 leaves: score.last.leaves,
                 time: score.last.time
             }
+            console.log('better');
         }
     }
 
 
-    // jsdoc
-    isBetter() {
-        return this.isMore('coins') && this.isMore('leaves') && this.isFaster();
+    isHighScore() {
+       return true;    // to edit!!!
     }
 
 
@@ -107,8 +106,20 @@ class Star extends AnimatedObject {
 
 
     // jsdoc
+    isEqual(key) {
+        return isMatch(score.best[key], score.last[key]);
+    }
+
+
+    // jsdoc
+    isScoreMatch() {
+        return this.isEqual('coins') && this.isEqual('leaves');
+    }
+
+
+    // jsdoc
     isFaster() {
-        return !isGreater(score.best.time, score.last.time, false);
+        return !isGreater(score.best.time, score.last.time, 'tolerant');
     }
 
 

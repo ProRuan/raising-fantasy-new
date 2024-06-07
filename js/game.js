@@ -13,16 +13,8 @@ let storableItems = {};
 
 let tempScore;
 let score = {
-    'best': {
-        'coins': 19,
-        'leaves': 17,
-        'time': '7 min 13 s'
-    },
-    'last': {
-        'coins': 17,
-        'leaves': 15,
-        'time': '9 min 31 s'
-    }
+    'best': { coins: 0, leaves: 0, time: 500000 },
+    'last': { coins: 0, leaves: 0, time: 500000 }
 };
 
 

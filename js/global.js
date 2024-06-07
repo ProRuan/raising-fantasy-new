@@ -1,4 +1,3 @@
-let paused = false;
 let intervalIds = [];    // necessary?
 
 
@@ -26,9 +25,7 @@ function stopIntervals() {
 
 let drawableObjects = [];
 
-function pauseGame() {
-    setPaused();
-    let logical = paused;
+function pauseGame(logical) {
     drawableObjects.forEach((o) => {
         if (o.interval) {
             o.stop(logical);
@@ -37,11 +34,6 @@ function pauseGame() {
             pauseThrowableObject(o, 'bomb', logical);    // set pauseable interval for class Knight!
         }
     });
-}
-
-
-function setPaused() {
-    paused = (!paused) ? true : false;
 }
 
 
