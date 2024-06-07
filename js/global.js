@@ -29,8 +29,18 @@ function pauseGame(logical) {
     drawableObjects.forEach((o) => {
         if (o.interval) {
             o.stop(logical);
+            pauseThrowableObject(o, 'magic', logical);
+            pauseThrowableObject(o, 'web', logical);
+            pauseThrowableObject(o, 'bomb', logical);    // set pauseable interval for class Knight!
         }
     });
+}
+
+
+function pauseThrowableObject(o, key, logical) {
+    if (o[key]) {
+        o[key].stop(logical);
+    }
 }
 
 

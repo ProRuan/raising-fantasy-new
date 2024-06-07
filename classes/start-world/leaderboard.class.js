@@ -7,11 +7,6 @@ class Leaderboard extends DrawableObject {
     yVolume = { music: 144, sound: 192 };
     volumeButtons = ['lowMusicButton', 'highMusicButton', 'lowSoundButton', 'highSoundButton'];
 
-    score = {
-        best: { coins: 19, leaves: 17, time: '7 min 13 s' },
-        last: { coins: 17, leaves: 15, time: '9 min 31 s' }
-    };
-
 
     // jsdoc
     constructor(x, y) {
@@ -58,7 +53,7 @@ class Leaderboard extends DrawableObject {
     // jsdoc
     drawScore() {
         if (this.isScore()) {
-            this.loadScore();
+            this.load('score');
             this.drawHeadline('gold', 'Best Score', this.yHeadline.a);
             this.drawChapter('gold', 'best', this.yTop + this.yScore.best);
             this.drawHeadline('white', 'Last Score', this.yHeadline.b);
@@ -75,10 +70,19 @@ class Leaderboard extends DrawableObject {
 
 
     // jsdoc
-    loadScore() {    // double code!
-        load('score');
-        score = storableItems.score;
-        this.score = storableItems.score;
+    load(key) {
+        load(key);
+        this.update(key);
+    }
+
+
+    // jsdoc
+    update(key) {
+        if (isMatch(key, 'score')) {
+            score = storableItems.score;
+        } else if (isMatch(key, 'volume')) {
+            volume = storableItems.volume;
+        }
     }
 
 
@@ -108,24 +112,24 @@ class Leaderboard extends DrawableObject {
     // jsdoc
     drawCoins(key, y) {
         y += this.yItem.coins;
-        let score = this.score[key].coins + ' / 20';
-        this.drawResultText('Coins:', y, score);
+        let value = score[key].coins + ' / 20';
+        this.drawResultText('Coins:', y, value);
     }
 
 
     // jsdoc
     drawLeaves(key, y) {
         y += this.yItem.leaves;
-        let score = this.score[key].leaves + ' / 18';
-        this.drawResultText('Leaves:', y, score);
+        let value = score[key].leaves + ' / 18';
+        this.drawResultText('Leaves:', y, value);
     }
 
 
     // jsdoc
     drawTime(key, y) {
         y += this.yItem.time;
-        let score = this.score[key].time;
-        this.drawResultText('Time:', y, score);
+        let value = score[key].time;
+        this.drawResultText('Time:', y, value);
     }
 
 
@@ -167,7 +171,7 @@ class Leaderboard extends DrawableObject {
     // jsdoc
     drawVolume() {
         if (this.isVolume()) {
-            this.loadVolume();
+            this.load('volume');
             this.drawHeadline('white', 'Volume', this.yHeadline.a);
             this.drawVolumeText('Music', this.yTop + this.yVolume.music, volume.music);
             this.drawVolumeText('Sound', this.yTop + this.yVolume.sound, volume.sound);
@@ -179,13 +183,6 @@ class Leaderboard extends DrawableObject {
     // jsdoc
     isVolume() {
         return world.settingsButton.isLocked();
-    }
-
-
-    // jsdoc
-    loadVolume() {
-        load('volume');
-        volume = storableItems.volume;
     }
 
 
