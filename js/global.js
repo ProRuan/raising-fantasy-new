@@ -1,4 +1,4 @@
-let intervalIds = [];
+let intervalIds = [];    // necessary?
 
 
 // jsdoc
@@ -31,4 +31,21 @@ function pauseGame(logical) {
             o.stop(logical);
         }
     });
+}
+
+
+// jsdoc
+function load(key) {
+    let valueAsText = localStorage.getItem(key);
+    if (valueAsText) {
+        storableItems[key] = JSON.parse(valueAsText);
+    }
+}
+
+
+// jsdoc
+function save(key) {
+    let value = storableItems[key];
+    let valueAsText = JSON.stringify(value);
+    localStorage.setItem(key, valueAsText);
 }

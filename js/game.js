@@ -9,6 +9,7 @@ let inPlay = true;    // set to false!!!
 let currentWorld = 'level';    // condition for mouse and keyboard!!!
 
 let buttons = ['newGame', 'story', 'cup', 'settings', 'coin', 'x', 'lowMusic', 'highMusic', 'lowSound', 'highSound'];
+let storableItems = {};
 
 let tempScore;
 let score = {
@@ -63,6 +64,8 @@ function init() {
     // currentWorld = 'level';    // is working
 
     // switchWorld();    // necessary? --> menu control!
+
+    setStoreableItems();
 }
 
 
@@ -102,6 +105,13 @@ function setStartWorld() {
 // jsdoc
 function setLevelWorld() {
     world = new LevelWorld(canvas, keyboard);
+}
+
+
+// jsdoc
+function setStoreableItems() {
+    storableItems.score = score;
+    storableItems.volume = volume;
 }
 
 

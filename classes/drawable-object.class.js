@@ -238,15 +238,23 @@ class DrawableObject {
     }
 
 
-    // jsdoc
     setPauseableInterval(subfunction, ms) {
-        this.interval = new PauseableInterval(subfunction, ms);
+        // this.interval = new PauseableInterval(subfunction, ms);
+
+        if (!this.interval) {
+            this.interval = new PauseableInterval(subfunction, ms);
+        } else {
+            this.interval2 = new PauseableInterval(subfunction, ms);
+        }
     }
 
 
-    // jsdoc
     stop(logical) {
         (logical) ? this.interval.stop() : this.interval.play();
+
+        if (this.interval2) {
+            (logical) ? this.interval2.stop() : this.interval2.play();
+        }
     }
 
 

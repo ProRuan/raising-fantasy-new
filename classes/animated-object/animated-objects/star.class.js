@@ -30,11 +30,14 @@ class Star extends AnimatedObject {
                 'time': delta
             }
         };
+        // score = tempScore;
+        // save();
 
 
         intervalIds.forEach((id) => {
             clearInterval(id);
         });
+        pauseGame(true);    // to edit
         clearInterval(world.hero.moveId);
         clearInterval(world.hero.playId);
 
