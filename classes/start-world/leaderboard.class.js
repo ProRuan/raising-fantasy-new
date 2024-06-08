@@ -53,7 +53,6 @@ class Leaderboard extends DrawableObject {
     // jsdoc
     drawScore() {
         if (this.isScore()) {
-            this.load('score');
             this.drawHeadline('gold', 'Best Score', this.yHeadline.a);
             this.drawChapter('gold', 'best', this.yTop + this.yScore.best);
             this.drawHeadline('white', 'Last Score', this.yHeadline.b);
@@ -66,23 +65,6 @@ class Leaderboard extends DrawableObject {
     // jsdoc
     isScore() {
         return world.cupButton.isLocked();
-    }
-
-
-    // jsdoc
-    load(key) {
-        load(key);
-        this.update(key);
-    }
-
-
-    // jsdoc
-    update(key) {
-        if (isMatch(key, 'score')) {
-            score = storableItems.score;
-        } else if (isMatch(key, 'volume')) {
-            volume = storableItems.volume;
-        }
     }
 
 
@@ -171,7 +153,6 @@ class Leaderboard extends DrawableObject {
     // jsdoc
     drawVolume() {
         if (this.isVolume()) {
-            this.load('volume');
             this.drawHeadline('white', 'Volume', this.yHeadline.a);
             this.drawVolumeText('Music', this.yTop + this.yVolume.music, volume.music);
             this.drawVolumeText('Sound', this.yTop + this.yVolume.sound, volume.sound);

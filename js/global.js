@@ -45,6 +45,24 @@ function pauseThrowableObject(o, key, logical) {
 
 
 // jsdoc
+function loadScore() {
+    load('score');
+    if (storableItems.score) {
+        score = storableItems.score;
+    }
+}
+
+
+// jsdoc
+function loadVolume() {
+    load('volume');
+    if (storableItems.volume) {
+        volume = storableItems.volume;
+    }
+}
+
+
+// jsdoc
 function load(key) {
     let valueAsText = localStorage.getItem(key);
     if (valueAsText) {

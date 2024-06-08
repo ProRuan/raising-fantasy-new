@@ -7,8 +7,8 @@ class Star extends AnimatedObject {
 
 
     triggerEffect() {    // to edit
-        this.setLastScore();
-        this.setBestScore();
+        this.setScore(true, 'last');
+        this.setScore(this.isHighScore(), 'best');
         save('score');
 
         pauseGame(true);
@@ -56,16 +56,18 @@ class Star extends AnimatedObject {
 
 
     // jsdoc
-    setLastScore() {
-        this.setScore('coins', this.getCollectedItems('coins'));
-        this.setScore('leaves', this.getCollectedItems('leaves'));
-        this.setScore('time', this.getPlaytime());
+    setScore(condition, key) {
+        if (condition) {
+            this.setScoreValue(key, 'coins', this.getCollectedItems('coins'));
+            this.setScoreValue(key, 'leaves', this.getCollectedItems('leaves'));
+            this.setScoreValue(key, 'time', this.getPlaytime());
+        }
     }
 
 
     // jsdoc
-    setScore(key, method) {
-        score.last[key] = method;
+    setScoreValue(key, subkey, method) {
+        score[key][subkey] = method;
     }
 
 
@@ -82,18 +84,7 @@ class Star extends AnimatedObject {
     }
 
 
-    setBestScore() {
-        if (this.isHighScore()) {
-            score.best = {
-                coins: score.last.coins,
-                leaves: score.last.leaves,
-                time: score.last.time
-            }
-            console.log('better');
-        }
-    }
-
-
+    // jsdoc
     isHighScore() {
         let moreItems = this.isMore('coins') && this.isMore('leaves');
         let moreCoins = this.isMore('coins') && this.isEqual('leaves');
