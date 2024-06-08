@@ -1,42 +1,25 @@
 class Star extends AnimatedObject {
 
 
+    // jsdoc
     constructor(x, y) {
         super(source.star, x, y);
     }
 
 
-    triggerEffect() {    // to edit
+    // jsdoc
+    triggerEffect() {
+        this.updateScore();
+        pauseGame(true);
+        this.setPauseableInterval(() => this.transit(), 1000 / 60);
+    }
+
+
+    // jsdoc
+    updateScore() {
         this.setScore(true, 'last');
         this.setScore(this.isHighScore(), 'best');
         save('score');
-        pauseGame(true);
-
-
-        this.id = setInterval(() => {
-            world.darken();
-            if (isMatch(world.alpha, 0)) {
-                if (!this.worldChanged) {
-                    this.worldChanged = true;
-
-                    setTimeout(() => {
-                        clearInterval(this.id);
-                        drawableObjects = [];
-                        world.stopped = true;
-                        world = new StartWorld(canvas, keyboard);
-                        world.alpha = 1;
-                        currentWorld = 'start';
-                        world.cupButton.locked = true;
-
-                        world.leaderboard.score = tempScore;
-
-                        // stopp ambience sound!
-                    }, 500);
-                }
-            }
-        }, 1000 / 60);
-
-        console.log('Let us go back to the start world ...');
     }
 
 
@@ -103,10 +86,41 @@ class Star extends AnimatedObject {
     }
 
 
+    // jsdoc
+    transit() {
+        world.darken();
+        this.shiftWorld();
+    }
 
-    // missing task!!!
-    // ----------------
-    // work for time, if game is paused!
-    // knight moveId and animateId ...
-    // press any key message ...
+
+    // jsdoc
+    shiftWorld() {
+        if (isMatch(world.alpha, 0) && !this.worldShifted) {
+            this.worldShifted = true;
+            setTimeout(() => { this.goHome() }, 500);
+        }
+    }
+
+
+    // jsdoc
+    goHome() {
+        this.leaveWorld();
+        this.showScore();
+    }
+
+
+    // jsdoc
+    leaveWorld() {
+        this.stop(true);
+        drawableObjects = [];
+        world.stopped = true;
+    }
+
+
+    // jsdoc
+    showScore() {
+        world = new StartWorld(canvas, keyboard);
+        currentWorld = 'start';
+        world.cupButton.locked = true;
+    }
 }

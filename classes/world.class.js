@@ -1,7 +1,6 @@
 class World {
     alpha = 1;
     darkSpeed = 0.025;
-    darkened = false;
 
 
     constructor(canvas, keyboard) {
@@ -139,11 +138,29 @@ class World {
     darken() {
         if (!isMatch(this.alpha, 0)) {
             let diff = getSum(this.alpha, -this.darkSpeed);
-            if (isGreater(diff, 0)) {
-                this.alpha = 0;
-            } else {
-                this.alpha -= this.darkSpeed;
-            }
+            this.setAlpha(diff);
         }
     }
+
+
+    // jsdoc
+    setAlpha(diff) {
+        if (isGreater(diff, 0)) {
+            this.alpha = 0;
+        } else {
+            this.alpha -= this.darkSpeed;
+        }
+    }
+
+
+
+
+    // missing task!!!
+    // ----------------
+    // work for time, if game is paused!
+    // pause key + pause text ...
+    // knight moveId and animateId ...
+    // press any key message ...
+    // stop ambient sound ...
+    // stop / remove web, magic, bomb ...
 }
