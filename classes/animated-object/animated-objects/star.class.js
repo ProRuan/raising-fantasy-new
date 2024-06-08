@@ -43,7 +43,7 @@ class Star extends AnimatedObject {
                 }
             }
 
-            console.log(world.alpha);
+            // console.log(world.alpha);
         }, 1000 / 60);
 
         // world = new StartWorld(canvas, keyboard);
@@ -95,7 +95,11 @@ class Star extends AnimatedObject {
 
 
     isHighScore() {
-       return true;    // to edit!!!
+        let moreItems = this.isMore('coins') && this.isMore('leaves');
+        let moreCoins = this.isMore('coins') && this.isEqual('leaves');
+        let moreLeaves = this.isEqual('coins') && this.isMore('leaves');
+        let lessTime = this.isScoreMatch() && this.isFaster();
+        return moreItems || moreCoins || moreLeaves || lessTime;
     }
 
 

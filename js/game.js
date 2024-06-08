@@ -43,9 +43,16 @@ let source = new Source();
 
 
 function init() {
+    load('score');
+    if (storableItems.score) {
+        score = storableItems.score;
+    }
+    load('volume');
+    if (storableItems.volume) {
+        volume = storableItems.volume;
+    }
     setCanvas();
     setKeyboard();
-
 
     // set class Star!!!
 
