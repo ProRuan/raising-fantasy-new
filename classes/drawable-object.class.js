@@ -290,6 +290,13 @@ class DrawableObject {
     }
 
 
+    removeDrawableObject() {
+        let idToDelete = drawableObjects.findIndex(o => o.interval && o.interval.stopped);
+        console.log('deleted id: ', idToDelete);
+        drawableObjects.splice(idToDelete, 1);
+    }
+
+
     // playSound(path) {    // double code!!!
     //     new Audio(path).play();
     // }

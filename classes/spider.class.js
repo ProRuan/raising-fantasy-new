@@ -87,17 +87,19 @@ class Spider extends Enemy {
     }
 
 
+    // jsdoc
     resetThrowParameters() {
-        if (this.web) {
-            this.web.stop(true);
-            let idToDelete = drawableObjects.findIndex(o => isMatch(o, this.web));
-            console.log('deleted id: ', idToDelete);
-            drawableObjects.splice(idToDelete, 1);
-        }
-
-        delete this.web;
+        this.removeWeb();
         this.thrown = false;
         this.nextThrow = getSum(this.throwDelay, getTime());
+    }
+
+
+    // jsdoc
+    removeWeb() {
+        this.web.stop(true);
+        this.removeDrawableObject();
+        delete this.web;
     }
 
 
