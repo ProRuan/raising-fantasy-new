@@ -27,9 +27,11 @@ class World {
 
 
     redraw() {
-        requestAnimationFrame(() => {
-            this.draw();
-        });
+        if (isUndefined(this.stopped)) {
+            requestAnimationFrame(() => {
+                this.draw();
+            });
+        }
     }
 
 

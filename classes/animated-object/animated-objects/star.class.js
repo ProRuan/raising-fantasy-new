@@ -12,8 +12,6 @@ class Star extends AnimatedObject {
         save('score');
 
         pauseGame(true);
-        clearInterval(world.hero.moveId);
-        clearInterval(world.hero.playId);
 
 
         this.id = setInterval(() => {
@@ -31,6 +29,8 @@ class Star extends AnimatedObject {
 
                     setTimeout(() => {
                         clearInterval(this.id);
+                        drawableObjects = [];
+                        world.stopped = true;
                         world = new StartWorld(canvas, keyboard);
                         world.alpha = 1;
                         currentWorld = 'start';

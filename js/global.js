@@ -26,12 +26,14 @@ function stopIntervals() {
 let drawableObjects = [];
 
 function pauseGame(logical) {
+    clearInterval(world.hero.moveId);
+    clearInterval(world.hero.playId);
     drawableObjects.forEach((o) => {
         if (o.interval) {
-            o.stop(logical);
             pauseThrowableObject(o, 'magic', logical);
             pauseThrowableObject(o, 'web', logical);
             pauseThrowableObject(o, 'bomb', logical);    // set pauseable interval for class Knight!
+            o.stop(logical);
         }
     });
 }
@@ -40,6 +42,7 @@ function pauseGame(logical) {
 function pauseThrowableObject(o, key, logical) {
     if (o[key]) {
         o[key].stop(logical);
+        console.log('stopped throwable item: ', o[key]);
     }
 }
 

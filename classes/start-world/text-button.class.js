@@ -88,6 +88,8 @@ class TextButton extends Button {
                 //     }
                 // }
 
+                drawableObjects = [];
+                world.stopped = true;
                 world = new LevelWorld(canvas, keyboard);
                 currentWorld = 'level';
                 // this.transit();

@@ -96,9 +96,7 @@ class DrawableObject {
 
 
     addDrawableObject() {    // rename and move?
-        if (currentWorld == 'start') {
-            drawableObjects.push(this);
-        }
+        drawableObjects.push(this);
     }
 
 
