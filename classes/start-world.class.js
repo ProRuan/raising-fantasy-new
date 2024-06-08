@@ -64,9 +64,6 @@ class StartWorld extends World {
     getTextWidth(text) {
         this.setText('24px Arial', 'left', 'black');
         let width = this.ctx.measureText(text).width;
-
-        console.log(Math.round(width));
-
         return Math.round(width);
     }
 

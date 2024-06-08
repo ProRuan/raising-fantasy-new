@@ -10,7 +10,6 @@ class Star extends AnimatedObject {
         this.setScore(true, 'last');
         this.setScore(this.isHighScore(), 'best');
         save('score');
-
         pauseGame(true);
 
 
@@ -118,23 +117,8 @@ class Star extends AnimatedObject {
     }
 
 
-    getTimeString(delta) {
-        let s = delta / 1000;
-        let min = Math.floor(s / 60);
-        s = Math.ceil(s % 60);
 
-        if (min >= 1) {
-            return `${min} min ${s} sec`;
-        } else {
-            return `${s} s`;
-        }
-
-
-        // return delta / 1000;
-    }
-
-
-
-
+    // missing task!!!
+    // ----------------
     // work for time, if game is paused!
 }

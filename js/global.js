@@ -42,7 +42,6 @@ function pauseGame(logical) {
 function pauseThrowableObject(o, key, logical) {
     if (o[key]) {
         o[key].stop(logical);
-        console.log('stopped throwable item: ', o[key]);
     }
 }
 

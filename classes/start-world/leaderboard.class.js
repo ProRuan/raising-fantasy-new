@@ -94,16 +94,16 @@ class Leaderboard extends DrawableObject {
     // jsdoc
     drawCoins(key, y) {
         y += this.yItem.coins;
-        let value = score[key].coins + ' / 20';
-        this.drawResultText('Coins:', y, value);
+        let coins = score[key].coins + ' / 20';
+        this.drawResultText('Coins:', y, coins);
     }
 
 
     // jsdoc
     drawLeaves(key, y) {
         y += this.yItem.leaves;
-        let value = score[key].leaves + ' / 18';
-        this.drawResultText('Leaves:', y, value);
+        let leaves = score[key].leaves + ' / 18';
+        this.drawResultText('Leaves:', y, leaves);
     }
 
 
@@ -111,7 +111,28 @@ class Leaderboard extends DrawableObject {
     drawTime(key, y) {
         y += this.yItem.time;
         let value = score[key].time;
-        this.drawResultText('Time:', y, value);
+        let time = this.getTime(value);
+        this.drawResultText('Time:', y, time);
+    }
+
+
+    // jsdoc
+    getTime(value) {
+        let min = this.getMin(value);
+        let s = this.getSec(value, min);
+        return (isGreater(0, min)) ? `${min} min ${s} s` : `${s} s`;
+    }
+
+
+    // jsdoc
+    getMin(value) {
+        return Math.floor(value / 1000 / 60);
+    }
+
+
+    // jsdoc
+    getSec(value, min) {
+        return Math.floor(value / 1000 - min * 60);
     }
 
 
