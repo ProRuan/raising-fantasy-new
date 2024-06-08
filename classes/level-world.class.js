@@ -3,7 +3,6 @@ class LevelWorld extends World {
     heroX = 212;
     trophyY = 436;
     victorySpeed = 2;
-    alpha = 1;
 
     // Create an upper class LevelWorldKit!!!
 

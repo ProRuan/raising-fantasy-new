@@ -14,17 +14,10 @@ class Star extends AnimatedObject {
 
 
         this.id = setInterval(() => {
-            let tSpeed = 0.025;
-            if (world.alpha != 0) {
-                if (world.alpha - tSpeed < 0) {
-                    world.alpha = 0;
-                } else {
-                    world.alpha -= tSpeed;
-                }
-            }
-            if (world.alpha == 0) {
-                if (!this.changeSet) {
-                    this.changeSet = true;
+            world.darken();
+            if (isMatch(world.alpha, 0)) {
+                if (!this.worldChanged) {
+                    this.worldChanged = true;
 
                     setTimeout(() => {
                         clearInterval(this.id);
@@ -41,14 +34,7 @@ class Star extends AnimatedObject {
                     }, 500);
                 }
             }
-
-            // console.log(world.alpha);
         }, 1000 / 60);
-
-        // world = new StartWorld(canvas, keyboard);
-        // currentWorld = 'start';
-
-        // knight moveId and animateId ...
 
         console.log('Let us go back to the start world ...');
     }
@@ -121,4 +107,6 @@ class Star extends AnimatedObject {
     // missing task!!!
     // ----------------
     // work for time, if game is paused!
+    // knight moveId and animateId ...
+    // press any key message ...
 }

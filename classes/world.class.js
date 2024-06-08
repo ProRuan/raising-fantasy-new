@@ -1,4 +1,7 @@
 class World {
+    alpha = 1;
+    darkSpeed = 0.025;
+    darkened = false;
 
 
     constructor(canvas, keyboard) {
@@ -129,5 +132,18 @@ class World {
 
     setBoolean(key, value) {
         this[key] = value;
+    }
+
+
+    // jsdoc
+    darken() {
+        if (!isMatch(this.alpha, 0)) {
+            let diff = getSum(this.alpha, -this.darkSpeed);
+            if (isGreater(diff, 0)) {
+                this.alpha = 0;
+            } else {
+                this.alpha -= this.darkSpeed;
+            }
+        }
     }
 }
