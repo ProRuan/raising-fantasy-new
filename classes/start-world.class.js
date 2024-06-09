@@ -1,5 +1,6 @@
 class StartWorld extends World {
     interacted = false;
+    title = { font: '80px Arial', text: 'Raising Fantasy' };
 
 
     // jsdoc
@@ -168,7 +169,7 @@ class StartWorld extends World {
 
 
 
-
+        // use new button function + clean leaderboard and quest roll
 
         if (this.leaderboard.isOpened()) {
             this.drawObject(this.leaderboard);
@@ -265,31 +266,44 @@ class StartWorld extends World {
     // jsdoc
     drawMain() {
         this.drawObject(this.background);
-        this.drawGameTitle('80px Arial', 'Raising Fantasy');
-        this.drawTextButtonWidthShadow(this.newGameButton);
-        this.drawTextButtonWidthShadow(this.questButton);
-        this.drawButtonWithShadow('cupButton', 'yellow', 16);
-        this.drawButtonWithShadow('settingsButton', 'yellow', 16);
+        this.drawTitle(this.title);
+        this.drawButton(this.newGameButton);
+        this.drawButton(this.questButton);
+        this.drawButton(this.cupButton);
+        this.drawButton(this.settingsButton);
     }
 
 
     // jsdoc
-    drawGameTitle(font, text) {
+    drawTitle(title) {
         let x = this.canvas.width / 2;
         let y = this.canvas.height / 2 + 8;
-        this.setText(font, 'center', 'black');
-        super.drawText(text, x, y);
+        this.setText(title.font, 'center', 'black');
+        super.drawText(title.text, x, y);
     }
 
 
-    drawTextButtonWidthShadow(button) {
+    // jsdoc
+    drawButton(button) {
         if (button.isHighlighted()) {
-            this.setShadow(button.shadowColor, button.shadowBlur);
-            this.drawTextButton(button);
-            this.setShadow();
+            this.setButtonWithShadow(button);
         } else {
-            this.drawTextButton(button);
+            this.setButton(button);
         }
+    }
+
+
+    // jsdoc
+    setButtonWithShadow(button) {
+        this.setShadow(button.shadowColor, button.shadowBlur);
+        this.setButton(button);
+        this.setShadow();
+    }
+
+
+    // jsdoc
+    setButton(button) {
+        (button.text) ? this.drawTextButton(button) : this.drawObject(button);
     }
 
 
@@ -300,7 +314,10 @@ class StartWorld extends World {
     }
 
 
-    // jsdoc
+
+
+
+    // to delete later!!!
     drawButtonWithShadow(key, color, blur) {
         if (this[key].isHighlighted()) {
             this.setShadow(color, blur);

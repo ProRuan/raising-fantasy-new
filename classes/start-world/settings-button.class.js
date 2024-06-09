@@ -1,6 +1,8 @@
 class SettingsButton extends Button {
     indent = 6;
     previous = 'cupButton';
+    shadowColor = 'yellow';
+    shadowBlur = 16;
 
 
     // jsdoc
