@@ -16,6 +16,12 @@ class TextButton extends Button {
 
 
     // jsdoc
+    get offsetY() {
+        return this.y + 20;
+    }
+
+
+    // jsdoc
     get previous() {
         return this.getPrevious();
     }

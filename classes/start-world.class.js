@@ -68,8 +68,8 @@ class StartWorld extends World {
 
     // jsdoc
     getTextCoord(width, height, b) {
-        let x = canvas.width / 2 - width / 2;
-        let y = canvas.height - b - height;
+        let x = this.canvas.width / 2 - width / 2;
+        let y = this.canvas.height - b - height;
         return [x, y];
     }
 
@@ -90,8 +90,8 @@ class StartWorld extends World {
 
     // jsdoc
     getBgCoord(key) {
-        let x = canvas.width / 2 - source[key].width / 2;
-        let y = canvas.height / 2 - source[key].height / 2;
+        let x = this.canvas.width / 2 - source[key].width / 2;
+        let y = this.canvas.height / 2 - source[key].height / 2;
         return [x, y];
     }
 
@@ -146,7 +146,7 @@ class StartWorld extends World {
     // jsdoc
     getVolBtnCoord() {
         let x = this.leaderboard.xLeft + (this.leaderboard.xRight - this.leaderboard.xLeft) / 2;
-        let y = canvas.height - this.leaderboard.yTop;
+        let y = this.canvas.height - this.leaderboard.yTop;
         return [x, y];
     }
 
@@ -160,28 +160,15 @@ class StartWorld extends World {
 
     draw() {
         this.clearCanvas();
-        this.ctx.globalAlpha = this.alpha;
+        this.setGlobalAlpha();
+        this.applyKeyControl();
+        this.drawMain();
+
+        this.drawFlashText();    // to edit / to move
 
 
 
-        this.lockButton();
-        this.selectButton();
 
-        this.drawObject(this.background);
-
-        this.drawGameTitle('80px Arial', 'Raising Fantasy');
-
-        this.drawFlashText();
-
-        this.drawTextButtonWidthShadow(this.newGameButton);
-        this.drawTextButtonWidthShadow(this.questButton);
-        // this.setText(this.newGameButton.font, this.newGameButton.textAlign, this.newGameButton.color);
-        // this.drawText(this.newGameButton.text, this.newGameButton.xCenter, this.newGameButton.yCenter + 10);
-
-        this.drawButtonWithShadow('cupButton', 'yellow', 16);
-        this.drawButtonWithShadow('settingsButton', 'yellow', 16);
-
-        // this.questButton.locked = true;    // to delete!
 
         if (this.leaderboard.isOpened()) {
             this.drawObject(this.leaderboard);
@@ -209,22 +196,45 @@ class StartWorld extends World {
 
 
     // jsdoc
-    setReachable(key, value) {
-        this[key].reachable = value;
+    applyKeyControl() {
+        this.lockButton();
+        this.selectButton();
     }
 
 
+    // jsdoc
     lockButton() {
-        if (isKey('enter') && keyboard.enter.locked != true && this.currentButton.selected) {
-            let locked = this.currentButton.locked;
-            this.currentButton.locked = (!locked) ? true : false;     // two different leaderboards / leaderboard.isOpened() !?!
-            keyboard.enter.locked = true;
-            if (this.currentButton == this.settingsButton) {
-                this.cupButton.locked = false;
-            } else if (this.currentButton == this.cupButton) {
-                this.settingsButton.locked = false;
-            }
+        if (this.isEnter()) {
+            this.cleanLeaderboard();
+            this.fillLeaderboard();
         }
+    }
+
+
+    // jsdoc
+    isEnter() {
+        let enter = isKey('enter');
+        let unlocked = !isTrue(this.keyboard.enter.locked);
+        let selected = isTrue(this.currentButton.selected);
+        return enter && unlocked && selected;
+    }
+
+
+    // jsdoc
+    cleanLeaderboard() {
+        if (isMatch(this.currentButton, this.settingsButton)) {
+            this.cupButton.locked = false;
+        } else if (isMatch(this.currentButton, this.cupButton)) {
+            this.settingsButton.locked = false;
+        }
+    }
+
+
+    // jsdoc
+    fillLeaderboard() {
+        let locked = this.currentButton.locked;
+        this.currentButton.locked = (!locked) ? true : false;
+        keyboard.enter.locked = true;
     }
 
 
@@ -247,32 +257,32 @@ class StartWorld extends World {
 
     // jsdoc
     setNextButton(nextButton) {
-        world.currentButton.selected = false;
-        world.currentButton = world[nextButton];
-        world.currentButton.selected = true;
+        this.currentButton.selected = false;
+        this.setCurrentButton(nextButton);
     }
 
 
+    // jsdoc
+    drawMain() {
+        this.drawObject(this.background);
+        this.drawGameTitle('80px Arial', 'Raising Fantasy');
+        this.drawTextButtonWidthShadow(this.newGameButton);
+        this.drawTextButtonWidthShadow(this.questButton);
+        this.drawButtonWithShadow('cupButton', 'yellow', 16);
+        this.drawButtonWithShadow('settingsButton', 'yellow', 16);
+    }
+
+
+    // jsdoc
     drawGameTitle(font, text) {
+        let x = this.canvas.width / 2;
+        let y = this.canvas.height / 2 + 8;
         this.setText(font, 'center', 'black');
-        super.drawText(text, canvas.width / 2, canvas.height / 2 + 8);
+        super.drawText(text, x, y);
     }
 
 
-    drawFlashText() {
-        let time = getTime();
-        let delta = time % 1000;
-        if (delta < 500 && this.interacted == false) {
-            this.setText('24px Arial', 'center', 'black');
-            let x = canvas.width / 2;
-            let a = 36;
-            let y = canvas.height / 2 + 90 + a;
-            this.drawText('Press any key', x, y);
-        }
-    }
-
-
-    drawTextButtonWidthShadow(button) {    // double code!?!
+    drawTextButtonWidthShadow(button) {
         if (button.isHighlighted()) {
             this.setShadow(button.shadowColor, button.shadowBlur);
             this.drawTextButton(button);
@@ -283,18 +293,10 @@ class StartWorld extends World {
     }
 
 
+    // jsdoc
     drawTextButton(button) {
         this.setText(button.font, button.textAlign, button.color);
-        this.drawText(button.text, button.x, button.y + 20);
-
-        this.ctx.beginPath();
-        this.ctx.lineWidth = '1';
-        this.ctx.strokeStyle = 'red';
-        this.ctx.rect(button.xLeft, button.yTop, button.xRight - button.xLeft, button.yBottom - button.yTop);
-        this.ctx.stroke();
-
-
-        // this.drawText('new game button', this.newGameButton.x, this.newGameButton.y);
+        this.drawText(button.text, button.x, button.offsetY);
     }
 
 
@@ -335,6 +337,28 @@ class StartWorld extends World {
     updateVolume() {
         this.music.volume = volume.music / 10;
     }
+
+
+    drawFlashText() {
+        let time = getTime();
+        let delta = time % 1000;
+        if (delta < 500 && this.interacted == false) {
+            this.setText('24px Arial', 'center', 'black');
+            let x = this.canvas.width / 2;
+            let a = 36;
+            let y = this.canvas.height / 2 + 90 + a;
+            this.drawText('Press any key', x, y);
+        }
+    }
+
+
+    // jsdoc
+    setReachable(key, value) {
+        this[key].reachable = value;
+    }
+
+
+
 
 
     showIntervalId() {

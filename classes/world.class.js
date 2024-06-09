@@ -144,12 +144,29 @@ class World {
 
 
     // jsdoc
+    setGlobalAlpha() {
+        this.ctx.globalAlpha = this.alpha;
+    }
+
+
+    // jsdoc
     setAlpha(diff) {
         if (isGreater(diff, 0)) {
             this.alpha = 0;
         } else {
             this.alpha -= this.darkSpeed;
         }
+    }
+
+
+
+    // only for testing!!!
+    drawRect(button) {
+        this.ctx.beginPath();
+        this.ctx.lineWidth = '1';
+        this.ctx.strokeStyle = 'red';
+        this.ctx.rect(button.xLeft, button.yTop, button.xRight - button.xLeft, button.yBottom - button.yTop);
+        this.ctx.stroke();
     }
 
 
@@ -167,4 +184,5 @@ class World {
     // remove drawable object (enemy, coins and so on) ...
     // remove web, magic, bomb ...
     // favicon
+    // prevent default ...
 }
