@@ -1,6 +1,5 @@
 class StartWorld extends World {
-    alpha = 1;
-    sound = source.newWorld;
+    interacted = false;
     // newGameSound
     // swordSound (selection)
 
@@ -19,6 +18,7 @@ class StartWorld extends World {
         this.setStartWorld();    // rename
         this.setCurrentButton('newGameButton');    // newGameButton!!!
         // { currentButton: cb, keySelection: logical }
+        this.setMusic();
         this.draw();
     }
 
@@ -137,9 +137,18 @@ class StartWorld extends World {
     }
 
 
+    // jsdoc
+    setMusic() {
+        this.sound = source.newWorld;
+        this.music = new Audio(this.sound);
+    }
+
+
     draw() {
         this.clearCanvas();
         this.ctx.globalAlpha = this.alpha;
+
+
 
         this.lockButton();
         this.selectButton();
@@ -147,6 +156,8 @@ class StartWorld extends World {
         this.drawObject(this.background);
 
         this.drawGameTitle('80px Arial', 'Raising Fantasy');
+
+        this.drawFlashText();
 
         this.drawTextButtonWidthShadow(this.newGameButton);
         this.drawTextButtonWidthShadow(this.questButton);
@@ -178,6 +189,8 @@ class StartWorld extends World {
         // this.drawButtonFrame(this.questRoll);
 
         this.redraw();
+        this.startMusic();
+        this.updateVolume();
     }
 
 
@@ -232,6 +245,19 @@ class StartWorld extends World {
     }
 
 
+    drawFlashText() {
+        let time = getTime();
+        let delta = time % 1000;
+        if (delta < 500 && this.interacted == false) {
+            this.setText('24px Arial', 'center', 'black');
+            let x = canvas.width / 2;
+            let a = 36;
+            let y = canvas.height / 2 + 90 + a;
+            this.drawText('Press any key', x, y);
+        }
+    }
+
+
     drawTextButtonWidthShadow(button) {    // double code!?!
         if (button.isHighlighted()) {
             this.setShadow(button.shadowColor, button.shadowBlur);
@@ -278,6 +304,22 @@ class StartWorld extends World {
             this.drawButtonWithShadow('lowSoundButton', 'white', 16);
             this.drawButtonWithShadow('highSoundButton', 'white', 16);
         }
+    }
+
+
+    // jsdoc
+    startMusic() {
+        if (isUndefined(this.musicStarted) && isTrue(this.interacted)) {
+            this.musicStarted = true;
+            this.music.volume = volume.music / 10;
+            this.music.play();
+        }
+    }
+
+
+    // jsdoc
+    updateVolume() {
+        this.music.volume = volume.music / 10;
     }
 
 

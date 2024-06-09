@@ -13,8 +13,8 @@ let storableItems = {};
 
 let tempScore;
 let score = {
-    'best': { coins: 0, leaves: 0, time: 500000 },
-    'last': { coins: 0, leaves: 0, time: 500000 }
+    'best': { coins: 0, leaves: 0, time: 300000 },
+    'last': { coins: 0, leaves: 0, time: 300000 }
 };
 
 
@@ -33,7 +33,7 @@ let result = {
 
 let counter = 0;    // for start world (necessary?)
 
-let volume = { music: 3, sound: 7 };    // to set in level world!
+let volume = { music: 5, sound: 5 };    // to set in level world!
 let music = 3;
 let sound = 7;
 

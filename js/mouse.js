@@ -51,6 +51,8 @@ function processMouseDown(event) {
     if (event && currentWorld == 'start') {
         world.currentButton.selected = false;
 
+        interactFirst(event);
+
         closeLeaderboard(event);
         setVolume(event, 'lowMusicButton');
         setVolume(event, 'highMusicButton');
@@ -62,6 +64,14 @@ function processMouseDown(event) {
         closeQuestRoll(event);
         openQuestRoll(event, 'questButton');
         startNewGame(event);
+    }
+}
+
+
+// jsdoc
+function interactFirst(event) {
+    if (event && !isTrue(world.interacted)) {
+        world.interacted = true;
     }
 }
 
