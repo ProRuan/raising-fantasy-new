@@ -34,3 +34,7 @@ function verifyDoubleClick(code) {
 function isDoubleClick(code) {
     return getKey(code, 'timeStamp') - getKey(code, 'lastKeyUp') < 250;
 }
+
+
+
+// set all keys (x, a, ...) ...

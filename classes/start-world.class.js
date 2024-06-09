@@ -1,45 +1,30 @@
 class StartWorld extends World {
     interacted = false;
-    // newGameSound
-    // swordSound (selection)
-
-    // set button triggers ...
-    // set button mouse events ...
-    // set button key events and key sequences ...
-    // set sound ...
-
-    // set questRoll and leaderboard interval (or stop interval)...
-    // move transit method ...
 
 
+    // jsdoc
     constructor(canvas, keyboard) {
         super(canvas, keyboard);
-        // this.setButtonCoordinates();
-        this.setStartWorld();    // rename
-        this.setCurrentButton('newGameButton');    // newGameButton!!!
-        // { currentButton: cb, keySelection: logical }
+        this.setStartWorld();
         this.setMusic();
         this.draw();
     }
 
 
-    // setButtonCoordinates() {
-
-    // }
-
-
+    // jsdoc
     setStartWorld() {
-        this.background = this.getDrawableObject(source.mainBg, 0, 0);
-
-        this.newGameButton = this.getTextButton('New Game', 340);
-        this.questButton = this.getTextButton('Quest', 412);
-
+        this.setBackground();
+        this.setTextButtons();
+        this.setQuestRoll();
         this.setExtraButtons();
-
-        this.sestQuestRoll();
-
         this.setLeaderboard();
         this.setVolumeButtons();
+    }
+
+
+    // jsdoc
+    setBackground() {
+        this.background = this.getDrawableObject(source.mainBg, 0, 0);
     }
 
 
@@ -49,14 +34,27 @@ class StartWorld extends World {
     }
 
 
+    // jsdoc
+    setTextButtons() {
+        this.newGameButton = this.getTextButton('New Game', 340);
+        this.questButton = this.getTextButton('Quest', 412);
+        this.setCurrentButton('newGameButton');
+    }
+
+
+    // jsdoc
+    setCurrentButton(key) {
+        this.currentButton = this[key];
+        this.currentButton.selected = true;
+    }
+
+
+    // jsdoc
     getTextButton(text, b) {
         let width = this.getTextWidth(text);
-        let [x, y] = this.getTextXY(width, 24, b);
+        let [x, y] = this.getTextCoord(width, 24, b);
         let textSource = this.getTextSource(text, width, 24);
         return new TextButton(textSource, x, y);
-        // if (key == 'newGameButton') {
-        //     this[key].selected = true;
-        // }
     }
 
 
@@ -69,7 +67,7 @@ class StartWorld extends World {
 
 
     // jsdoc
-    getTextXY(width, height, b) {
+    getTextCoord(width, height, b) {
         let x = canvas.width / 2 - width / 2;
         let y = canvas.height - b - height;
         return [x, y];
@@ -82,11 +80,11 @@ class StartWorld extends World {
     }
 
 
-    sestQuestRoll() {
+    // jsdoc
+    setQuestRoll() {
         let [x, y] = this.getBgCoord('questRoll');
         this.questRoll = new QuestRoll(x, y);
-
-        this.coinButton = new CoinButton(this.questRoll.xRight, this.questRoll.yTop);
+        this.setCoinButton();
     }
 
 
@@ -99,41 +97,57 @@ class StartWorld extends World {
 
 
     // jsdoc
+    setCoinButton() {
+        let [x, y] = this.getObjectCoord('questRoll');
+        this.coinButton = new CoinButton(x, y);
+    }
+
+
+    // jsdoc
+    getObjectCoord(key) {
+        let x = this[key].xRight;
+        let y = this[key].yTop;
+        return [x, y];
+    }
+
+
+    // jsdoc
     setExtraButtons() {
         this.cupButton = new CupButton();
         this.settingsButton = new SettingsButton();
     }
 
 
+    // jsdoc
     setLeaderboard() {
         let [x, y] = this.getBgCoord('leaderboard');
         this.leaderboard = new Leaderboard(x, y);
+        this.setXButton();
+    }
 
-        this.xButton = new XButton(this.leaderboard.xRight, this.leaderboard.yTop);
+
+    // jsdoc
+    setXButton() {
+        let [x, y] = this.getObjectCoord('leaderboard');
+        this.xButton = new XButton(x, y);
     }
 
 
     // jsdoc
     setVolumeButtons() {
-        this.setVolBtnCoord();
-        this.lowMusicButton = new LowMusicButton(this.volBtnX, this.volBtnY);
-        this.highMusicButton = new HighMusicButton(this.volBtnX, this.volBtnY);
-        this.lowSoundButton = new LowSoundButton(this.volBtnX, this.volBtnY);
-        this.highSoundButton = new HighSoundButton(this.volBtnX, this.volBtnY);
+        let [x, y] = this.getVolBtnCoord();
+        this.lowMusicButton = new LowMusicButton(x, y);
+        this.highMusicButton = new HighMusicButton(x, y);
+        this.lowSoundButton = new LowSoundButton(x, y);
+        this.highSoundButton = new HighSoundButton(x, y);
     }
 
 
     // jsdoc
-    setVolBtnCoord() {
-        this.volBtnX = this.leaderboard.xLeft + (this.leaderboard.xRight - this.leaderboard.xLeft) / 2;
-        this.volBtnY = canvas.height - this.leaderboard.yTop;
-    }
-
-
-    // jsdoc
-    setCurrentButton(key) {
-        this.currentButton = this[key];
-        this.currentButton.selected = true;
+    getVolBtnCoord() {
+        let x = this.leaderboard.xLeft + (this.leaderboard.xRight - this.leaderboard.xLeft) / 2;
+        let y = canvas.height - this.leaderboard.yTop;
+        return [x, y];
     }
 
 
