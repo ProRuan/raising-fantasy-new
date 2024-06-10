@@ -98,7 +98,6 @@ class Spider extends Enemy {
     // jsdoc
     removeWeb() {
         this.web.stop(true);
-        this.removeDrawableObject();
         delete this.web;
     }
 

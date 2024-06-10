@@ -304,6 +304,5 @@ class Knight extends Character {
 
     // fix updateGroundLevel (error after collecting star) ...
 
-    // clear web, magic, bomb ... (0/3)
     // clear enemies (0/3) ...
 }

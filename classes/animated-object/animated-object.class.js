@@ -84,7 +84,7 @@ class AnimatedObject extends DrawableObject {
     restoreHp() {
         let newMax = this.getNewMax();
         this.restore(newMax);
-        this.clear();
+        this.stop(true);
     }
 
 

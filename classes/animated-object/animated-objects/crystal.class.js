@@ -10,7 +10,7 @@ class Crystal extends AnimatedObject {
     // jsdoc
     triggerEffect() {
         this.release();
-        this.clear();
+        this.stop(true);
     }
 
 

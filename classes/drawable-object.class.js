@@ -43,7 +43,6 @@ class DrawableObject {
     setUp(source, x, y) {
         this.setImage(source);
         this.setPosition(x, y);
-        this.addDrawableObject();
     }
 
 
@@ -92,11 +91,6 @@ class DrawableObject {
 
     setY(y) {
         this.y = canvas.height - this.height - y;
-    }
-
-
-    addDrawableObject() {    // rename and move?
-        drawableObjects.push(this);
     }
 
 
@@ -255,7 +249,7 @@ class DrawableObject {
             (logical) ? this.interval2.stop() : this.interval2.play();
         }
 
-        console.log(this, 'stopped');
+        // console.log(this, 'stopped');
     }
 
 
@@ -290,20 +284,6 @@ class DrawableObject {
         }
         audio.volume = soundVolume;
         audio.play();
-    }
-
-
-    // jsdoc
-    clear() {
-        this.stop(true);
-        this.removeDrawableObject();
-    }
-
-
-    removeDrawableObject() {
-        let idToDelete = drawableObjects.findIndex(o => o.interval && o.interval.stopped);
-        drawableObjects.splice(idToDelete, 1);
-        console.log(this, ' deleted');
     }
 
 

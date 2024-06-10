@@ -83,6 +83,7 @@ class TextButton extends Button {
             this.playSound(this.sound);
 
             setTimeout(() => {
+
                 intervalIds.forEach((id) => {
                     clearInterval(id);
                     console.log(id);
@@ -94,10 +95,12 @@ class TextButton extends Button {
                 //     }
                 // }
 
-                drawableObjects = [];
+                setCursor('initial');
+
                 world.stopped = true;
                 world = new LevelWorld(canvas, keyboard);
                 currentWorld = 'level';
+
                 // this.transit();
             }, 750);
         }
