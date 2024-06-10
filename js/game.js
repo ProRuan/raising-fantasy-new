@@ -120,12 +120,30 @@ function processKeydown(event) {    // check doubleClick!!!
         world.currentButton.selected = true;    // newGameButton selected?
     }
 
-    // console.log(event);
+    console.log(event);
     let code = getCode(event.code);
     setKey(code, 'keydown', true);
     setKey(code, 'timeStamp', getTime());
     verifyDoubleClick(code);
 
+
+    if (isMatch(currentWorld, 'start')) {
+        closeWithKey('backspace', 'leaderboard', 'xButton');
+        closeWithKey('backspace', 'questRoll', 'coinButton');
+        closeWithKey('space', 'leaderboard', 'xButton');
+        closeWithKey('space', 'questRoll', 'coinButton');
+        closeWithKey('keyX', 'leaderboard', 'xButton');
+        closeWithKey('keyX', 'questRoll', 'coinButton');
+    }
+
+}
+
+
+// jsdoc
+function closeWithKey(key, dialog, button) {
+    if (isKey(key) && world[dialog].isOpened()) {
+        world[button].locked = true;
+    }
 }
 
 

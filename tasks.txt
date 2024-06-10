@@ -113,8 +113,9 @@ Tasks
   - option: fix jump animation for 'fall after walk' ...
 
 
-Clean Coding (11/11 + 52/58) + (0/5) + review some classes (new code)
+Clean Coding (12/12 + 52/57) + (0/5) + review some classes (new code)
 ------------
+  - class Button - simpleCheck
   - class TextButton - simpleCheck
   - class CupButton - simpleCheck
   - class SettingsButton - simpleCheck
@@ -155,7 +156,6 @@ Clean Coding (11/11 + 52/58) + (0/5) + review some classes (new code)
   - class AvatarInfo - simpleCheck
   - class Background - simpleCheck
   - class Boss - simpleCheck
-  - class Button - simpleCheck
   - class Character - simpleCheck
   - class Cloud - simpleCheck
   - class CoordinateSystem ... ???
@@ -166,7 +166,7 @@ Clean Coding (11/11 + 52/58) + (0/5) + review some classes (new code)
   - class Ent - simpleCheck
   - class FlipBook - simpleCheck
   - class Key - simpleCheck
-  - class Keyboard ...
+  - class Keyboard - simpleCheck
   - class Knight ...
   - class Leaf - simpleCheck
   - class LevelScreen ...
