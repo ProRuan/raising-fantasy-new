@@ -48,7 +48,9 @@ class Star extends AnimatedObject {
     // jsdoc
     getPlaytime() {
         world.hero.endTime = getTime();
-        return getSum(world.hero.endTime, -world.hero.startTime);
+        let time = getSum(world.hero.endTime, -world.hero.startTime);
+        console.log(time - pauseTime, time, pauseTime);
+        return time - pauseTime;
     }
 
 

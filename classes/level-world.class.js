@@ -33,6 +33,7 @@ class LevelWorld extends World {
         this.setAvatar();
         this.setHero();
         this.connectWorld();
+        this.setPause();
     }
 
 
@@ -94,6 +95,17 @@ class LevelWorld extends World {
     }
 
 
+    setPause() {    // set source in class Source!!!
+        let path = './img/inner_interface/pause.png';
+        let width = 157;
+        let height = 63;
+        let source = { path: path, width: width, height: height };
+        let x = this.canvas.width / 2 - width / 2;
+        let y = this.canvas.height / 2 - height / 2;
+        this.pause = new DrawableObject(source, x, y);
+    }
+
+
     draw() {
         this.clearCanvas();
         this.setGlobalAlpha();
@@ -132,6 +144,10 @@ class LevelWorld extends World {
 
             this.drawAvatarInfo();
             this.removeDeadEnemies();
+
+            if (paused) {
+                this.drawObject(this.pause);
+            }
         }
         this.redraw();
     }
@@ -206,6 +222,8 @@ class LevelWorld extends World {
         let enemy = this.enemies.find(e => e.dead && !e.removable);
         if (enemy) {
             enemy.removable = true;
+            enemy.stop(true);
+            console.log(enemy, enemy.interval.stopped, enemy.interval2.stopped);
             setTimeout(() => {
                 let id = world.enemies.indexOf(enemy);
                 world.enemies.splice(id, 1);

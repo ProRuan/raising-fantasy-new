@@ -39,6 +39,11 @@ let sound = 7;
 
 pointer = false;
 
+let paused = false;
+let pauseStart = 0;
+let pauseEnd = 0;
+let pauseTime = 0;
+
 let source = new Source();
 
 
@@ -134,6 +139,20 @@ function processKeydown(event) {    // check doubleClick!!!
         closeWithKey('space', 'questRoll', 'coinButton');
         closeWithKey('keyX', 'leaderboard', 'xButton');
         closeWithKey('keyX', 'questRoll', 'coinButton');
+    }
+
+    if (isMatch(currentWorld, 'level')) {
+        if (isKey('keyP')) {
+            (!paused) ? pauseGame(true) : pauseGame(false);
+            paused = (!paused) ? true : false;
+            if (paused) {
+                pauseStart = getTime();
+            } else {
+                pauseEnd = getTime();
+                pauseTime += getSum(pauseEnd, -pauseStart);
+                console.log('Pause time: ', pauseTime);
+            }
+        }
     }
 
 }

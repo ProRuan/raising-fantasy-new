@@ -158,13 +158,6 @@ class Character extends MoveableObject {
 
 
     // jsdoc
-    clear() {
-        this.stop(true);
-        this.removeDrawableObject();
-    }
-
-
-    // jsdoc
     playSound(nameA, sound, nameB) {
         if (this.isImage(nameA)) {
             this.playAudio(sound);
