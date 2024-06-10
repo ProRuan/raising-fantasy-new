@@ -291,41 +291,6 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
-    updateGroundLevel(key) {
-        if (this.isUndefined(key)) {
-            this.setGroundLevel('flyGrass', this.updateGroundLevel('grass'));
-        } else {
-            this.setGroundLevel('grass', this.setObjectValue('groundLevel', this.abyssLevel));
-        }
-    }
-
-
-    // jsdoc
-    setGroundLevel(key, method) {
-        let grass = this.getGrass(key);
-        (grass) ? this.setObjectValue('groundLevel', grass.yTop) : method;
-    }
-
-
-    // jsdoc
-    getGrass(key) {
-        return this.world[key].find(g => this.isOnGrass(g) && this.isAboveGrass(g));
-    }
-
-
-    // jsdoc
-    isOnGrass(g) {
-        return isIncluded(g.xLeft, this.body.xLeft, g.xRight) || isIncluded(g.xLeft, this.body.xRight, g.xRight);
-    }
-
-
-    // jsdoc
-    isAboveGrass(g) {
-        return isGreater(this.body.yBottom, g.yTop, true);
-    }
-
-
 
     // avoid double code ...
     // move methods to other classes ...
@@ -335,4 +300,10 @@ class Knight extends Character {
     // review class Character (sort methods) ...
     // game over screen (this + level world) ...
     // pause ...
+    // fix enemy gravity or dino walk ...
+
+    // fix updateGroundLevel (error after collecting star) ...
+
+    // clear web, magic, bomb ... (0/3)
+    // clear enemies (0/3) ...
 }

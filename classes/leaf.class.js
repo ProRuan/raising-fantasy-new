@@ -32,6 +32,7 @@ class Leaf extends DrawableObject {
     // jsdoc
     triggerEffect() {
         world.hero.leaves++;
+        this.clear();
     }
 
 

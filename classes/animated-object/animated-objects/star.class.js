@@ -111,7 +111,7 @@ class Star extends AnimatedObject {
 
     // jsdoc
     leaveWorld() {
-        this.stop(true);
+        this.clear();
         drawableObjects = [];
         world.stopped = true;
     }

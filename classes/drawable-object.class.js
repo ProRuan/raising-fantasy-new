@@ -248,11 +248,14 @@ class DrawableObject {
 
 
     stop(logical) {
-        (logical) ? this.interval.stop() : this.interval.play();
-
+        if (this.interval) {
+            (logical) ? this.interval.stop() : this.interval.play();
+        }
         if (this.interval2) {
             (logical) ? this.interval2.stop() : this.interval2.play();
         }
+
+        console.log(this, 'stopped');
     }
 
 
@@ -290,9 +293,17 @@ class DrawableObject {
     }
 
 
+    // jsdoc
+    clear() {
+        this.stop(true);
+        this.removeDrawableObject();
+    }
+
+
     removeDrawableObject() {
         let idToDelete = drawableObjects.findIndex(o => o.interval && o.interval.stopped);
         drawableObjects.splice(idToDelete, 1);
+        console.log(this, ' deleted');
     }
 
 

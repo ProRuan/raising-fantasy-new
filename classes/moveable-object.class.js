@@ -196,7 +196,7 @@ class MoveableObject extends DrawableObject {
 
     // jsdoc
     getLadder(key) {
-        return this.world.ladders.find(l => this.isLadder(key, l));
+        return world.ladders.find(l => this.isLadder(key, l));
     }
 
 
@@ -303,6 +303,41 @@ class MoveableObject extends DrawableObject {
     // jsdoc
     muteAmbientSound(logical) {
         world.hero.music.muted = logical;
+    }
+
+
+    // jsdoc
+    updateGroundLevel(key) {
+        if (this.isUndefined(key)) {
+            this.setGroundLevel('flyGrass', this.updateGroundLevel('grass'));
+        } else {
+            this.setGroundLevel('grass', this.setObjectValue('groundLevel', this.abyssLevel));
+        }
+    }
+
+
+    // jsdoc
+    setGroundLevel(key, method) {
+        let grass = this.getGrass(key);
+        (grass) ? this.setObjectValue('groundLevel', grass.yTop) : method;
+    }
+
+
+    // jsdoc
+    getGrass(key) {
+        return world[key].find(g => this.isOnGrass(g) && this.isAboveGrass(g));
+    }
+
+
+    // jsdoc
+    isOnGrass(g) {
+        return isIncluded(g.xLeft, this.body.xLeft, g.xRight) || isIncluded(g.xLeft, this.body.xRight, g.xRight);
+    }
+
+
+    // jsdoc
+    isAboveGrass(g) {
+        return isGreater(this.body.yBottom, g.yTop, true);
     }
 
 

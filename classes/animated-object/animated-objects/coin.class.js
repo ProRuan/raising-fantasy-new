@@ -10,5 +10,6 @@ class Coin extends AnimatedObject {
     // jsdoc
     triggerEffect() {
         world.hero.coins++;
+        this.clear();
     }
 }
