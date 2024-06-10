@@ -3,6 +3,8 @@ class CoinButton extends Button {
     reachable = false;
     previous = 'settingsButton';
     next = 'cupButton';
+    shadowColor = 'olive';
+    shadowBlur = 16;
 
 
     // jsdoc

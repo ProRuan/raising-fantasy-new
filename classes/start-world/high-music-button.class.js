@@ -3,6 +3,8 @@ class HighMusicButton extends Button {
     reachable = false;
     previous = 'lowMusicButton';
     next = 'lowSoundButton';
+    shadowColor = 'white';
+    shadowBlur = 16;
 
 
     // jsdoc

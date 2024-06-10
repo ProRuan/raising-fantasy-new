@@ -167,28 +167,9 @@ class StartWorld extends World {
 
         this.drawFlashText();    // to edit / to move
 
+        this.drawLeaderboard();
+        this.drawQuestRoll();
 
-
-        // use new button function + clean leaderboard and quest roll
-
-        if (this.leaderboard.isOpened()) {
-            this.drawObject(this.leaderboard);
-            this.drawButtonWithShadow('xButton', 'lightcyan', 16);
-
-            this.leaderboard.drawScore();
-            this.leaderboard.drawVolume();
-
-            this.drawVolumeButtons();
-        } else if (this.questRoll.isOpened()) {    // set if rang and values!!!
-            this.drawObject(this.questRoll);
-            this.drawButtonWithShadow('coinButton', 'olive', 16);    // set values!
-
-            this.questRoll.drawQuest();
-        }
-
-
-        // only for testing!!!
-        // this.drawButtonFrame(this.questRoll);
 
         this.redraw();
         this.startMusic();
@@ -314,17 +295,14 @@ class StartWorld extends World {
     }
 
 
-
-
-
-    // to delete later!!!
-    drawButtonWithShadow(key, color, blur) {
-        if (this[key].isHighlighted()) {
-            this.setShadow(color, blur);
-            this.drawObject(this[key]);
-            this.setShadow();
-        } else {
-            this.drawObject(this[key]);
+    // jsdoc
+    drawLeaderboard() {
+        if (this.leaderboard.isOpened()) {
+            this.drawObject(this.leaderboard);
+            this.drawButton(this.xButton);
+            this.drawVolumeButtons();
+            this.leaderboard.drawScore();
+            this.leaderboard.drawVolume();
         }
     }
 
@@ -332,10 +310,20 @@ class StartWorld extends World {
     // jsdoc
     drawVolumeButtons() {
         if (this.settingsButton.isLocked()) {
-            this.drawButtonWithShadow('lowMusicButton', 'white', 16);
-            this.drawButtonWithShadow('highMusicButton', 'white', 16);
-            this.drawButtonWithShadow('lowSoundButton', 'white', 16);
-            this.drawButtonWithShadow('highSoundButton', 'white', 16);
+            this.drawButton(this.lowMusicButton);
+            this.drawButton(this.highMusicButton);
+            this.drawButton(this.lowSoundButton);
+            this.drawButton(this.highSoundButton);
+        }
+    }
+
+
+    // jsdoc
+    drawQuestRoll() {
+        if (this.questRoll.isOpened()) {
+            this.drawObject(this.questRoll);
+            this.drawButton(this.coinButton);
+            this.questRoll.drawQuest();
         }
     }
 
@@ -356,6 +344,12 @@ class StartWorld extends World {
     }
 
 
+    // jsdoc
+    setReachable(key, value) {
+        this[key].reachable = value;
+    }
+
+
     drawFlashText() {
         let time = getTime();
         let delta = time % 1000;
@@ -369,33 +363,7 @@ class StartWorld extends World {
     }
 
 
-    // jsdoc
-    setReachable(key, value) {
-        this[key].reachable = value;
-    }
 
-
-
-
-
-    showIntervalId() {
-        intervalIds.forEach((id) => {
-            console.log(id);
-        })
-        // for (const [key] of Object.entries(this)) {
-        //     if (this[key] instanceof Button && key != 'currentButton') {
-        //         console.log(key, this[key].id);
-        //     }
-        // }
-        return 'stopped buttons';
-    }
-
-
-    drawButtonFrame(button) {
-        this.ctx.beginPath();
-        this.ctx.lineWidth = '1';
-        this.ctx.strokeStyle = 'red';
-        this.ctx.rect(button.xLeft, button.yTop, button.xRight - button.xLeft, button.yBottom - button.yTop);
-        this.ctx.stroke();
-    }
+    // set draw()
+    // set flash text
 }

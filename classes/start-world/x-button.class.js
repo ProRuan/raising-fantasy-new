@@ -2,6 +2,8 @@ class XButton extends Button {
     indent = 2;
     reachable = false;
     previous = 'settingsButton';
+    shadowColor = 'lightcyan';
+    shadowBlur = 16;
 
 
     // jsdoc

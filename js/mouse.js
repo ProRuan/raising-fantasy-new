@@ -79,7 +79,6 @@ function interactFirst(event) {
 function closeLeaderboard(event) {
     if (isMouseEvent(event, world.xButton) && world.xButton.reachable) {
         world.xButton.locked = true;
-        console.log('xButton');
     }
 }
 
@@ -87,7 +86,6 @@ function closeLeaderboard(event) {
 function setVolume(event, key) {
     if (isMouseEvent(event, world[key]) && world[key].reachable) {
         world[key].locked = true;
-        console.log(world[key]);
     }
 }
 
@@ -122,7 +120,6 @@ function isButtonLocked(event, key, logical) {
 function closeQuestRoll(event) {    // double code?
     if (isMouseEvent(event, world.coinButton) && world.coinButton.reachable) {
         world.coinButton.locked = true;
-        console.log('coinButton');
     }
 }
 
