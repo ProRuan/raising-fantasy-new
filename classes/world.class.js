@@ -1,6 +1,7 @@
 class World {
     alpha = 1;
     darkSpeed = 0.025;
+    cameraX = 0;
 
 
     // jsdoc
@@ -122,5 +123,11 @@ class World {
         } else {
             this.alpha -= this.darkSpeed;
         }
+    }
+
+
+    // jsdoc
+    translateCamera(x, y) {
+        this.ctx.translate(x, y);
     }
 }

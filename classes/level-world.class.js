@@ -1,19 +1,23 @@
 class LevelWorld extends World {
-    // to move!!!
     heroX = 212;
     trophyY = 436;
     victorySpeed = 2;
 
-    // Create an upper class LevelWorldKit!!!
+
+    // Please take care of x, y and UNIT!!!
+    // Fix loading sequence!!!
 
 
     constructor(canvas, keyboard) {
         super(canvas, keyboard);
-
-
         this.setLevelWorld();
-        this.runTime();
         this.draw();
+    }
+
+
+    // jsdoc
+    get time() {
+        return new Date().getTime();
     }
 
 
@@ -23,31 +27,23 @@ class LevelWorld extends World {
     }
 
 
+    // jsdoc
     setLevelWorld() {
-
-
-        // only for testing!!!
-        this.cameraX = 0;
-
-
-        this.hero = new Knight(this.heroX, 38);
-
-
-        // ready!!!
         this.setLevel();
-        this.setAvatarInfo();
-
-
+        this.setAvatar();
+        this.setHero();
         this.connectWorld();
     }
 
 
+    // jsdoc
     setLevel() {
         this.level = new Level1();
         this.setLevelObjects();
     }
 
 
+    // jsdoc
     setLevelObjects() {
         for (const [key, value] of Object.entries(this.level)) {
             this[key] = value;
@@ -55,54 +51,52 @@ class LevelWorld extends World {
     }
 
 
-    setAvatarInfo() {
-        this.setInfoAvatar();
-        this.setInfoStateBar();
-        this.setInfoItem();
+    // jsdoc
+    setAvatar() {
+        this.setAvatarProfile();
+        this.setAvatarStateBar();
+        this.setAvatarItem();
     }
 
 
-    setInfoAvatar() {
+    // jsdoc
+    setAvatarProfile() {
         this.avatarImage = new AvatarInfo(source.avatarImage);
         this.avatarFrame = new AvatarInfo(source.avatarFrame);
     }
 
 
-    setInfoStateBar() {
+    // jsdoc
+    setAvatarStateBar() {
         this.hpBar = new StateBar(source.hpPoint, 120, 600);
         this.energyBar = new StateBar(source.energyPoint, 100, 48);
         this.staminaBar = new StateBar(source.staminaPoint, 100, 16);
     }
 
 
-    setInfoItem() {
+    // jsdoc
+    setAvatarItem() {
         this.itemBg = new AvatarInfo(source.itemBg);
         this.itemBomb = new AvatarInfo(source.itemBomb);
         this.itemBorder = new AvatarInfo(source.itemBorder);
     }
 
 
+    // jsdoc
+    setHero() {
+        this.hero = new Knight(this.heroX, 38);
+    }
+
+
+    // jsdoc
     connectWorld() {
         this.hero.world = this;
     }
 
 
-    runTime() {    // getter worldTime?
-        setInterval(() => {
-            this.time = new Date().getTime();
-        }, 1000 / 60);
-    }
-
-
-    // Please take care of x, y and UNIT!!!
-
-    // Fix loading sequence!!!
-
-
-    draw() {    // double code!!!
-
-        this.clearCanvas();    // think about camera objects!!!
-        this.ctx.globalAlpha = this.alpha;
+    draw() {
+        this.clearCanvas();
+        this.setGlobalAlpha();
 
 
         if (this.hero.img.src.includes('death')) {
@@ -120,17 +114,11 @@ class LevelWorld extends World {
                 this.ctx.textAlign = 'center';
                 this.ctx.fillStyle = 'white';
                 this.drawText('Game Over', 480, 270);
-
-                // this.ctx.font = '24px Arial';
-                // this.ctx.textAlign = 'center';
-                // this.ctx.fillStyle = 'white';
-                // this.drawText('Go back', 480, 400);
             }
         } else {
             this.translateCamera(this.cameraX, 0);
 
 
-            // ready!!!
             this.drawLevel();
             this.drawObject(this.hero);
             if (this.endboss[0].magic) {
@@ -149,15 +137,29 @@ class LevelWorld extends World {
     }
 
 
-    translateCamera(x, y) {
-        this.ctx.translate(x, y);
+    drawLevel() {
+        // this.drawObjectGroup(this.level.background);
+        // this.drawObjectGroup(this.level.clouds);
+        // this.drawObjectGroup(this.level.birds);
+        // this.drawObjectGroup(this.level.trees);
+        for (const [key] of Object.entries(this.level)) {
+            this.drawObjectGroup(this.level[key]);
+
+            this.isMatchGroup(key);
+        }
     }
 
 
-    drawLevel() {
-        for (const [key] of Object.entries(this.level)) {
-            this.drawObjectGroup(this.level[key]);
-        }
+    isMatchGroup(key) {
+        let objects = ['background', 'clouds', 'birds', 'trees'];
+        objects.forEach((element) => {
+            if (isMatch(element, key)) {
+                // console.log(true);
+                return true;
+            }
+        })
+        // console.log(false);
+        return false;
     }
 
 
@@ -274,4 +276,7 @@ class LevelWorld extends World {
     // remove web, magic, bomb ...
     // favicon
     // prevent default ...
+
+    // class StartWorldKit?
+    // class LevelWorldKit?
 }
