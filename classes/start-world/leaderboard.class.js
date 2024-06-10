@@ -57,7 +57,6 @@ class Leaderboard extends DrawableObject {
             this.drawChapter('gold', 'best', this.yTop + this.yScore.best);
             this.drawHeadline('white', 'Last Score', this.yHeadline.b);
             this.drawChapter('white', 'last', this.yTop + this.yScore.last);
-            world.setFillStyle();
         }
     }
 
@@ -177,7 +176,6 @@ class Leaderboard extends DrawableObject {
             this.drawHeadline('white', 'Volume', this.yHeadline.a);
             this.drawVolumeText('Music', this.yTop + this.yVolume.music, volume.music);
             this.drawVolumeText('Sound', this.yTop + this.yVolume.sound, volume.sound);
-            world.setFillStyle();
         }
     }
 
