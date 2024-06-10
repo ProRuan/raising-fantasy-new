@@ -9,10 +9,6 @@ class Knight extends Character {
     xStopLeft = source.startX;
     xStopRight = source.crystalXCenter;
 
-    // hurt: set condition + delay!!!
-    // set attackXY and walkAttackXY for isBattle()!!!
-
-
     // edit source!!!
     // option: fix fall animation and sound!!!
     goAway = { path: source.goAway, startTime: 0.3 };
@@ -32,92 +28,112 @@ class Knight extends Character {
     }
 
 
+    // jsdoc
     animate() {
-        this.moveId = setInterval(() => {
-            this.startAmbientSound();
+        this.setPauseableInterval(() => this.move(), 1000 / 60);
+        this.setPauseableInterval(() => this.play(), 100);
+    }
 
-            this.resetJumpCounter();
 
-            // only for testing!!!
-            if (isKey('keyQ')) {
-                this.setOtherDirection(true);
+    move() {
+        this.startAmbientSound();
+        this.resetJumpCounter();
+
+        this.flip();
+
+        this.climb();
+        this.jump();
+        this.run()
+        this.attack();    // still to write!!!
+        this.idle();
+
+        this.setChapter();
+        this.resetCurrentImage();
+        // this.setSound();    // maybe?
+
+        this.updateGroundLevel();
+
+        this.collect('coins');
+        this.collect('crystals');
+        this.collect('hearts');
+        this.collect('hitPoints');
+        this.collect('leaves');
+        this.collect('stars');
+
+
+        if (isKey('keyA')) {    // set condition and move method call!?!
+            this.staminaPoints.splice(this.staminaPoints.length - 1, 1);
+        }
+
+
+        if (isKey('keyF') && !this.bomb && this.energyPoints.length == 100) {
+            let x = (this.x - 42) / 64;
+            let y = (canvas.height - (this.y + this.height + 62 + 13)) / 64;
+            this.bomb = new Bomb(x, y);
+            this.energyPoints.splice(0, 100);
+        }
+        if (this.bomb && this.bomb.removeable || this.bomb && this.bomb.y > this.abyssLevel) {
+            this.bomb = undefined;
+        }
+
+
+        if (isGreater(6932, this.x) && isUndefined(this.bossBattleStarted)) {
+            this.bossBattleStarted = true;
+            this.xStopLeft = source.bossBattleX;
+        }
+
+        // (64, body.xCenter) + (body.xCenter, 960 - 64)
+
+        if (isUndefined(this.bossBattleStarted)) {
+            if (isGreater(960 * 7 + 212, this.x)) {
+                this.world.cameraX = -960 * 7;
+            } else if (isGreater(212, this.x)) {
+                this.world.cameraX = -this.x + 212;    // set camera x offset!!!
+            } else {
+                this.world.cameraX = 0;
             }
-            if (isKey('keyE')) {
-                this.setOtherDirection(false);
-            }
-
-            this.climb();
-            this.jump();
-            this.run()
-            this.attack();    // still to write!!!
-            this.idle();
-
-            this.setChapter();
-            this.resetCurrentImage();
-            // this.setSound();    // maybe?
-
-            this.updateGroundLevel();
-
-            this.collect('coins');
-            this.collect('crystals');
-            this.collect('hearts');
-            this.collect('hitPoints');
-            this.collect('leaves');
-            this.collect('stars');
+        }
+    }
 
 
-            if (isKey('keyA')) {    // set condition and move method call!?!
-                this.staminaPoints.splice(this.staminaPoints.length - 1, 1);
-            }
+    startAmbientSound() {    // double code!!! (shaman)
+        if (!this.musicStarted) {
+            this.musicStarted = true;
+            this.music.play();
+            this.startTime = getTime();
+        }
+    }
 
 
-            if (isKey('keyF') && !this.bomb && this.energyPoints.length == 100) {
-                let x = (this.x - 42) / 64;
-                let y = (canvas.height - (this.y + this.height + 62 + 13)) / 64;
-                this.bomb = new Bomb(x, y);
-                this.energyPoints.splice(0, 100);
-            }
-            if (this.bomb && this.bomb.removeable || this.bomb && this.bomb.y > this.abyssLevel) {
-                this.bomb = undefined;
-            }
+    // jsdoc
+    flip() {
+        this.changeDirection('keyQ', true);
+        this.changeDirection('keyE', false);
+    }
 
 
-            if (isGreater(6932, this.x) && isUndefined(this.bossBattleStarted)) {
-                this.bossBattleStarted = true;
-                this.xStopLeft = source.bossBattleX;
-            }
-
-            // (64, body.xCenter) + (body.xCenter, 960 - 64)
-
-            if (isUndefined(this.bossBattleStarted)) {
-                if (isGreater(960 * 7 + 212, this.x)) {
-                    this.world.cameraX = -960 * 7;
-                } else if (isGreater(212, this.x)) {
-                    this.world.cameraX = -this.x + 212;    // set camera x offset!!!
-                } else {
-                    this.world.cameraX = 0;
-                }
-            }
-
-        }, 1000 / 60);
+    // jsdoc
+    changeDirection(key, logical) {
+        if (isKey(key)) {
+            this.setOtherDirection(logical);
+        }
+    }
 
 
-        this.playId = setInterval(() => {
-            // console.log(this.chapter, this.currentImage);
+    // jsdoc
+    play() {
+        this.playAnimation();
+        this.playSoundEffects();
+    }
 
-            // if (!isUndefined(this.world.endboss[0].magic)) {
-            //     let magic = this.world.endboss[0].magic.body;
-            //     console.log('lightning: ', magic.xLeft, magic.xRight, magic.yTop, magic.yBottom);
-            //     console.log('hero: ', this.body.xLeft, this.body.xRight, this.body.yTop, this.body.yBottom);
-            //     console.log('collided x: ', isIncluded(this.body.xLeft, magic.xCenter, this.body.xRight));
-            //     console.log('collided y: ', isIncluded(magic.yTop, this.body.yCenter, magic.yBottom));
-            // }
 
-            // is ready!!!
-            // -----------
-            this.playAnimation();
-            this.playSoundEffects();
-        }, 100);
+    // jsdoc
+    playAnimation() {
+        if (!this.isJump()) {
+            super.playAnimation(this.flipBook[this.chapter]);
+        } else {
+            this.playJumpAnimation();
+        }
     }
 
 
@@ -137,26 +153,7 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
-    playSound(nameA, sound, nameB) {
-        if (this.isImage(nameA)) {
-            this.playAudio(sound);
-        } else if (!isUndefined(nameB) && this.isImage(nameB)) {
-            this.playAudio(sound);
-        }
-    }
-
-
-    // jsdoc
-    playAudio(sound) {
-        let audio = new Audio(sound.path);
-        audio.currentTime = sound.startTime;
-        audio.volume = soundVolume;
-        audio.play();
-    }
-
-
-    // isPassedAway() / isGone() / ...
+    // isPassedAway() ...
 
 
     // to edit!
@@ -256,26 +253,13 @@ class Knight extends Character {
         if (isGreater(this.body.xCenter, this.xStopRight)) {
             this.runLeft('arrowRight', false);
         }
-
-
-        // if (!isUndefined(this.world.crystals[0]) && isGreater(source.xStart, this.body.xCenter)) {    // level xStart
-        //     this.runLeft('arrowLeft', true);
-        // } else if (isGreater(5760 + 192 + 32, this.body.xCenter)) {
-        //     this.runLeft('arrowLeft', true);
-        // }
-
-        // if (isGreater(this.body.xCenter, 6240)) {    // level xEnd
-        //     this.runLeft('arrowRight', false);
-        // } else if (isUndefined(this.world.crystals[0]) && isGreater(this.body.xCenter, source.xEnd)) {    // level xEnd
-        //     this.runLeft('arrowRight', false);
-        // }
     }
 
 
     // jsdoc
     runLeft(key, value) {
         if (isKey(key)) {
-            this.move(value, key);
+            super.move(value, key);
         }
     }
 
@@ -287,25 +271,6 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
-    playAnimation() {
-        if (!this.isJump()) {
-            super.playAnimation(this.flipBook[this.chapter]);
-        } else {
-            this.playJumpAnimation();
-        }
-    }
-
-
-    // to use?
-    playSoundOnTrigger(key, sound) {
-        if (this.isImage(key)) {
-            super.playSound(sound);
-        }
-    }
-
-
-    // to edit (this and subsequent methods)!!!
     collect(key) {
         let object = this.getObject(key);
         if (object) {
@@ -315,35 +280,14 @@ class Knight extends Character {
     }
 
 
-    // use object id directly!!!
+    // jsdoc
     getObject(key) {
         return world[key].find(o => isCollided(this.body, o));
     }
 
 
-    // jsdoc
     removeObject(key, object) {
         world[key].splice(object.getId(key), 1);
-    }
-
-
-    // jsdoc
-    increaseCounter(item, object) {
-        if (this.isCollectableItem(object)) {
-            this.increaseItem(item);
-        }
-    }
-
-
-    // jsdoc
-    isCollectableItem(object) {
-        return object instanceof Coin || object instanceof Leaf;
-    }
-
-
-    // jsdoc
-    increaseItem(item) {
-        this[item]++;
     }
 
 
@@ -359,13 +303,13 @@ class Knight extends Character {
 
     // jsdoc
     setGroundLevel(key, method) {
-        let grass = this.searchGrass(key);
+        let grass = this.getGrass(key);
         (grass) ? this.setObjectValue('groundLevel', grass.yTop) : method;
     }
 
 
-    // jsdoc + rename to getGrass()
-    searchGrass(key) {
+    // jsdoc
+    getGrass(key) {
         return this.world[key].find(g => this.isOnGrass(g) && this.isAboveGrass(g));
     }
 
@@ -382,17 +326,13 @@ class Knight extends Character {
     }
 
 
-    startAmbientSound() {    // double code!!! (shaman)
-        if (!this.musicStarted) {
-            this.musicStarted = true;
-            this.music.play();
-            this.startTime = getTime();
-            console.log(this.startTime);
-            // setTimeout(() => {
-            //     this.music.play();
-            //     this.startTime = getTime();
-            //     console.log(this.startTime);
-            // }, 125);
-        }
-    }
+
+    // avoid double code ...
+    // move methods to other classes ...
+    // hurt: set condition + delay!!!
+    // set attackXY and walkAttackXY for isBattle()!!!
+    // move animate() ... ?
+    // review class Character (sort methods) ...
+    // game over screen (this + level world) ...
+    // pause ...
 }

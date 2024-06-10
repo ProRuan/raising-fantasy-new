@@ -155,4 +155,23 @@ class Character extends MoveableObject {
             this.hpPoints.splice(currentHp, damage);
         }
     }
+
+
+    // jsdoc
+    playSound(nameA, sound, nameB) {
+        if (this.isImage(nameA)) {
+            this.playAudio(sound);
+        } else if (!isUndefined(nameB) && this.isImage(nameB)) {
+            this.playAudio(sound);
+        }
+    }
+
+
+    // jsdoc
+    playAudio(sound) {
+        let audio = new Audio(sound.path);
+        audio.currentTime = sound.startTime;
+        audio.volume = soundVolume;
+        audio.play();
+    }
 }

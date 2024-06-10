@@ -9,13 +9,6 @@ let musicVolume = 0.5;
 let soundVolume = 0.5;
 
 
-// in use?
-const OBJECTS_TO_COUNT = [
-    'bird', 'bomb', 'coin', 'crystal', 'heart',
-    'hitPoint', 'leaf', 'star', 'web'
-];
-
-
 const FLIP_BOOK_KNIGHT = [
     './img/characters/knight/attack/attack4.png',
     './img/characters/knight/climb/climb4.png',
