@@ -1,5 +1,5 @@
 class Button extends DrawableObject {
-    reachable = true;
+    reachable = false;
     targeted = false;
     selected = false;
     locked = false;

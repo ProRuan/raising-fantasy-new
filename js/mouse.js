@@ -49,21 +49,23 @@ function setCursor(value) {
 // Please sort the subsequent functions + rename!!!
 function processMouseDown(event) {
     if (event && currentWorld == 'start') {
-        world.currentButton.selected = false;
+        if (!world.interacted) {
+            interactFirst(event);
+        } else {
+            world.currentButton.selected = false;
 
-        interactFirst(event);
+            closeLeaderboard(event);
+            setVolume(event, 'lowMusicButton');
+            setVolume(event, 'highMusicButton');
+            setVolume(event, 'lowSoundButton');
+            setVolume(event, 'highSoundButton');
+            openLeaderboard(event, 'cupButton');
+            openLeaderboard(event, 'settingsButton');
 
-        closeLeaderboard(event);
-        setVolume(event, 'lowMusicButton');
-        setVolume(event, 'highMusicButton');
-        setVolume(event, 'lowSoundButton');
-        setVolume(event, 'highSoundButton');
-        openLeaderboard(event, 'cupButton');
-        openLeaderboard(event, 'settingsButton');
-
-        closeQuestRoll(event);
-        openQuestRoll(event, 'questButton');
-        startNewGame(event);
+            closeQuestRoll(event);
+            openQuestRoll(event, 'questButton');
+            startNewGame(event);
+        }
     }
 }
 
@@ -147,6 +149,12 @@ function startNewGame(event) {
 
 function processMouseUp() {
     if (currentWorld == 'start') {
-
+        if (world.interacted && !world.mainRevealed) {
+            world.mainRevealed = true;
+            world.newGameButton.reachable = true;
+            world.questButton.reachable = true;
+            world.cupButton.reachable = true;
+            world.settingsButton.reachable = true;
+        }
     }
 }

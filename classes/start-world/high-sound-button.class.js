@@ -1,6 +1,5 @@
 class HighSoundButton extends Button {
     indent = -6;
-    reachable = false;
     previous = 'lowSoundButton';
     next = 'cupButton';
     shadowColor = 'white';

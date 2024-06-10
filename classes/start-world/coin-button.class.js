@@ -1,6 +1,5 @@
 class CoinButton extends Button {
     indent = 2;
-    reachable = false;
     previous = 'settingsButton';
     next = 'cupButton';
     shadowColor = 'olive';

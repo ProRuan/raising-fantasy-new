@@ -1,6 +1,5 @@
 class LowMusicButton extends Button {
     indent = -6;
-    reachable = false;
     previous = 'xButton';
     next = 'highMusicButton';
     shadowColor = 'white';

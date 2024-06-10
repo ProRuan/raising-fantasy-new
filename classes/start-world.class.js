@@ -159,18 +159,15 @@ class StartWorld extends World {
     }
 
 
+    // jsdoc
     draw() {
         this.clearCanvas();
         this.setGlobalAlpha();
         this.applyKeyControl();
         this.drawMain();
-
-        this.drawFlashText();    // to edit / to move
-
+        this.drawFlashText();
         this.drawLeaderboard();
         this.drawQuestRoll();
-
-
         this.redraw();
         this.startMusic();
         this.updateVolume();
@@ -248,10 +245,7 @@ class StartWorld extends World {
     drawMain() {
         this.drawObject(this.background);
         this.drawTitle(this.title);
-        this.drawButton(this.newGameButton);
-        this.drawButton(this.questButton);
-        this.drawButton(this.cupButton);
-        this.drawButton(this.settingsButton);
+        this.drawMainButtons();
     }
 
 
@@ -261,6 +255,17 @@ class StartWorld extends World {
         let y = this.canvas.height / 2 + 8;
         this.setText(title.font, 'center', 'black');
         super.drawText(title.text, x, y);
+    }
+
+
+    // jsdoc
+    drawMainButtons() {
+        if (this.interacted) {
+            this.drawButton(this.newGameButton);
+            this.drawButton(this.questButton);
+            this.drawButton(this.cupButton);
+            this.drawButton(this.settingsButton);
+        }
     }
 
 
@@ -346,24 +351,27 @@ class StartWorld extends World {
 
     // jsdoc
     setReachable(key, value) {
-        this[key].reachable = value;
-    }
-
-
-    drawFlashText() {
-        let time = getTime();
-        let delta = time % 1000;
-        if (delta < 500 && this.interacted == false) {
-            this.setText('24px Arial', 'center', 'black');
-            let x = this.canvas.width / 2;
-            let a = 36;
-            let y = this.canvas.height / 2 + 90 + a;
-            this.drawText('Press any key', x, y);
+        if (this.interacted) {
+            this[key].reachable = value;
         }
     }
 
 
+    // jsdoc
+    drawFlashText() {
+        let time = getTime();
+        let ms = time % 1000;
+        if (isGreater(ms, 500) && !isTrue(this.interacted)) {
+            this.setText('24px Arial', 'center', 'black');
+            this.setFlashText();
+        }
+    }
 
-    // set draw()
-    // set flash text
+
+    // jsdoc
+    setFlashText() {
+        let x = this.canvas.width / 2;
+        let y = this.canvas.height / 2 + 126;
+        this.drawText('Press any key', x, y);
+    }
 }
