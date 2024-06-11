@@ -19,6 +19,15 @@ class Knight extends Character {
     skillUpgrade = { path: source.skillUpgrade, startTime: 0 };
 
 
+    // tasks
+    // -----
+    // hurt
+    // attack
+    // throw
+    // sound
+    // act
+
+
     constructor(x, y) {
         super(source.knight, x, y);
         this.setSpeed(128, 256);
@@ -44,30 +53,39 @@ class Knight extends Character {
         this.resetCurrentImage();
         this.updateGroundLevel();
 
+        this.throw();    // give it to act()?
 
-        if (isKey('keyA')) {    // set condition and move method call!?!
-            this.staminaPoints.splice(this.staminaPoints.length - 1, 1);
-        }
-
-
-        if (isKey('keyF') && !this.bomb && this.energyPoints.length == 100) {
-            let x = (this.x - 42) / 64;
-            let y = (canvas.height - (this.y + this.height + 62 + 13)) / 64;
-            this.bomb = new Bomb(x, y);
-            this.energyPoints.splice(0, 100);
-        }
-        if (this.bomb && this.bomb.removeable || this.bomb && this.bomb.y > this.abyssLevel) {
-            this.bomb = undefined;
-        }
-
-
-        if (isGreater(6932, this.x) && isUndefined(this.bossBattleStarted)) {
-            this.bossBattleStarted = true;
-            this.xStopLeft = source.bossBattleX;
-        }
+        this.startBossBattle();
 
         this.updateCameraX();
         this.startAmbientSound();
+    }
+
+
+    throw() {
+        if (this.isBombReady()) {
+            if (isKey('keyF') && !this.bomb && this.energyPoints.length == 100) {
+                let x = (this.x - 42) / 64;
+                let y = (canvas.height - (this.y + this.height + 62 + 13)) / 64;
+                this.bomb = new Bomb(x, y);
+                this.energyPoints.splice(0, 100);
+            }
+            this.resetBomb();
+        }
+    }
+
+
+    // jsdoc
+    isBombReady() {
+        return !this.isUndefined(this.bombUnlocked) && !isTrue(this.otherDirection);
+    }
+
+
+    // jsdoc
+    resetBomb() {
+        let bombBurst = this.bomb && this.bomb.removeable;
+        let bombOut = this.bomb && isGreater(this.abyssLevel, this.bomb.y);
+        this.bomb = (bombBurst || bombOut) ? undefined : this.bomb;
     }
 
 
@@ -255,7 +273,16 @@ class Knight extends Character {
 
     attack() {
         if (this.isAttack() && this.isBattle()) {
-            // console.log('battle');
+
+        }
+        this.applyStamina();
+    }
+
+
+    // jsdoc
+    applyStamina() {
+        if (this.isAttack()) {
+            this.staminaPoints.splice(this.staminaPoints.length - 1, 1);
         }
     }
 
@@ -279,6 +306,15 @@ class Knight extends Character {
     // jsdoc
     removeObject(key, object) {
         world[key].splice(object.getId(key), 1);
+    }
+
+
+    // jsdoc
+    startBossBattle() {
+        if (isGreater(source.bossBattleTriggerX, this.x) && isUndefined(this.bossBattleStarted)) {
+            this.bossBattleStarted = true;
+            this.xStopLeft = source.bossBattleX;
+        }
     }
 
 

@@ -97,6 +97,7 @@ class TextButton extends Button {
 
                 setCursor('initial');
 
+                world.music.pause();
                 world.stopped = true;
                 world = new LevelWorld(canvas, keyboard);
                 currentWorld = 'level';

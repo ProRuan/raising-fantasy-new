@@ -114,6 +114,7 @@ class Star extends AnimatedObject {
     // jsdoc
     leaveWorld() {
         this.stop(true);
+        world.hero.music.pause();
         world.stopped = true;
     }
 
