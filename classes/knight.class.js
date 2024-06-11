@@ -4,6 +4,7 @@ class Knight extends Character {
     weaponXY = { xLeft: 24, xRight: 60, yTop: 56, yBottom: 104 };
     attackXY = { xLeft: 24, xRight: 60, yTop: 56, yBottom: 104 };
     walkAttackXY = { xLeft: 24, xRight: 50, yTop: 56, yBottom: 108 };
+    bombXY = { x: 42, y: 75 };
     chapters = ['epilog', 'death', 'hurt', 'climb', 'jump', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'idle', 'cover'];
 
     xStopLeft = source.startX;
@@ -80,16 +81,25 @@ class Knight extends Character {
     // jsdoc
     throwBomb() {
         if (this.isBombThrow()) {
-            let x = (this.x - 42) / 64;
-            let y = (canvas.height - (this.y + this.height + 62 + 13)) / 64;
+            let [x, y] = this.getBombCoord();
             this.bomb = new Bomb(x, y);
             this.energyPoints.splice(0, 100);
         }
     }
 
 
-    isBombThrow() {    // to edit!
+    // jsdoc
+    isBombThrow() {
         return isKey('keyF') && isUndefined(this.bomb) && isMatch(this.energyPoints.length, 100);
+    }
+
+
+    // jsdoc
+    getBombCoord() {
+        let x = (this.x - this.bombXY.x) / UNIT;
+        let tempY = this.y + this.height + this.bombXY.y;
+        let y = (canvas.height - tempY) / UNIT;
+        return [x, y];
     }
 
 
