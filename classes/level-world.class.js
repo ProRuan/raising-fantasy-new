@@ -2,6 +2,7 @@ class LevelWorld extends World {
     heroX = 212;
     trophyY = 436;
     victorySpeed = 2;
+    size = LEVEL_SIZE;
 
 
     // Please take care of x, y and UNIT!!!

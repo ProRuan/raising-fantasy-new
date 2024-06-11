@@ -36,29 +36,13 @@ class Knight extends Character {
 
 
     move() {
-        this.startAmbientSound();
         this.resetJumpCounter();
 
-        this.flip();
-
-        this.climb();
-        this.jump();
-        this.run()
-        this.attack();    // still to write!!!
-        this.idle();
+        this.act();
 
         this.setChapter();
         this.resetCurrentImage();
-        // this.setSound();    // maybe?
-
         this.updateGroundLevel();
-
-        this.collect('coins');
-        this.collect('crystals');
-        this.collect('hearts');
-        this.collect('hitPoints');
-        this.collect('leaves');
-        this.collect('stars');
 
 
         if (isKey('keyA')) {    // set condition and move method call!?!
@@ -82,26 +66,20 @@ class Knight extends Character {
             this.xStopLeft = source.bossBattleX;
         }
 
-        // (64, body.xCenter) + (body.xCenter, 960 - 64)
-
-        if (isUndefined(this.bossBattleStarted)) {
-            if (isGreater(960 * 7 + 212, this.x)) {
-                this.world.cameraX = -960 * 7;
-            } else if (isGreater(212, this.x)) {
-                this.world.cameraX = -this.x + 212;    // set camera x offset!!!
-            } else {
-                this.world.cameraX = 0;
-            }
-        }
+        this.updateCameraX();
+        this.startAmbientSound();
     }
 
 
-    startAmbientSound() {    // double code!!! (shaman)
-        if (!this.musicStarted) {
-            this.musicStarted = true;
-            this.music.play();
-            this.startTime = getTime();
-        }
+    // jsdoc
+    act() {
+        this.climb();
+        this.jump();
+        this.run()
+        this.attack();
+        this.idle();
+        this.flip();
+        this.collect();
     }
 
 
@@ -217,6 +195,17 @@ class Knight extends Character {
 
 
     // jsdoc
+    collect() {
+        this.collectItem('coins');
+        this.collectItem('crystals');
+        this.collectItem('hearts');
+        this.collectItem('hitPoints');
+        this.collectItem('leaves');
+        this.collectItem('stars');
+    }
+
+
+    // jsdoc
     climb() {
         this.climbUp('arrowUp', true);
         this.climbUp('arrowDown', false);
@@ -271,7 +260,8 @@ class Knight extends Character {
     }
 
 
-    collect(key) {
+    // jsdoc
+    collectItem(key) {
         let object = this.getObject(key);
         if (object) {
             object.effect();
@@ -286,9 +276,53 @@ class Knight extends Character {
     }
 
 
+    // jsdoc
     removeObject(key, object) {
         world[key].splice(object.getId(key), 1);
     }
+
+
+    // jsdoc
+    updateCameraX() {
+        if (isUndefined(this.bossBattleStarted)) {
+            let cameraX = this.getCameraX();
+            if (isGreater(cameraX, this.x)) {
+                this.setCameraX(2);
+            } else if (isGreater(this.world.heroX, this.x)) {
+                this.setCameraX(1);
+            } else {
+                this.setCameraX(0);
+            }
+        }
+    }
+
+
+    // jsdoc
+    getCameraX() {
+        return canvas.width * (this.world.size - 1) + this.world.heroX;
+    }
+
+
+    // jsdoc
+    setCameraX(id) {
+        if (isMatch(id, 2)) {
+            this.world.cameraX = -canvas.width * (this.world.size - 1);
+        } else if (isMatch(id, 1)) {
+            this.world.cameraX = -this.x + this.world.heroX;
+        } else if (isMatch(id, 0)) {
+            this.world.cameraX = 0;
+        }
+    }
+
+
+    startAmbientSound() {    // double code!!! (shaman)
+        if (!this.musicStarted) {
+            this.musicStarted = true;
+            this.music.play();
+            this.startTime = getTime();
+        }
+    }
+
 
 
 
