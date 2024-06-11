@@ -2,6 +2,7 @@ class Ent extends Enemy {
     radDispl = 232;
     bodyXY = { xLeft: 100, xCenter: 116, xRight: 132, yTop: 92, yCenter: 134, yBottom: 176 };
     weaponXY = { xLeft: 52, xRight: 124, yTop: 112, yBottom: 176 };
+    damage = { trigger: 'attack3', value: 16, time: 0 };
     patrolDistance = 160;
     patrolBreak = 2500;
     lastTurn = 0;

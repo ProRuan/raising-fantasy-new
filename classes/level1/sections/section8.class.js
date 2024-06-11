@@ -7,7 +7,7 @@ class Section8 {
         this.setGrass();
         this.setLadders();
         this.setStars();
-        this.setEndboss();
+        this.setBosses();
     }
 
 
@@ -48,7 +48,7 @@ class Section8 {
 
 
     // jsdoc
-    setEndboss() {
-        this.endboss = [new Shaman(11.875, 0.0625)];
+    setBosses() {
+        this.bosses = [new Shaman(11.875, 0.0625)];
     }
 }

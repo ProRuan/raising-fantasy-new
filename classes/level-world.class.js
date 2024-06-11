@@ -23,6 +23,12 @@ class LevelWorld extends World {
 
 
     // jsdoc
+    get endboss() {
+        return this.level.bosses[0];
+    }
+
+
+    // jsdoc
     get star() {
         return this.level.stars[0];
     }
@@ -134,8 +140,8 @@ class LevelWorld extends World {
 
             this.drawLevel();
             this.drawObject(this.hero);
-            if (this.endboss[0].magic) {
-                this.drawObject(this.endboss[0].magic);
+            if (this.endboss.magic) {
+                this.drawObject(this.endboss.magic);
             }
             if (this.hero.bomb) {
                 this.drawObject(this.hero.bomb);

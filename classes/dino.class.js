@@ -2,6 +2,7 @@ class Dino extends Enemy {
     radDispl = 104;
     bodyXY = { xLeft: 4, xCenter: 52, xRight: 100, yTop: 43, yCenter: 65, yBottom: 87 };
     weaponXY = { xLeft: 48, xRight: 68, yTop: 52, yBottom: 80 };
+    damage = { trigger: 'attack4', value: 12, time: 0 };
     biteDistance = 80;
     pursuitDistance = 320;
     pursuitStop = 0;

@@ -188,7 +188,7 @@ class Knight extends Character {
     isHurt() {
         let enemy = this.world.enemies.find(e => e.isBattle(this));
         if (enemy && !(enemy instanceof Spider)) {    // variable!!!, is it working for dino and ent?
-            // this.hpPoints.splice(this.hpPoints.length - 1, 1);    // to activate!
+            enemy.attack();
             return true;
         }
 
@@ -198,7 +198,7 @@ class Knight extends Character {
         }
 
         // double code
-        let magic = this.world.endboss.find(endboss => endboss.magic && isCollided(this.body, endboss.magic.body));
+        let magic = this.world.endboss.magic && isCollided(this.body, this.world.endboss.magic.body);
         if (magic) {
             return true;
         }

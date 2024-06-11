@@ -2,6 +2,7 @@ class Spider extends Enemy {
     radDispl = 128;
     bodyXY = { xLeft: 40, xCenter: 64, xRight: 88, yTop: 46, yCenter: 65, yBottom: 84 };
     weaponXY = { xLeft: 36, xRight: 424, yTop: 52, yBottom: 76 };
+    damage = { trigger: 'attack3', value: 0, time: 0 };
     nextThrow = 0;
     throwDelay = 500;
     thrown = false;
@@ -123,6 +124,7 @@ class Spider extends Enemy {
     // jsdoc
     processWebBurst() {
         this.webBroken = true;
+        this.applyDamage(10);
         setTimeout(() => {
             this.resetThrowParameters();
             this.webBroken = false;

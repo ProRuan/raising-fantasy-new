@@ -54,6 +54,7 @@ class Enemy extends MoveableObject {
     live() {
         this.passAway();
         this.hurt();
+        this.attack();
         this.act();
         this.setChapter();
         this.resetCurrentImage();
@@ -108,6 +109,29 @@ class Enemy extends MoveableObject {
     // jsdoc
     isHurt() {
         return world.hero.isAttack() && world.hero.isBattle(this);
+    }
+
+
+    // jsdoc
+    attack() {
+        if (this.isImage(this.damage.trigger) && isGreater(this.damage.time, world.time)) {
+            this.applyDamage(this.damage.value);
+            this.updateDamageTime();
+        }
+    }
+
+
+    // jsdoc
+    applyDamage(damage) {
+        let hpPoints = world.hero.hpPoints;
+        hpPoints.splice(hpPoints.length - damage, damage);
+    }
+
+
+    // jsdoc
+    updateDamageTime() {
+        let delay = this.flipBook.attack.length * 100;
+        this.damage.time = delay + getTime();
     }
 
 
