@@ -62,14 +62,10 @@ class Knight extends Character {
     }
 
 
+    // jsdoc
     throw() {
         if (this.isBombReady()) {
-            if (isKey('keyF') && !this.bomb && this.energyPoints.length == 100) {
-                let x = (this.x - 42) / 64;
-                let y = (canvas.height - (this.y + this.height + 62 + 13)) / 64;
-                this.bomb = new Bomb(x, y);
-                this.energyPoints.splice(0, 100);
-            }
+            this.throwBomb();
             this.resetBomb();
         }
     }
@@ -78,6 +74,22 @@ class Knight extends Character {
     // jsdoc
     isBombReady() {
         return !this.isUndefined(this.bombUnlocked) && !isTrue(this.otherDirection);
+    }
+
+
+    // jsdoc
+    throwBomb() {
+        if (this.isBombThrow()) {
+            let x = (this.x - 42) / 64;
+            let y = (canvas.height - (this.y + this.height + 62 + 13)) / 64;
+            this.bomb = new Bomb(x, y);
+            this.energyPoints.splice(0, 100);
+        }
+    }
+
+
+    isBombThrow() {    // to edit!
+        return isKey('keyF') && isUndefined(this.bomb) && isMatch(this.energyPoints.length, 100);
     }
 
 

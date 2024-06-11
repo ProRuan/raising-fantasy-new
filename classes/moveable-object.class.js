@@ -12,6 +12,9 @@ class MoveableObject extends DrawableObject {
     hitDelay = 500;
 
 
+    // set pauseable interval for applyGravity() ...
+
+
     constructor(path, x, y) {
         super(path, x, y);
     }

@@ -23,6 +23,9 @@ function stopIntervals() {
 
 // on testing ...
 
+// set home button and play button ...
+// set escape and keyP ...
+
 function pauseGame(logical) {
     if (world.hero.bomb) {
         world.hero.bomb.stop(logical);

@@ -99,8 +99,7 @@ class TextButton extends Button {
 
                 world.music.pause();
                 world.stopped = true;
-                world = new LevelWorld(canvas, keyboard);
-                currentWorld = 'level';
+                setLevelWorld();
 
                 // this.transit();
             }, 750);

@@ -39,7 +39,7 @@ let sound = 7;
 
 pointer = false;
 
-let paused = false;
+let paused;
 let pauseStart = 0;
 let pauseEnd = 0;
 let pauseTime = 0;
@@ -97,12 +97,15 @@ function setKeyboard() {
 // jsdoc
 function setStartWorld() {
     world = new StartWorld(canvas, keyboard);
+    currentWorld = 'start';
+    paused = false;
 }
 
 
 // jsdoc
 function setLevelWorld() {
     world = new LevelWorld(canvas, keyboard);
+    currentWorld = 'level';
 }
 
 
@@ -142,6 +145,9 @@ function processKeydown(event) {    // check doubleClick!!!
     }
 
     if (isMatch(currentWorld, 'level')) {
+        if (isKey('escape') && paused) {
+            setStartWorld();
+        }
         if (isKey('keyP')) {
             (!paused) ? pauseGame(true) : pauseGame(false);
             paused = (!paused) ? true : false;

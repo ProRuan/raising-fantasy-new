@@ -121,8 +121,8 @@ class Star extends AnimatedObject {
 
     // jsdoc
     showScore() {
-        world = new StartWorld(canvas, keyboard);
-        currentWorld = 'start';
+        setStartWorld();
+        world.interacted = true;
         world.cupButton.locked = true;
         world.setCurrentButton('cupButton');
     }
