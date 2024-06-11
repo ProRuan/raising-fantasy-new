@@ -124,7 +124,20 @@ class Enemy extends MoveableObject {
     // jsdoc
     applyDamage(damage) {
         let hpPoints = world.hero.hpPoints;
-        hpPoints.splice(hpPoints.length - damage, damage);
+        let diff = getSum(hpPoints.length, -damage);
+        this.setHeroHp(damage, hpPoints, diff);
+    }
+
+
+    // jsdoc
+    setHeroHp(damage, hpPoints, diff) {
+        if (isGreater(diff, 0)) {
+            let rest = hpPoints.length;
+            hpPoints.splice(0, rest);
+        } else {
+            let hp = hpPoints.length - damage;
+            hpPoints.splice(hp, damage);
+        }
     }
 
 
