@@ -15,18 +15,99 @@ class Character extends MoveableObject {
     }
 
 
+    // jsdoc
     get hpPoints() {
         return this.world.hpBar.points;
     }
 
 
+    // jsdoc
     get energyPoints() {
         return this.world.energyBar.points;
     }
 
 
+    // jsdoc
     get staminaPoints() {
         return this.world.staminaBar.points;
+    }
+
+
+    // jsdoc
+    animate() {
+        this.setPauseableInterval(() => this.move(), 1000 / 60);
+        this.setPauseableInterval(() => this.play(), 100);
+    }
+
+
+    // jsdoc
+    resetJumpCounter() {
+        if (!isMatch(this.chapter, 'jump')) {
+            this.increaseJumpCounter(false);
+        }
+    }
+
+
+    // jsdoc
+    flip() {
+        this.changeDirection('keyQ', true);
+        this.changeDirection('keyE', false);
+    }
+
+
+    // jsdoc
+    changeDirection(key, logical) {
+        if (isKey(key)) {
+            this.setOtherDirection(logical);
+        }
+    }
+
+
+    // jsdoc
+    isEpilog() {
+        return this.isDeath() && this.isImage('death10');
+    }
+
+
+    // jsdoc
+    isDeath() {
+        return !isGreater(0, this.hpPoints.length);
+    }
+
+
+    // jsdoc
+    isHurt() {
+        let enemyHit = this.getHit('enemies', 'isEnemyHit');
+        let webHit = this.getHit('enemies', 'isWebHit');
+        let magicHit = this.getHit('bosses', 'isMagicHit');
+        return enemyHit || webHit || magicHit;
+    }
+
+
+    // jsdoc
+    getHit(key, method) {
+        return this.world[key].find(enemy => this[method](enemy));
+    }
+
+
+    // jsdoc
+    isEnemyHit(enemy) {
+        let inBattle = enemy.isBattle(this) && enemy.isAttack();
+        return enemy && enemy.ableToFight && inBattle;
+    }
+
+
+    // jsdoc
+    isWebHit(enemy) {
+        let web = enemy instanceof Spider && enemy.web;
+        return web && isCollided(this.body, enemy.web);
+    }
+
+
+    // jsdoc
+    isMagicHit(enemy) {
+        let magic = enemy.magic;
+        return magic && isCollided(this.body, magic.body);
     }
 
 
@@ -87,14 +168,6 @@ class Character extends MoveableObject {
     // jsdoc
     increaseJumpCounter(logical) {
         (logical) ? this.jumpCounter++ : this.jumpCounter = -1;
-    }
-
-
-    // jsdoc
-    resetJumpCounter() {
-        if (!isMatch(this.chapter, 'jump')) {
-            this.increaseJumpCounter(false);
-        }
     }
 
 
@@ -174,4 +247,20 @@ class Character extends MoveableObject {
         audio.volume = soundVolume;
         audio.play();
     }
+
+
+
+    // sort methods (class Knight and class Character) ...
+
+    // move methods to other classes ...
+    // move animate() ... ?
+    // review class Character (sort methods) ...
+    // game over screen (this + level world) ...
+    // pause ...
+    // pause music ...
+    // fix enemy gravity or dino walk ...
+
+    // fix updateGroundLevel (error after collecting star) ...
+
+    // clear enemies (0/3) ...
 }

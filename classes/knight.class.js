@@ -1,17 +1,16 @@
 class Knight extends Character {
     radDispl = 84;
+    xStopLeft = source.startX;
+    xStopRight = source.crystalXCenter;
+    chapters = [
+        'epilog', 'death', 'hurt', 'climb', 'jump', 'runAttack', 'run',
+        'walkAttack', 'walk', 'attack', 'idle', 'cover'
+    ];
     bodyXY = { xLeft: 28, xCenter: 44, xRight: 60, yTop: 62, yCenter: 86, yBottom: 110 };
     weaponXY = { xLeft: 24, xRight: 60, yTop: 56, yBottom: 104 };
     attackXY = { xLeft: 24, xRight: 60, yTop: 56, yBottom: 104 };
     walkAttackXY = { xLeft: 24, xRight: 50, yTop: 56, yBottom: 108 };
     bombXY = { x: 42, y: 75 };
-    chapters = ['epilog', 'death', 'hurt', 'climb', 'jump', 'runAttack', 'run', 'walkAttack', 'walk', 'attack', 'idle', 'cover'];
-
-    xStopLeft = source.startX;
-    xStopRight = source.crystalXCenter;
-
-    // edit source!!!
-    // option: fix fall animation and sound!!!
     goAway = { path: source.goAway, startTime: 0.3 };
     armorHit = { path: source.armorHit, startTime: 0 };
     staveStep = { path: source.staveStep, startTime: 0 };
@@ -20,15 +19,7 @@ class Knight extends Character {
     skillUpgrade = { path: source.skillUpgrade, startTime: 0 };
 
 
-    // tasks
-    // -----
-    // hurt
-    // attack
-    // throw
-    // sound
-    // act
-
-
+    // jsdoc
     constructor(x, y) {
         super(source.knight, x, y);
         this.setSpeed(128, 256);
@@ -39,27 +30,70 @@ class Knight extends Character {
 
 
     // jsdoc
-    animate() {
-        this.setPauseableInterval(() => this.move(), 1000 / 60);
-        this.setPauseableInterval(() => this.play(), 100);
-    }
-
-
     move() {
         this.resetJumpCounter();
-
         this.act();
-
         this.setChapter();
         this.resetCurrentImage();
         this.updateGroundLevel();
-
-        this.throw();    // give it to act()?
-
         this.startBossBattle();
-
         this.updateCameraX();
         this.startAmbientSound();
+    }
+
+
+    // jsdoc
+    act() {
+        this.climb();
+        this.jump();
+        this.run();
+        this.throw();
+        this.attack();
+        this.idle();
+        this.flip();
+        this.collect();
+    }
+
+
+    // jsdoc
+    climb() {
+        this.climbUp('arrowUp', true);
+        this.climbUp('arrowDown', false);
+    }
+
+
+    // jsdoc
+    climbUp(key, value) {
+        if (this.isClimbLadder(key)) {
+            super.climb(value);
+        }
+    }
+
+
+    // jsdoc
+    jump() {
+        if (super.isJump()) {
+            super.jump();
+        }
+    }
+
+
+    // jsdoc
+    run() {
+        if (isGreater(this.xStopLeft, this.body.xCenter)) {
+            this.runTo('arrowLeft', true);
+        }
+        if (isGreater(this.body.xCenter, this.xStopRight)) {
+            this.runTo('arrowRight', false);
+        }
+    }
+
+
+    // jsdoc
+    runTo(key, value) {
+        if (isKey(key)) {
+            super.move(value, key);
+        }
     }
 
 
@@ -112,199 +146,6 @@ class Knight extends Character {
 
 
     // jsdoc
-    act() {
-        this.climb();
-        this.jump();
-        this.run()
-        this.attack();
-        this.idle();
-        this.flip();
-        this.collect();
-    }
-
-
-    // jsdoc
-    flip() {
-        this.changeDirection('keyQ', true);
-        this.changeDirection('keyE', false);
-    }
-
-
-    // jsdoc
-    changeDirection(key, logical) {
-        if (isKey(key)) {
-            this.setOtherDirection(logical);
-        }
-    }
-
-
-    // jsdoc
-    play() {
-        this.playAnimation();
-        this.playSoundEffects();
-    }
-
-
-    // jsdoc
-    playAnimation() {
-        if (!this.isJump()) {
-            super.playAnimation(this.flipBook[this.chapter]);
-        } else {
-            this.playJumpAnimation();
-        }
-    }
-
-
-    // jsdoc
-    playSoundEffects() {
-        this.playSound('death6', this.goAway);
-        // this.playSound('hurt1', this.armorHit);
-        this.playSound('climb2', this.staveStep, 'climb4');
-        this.playSound('jump7', this.grassStep);
-        this.playSound('run_attack2', this.grassStep, 'run_attack6');
-        this.playSound('run_attack4', this.swordDraw);
-        this.playSound('run2', this.grassStep, 'run6');
-        this.playSound('walk_attack2', this.grassStep, 'walk_attack5');
-        this.playSound('walk_attack4', this.swordDraw);
-        this.playSound('walk2', this.grassStep, 'walk5');
-        this.playSound('/attack2', this.swordDraw);
-    }
-
-
-    // jsdoc
-    isEpilog() {
-        return this.isDeath() && this.img.src.includes('death10');
-    }
-
-
-    // jsdoc
-    isDeath() {
-        return !isGreater(0, this.hpPoints.length);
-    }
-
-
-    // jsdoc
-    isHurt() {
-        let enemyHit = this.getHit('enemies', 'isEnemyHit');
-        let webHit = this.getHit('enemies', 'isWebHit');
-        let magicHit = this.getHit('bosses', 'isMagicHit');
-        return enemyHit || webHit || magicHit;
-    }
-
-
-    // jsdoc
-    getHit(key, method) {
-        return this.world[key].find(enemy => this[method](enemy));
-    }
-
-
-    // jsdoc
-    isEnemyHit(enemy) {
-        let inBattle = enemy.isBattle(this) && enemy.isAttack();
-        return enemy && enemy.ableToFight && inBattle;
-    }
-
-
-    // jsdoc
-    isWebHit(enemy) {
-        let web = enemy instanceof Spider && enemy.web;
-        return web && isCollided(this.body, enemy.web);
-    }
-
-
-    // jsdoc
-    isMagicHit(enemy) {
-        let magic = enemy.magic;
-        return magic && isCollided(this.body, magic.body);
-    }
-
-
-    // jsdoc
-    idle() {
-        if (this.isIdleToUpdate()) {
-            this.setObjectValue('lastIdle', world.time + this.idleDelay);
-        }
-    }
-
-
-    // jsdoc
-    isIdleToUpdate() {
-        return this.isNotIdle() || this.isIdleEnd();
-    }
-
-
-    // jsdoc
-    isNotIdle() {
-        return !isMatch(this.chapter, 'idle') && !isMatch(this.chapter, 'cover');
-    }
-
-
-    // jsdoc
-    isIdleEnd() {
-        return isMatch(this.chapter, 'idle') && this.img.src.includes('idle12');
-    }
-
-
-    // jsdoc
-    collect() {
-        this.collectItem('coins');
-        this.collectItem('crystals');
-        this.collectItem('hearts');
-        this.collectItem('hitPoints');
-        this.collectItem('leaves');
-        this.collectItem('stars');
-    }
-
-
-    // jsdoc
-    climb() {
-        this.climbUp('arrowUp', true);
-        this.climbUp('arrowDown', false);
-    }
-
-
-    // jsdoc
-    climbUp(key, value) {
-        if (this.isClimbLadder(key)) {
-            super.climb(value);
-        }
-    }
-
-
-    // jsdoc
-    isJump() {
-        return isGreater(-1, this.jumpCounter);
-    }
-
-
-    // jsdoc
-    jump() {
-        if (super.isJump()) {
-            super.jump();
-        }
-    }
-
-
-    // jsdoc
-    run() {
-        if (isGreater(this.xStopLeft, this.body.xCenter)) {
-            this.runLeft('arrowLeft', true);
-        }
-        if (isGreater(this.body.xCenter, this.xStopRight)) {
-            this.runLeft('arrowRight', false);
-        }
-    }
-
-
-    // jsdoc
-    runLeft(key, value) {
-        if (isKey(key)) {
-            super.move(value, key);
-        }
-    }
-
-
-    // jsdoc
     attack() {
         this.setWeaponState();
         this.applyStamina();
@@ -339,6 +180,34 @@ class Knight extends Character {
 
 
     // jsdoc
+    idle() {
+        if (this.isIdleUpdate()) {
+            let nextIdle = world.time + this.idleDelay;
+            this.setObjectValue('lastIdle', nextIdle);
+        }
+    }
+
+
+    // jsdoc
+    isIdleUpdate() {
+        let noIdle = !isMatch(this.chapter, 'idle') && !isMatch(this.chapter, 'cover');
+        let idleEnd = isMatch(this.chapter, 'idle') && this.isImage('idle12');
+        return noIdle || idleEnd;
+    }
+
+
+    // jsdoc
+    collect() {
+        this.collectItem('coins');
+        this.collectItem('crystals');
+        this.collectItem('hearts');
+        this.collectItem('hitPoints');
+        this.collectItem('leaves');
+        this.collectItem('stars');
+    }
+
+
+    // jsdoc
     collectItem(key) {
         let object = this.getObject(key);
         if (object) {
@@ -357,6 +226,44 @@ class Knight extends Character {
     // jsdoc
     removeObject(key, object) {
         world[key].splice(object.getId(key), 1);
+    }
+
+
+    // jsdoc
+    play() {
+        this.playAnimation();
+        this.playSoundEffects();
+    }
+
+
+    // jsdoc
+    playAnimation() {
+        if (!this.isJump()) {
+            super.playAnimation(this.flipBook[this.chapter]);
+        } else {
+            this.playJumpAnimation();
+        }
+    }
+
+
+    // jsdoc
+    isJump() {
+        return isGreater(-1, this.jumpCounter);
+    }
+
+
+    // jsdoc
+    playSoundEffects() {
+        this.playSound('death6', this.goAway);
+        this.playSound('climb2', this.staveStep, 'climb4');
+        this.playSound('jump7', this.grassStep);
+        this.playSound('run_attack2', this.grassStep, 'run_attack6');
+        this.playSound('run_attack4', this.swordDraw);
+        this.playSound('run2', this.grassStep, 'run6');
+        this.playSound('walk_attack2', this.grassStep, 'walk_attack5');
+        this.playSound('walk_attack4', this.swordDraw);
+        this.playSound('walk2', this.grassStep, 'walk5');
+        this.playSound('/attack2', this.swordDraw);
     }
 
 
@@ -410,19 +317,4 @@ class Knight extends Character {
             this.startTime = getTime();
         }
     }
-
-
-
-
-    // move methods to other classes ...
-    // move animate() ... ?
-    // review class Character (sort methods) ...
-    // game over screen (this + level world) ...
-    // pause ...
-    // pause music ...
-    // fix enemy gravity or dino walk ...
-
-    // fix updateGroundLevel (error after collecting star) ...
-
-    // clear enemies (0/3) ...
 }
