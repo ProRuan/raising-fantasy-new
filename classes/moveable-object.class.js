@@ -1,20 +1,17 @@
 class MoveableObject extends DrawableObject {
-    otherDirection = false;
-
     speedY = 0;
     acceleration = 0.5;
     jumpCounter = -1;
     basicLevel = 484;
     groundLevel = 484;
     abyssLevel = 668;
-    climbing = false;
     lastHit = 0;
     hitDelay = 500;
+    otherDirection = false;
+    climbing = false;
 
 
-    // set pauseable interval for applyGravity() ...
-
-
+    // jsdoc
     constructor(path, x, y) {
         super(path, x, y);
     }
@@ -22,60 +19,13 @@ class MoveableObject extends DrawableObject {
 
     // jsdoc
     get body() {
-        return {
-            'xLeft': this.getBody('x', 'xLeft'),
-            'xCenter': this.getBody('x', 'xCenter'),
-            'xRight': this.getBody('x', 'xRight'),
-            'yTop': this.getBody('y', 'yTop'),
-            'yCenter': this.getBody('y', 'yCenter'),
-            'yBottom': this.getBody('y', 'yBottom')
-        }
+        return this.getBody();
     }
 
 
     // jsdoc
     get weapon() {
-        return {
-            'xLeft': this.getWeapon('xCenter', 'xLeft', 'xRight'),
-            'xRight': this.getWeapon('xCenter', 'xRight', 'xLeft'),
-            'yTop': this.getWeapon('y', 'yTop'),
-            'yBottom': this.getWeapon('y', 'yBottom')
-        };
-    }
-
-
-    // jsdoc
-    getBody(key, subkey) {
-        return this[key] + this.bodyXY[subkey];
-    }
-
-
-    // jsdoc
-    getWeapon(key, subkeyA, subkeyB) {
-        return (isUndefined(subkeyB)) ? this.getWeaponValue(key, subkeyA) : this.getWeaponX(key, subkeyA, subkeyB);
-    }
-
-
-    // jsdoc
-    getWeaponX(key, subkeyA, subkeyB) {
-        return (!isTrue(this.otherDirection)) ? this.getWeaponValue(key, subkeyA, true) : this.getWeaponValue(key, subkeyB, false);
-    }
-
-
-    // jsdoc
-    getWeaponValue(key, subkey, logical) {
-        if (isUndefined(logical)) {
-            return this[key] + this.weaponXY[subkey];
-        } else if (isTrue(logical)) {
-            return this.body[key] + this.weaponXY[subkey];
-        } else {
-            return this.body[key] - this.weaponXY[subkey];
-        }
-    }
-
-
-    setCover(source) {
-        this.flipBook.cover = [source.path];
+        return this.getWeapon();
     }
 
 
@@ -88,12 +38,20 @@ class MoveableObject extends DrawableObject {
     }
 
 
-    setEpilog() {
-        this.flipBook.epilog = [this.flipBook.death[getLastIndex(this.flipBook.death)]];
+    // jsdoc
+    setCover(source) {
+        this.flipBook.cover = [source.path];
     }
 
 
-    setImages() {    // double code ( setImages() )
+    // jsdoc
+    setEpilog() {
+        let img = getLastElement(this.flipBook.death);
+        this.flipBook.epilog = [img];
+    }
+
+
+    setImages() {
         for (const [key] of Object.entries(this.flipBook)) {
             let chapter = this.flipBook[key];
             this.fillImageCache(chapter);
@@ -363,7 +321,7 @@ class MoveableObject extends DrawableObject {
 
 
 
-    // sort methods (class Knight and class Character) ...
+    // set pauseable intervall for applyGravity() ...
 
     // move methods to other classes ...
     // move animate() ... ?
@@ -372,9 +330,11 @@ class MoveableObject extends DrawableObject {
     // pause ...
     // pause music ...
     // fix enemy gravity or dino walk ...
-
+    // fix climb method (at least for climb down) ...
     // fix updateGroundLevel (error after collecting star) ...
 
     // clear enemies (0/3) ...
     // remove console log ...
+
+    // set prevent default ...
 }

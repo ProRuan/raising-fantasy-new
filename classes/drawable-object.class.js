@@ -94,6 +94,60 @@ class DrawableObject {
     }
 
 
+    // jsdoc
+    getBody() {
+        return {
+            'xLeft': this.getBodyCoord('x', 'xLeft'),
+            'xCenter': this.getBodyCoord('x', 'xCenter'),
+            'xRight': this.getBodyCoord('x', 'xRight'),
+            'yTop': this.getBodyCoord('y', 'yTop'),
+            'yCenter': this.getBodyCoord('y', 'yCenter'),
+            'yBottom': this.getBodyCoord('y', 'yBottom')
+        };
+    }
+
+
+    // jsdoc
+    getBodyCoord(key, subkey) {
+        return this[key] + this.bodyXY[subkey];
+    }
+
+
+    // jsdoc
+    getWeapon() {
+        return {
+            'xLeft': this.getWeaponCoord('xCenter', 'xLeft', 'xRight'),
+            'xRight': this.getWeaponCoord('xCenter', 'xRight', 'xLeft'),
+            'yTop': this.getWeaponCoord('y', 'yTop'),
+            'yBottom': this.getWeaponCoord('y', 'yBottom')
+        };
+    }
+
+
+    // jsdoc
+    getWeaponCoord(key, subkeyA, subkeyB) {
+        return (isUndefined(subkeyB)) ? this.getWeaponValue(key, subkeyA) : this.getWeaponX(key, subkeyA, subkeyB);
+    }
+
+
+    // jsdoc
+    getWeaponX(key, subkeyA, subkeyB) {
+        return (!isTrue(this.otherDirection)) ? this.getWeaponValue(key, subkeyA, true) : this.getWeaponValue(key, subkeyB, false);
+    }
+
+
+    // jsdoc
+    getWeaponValue(key, subkey, logical) {
+        if (isUndefined(logical)) {
+            return this[key] + this.weaponXY[subkey];
+        } else if (isTrue(logical)) {
+            return this.body[key] + this.weaponXY[subkey];
+        } else {
+            return this.body[key] - this.weaponXY[subkey];
+        }
+    }
+
+
     // in use???
     setBorder(x, y, width, height) {
         this.x = x;
