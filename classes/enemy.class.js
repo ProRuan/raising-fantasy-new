@@ -98,18 +98,11 @@ class Enemy extends MoveableObject {
         return this.isImage(fileName);
     }
 
-
+    // jsdoc
     hurt() {
         if (this.isHurt()) {
-            if (world.hero.isImage('/attack2')) {
-                if (!this.hitSet) {
-                    this.hitSet = true;
-                    this.hp -= 15;
-                    this.playSound(this.weaponImpact);
-                    setTimeout(() => {
-                        this.hitSet = false;
-                    }, 100);
-                }
+            if (this.isHeroWeapon()) {
+                this.applyWeaponHit();
             }
         }
     }
@@ -118,6 +111,28 @@ class Enemy extends MoveableObject {
     // jsdoc
     isHurt() {
         return world.hero.isAttack() && world.hero.isBattle(this);
+    }
+
+
+    // jsdoc
+    isHeroWeapon() {
+        let runAttack = world.hero.isImage('run_attack4');
+        let walkAttack = world.hero.isImage('walk_attack4');
+        let attack = world.hero.isImage('/attack2');
+        return runAttack || walkAttack || attack;
+    }
+
+
+    // jsdoc
+    applyWeaponHit() {
+        if (!this.hitSet) {
+            this.hitSet = true;
+            this.hp -= world.hero.weaponDamage;
+            this.playSound(this.weaponImpact);
+            setTimeout(() => {
+                this.hitSet = false;
+            }, 100);
+        }
     }
 
 

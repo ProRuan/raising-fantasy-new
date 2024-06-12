@@ -171,15 +171,13 @@ class Knight extends Character {
     }
 
 
-    // isPassedAway() ...
-
-
-    // to edit!
+    // jsdoc
     isEpilog() {
         return this.isDeath() && this.img.src.includes('death10');
     }
 
 
+    // jsdoc
     isDeath() {
         return !isGreater(0, this.hpPoints.length);
     }
@@ -306,11 +304,29 @@ class Knight extends Character {
     }
 
 
+    // jsdoc
     attack() {
-        if (this.isAttack() && this.isBattle()) {
-
-        }
+        this.setWeaponState();
         this.applyStamina();
+    }
+
+
+    // jsdoc
+    setWeaponState() {
+        if (this.isImage('run_attack')) {
+            this.setWeaponDamage(this.walkAttackXY, 25);
+        } else if (this.isImage('walk_attack')) {
+            this.setWeaponDamage(this.walkAttackXY, 20);
+        } else if (this.isImage('/attack')) {
+            this.setWeaponDamage(this.attackXY, 15);
+        }
+    }
+
+
+    // jsdoc
+    setWeaponDamage(weapon, value) {
+        this.weaponXY = weapon;
+        this.weaponDamage = value;
     }
 
 
