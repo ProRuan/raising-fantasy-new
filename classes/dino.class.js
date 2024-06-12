@@ -17,7 +17,7 @@ class Dino extends Enemy {
 
     // jsdoc
     pursue() {
-        if (this.isWalk() && this.isFine()) {
+        if (this.isWalk() && this.isPeaceful()) {
             this.applySpeedType('x', this.otherDirection, 'speed');
         }
     }

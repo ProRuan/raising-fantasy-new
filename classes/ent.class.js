@@ -55,7 +55,7 @@ class Ent extends Enemy {
 
     // jsdoc
     updateSpeed(speed) {
-        if (this.isFine()) {
+        if (this.isPeaceful()) {
             this.x += speed;
         }
     }

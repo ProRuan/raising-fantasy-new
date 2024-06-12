@@ -158,7 +158,7 @@ class Knight extends Character {
     // jsdoc
     playSoundEffects() {
         this.playSound('death6', this.goAway);
-        this.playSound('hurt1', this.armorHit);
+        // this.playSound('hurt1', this.armorHit);
         this.playSound('climb2', this.staveStep, 'climb4');
         this.playSound('jump7', this.grassStep);
         this.playSound('run_attack2', this.grassStep, 'run_attack6');
@@ -202,7 +202,7 @@ class Knight extends Character {
 
     // jsdoc
     isEnemyHit(enemy) {
-        let inBattle = enemy.isBattle(this);
+        let inBattle = enemy.isBattle(this) && enemy.isAttack();
         return enemy && enemy.ableToFight && inBattle;
     }
 

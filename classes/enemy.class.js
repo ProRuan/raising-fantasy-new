@@ -118,6 +118,7 @@ class Enemy extends MoveableObject {
         if (this.isImage(this.damage.trigger) && isGreater(this.damage.time, world.time)) {
             this.applyDamage(this.damage.value);
             this.updateDamageTime();
+            this.playSound(source.weaponImpact);
         }
     }
 
@@ -151,7 +152,7 @@ class Enemy extends MoveableObject {
 
     // jsdoc
     isAttack() {
-        return this.isBattle(world.hero) && !world.hero.isDeath();
+        return this.isBattle(world.hero) && !this.isDeath() && !this.isHurt() && !world.hero.isDeath();
     }
 
 
@@ -162,8 +163,14 @@ class Enemy extends MoveableObject {
 
 
     // jsdoc
+    isPeaceful() {
+        return this.isFine() && !this.isAttack();
+    }
+
+
+    // jsdoc
     isFine() {
-        return !(this.isDeath() || this.isHurt() || this.isAttack());
+        return !(this.isDeath() || this.isHurt());
     }
 
 
