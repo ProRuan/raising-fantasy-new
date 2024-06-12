@@ -51,20 +51,12 @@ class MoveableObject extends DrawableObject {
     }
 
 
+    // jsdoc
     setImages() {
         for (const [key] of Object.entries(this.flipBook)) {
             let chapter = this.flipBook[key];
-            this.fillImageCache(chapter);
+            super.setImages(chapter);
         }
-    }
-
-
-    fillImageCache(images) {
-        images.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        })
     }
 
 
@@ -76,12 +68,6 @@ class MoveableObject extends DrawableObject {
 
 
     // jsdoc
-    setObjectValue(key, value) {
-        this[key] = value;
-    }
-
-
-    // jsdoc + setBoolean() above!!!
     setOtherDirection(logical) {
         this.otherDirection = logical;
     }
@@ -97,14 +83,8 @@ class MoveableObject extends DrawableObject {
     }
 
 
-    climb(logical) {
+    climb(logical) {    // speedY = 0 ...
         this.applySpeedType('y', logical, 'speed');    // not waterproof!!!
-    }
-
-
-    // jsdoc
-    isUndefined(value) {
-        return value === undefined;
     }
 
 
@@ -142,6 +122,12 @@ class MoveableObject extends DrawableObject {
     jump() {
         this.setObjectValue('speedY', 12.5);    // y value!!!
         this.setObjectValue('jumpCounter', 0);
+    }
+
+
+    // jsdoc
+    setObjectValue(key, value) {
+        this[key] = value;
     }
 
 
@@ -278,7 +264,7 @@ class MoveableObject extends DrawableObject {
 
     // jsdoc
     updateGroundLevel(key) {
-        if (this.isUndefined(key)) {
+        if (isUndefined(key)) {
             this.setGroundLevel('flyGrass', this.updateGroundLevel('grass'));
         } else {
             this.setGroundLevel('grass', this.setObjectValue('groundLevel', this.abyssLevel));

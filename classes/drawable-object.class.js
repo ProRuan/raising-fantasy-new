@@ -180,8 +180,9 @@ class DrawableObject {
     }
 
 
-    setImages() {
-        this.flipBook.forEach(chapter => {
+    setImages(flipBook) {
+        flipBook = (flipBook) ? flipBook : this.flipBook;
+        flipBook.forEach((chapter) => {
             let img = new Image();
             img.src = chapter;
             this.imageCache[chapter] = img;

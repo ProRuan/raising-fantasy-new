@@ -108,7 +108,7 @@ class Knight extends Character {
 
     // jsdoc
     isBombReady() {
-        return !this.isUndefined(this.bombUnlocked) && !isTrue(this.otherDirection);
+        return !isUndefined(this.bombUnlocked) && !isTrue(this.otherDirection);
     }
 
 
