@@ -185,16 +185,18 @@ class Knight extends Character {
     }
 
 
+    // jsdoc
     isHurt() {
-        let enemyHit = this.getHit('isEnemyHit');
-        let webHit = this.getHit('isWebHit');
-        return enemyHit || webHit || this.isMagicHit();
+        let enemyHit = this.getHit('enemies', 'isEnemyHit');
+        let webHit = this.getHit('enemies', 'isWebHit');
+        let magicHit = this.getHit('bosses', 'isMagicHit');
+        return enemyHit || webHit || magicHit;
     }
 
 
     // jsdoc
-    getHit(method) {
-        return this.world.enemies.find(enemy => this[method](enemy));
+    getHit(key, method) {
+        return this.world[key].find(enemy => this[method](enemy));
     }
 
 
@@ -213,8 +215,8 @@ class Knight extends Character {
 
 
     // jsdoc
-    isMagicHit() {
-        let magic = this.world.endboss.magic;
+    isMagicHit(enemy) {
+        let magic = enemy.magic;
         return magic && isCollided(this.body, magic.body);
     }
 
