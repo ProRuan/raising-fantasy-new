@@ -153,10 +153,14 @@ function processKeydown(event) {    // check doubleClick!!!
             paused = (!paused) ? true : false;
             if (paused) {
                 pauseStart = getTime();
+                world.hero.music.pause();
+                // world.endboss.music.pause();
             } else {
                 pauseEnd = getTime();
                 pauseTime += getSum(pauseEnd, -pauseStart);
                 console.log('Pause time: ', pauseTime);
+                world.hero.music.play();
+                // world.endboss.music.play();
             }
         }
     }
