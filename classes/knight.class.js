@@ -186,28 +186,36 @@ class Knight extends Character {
 
 
     isHurt() {
-        return this.isEnemyHit() || this.isWebHit() || this.isMagicHit();
+        let enemyHit = this.getHit('isEnemyHit');
+        let webHit = this.getHit('isWebHit');
+        return enemyHit || webHit || this.isMagicHit();
     }
 
 
-    isEnemyHit() {
-        let enemy = this.world.enemies.find(e => e.isBattle(this));
-        return enemy && enemy.ableToFight;
+    // jsdoc
+    getHit(method) {
+        return this.world.enemies.find(enemy => this[method](enemy));
     }
 
 
-    isWebHit() {
-        return this.world.enemies.find(enemy => this.isSpiderWeb(enemy) && isCollided(this.body, enemy.web));
+    // jsdoc
+    isEnemyHit(enemy) {
+        let inBattle = enemy.isBattle(this);
+        return enemy && enemy.ableToFight && inBattle;
     }
 
 
-    isSpiderWeb(enemy) {
-        return enemy instanceof Spider && enemy.web;
+    // jsdoc
+    isWebHit(enemy) {
+        let web = enemy instanceof Spider && enemy.web;
+        return web && isCollided(this.body, enemy.web);
     }
 
 
+    // jsdoc
     isMagicHit() {
-        return this.world.endboss.magic && isCollided(this.body, this.world.endboss.magic.body);
+        let magic = this.world.endboss.magic;
+        return magic && isCollided(this.body, magic.body);
     }
 
 
@@ -396,6 +404,7 @@ class Knight extends Character {
     // game over screen (this + level world) ...
     // pause ...
     // pause music ...
+    // fix hit sound (on enemy side?) ...
     // fix enemy gravity or dino walk ...
 
     // fix updateGroundLevel (error after collecting star) ...
