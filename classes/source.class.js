@@ -199,6 +199,10 @@ class Source {
         this.addSoundSource('dino', 'weaponImpact', this.weaponImpact);
         this.addSoundSource('ent', 'weaponImpact', this.weaponImpact);
         this.addSoundSource('spider', 'weaponImpact', this.weaponImpact);
+
+        this.addSoundSource('dino', 'amorHit', this.armorHit);
+        this.addSoundSource('ent', 'amorHit', this.armorHit);
+        this.addSoundSource('spider', 'amorHit', this.armorHit);
     }
 
 

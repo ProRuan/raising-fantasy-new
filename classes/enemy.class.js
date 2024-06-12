@@ -19,6 +19,7 @@ class Enemy extends MoveableObject {
     setGrowl(source) {    // rename!!!
         this.growl = source.growl;
         this.weaponImpact = source.weaponImpact;
+        this.amorHit = source.amorHit;
     }
 
 
@@ -99,10 +100,17 @@ class Enemy extends MoveableObject {
 
 
     hurt() {
-        if (this.isHurt() && isOnTime(world.time, this.lastHit, this.hitDelay)) {
-            this.hp -= 30;
-            this.lastHit = world.time + this.hitDelay;
-            this.playSound(this.weaponImpact);
+        if (this.isHurt()) {
+            if (world.hero.isImage('/attack2')) {
+                if (!this.hitSet) {
+                    this.hitSet = true;
+                    this.hp -= 15;
+                    this.playSound(this.weaponImpact);
+                    setTimeout(() => {
+                        this.hitSet = false;
+                    }, 100);
+                }
+            }
         }
     }
 
@@ -118,7 +126,7 @@ class Enemy extends MoveableObject {
         if (this.isImage(this.damage.trigger) && isGreater(this.damage.time, world.time)) {
             this.applyDamage(this.damage.value);
             this.updateDamageTime();
-            this.playSound(source.weaponImpact);
+            this.playHeroHitSound();
         }
     }
 
@@ -128,6 +136,14 @@ class Enemy extends MoveableObject {
         let hpPoints = world.hero.hpPoints;
         let diff = getSum(hpPoints.length, -damage);
         this.setHeroHp(damage, hpPoints, diff);
+    }
+
+
+    // jsdoc
+    playHeroHitSound() {
+        if (!(this instanceof Spider)) {
+            this.playSound(this.amorHit);
+        }
     }
 
 

@@ -126,6 +126,7 @@ class Spider extends Enemy {
     processWebBurst() {
         this.webBroken = true;
         this.applyDamage(10);
+        this.playSound(this.amorHit);
         setTimeout(() => {
             this.resetThrowParameters();
             this.webBroken = false;
