@@ -79,6 +79,15 @@ class MoveableObject extends DrawableObject {
     }
 
 
+    // jsdoc
+    setAnimation(source) {
+        this.setFlipBook(source);
+        this.setCover(source);
+        this.setEpilog();
+        this.loadImages();
+    }
+
+
     setEpilog() {
         this.flipBook.epilog = [this.flipBook.death[getLastIndex(this.flipBook.death)]];
     }
@@ -351,4 +360,21 @@ class MoveableObject extends DrawableObject {
         let path = flipBook[i];
         this.img = this.imageCache[path];
     }
+
+
+
+    // sort methods (class Knight and class Character) ...
+
+    // move methods to other classes ...
+    // move animate() ... ?
+    // review class Character (sort methods) ...
+    // game over screen (this + level world) ...
+    // pause ...
+    // pause music ...
+    // fix enemy gravity or dino walk ...
+
+    // fix updateGroundLevel (error after collecting star) ...
+
+    // clear enemies (0/3) ...
+    // remove console log ...
 }

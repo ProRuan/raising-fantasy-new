@@ -6,12 +6,10 @@ class Character extends MoveableObject {
     leaves = 0;
 
 
+    // jsdoc
     constructor(source, x, y) {
         super(source, x, y);
-        this.setFlipBook(source);    // double code???
-        this.setCover(source);    // double code???
-        this.setEpilog();    // double code???
-        this.loadImages();    // double code???
+        this.setAnimation(source);
     }
 
 
@@ -214,12 +212,6 @@ class Character extends MoveableObject {
 
 
     // jsdoc
-    soundUpgrade() {
-        this.playAudio(this.skillUpgrade);
-    }
-
-
-    // jsdoc
     damage(damage) {
         if (isGreater(this.hpPoints.length, damage)) {
             this.hpPoints.splice(0, this.hpPoints.length);
@@ -249,18 +241,8 @@ class Character extends MoveableObject {
     }
 
 
-
-    // sort methods (class Knight and class Character) ...
-
-    // move methods to other classes ...
-    // move animate() ... ?
-    // review class Character (sort methods) ...
-    // game over screen (this + level world) ...
-    // pause ...
-    // pause music ...
-    // fix enemy gravity or dino walk ...
-
-    // fix updateGroundLevel (error after collecting star) ...
-
-    // clear enemies (0/3) ...
+    // jsdoc
+    soundUpgrade() {
+        this.playAudio(this.skillUpgrade);
+    }
 }

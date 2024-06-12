@@ -8,10 +8,7 @@ class Enemy extends MoveableObject {
     // jsdoc
     constructor(source, x, y) {
         super(source, x * UNIT, y * UNIT);
-        this.setFlipBook(source);    // double code???
-        this.setCover(source);    // double code???
-        this.setEpilog();    // double code???
-        this.loadImages();    // double code???
+        this.setAnimation(source);
         this.setGrowl(source);
     }
 
