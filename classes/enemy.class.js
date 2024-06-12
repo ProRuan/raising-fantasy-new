@@ -2,6 +2,7 @@ class Enemy extends MoveableObject {
     otherDirection = true;
     chapter = 'idle';
     chapters = ['epilog', 'death', 'hurt', 'attack', 'walk', 'idle'];
+    ableToFight = true;
 
 
     // jsdoc

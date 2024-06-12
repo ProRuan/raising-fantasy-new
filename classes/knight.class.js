@@ -186,26 +186,29 @@ class Knight extends Character {
 
 
     isHurt() {
-        let enemy = this.world.enemies.find(e => e.isBattle(this));
-        if (enemy && !(enemy instanceof Spider)) {    // variable!!!, is it working for dino and ent?
-            enemy.attack();
-            return true;
-        }
-
-        let web = this.world.enemies.find(enemy => enemy instanceof Spider && enemy.web && isCollided(this.body, enemy.web));
-        if (web) {
-            return true;
-        }
-
-        // double code
-        let magic = this.world.endboss.magic && isCollided(this.body, this.world.endboss.magic.body);
-        if (magic) {
-            return true;
-        }
+        return this.isEnemyHit() || this.isWebHit() || this.isMagicHit();
     }
 
 
-    // hurt()
+    isEnemyHit() {
+        let enemy = this.world.enemies.find(e => e.isBattle(this));
+        return enemy && enemy.ableToFight;
+    }
+
+
+    isWebHit() {
+        return this.world.enemies.find(enemy => this.isSpiderWeb(enemy) && isCollided(this.body, enemy.web));
+    }
+
+
+    isSpiderWeb(enemy) {
+        return enemy instanceof Spider && enemy.web;
+    }
+
+
+    isMagicHit() {
+        return this.world.endboss.magic && isCollided(this.body, this.world.endboss.magic.body);
+    }
 
 
     // jsdoc
@@ -392,6 +395,7 @@ class Knight extends Character {
     // review class Character (sort methods) ...
     // game over screen (this + level world) ...
     // pause ...
+    // pause music ...
     // fix enemy gravity or dino walk ...
 
     // fix updateGroundLevel (error after collecting star) ...

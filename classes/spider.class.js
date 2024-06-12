@@ -8,6 +8,7 @@ class Spider extends Enemy {
     thrown = false;
     throwDone = true;
     webBroken = false;
+    ableToFight = false;
 
 
     // jsdoc
