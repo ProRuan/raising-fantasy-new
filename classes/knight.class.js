@@ -57,8 +57,37 @@ class Knight extends Character {
 
     // jsdoc
     climb() {
-        this.climbUp('arrowUp', true);
-        this.climbUp('arrowDown', false);
+        let ladderT = world.ladders.find(l => isIncluded(l.xLeft, this.body.xCenter, l.xRight) && l instanceof LadderT);
+        if (isKey('arrowUp')) {
+            if (ladderT && isGreater(ladderT.yTop, this.body.yBottom)) {
+                this.speedY = 0;
+                if (this.body.yBottom - this.speed < ladderT.yTop) {
+                    this.y = ladderT.yTop - 110;
+                    console.log('exact y');
+                } else {
+                    this.y -= this.speed;
+                    // console.log(ladderT, this.body.yBottom, ladderT.yTop);
+                }
+            }
+        }
+
+        let ladderB = world.ladders.find(l => isIncluded(l.xLeft, this.body.xCenter, l.xRight) && l instanceof LadderB);
+        if (isKey('arrowDown')) {
+            if (ladderB && isGreater(this.body.yBottom, ladderB.yBottom) && !isGreater(this.body.yBottom, ladderT.yTop)) {
+                this.speedY = 0;
+                if (this.body.yBottom + this.speed > ladderB.yBottom) {
+                    this.y = ladderB.yBottom - 110;
+                    console.log('exact y');
+                } else if (isGreater(ladderT.yTop, this.body.yBottom, 'tolerant')) {
+                    this.y += this.speed;
+                    // console.log(ladderT, this.body.yBottom, ladderT.yTop);
+                }
+            }
+        }
+
+
+        // this.climbUp('arrowUp', true);
+        // this.climbUp('arrowDown', false);
     }
 
 

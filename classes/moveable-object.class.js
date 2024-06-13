@@ -91,39 +91,32 @@ class MoveableObject extends DrawableObject {
 
     // jsdoc
     isClimb() {
-        return this.isClimbLadder('arrowUp') || this.isClimbLadder('arrowDown');
+        let ladderTop = this.getWorldObject('ladders', 'isLadderTop');
+        let ladderBottom = this.getWorldObject('ladders', 'isLadderBottom');
+        let ladderTopInRange = ladderTop && isGreater(ladderTop.yTop, this.body.yBottom);
+        let ladderBottomInRange = ladderBottom && isGreater(this.body.yBottom, ladderBottom.yBottom);
+        let ladderTopOutOfRange = ladderTop && isGreater(this.body.yBottom, ladderTop.yTop);
+        let climbUp = isKey('arrowUp') && ladderTopInRange;
+        let climbDown = isKey('arrowDown') && ladderBottomInRange && !ladderTopOutOfRange;
+        return climbUp || climbDown;
     }
 
 
     // jsdoc
-    isClimbLadder(key) {
-        return isKey(key) && this.isAtLadder(key);
+    isLadderTop(ladder) {
+        return this.isLadder(ladder) && ladder instanceof LadderT;
     }
 
 
     // jsdoc
-    isAtLadder(key) {
-        let ladder = this.getLadder(key);
-        return (ladder) ? true : false;
+    isLadder(ladder) {
+        return isIncluded(ladder.xLeft, this.body.xCenter, ladder.xRight);
     }
 
 
     // jsdoc
-    getLadder(key) {
-        return world.ladders.find(l => this.isLadder(key, l));
-    }
-
-
-    // jsdoc
-    isLadder(key, l) {
-        let [a, b] = this.getLadderParameters(key, l);
-        return isIncluded(this.body.xLeft, l.xCenter, this.body.xRight) && isGreater(a, b - 0.5);
-    }
-
-
-    // jsdoc
-    getLadderParameters(key, l) {
-        return (key == 'arrowUp') ? [l.yTop, this.body.yBottom] : [this.body.yBottom, l.yBottom]
+    isLadderBottom(ladder) {
+        return this.isLadder(ladder) && ladder instanceof LadderB;
     }
 
 

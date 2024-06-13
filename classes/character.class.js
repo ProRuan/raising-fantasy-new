@@ -75,15 +75,15 @@ class Character extends MoveableObject {
 
     // jsdoc
     isHurt() {
-        let enemyHit = this.getHit('enemies', 'isEnemyHit');
-        let webHit = this.getHit('enemies', 'isWebHit');
-        let magicHit = this.getHit('bosses', 'isMagicHit');
+        let enemyHit = this.getWorldObject('enemies', 'isEnemyHit');
+        let webHit = this.getWorldObject('enemies', 'isWebHit');
+        let magicHit = this.getWorldObject('bosses', 'isMagicHit');
         return enemyHit || webHit || magicHit;
     }
 
 
     // jsdoc
-    getHit(key, method) {
+    getWorldObject(key, method) {
         return this.world[key].find(enemy => this[method](enemy));
     }
 
