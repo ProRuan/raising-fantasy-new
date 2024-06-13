@@ -24,13 +24,13 @@ class Knight extends Character {
         super(source.knight, x, y);
         this.setSpeed(128, 256);
         this.animate();
-        this.applyGravity();
         this.setMusic(source.ambience);
     }
 
 
     // jsdoc
     move() {
+        this.applyGravity();
         this.resetJumpCounter();
         this.act();
         this.setChapter();
@@ -182,8 +182,8 @@ class Knight extends Character {
     // jsdoc
     idle() {
         if (this.isIdleUpdate()) {
-            let nextIdle = world.time + this.idleDelay;
-            this.setObjectValue('lastIdle', nextIdle);
+            let nextIdle = getSum(world.time, this.idleDelay);
+            this.lastIdle = nextIdle;
         }
     }
 

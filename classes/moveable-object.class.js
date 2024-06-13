@@ -83,57 +83,9 @@ class MoveableObject extends DrawableObject {
     }
 
 
-    climb(logical) {    // speedY = 0 ...
-        this.applySpeedType('y', logical, 'speed');    // not waterproof!!!
-    }
-
-
-    applyGravity() {
-        setInterval(() => {
-            if (!this.isClimb()) {
-                if (this.isAboveGround() || isGreater(0, this.speedY)) {
-                    this.applyFallSpeed();
-                    this.setGroundY();
-                } else {
-                    this.speedY = 0;
-                }
-            }
-        }, 1000 / 60);
-    }
-
-
     // jsdoc
-    isAboveGround() {
-        return this.body.yBottom < this.groundLevel;
-    }
-
-
-    // jsdoc
-    applyFallSpeed() {
-        this.y -= this.speedY;
-        this.speedY -= this.acceleration;
-    }
-
-
-    // jsdoc
-    setGroundY() {
-        let deltaY = this.body.yBottom - this.y;
-        let groundY = this.groundLevel - deltaY;
-        if (isGreater(groundY, this.y)) {
-            this.y = groundY;
-        }
-    }
-
-
-    jump() {
-        this.setObjectValue('speedY', 12.5);    // y value!!!
-        this.setObjectValue('jumpCounter', 0);
-    }
-
-
-    // jsdoc
-    setObjectValue(key, value) {
-        this[key] = value;
+    climb(logical) {
+        this.applySpeedType('y', logical, 'speed');
     }
 
 
@@ -169,32 +121,68 @@ class MoveableObject extends DrawableObject {
     }
 
 
+    // jsdoc
     getLadderParameters(key, l) {
         return (key == 'arrowUp') ? [l.yTop, this.body.yBottom] : [this.body.yBottom, l.yBottom]
     }
 
 
-    isBattle(enemy) {
-        enemy = (enemy) ? this.verifyEnemy(this.weapon, enemy.body) : world.enemies.find(enemy => this.verifyEnemy(this.weapon, enemy.body));
-        return (enemy) ? true : false;
+    // jsdoc
+    applyGravity() {
+        if (!this.isClimb()) {
+            if (this.isAboveGround() || isGreater(0, this.speedY)) {
+                this.applyFallSpeed();
+                this.setGroundY();
+            } else {
+                this.speedY = 0;
+            }
+        }
     }
-
-
-    verifyEnemy(a, b) {
-        let xLeft = isIncluded(a.xLeft, b.xLeft, a.xRight) || isIncluded(b.xLeft, a.xLeft, b.xRight);
-        let xRight = isIncluded(a.xLeft, b.xRight, a.xRight) || isIncluded(b.xLeft, a.xRight, b.xRight);
-        let yTop = isIncluded(a.yTop, b.yTop, a.yBottom) || isIncluded(b.yTop, a.yTop, b.yBottom);
-        let yBottom = isIncluded(a.yTop, b.yBottom, a.yBottom) || isIncluded(b.yTop, a.yBottom, b.yBottom);
-        return (xLeft || xRight) && (yTop || yBottom);
-    }
-
-
 
 
     // jsdoc
-    resetCurrentImage() {
-        if (!this.isSimilarChapter()) {
-            this.setObjectValue('currentImage', 0);
+    isAboveGround() {
+        return this.body.yBottom < this.groundLevel;
+    }
+
+
+    // jsdoc
+    applyFallSpeed() {
+        this.y -= this.speedY;
+        this.speedY -= this.acceleration;
+    }
+
+
+    // jsdoc
+    setGroundY() {
+        let deltaY = this.body.yBottom - this.y;
+        let groundY = this.groundLevel - deltaY;
+        if (isGreater(groundY, this.y)) {
+            this.y = groundY;
+        }
+    }
+
+
+    // jsdoc
+    jump() {
+        this.speedY = 12.5;
+        this.jumpCounter = 0;
+    }
+
+
+    // jsdoc
+    isBattle(enemy) {
+        let battle = this.getBattle(enemy);
+        return (battle) ? true : false;
+    }
+
+
+    // jsdoc
+    getBattle(enemy) {
+        if (enemy) {
+            return isCollided(this.weapon, enemy.body);
+        } else {
+            return world.enemies.find(enemy => isCollided(this.weapon, enemy.body));
         }
     }
 
@@ -214,6 +202,7 @@ class MoveableObject extends DrawableObject {
     }
 
 
+    // jsdoc
     setChapter() {
         this.lastChapter = this.chapter;
         this.chapter = this.getChapter();
@@ -234,14 +223,21 @@ class MoveableObject extends DrawableObject {
     // jsdoc
     getCondition(i) {
         let condition = this.chapters[i];
-        let initial = condition[0];
-        return 'is' + condition.replace(initial, initial.toUpperCase());
+        return 'is' + formatInitial(condition, 'toUpperCase');
     }
 
 
     // jsdoc
     isChapter(condition) {
         return this[condition]();
+    }
+
+
+    // jsdoc
+    resetCurrentImage() {
+        if (!this.isSimilarChapter()) {
+            this.currentImage = 0;
+        }
     }
 
 
@@ -273,15 +269,21 @@ class MoveableObject extends DrawableObject {
         if (isUndefined(key)) {
             this.setGroundLevel('flyGrass', this.updateGroundLevel('grass'));
         } else {
-            this.setGroundLevel('grass', this.setObjectValue('groundLevel', this.abyssLevel));
+            this.setGroundLevel('grass', this.setValue('groundLevel', this.abyssLevel));
         }
+    }
+
+
+    // jsdoc
+    setValue(key, value) {
+        this[key] = value;
     }
 
 
     // jsdoc
     setGroundLevel(key, method) {
         let grass = this.getGrass(key);
-        (grass) ? this.setObjectValue('groundLevel', grass.yTop) : method;
+        (grass) ? this.setValue('groundLevel', grass.yTop) : method;
     }
 
 
@@ -313,7 +315,6 @@ class MoveableObject extends DrawableObject {
 
 
 
-    // set pauseable intervall for applyGravity() ...
 
     // move methods to other classes ...
     // move animate() ... ?
@@ -322,7 +323,7 @@ class MoveableObject extends DrawableObject {
     // pause ...
     // pause music ...
     // fix enemy gravity or dino walk ...
-    // fix climb method (at least for climb down) ...
+    // fix climb method (at least for climb down, set speedY = 0, ...) ...
     // fix updateGroundLevel (error after collecting star) ...
 
     // clear enemies (0/3) ...

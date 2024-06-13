@@ -63,7 +63,7 @@ class Enemy extends MoveableObject {
     // jsdoc
     passAway() {
         if (this.isEpilog() && isUndefined(this.dead)) {
-            this.setObjectValue('dead', true);
+            this.dead = true;
             this.growlTerminally();
         }
     }
