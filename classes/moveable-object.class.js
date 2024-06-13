@@ -91,14 +91,23 @@ class MoveableObject extends DrawableObject {
 
     // jsdoc
     isClimb() {
-        let ladderTop = this.getWorldObject('ladders', 'isLadderTop');
-        let ladderBottom = this.getWorldObject('ladders', 'isLadderBottom');
-        let ladderTopInRange = ladderTop && isGreater(ladderTop.yTop, this.body.yBottom);
-        let ladderBottomInRange = ladderBottom && isGreater(this.body.yBottom, ladderBottom.yBottom);
-        let ladderTopOutOfRange = ladderTop && isGreater(this.body.yBottom, ladderTop.yTop);
+        let ladderTopInRange = this.isLadderInRange('isLadderTop', 'yTop', this.body.yBottom);
+        let ladderBottomInRange = this.isLadderInRange('isLadderBottom', this.body.yBottom, 'yBottom');
+        let ladderTopOutOfRange = this.isLadderInRange('isLadderTop', this.body.yBottom, 'yTop');
         let climbUp = isKey('arrowUp') && ladderTopInRange;
         let climbDown = isKey('arrowDown') && ladderBottomInRange && !ladderTopOutOfRange;
         return climbUp || climbDown;
+    }
+
+
+    // jsdoc
+    isLadderInRange(method, valueA, valueB) {
+        let ladder = this.getWorldObject('ladders', method);
+        if (isMatch(valueA, this.body.yBottom)) {
+            return ladder && isGreater(valueA, ladder[valueB]);
+        } else {
+            return ladder && isGreater(ladder[valueA], valueB);
+        }
     }
 
 
