@@ -88,24 +88,12 @@ class MoveableObject extends DrawableObject {
     }
 
 
-    // playAnimation(images) {
-    //     let i = this.currentImage % images.length;
-    //     let path = images[i];
-    //     this.img = this.imageCache[path];
-    //     this.currentImage++;
-    // }
-
-
     applyGravity() {
         setInterval(() => {
             if (!this.isClimb()) {
-                if (this.isAboveGround() || this.speedY > 0) {
-                    this.y -= this.speedY;
-                    this.speedY -= this.acceleration;
-                    if (this.y > this.groundLevel - (this.body.yBottom - this.y)) {
-                        // console.log(this.y);
-                        this.y = this.groundLevel - (this.body.yBottom - this.y);
-                    }
+                if (this.isAboveGround() || isGreater(0, this.speedY)) {
+                    this.applyFallSpeed();
+                    this.setGroundY();
                 } else {
                     this.speedY = 0;
                 }
@@ -114,8 +102,26 @@ class MoveableObject extends DrawableObject {
     }
 
 
+    // jsdoc
     isAboveGround() {
         return this.body.yBottom < this.groundLevel;
+    }
+
+
+    // jsdoc
+    applyFallSpeed() {
+        this.y -= this.speedY;
+        this.speedY -= this.acceleration;
+    }
+
+
+    // jsdoc
+    setGroundY() {
+        let deltaY = this.body.yBottom - this.y;
+        let groundY = this.groundLevel - deltaY;
+        if (isGreater(groundY, this.y)) {
+            this.y = groundY;
+        }
     }
 
 
