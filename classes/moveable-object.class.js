@@ -84,19 +84,15 @@ class MoveableObject extends DrawableObject {
 
 
     // jsdoc
-    climb(logical) {
-        this.applySpeedType('y', logical, 'speed');
+    isClimb() {
+        return this.isClimbUp() || this.isClimbDown();
     }
 
 
     // jsdoc
-    isClimb() {
+    isClimbUp() {
         let ladderTopInRange = this.isLadderInRange('isLadderTop', 'yTop', this.body.yBottom);
-        let ladderBottomInRange = this.isLadderInRange('isLadderBottom', this.body.yBottom, 'yBottom');
-        let ladderTopOutOfRange = this.isLadderInRange('isLadderTop', this.body.yBottom, 'yTop');
-        let climbUp = isKey('arrowUp') && ladderTopInRange;
-        let climbDown = isKey('arrowDown') && ladderBottomInRange && !ladderTopOutOfRange;
-        return climbUp || climbDown;
+        return isKey('arrowUp') && ladderTopInRange;
     }
 
 
@@ -120,6 +116,14 @@ class MoveableObject extends DrawableObject {
     // jsdoc
     isLadder(ladder) {
         return isIncluded(ladder.xLeft, this.body.xCenter, ladder.xRight);
+    }
+
+
+    // jsdoc
+    isClimbDown() {
+        let ladderBottomInRange = this.isLadderInRange('isLadderBottom', this.body.yBottom, 'yBottom');
+        let ladderTopOutOfRange = this.isLadderInRange('isLadderTop', this.body.yBottom, 'yTop');
+        return isKey('arrowDown') && ladderBottomInRange && !ladderTopOutOfRange;
     }
 
 

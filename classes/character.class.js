@@ -47,6 +47,62 @@ class Character extends MoveableObject {
 
 
     // jsdoc
+    climbUp() {
+        if (this.isClimbUp()) {
+            this.speedY = 0;
+            let nextY = getSum(this.body.yBottom, -this.speed);
+            let ladder = this.getWorldObject('ladders', 'isLadderTop');
+            this.setYUp(nextY, ladder);
+        }
+    }
+
+
+    // jsdoc
+    setYUp(nextY, ladder) {
+        if (isGreater(nextY, ladder.yTop)) {
+            this.setClimbEndY(ladder.yTop);
+        } else {
+            this.y -= this.speed;
+        }
+    }
+
+
+    // jsdoc
+    setClimbEndY(endpoint) {
+        let deltaY = getSum(this.body.yBottom, -this.y);
+        this.y = getSum(endpoint, -deltaY);
+    }
+
+
+    // jsdoc
+    climbDown() {
+        if (this.isClimbDown()) {
+            this.speedY = 0;
+            let nextY = getSum(this.body.yBottom, this.speed);
+            let ladder = this.getWorldObject('ladders', 'isLadderBottom');
+            this.setYDown(nextY, ladder);
+        }
+    }
+
+
+    // jsdoc
+    setYDown(nextY, ladder) {
+        if (isGreater(ladder.yBottom, nextY)) {
+            this.setClimbEndY(ladder.yBottom);
+        } else if (this.isClimbTopPoint()) {
+            this.y += this.speed;
+        }
+    }
+
+
+    // jsdoc
+    isClimbTopPoint() {
+        let ladder = this.getWorldObject('ladders', 'isLadderTop');
+        return isGreater(ladder.yTop, this.body.yBottom, 'tolerant');
+    }
+
+
+    // jsdoc
     flip() {
         this.changeDirection('keyQ', true);
         this.changeDirection('keyE', false);
