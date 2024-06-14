@@ -84,10 +84,6 @@ class TextButton extends Button {
 
             setTimeout(() => {
 
-                intervalIds.forEach((id) => {
-                    clearInterval(id);
-                    console.log(id);
-                })
                 // for (const [key] of Object.entries(world)) {
                 //     if (world[key] instanceof Button && key != 'currentButton') {
                 //         clearInterval(world[key].id);

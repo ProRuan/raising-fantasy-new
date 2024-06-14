@@ -217,7 +217,7 @@ class DrawableObject {
 
     // jsdoc
     setImages(flipBook) {
-        flipBook = this.getRequestedFlipBook(flipBook);
+        flipBook = this.getImages(flipBook);
         flipBook.forEach((chapter) => {
             this.addImage(chapter);
         });
@@ -225,7 +225,7 @@ class DrawableObject {
 
 
     // jsdoc
-    getRequestedFlipBook(flipBook) {
+    getImages(flipBook) {
         return (flipBook) ? flipBook : this.flipBook;
     }
 
@@ -329,14 +329,19 @@ class DrawableObject {
     }
 
 
+    // jsdoc
     playAnimation(images) {
-        if (isUndefined(images)) {
-            images = this.flipBook;
-        }
+        images = this.getImages(images);
+        this.showImage(images);
+        this.currentImage++;
+    }
+
+
+    // jsdoc
+    showImage(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
         this.img = this.imageCache[path];
-        this.currentImage++;
     }
 
 
