@@ -5,9 +5,6 @@ const UNIT = NATIVE_WIDTH / 15;
 
 const LEVEL_SIZE = 8;
 
-let musicVolume = 0.5;
-let soundVolume = 0.5;
-
 
 const FLIP_BOOK_KNIGHT = [
     './img/characters/knight/attack/attack4.png',

@@ -34,9 +34,6 @@ let result = {
 let counter = 0;    // for start world (necessary?)
 
 let volume = { music: 5, sound: 5 };    // to set in level world!
-let music = 3;
-let sound = 7;
-
 pointer = false;
 
 let paused;

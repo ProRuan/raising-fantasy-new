@@ -350,7 +350,7 @@ class DrawableObject {
         if (currentTime) {
             audio.currentTime = currentTime;
         }
-        audio.volume = soundVolume;
+        audio.volume = volume.sound / 10;
         audio.play();
     }
 

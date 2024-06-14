@@ -35,7 +35,7 @@ class Leaf extends DrawableObject {
     }
 
 
-    // as audio now!?!
+    // jsdoc
     setSound() {
         this.sound = source.leaf.sound;
     }

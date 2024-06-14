@@ -292,7 +292,7 @@ class Character extends MoveableObject {
     playAudio(sound) {
         let audio = new Audio(sound.path);
         audio.currentTime = sound.startTime;
-        audio.volume = soundVolume;
+        audio.volume = volume.sound / 10;
         audio.play();
     }
 
