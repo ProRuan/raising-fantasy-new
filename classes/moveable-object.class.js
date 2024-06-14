@@ -247,29 +247,6 @@ class MoveableObject extends DrawableObject {
     }
 
 
-    setMusic(path) {
-        this.music = new Audio(path);
-        this.music.volume = music / 10;    // to edit
-    }
-
-
-    // jsdoc
-    startMusic(condition, delay) {
-        if (condition && !this.musicStarted) {
-            this.musicStarted = true;
-            setTimeout(() => {
-                this.music.play();
-            }, delay);
-        }
-    }
-
-
-    // jsdoc
-    muteAmbientSound(logical) {
-        world.hero.music.muted = logical;
-    }
-
-
     // jsdoc
     updateGroundLevel(key) {
         if (isUndefined(key)) {
@@ -277,12 +254,6 @@ class MoveableObject extends DrawableObject {
         } else {
             this.setGroundLevel('grass', this.setValue('groundLevel', this.abyssLevel));
         }
-    }
-
-
-    // jsdoc
-    setValue(key, value) {
-        this[key] = value;
     }
 
 
@@ -301,7 +272,9 @@ class MoveableObject extends DrawableObject {
 
     // jsdoc
     isOnGrass(g) {
-        return isIncluded(g.xLeft, this.body.xLeft, g.xRight) || isIncluded(g.xLeft, this.body.xRight, g.xRight);
+        let onGrassLeft = isIncluded(g.xLeft, this.body.xLeft, g.xRight);
+        let onGrassRight = isIncluded(g.xLeft, this.body.xRight, g.xRight);
+        return onGrassLeft || onGrassRight;
     }
 
 
@@ -311,29 +284,32 @@ class MoveableObject extends DrawableObject {
     }
 
 
-
-
-    // in use?
-    loadImage(flipBook, i) {
-        let path = flipBook[i];
-        this.img = this.imageCache[path];
+    // jsdoc
+    setValue(key, value) {
+        this[key] = value;
     }
 
 
+    // jsdoc
+    setMusic(path) {
+        this.music = new Audio(path);
+        this.music.volume = volume.music / 10;
+    }
 
 
-    // move methods to other classes ...
-    // move animate() ... ?
-    // review class Character (sort methods) ...
-    // game over screen (this + level world) ...
-    // pause ...
-    // pause music ...
-    // fix enemy gravity or dino walk ...
-    // fix climb method (at least for climb down, set speedY = 0, ...) ...
-    // fix updateGroundLevel (error after collecting star) ...
+    // jsdoc
+    startMusic(condition, delay) {
+        if (condition && !this.musicStarted) {
+            this.musicStarted = true;
+            setTimeout(() => {
+                this.music.play();
+            }, delay);
+        }
+    }
 
-    // clear enemies (0/3) ...
-    // remove console log ...
 
-    // set prevent default ...
+    // jsdoc
+    muteAmbientSound(logical) {
+        world.hero.music.muted = logical;
+    }
 }

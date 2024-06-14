@@ -303,10 +303,7 @@ class Knight extends Character {
 
     // jsdoc
     startAmbientSound() {
-        if (!this.musicStarted) {
-            this.musicStarted = true;
-            this.music.play();
-            this.startTime = getTime();
-        }
+        this.startTime = getTime();
+        this.startMusic(true, 0);
     }
 }

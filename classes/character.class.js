@@ -69,8 +69,8 @@ class Character extends MoveableObject {
 
     // jsdoc
     setClimbEndY(endpoint) {
-        let deltaY = getSum(this.body.yBottom, -this.y);
-        this.y = getSum(endpoint, -deltaY);
+        let deltaY = this.body.yBottom - this.y;
+        this.y = endpoint - deltaY;
     }
 
 
