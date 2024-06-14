@@ -271,6 +271,37 @@ class DrawableObject {
 
 
     // jsdoc
+    move(subfunction) {
+        this.setPauseableInterval(subfunction, 1000 / 60);
+    }
+
+
+    // jsdoc
+    setPauseableInterval(subfunction, ms) {
+        if (!this.interval) {
+            this.interval = new PauseableInterval(subfunction, ms);
+        } else {
+            this.interval2 = new PauseableInterval(subfunction, ms);
+        }
+    }
+
+
+    // jsdoc
+    stop(logical) {
+        this.pauseInterval(logical, this.interval);
+        this.pauseInterval(logical, this.interval2);
+    }
+
+
+    // jsdoc
+    pauseInterval(logical, interval) {
+        if (interval) {
+            (logical) ? interval.stop() : interval.play();
+        }
+    }
+
+
+    // jsdoc
     floatPermanently() {
         this.float();
         this.keep();
@@ -288,41 +319,6 @@ class DrawableObject {
         if (isGreater(this.x, -this.width)) {
             this.x = world.size * canvas.width;
         }
-    }
-
-
-    // jsdoc
-    move(subfunction) {
-        this.setPauseableInterval(subfunction, 1000 / 60);
-    }
-
-
-    setPauseableInterval(subfunction, ms) {
-        // this.interval = new PauseableInterval(subfunction, ms);
-
-        if (!this.interval) {
-            this.interval = new PauseableInterval(subfunction, ms);
-        } else {
-            this.interval2 = new PauseableInterval(subfunction, ms);
-        }
-    }
-
-
-    stop(logical) {
-        if (this.interval) {
-            (logical) ? this.interval.stop() : this.interval.play();
-        }
-        if (this.interval2) {
-            (logical) ? this.interval2.stop() : this.interval2.play();
-        }
-
-        // console.log(this, 'stopped');
-    }
-
-
-    setStoppableInterval(subfunction, interval) {    // to delete later?
-        let id = setInterval(subfunction, interval);
-        intervalIds.push(id);
     }
 
 
@@ -352,11 +348,6 @@ class DrawableObject {
         audio.volume = soundVolume;
         audio.play();
     }
-
-
-    // playSound(path) {    // double code!!!
-    //     new Audio(path).play();
-    // }
 
 
 

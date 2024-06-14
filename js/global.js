@@ -1,26 +1,3 @@
-let intervalIds = [];    // necessary?
-
-
-// jsdoc
-function setStoppableInterval(subfunction, interval) {
-    let id = setInterval(subfunction, interval);
-    intervalIds.push(id);
-}
-
-
-// jsdoc
-function stopIntervals() {
-    intervalIds.forEach((id) => {
-        clearInterval(id);
-    });
-}
-
-
-// to delete later?
-
-
-
-
 // on testing ...
 
 // set home button and play button ...
