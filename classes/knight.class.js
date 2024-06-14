@@ -39,6 +39,7 @@ class Knight extends Character {
         this.startBossBattle();
         this.updateCameraX();
         this.startAmbientSound();
+        this.setStartTime();
     }
 
 
@@ -303,7 +304,14 @@ class Knight extends Character {
 
     // jsdoc
     startAmbientSound() {
-        this.startTime = getTime();
         this.startMusic(true, 0);
+    }
+
+
+    // jsdoc
+    setStartTime() {
+        if (!this.startTime) {
+            this.startTime = getTime();
+        }
     }
 }

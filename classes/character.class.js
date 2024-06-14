@@ -281,24 +281,17 @@ class Character extends MoveableObject {
     // jsdoc
     playSound(nameA, sound, nameB) {
         if (this.isImage(nameA)) {
-            this.playAudio(sound);
+            super.playSound(sound.path, sound.startTime);
         } else if (!isUndefined(nameB) && this.isImage(nameB)) {
-            this.playAudio(sound);
+            super.playSound(sound.path, sound.startTime);
         }
     }
 
 
     // jsdoc
-    playAudio(sound) {
-        let audio = new Audio(sound.path);
-        audio.currentTime = sound.startTime;
-        audio.volume = volume.sound / 10;
-        audio.play();
-    }
-
-
-    // jsdoc
     soundUpgrade() {
-        this.playAudio(this.skillUpgrade);
+        let path = this.skillUpgrade.path;
+        let startTime = this.skillUpgrade.startTime;
+        super.playSound(path, startTime);
     }
 }

@@ -345,26 +345,23 @@ class DrawableObject {
     }
 
 
-    playSound(path, currentTime) {    // double code!!!
+    // jsdoc
+    playSound(path, currentTime) {
         let audio = new Audio(path);
-        if (currentTime) {
-            audio.currentTime = currentTime;
-        }
-        audio.volume = volume.sound / 10;
+        audio.currentTime = this.getCurrentTime(currentTime);
+        audio.volume = this.getSoundVolume();
         audio.play();
     }
 
 
+    // jsdoc
+    getCurrentTime(currentTime) {
+        return (currentTime) ? currentTime : 0;
+    }
 
 
-    // game over screen (this + level world) ...
-    // pause ...
-    // pause music ...
-    // fix enemy gravity or dino walk ...
-    // fix updateGroundLevel (error after collecting star) ...
-
-    // clear enemies (0/3) ...
-    // remove console log ...
-
-    // set prevent default ...
+    // jsdoc
+    getSoundVolume() {
+        return volume.sound / 10;
+    }
 }
