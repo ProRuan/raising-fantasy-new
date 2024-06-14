@@ -2,56 +2,63 @@ class DrawableObject {
     indent = 0;
 
 
+    // jsdoc
     constructor(source, x, y) {
         this.setUp(source, x, y);
     }
 
 
-    // Make a class CoordinateSystem?!?
-
-
+    // jsdoc
     get xLeft() {
         return this.x + this.indent;
     }
 
 
+    // jsdoc
     get xCenter() {
         return this.x + this.width / 2;
     }
 
 
+    // jsdoc
     get xRight() {
         return this.x + (this.width - this.indent);
     }
 
 
+    // jsdoc
     get yTop() {
         return this.y + this.indent;
     }
 
 
+    // jsdoc
     get yCenter() {
         return this.y + this.height / 2;
     }
 
 
+    // jsdoc
     get yBottom() {
         return this.y + (this.height - this.indent);
     }
 
 
+    // jsdoc
     setUp(source, x, y) {
         this.setImage(source);
         this.setPosition(x, y);
     }
 
 
+    // jsdoc
     setImage(source) {
         this.setPath(source);
         this.setSize(source);
     }
 
 
+    // jsdoc
     setPath(source) {
         if (source.path) {
             this.img = new Image();
@@ -60,35 +67,61 @@ class DrawableObject {
     }
 
 
+    // jsdoc
     setSize(source) {
         this.setWidth(source);
         this.setHeight(source);
     }
 
 
+    // jsdoc
     setWidth(source) {
         let scaleFactor = canvas.width / NATIVE_WIDTH;
-        this.width = (source.height) ? source.width * scaleFactor : source.size * scaleFactor;
+        this.width = this.getWidth(source, scaleFactor);
     }
 
 
+    // jsdoc
+    getWidth(source, scaleFactor) {
+        if (source.height) {
+            return source.width * scaleFactor;
+        } else {
+            return source.size * scaleFactor;
+        }
+    }
+
+
+    // jsdoc
     setHeight(source) {
-        let aspectRatio = (source.height) ? source.height / this.width : source.size / this.width;
+        let aspectRatio = this.getAspectRatio(source);
         this.height = this.width * aspectRatio;
     }
 
 
+    // jsdoc
+    getAspectRatio(source) {
+        if (source.height) {
+            return source.height / this.width;
+        } else {
+            return source.size / this.width;
+        }
+    }
+
+
+    // jsdoc
     setPosition(x, y) {
         this.setX(x);
         this.setY(y);
     }
 
 
+    // jsdoc
     setX(x) {
         this.x = x;
     }
 
 
+    // jsdoc
     setY(y) {
         this.y = canvas.height - this.height - y;
     }
@@ -126,13 +159,21 @@ class DrawableObject {
 
     // jsdoc
     getWeaponCoord(key, subkeyA, subkeyB) {
-        return (isUndefined(subkeyB)) ? this.getWeaponValue(key, subkeyA) : this.getWeaponX(key, subkeyA, subkeyB);
+        if (isUndefined(subkeyB)) {
+            return this.getWeaponValue(key, subkeyA);
+        } else {
+            return this.getWeaponX(key, subkeyA, subkeyB);
+        }
     }
 
 
     // jsdoc
     getWeaponX(key, subkeyA, subkeyB) {
-        return (!isTrue(this.otherDirection)) ? this.getWeaponValue(key, subkeyA, true) : this.getWeaponValue(key, subkeyB, false);
+        if (!isTrue(this.otherDirection)) {
+            return this.getWeaponValue(key, subkeyA, true);
+        } else {
+            return this.getWeaponValue(key, subkeyB, false);
+        }
     }
 
 
@@ -148,21 +189,13 @@ class DrawableObject {
     }
 
 
-    // in use???
-    setBorder(x, y, width, height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-    }
-
-
     // jsdoc
     isOpened() {
         return this.opened == true;
     }
 
 
+    // jsdoc
     loadImages() {
         this.setCurrentImage(0);
         this.setImageCache();
@@ -170,31 +203,48 @@ class DrawableObject {
     }
 
 
+    // jsdoc
     setCurrentImage(n) {
         this.currentImage = n;
     }
 
 
+    // jsdoc
     setImageCache() {
         this.imageCache = [];
     }
 
 
+    // jsdoc
     setImages(flipBook) {
-        flipBook = (flipBook) ? flipBook : this.flipBook;
+        flipBook = this.getRequestedFlipBook(flipBook);
         flipBook.forEach((chapter) => {
-            let img = new Image();
-            img.src = chapter;
-            this.imageCache[chapter] = img;
+            this.addImage(chapter);
         });
     }
 
 
+    // jsdoc
+    getRequestedFlipBook(flipBook) {
+        return (flipBook) ? flipBook : this.flipBook;
+    }
+
+
+    // jsdoc
+    addImage(chapter) {
+        let img = new Image();
+        img.src = chapter;
+        this.imageCache[chapter] = img;
+    }
+
+
+    // jsdoc
     setFlipBook(source) {
         this.flipBook = new FlipBook(source.flipBook);
     }
 
 
+    // jsdoc
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
@@ -206,46 +256,7 @@ class DrawableObject {
     }
 
 
-
-
-    // only for testing!!!
-    drawFrame(ctx) {
-        if (this instanceof Knight) {
-            ctx.beginPath();
-            ctx.lineWidth = '1';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.body.xCenter, this.body.yTop, 0, this.body.yBottom - this.body.yTop);
-            ctx.rect(this.body.xLeft, this.body.yTop, this.body.xRight - this.body.xLeft, this.body.yBottom - this.body.yTop);
-            ctx.rect(this.weapon.xLeft, this.weapon.yTop, this.weapon.xRight - this.weapon.xLeft, this.weapon.yBottom - this.weapon.yTop);
-            ctx.stroke();
-        }
-
-
-        if (this instanceof Shaman) {
-            ctx.beginPath();
-            ctx.lineWidth = '1';
-            ctx.strokeStyle = 'red';
-            // ctx.rect(this.body.xCenter, this.body.yTop, 0, this.body.yBottom - this.body.yTop);
-            ctx.rect(this.body.xLeft, this.body.yTop, this.body.xRight - this.body.xLeft, this.body.yBottom - this.body.yTop);
-            // ctx.rect(this.weapon.xLeft, this.weapon.yTop, this.weapon.xRight - this.weapon.xLeft, this.weapon.yBottom - this.weapon.yTop);
-            ctx.stroke();
-        }
-
-
-        if (this instanceof Bomb) {
-            ctx.beginPath();
-            ctx.lineWidth = '1';
-            ctx.strokeStyle = 'red';
-            ctx.rect(this.body.xCenter, this.body.yTop, 0, this.body.yBottom - this.body.yTop);
-            ctx.rect(this.body.xLeft, this.body.yTop, this.body.xRight - this.body.xLeft, this.body.yBottom - this.body.yTop);
-            ctx.stroke();
-        }
-    }
-
-
-
-
-    // to check, clean and move!!!
+    // jsdoc
     setSpeed(s, r, y) {
         this.speed = s / 60;
         (r) ? this.runSpeed = r / 60 : false;
@@ -266,15 +277,16 @@ class DrawableObject {
     }
 
 
+    // jsdoc
     float() {
         this.x -= this.speed;
     }
 
 
-    // to edit
+    // jsdoc
     keep() {
-        if (this.x < -this.width) {
-            this.x = LEVEL_SIZE * canvas.width;    // level size
+        if (isGreater(this.x, -this.width)) {
+            this.x = world.size * canvas.width;
         }
     }
 
