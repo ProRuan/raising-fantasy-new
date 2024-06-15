@@ -151,7 +151,7 @@ class SourceNew {
         this.hpBarBg = this.getImageSource(imgHpBarBg, 121, 14);
         this.hpPoint = this.getImageSource(imgHpPoint, 1, 12);
         this.hpBarBorder = this.getImageSource(imgHpBarBorder, 127, 20);
-        this.setCoord('hpBarBG', 95, 503);
+        this.setCoord('hpBarBg', 95, 503);
         this.setCoord('hpPoint', 0, 506);
         this.setCoord('hpBarBorder', 92, 500);
     }
@@ -162,7 +162,7 @@ class SourceNew {
         this.energyBarBg = this.getImageSource(imgEnergyBarBg, 97, 13);
         this.energyPoint = this.getImageSource(imgEnergyPoint, 1, 10);
         this.energyBarBorder = this.getImageSource(imgEnergyBarBorder, 102, 18);
-        this.setCoord('energyBarBG', 94.5, 484);
+        this.setCoord('energyBarBg', 94.5, 484);
         this.setCoord('energyPoint', 0, 486);
         this.setCoord('energyBarBorder', 92, 482);
     }
@@ -173,7 +173,7 @@ class SourceNew {
         this.staminaBarBg = this.getImageSource(imgStaminaBarBg, 97, 13);
         this.staminaPoint = this.getImageSource(imgStaminaPoint, 1, 10);
         this.staminaBarBorder = this.getImageSource(imgStaminaBarBorder, 102, 18);
-        this.setCoord('staminaBarBG', 94.5, 466);
+        this.setCoord('staminaBarBg', 94.5, 466);
         this.setCoord('staminaPoint', 0, 468);
         this.setCoord('staminaBarBorder', 92, 464);
     }
@@ -198,8 +198,8 @@ class SourceNew {
 
 
     setStartWorldAudioSource() {    // to edit?
-        this.setAudioSource('newWorld', audioNewWorld, 'newWorld');
-        this.setAudioSource('newGame', audioNewGame, 'newGame');
+        this.newWorld = audioNewWorld;
+        this.newGame = audioNewGame;
     }
 
 
@@ -215,10 +215,9 @@ class SourceNew {
     }
 
 
-    // jsdoc
     setLevelWorldMusicSources() {
-        this.setAudioSource('ambience', audioAmbience, 'ambience');
-        this.setAudioSource('bossBattle', audioBossBattle, 'bossBattle');
+        this.ambience = audioAmbience;
+        this.bossBattle = audioBossBattle;
     }
 
 
@@ -267,15 +266,14 @@ class SourceNew {
     }
 
 
-    // jsdoc
     setHeroAudioSources() {
-        this.setAudioSource('knight', audioGoAway, 'goAway');
-        this.setAudioSource('knight', audioStaveStep, 'staveStep');
-        this.setAudioSource('knight', audioGrassStep, 'grassStep');
-        this.setAudioSource('knight', audioSwordDraw, 'swordDraw');
-        this.setAudioSource('knight', audioSkillUpgrade, 'skillUpgrade');
-        this.setAudioSource('knight', audioBombThrow, 'bombThrow');
-        this.setAudioSource('knight', audioBombBurst, 'bombBurst');
+        this.goAway = audioGoAway;
+        this.staveStep = audioStaveStep;
+        this.grassStep = audioGrassStep;
+        this.swordDraw = audioSwordDraw;
+        this.skillUpgrade = audioSkillUpgrade;
+        this.bombThrow = audioBombThrow;
+        this.bombBurst = audioBombBurst;
     }
 
 
