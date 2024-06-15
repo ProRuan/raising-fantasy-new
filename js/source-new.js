@@ -68,6 +68,10 @@ let audioLeaf = './audio/collect/leaf.wav';
 let imgShaman = './img/bosses/shaman/shaman.png';
 
 
+// audio path of shaman
+let audioShamanGrowl = './audio/attacks_and_creatures/shaman_growl.wav';
+
+
 // image paths of enemies
 let imgDino = './img/enemies/dino/dino.png';
 let imgEnt = './img/enemies/ent/ent.png';
@@ -97,6 +101,37 @@ let audioLightningCast = './audio/elemental_magic/magic_lightning_cast.wav';
 let audioLightningHit = './audio/elemental_magic/magic_lightning_hit.wav';
 
 
+// image paths of avatar
+let imgAvatarImage = './img/inner_interface/avatar_image.png';
+let imgAvatarFrame = './img/inner_interface/avatar_frame.png';
+
+
+// image paths of hp bar
+let imgHpBarBg = './img/inner_interface/hp_bar_bg.png';
+let imgHpPoint = './img/inner_interface/hp_point.png';
+let imgHpBarBorder = './img/inner_interface/hp_bar_border.png';
+
+
+// image paths of energy bar
+let imgEnergyBarBg = './img/inner_interface/energy_bar_bg.png';
+let imgEnergyPoint = './img/inner_interface/energy_point.png';
+let imgEnergyBarBorder = './img/inner_interface/energy_bar_border.png';
+
+
+// image paths of stamina bar
+let imgStaminaBarBg = './img/inner_interface/stamina_bar_bg.png';
+let imgStaminaPoint = './img/inner_interface/stamina_point.png';
+let imgStaminaBarBorder = './img/inner_interface/stamina_bar_border.png';
+
+
+// image paths of item
+let imgItemBg = './img/inner_interface/item_bg.png';
+let imgItemBomb = './img/inner_interface/item_bomb.png';
+let imgItemBorder = './img/inner_interface/item_border.png';
+
+
+// image path of knight
+let imgKnight = './img/characters/knight/knight.png';
 
 
 
@@ -111,11 +146,6 @@ let audioLightningHit = './audio/elemental_magic/magic_lightning_hit.wav';
 // audio path of level world
 let ambience = './audio/ambience/nature_forest_daytime.wav';
 let bossBattle = './audio/epic_fantasy/boss_battle_lufus.wav';
-
-
-// review!!!
-// audio paths of enemies
-let audioShamanGrowl = './audio/attacks_and_creatures/shaman_growl.wav';
 
 
 // audio paths of knight

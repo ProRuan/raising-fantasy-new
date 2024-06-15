@@ -8,7 +8,10 @@ class Source {
         this.setStartWorldImageSource();
         this.setLevelWorldImageSource();
 
+        // set flip book sources ...
+
         // set audio start world ...
+        this.setLevelWorldAudioSource();
 
         this.setSourceX();
     }
@@ -34,7 +37,6 @@ class Source {
     }
 
 
-    // jsdoc
     setLevelWorldImageSource() {
         this.setSceneryImageSources();
         this.setGrassImageSources();
@@ -44,6 +46,14 @@ class Source {
         this.setEndbossImageSource();
         this.setEnemyImageSources();
         this.setMagicImageSources();
+
+        this.setAvatarImageSources();
+        this.setHpBarImageSources();
+        this.setEnergyBarImageSources();
+        this.setStaminaBarImageSources();
+        this.setItemImageSources();
+
+        this.setHeroImageSource();
     }
 
 
@@ -115,12 +125,86 @@ class Source {
     }
 
 
+    // jsdoc
+    setAvatarImageSources() {
+        this.avatarImage = this.getImageSource(imgAvatarImage, 64);
+        this.avatarFrame = this.getImageSource(imgAvatarFrame, 76, 79);
+        this.setCoord('avatarImage', 24, 452.5);
+        this.setCoord('avatarFrame', 16, 445);
+    }
+
+
+    // jsdoc
+    setCoord(key, x, y) {
+        this[key].x = x;
+        this[key].y = y;
+    }
+
+
+    // jsdoc
+    setHpBarImageSources() {
+        this.hpBarBg = this.getImageSource(imgHpBarBg, 121, 14);
+        this.hpPoint = this.getImageSource(imgHpPoint, 1, 12);
+        this.hpBarBorder = this.getImageSource(imgHpBarBorder, 127, 20);
+        this.setCoord('hpBarBG', 95, 503);
+        this.setCoord('hpPoint', 0, 506);
+        this.setCoord('hpBarBorder', 92, 500);
+    }
+
+
+    // jsdoc
+    setEnergyBarImageSources() {
+        this.energyBarBg = this.getImageSource(imgEnergyBarBg, 97, 13);
+        this.energyPoint = this.getImageSource(imgEnergyPoint, 1, 10);
+        this.energyBarBorder = this.getImageSource(imgEnergyBarBorder, 102, 18);
+        this.setCoord('energyBarBG', 94.5, 484);
+        this.setCoord('energyPoint', 0, 486);
+        this.setCoord('energyBarBorder', 92, 482);
+    }
+
+
+    // jsdoc
+    setStaminaBarImageSources() {
+        this.staminaBarBg = this.getImageSource(imgStaminaBarBg, 97, 13);
+        this.staminaPoint = this.getImageSource(imgStaminaPoint, 1, 10);
+        this.staminaBarBorder = this.getImageSource(imgStaminaBarBorder, 102, 18);
+        this.setCoord('staminaBarBG', 94.5, 466);
+        this.setCoord('staminaPoint', 0, 468);
+        this.setCoord('staminaBarBorder', 92, 464);
+    }
+
+
+    // jsdoc
+    setItemImageSources() {
+        this.itemBg = this.getImageSource(imgItemBg, 34, 35);
+        this.itemBomb = this.getImageSource(imgItemBomb, 35);
+        this.itemBorder = this.getImageSource(imgItemBorder, 40);
+        this.setCoord('itemBg', 23, 411.5);
+        this.setCoord('itemBomb', 22.5, 411.5);
+        this.setCoord('itemBorder', 20, 409);
+    }
+
+
+    // jsdoc
+    setHeroImageSource() {
+        this.hero = this.getImageSource(imgKnight, 128);
+    }
+
+
 
 
     // add flip book sources ... !!!
 
 
 
+
+    // jsdoc
+    setLevelWorldAudioSource() {
+        this.setAnimatedObjectAudioSources();
+        this.setEndbossAudioSource();
+        this.setEnemyAudioSources();
+        this.setMagicAudioSources();
+    }
 
 
     // jsdoc
@@ -141,6 +225,12 @@ class Source {
         } else {
             this[key][subkey] = path;
         }
+    }
+
+
+    // jsdoc
+    setEndbossAudioSource() {
+        this.setAudioSource('shaman', audioShamanGrowl, 'growl');
     }
 
 
