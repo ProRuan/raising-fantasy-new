@@ -7,11 +7,6 @@ class Source {
     endX = 7620;
 
 
-    // width, height, size ...
-    // double code (flip book and coord) ...
-    // enemy growl ...
-
-
     // jsdoc
     constructor() {
         this.setStartWorld();
@@ -78,8 +73,6 @@ class Source {
         this.setGrassImages();
         this.setSimpleObjectImages();
         this.setAnimatedObjectImages();
-        this.setLeafImage();
-        this.setEndbossImage();
         this.setEnemyImages();
         this.setHeroImage();
         this.setMagicImages();
@@ -121,25 +114,15 @@ class Source {
         this.crystal = this.getImageSource(imgCrystal, 32);
         this.heart = this.getImageSource(imgHeart, 32);
         this.hitPoint = this.getImageSource(imgHitPoint, 32);
+        this.leaf = this.getImageSource(imgLeaf, 32);
         this.star = this.getImageSource(imgStar, 32);
         this.web = this.getImageSource(imgWeb, 32);
     }
 
 
     // jsdoc
-    setLeafImage() {
-        this.leaf = this.getImageSource(imgLeaf, 32);
-    }
-
-
-    // jsdoc
-    setEndbossImage() {
-        this.shaman = this.getImageSource(imgShaman, 256);
-    }
-
-
-    // jsdoc
     setEnemyImages() {
+        this.shaman = this.getImageSource(imgShaman, 256);
         this.dino = this.getImageSource(imgDino, 128);
         this.ent = this.getImageSource(imgEnt, 256);
         this.spider = this.getImageSource(imgSpider, 128);
@@ -174,13 +157,13 @@ class Source {
     setAvatarImages() {
         this.avatarImage = this.getImageSource(imgAvatarImage, 64);
         this.avatarFrame = this.getImageSource(imgAvatarFrame, 76, 79);
-        this.setCoord('avatarImage', 24, 452.5);
-        this.setCoord('avatarFrame', 16, 445);
+        this.addCoord('avatarImage', 24, 452.5);
+        this.addCoord('avatarFrame', 16, 445);
     }
 
 
     // jsdoc
-    setCoord(key, x, y) {
+    addCoord(key, x, y) {
         this[key].x = x;
         this[key].y = y;
     }
@@ -191,9 +174,9 @@ class Source {
         this.hpBarBg = this.getImageSource(imgHpBarBg, 121, 14);
         this.hpPoint = this.getImageSource(imgHpPoint, 1, 12);
         this.hpBarBorder = this.getImageSource(imgHpBarBorder, 127, 20);
-        this.setCoord('hpBarBg', 95, 503);
-        this.setCoord('hpPoint', 0, 506);
-        this.setCoord('hpBarBorder', 92, 500);
+        this.addCoord('hpBarBg', 95, 503);
+        this.addCoord('hpPoint', 0, 506);
+        this.addCoord('hpBarBorder', 92, 500);
     }
 
 
@@ -202,9 +185,9 @@ class Source {
         this.energyBarBg = this.getImageSource(imgEnergyBarBg, 97, 13);
         this.energyPoint = this.getImageSource(imgEnergyPoint, 1, 10);
         this.energyBarBorder = this.getImageSource(imgEnergyBarBorder, 102, 18);
-        this.setCoord('energyBarBg', 94.5, 484);
-        this.setCoord('energyPoint', 0, 486);
-        this.setCoord('energyBarBorder', 92, 482);
+        this.addCoord('energyBarBg', 94.5, 484);
+        this.addCoord('energyPoint', 0, 486);
+        this.addCoord('energyBarBorder', 92, 482);
     }
 
 
@@ -213,9 +196,9 @@ class Source {
         this.staminaBarBg = this.getImageSource(imgStaminaBarBg, 97, 13);
         this.staminaPoint = this.getImageSource(imgStaminaPoint, 1, 10);
         this.staminaBarBorder = this.getImageSource(imgStaminaBarBorder, 102, 18);
-        this.setCoord('staminaBarBg', 94.5, 466);
-        this.setCoord('staminaPoint', 0, 468);
-        this.setCoord('staminaBarBorder', 92, 464);
+        this.addCoord('staminaBarBg', 94.5, 466);
+        this.addCoord('staminaPoint', 0, 468);
+        this.addCoord('staminaBarBorder', 92, 464);
     }
 
 
@@ -224,24 +207,24 @@ class Source {
         this.itemBg = this.getImageSource(imgItemBg, 34, 35);
         this.itemBomb = this.getImageSource(imgItemBomb, 35);
         this.itemBorder = this.getImageSource(imgItemBorder, 40);
-        this.setCoord('itemBg', 23, 411.5);
-        this.setCoord('itemBomb', 22.5, 411.5);
-        this.setCoord('itemBorder', 20, 409);
+        this.addCoord('itemBg', 23, 411.5);
+        this.addCoord('itemBomb', 22.5, 411.5);
+        this.addCoord('itemBorder', 20, 409);
     }
 
 
     // jsdoc
     setLevelWorldFlipBooks() {
-        this.setFlipBook('dino', FLIP_BOOK_DINO);
-        this.setFlipBook('ent', FLIP_BOOK_ENT);
-        this.setFlipBook('spider', FLIP_BOOK_SPIDER);
-        this.setFlipBook('shaman', FLIP_BOOK_SHAMAN);
-        this.setFlipBook('knight', FLIP_BOOK_KNIGHT);
+        this.addFlipBook('dino', FLIP_BOOK_DINO);
+        this.addFlipBook('ent', FLIP_BOOK_ENT);
+        this.addFlipBook('spider', FLIP_BOOK_SPIDER);
+        this.addFlipBook('shaman', FLIP_BOOK_SHAMAN);
+        this.addFlipBook('knight', FLIP_BOOK_KNIGHT);
     }
 
 
     // jsdoc
-    setFlipBook(key, flipBook) {
+    addFlipBook(key, flipBook) {
         this[key].flipBook = flipBook;
     }
 
@@ -250,8 +233,6 @@ class Source {
     setLevelWorldAudio() {
         this.setLevelWorldMusic();
         this.setAnimatedObjectAudio();
-        this.setLeafAudio();
-        this.setEndbossAudio();
         this.setEnemyAudio();
         this.setHeroAudio();
         this.setMagicAudio();
@@ -267,23 +248,18 @@ class Source {
 
     // jsdoc
     setAnimatedObjectAudio() {
-        this.setAudioSource('coin', audioCoin);
-        this.setAudioSource('crystal', audioCrystal);
-        this.setAudioSource('heart', audioHeart);
-        this.setAudioSource('hitPoint', audioHitPoint);
-        this.setAudioSource('star', audioStar);
-        this.setAudioSource('web', audioWeb);
+        this.addAudioSource('coin', audioCoin);
+        this.addAudioSource('crystal', audioCrystal);
+        this.addAudioSource('heart', audioHeart);
+        this.addAudioSource('hitPoint', audioHitPoint);
+        this.addAudioSource('leaf', audioLeaf);
+        this.addAudioSource('star', audioStar);
+        this.addAudioSource('web', audioWeb);
     }
 
 
     // jsdoc
-    setLeafAudio() {
-        this.setAudioSource('leaf', audioLeaf);
-    }
-
-
-    // jsdoc
-    setAudioSource(key, path, subkey) {
+    addAudioSource(key, path, subkey) {
         if (!subkey) {
             this[key].sound = path;
         } else {
@@ -293,18 +269,11 @@ class Source {
 
 
     // jsdoc
-    setEndbossAudio() {
-        this.setAudioSource('shaman', audioShamanGrowl, 'growl');
-        this.setAudioSource('shaman', audioWeaponImpact, 'weaponImpact');
-        this.setAudioSource('shaman', audioArmorHit, 'armorHit');
-    }
-
-
-    // jsdoc
     setEnemyAudio() {
-        this.setAudioSource('dino', audioDinoGrowl, 'growl');
-        this.setAudioSource('ent', audioEntGrowl, 'growl');
-        this.setAudioSource('spider', audioSpiderGrowl, 'growl');
+        this.addAudioSource('shaman', audioShamanGrowl, 'growl');
+        this.addAudioSource('dino', audioDinoGrowl, 'growl');
+        this.addAudioSource('ent', audioEntGrowl, 'growl');
+        this.addAudioSource('spider', audioSpiderGrowl, 'growl');
         this.addEnemyAudio(audioWeaponImpact, 'weaponImpact');
         this.addEnemyAudio(audioArmorHit, 'armorHit');
     }
@@ -312,9 +281,10 @@ class Source {
 
     // jsdoc
     addEnemyAudio(path, subkey) {
-        this.setAudioSource('dino', path, subkey);
-        this.setAudioSource('ent', path, subkey);
-        this.setAudioSource('spider', path, subkey);
+        this.addAudioSource('shaman', path, subkey);
+        this.addAudioSource('dino', path, subkey);
+        this.addAudioSource('ent', path, subkey);
+        this.addAudioSource('spider', path, subkey);
     }
 
 
