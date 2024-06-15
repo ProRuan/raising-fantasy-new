@@ -1,336 +1,327 @@
 class Source {
-    mainBg = { path: './img/start_screen/background.png', width: 960, height: 540 };
-    questRoll = { path: './img/start_screen/quest_roll.png', width: 276, height: 333 };    // rename to storyboard!
-    coinButton = { path: './img/start_screen/coin_button.png', width: 27, height: 27 };
-    cupButton = { path: './img/start_screen/cup_button.png', width: 66, height: 66 };
-    leaderboard = { path: './img/start_screen/leaderboard.png', width: 382, height: 441 };
-    xButton = { path: './img/start_screen/x_button.png', width: 28, height: 28 };
-    settingsButton = { path: './img/start_screen/settings_button.png', width: 66, height: 66 };
-    arrowLeft = { path: './img/start_screen/arrow_left.png', width: 10, height: 17 };
-    arrowRight = { path: './img/start_screen/arrow_right.png', width: 10, height: 17 };
 
 
-    // to edit and/or move!!!
-    startX = 60;
-    crystalXCenter = 6240;
-    crystalCollectedX = 5984;
-    bossBattleX = 6780;
-    bossBattleTriggerX = 6932;
-    endX = 7620;
+    // rename file + add to index.html!!!
 
-
-    // edit all source files
-
-
-    // to give to method below
-
-
-
-
-    // tasks
-    // -----
-    // check Knight, MoveableObject, Shaman, Source ...
-    // startWorld: newWorldMusic + newGameSound ... (0/2)
-
-    // getter for star and endboss ...
-    // victory podium as section 8 array ...
-    // musicVolume + soundVolume ...
-    // sound loop ...
-
-
-    // tasks (shaman)
-    // -----
-    // SET EMPTY IMAGE for all flip books!!! ...
-    // magic sound (cast + hit) ...
-    // get body() --> double and triple code ...
-    // think about getter body() --> get () --> return getBody() ...
-    // enemy attack / hurt delay ...
-    // level word pause ...
-
-    newWorld = './audio/epic_fantasy/a_whole_new_world_luvus.wav';
-    newGame = './audio/start_screen/new_game.wav';
-
-
-    // to edit!!!
-    ambience = './audio/ambience/nature_forest_daytime.wav';
-
-
-    // audio
-    dinoGrowl = './audio/attacks_and_creatures/dino_growl.wav';
-    entGrowl = './audio/attacks_and_creatures/ent_growl.wav';
-    spiderGrowl = './audio/attacks_and_creatures/spider_growl.wav';
-    shamanGrowl = './audio/attacks_and_creatures/shaman_growl.wav';
-
-    goAway = './audio/attacks_and_creatures/go_away.wav';
-    armorHit = './audio/attacks_and_creatures/cloth_armor_hit.wav';
-    staveStep = './audio/footsteps/dirt.wav';
-    grassStep = './audio/footsteps/grass.wav';
-    swordDraw = './audio/attacks_and_creatures/blade_draw.wav';
-
-    // on progress ...
-    skillUpgrade = './audio/attacks_and_creatures/skill_upgrade.wav';
-    weaponImpact = './audio/attacks_and_creatures/weapon_impact.wav';
-
-    bladeCast = './audio/elemental_magic/magic_blade_cast.wav';
-    bladeHit = './audio/elemental_magic/magic_blade_hit.wav';
-    fireCast = './audio/elemental_magic/magic_fire_cast.wav';
-    fireHit = './audio/elemental_magic/magic_fire_hit.wav';
-    lightningCast = './audio/elemental_magic/magic_lightning_cast.wav';
-    lightningHit = './audio/elemental_magic/magic_lightning_hit.wav';
-
-    bombThrow = './audio/elemental_magic/bomb_throw.wav';
-    bombBurst = './audio/elemental_magic/bomb_burst.wav';
-
-    bossBattle = './audio/epic_fantasy/boss_battle_lufus.wav';
+    // 4. clean new classes and files
 
 
     constructor() {
-        // this.loadImagePaths();    // to think about!!!
+        this.setStartWorldImageSource();
+        this.setLevelWorldImageSource();
 
-        this.setLevel();
-        this.setAvatarInfo();
-        this.setHero();
+        this.setLevelWorldFlipBookSource();
+
+        this.setStartWorldAudioSource();
+        this.setLevelWorldAudioSource();
+
+        this.setSourceX();
     }
 
 
     // jsdoc
-    setLevel() {
-        this.setBackground();
-        this.setGrass();
-        this.setSimpleObjects();
-        this.setAnimatedObjects();
-        this.setLeaf();
-        this.setEndboss();
-        this.setMagic();
-        this.setEnemies();
+    setStartWorldImageSource() {
+        this.mainBg = this.getImageSource(imgMainBg, 960, 540);
+        this.questRoll = this.getImageSource(imgQuestRoll, 276, 333);
+        this.coinButton = this.getImageSource(imgCoinButton, 27, 27);
+        this.cupButton = this.getImageSource(imgCupButton, 66, 66);
+        this.leaderboard = this.getImageSource(imgLeaderboard, 382, 441);
+        this.xButton = this.getImageSource(imgXButton, 28, 28);
+        this.settingsButton = this.getImageSource(imgSettingsButton, 66, 66);
+        this.arrowLeft = this.getImageSource(imgArrowLeft, 10, 17);
+        this.arrowRight = this.getImageSource(imgArrowRight, 10, 17);
     }
 
 
     // jsdoc
-    setBackground() {
-        this.setSource('background', './img/background/background5.png', 960, 540);
-        this.setSource('cloud', './img/background/background6.png', 960, 540);
+    getImageSource(path, width, height) {
+        if (!height) {
+            return { path: path, size: width };
+        } else {
+            return { path: path, width: width, height: height };
+        }
+    }
+
+
+    setLevelWorldImageSource() {
+        this.setSceneryImageSources();
+        this.setGrassImageSources();
+        this.setSimpleObjectImageSources();
+        this.setAnimatedObjectImageSources();
+        this.setLeafImageSource();
+        this.setEndbossImageSource();
+        this.setEnemyImageSources();
+        this.setHeroImageSource();
+        this.setMagicImageSources();
+
+        this.setAvatarImageSources();
+        this.setHpBarImageSources();
+        this.setEnergyBarImageSources();
+        this.setStaminaBarImageSources();
+        this.setItemImageSources();
     }
 
 
     // jsdoc
-    setSource(name, path, width, height) {
-        this[name] = (height) ? { path: path, width: width, height: height } : { path: path, size: width };
+    setSceneryImageSources() {
+        this.background = this.getImageSource(imgBackground, 960, 540);
+        this.cloud = this.getImageSource(imgCloud, 960, 540);
     }
 
 
     // jsdoc
-    setGrass() {
-        this.setSource('grassL', './img/tiles/grass1.png', 64);
-        this.setSource('grassC', './img/tiles/grass2.png', 64);
-        this.setSource('grassR', './img/tiles/grass3.png', 64);
-        this.setSource('flyGrassL', './img/tiles/flying_grass1.png', 64);
-        this.setSource('flyGrassC', './img/tiles/flying_grass2.png', 64);
-        this.setSource('flyGrassR', './img/tiles/flying_grass3.png', 64);
+    setGrassImageSources() {
+        this.grassL = this.getImageSource(imgGrassL, 64);
+        this.grassC = this.getImageSource(imgGrassC, 64);
+        this.grassR = this.getImageSource(imgGrassR, 64);
+        this.flyGrassL = this.getImageSource(imgFlyGrassL, 64);
+        this.flyGrassC = this.getImageSource(imgFlyGrassC, 64);
+        this.flyGrassR = this.getImageSource(imgFlyGrassR, 64);
     }
 
 
     // jsdoc
-    setSimpleObjects() {
-        this.setSource('tree', './img/objects/tree.png', 256);
-        this.setSource('ladderB', './img/objects/ladder1.png', 32);
-        this.setSource('ladderC', './img/objects/ladder2.png', 32);
-        this.setSource('ladderT', './img/objects/ladder3.png', 32);
+    setSimpleObjectImageSources() {
+        this.tree = this.getImageSource(imgTree, 256);
+        this.ladderB = this.getImageSource(imgLadderB, 32);
+        this.ladderC = this.getImageSource(imgLadderC, 32);
+        this.ladderT = this.getImageSource(imgLadderT, 32);
     }
 
 
     // jsdoc
-    setAnimatedObjects() {
-        this.setSource('bird', './img/objects_animated/bird.png', 64);
-        this.setSource('bomb', './img/objects_animated/bomb.png', 256);
-        this.setSource('coin', './img/objects_animated/coin.png', 32);
-        this.setSource('crystal', './img/objects_animated/crystal.png', 32);
-        this.setSource('heart', './img/objects_animated/heart.png', 32);
-        this.setSource('hitPoint', './img/objects_animated/hit_point.png', 32);
-        this.setSource('star', './img/objects_animated/star.png', 32);
-        this.setSource('web', './img/objects_animated/web.png', 32);
-
-        // to edit or to move!!!
-        this.addSourceSound('coin', './audio/collect/coin.wav');
-        this.addSourceSound('crystal', './audio/collect/crystal.wav');
-        this.addSourceSound('heart', './audio/collect/heart.wav');
-        this.addSourceSound('hitPoint', './audio/collect/hit_point.wav');
-        this.addSourceSound('star', './audio/collect/star.wav');
-        this.addSourceSound('web', './audio/attacks_and_creatures/web_throw.wav');
-    }
-
-
-    addSourceSound(key, path) {
-        this[key].sound = path;
+    setAnimatedObjectImageSources() {
+        this.bird = this.getImageSource(imgBird, 64);
+        this.bomb = this.getImageSource(imgBomb, 256);
+        this.coin = this.getImageSource(imgCoin, 32);
+        this.crystal = this.getImageSource(imgCrystal, 32);
+        this.heart = this.getImageSource(imgHeart, 32);
+        this.hitPoint = this.getImageSource(imgHitPoint, 32);
+        this.star = this.getImageSource(imgStar, 32);
+        this.web = this.getImageSource(imgWeb, 32);
     }
 
 
     // jsdoc
-    setLeaf() {
-        this.setSource('leaf', './img/leaves/leaf1.png', 32);
-        this.addSourceSound('leaf', './audio/collect/leaf.wav');
+    setLeafImageSource() {
+        this.leaf = this.getImageSource(imgLeaf, 32);
     }
 
 
     // jsdoc
-    setEndboss() {
-        this.setSource('shaman', './img/bosses/shaman/shaman.png', 256);
+    setEndbossImageSource() {
+        this.shaman = this.getImageSource(imgShaman, 256);
     }
 
 
     // jsdoc
-    addSourceFlipBook(key, flipBook) {
-        this[key].flipBook = flipBook;
+    setEnemyImageSources() {
+        this.dino = this.getImageSource(imgDino, 128);
+        this.ent = this.getImageSource(imgEnt, 256);
+        this.spider = this.getImageSource(imgSpider, 128);
     }
 
 
     // jsdoc
-    setEnemies() {
-        this.setSource('dino', './img/enemies/dino/dino.png', 128);
-        this.setSource('ent', './img/enemies/ent/ent.png', 256);
-        this.setSource('spider', './img/enemies/spider/spider.png', 128);
-        this.addSourceFlipBook('dino', FLIP_BOOK_DINO);
-        this.addSourceFlipBook('ent', FLIP_BOOK_ENT);
-        this.addSourceFlipBook('spider', FLIP_BOOK_SPIDER);
-        this.addSoundSource('dino', 'growl', this.dinoGrowl);
-        this.addSoundSource('ent', 'growl', this.entGrowl);
-        this.addSoundSource('spider', 'growl', this.spiderGrowl);
-
-        this.addSoundSource('dino', 'weaponImpact', this.weaponImpact);
-        this.addSoundSource('ent', 'weaponImpact', this.weaponImpact);
-        this.addSoundSource('spider', 'weaponImpact', this.weaponImpact);
-
-        this.addSoundSource('dino', 'amorHit', this.armorHit);
-        this.addSoundSource('ent', 'amorHit', this.armorHit);
-        this.addSoundSource('spider', 'amorHit', this.armorHit);
+    setHeroImageSource() {
+        this.knight = this.getImageSource(imgKnight, 128);
     }
 
 
     // jsdoc
-    addSoundSource(key, subkey, path) {    // similar method existing???
-        this[key][subkey] = path;
+    setMagicImageSources() {
+        this.blade = this.getImageSource(imgBlade, 256);
+        this.fire = this.getImageSource(imgFire, 256);
+        this.lightning = this.getImageSource(imgLightning, 256);
     }
 
 
     // jsdoc
-    setAvatarInfo() {
-        this.setAvatar();
-        this.setHpBar();
-        this.setEnergyBar();
-        this.setStaminaBar();
-        this.setItem();
+    setAvatarImageSources() {
+        this.avatarImage = this.getImageSource(imgAvatarImage, 64);
+        this.avatarFrame = this.getImageSource(imgAvatarFrame, 76, 79);
+        this.setCoord('avatarImage', 24, 452.5);
+        this.setCoord('avatarFrame', 16, 445);
     }
 
 
     // jsdoc
-    setAvatar() {
-        this.setSource('avatarImage', './img/inner_interface/avatar_image.png', 64);
-        this.setSource('avatarFrame', './img/inner_interface/avatar_frame.png', 76, 79);
-        this.addSourceXY('avatarImage', 24, 452.5);
-        this.addSourceXY('avatarFrame', 16, 445);
-    }
-
-
-    // jsdoc
-    addSourceXY(key, x, y) {
+    setCoord(key, x, y) {
         this[key].x = x;
         this[key].y = y;
     }
 
 
     // jsdoc
-    setHpBar() {
-        this.setSource('hpBarBg', './img/inner_interface/hp_bar_bg.png', 121, 14);
-        this.setSource('hpPoint', './img/inner_interface/hp_point.png', 1, 12);
-        this.setSource('hpBarBorder', './img/inner_interface/hp_bar_border.png', 127, 20);
-        this.addSourceXY('hpBarBg', 95, 503);
-        this.addSourceXY('hpPoint', 0, 506);
-        this.addSourceXY('hpBarBorder', 92, 500);
+    setHpBarImageSources() {
+        this.hpBarBg = this.getImageSource(imgHpBarBg, 121, 14);
+        this.hpPoint = this.getImageSource(imgHpPoint, 1, 12);
+        this.hpBarBorder = this.getImageSource(imgHpBarBorder, 127, 20);
+        this.setCoord('hpBarBg', 95, 503);
+        this.setCoord('hpPoint', 0, 506);
+        this.setCoord('hpBarBorder', 92, 500);
     }
 
 
     // jsdoc
-    setEnergyBar() {
-        this.setSource('energyBarBg', './img/inner_interface/state_bar_bg.png', 97, 13);
-        this.setSource('energyPoint', './img/inner_interface/energy_point.png', 1, 10);
-        this.setSource('energyBarBorder', './img/inner_interface/state_bar_border.png', 102, 18);
-        this.addSourceXY('energyBarBg', 94.5, 484);
-        this.addSourceXY('energyPoint', 0, 486);
-        this.addSourceXY('energyBarBorder', 92, 482);
+    setEnergyBarImageSources() {
+        this.energyBarBg = this.getImageSource(imgEnergyBarBg, 97, 13);
+        this.energyPoint = this.getImageSource(imgEnergyPoint, 1, 10);
+        this.energyBarBorder = this.getImageSource(imgEnergyBarBorder, 102, 18);
+        this.setCoord('energyBarBg', 94.5, 484);
+        this.setCoord('energyPoint', 0, 486);
+        this.setCoord('energyBarBorder', 92, 482);
     }
 
 
     // jsdoc
-    setStaminaBar() {
-        this.setSource('staminaBarBg', './img/inner_interface/state_bar_bg.png', 97, 13);
-        this.setSource('staminaPoint', './img/inner_interface/stamina_point.png', 1, 10);
-        this.setSource('staminaBarBorder', './img/inner_interface/state_bar_border.png', 102, 18);
-        this.addSourceXY('staminaBarBg', 94.5, 466);
-        this.addSourceXY('staminaPoint', 0, 468);
-        this.addSourceXY('staminaBarBorder', 92, 464);
+    setStaminaBarImageSources() {
+        this.staminaBarBg = this.getImageSource(imgStaminaBarBg, 97, 13);
+        this.staminaPoint = this.getImageSource(imgStaminaPoint, 1, 10);
+        this.staminaBarBorder = this.getImageSource(imgStaminaBarBorder, 102, 18);
+        this.setCoord('staminaBarBg', 94.5, 466);
+        this.setCoord('staminaPoint', 0, 468);
+        this.setCoord('staminaBarBorder', 92, 464);
     }
 
 
     // jsdoc
-    setItem() {
-        this.setSource('itemBg', './img/inner_interface/item_bg.png', 34, 35);
-        this.setSource('itemBomb', './img/inner_interface/item_bomb.png', 35);
-        this.setSource('itemBorder', './img/inner_interface/item_border.png', 40);
-        this.addSourceXY('itemBg', 23, 411.5);
-        this.addSourceXY('itemBomb', 22.5, 411.5);
-        this.addSourceXY('itemBorder', 20, 409);
+    setItemImageSources() {
+        this.itemBg = this.getImageSource(imgItemBg, 34, 35);
+        this.itemBomb = this.getImageSource(imgItemBomb, 35);
+        this.itemBorder = this.getImageSource(imgItemBorder, 40);
+        this.setCoord('itemBg', 23, 411.5);
+        this.setCoord('itemBomb', 22.5, 411.5);
+        this.setCoord('itemBorder', 20, 409);
     }
 
 
     // jsdoc
-    setEndboss() {
-        this.setSource('shaman', './img/bosses/shaman/shaman.png', 256, 256);
-        this.addSourceFlipBook('shaman', FLIP_BOOK_SHAMAN);
-        this.addSoundSource('shaman', 'growl', this.shamanGrowl);
+    setLevelWorldFlipBookSource() {
+        this.setFlipBookSource('dino', FLIP_BOOK_DINO);
+        this.setFlipBookSource('ent', FLIP_BOOK_ENT);
+        this.setFlipBookSource('spider', FLIP_BOOK_SPIDER);
+        this.setFlipBookSource('shaman', FLIP_BOOK_SHAMAN);
+        this.setFlipBookSource('knight', FLIP_BOOK_KNIGHT);
     }
 
 
     // jsdoc
-    setMagic() {
-        this.setSource('blade', './img/bosses/magic/blade.png', 256);
-        this.setSource('fire', './img/bosses/magic/fire.png', 256);
-        this.setSource('lightning', './img/bosses/magic/lightning.png', 256);
-        this.addMagicSoundSource('blade', this.bladeCast, this.bladeHit);
-        this.addMagicSoundSource('fire', this.fireCast, this.fireHit);
-        this.addMagicSoundSource('lightning', this.lightningCast, this.lightningHit);
+    setFlipBookSource(key, flipBook) {
+        this[key].flipBook = flipBook;
+    }
+
+
+    setStartWorldAudioSource() {    // to edit?
+        this.newWorld = audioNewWorld;
+        this.newGame = audioNewGame;
+    }
+
+
+
+    // jsdoc
+    setLevelWorldAudioSource() {
+        this.setLevelWorldMusicSources();
+        this.setAnimatedObjectAudioSources();
+        this.setLeafAudioSource();
+        this.setEndbossAudioSource();
+        this.setEnemyAudioSources();
+        this.setHeroAudioSources();
+        this.setMagicAudioSources();
+    }
+
+
+    setLevelWorldMusicSources() {
+        this.ambience = audioAmbience;
+        this.bossBattle = audioBossBattle;
     }
 
 
     // jsdoc
-    addMagicSoundSource(key, cast, hit) {
+    setAnimatedObjectAudioSources() {
+        this.setAudioSource('coin', audioCoin);
+        this.setAudioSource('crystal', audioCrystal);
+        this.setAudioSource('heart', audioHeart);
+        this.setAudioSource('hitPoint', audioHitPoint);
+        this.setAudioSource('star', audioStar);
+        this.setAudioSource('web', audioWeb);
+    }
+
+
+    // jsdoc
+    setLeafAudioSource() {
+        this.setAudioSource('leaf', audioLeaf);
+    }
+
+
+    // jsdoc
+    setAudioSource(key, path, subkey) {
+        if (!subkey) {
+            this[key].sound = path;
+        } else {
+            this[key][subkey] = path;
+        }
+    }
+
+
+    setEndbossAudioSource() {
+        this.setAudioSource('shaman', audioShamanGrowl, 'growl');
+
+        this.setAudioSource('shaman', audioWeaponImpact, 'weaponImpact');
+        this.setAudioSource('shaman', audioArmorHit, 'armorHit');
+    }
+
+
+    // jsdoc
+    setEnemyAudioSources() {
+        this.setAudioSource('dino', audioDinoGrowl, 'growl');
+        this.setAudioSource('ent', audioEntGrowl, 'growl');
+        this.setAudioSource('spider', audioSpiderGrowl, 'growl');
+        this.addEnemyAudioSource(audioWeaponImpact, 'weaponImpact');
+        this.addEnemyAudioSource(audioArmorHit, 'armorHit');
+    }
+
+
+    // jsdoc
+    addEnemyAudioSource(path, subkey) {
+        this.setAudioSource('dino', path, subkey);
+        this.setAudioSource('ent', path, subkey);
+        this.setAudioSource('spider', path, subkey);
+    }
+
+
+    setHeroAudioSources() {
+        this.goAway = audioGoAway;
+        this.staveStep = audioStaveStep;
+        this.grassStep = audioGrassStep;
+        this.swordDraw = audioSwordDraw;
+        this.skillUpgrade = audioSkillUpgrade;
+        this.bombThrow = audioBombThrow;
+        this.bombBurst = audioBombBurst;
+    }
+
+
+    // jsdoc
+    setMagicAudioSources() {
+        this.setMagicSound('blade', audioBladeCast, audioBladeHit);
+        this.setMagicSound('fire', audioFireCast, audioFireHit);
+        this.setMagicSound('lightning', audioLightningCast, audioLightningHit);
+    }
+
+
+    // jsdoc
+    setMagicSound(key, cast, hit) {
         this[key].sound = { cast: cast, hit: hit };
     }
 
 
     // jsdoc
-    setHero() {
-        this.setSource('knight', './img/characters/knight/knight.png', 128, 128);
-        this.addSourceFlipBook('knight', FLIP_BOOK_KNIGHT);
+    setSourceX() {
+        this.startX = 60;
+        this.crystalXCenter = 6240;
+        this.crystalCollectedX = 5984;
+        this.bossBattleX = 6780;
+        this.bossBattleTriggerX = 6932;
+        this.endX = 7620;
     }
-
-
-
-
-    // to think about!!!
-    loadImagePaths() {
-        this.image = new ImagePath();
-    }
-
-
-
-    // game over screen (this + level world) ...
-    // pause ...
-    // pause music ...
-    // fix enemy gravity or dino walk ...
-    // fix updateGroundLevel (error after collecting star) ...
-
-    // clear enemies (0/3) ...
-    // remove console log ...
-
-    // set prevent default ...
 }

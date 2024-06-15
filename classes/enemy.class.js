@@ -16,7 +16,7 @@ class Enemy extends MoveableObject {
     setGrowl(source) {    // rename!!!
         this.growl = source.growl;
         this.weaponImpact = source.weaponImpact;
-        this.amorHit = source.amorHit;
+        this.armorHit = source.armorHit;
     }
 
 
@@ -154,7 +154,7 @@ class Enemy extends MoveableObject {
     // jsdoc
     playHeroHitSound() {
         if (!(this instanceof Spider)) {
-            this.playSound(this.amorHit);
+            this.playSound(this.armorHit);
         }
     }
 
