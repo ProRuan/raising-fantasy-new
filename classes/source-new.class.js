@@ -1,4 +1,4 @@
-class Source {
+class SourceNew {
 
 
     // rename file + add to index.html!!!
@@ -10,7 +10,7 @@ class Source {
 
         // set flip book sources ...
 
-        // set audio start world ...
+        this.setStartWorldAudioSource();
         this.setLevelWorldAudioSource();
 
         this.setSourceX();
@@ -45,6 +45,7 @@ class Source {
         this.setLeafImageSource();
         this.setEndbossImageSource();
         this.setEnemyImageSources();
+        this.setHeroImageSource();
         this.setMagicImageSources();
 
         this.setAvatarImageSources();
@@ -52,8 +53,6 @@ class Source {
         this.setEnergyBarImageSources();
         this.setStaminaBarImageSources();
         this.setItemImageSources();
-
-        this.setHeroImageSource();
     }
 
 
@@ -114,6 +113,12 @@ class Source {
         this.dino = this.getImageSource(imgDino, 128);
         this.ent = this.getImageSource(imgEnt, 256);
         this.spider = this.getImageSource(imgSpider, 128);
+    }
+
+
+    // jsdoc
+    setHeroImageSource() {
+        this.hero = this.getImageSource(imgKnight, 128);
     }
 
 
@@ -185,12 +190,6 @@ class Source {
     }
 
 
-    // jsdoc
-    setHeroImageSource() {
-        this.hero = this.getImageSource(imgKnight, 128);
-    }
-
-
 
 
     // add flip book sources ... !!!
@@ -198,12 +197,28 @@ class Source {
 
 
 
+    setStartWorldAudioSource() {    // to edit?
+        this.setAudioSource('newWorld', audioNewWorld, 'newWorld');
+        this.setAudioSource('newGame', audioNewGame, 'newGame');
+    }
+
+
+
     // jsdoc
     setLevelWorldAudioSource() {
+        this.setLevelWorldMusicSources();
         this.setAnimatedObjectAudioSources();
         this.setEndbossAudioSource();
         this.setEnemyAudioSources();
+        this.setHeroAudioSources();
         this.setMagicAudioSources();
+    }
+
+
+    // jsdoc
+    setLevelWorldMusicSources() {
+        this.setAudioSource('ambience', audioAmbience, 'ambience');
+        this.setAudioSource('bossBattle', audioBossBattle, 'bossBattle');
     }
 
 
@@ -249,6 +264,18 @@ class Source {
         this.setAudioSource('dino', path, subkey);
         this.setAudioSource('ent', path, subkey);
         this.setAudioSource('spider', path, subkey);
+    }
+
+
+    // jsdoc
+    setHeroAudioSources() {
+        this.setAudioSource('knight', audioGoAway, 'goAway');
+        this.setAudioSource('knight', audioStaveStep, 'staveStep');
+        this.setAudioSource('knight', audioGrassStep, 'grassStep');
+        this.setAudioSource('knight', audioSwordDraw, 'swordDraw');
+        this.setAudioSource('knight', audioSkillUpgrade, 'skillUpgrade');
+        this.setAudioSource('knight', audioBombThrow, 'bombThrow');
+        this.setAudioSource('knight', audioBombBurst, 'bombBurst');
     }
 
 

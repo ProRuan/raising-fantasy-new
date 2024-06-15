@@ -15,6 +15,11 @@ let audioNewWorld = './audio/epic_fantasy/a_whole_new_world_luvus.wav';
 let audioNewGame = './audio/start_screen/new_game.wav';
 
 
+// audio paths of level world
+let audioAmbience = './audio/ambience/nature_forest_daytime.wav';
+let audioBossBattle = './audio/epic_fantasy/boss_battle_lufus.wav';
+
+
 // image paths of background
 let imgBackground = './img/background/background5.png';
 let imgCloud = './img/background/background6.png';
@@ -134,25 +139,16 @@ let imgItemBorder = './img/inner_interface/item_border.png';
 let imgKnight = './img/characters/knight/knight.png';
 
 
+// audio paths of knight
+let audioGoAway = './audio/attacks_and_creatures/go_away.wav';
+let audioStaveStep = './audio/footsteps/dirt.wav';
+let audioGrassStep = './audio/footsteps/grass.wav';
+let audioSwordDraw = './audio/attacks_and_creatures/blade_draw.wav';
+let audioSkillUpgrade = './audio/attacks_and_creatures/skill_upgrade.wav';
+let audioBombThrow = './audio/elemental_magic/bomb_throw.wav';
+let audioBombBurst = './audio/elemental_magic/bomb_burst.wav';
+
+
+
 
 // add flip book sources ... (!!!)
-
-
-
-
-
-
-
-// audio path of level world
-let ambience = './audio/ambience/nature_forest_daytime.wav';
-let bossBattle = './audio/epic_fantasy/boss_battle_lufus.wav';
-
-
-// audio paths of knight
-let goAway = './audio/attacks_and_creatures/go_away.wav';
-let staveStep = './audio/footsteps/dirt.wav';
-let grassStep = './audio/footsteps/grass.wav';
-let swordDraw = './audio/attacks_and_creatures/blade_draw.wav';
-let skillUpgrade = './audio/attacks_and_creatures/skill_upgrade.wav';
-let bombThrow = './audio/elemental_magic/bomb_throw.wav';
-let bombBurst = './audio/elemental_magic/bomb_burst.wav';
