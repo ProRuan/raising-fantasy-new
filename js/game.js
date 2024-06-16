@@ -345,3 +345,21 @@ function formatInitial(word, method) {
     let initial = word[0];
     return word.replace(initial, initial[method]());
 }
+
+
+window.addEventListener("orientationchange", (event) => {
+    let currentOrientation = event.target.screen.orientation.angle;
+    if (isMatch(currentOrientation, 90)) {
+        let canvas = document.getElementById('canvas');
+        canvas.style.transform = 'rotate(90deg)';
+        console.log('Mobile', canvas);
+    } else {
+        let canvas = document.getElementById('canvas');
+        canvas.style.transform = 'rotate(0deg)';
+        console.log('Mobile', canvas);
+    }
+    console.log(
+        `the orientation of the device is now ${currentOrientation
+        }`,
+    );
+});

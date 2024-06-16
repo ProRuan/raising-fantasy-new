@@ -10,3 +10,28 @@ body {
 #canvas {
     background-color: black;
 }
+
+
+@media (max-width: 960px) {
+    @media screen {
+        #canvas {
+            width: 100%;
+            /* transform: rotate(90deg);
+            transition: transform 100ms ease-in-out; */
+        }
+    }
+}
+
+
+
+
+/* 
+    Responsiveness
+    --------------
+      - style.css
+      - game.js
+
+      - desktop, tablet, mobile ... (0/3)
+      - drawable objects ... ?
+
+*/
