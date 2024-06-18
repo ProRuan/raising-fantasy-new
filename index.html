@@ -94,14 +94,18 @@
     <script src="./classes/key.class.js"></script>
     <script src="./js/global.js"></script>
     <script src="./js/game.js"></script>
+    <script src="./js/touch.js"></script>
     <script src="./js/mouse.js"></script>
     <script src="./js/key.js"></script>
 </head>
 
-<body onload="init()" onkeydown="processKeydown(event)" onkeyup="processKeyup(event)">
+<body id="body" onload="init()" onkeydown="processKeydown(event)" onkeyup="processKeyup(event)">
 
-    <h1>Raising Fantasy</h1>
-    <canvas id="canvas" width="960" height="540"></canvas>
+    <canvas id="canvas" class="display-unset" width="960" height="540"></canvas>
+
+    <div id="rotation-hint" class="display-none"> Please rotate your device.</div>
+
+    <!-- add button for rotation or display:none -->
 
 </body>
 

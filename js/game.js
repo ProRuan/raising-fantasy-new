@@ -82,6 +82,34 @@ function switchWorld() {    // only for testing?
 // jsdoc
 function setCanvas() {
     canvas = document.getElementById('canvas');
+
+
+    let currentOrientation = screen.orientation.angle;
+
+    if (isMatch(currentOrientation, 90)) {
+        setClass('canvas', 'remove', 'display-unset');
+        setClass('rotation-hint', 'remove', 'display-none');
+        setClass('rotation-hint', 'add', 'display-unset');
+
+        console.log('landscape: ', currentOrientation);
+
+        // canvas.height = Math.floor(body.offsetHeight / 9) * 9;
+        // canvas.width = canvas.height / 9 * 16;
+        // console.log('calculated: ', canvas.width, canvas.height);
+    } else if (isMatch(currentOrientation, 0)) {
+        setClass('rotation-hint', 'remove', 'display-unset');
+        setClass('rotation-hint', 'add', 'display-none');
+        setClass('canvas', 'add', 'display-unset');
+
+        console.log('protrait: ', currentOrientation);
+
+        // canvas.width = Math.floor(body.offsetWidth / 16) * 16;
+        // canvas.height = canvas.width / 16 * 9;
+        // console.log('calculated: ', canvas.width, canvas.height);
+    }
+
+    console.log('canvas (native): ', canvas.width, canvas.height);
+    console.log('canvas (offset): ', canvas.offsetWidth, canvas.offsetHeight);
 }
 
 
@@ -214,9 +242,12 @@ function isMouseEvent(mouse, object) {
 }
 
 
-// jsdoc
 function getMouseXY(m) {
-    return { x: m.offsetX, y: m.offsetY };
+    let offsetX = m.offsetX / canvas.offsetWidth * NATIVE_WIDTH;
+    let offsetY = m.offsetY / canvas.offsetHeight * NATIVE_HEIGHT;
+    return { x: offsetX, y: offsetY };
+
+    // return { x: m.offsetX, y: m.offsetY };
 }
 
 
@@ -345,3 +376,31 @@ function formatInitial(word, method) {
     let initial = word[0];
     return word.replace(initial, initial[method]());
 }
+
+
+
+
+
+window.addEventListener("orientationchange", (event) => {
+    let currentOrientation = event.target.screen.orientation.angle;
+
+    if (isMatch(currentOrientation, 90)) {
+        setClass('canvas', 'remove', 'display-unset');
+        setClass('rotation-hint', 'remove', 'display-none');
+        setClass('rotation-hint', 'add', 'display-unset');
+
+        setClass('body', 'add', 'lightcoral');
+        console.log('landscape: ', currentOrientation);
+    } else if (isMatch(currentOrientation, 0)) {
+        setClass('rotation-hint', 'remove', 'display-unset');
+        setClass('rotation-hint', 'add', 'display-none');
+        setClass('canvas', 'add', 'display-unset');
+
+        setClass('body', 'remove', 'lightcoral');
+        console.log('protrait: ', currentOrientation);
+    }
+
+    // console.log(
+    //     `the orientation of the device is now ${currentOrientation}`,
+    // );
+});

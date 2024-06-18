@@ -152,11 +152,34 @@ class LevelWorld extends World {
             this.drawAvatarInfo();
             this.removeDeadEnemies();
 
+
+            // this.drawTouchButton(16, this.canvas.clientHeight + 16, 48, 48);
+            // this.drawTouchButton(88, this.canvas.clientHeight + 16, 48, 48);
+            // this.drawTouchButton(160, this.canvas.clientHeight + 16, 48, 48);
+
+            // this.drawTouchButton(16, this.canvas.clientHeight - 72 + 16, 48, 48);
+            // this.drawTouchButton(88, this.canvas.clientHeight - 72 + 16, 48, 48);
+            // this.drawTouchButton(160, this.canvas.clientHeight - 72 + 16, 48, 48);
+
+            // this.drawTouchButton(16, this.canvas.clientHeight - 144 + 16, 48, 48);
+            // this.drawTouchButton(88, this.canvas.clientHeight - 144 + 16, 48, 48);
+            // this.drawTouchButton(160, this.canvas.clientHeight - 144 + 16, 48, 48);
+
+
+
             if (paused) {
                 this.drawObject(this.pause);
             }
         }
         this.redraw();
+    }
+
+
+    drawTouchButton(x, y, width, height) {
+        this.ctx.beginPath();
+        this.ctx.strokeStyle = 'steelblue';
+        this.ctx.rect(x, y - height, width, height);
+        this.ctx.stroke();
     }
 
 

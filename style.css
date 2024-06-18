@@ -3,10 +3,41 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    overflow-x: hidden;
 }
 
 
 #canvas {
     background-color: black;
+}
+
+
+.display-unset {
+    display: unset;
+}
+
+
+.display-none {
+    display: none;
+}
+
+
+@media only screen and (max-width: 960px) {
+    .display-unset {
+        display: none;
+    }
+
+
+    .display-none {
+        display: unset;
+    }
+
+
+    @media only screen and (max-height: 540px) {
+        #canvas {
+            height: calc(round(down, calc(100vh / 9), 1px) * 9);
+        }
+    }
 }

@@ -69,3 +69,20 @@ function save(key) {
     let valueAsText = JSON.stringify(value);
     localStorage.setItem(key, valueAsText);
 }
+
+
+
+
+// jsdoc
+function setClass(id, method, className) {
+    document.getElementById(id).classList[method](className);
+}
+
+
+
+
+// screen size not exactly (background gap!) ...
+// white line below game screen (depends on phone size) ...
+// buttons / touch events ...
+// await loading of images (progress bar?) ...
+// answers and questions ...
