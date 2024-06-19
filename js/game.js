@@ -50,6 +50,11 @@ function init() {
     loadScore();
     loadVolume();
     setCanvas();
+
+    if (canvas.offsetWidth != screen.width && canvas.offsetHeight != screen.height) {
+        enableFullscreen(true);
+    }
+
     setKeyboard();
 
     // set class Star!!!
@@ -386,7 +391,7 @@ function enableFullscreen(logical) {
     let orientation = screen.orientation.type;
 
     let nativeFactor = 16 / 9;
-    let factor = screen.width / screen.height;
+    let factor = body.offsetWidth / body.offsetHeight;
     console.log(factor, isGreater(nativeFactor, factor));
 
     if (isTrue(logical) && isGreater(nativeFactor, factor)) {
@@ -422,6 +427,11 @@ function enableFullscreen(logical) {
     // save current width
     // calculate width or height
 }
+
+
+window.addEventListener('resize', (event) => {
+    enableFullscreen(true);
+});
 
 
 window.addEventListener("orientationchange", (event) => {
