@@ -158,6 +158,10 @@ class LevelWorld extends World {
             this.drawAvatarInfo();
             this.removeDeadEnemies();
 
+            if (paused) {
+                this.drawObject(this.pause);
+            }
+
 
             // this.drawTouchButton(16, this.canvas.clientHeight + 16, 48, 48);
             // this.drawTouchButton(88, this.canvas.clientHeight + 16, 48, 48);
@@ -372,4 +376,9 @@ class LevelWorld extends World {
     // sound and music: only if (defined) ...
 
     // think about class folder structure ...
+
+
+    // fullscreen with fourth class ...
+    // load game (await) ...
+    // 0 min or 0 sec ...
 }

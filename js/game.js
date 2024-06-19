@@ -1,4 +1,6 @@
 let canvas;
+let currentWidth;
+let currentHeight;
 let keyboard;
 let hovered = false;    // rename?
 let buttonSelected = false;    // move to StartWorld?!
@@ -380,7 +382,46 @@ function formatInitial(word, method) {
 }
 
 
+function enableFullscreen(logical) {
+    let orientation = screen.orientation.type;
 
+    let nativeFactor = 16 / 9;
+    let factor = screen.width / screen.height;
+    console.log(factor, isGreater(nativeFactor, factor));
+
+    if (isTrue(logical) && isGreater(nativeFactor, factor)) {
+        currentWidth = canvas.offsetWidth;
+        currentHeight = canvas.offsetHeight;
+        document.getElementById('canvas').style.width = 'unset';
+        document.getElementById('canvas').style.height = '100vh';
+    } else if (isTrue(logical) && isGreater(factor, nativeFactor)) {
+        currentWidth = canvas.offsetWidth;
+        currentHeight = canvas.offsetHeight;
+        document.getElementById('canvas').style.width = '100%';
+        document.getElementById('canvas').style.height = 'unset';
+    } else if (isTrue(logical) && isMatch(factor, nativeFactor)) {
+        currentWidth = canvas.offsetWidth;
+        currentHeight = canvas.offsetHeight;
+        document.getElementById('canvas').style.width = `100%`;
+        document.getElementById('canvas').style.height = `100vh`;
+    } else {
+        document.getElementById('canvas').style.width = `${currentWidth}px`;
+        document.getElementById('canvas').style.height = `${currentHeight}px`;
+    }
+
+
+    // if (isTrue(logical) && window.matchMedia("(orientation: landscape)").matches) {
+    //     currentWidth = canvas.offsetWidth;
+    //     document.getElementById('canvas').style.width = '100%';
+    // } else {
+    //     document.getElementById('canvas').style.width = `${currentWidth}px`;
+    // }
+
+
+    // set logical
+    // save current width
+    // calculate width or height
+}
 
 
 window.addEventListener("orientationchange", (event) => {
