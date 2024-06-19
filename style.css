@@ -14,17 +14,33 @@ body {
 }
 
 
-.display-unset {
-    display: unset;
+@media (max-width: 960px) {
+    #canvas {
+        width: 100%;
+    }
 }
 
 
-.display-none {
-    display: none;
+@media (orientation: landscape) {
+    #canvas {
+        height: 100vh;
+    }
 }
 
 
-@media only screen and (max-width: 960px) {
+/* @media only screen and (max-width: 960px) {
+    #canvas {
+        height: 100vh;
+        width: calc(round(down, 100vh / 9, 1px) * 16);
+        height: calc(round(down, calc(100vh / 9), 1px) * 9);
+    }
+} */
+
+
+
+
+
+/* @media only screen and (max-width: 960px) {
     .display-unset {
         display: none;
     }
@@ -40,4 +56,4 @@ body {
             height: calc(round(down, calc(100vh / 9), 1px) * 9);
         }
     }
-}
+} */

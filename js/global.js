@@ -79,6 +79,16 @@ function setClass(id, method, className) {
 }
 
 
+function checkOrientation() {
+    let orientation = screen.orientation.type;
+    if (isMatch(orientation, 'landscape-primary')) {
+        console.log(orientation);
+    } else if (isMatch(orientation, 'portrait-primary')) {
+        console.log(orientation);
+    }
+}
+
+
 
 
 // screen size not exactly (background gap!) ...
