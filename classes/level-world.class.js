@@ -34,7 +34,6 @@ class LevelWorld extends World {
     }
 
 
-    // jsdoc
     setLevelWorld() {
         this.setLevel();
         this.setAvatar();
@@ -133,6 +132,13 @@ class LevelWorld extends World {
                 this.ctx.textAlign = 'center';
                 this.ctx.fillStyle = 'white';
                 this.drawText('Game Over', 480, 270);
+                if (!this.transitSet) {
+                    this.transitSet = true;
+                    setTimeout(() => {
+                        pauseGame(true);
+                        setStartWorld();    // compare with other methods!
+                    }, 1500);
+                }
             }
         } else {
             this.translateCamera(this.cameraX, 0);
@@ -164,12 +170,6 @@ class LevelWorld extends World {
             // this.drawTouchButton(16, this.canvas.clientHeight - 144 + 16, 48, 48);
             // this.drawTouchButton(88, this.canvas.clientHeight - 144 + 16, 48, 48);
             // this.drawTouchButton(160, this.canvas.clientHeight - 144 + 16, 48, 48);
-
-
-
-            if (paused) {
-                this.drawObject(this.pause);
-            }
         }
         this.redraw();
     }

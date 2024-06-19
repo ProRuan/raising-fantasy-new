@@ -110,6 +110,19 @@ function setCanvas() {
 
     console.log('canvas (native): ', canvas.width, canvas.height);
     console.log('canvas (offset): ', canvas.offsetWidth, canvas.offsetHeight);
+
+    let factor = body.offsetWidth / body.offsetHeight;
+    let nativeFactor = 960 / 540;
+    if (isGreater(nativeFactor, factor)) {
+        let height = Math.floor(body.offsetHeight / 9) * 9;
+        let width = height / 9 * 16;
+        console.log('init size: ', factor, width, height);
+    } else if (isGreater(factor, nativeFactor)) {
+        let width = Math.floor(body.offsetWidth / 16) * 16;
+        let height = width / 16 * 9;
+        console.log('init size: ', factor, width, height);
+    }
+
 }
 
 
@@ -171,7 +184,12 @@ function processKeydown(event) {    // check doubleClick!!!
 
     if (isMatch(currentWorld, 'level')) {
         if (isKey('escape') && paused) {
-            setStartWorld();
+            world.stopped = true;
+            setStartWorld();    // compare with other functions!
+            world.interacted = true;
+            world.setCurrentButton('newGameButton');
+
+            // setStartWorld();
         }
         if (isKey('keyP')) {
             (!paused) ? pauseGame(true) : pauseGame(false);

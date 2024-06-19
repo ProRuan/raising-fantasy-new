@@ -125,7 +125,7 @@ class Character extends MoveableObject {
 
     // jsdoc
     isDeath() {
-        return !isGreater(0, this.hpPoints.length);
+        return !isGreater(0, this.hpPoints.length) || isGreater(canvas.height, this.y);
     }
 
 
