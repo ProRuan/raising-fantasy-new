@@ -72,6 +72,11 @@ window.addEventListener("touchstart", (event) => {
         }
 
         // console.log(event);
+
+        let touchAttack = event.changedTouches[0];
+        if (isGreater(body.offsetWidth / 2, touchAttack.clientX)) {
+            console.log('attack - start: ', touchAttack);
+        }
     }
 });
 
@@ -117,6 +122,12 @@ window.addEventListener("touchmove", (event) => {
         // if (isGreater(body.offsetWidth / 2, event.touches[0].clientX)) {
 
         // }
+
+
+        let touchAttack = event.changedTouches[0];
+        if (isGreater(body.offsetWidth / 2, touchAttack.clientX)) {
+            console.log('attack - move: ', touchAttack);
+        }
     }
 });
 
@@ -162,6 +173,29 @@ window.addEventListener("touchend", (event) => {
 
 
         // console.log(event);
+
+
+        let touchAttack = event.changedTouches[0];
+        if (isGreater(body.offsetWidth / 2, touchAttack.clientX)) {
+            console.log('attack - end: ', touchAttack);
+        }
+    }
+});
+
+
+window.addEventListener("touchmove", (event) => {
+    if (event && isMatch(currentWorld, 'level')) {
+
+
+
+
+        let touchAttack = event.changedTouches[0];
+        if (isGreater(body.offsetWidth / 2, touchAttack.clientX)) {
+            console.log('attack - cancel: ', touchAttack);
+        } else {
+            setKey('keyA', 'keydown', false);
+            console.log('canceled');
+        }
     }
 });
 

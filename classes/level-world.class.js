@@ -1,5 +1,5 @@
 class LevelWorld extends World {
-    heroX = 212;
+    heroX = 212;    // set source x values!
     trophyY = 436;
     victorySpeed = 2;
     size = LEVEL_SIZE;
@@ -162,18 +162,10 @@ class LevelWorld extends World {
                 this.drawObject(this.pause);
             }
 
-
-            // this.drawTouchButton(16, this.canvas.clientHeight + 16, 48, 48);
-            // this.drawTouchButton(88, this.canvas.clientHeight + 16, 48, 48);
-            // this.drawTouchButton(160, this.canvas.clientHeight + 16, 48, 48);
-
-            // this.drawTouchButton(16, this.canvas.clientHeight - 72 + 16, 48, 48);
-            // this.drawTouchButton(88, this.canvas.clientHeight - 72 + 16, 48, 48);
-            // this.drawTouchButton(160, this.canvas.clientHeight - 72 + 16, 48, 48);
-
-            // this.drawTouchButton(16, this.canvas.clientHeight - 144 + 16, 48, 48);
-            // this.drawTouchButton(88, this.canvas.clientHeight - 144 + 16, 48, 48);
-            // this.drawTouchButton(160, this.canvas.clientHeight - 144 + 16, 48, 48);
+            this.drawTouchButton(0, 0 + canvas.height / 2, canvas.width / 2, canvas.height / 2);
+            this.drawTouchButton(0 + canvas.width / 2, 0 + canvas.height / 2, canvas.width / 2, canvas.height / 2);
+            this.drawTouchButton(0, 0 + canvas.height, canvas.width / 2, canvas.height / 2);
+            this.drawTouchButton(0 + canvas.width / 2, 0 + canvas.height, canvas.width / 2, canvas.height / 2);
         }
         this.redraw();
     }
@@ -381,4 +373,9 @@ class LevelWorld extends World {
     // fullscreen with fourth class ...
     // load game (await) ...
     // 0 min or 0 sec ...
+    // heroX (due to touch event) ...
+
+
+
+    // use find() - some() - filter() ... !!!
 }
