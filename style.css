@@ -10,7 +10,23 @@ body {
 
 
 #canvas {
+    display: block;
     background-color: black;
+}
+
+
+/* for fullscreen !?! */
+/* @media (orientation: landscape) {
+    #canvas {
+        width: 100%;
+    }
+} */
+
+
+@media (orientation: portrait) {
+    #canvas {
+        display: none;
+    }
 }
 
 
@@ -21,39 +37,9 @@ body {
 }
 
 
-@media (orientation: landscape) {
+@media (max-height: 540px) {
     #canvas {
+        width: unset;
         height: 100vh;
     }
 }
-
-
-/* @media only screen and (max-width: 960px) {
-    #canvas {
-        height: 100vh;
-        width: calc(round(down, 100vh / 9, 1px) * 16);
-        height: calc(round(down, calc(100vh / 9), 1px) * 9);
-    }
-} */
-
-
-
-
-
-/* @media only screen and (max-width: 960px) {
-    .display-unset {
-        display: none;
-    }
-
-
-    .display-none {
-        display: unset;
-    }
-
-
-    @media only screen and (max-height: 540px) {
-        #canvas {
-            height: calc(round(down, calc(100vh / 9), 1px) * 9);
-        }
-    }
-} */
