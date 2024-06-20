@@ -69,42 +69,14 @@ class DrawableObject {
 
     // jsdoc
     setSize(source) {
-        this.setWidth(source);
-        this.setHeight(source);
+        this.width = this.getSize(source, 'width');
+        this.height = this.getSize(source, 'height');
     }
 
 
     // jsdoc
-    setWidth(source) {
-        let scaleFactor = canvas.width / NATIVE_WIDTH;
-        this.width = this.getWidth(source, scaleFactor);
-    }
-
-
-    // jsdoc
-    getWidth(source, scaleFactor) {
-        if (source.height) {
-            return source.width * scaleFactor;
-        } else {
-            return source.size * scaleFactor;
-        }
-    }
-
-
-    // jsdoc
-    setHeight(source) {
-        let aspectRatio = this.getAspectRatio(source);
-        this.height = this.width * aspectRatio;
-    }
-
-
-    // jsdoc
-    getAspectRatio(source) {
-        if (source.height) {
-            return source.height / this.width;
-        } else {
-            return source.size / this.width;
-        }
+    getSize(source, key) {
+        return (source.height) ? source[key] : source.size;
     }
 
 
