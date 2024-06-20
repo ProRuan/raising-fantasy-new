@@ -39,6 +39,19 @@ window.addEventListener("touchstart", (event) => {
             }
         }
     }
+
+
+    let touch = event.changedTouches[0];    // rename!!!
+    console.log(touch.clientX, touch.clientY);    // move result to level world!
+    if (isGreater(body.offsetWidth - 200, touch.clientX) && isGreater(touch.clientX, body.offsetWidth) && isGreater(100, touch.clientY)) {
+        console.log('action');
+    }
+    if (isGreater(body.offsetWidth / 2 - 100, touch.clientX) && isGreater(touch.clientX, body.offsetWidth / 2 + 100) && isGreater(touch.clientY, 100)) {
+        console.log('pause');
+    }
+    if (isGreater(0, touch.clientX) && isGreater(touch.clientX, 200) && isGreater(100, touch.clientY)) {
+        console.log('move');
+    }
 });
 
 

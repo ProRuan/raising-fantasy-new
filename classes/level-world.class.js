@@ -161,16 +161,12 @@ class LevelWorld extends World {
             if (paused) {
                 this.drawObject(this.pause);
             }
-
-            this.drawTouchButton(0, 0 + canvas.height / 2, canvas.width / 2, canvas.height / 2);
-            this.drawTouchButton(0 + canvas.width / 2, 0 + canvas.height / 2, canvas.width / 2, canvas.height / 2);
-            this.drawTouchButton(0, 0 + canvas.height, canvas.width / 2, canvas.height / 2);
-            this.drawTouchButton(0 + canvas.width / 2, 0 + canvas.height, canvas.width / 2, canvas.height / 2);
         }
         this.redraw();
     }
 
 
+    // to delete!!!
     drawTouchButton(x, y, width, height) {
         this.ctx.beginPath();
         this.ctx.strokeStyle = 'steelblue';
@@ -374,6 +370,7 @@ class LevelWorld extends World {
     // load game (await) ...
     // 0 min or 0 sec ...
     // heroX (due to touch event) ...
+    // make wav files smaller ...
 
 
 
@@ -382,5 +379,4 @@ class LevelWorld extends World {
 
 
     // touch zones (1/3 zones) ...
-    // add progress bar or make wav files smaller ...
 }
