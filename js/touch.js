@@ -1,81 +1,42 @@
-let touchStartX = 0;
-let touchStartY = 0;
-let touchStartTime = 0;
-let lastTouchStartTime = 0;
-
-let leftTouches = [];
-let rightTouches = [];
+let currentX = 0;
+let lastX = 0;
+let deltaX = 0;
+let currentY = 0;
+let lastY = 0;
+let deltaY = 0;
+let currentTime = 0;
+let lastTime = 0;
+let doubleClick = false;    // rename to run?
+let climb = false;
+let move = false;
 
 
 window.addEventListener("touchstart", (event) => {
     if (event && isMatch(currentWorld, 'level')) {
-        // make it variable!!! (set currentWorld!)
-        let cupButton = world.cupButton;
-        let settingsButton = world.settingsButton;
 
-        let touch = event.changedTouches[0];
-        let x = touch.clientX / world.canvas.offsetWidth * NATIVE_WIDTH;
-        let canvasX = world.canvas.offsetLeft / world.canvas.offsetWidth * NATIVE_WIDTH;
-        x = x - canvasX;
-        x = Math.round(x);
-        let y = touch.clientY / world.canvas.offsetHeight * NATIVE_HEIGHT;
-        y = Math.round(y);
+        let touch = event.changedTouches[0];    // rename!!!
 
-        // console.log('x: ', x, x);
-        // console.log(cupButton.xLeft, x, cupButton.xRight);
-        // console.log(cupButton.yTop, y, cupButton.yBottom);
+        if (isGreater(touch.clientX, body.offsetWidth / 2)) {
+            currentX = touch.clientX;
+            currentY = touch.clientY;
+            lastTime = currentTime;
+            currentTime = getTime();
 
-        // console.log(settingsButton.xLeft, x, settingsButton.xRight);
-        // console.log(settingsButton.yTop, y, settingsButton.yBottom);
-
-
-        let hero = world.hero.body;
-        // console.log(hero.xLeft, x, hero.xRight);
-        // console.log(hero.yTop, y, hero.yBottom);
-
-        let heroX = hero.xCenter - (hero.xCenter - world.heroX);
-
-        // if (isGreater(x, heroX)) {
-        //     setKey('arrowLeft', 'keydown', true);
-        // }
-        // if (isGreater(heroX, x)) {
-        //     setKey('arrowRight', 'keydown', true);
-        // }
-
-
-        // touchStartX = x;
-        // touchStartY = y;
-        // lastTouchStartTime = touchStartTime;
-        // touchStartTime = getTime();
-
-
-        if (isGreater(event.changedTouches[0].clientX, body.offsetWidth / 2)) {
-            touchStartX = x;
-            touchStartY = y;
-            lastTouchStartTime = touchStartTime;
-            touchStartTime = getTime();
-            console.log('left touch zone');
-
-            if (isGreater(touchStartTime - lastTouchStartTime, 500)) {
-                setKey('arrowRight', 'doubleClick', true);
-                setKey('arrowLeft', 'doubleClick', true);
+            if (isGreater(currentTime - lastTime, 500)) {
+                doubleClick = true;
             }
-        }
 
-        if (isGreater(body.offsetWidth / 2, event.changedTouches[0].clientX)) {
-            if (isGreater(event.changedTouches[0].clientY, body.offsetHeight - 100)) {
-                setKey('keyA', 'keydown', true);
-            } else if (isGreater(event.changedTouches[0].clientY, body.offsetHeight - 0)) {
+        } else if (isGreater(body.offsetWidth / 2, touch.clientX)) {
+
+            if (isGreater(body.offsetHeight / 2, touch.clientY)) {
+                if (!world.hero.bombUnlocked) {
+                    setKey('keyA', 'keydown', true);
+                } else if (isTrue(world.hero.bombUnlocked)) {
+                    setKey('keyF', 'keydown', true);
+                }
+            } else {
                 setKey('space', 'keydown', true);
             }
-            console.log('right touch zone');
-        }
-
-        // console.log(event);
-
-        let touchAttack = event.changedTouches[0];
-        if (isGreater(body.offsetWidth / 2, touchAttack.clientX)) {
-            console.log('attack - start: ', touchAttack);
         }
     }
 });
@@ -83,50 +44,69 @@ window.addEventListener("touchstart", (event) => {
 
 window.addEventListener("touchmove", (event) => {
     if (event && isMatch(currentWorld, 'level')) {
+
+
         let touch = event.changedTouches[0];
-        let x = touch.clientX / world.canvas.offsetWidth * NATIVE_WIDTH;
-        let canvasX = world.canvas.offsetLeft / world.canvas.offsetWidth * NATIVE_WIDTH;
-        x = x - canvasX;
-        x = Math.round(x);
-        let y = touch.clientY / world.canvas.offsetHeight * NATIVE_HEIGHT;
-        y = Math.round(y);
+        if (isGreater(touch.clientX, body.offsetWidth / 2)) {    // set timeout for climb, run and walk (16-128px)!
+            lastX = currentX;
+            currentX = touch.clientX;
+            deltaX = currentX - lastX;
+            lastY = currentY;
+            currentY = touch.clientY;
+            deltaY = lastY - currentY;
 
-        if (isGreater(event.changedTouches[0].clientX, body.offsetWidth / 2)) {
-            if (isGreater(y, touchStartY)) {
-                setKey('arrowDown', 'keydown', false);
-                setKey('arrowUp', 'keydown', true);
+
+            let absDeltaX;
+            let absDeltaY;
+            if (deltaX < 0) {
+                absDeltaX = deltaX * deltaX / (deltaX * -1);
+            } else {
+                absDeltaX = deltaX;
             }
-            if (isGreater(touchStartY, y)) {
-                setKey('arrowUp', 'keydown', false);
-                setKey('arrowDown', 'keydown', true);
+            if (deltaY < 0) {
+                absDeltaY = deltaY * deltaY / (deltaY * -1);
+            } else {
+                absDeltaY = deltaY;
             }
-            // if (isGreater(touchStartTime - lastTouchStartTime, 500) && isGreater(x, touchStartX) && isGreater(32, touchStartX - x)) {
-            //     setKey('arrowRight', 'doubleClick', false);
-            //     setKey('arrowLeft', 'doubleClick', true);
-            // }
-            // if (isGreater(touchStartTime - lastTouchStartTime, 500) && isGreater(touchStartX, x) && isGreater(32, x - touchStartX)) {
-            //     setKey('arrowLeft', 'doubleClick', false);
-            //     setKey('arrowRight', 'doubleClick', true);
-            // }
-            if (isGreater(x, touchStartX) && isGreater(32, touchStartX - x)) {
+
+
+            if (isGreater(absDeltaX, absDeltaY) && isGreater(4, absDeltaY)) {
+                move = false;
+                climb = true;
+            } else if (isGreater(absDeltaY, absDeltaX) && isGreater(4, absDeltaX)) {
+                climb = false;
+                move = true;
+            }
+
+            if (isTrue(climb)) {
                 setKey('arrowRight', 'keydown', false);
-                setKey('arrowLeft', 'keydown', true);
-            }
-            if (isGreater(touchStartX, x) && isGreater(32, x - touchStartX)) {
                 setKey('arrowLeft', 'keydown', false);
-                setKey('arrowRight', 'keydown', true);
+                if (isGreater(currentY, lastY)) {
+                    setKey('arrowDown', 'keydown', false);
+                    setKey('arrowUp', 'keydown', true);
+                } else if (isGreater(lastY, currentY)) {
+                    setKey('arrowUp', 'keydown', false);
+                    setKey('arrowDown', 'keydown', true);
+                }
+                console.log('delta sky start');
+            } else if (isTrue(move)) {
+                if (isGreater(currentX, lastX) && isTrue(doubleClick)) {
+                    setKey('arrowRight', 'doubleClick', false);
+                    setKey('arrowLeft', 'doubleClick', true);
+                } else if (isGreater(lastX, currentX) && isTrue(doubleClick)) {
+                    setKey('arrowLeft', 'doubleClick', false);
+                    setKey('arrowRight', 'doubleClick', true);
+                }
+                if (isGreater(currentX, lastX)) {
+                    setKey('arrowRight', 'keydown', false);
+                    setKey('arrowLeft', 'keydown', true);
+                } else if (isGreater(lastX, currentX)) {
+                    setKey('arrowLeft', 'keydown', false);
+                    setKey('arrowRight', 'keydown', true);
+                }
+                console.log('delta earth start');
             }
-            console.log('left touch zone');
-        }
-
-        // if (isGreater(body.offsetWidth / 2, event.touches[0].clientX)) {
-
-        // }
-
-
-        let touchAttack = event.changedTouches[0];
-        if (isGreater(body.offsetWidth / 2, touchAttack.clientX)) {
-            console.log('attack - move: ', touchAttack);
+            console.log('delta move: ', deltaX, deltaY, isGreater(deltaX, deltaY));
         }
     }
 });
@@ -136,66 +116,59 @@ window.addEventListener("touchend", (event) => {
     if (event && isMatch(currentWorld, 'level')) {
 
 
-        if (isGreater(event.changedTouches[0].clientX, body.offsetWidth / 2)) {
+        let touch = event.changedTouches[0];
+        if (isGreater(touch.clientX, body.offsetWidth / 2)) {
+            lastX = 0;
+            currentX = 0;
+            deltaX = 0;
+            lastY = 0;
+            currentY = 0;
+            deltaY = 0;
+            doubleClick = false;
+            climb = false;
+            move = false;
             setKey('arrowUp', 'keydown', false);
             setKey('arrowDown', 'keydown', false);
-            setKey('arrowLeft', 'keydown', false);
-            setKey('arrowRight', 'keydown', false);
             setKey('arrowLeft', 'doubleClick', false);
             setKey('arrowRight', 'doubleClick', false);
-            console.log('left touch zone');
-        }
-
-
-        if (isGreater(body.offsetWidth / 2, event.changedTouches[0].clientX)) {
-            if (isGreater(event.changedTouches[0].clientY, body.offsetHeight - 100)) {
+            setKey('arrowLeft', 'keydown', false);
+            setKey('arrowRight', 'keydown', false);
+        } else if (isGreater(body.offsetWidth / 2, touch.clientX)) {
+            if (isGreater(body.offsetHeight / 2, touch.clientY)) {
                 setKey('keyA', 'keydown', false);
-            } else if (isGreater(event.changedTouches[0].clientY, body.offsetHeight - 0)) {
+                setKey('keyF', 'keydown', false);    // condition?
+            } else {
                 setKey('space', 'keydown', false);
             }
-            console.log('right touch zone');
-            // setKey('keyA', 'keydown', false);
-            // setKey('space', 'keydown', false);
-        }
-
-        // if (event.touches.length > 0) {
-        //     setKey('space', 'keydown', false);
-        // } else {
-        //     setKey('arrowUp', 'keydown', false);
-        //     setKey('arrowDown', 'keydown', false);
-        //     setKey('space', 'keydown', false);
-        //     setKey('arrowLeft', 'keydown', false);
-        //     setKey('arrowRight', 'keydown', false);
-        //     setKey('arrowLeft', 'doubleClick', false);
-        //     setKey('arrowRight', 'doubleClick', false);
-        //     setKey('keyA', 'keydown', false);
-        // }
-
-
-        // console.log(event);
-
-
-        let touchAttack = event.changedTouches[0];
-        if (isGreater(body.offsetWidth / 2, touchAttack.clientX)) {
-            console.log('attack - end: ', touchAttack);
         }
     }
 });
 
 
-window.addEventListener("touchmove", (event) => {
+window.addEventListener("touchcancel", (event) => {
     if (event && isMatch(currentWorld, 'level')) {
 
+        lastX = 0;
+        currentX = 0;
+        deltaX = 0;
+        lastY = 0;
+        currentY = 0;
+        deltaY = 0;
+        doubleClick = false;
+        climb = false;
+        move = false;
 
+        setKey('arrowUp', 'keydown', false);
+        setKey('arrowDown', 'keydown', false);
+        setKey('space', 'keydown', false);
+        setKey('arrowLeft', 'doubleClick', false);
+        setKey('arrowRight', 'doubleClick', false);
+        setKey('arrowLeft', 'keydown', false);
+        setKey('arrowRight', 'keydown', false);
+        setKey('keyA', 'keydown', false);
+        setKey('keyF', 'keydown', false);
 
-
-        let touchAttack = event.changedTouches[0];
-        if (isGreater(body.offsetWidth / 2, touchAttack.clientX)) {
-            console.log('attack - cancel: ', touchAttack);
-        } else {
-            setKey('keyA', 'keydown', false);
-            console.log('canceled');
-        }
+        console.log('canceled all');
     }
 });
 

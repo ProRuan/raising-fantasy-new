@@ -9,6 +9,11 @@ function pauseGame(logical) {
     }
 
     world.hero.stop(logical);
+    if (isTrue(logical)) {
+        world.hero.music.pause();
+    } else if (!isTrue()) {
+        world.hero.music.play();
+    }
 
     world.hpBar.stop(logical);
     world.energyBar.stop(logical);

@@ -378,4 +378,9 @@ class LevelWorld extends World {
 
 
     // use find() - some() - filter() ... !!!
+    // fix media round errors ... ?
+
+    // touch zones (1/3 zones) ...
+    // touch combination ...
+    // pause game on rotation (keyP + pause text or just pause:false by orientation == landscape) ...
 }

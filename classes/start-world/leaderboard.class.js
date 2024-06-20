@@ -119,7 +119,7 @@ class Leaderboard extends DrawableObject {
     getTime(value) {
         let min = this.getMin(value);
         let s = this.getSec(value, min);
-        return (isGreater(0, min)) ? `${min} min ${s} s` : `${s} s`;
+        return this.formatTime(min, s);
     }
 
 
@@ -132,6 +132,18 @@ class Leaderboard extends DrawableObject {
     // jsdoc
     getSec(value, min) {
         return Math.floor(value / 1000 - min * 60);
+    }
+
+
+    // jsdoc
+    formatTime(min, s) {
+        if (isGreater(0, min) && isGreater(0, s)) {
+            return `${min} min ${s} s`;
+        } else if (isGreater(0, min)) {
+            return `${min} min`;
+        } else if (isGreater(0, s)) {
+            return `${s} s`;
+        }
     }
 
 

@@ -187,13 +187,13 @@ function processKeydown(event) {    // check doubleClick!!!
             paused = (!paused) ? true : false;
             if (paused) {
                 pauseStart = getTime();
-                world.hero.music.pause();
+                world.hero.music.pause();    // game.js or global? (double code!)
                 // world.endboss.music.pause();
             } else {
                 pauseEnd = getTime();
                 pauseTime += getSum(pauseEnd, -pauseStart);
                 console.log('Pause time: ', pauseTime);
-                world.hero.music.play();
+                world.hero.music.play();    // game.js or global? (double code!)
                 // world.endboss.music.play();
             }
         }
@@ -440,6 +440,7 @@ window.addEventListener("orientationchange", (event) => {
     if (isMatch(currentOrientation, 90)) {
         console.log('landscape: ', currentOrientation);
     } else if (isMatch(currentOrientation, 0)) {
+        pauseGame(true);    // pause by currentWorld == 'level' and orientation == 'portrait'
         console.log('protrait: ', currentOrientation);
     }
 });
