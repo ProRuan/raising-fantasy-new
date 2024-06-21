@@ -38,6 +38,24 @@ window.addEventListener("touchstart", (event) => {
                 setKey('space', 'keydown', true);
             }
         }
+
+
+        let touchZoneWidth = (screen.width - 64) / 3;
+        let touchZoneHeight = (screen.height - 32) / 3 * 2;
+        if (isGreater(touchZoneWidth, touchZoneHeight)) {
+            touchZoneWidth = touchZoneHeight;
+        } else if (isGreater(touchZoneHeight, touchZoneWidth)) {
+            touchZoneHeight = touchZoneWidth;
+        }
+        if (isGreater(256, touchZoneWidth)) {
+            touchZoneWidth = 256;
+            touchZoneHeight = 256;
+        }
+        console.log('touch zone: ', Math.floor(touchZoneWidth), Math.floor(touchZoneHeight));
+
+        let pauseZoneWidth = touchZoneWidth - 64;
+        let pauseZoneHeight = touchZoneHeight / 2 - 32;
+        console.log('pause zone: ', Math.floor(pauseZoneWidth), Math.floor(pauseZoneHeight));
     }
 
 
