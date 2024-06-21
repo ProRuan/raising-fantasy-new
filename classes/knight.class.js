@@ -130,11 +130,10 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
     resetBomb() {
-        let bombBurst = this.bomb && this.bomb.removeable;
         let bombOut = this.bomb && isGreater(this.abyssLevel, this.bomb.y);
-        this.bomb = (bombBurst || bombOut) ? undefined : this.bomb;
+        // verify, if bomb intervall is stopped ...
+        this.bomb = bombOut ? undefined : this.bomb;
     }
 
 
@@ -265,6 +264,7 @@ class Knight extends Character {
         if (isGreater(source.bossBattleTriggerX, this.x) && isUndefined(this.bossBattleStarted)) {
             this.bossBattleStarted = true;
             this.xStopLeft = source.bossBattleX;
+            world.endboss.nextCast = getSum(world.time, world.endboss.angerDelay);
         }
     }
 

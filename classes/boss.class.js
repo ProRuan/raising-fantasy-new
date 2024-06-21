@@ -2,9 +2,13 @@ class Boss extends Enemy {
     chapters = ['epilog', 'death', 'hurt', 'anger', 'castBlade', 'castFire', 'castLightning', 'idle'];
     angerLevel = 0;
     magicRange = 760;
+    nextCast = 0;
+    angerDelay = 2400;
+    castDelay = 1000;
     spellCast = false;
 
 
+    // jsdoc
     constructor(source, x, y) {
         super(source, x, y)
         this.setEnemy(300, 64, 'move');
@@ -35,7 +39,7 @@ class Boss extends Enemy {
         if (this.isBombBurst()) {
             this.applyBombBurst();
             this.keepHurt();
-            this.resetDelay();
+            this.updateCast(this.castDelay);
         }
     }
 
@@ -54,20 +58,28 @@ class Boss extends Enemy {
     }
 
 
-    // jsdoc
     keepHurt() {
         if (isMatch(this.chapter, 'hurt')) {
             this.currentImage = (isGreater(1, this.currentImage)) ? 1 : this.currentImage;
+
+
+            // move to class Bomb?
+            if (world.hero.bomb && world.hero.bomb.isImage('bomb11')) {    // replace all timeout methods + add pause time (also for this)!!!
+                if (!isUndefined(this.bombTime) && isGreater(this.bombTime, world.time)) {
+                    delete this.bombTime;
+                    world.hero.bomb = undefined;
+                }
+                if (isUndefined(this.bombTime)) {
+                    this.bombTime = world.time + 100;
+                }
+            }
         }
     }
 
 
     // jsdoc
-    resetDelay() {
-        if (isUndefined(this.magic)) {
-            this.spellCast = false;
-            clearTimeout(this.delayId);
-        }
+    updateCast(delay) {
+        this.nextCast = getSum(world.time, delay);
     }
 
 
@@ -101,11 +113,10 @@ class Boss extends Enemy {
     }
 
 
-    // jsdoc
     damage() {
-        if (this.isLightning()) {
+        if (this.isLightning()) {    // apply cast delay depending on flip book length!
             this.reduceHeroHp();
-        } else if (this.isCollided()) {
+        } else if (this.isCollided()) {    // apply cast delay depending on flip book length!
             this.magic.collided = true;
             world.hero.damage(this.magic.damage);
         }
@@ -170,7 +181,7 @@ class Boss extends Enemy {
             this.angry = true;
             this.calm();
             this.playSound(this.growl);
-            clearTimeout(this.delayId);
+            this.updateCast(this.angerDelay);
         }
     }
 
@@ -180,7 +191,6 @@ class Boss extends Enemy {
         setTimeout(() => {
             this.angerLevel++;
             this.angry = false;
-            this.resetDelay();
             this.startMusic(this.triggered, 250);
         }, 1400);
     }

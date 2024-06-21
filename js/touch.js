@@ -84,7 +84,7 @@ window.addEventListener("touchstart", (event) => {
             console.log('control zone');    // set height as well
         } else if (isGreater(body.offsetWidth - touchZoneWidth, touch.clientX) && isGreater(body.offsetHeight - touchZoneHeight, touch.clientY)) {
 
-            if (isGreater(body.offsetHeight - touchZoneHeight / 9 * 3, touch.clientY)) {
+            if (isGreater(body.offsetHeight - touchZoneHeight / 2, touch.clientY)) {
                 setKey('space', 'keydown', true);
             } else {
                 if (!world.hero.bombUnlocked) {
@@ -241,7 +241,7 @@ window.addEventListener("touchend", (event) => {
             setKey('arrowLeft', 'keydown', false);
             setKey('arrowRight', 'keydown', false);
         } else if (isGreater(body.offsetWidth - touchZoneWidth, touch.clientX) && isGreater(body.offsetHeight - touchZoneHeight, touch.clientY)) {
-            if (isGreater(body.offsetHeight - touchZoneHeight / 9 * 3, touch.clientY)) {
+            if (isGreater(body.offsetHeight - touchZoneHeight / 2, touch.clientY)) {
                 setKey('space', 'keydown', false);
             } else {
                 setKey('keyA', 'keydown', false);

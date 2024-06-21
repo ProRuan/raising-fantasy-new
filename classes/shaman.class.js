@@ -42,21 +42,11 @@ class Shaman extends Boss {
 
     // jsdoc
     recast() {
-        if (!isTrue(this.spellCast) || !this.magic) {
-            if (!isTrue(this.spellCast)) {
-                this.spellCast = true;
-                this.delayCast();
-            }
-        }
-    }
-
-
-    // jsdoc
-    delayCast() {
-        this.delayId = setTimeout(() => {
+        if (isGreater(this.nextCast, world.time) && !isTrue(this.spellCast)) {
+            this.spellCast = true;
             this.updateRate();
             this.castRandomly();
-        }, 1000);
+        }
     }
 
 
