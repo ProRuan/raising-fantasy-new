@@ -14,9 +14,58 @@ let move = false;
 window.addEventListener("touchstart", (event) => {
     if (event && isMatch(currentWorld, 'level')) {
 
+        let touchZoneWidth = body.offsetWidth / 16 * 4;
+        let touchZoneHeight = body.offsetHeight / 9 * 6;
+
+        if (isGreater(touchZoneWidth, 256)) {
+            touchZoneWidth = 256;
+        }
+        if (isGreater(touchZoneHeight, 256)) {
+            touchZoneHeight = 256;
+        }
+
+        // console.log('touch zone: ', Math.floor(touchZoneWidth), Math.floor(touchZoneHeight));
+
+        let pauseZoneWidth = body.offsetWidth / 16 * 2;
+        let pauseZoneHeight = body.offsetHeight / 9 * 1;
+        // console.log('pause zone: ', Math.floor(pauseZoneWidth), Math.floor(pauseZoneHeight));
+
+
+
         let touch = event.changedTouches[0];    // rename!!!
 
-        if (isGreater(touch.clientX, body.offsetWidth / 2)) {
+        if (isGreater(body.offsetWidth / 2 - pauseZoneWidth / 2, touch.clientX) && isGreater(touch.clientX, body.offsetWidth / 2 + pauseZoneWidth / 2) && isGreater(touch.clientY, pauseZoneHeight)) {
+            // if (!paused) {
+            //     paused = true;
+            //     pauseGame(paused);
+            // } else if (isTrue(paused)) {
+            //     paused = false;
+            //     pauseGame(paused);
+            // }
+            if (isTrue(paused)) {
+                world.stopped = true;
+                setStartWorld();    // compare with other functions!
+                world.interacted = true;
+                world.setCurrentButton('newGameButton');
+
+                // reset touches (keys) or new keyboard!!!
+
+                console.log('exit game');
+            }
+        }
+
+        if (isGreater(body.offsetWidth / 2 - pauseZoneWidth / 2, touch.clientX) && isGreater(touch.clientX, body.offsetWidth / 2 + pauseZoneWidth / 2) && isGreater(body.offsetHeight - pauseZoneHeight, touch.clientY)) {
+            if (!paused) {
+                paused = true;
+                pauseGame(paused);
+            } else if (isTrue(paused)) {
+                paused = false;
+                pauseGame(paused);
+            }
+            console.log('pause zone');
+        }
+
+        if (isGreater(touch.clientX, touchZoneWidth) && isGreater(body.offsetHeight - touchZoneHeight, touch.clientY)) {
             currentX = touch.clientX;
             currentY = touch.clientY;
             lastTime = currentTime;
@@ -26,49 +75,24 @@ window.addEventListener("touchstart", (event) => {
                 doubleClick = true;
             }
 
-        } else if (isGreater(body.offsetWidth / 2, touch.clientX)) {
+            console.log('control zone');    // set height as well
+        } else if (isGreater(body.offsetWidth - touchZoneWidth, touch.clientX) && isGreater(body.offsetHeight - touchZoneHeight, touch.clientY)) {
 
-            if (isGreater(body.offsetHeight / 2, touch.clientY)) {
+            if (isGreater(body.offsetHeight - touchZoneHeight / 9 * 3, touch.clientY)) {
+                setKey('space', 'keydown', true);
+            } else {
                 if (!world.hero.bombUnlocked) {
                     setKey('keyA', 'keydown', true);
                 } else if (isTrue(world.hero.bombUnlocked)) {
                     setKey('keyF', 'keydown', true);
                 }
-            } else {
-                setKey('space', 'keydown', true);
             }
+
+            console.log('action zone');    // set height as well
+
+            console.log('body: ', body.offsetWidth, body.offsetHeight);
+            console.log('touch: ', touch.clientX, touch.clientY);
         }
-
-
-        let touchZoneWidth = (screen.width - 64) / 3;
-        let touchZoneHeight = (screen.height - 32) / 3 * 2;
-        if (isGreater(touchZoneWidth, touchZoneHeight)) {
-            touchZoneWidth = touchZoneHeight;
-        } else if (isGreater(touchZoneHeight, touchZoneWidth)) {
-            touchZoneHeight = touchZoneWidth;
-        }
-        if (isGreater(256, touchZoneWidth)) {
-            touchZoneWidth = 256;
-            touchZoneHeight = 256;
-        }
-        console.log('touch zone: ', Math.floor(touchZoneWidth), Math.floor(touchZoneHeight));
-
-        let pauseZoneWidth = touchZoneWidth - 64;
-        let pauseZoneHeight = touchZoneHeight / 2 - 32;
-        console.log('pause zone: ', Math.floor(pauseZoneWidth), Math.floor(pauseZoneHeight));
-    }
-
-
-    let touch = event.changedTouches[0];    // rename!!!
-    console.log(touch.clientX, touch.clientY);    // move result to level world!
-    if (isGreater(body.offsetWidth - 200, touch.clientX) && isGreater(touch.clientX, body.offsetWidth) && isGreater(100, touch.clientY)) {
-        console.log('action');
-    }
-    if (isGreater(body.offsetWidth / 2 - 100, touch.clientX) && isGreater(touch.clientX, body.offsetWidth / 2 + 100) && isGreater(touch.clientY, 100)) {
-        console.log('pause');
-    }
-    if (isGreater(0, touch.clientX) && isGreater(touch.clientX, 200) && isGreater(100, touch.clientY)) {
-        console.log('move');
     }
 });
 
@@ -76,9 +100,26 @@ window.addEventListener("touchstart", (event) => {
 window.addEventListener("touchmove", (event) => {
     if (event && isMatch(currentWorld, 'level')) {
 
+        let touchZoneWidth = body.offsetWidth / 16 * 4;
+        let touchZoneHeight = body.offsetHeight / 9 * 6;
+
+        if (isGreater(touchZoneWidth, 256)) {
+            touchZoneWidth = 256;
+        }
+        if (isGreater(touchZoneHeight, 256)) {
+            touchZoneHeight = 256;
+        }
+
+        // console.log('touch zone: ', Math.floor(touchZoneWidth), Math.floor(touchZoneHeight));
+
+        let pauseZoneWidth = body.offsetWidth / 16 * 2;
+        let pauseZoneHeight = body.offsetHeight / 9 * 1;
+        // console.log('pause zone: ', Math.floor(pauseZoneWidth), Math.floor(pauseZoneHeight));
+
+
 
         let touch = event.changedTouches[0];
-        if (isGreater(touch.clientX, body.offsetWidth / 2)) {    // set timeout for climb, run and walk (16-128px)!
+        if (isGreater(touch.clientX, touchZoneWidth) && isGreater(body.offsetHeight - touchZoneHeight, touch.clientY)) {    // set timeout for climb, run and walk (16-128px)!
             lastX = currentX;
             currentX = touch.clientX;
             deltaX = currentX - lastX;
@@ -146,9 +187,25 @@ window.addEventListener("touchmove", (event) => {
 window.addEventListener("touchend", (event) => {
     if (event && isMatch(currentWorld, 'level')) {
 
+        let touchZoneWidth = body.offsetWidth / 16 * 4;
+        let touchZoneHeight = body.offsetHeight / 9 * 6;
+
+        if (isGreater(touchZoneWidth, 256)) {
+            touchZoneWidth = 256;
+        }
+        if (isGreater(touchZoneHeight, 256)) {
+            touchZoneHeight = 256;
+        }
+
+        // console.log('touch zone: ', Math.floor(touchZoneWidth), Math.floor(touchZoneHeight));
+
+        let pauseZoneWidth = body.offsetWidth / 16 * 2;
+        let pauseZoneHeight = body.offsetHeight / 9 * 1;
+        // console.log('pause zone: ', Math.floor(pauseZoneWidth), Math.floor(pauseZoneHeight));
+
 
         let touch = event.changedTouches[0];
-        if (isGreater(touch.clientX, body.offsetWidth / 2)) {
+        if (isGreater(touch.clientX, touchZoneWidth) && isGreater(body.offsetHeight - touchZoneHeight, touch.clientY)) {
             lastX = 0;
             currentX = 0;
             deltaX = 0;
@@ -164,12 +221,12 @@ window.addEventListener("touchend", (event) => {
             setKey('arrowRight', 'doubleClick', false);
             setKey('arrowLeft', 'keydown', false);
             setKey('arrowRight', 'keydown', false);
-        } else if (isGreater(body.offsetWidth / 2, touch.clientX)) {
-            if (isGreater(body.offsetHeight / 2, touch.clientY)) {
+        } else if (isGreater(body.offsetWidth - touchZoneWidth, touch.clientX) && isGreater(body.offsetHeight - touchZoneHeight, touch.clientY)) {
+            if (isGreater(body.offsetHeight - touchZoneHeight / 9 * 3, touch.clientY)) {
+                setKey('space', 'keydown', false);
+            } else {
                 setKey('keyA', 'keydown', false);
                 setKey('keyF', 'keydown', false);    // condition?
-            } else {
-                setKey('space', 'keydown', false);
             }
         }
     }
