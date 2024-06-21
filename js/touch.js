@@ -17,17 +17,23 @@ window.addEventListener("touchstart", (event) => {
         let touchZoneWidth = body.offsetWidth / 16 * 4;
         let touchZoneHeight = body.offsetHeight / 9 * 6;
 
-        if (isGreater(touchZoneWidth, 256)) {
-            touchZoneWidth = 256;
+        if (isGreater(touchZoneWidth, 192)) {
+            touchZoneWidth = 192;
         }
-        if (isGreater(touchZoneHeight, 256)) {
-            touchZoneHeight = 256;
+        if (isGreater(touchZoneHeight, 192)) {
+            touchZoneHeight = 192;
         }
 
         // console.log('touch zone: ', Math.floor(touchZoneWidth), Math.floor(touchZoneHeight));
 
         let pauseZoneWidth = body.offsetWidth / 16 * 2;
         let pauseZoneHeight = body.offsetHeight / 9 * 1;
+        if (isGreater(pauseZoneWidth, 128)) {
+            pauseZoneWidth = 128;
+        }
+        if (isGreater(pauseZoneHeight, 72)) {
+            pauseZoneHeight = 72;
+        }
         // console.log('pause zone: ', Math.floor(pauseZoneWidth), Math.floor(pauseZoneHeight));
 
 
@@ -93,6 +99,7 @@ window.addEventListener("touchstart", (event) => {
             console.log('body: ', body.offsetWidth, body.offsetHeight);
             console.log('touch: ', touch.clientX, touch.clientY);
         }
+        console.log('touch zone size: ', touchZoneWidth, touchZoneHeight, pauseZoneWidth, pauseZoneHeight);
     }
 });
 
@@ -103,17 +110,23 @@ window.addEventListener("touchmove", (event) => {
         let touchZoneWidth = body.offsetWidth / 16 * 4;
         let touchZoneHeight = body.offsetHeight / 9 * 6;
 
-        if (isGreater(touchZoneWidth, 256)) {
-            touchZoneWidth = 256;
+        if (isGreater(touchZoneWidth, 192)) {
+            touchZoneWidth = 192;
         }
-        if (isGreater(touchZoneHeight, 256)) {
-            touchZoneHeight = 256;
+        if (isGreater(touchZoneHeight, 192)) {
+            touchZoneHeight = 192;
         }
 
         // console.log('touch zone: ', Math.floor(touchZoneWidth), Math.floor(touchZoneHeight));
 
         let pauseZoneWidth = body.offsetWidth / 16 * 2;
         let pauseZoneHeight = body.offsetHeight / 9 * 1;
+        if (isGreater(pauseZoneWidth, 128)) {
+            pauseZoneWidth = 128;
+        }
+        if (isGreater(pauseZoneHeight, 72)) {
+            pauseZoneHeight = 72;
+        }
         // console.log('pause zone: ', Math.floor(pauseZoneWidth), Math.floor(pauseZoneHeight));
 
 
@@ -190,17 +203,23 @@ window.addEventListener("touchend", (event) => {
         let touchZoneWidth = body.offsetWidth / 16 * 4;
         let touchZoneHeight = body.offsetHeight / 9 * 6;
 
-        if (isGreater(touchZoneWidth, 256)) {
-            touchZoneWidth = 256;
+        if (isGreater(touchZoneWidth, 192)) {
+            touchZoneWidth = 192;
         }
-        if (isGreater(touchZoneHeight, 256)) {
-            touchZoneHeight = 256;
+        if (isGreater(touchZoneHeight, 192)) {
+            touchZoneHeight = 192;
         }
 
         // console.log('touch zone: ', Math.floor(touchZoneWidth), Math.floor(touchZoneHeight));
 
         let pauseZoneWidth = body.offsetWidth / 16 * 2;
         let pauseZoneHeight = body.offsetHeight / 9 * 1;
+        if (isGreater(pauseZoneWidth, 128)) {
+            pauseZoneWidth = 128;
+        }
+        if (isGreater(pauseZoneHeight, 72)) {
+            pauseZoneHeight = 72;
+        }
         // console.log('pause zone: ', Math.floor(pauseZoneWidth), Math.floor(pauseZoneHeight));
 
 
