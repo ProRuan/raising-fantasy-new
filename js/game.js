@@ -205,6 +205,18 @@ function processKeydown(event) {    // check doubleClick!!!
                     magic.chargingStop = magic.chargingStop + getSum(pauseEnd, -pauseStart);
                     console.log(magic.targetingStop, magic.chargingStop);
                 }
+                if (world.endboss.calmTime) {
+                    world.endboss.calmTime += getSum(pauseEnd, -pauseStart);
+                }
+                if (world.endboss.nextCast) {
+                    world.endboss.nextCast += getSum(pauseEnd, -pauseStart);
+                }
+                if (world.hero.jumpTime) {
+                    world.hero.jumpTime += getSum(pauseEnd, -pauseStart);
+                }
+                if (world.hero.lastIdle) {
+                    world.hero.lastIdle += getSum(pauseEnd, -pauseStart);
+                }
             }
         }
     }

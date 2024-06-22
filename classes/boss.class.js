@@ -173,24 +173,24 @@ class Boss extends Enemy {
     }
 
 
-    // jsdoc
     setAnger() {
         if (!isTrue(this.angry)) {
             this.angry = true;
-            this.calm();
+            this.calmTime = world.time + 1400;
             this.playSound(this.growl);
             this.updateCast(this.angerDelay);
         }
+        this.calm();
     }
 
 
-    // jsdoc
     calm() {
-        setTimeout(() => {
+        if (this.calmTime && isGreater(this.calmTime, world.time)) {
             this.angerLevel++;
             this.angry = false;
             this.startMusic(this.triggered, 250);
-        }, 1400);
+            delete this.calmTime;
+        }
     }
 
 

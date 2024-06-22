@@ -381,10 +381,10 @@ class LevelWorld extends World {
     // III. Set stop and remove time for web ... !!!
 
     // IV. Replace timeout with (pauseable timeout or nextTime)? ... (timeout (1/9) + pauseTimeout(1/9) + nextTime(0/?))
-    // - star - doublecheck
-    // - textButton - doublecheck
-    // - boss ...
-    // - character ...
+    // - star - doubleCheck
+    // - textButton - doubleCheck
+    // - boss - doubleCheck
+    // - character - doubleCheck
     // - enemy ...
     // - levelWorld ...
     // - moveableObject ...
@@ -392,7 +392,9 @@ class LevelWorld extends World {
     // - spider ...
 
     // + all nextValues ... !!! (0/?)
-    // lightning - doublecheck (timeout + pauseOffset)
+    // lightning - doubleCheck (delay/nextTime + pauseOffset)
+    // boss - doubleCheck
+    // character - doubleCheck
 
     // V. Translate=no + user-scalable=no ...
 }
