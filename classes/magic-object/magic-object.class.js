@@ -64,7 +64,7 @@ class MagicObject extends AnimatedObject {
     playAnimation() {
         if (isTrue(this.finalized)) {
             super.playAnimation(this.flipBook.epilog);
-            this.setRemoveable();
+            this.setTime();
         } else if (isTrue(this.collided)) {
             super.playAnimation(this.flipBook.collided);
             this.setFinalized();

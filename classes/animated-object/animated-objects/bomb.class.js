@@ -89,14 +89,6 @@ class Bomb extends AnimatedObject {
 
 
     // jsdoc
-    setTime() {
-        if (isUndefined(this.time)) {
-            this.time = world.time + 100;
-        }
-    }
-
-
-    // jsdoc
     resetCurrentImage() {
         if (!this.currentImageReset) {
             this.currentImageReset = true;

@@ -181,9 +181,8 @@ class Shaman extends Boss {
     }
 
 
-    // jsdoc
     win() {
-        this.setUndefined('magic');
+        this.removeMagic();
         this.lowMusic();
         world.raiseVictoryPodium();
     }

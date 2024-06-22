@@ -130,12 +130,9 @@ class AnimatedObject extends DrawableObject {
 
 
     // jsdoc
-    setRemoveable() {
-        if (isUndefined(this.removeableSet)) {
-            this.removeableSet = true;
-            setTimeout(() => {
-                this.removeable = true;
-            }, 100);
+    setTime() {
+        if (isUndefined(this.time)) {
+            this.time = world.time + 100;
         }
     }
 }

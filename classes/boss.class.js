@@ -82,7 +82,7 @@ class Boss extends Enemy {
     resetMagicCast() {
         if (this.isMagicCastReset()) {
             this.spellCast = false;
-            this.magic = undefined;
+            this.removeMagic();
         }
     }
 
@@ -90,7 +90,7 @@ class Boss extends Enemy {
     // jsdoc
     isMagicCastReset() {
         if (this.magic) {
-            return this.isOutOfRange() || this.magic.removeable;
+            return this.isOutOfRange() || isGreater(this.magic.time, world.time);
         }
     }
 
@@ -99,6 +99,15 @@ class Boss extends Enemy {
     isOutOfRange() {
         let outX = getSum(this.x, -this.magicRange);
         return isGreater(this.magic.xRight, outX);
+    }
+
+
+    // jsdoc
+    removeMagic() {
+        if (this.magic) {
+            this.magic.stop(true);
+            delete this.magic;
+        }
     }
 
 
