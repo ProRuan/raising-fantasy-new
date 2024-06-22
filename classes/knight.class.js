@@ -92,7 +92,7 @@ class Knight extends Character {
 
     // jsdoc
     throw() {
-        if (this.isBombReady()) {
+        if (this.bombUnlocked) {
             this.throwBomb();
             this.resetBomb();
         }
@@ -100,14 +100,8 @@ class Knight extends Character {
 
 
     // jsdoc
-    isBombReady() {
-        return !isUndefined(this.bombUnlocked) && !isTrue(this.otherDirection);
-    }
-
-
-    // jsdoc
     throwBomb() {
-        if (this.isBombThrow()) {
+        if (this.isBombThrow() && !isTrue(this.otherDirection)) {
             let [x, y] = this.getBombCoord();
             this.bomb = new Bomb(x, y);
             this.energyPoints.splice(0, 100);
@@ -130,10 +124,14 @@ class Knight extends Character {
     }
 
 
+    // jsdoc
     resetBomb() {
+        let bombBurst = this.bomb && isGreater(this.bomb.time, world.time);
         let bombOut = this.bomb && isGreater(this.abyssLevel, this.bomb.y);
-        // verify, if bomb intervall is stopped ...
-        this.bomb = bombOut ? undefined : this.bomb;
+        if (bombBurst || bombOut) {
+            this.bomb.stop(true);
+            delete this.bomb;
+        }
     }
 
 

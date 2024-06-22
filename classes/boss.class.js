@@ -58,21 +58,10 @@ class Boss extends Enemy {
     }
 
 
+    // jsdoc
     keepHurt() {
         if (isMatch(this.chapter, 'hurt')) {
             this.currentImage = (isGreater(1, this.currentImage)) ? 1 : this.currentImage;
-
-
-            // move to class Bomb?
-            if (world.hero.bomb && world.hero.bomb.isImage('bomb11')) {    // replace all timeout methods + add pause time (also for this)!!!
-                if (!isUndefined(this.bombTime) && isGreater(this.bombTime, world.time)) {
-                    delete this.bombTime;
-                    world.hero.bomb = undefined;
-                }
-                if (isUndefined(this.bombTime)) {
-                    this.bombTime = world.time + 100;
-                }
-            }
         }
     }
 

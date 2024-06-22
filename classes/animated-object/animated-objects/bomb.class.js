@@ -78,12 +78,20 @@ class Bomb extends AnimatedObject {
     playAnimation() {
         if (this.isImage('bomb11')) {
             super.playAnimation(this.flipBook.epilog);
-            this.setRemoveable();
+            this.setTime();
         } else if (this.collided) {
             this.resetCurrentImage();
             super.playAnimation(this.flipBook.burst);
         } else if (!this.collided) {
             super.playAnimation(this.flipBook.throw);
+        }
+    }
+
+
+    // jsdoc
+    setTime() {
+        if (isUndefined(this.time)) {
+            this.time = world.time + 100;
         }
     }
 
