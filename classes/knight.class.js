@@ -257,12 +257,20 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
     startBossBattle() {
         if (isGreater(source.bossBattleTriggerX, this.x) && isUndefined(this.bossBattleStarted)) {
             this.bossBattleStarted = true;
             this.xStopLeft = source.bossBattleX;
             world.endboss.nextCast = getSum(world.time, world.endboss.angerDelay);
+        }
+
+        if (this.bossBattleStarted && -6720 < this.world.cameraX) {
+            if (this.world.cameraX - 4 < -6720) {
+                this.world.cameraX = -6720;
+            } else {
+                this.world.cameraX -= 4;
+            }
+            console.log(this.world.cameraX);
         }
     }
 
