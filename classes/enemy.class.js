@@ -120,15 +120,13 @@ class Enemy extends MoveableObject {
     }
 
 
-    // jsdoc
     applyWeaponHit() {
-        if (!this.hitSet) {
-            this.hitSet = true;
+        if (this.hitTime && isGreater(this.hitTime, world.time)) {
             this.hp -= world.hero.weaponDamage;
             this.playSound(this.weaponImpact);
-            setTimeout(() => {
-                this.hitSet = false;
-            }, 100);
+            delete this.hitTime;
+        } else if (!this.hitTime) {
+            this.hitTime = world.time + 100;
         }
     }
 

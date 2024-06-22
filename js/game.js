@@ -211,6 +211,16 @@ function processKeydown(event) {    // check doubleClick!!!
                 if (world.endboss.nextCast) {
                     world.endboss.nextCast += getSum(pauseEnd, -pauseStart);
                 }
+                world.enemies.forEach((enemy) => {
+                    if (enemy.hitTime) {
+                        enemy.hitTime += getSum(pauseEnd, -pauseStart);
+                    }
+                });
+                world.enemies.forEach((enemy) => {
+                    if (enemy instanceof Dino) {
+                        enemy.pursuitStop += getSum(pauseEnd, -pauseStart);
+                    }
+                });
                 if (world.hero.jumpTime) {
                     world.hero.jumpTime += getSum(pauseEnd, -pauseStart);
                 }
