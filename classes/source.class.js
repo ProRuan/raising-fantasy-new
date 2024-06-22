@@ -3,7 +3,7 @@ class Source {
     crystalXCenter = 6240;
     crystalCollectedX = 5984;
     bossBattleX = 6780;
-    bossBattleTriggerX = 6932;
+    bossBattleTriggerX = 6948;
     endX = 7620;
 
 
