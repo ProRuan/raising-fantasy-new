@@ -76,29 +76,27 @@ class TextButton extends Button {
     }
 
 
-    // jsdoc
     startNewGame() {
-        if (world.newGameButton.isLocked()) {
+        if (this.time && isGreater(this.time, world.time)) {
+            // for (const [key] of Object.entries(world)) {
+            //     if (world[key] instanceof Button && key != 'currentButton') {
+            //         clearInterval(world[key].id);
+            //         console.log(key, world[key].id);
+            //     }
+            // }
+
+            setCursor('initial');
+
+            world.music.pause();
+            world.stopped = true;
+            setLevelWorld();
+
+            // this.transit();
+        } else if (world.newGameButton.isLocked()) {
             this.unlock('newGameButton');
             this.playSound(this.sound);
 
-            setTimeout(() => {
-
-                // for (const [key] of Object.entries(world)) {
-                //     if (world[key] instanceof Button && key != 'currentButton') {
-                //         clearInterval(world[key].id);
-                //         console.log(key, world[key].id);
-                //     }
-                // }
-
-                setCursor('initial');
-
-                world.music.pause();
-                world.stopped = true;
-                setLevelWorld();
-
-                // this.transit();
-            }, 750);
+            this.time = world.time + 750;
         }
     }
 

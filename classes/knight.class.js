@@ -270,7 +270,6 @@ class Knight extends Character {
             } else {
                 this.world.cameraX -= 4;
             }
-            console.log(this.world.cameraX);
         }
     }
 

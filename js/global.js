@@ -4,32 +4,34 @@
 // set escape and keyP ...
 
 function pauseGame(logical) {
-    if (world.hero.bomb) {
-        world.hero.bomb.stop(logical);
-    }
+    if (!isTrue(pauseDisabled)) {
+        if (world.hero.bomb) {
+            world.hero.bomb.stop(logical);
+        }
 
-    world.hero.stop(logical);
-    if (isTrue(logical)) {
-        world.hero.music.pause();
-    } else if (!isTrue()) {
-        world.hero.music.play();
-    }
+        world.hero.stop(logical);
+        if (isTrue(logical)) {
+            world.hero.music.pause();
+        } else if (!isTrue()) {
+            world.hero.music.play();
+        }
 
-    world.hpBar.stop(logical);
-    world.energyBar.stop(logical);
-    world.staminaBar.stop(logical);
+        world.hpBar.stop(logical);
+        world.energyBar.stop(logical);
+        world.staminaBar.stop(logical);
 
-    for (const [key] of Object.entries(world.level)) {
-        let objectGroup = world.level[key];
-        objectGroup.forEach((object) => {
-            if (object.web) {
-                object.web.stop(logical);
-            }
-            if (object.magic) {
-                object.magic.stop(logical);
-            }
-            object.stop(logical);
-        });
+        for (const [key] of Object.entries(world.level)) {
+            let objectGroup = world.level[key];
+            objectGroup.forEach((object) => {
+                if (object.web) {
+                    object.web.stop(logical);
+                }
+                if (object.magic) {
+                    object.magic.stop(logical);
+                }
+                object.stop(logical);
+            });
+        }
     }
 }
 

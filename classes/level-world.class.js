@@ -17,12 +17,6 @@ class LevelWorld extends World {
 
 
     // jsdoc
-    get time() {
-        return new Date().getTime();
-    }
-
-
-    // jsdoc
     get endboss() {
         return this.level.bosses[0];
     }
@@ -381,8 +375,24 @@ class LevelWorld extends World {
 
 
 
+
     // I. Game over ...
     // II. Loading (saving?) ...
     // III. Set stop and remove time for web ... !!!
-    // IV. Replace timeout with (pauseable timeout or nextTime)? ...
+
+    // IV. Replace timeout with (pauseable timeout or nextTime)? ... (timeout (1/9) + pauseTimeout(1/9) + nextTime(0/?))
+    // - star - doublecheck
+    // - textButton - doublecheck
+    // - boss ...
+    // - character ...
+    // - enemy ...
+    // - levelWorld ...
+    // - moveableObject ...
+    // - shaman ...
+    // - spider ...
+
+    // + all nextValues ... !!! (0/?)
+    // lightning - doublecheck (timeout + pauseOffset)
+
+    // V. Translate=no + user-scalable=no ...
 }

@@ -11,6 +11,12 @@ class World {
 
 
     // jsdoc
+    get time() {
+        return new Date().getTime();
+    }
+
+
+    // jsdoc
     init(canvas, keyboard) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');

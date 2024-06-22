@@ -38,7 +38,8 @@ let counter = 0;    // for start world (necessary?)
 let volume = { music: 5, sound: 5 };    // to set in level world!
 pointer = false;
 
-let paused;
+let paused;    // set false?
+let pauseDisabled = false;
 let pauseStart = 0;
 let pauseEnd = 0;
 let pauseTime = 0;
@@ -173,7 +174,7 @@ function processKeydown(event) {    // check doubleClick!!!
         closeWithKey('keyX', 'questRoll', 'coinButton');
     }
 
-    if (isMatch(currentWorld, 'level')) {
+    if (isMatch(currentWorld, 'level') && !isTrue(pauseDisabled)) {
         if (isKey('escape') && paused) {
             world.stopped = true;
             setStartWorld();    // compare with other functions!
@@ -182,7 +183,7 @@ function processKeydown(event) {    // check doubleClick!!!
 
             // setStartWorld();
         }
-        if (isKey('keyP')) {
+        if (isKey('keyP')) {    // or touch in pause zone!!!
             (!paused) ? pauseGame(true) : pauseGame(false);
             paused = (!paused) ? true : false;
             if (paused) {
@@ -195,6 +196,15 @@ function processKeydown(event) {    // check doubleClick!!!
                 console.log('Pause time: ', pauseTime);
                 world.hero.music.play();    // game.js or global? (double code!)
                 // world.endboss.music.play();
+
+
+                if (world.endboss.magic && world.endboss.magic instanceof Lightning) {
+                    let magic = world.endboss.magic;
+                    console.log(magic.targetingStop, magic.chargingStop);
+                    magic.targetingStop = magic.targetingStop + getSum(pauseEnd, -pauseStart);
+                    magic.chargingStop = magic.chargingStop + getSum(pauseEnd, -pauseStart);
+                    console.log(magic.targetingStop, magic.chargingStop);
+                }
             }
         }
     }

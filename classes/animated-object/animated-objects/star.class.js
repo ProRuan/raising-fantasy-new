@@ -7,10 +7,10 @@ class Star extends AnimatedObject {
     }
 
 
-    // jsdoc
     triggerEffect() {
         this.updateScore();
         pauseGame(true);
+        pauseDisabled = true;
         this.setPauseableInterval(() => this.transit(), 1000 / 60);
     }
 
@@ -95,11 +95,13 @@ class Star extends AnimatedObject {
     }
 
 
-    // jsdoc
     shiftWorld() {
         if (isMatch(world.alpha, 0) && !this.worldShifted) {
             this.worldShifted = true;
-            setTimeout(() => { this.goHome() }, 500);
+            this.worldShiftTime = world.time + 500;
+        }
+        if (this.worldShiftTime && isGreater(this.worldShiftTime, world.time)) {
+            this.goHome();
         }
     }
 
@@ -111,12 +113,12 @@ class Star extends AnimatedObject {
     }
 
 
-    // jsdoc
     leaveWorld() {
         this.stop(true);
         world.hero.music.pause();
         world.endboss.music.pause();
         world.stopped = true;
+        pauseDisabled = false;
     }
 
 
