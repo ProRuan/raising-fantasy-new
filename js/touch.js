@@ -14,8 +14,8 @@ let move = false;
 window.addEventListener("touchstart", (event) => {
     if (event && isMatch(currentWorld, 'level')) {
 
-        let touchZoneWidth = body.offsetWidth / 16 * 4;
-        let touchZoneHeight = body.offsetHeight / 9 * 6;
+        let touchZoneWidth = body.offsetWidth / 3;
+        let touchZoneHeight = body.offsetHeight / 3 * 2;
 
         if (isGreater(touchZoneWidth, 192)) {
             touchZoneWidth = 192;
@@ -107,8 +107,8 @@ window.addEventListener("touchstart", (event) => {
 window.addEventListener("touchmove", (event) => {
     if (event && isMatch(currentWorld, 'level')) {
 
-        let touchZoneWidth = body.offsetWidth / 16 * 4;
-        let touchZoneHeight = body.offsetHeight / 9 * 6;
+        let touchZoneWidth = body.offsetWidth / 3;
+        let touchZoneHeight = body.offsetHeight / 3 * 2;
 
         if (isGreater(touchZoneWidth, 192)) {
             touchZoneWidth = 192;
@@ -200,8 +200,8 @@ window.addEventListener("touchmove", (event) => {
 window.addEventListener("touchend", (event) => {
     if (event && isMatch(currentWorld, 'level')) {
 
-        let touchZoneWidth = body.offsetWidth / 16 * 4;
-        let touchZoneHeight = body.offsetHeight / 9 * 6;
+        let touchZoneWidth = body.offsetWidth / 3;
+        let touchZoneHeight = body.offsetHeight / 3 * 2;
 
         if (isGreater(touchZoneWidth, 192)) {
             touchZoneWidth = 192;
