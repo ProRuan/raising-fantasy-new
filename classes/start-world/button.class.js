@@ -89,12 +89,21 @@ class Button extends DrawableObject {
     }
 
 
-    // jsdoc
     setVolumeValue(key, logical) {
         if (isTrue(logical) && isGreater(volume[key], 10)) {
             volume[key]++;
+            if (isMatch(key, 'sound')) {    // global function!!!
+                let audio = new Audio(source.swordDraw);
+                audio.volume = volume.sound / 10;
+                audio.play();
+            }
         } else if (!isTrue(logical) && isGreater(0, volume[key])) {
             volume[key]--;
+            if (isMatch(key, 'sound')) {    // global function!!!
+                let audio = new Audio(source.swordDraw);
+                audio.volume = volume.sound / 10;
+                audio.play();
+            }
         }
     }
 
