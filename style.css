@@ -1,6 +1,10 @@
 body {
     margin: 0;
     height: 100vh;
+    background-image: url('./img/background.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -12,11 +16,15 @@ body {
 #canvas {
     display: block;
     background-color: black;
+    box-shadow: 0 0 32px 32px white;
 }
 
 
 #rotation-img {
+    padding: 32px;
     width: 50%;
+    background-color: white;
+    border-radius: 10%;
 }
 
 
@@ -33,11 +41,6 @@ body {
 
 
 @media (orientation: landscape) {
-    body {
-        background: black;
-    }
-
-
     #rotation-img {
         display: none;
     }
