@@ -50,12 +50,19 @@ class Spider extends Enemy {
     }
 
 
-    // jsdoc
     trigger() {
         if (this.isThrowTimeout()) {
             this.resetThrowParameters();
+        } else if (this.throwResetTime && isGreater(this.throwResetTime, world.time)) {
+            this.resetThrowParameters();
+            this.webBroken = false;
+            this.nextThrow = world.time + 1000;
+            delete this.throwResetTime;
         } else if (this.isWebBurst()) {
             this.processWebBurst();
+        } else if (this.throwDoneTime && isGreater(this.throwDoneTime, world.time)) {
+            this.throwDone = true;
+            delete this.throwDoneTime;
         } else if (this.isThrowTime()) {
             this.processWebThrow();
             this.setWeb();
@@ -122,15 +129,13 @@ class Spider extends Enemy {
     }
 
 
-    // jsdoc
     processWebBurst() {
         this.webBroken = true;
         this.applyDamage(10);
         this.playSound(this.amorHit);
-        setTimeout(() => {
-            this.resetThrowParameters();
-            this.webBroken = false;
-        }, 200);
+        if (!this.throwResetTime) {
+            this.throwResetTime = world.time + 200;
+        }
     }
 
 
@@ -146,13 +151,12 @@ class Spider extends Enemy {
     }
 
 
-    // jsdoc
     processWebThrow() {
         this.thrown = true;
         this.throwDone = false;
-        setTimeout(() => {
-            this.throwDone = true;
-        }, this.getMs());
+        if (!this.throwDoneTime) {
+            this.throwDoneTime = world.time + this.getMs();
+        }
     }
 
 

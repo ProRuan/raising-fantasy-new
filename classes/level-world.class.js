@@ -378,28 +378,10 @@ class LevelWorld extends World {
 
     // I. Game over ...
     // II. Loading (saving?) ...
-    // III. Set stop and remove time for web ... !!!
+    // III. Set stop and remove time for web + magic ... !!!
 
     // IV. Replace timeout with (pauseable timeout or nextTime)? ... (timeout (1/9) + pauseTimeout(1/9) + nextTime(0/?))
-
     // Fix LevelWorld timeout / next / last + pauseOffset ...
-
-    // - star - doubleCheck
-    // - textButton - doubleCheck
-    // - boss - doubleCheck
-    // - character - doubleCheck
-    // - enemy - doubleCheck
-    // - levelWorld ...
-    // - shaman - doubleCheck
-    // - spider ...
-
-    // + all nextValues ... !!! (6/6)
-    // lightning - doubleCheck (delay/nextTime + pauseOffset)
-    // boss - doubleCheck
-    // character - doubleCheck
-    // dino - doubleCheck
-    // ent - doubleCheck
-    // spider - doubleCheck
 
     // V. Translate=no + user-scalable=no ...
     // VI. Pause sounds (array) ...
