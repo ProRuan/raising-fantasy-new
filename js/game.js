@@ -95,24 +95,24 @@ function setCanvas() {
     let currentOrientation = screen.orientation.angle;
 
     if (isMatch(currentOrientation, 90)) {
-        console.log('landscape: ', currentOrientation);
+        // console.log('landscape: ', currentOrientation);
     } else if (isMatch(currentOrientation, 0)) {
-        console.log('protrait: ', currentOrientation);
+        // console.log('protrait: ', currentOrientation);
     }
 
-    console.log('canvas (native): ', canvas.width, canvas.height);
-    console.log('canvas (offset): ', canvas.offsetWidth, canvas.offsetHeight);
+    // console.log('canvas (native): ', canvas.width, canvas.height);
+    // console.log('canvas (offset): ', canvas.offsetWidth, canvas.offsetHeight);
 
     let factor = body.offsetWidth / body.offsetHeight;
     let nativeFactor = 960 / 540;
     if (isGreater(nativeFactor, factor)) {
         let height = Math.floor(body.offsetHeight / 9) * 9;
         let width = height / 9 * 16;
-        console.log('init size: ', factor, width, height);
+        // console.log('init size: ', factor, width, height);
     } else if (isGreater(factor, nativeFactor)) {
         let width = Math.floor(body.offsetWidth / 16) * 16;
         let height = width / 16 * 9;
-        console.log('init size: ', factor, width, height);
+        // console.log('init size: ', factor, width, height);
     }
 
 }
@@ -200,10 +200,10 @@ function processKeydown(event) {    // check doubleClick!!!
 
                 if (world.endboss.magic && world.endboss.magic instanceof Lightning) {
                     let magic = world.endboss.magic;
-                    console.log(magic.targetingStop, magic.chargingStop);
+                    // console.log(magic.targetingStop, magic.chargingStop);
                     magic.targetingStop = magic.targetingStop + getSum(pauseEnd, -pauseStart);
                     magic.chargingStop = magic.chargingStop + getSum(pauseEnd, -pauseStart);
-                    console.log(magic.targetingStop, magic.chargingStop);
+                    // console.log(magic.targetingStop, magic.chargingStop);
                 }
                 if (world.endboss.calmTime) {
                     world.endboss.calmTime += getSum(pauseEnd, -pauseStart);
@@ -444,7 +444,7 @@ function enableFullscreen(logical) {
 
     let nativeFactor = 16 / 9;
     let factor = body.offsetWidth / body.offsetHeight;
-    console.log(factor, isGreater(nativeFactor, factor));
+    // console.log(factor, isGreater(nativeFactor, factor));
 
     if (isTrue(logical) && isGreater(nativeFactor, factor)) {
         currentWidth = canvas.offsetWidth;
@@ -490,14 +490,20 @@ window.addEventListener("orientationchange", (event) => {
     let currentOrientation = event.target.screen.orientation.angle;
 
     if (isMatch(currentOrientation, 90)) {
+        if (isMatch(currentWorld, 'start')) {    // pause music of start world at least
+            world.music.play();
+        }
         if (isMatch(currentWorld, 'level') && !isTrue(paused)) {    // pause music of start world at least
             pauseGame(false);
         }
-        console.log('landscape: ', currentOrientation);
+        // console.log('landscape: ', currentOrientation);
     } else if (isMatch(currentOrientation, 0)) {
+        if (isMatch(currentWorld, 'start')) {    // pause music of start world at least
+            world.music.pause();
+        }
         if (isMatch(currentWorld, 'level') && !isTrue(paused)) {    // pause music of start world at least
             pauseGame(true);
         }
-        console.log('protrait: ', currentOrientation);
+        // console.log('protrait: ', currentOrientation);
     }
 });

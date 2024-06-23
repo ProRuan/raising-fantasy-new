@@ -104,8 +104,7 @@ class Spider extends Enemy {
     }
 
 
-    // jsdoc
-    removeWeb() {
+    removeWeb() {    // double code (bomb and 3 x magic)!?! 
         this.web.stop(true);
         delete this.web;
     }
