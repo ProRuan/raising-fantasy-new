@@ -110,52 +110,48 @@ class LevelWorld extends World {
         this.clearCanvas();
         this.setGlobalAlpha();
 
-
-        if (this.hero.img.src.includes('death')) {
-            if (isUndefined(this.gameOver)) {
-                this.drawObject(this.hero);
-                if (this.hero.img.src.includes('death10') && isUndefined(this.gameOverSet)) {
-                    this.gameOverSet = true;
-                    setTimeout(() => {
-                        this.gameOver = true;
-                    }, 100);
-                }
-            }
-            if (this.gameOver) {
-                this.ctx.font = '64px Arial';
-                this.ctx.textAlign = 'center';
-                this.ctx.fillStyle = 'white';
-                this.drawText('Game Over', 480, 270);
-                if (!this.transitSet) {
-                    this.transitSet = true;
-                    setTimeout(() => {
-                        pauseGame(true);
-                        setStartWorld();    // compare with other methods!
-                    }, 1500);
-                }
-            }
-        } else {
-            this.translateCamera(this.cameraX, 0);
+        this.translateCamera(this.cameraX, 0);
 
 
-            this.drawLevel();
-            this.drawObject(this.hero);
-            if (this.endboss.magic) {
-                this.drawObject(this.endboss.magic);
-            }
-            if (this.hero.bomb) {
-                this.drawObject(this.hero.bomb);
-            }
-            this.drawSpiderWebs();
-            this.translateCamera(-this.cameraX, 0);
+        this.drawLevel();
 
-            this.drawAvatarInfo();
-            this.removeDeadEnemies();
+        if (this.hero && this.hero.isImage('death10') || this.hero && this.hero.y > canvas.height) {
+            this.ctx.font = '64px Arial';
+            this.ctx.textAlign = 'center';
+            this.ctx.fillStyle = 'black';
+            this.drawText('Game Over', this.hero.x + 96, 270 + 32);
+            if (!this.transitSet) {
+                this.transitSet = true;
+                setTimeout(() => {
+                    this.hero.music.pause();
+                    this.endboss.music.pause();
+                    pauseGame(true);
+                    this.stopped = true;
+                    pauseDisabled = false;
 
-            if (paused) {
-                this.drawObject(this.pause);
+                    setStartWorld();
+                    world.interacted = true;
+                }, 3000);
             }
         }
+
+        this.drawObject(this.hero);
+        if (this.endboss.magic) {
+            this.drawObject(this.endboss.magic);
+        }
+        if (this.hero.bomb) {
+            this.drawObject(this.hero.bomb);
+        }
+        this.drawSpiderWebs();
+        this.translateCamera(-this.cameraX, 0);
+
+        this.drawAvatarInfo();
+        this.removeDeadEnemies();
+
+        if (paused) {
+            this.drawObject(this.pause);
+        }
+
         this.redraw();
     }
 
@@ -376,11 +372,11 @@ class LevelWorld extends World {
 
 
 
-    // I. Game over ...
-
-    // II. Replace timeout with (pauseable timeout or nextTime)? ... (timeout (7/8) + pauseTimeout(7/8))
+    // I. Replace timeout with (pauseable timeout or nextTime)? ... (timeout (7/8) + pauseTimeout(7/8))
     // Fix LevelWorld timeout/next/last + pauseOffset ...
     // Fix pause for touch ... !!!
 
-    // III. Pause sounds (array) ...
+    // II. Pause sounds (array) ...
+    // III. Dino gravity (GrassL/R or some()) ...
+    // IV. Font ...
 }
