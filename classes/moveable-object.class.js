@@ -5,10 +5,7 @@ class MoveableObject extends DrawableObject {
     basicLevel = 484;
     groundLevel = 484;
     abyssLevel = 668;
-    lastHit = 0;
-    hitDelay = 500;
     otherDirection = false;
-    climbing = false;
 
 
     // jsdoc

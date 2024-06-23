@@ -40,9 +40,14 @@ class Shaman extends Boss {
     }
 
 
-    // jsdoc
     recast() {
-        if (isGreater(this.nextCast, world.time) && !isTrue(this.spellCast)) {
+        if (this.chapterTime && isGreater(this.chapterTime, world.time)) {
+            this.setUndefined('magicChapter');
+            delete this.chapterTime;
+        } else if (this.selectionTime && isGreater(this.selectionTime, world.time)) {
+            this.selectMagic(this.magicChapter);
+            delete this.selectionTime;
+        } else if (isGreater(this.nextCast, world.time) && !isTrue(this.spellCast)) {
             this.spellCast = true;
             this.updateRate();
             this.castRandomly();
@@ -90,11 +95,14 @@ class Shaman extends Boss {
     }
 
 
-    // jsdoc
     setCast(key) {
         this.magicChapter = key;
-        setTimeout(() => this.selectMagic(key), 300);
-        setTimeout(() => this.setUndefined('magicChapter'), this.ms);
+        if (!this.selectionTime) {
+            this.selectionTime = world.time + 300;
+        }
+        if (!this.chapterTime) {
+            this.chapterTime = world.time + this.ms;
+        }
     }
 
 
