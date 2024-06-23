@@ -229,6 +229,12 @@ function processKeydown(event) {    // check doubleClick!!!
                     if (enemy instanceof Ent) {
                         enemy.lastTurn += getSum(pauseEnd, -pauseStart);
                     }
+                    if (enemy instanceof Spider) {
+                        enemy.nextThrow += getSum(pauseEnd, -pauseStart);
+                    }
+                    if (enemy instanceof Spider && enemy.web.throwDoneTime) {
+                        enemy.web.throwDoneTime += getSum(pauseEnd, -pauseStart);
+                    }
                 });
                 if (world.hero.jumpTime) {
                     world.hero.jumpTime += getSum(pauseEnd, -pauseStart);

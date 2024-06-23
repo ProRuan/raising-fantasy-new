@@ -388,18 +388,18 @@ class LevelWorld extends World {
     // - textButton - doubleCheck
     // - boss - doubleCheck
     // - character - doubleCheck
-    // - enemy - doubleCheck (triple sound?!)
+    // - enemy - doubleCheck
     // - levelWorld ...
     // - shaman - doubleCheck
     // - spider ...
 
-    // + all nextValues ... !!! (0/?)
+    // + all nextValues ... !!! (6/6)
     // lightning - doubleCheck (delay/nextTime + pauseOffset)
     // boss - doubleCheck
     // character - doubleCheck
     // dino - doubleCheck
     // ent - doubleCheck
-    // ??? ...
+    // spider - doubleCheck
 
     // V. Translate=no + user-scalable=no ...
     // VI. Pause sounds (array) ...
