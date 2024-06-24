@@ -160,9 +160,11 @@ function processKeydown(event) {    // check doubleClick!!!
 
     // console.log(event);
     let code = getCode(event.code);
-    setKey(code, 'keydown', true);
-    setKey(code, 'timeStamp', getTime());
-    verifyDoubleClick(code);
+    if (world.keyboard[code]) {
+        setKey(code, 'keydown', true);
+        setKey(code, 'timeStamp', getTime());
+        verifyDoubleClick(code);
+    }
 
 
     if (isMatch(currentWorld, 'start')) {
@@ -268,9 +270,11 @@ function processKeyup(event) {
 
     // console.log(event);    // to delete!!!
     let code = getCode(event.code);
-    setKey(code, 'keydown', false);
-    setKey(code, 'doubleClick', false);
-    setKey(code, 'lastKeyUp', getTime());
+    if (world.keyboard[code]) {
+        setKey(code, 'keydown', false);
+        setKey(code, 'doubleClick', false);
+        setKey(code, 'lastKeyUp', getTime());
+    }
 }
 
 
