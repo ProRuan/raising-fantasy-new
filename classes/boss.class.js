@@ -17,7 +17,7 @@ class Boss extends Enemy {
 
     // jsdoc
     get triggered() {
-        return world.hero.bossBattleStarted;
+        return world.hero.bossBattleStarted && isMatch(world.cameraX, -6720);
     }
 
 
