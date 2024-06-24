@@ -253,8 +253,10 @@ class StartWorld extends World {
     drawTitle(title) {
         let x = this.canvas.width / 2;
         let y = this.canvas.height / 2 + 8;
+        this.setShadow('white', 16);
         this.setText(title.font, 'center', 'black');
         super.drawText(title.text, x, y);
+        this.setShadow();
     }
 
 
