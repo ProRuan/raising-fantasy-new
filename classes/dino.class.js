@@ -19,6 +19,17 @@ class Dino extends Enemy {
     pursue() {
         if (this.isWalk() && this.isPeaceful()) {
             this.applySpeedType('x', this.otherDirection, 'speed');
+            this.applyGravity();
+        }
+    }
+
+
+    applyGravity() {
+        let grassL = world.grass.find(g => isIncluded(g.xLeft, this.body.xRight - 24, g.xRight));
+        let grassC = world.grass.find(g => isIncluded(g.xLeft, this.body.xCenter, g.xRight));
+        let grassR = world.grass.find(g => isIncluded(g.xLeft, this.body.xLeft + 24, g.xRight));
+        if (!grassL && !grassC && !grassR) {
+            this.applyFallSpeed();
         }
     }
 

@@ -407,28 +407,16 @@ class LevelWorld extends World {
     // Fix pause for touch ... !!!
 
     // II. Pause sounds (array) ...
-    // III. Dino gravity (GrassL/R or some()) ...
-    // IV. Prevent default + console.logs ...
+    // III. Prevent default + console.logs ...
 
 
     // -----------------------------------
 
+    // Clean coding (1 class + 5 js) ...
     // Jsdoc ... (siehe tasks.txt)
 
     // -----------------------------------
 
-    // Imprint, privacy policy, cookies, control ... (0/4)
+    // Imprint, privacy policy, cookies, help (guide) ... (0/4)
     // Project checklist ...
-
-
-    // dino gravity
-    // ------------
-    // applyGravity() {
-    //     let grassL = world.grass.find(g => isIncluded(g.xLeft, this.body.xRight, g.xRight));
-    //     let grassC = world.grass.find(g => isIncluded(g.xLeft, this.body.xCenter, g.xRight));
-    //     let grassR = world.grass.find(g => isIncluded(g.xLeft, this.body.xLeft, g.xRight));
-    //     if (!grassL && !grassC && !grassR) {
-    //         this.applyFallSpeed();
-    //     }
-    // }
 }
