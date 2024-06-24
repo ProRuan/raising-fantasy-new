@@ -407,7 +407,6 @@ class LevelWorld extends World {
     // Fix pause for touch ... !!!
 
     // II. Pause sounds (array) ...
-    // III. Favicon ...
 
 
     // -----------------------------------
