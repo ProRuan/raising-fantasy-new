@@ -41,7 +41,7 @@ class Web extends AnimatedObject {
 
     // jsdoc
     verifyCollision() {
-        if (isCollided(world.hero.body, this)) {
+        if (world.hero.body && isCollided(world.hero.body, this)) {
             this.collided = true;
         }
     }
