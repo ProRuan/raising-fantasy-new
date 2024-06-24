@@ -134,13 +134,14 @@ class LevelWorld extends World {
                 setTimeout(() => {
                     this.hero.music.pause();
                     this.endboss.music.pause();
+                    pauseDisabled = false;
                     pauseGame(true);
                     this.stopped = true;
-                    pauseDisabled = false;
 
                     setStartWorld();
                     world.interacted = true;
                 }, 2250);
+                pauseDisabled = true;
             }
         }
 
@@ -396,4 +397,17 @@ class LevelWorld extends World {
 
     // II. Pause sounds (array) ...
     // III. Dino gravity (GrassL/R or some()) ...
+    // IV. Prevent default + console.logs ...
+
+
+    // dino gravity
+    // ------------
+    // applyGravity() {
+    //     let grassL = world.grass.find(g => isIncluded(g.xLeft, this.body.xRight, g.xRight));
+    //     let grassC = world.grass.find(g => isIncluded(g.xLeft, this.body.xCenter, g.xRight));
+    //     let grassR = world.grass.find(g => isIncluded(g.xLeft, this.body.xLeft, g.xRight));
+    //     if (!grassL && !grassC && !grassR) {
+    //         this.applyFallSpeed();
+    //     }
+    // }
 }
