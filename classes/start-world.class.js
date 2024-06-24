@@ -1,6 +1,6 @@
 class StartWorld extends World {
     interacted = false;
-    title = { font: '80px Inknut Antiqua', text: 'Raising Fantasy' };
+    title = { font: '80px Arial', text: 'Raising Fantasy' };
 
 
     // jsdoc

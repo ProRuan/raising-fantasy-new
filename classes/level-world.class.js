@@ -115,9 +115,10 @@ class LevelWorld extends World {
         this.drawLevel();
 
         if (this.hero && this.hero.isEpilog()) {
-            this.ctx.font = '64px Arial';
+            this.setShadow('white', 16);
+            this.ctx.font = '64px Bungee Spice';
             this.ctx.textAlign = 'center';
-            this.ctx.fillStyle = 'black';
+            this.ctx.fillStyle = 'steelblue';
 
             if (isGreater(source.bossBattleTriggerX, this.hero.x)) {
                 this.drawText('Game Over', (this.size - 1) * this.canvas.width + this.canvas.width / 2, 270 + 32);
@@ -126,6 +127,7 @@ class LevelWorld extends World {
             } else {
                 this.drawText('Game Over', 480, 270 + 32);
             }
+            this.setShadow();
 
             if (!this.transitSet) {
                 this.transitSet = true;
