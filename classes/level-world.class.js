@@ -115,17 +115,28 @@ class LevelWorld extends World {
         this.drawLevel();
 
         if (this.hero && this.hero.isEpilog()) {
-            this.setShadow('white', 16);
             this.ctx.font = '64px Bungee Spice';
+            // let text = this.ctx.measureText('Game over').width;
+            // console.log(text);
+            this.ctx.filter = 'blur(12px)';
+            this.ctx.beginPath();
+            this.ctx.fillStyle = 'white';
+            this.ctx.rect(this.hero.x - this.heroX + canvas.width / 2 - 193 - 24, canvas.height / 2 - 24 - 12, 386 + 48, 64 + 24);    // variable!!!
+            this.ctx.fill();
+            this.ctx.filter = 'none';
+
+
+            this.setShadow('white', 16);
+            // this.ctx.font = '64px Bungee Spice';
             this.ctx.textAlign = 'center';
             this.ctx.fillStyle = 'steelblue';
 
             if (isGreater(source.bossBattleTriggerX, this.hero.x)) {
-                this.drawText('Game Over', (this.size - 1) * this.canvas.width + this.canvas.width / 2, 270 + 32);
+                this.drawText('Game over', (this.size - 1) * this.canvas.width + this.canvas.width / 2, 270);
             } else if (isGreater(this.heroX, this.hero.x)) {
-                this.drawText('Game Over', this.hero.x + 96, 270 + 32);
+                this.drawText('Game over', this.hero.x + 96, 270 + 32);
             } else {
-                this.drawText('Game Over', 480, 270 + 32);
+                this.drawText('Game over', 480, 270 + 32);
             }
             this.setShadow();
 
@@ -398,6 +409,16 @@ class LevelWorld extends World {
     // II. Pause sounds (array) ...
     // III. Dino gravity (GrassL/R or some()) ...
     // IV. Prevent default + console.logs ...
+
+
+    // -----------------------------------
+
+    // Jsdoc ... (siehe tasks.txt)
+
+    // -----------------------------------
+
+    // Imprint, privacy policy, cookies, control ... (0/4)
+    // Project checklist ...
 
 
     // dino gravity
