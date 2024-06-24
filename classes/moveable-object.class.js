@@ -4,7 +4,7 @@ class MoveableObject extends DrawableObject {
     jumpCounter = -1;
     basicLevel = 484;
     groundLevel = 484;
-    abyssLevel = canvas.height;
+    abyssLevel = 668;
     otherDirection = false;
 
 

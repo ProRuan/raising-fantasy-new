@@ -119,7 +119,7 @@ class Character extends MoveableObject {
 
     // jsdoc
     isEpilog() {
-        return this.isDeath() && this.isImage('death10') || isGreater(this.abyssLevel, this.y);
+        return this.isDeath() && this.isImage('death10') || isGreater(canvas.height, this.y);
     }
 
 
@@ -290,7 +290,7 @@ class Character extends MoveableObject {
                 super.playSound(sound.path, sound.startTime);
             }
         } else if (!isUndefined(nameB) && this.isImage(nameB)) {
-            if (isMatch(nameB, 'death10') && isGreater(this.abyssLevel, this.y) && !this.gameOver) {
+            if (isMatch(nameB, 'death10') && isGreater(canvas.height, this.y) && !this.gameOver) {
                 this.gameOver = true;
                 super.playSound(sound.path, sound.startTime);
             } else if (!isMatch(nameB, 'death10')) {
