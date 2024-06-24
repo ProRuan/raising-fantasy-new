@@ -244,7 +244,7 @@ class Knight extends Character {
 
     // jsdoc
     playSoundEffects() {
-        this.playSound('death6', this.goAway);
+        this.playSound('death6', this.goAway, 'death10');
         this.playSound('climb2', this.staveStep, 'climb4');
         this.playSound('jump7', this.grassStep);
         this.playSound('run_attack2', this.grassStep, 'run_attack6');

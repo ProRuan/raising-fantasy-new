@@ -115,7 +115,7 @@ class LevelWorld extends World {
 
         this.drawLevel();
 
-        if (this.hero && this.hero.isImage('death10') || this.hero && this.hero.y > canvas.height) {
+        if (this.hero && this.hero.isEpilog()) {
             this.ctx.font = '64px Arial';
             this.ctx.textAlign = 'center';
             this.ctx.fillStyle = 'black';
@@ -131,7 +131,7 @@ class LevelWorld extends World {
 
                     setStartWorld();
                     world.interacted = true;
-                }, 3000);
+                }, 2250);
             }
         }
 
@@ -379,5 +379,5 @@ class LevelWorld extends World {
     // II. Pause sounds (array) ...
     // III. Dino gravity (GrassL/R or some()) ...
     // IV. Font ...
-    // V. Endboss star/abyss y ...
+    // V. Fix game over text (start, middle, end) ...
 }

@@ -4,7 +4,7 @@ class MoveableObject extends DrawableObject {
     jumpCounter = -1;
     basicLevel = 484;
     groundLevel = 484;
-    abyssLevel = 668;
+    abyssLevel = canvas.height;
     otherDirection = false;
 
 
@@ -132,7 +132,7 @@ class MoveableObject extends DrawableObject {
 
     // jsdoc
     applyGravity() {
-        if (!this.isClimb()) {
+        if (!this.isClimb() && !this.isEpilog()) {
             if (this.isAboveGround() || isGreater(0, this.speedY)) {
                 this.applyFallSpeed();
                 this.setGroundY();
@@ -294,9 +294,8 @@ class MoveableObject extends DrawableObject {
     }
 
 
-    // jsdoc
     startMusic(condition, delay) {
-        if (condition && !this.musicStarted) {
+        if (condition && !this.musicStarted && !world.hero.isEpilog()) {
             this.musicStarted = true;
             setTimeout(() => {
                 this.music.play();

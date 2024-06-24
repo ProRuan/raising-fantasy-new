@@ -24,9 +24,8 @@ class Shaman extends Boss {
     }
 
 
-    // jsdoc
     isCastReady() {
-        return !this.isDeath() && isTrue(this.triggered);
+        return !this.isDeath() && isTrue(this.triggered) && !world.hero.isEpilog();
     }
 
 
