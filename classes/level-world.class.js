@@ -108,7 +108,6 @@ class LevelWorld extends World {
 
     draw() {
         this.clearCanvas();
-        this.setGlobalAlpha();
 
         this.translateCamera(this.cameraX, 0);
 
@@ -119,7 +118,15 @@ class LevelWorld extends World {
             this.ctx.font = '64px Arial';
             this.ctx.textAlign = 'center';
             this.ctx.fillStyle = 'black';
-            this.drawText('Game Over', this.hero.x + 96, 270 + 32);
+
+            if (isGreater(source.bossBattleTriggerX, this.hero.x)) {
+                this.drawText('Game Over', (this.size - 1) * this.canvas.width + this.canvas.width / 2, 270 + 32);
+            } else if (isGreater(this.heroX, this.hero.x)) {
+                this.drawText('Game Over', this.hero.x + 96, 270 + 32);
+            } else {
+                this.drawText('Game Over', 480, 270 + 32);
+            }
+
             if (!this.transitSet) {
                 this.transitSet = true;
                 setTimeout(() => {
@@ -147,6 +154,15 @@ class LevelWorld extends World {
 
         this.drawAvatarInfo();
         this.removeDeadEnemies();
+
+
+        this.ctx.globalAlpha = 1 - this.alpha;
+        this.ctx.beginPath();
+        this.ctx.fillStyle = 'black';
+        this.ctx.rect(0, 0, 960, 540);
+        this.ctx.fill();
+        this.setGlobalAlpha();
+
 
         if (paused) {
             this.drawObject(this.pause);
@@ -379,5 +395,6 @@ class LevelWorld extends World {
     // II. Pause sounds (array) ...
     // III. Dino gravity (GrassL/R or some()) ...
     // IV. Font ...
-    // V. Fix game over text (start, middle, end) ...
+    // V. Fix (stop) spider web ...
+    // VI. Storable Items ... ?
 }
