@@ -67,14 +67,14 @@ class QuestRoll extends DrawableObject {
 
     // jsdoc
     drawHeadline() {
-        world.setText('bold 28px Arial', 'center', 'black');
+        world.setText('bold 28px Amaranth', 'center', 'black');
         world.drawText('Quest', this.xHeadline, this.yHeadline);
     }
 
 
     // jsdoc
     drawStory() {
-        world.setText('20px Arial', 'left', 'black');
+        world.setText('20px Roboto', 'left', 'black');
         world.drawText('Play as a knight and', this.xText, this.yStory.first);
         world.drawText('explore a new world.', this.xText, this.yStory.second);
     }
@@ -82,14 +82,14 @@ class QuestRoll extends DrawableObject {
 
     // jsdoc
     drawSubheadline() {
-        world.setText('bold 20px Arial', 'left', 'black');
+        world.setText('bold 22px Roboto', 'left', 'black');
         world.drawText('Challenges', this.xText, this.ySubheadline);
     }
 
 
     // jsdoc
     drawChallenges() {
-        world.setText('20px Arial', 'left', 'black');
+        world.setText('20px Roboto', 'left', 'black');
         world.drawText('1. Collect all coins.', this.xText, this.yChallenge.first);
         world.drawText('2. Collect all leaves.', this.xText, this.yChallenge.second);
         world.drawText('3. Defeat the endboss.', this.xText, this.yChallenge.third);

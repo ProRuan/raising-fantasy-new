@@ -69,7 +69,7 @@ class Leaderboard extends DrawableObject {
 
     // jsdoc
     drawHeadline(color, text, y) {
-        world.setText('28px Arial', 'center', color);
+        world.setText('28px Roboto', 'center', color);
         this.setHeadline(text, y);
     }
 
@@ -83,7 +83,7 @@ class Leaderboard extends DrawableObject {
 
     // jsdoc
     drawChapter(color, key, y) {
-        world.setText('20px Arial', 'center', color);
+        world.setText('20px Roboto', 'center', color);
         this.drawCoins(key, y);
         this.drawLeaves(key, y);
         this.drawTime(key, y);
@@ -207,7 +207,7 @@ class Leaderboard extends DrawableObject {
 
     // jsdoc
     drawVolumeName(text, y) {
-        world.setText('20px Arial', 'left', 'white');
+        world.setText('20px Roboto', 'left', 'white');
         let x = this.getXLeftText();
         world.drawText(text, x, y);
     }
@@ -215,7 +215,7 @@ class Leaderboard extends DrawableObject {
 
     // jsdoc
     drawVolumeValue(y, type) {
-        world.setText('20px Arial', 'center', 'white');
+        world.setText('20px Roboto', 'center', 'white');
         let x = this.getXRightText();
         world.drawText(type, x, y);
     }

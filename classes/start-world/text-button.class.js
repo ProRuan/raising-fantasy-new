@@ -2,7 +2,7 @@ class TextButton extends Button {
     indent = -8;    // to set!
     shadowColor = 'lightcyan';
     shadowBlur = '12';
-    font = '24px Arial';
+    font = '28px Roboto';
     textAlign = 'left';
     color = 'black';
     sound = source.newGame;

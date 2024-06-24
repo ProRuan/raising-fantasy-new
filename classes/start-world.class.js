@@ -1,6 +1,6 @@
 class StartWorld extends World {
     interacted = false;
-    title = { font: '80px Arial', text: 'Raising Fantasy' };
+    title = { font: '80px Inknut Antiqua', text: 'Raising Fantasy' };
 
 
     // jsdoc
@@ -362,7 +362,7 @@ class StartWorld extends World {
         let time = getTime();
         let ms = time % 1000;
         if (isGreater(ms, 500) && !isTrue(this.interacted)) {
-            this.setText('24px Arial', 'center', 'black');
+            this.setText('28px Roboto', 'center', 'black');
             this.setFlashText();
         }
     }
