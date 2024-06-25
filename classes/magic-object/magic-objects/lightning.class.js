@@ -1,3 +1,7 @@
+/**
+ * Represents a lightning.
+ * @extends MagicObject
+ */
 class Lightning extends MagicObject {
     radDispl = 260;
     pages = { move: 2, collided: 8, epilog: 9 };
@@ -7,7 +11,12 @@ class Lightning extends MagicObject {
     delay = 1000;
 
 
-    // jsdoc
+    /**
+     * Creates a lightning.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     * @param {boolean} otherDirection - A boolean value.
+     */
     constructor(x, y, otherDirection) {
         super(source.lightning, x, y);
         this.setMagic(otherDirection, 40, 'lightning8');
@@ -16,7 +25,9 @@ class Lightning extends MagicObject {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the parameters of the charge.
+     */
     setCharge() {
         this.bodyXY = this.chargeXY;
         this.targetingStop = getTime() + this.delay;
@@ -24,7 +35,9 @@ class Lightning extends MagicObject {
     }
 
 
-    // jsdoc
+    /**
+     * Casts the lightning.
+     */
     cast() {
         if (this.isTargeting()) {
             this.target();
@@ -34,38 +47,54 @@ class Lightning extends MagicObject {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the lightning is targeting.
+     * @returns {boolean} - A boolean value.
+     */
     isTargeting() {
         return isGreater(world.time, this.targetingStop);
     }
 
 
-    // jsdoc
+    /**
+     * Targets the hero.
+     */
     target() {
         this.x = this.getHeroX();
         this.y = this.getHeroY();
     }
 
 
-    // jsdoc
+    /**
+     * Provides the x value of the hero.
+     * @returns {number} - The x value of the hero.
+     */
     getHeroX() {
         return world.hero.body.xCenter - (this.body.xCenter - this.x);
     }
 
 
-    // jsdoc
+    /**
+     * Provides the y value of the hero.
+     * @returns {number} - The y value of the hero.
+     */
     getHeroY() {
         return world.hero.y - this.deltaY.move;
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the lightning is ready to discharge.
+     * @returns {boolean} - A boolean value.
+     */
     isDischarge() {
         return isGreater(this.chargingStop, world.time) && !isTrue(this.collided);
     }
 
 
-    // jsdoc
+    /**
+     * Discharges the lightning.
+     */
     discharge() {
         this.bodyXY = this.lightningXY;
         this.y += this.deltaY.collided;
