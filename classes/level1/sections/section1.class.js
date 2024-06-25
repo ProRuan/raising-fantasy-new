@@ -1,14 +1,21 @@
+/**
+ * Represents a section 1.
+ */
 class Section1 {
 
 
-    // jsdoc
+    /**
+     * Creates a section 1.
+     */
     constructor() {
         this.setGrass();
         this.setCoins();
     }
 
 
-    // jsdoc
+    /**
+     * Sets the grass of section 1.
+     */
     setGrass() {
         this.grass = [
             new GrassC(0, 0), new GrassC(1, 0), new GrassC(2, 0), new GrassC(3, 0),
@@ -19,7 +26,9 @@ class Section1 {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the coins of section 1.
+     */
     setCoins() {
         this.coins = [
             new Coin(9.25, 1.125), new Coin(10.25, 1.125), new Coin(11.25, 1.125)

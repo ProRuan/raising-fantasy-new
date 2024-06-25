@@ -1,7 +1,12 @@
+/**
+ * Represents a section 6.
+ */
 class Section6 {
 
 
-    // jsdoc
+    /**
+     * Creates a section 6.
+     */
     constructor() {
         this.setTrees();
         this.setLeaves();
@@ -14,7 +19,9 @@ class Section6 {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the trees of section 6.
+     */
     setTrees() {
         this.trees = [
             new Tree(-2, 4), new Tree(8, 0)
@@ -22,7 +29,9 @@ class Section6 {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the leaves of section 6.
+     */
     setLeaves() {
         this.leaves = [
             new Leaf(-0.875, 6, 5), new Leaf(-0.25, 6.5, 5), new Leaf(0.25, 6, 5),
@@ -31,7 +40,9 @@ class Section6 {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the flying grass of section 6.
+     */
     setFlyGrass() {
         this.flyGrass = [
             new FlyGrassC(0, 4), new FlyGrassC(1, 4), new FlyGrassC(2, 4), new FlyGrassR(3, 4)
@@ -39,7 +50,9 @@ class Section6 {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the grass of section 6.
+     */
     setGrass() {
         this.grass = [
             new GrassL(1, 0), new GrassC(2, 0), new GrassC(3, 0), new GrassC(4, 0),
@@ -50,7 +63,9 @@ class Section6 {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the ladders of section 6.
+     */
     setLadders() {
         this.ladders = [
             new LadderB(2.5, 0.875), new LadderC(2.5, 1.375), new LadderC(2.5, 1.875), new LadderC(2.5, 2.375),
@@ -59,7 +74,9 @@ class Section6 {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the coins of section 6.
+     */
     setCoins() {
         this.coins = [
             new Coin(3.25, 5.125), new Coin(5.75, 1.125), new Coin(13.75, 1.125)
@@ -67,7 +84,9 @@ class Section6 {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the hit points of section 6.
+     */
     setHitPoints() {
         this.hitPoints = [
             new HitPoint(0.75, 5.125)
@@ -75,7 +94,9 @@ class Section6 {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the enemies of section 6.
+     */
     setEnemies() {
         this.enemies = [
             new Dino(0.8, 0.234375), new Ent(8.1875, -0.375)

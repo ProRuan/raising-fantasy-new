@@ -1,7 +1,12 @@
+/**
+ * Represents a section 8.
+ */
 class Section8 {
 
 
-    // jsdoc
+    /**
+     * Creates a section 8.
+     */
     constructor() {
         this.setFlyGrass();
         this.setGrass();
@@ -11,7 +16,9 @@ class Section8 {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the flying grass of section 8.
+     */
     setFlyGrass() {
         this.flyGrass = [
             new FlyGrassL(3, 3.5), new FlyGrassC(4, 3.5), new FlyGrassC(5, 3.5), new FlyGrassR(6, 3.5),
@@ -20,7 +27,9 @@ class Section8 {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the grass of section 8.
+     */
     setGrass() {
         this.grass = [
             new GrassC(0, 0), new GrassC(1, 0), new GrassC(2, 0), new GrassC(3, 0),
@@ -30,7 +39,9 @@ class Section8 {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the ladders of section 8.
+     */
     setLadders() {
         this.ladders = [
             new LadderB(4.25, 0.875), new LadderC(4.25, 1.375), new LadderC(4.25, 1.875), new LadderC(4.25, 2.375),
@@ -39,7 +50,9 @@ class Section8 {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the stars of section 8.
+     */
     setStars() {
         this.stars = [
             new Star(9.25, -3.875)
@@ -47,8 +60,12 @@ class Section8 {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the bosses of section 8.
+     */
     setBosses() {
-        this.bosses = [new Shaman(11.875, 0.0625)];
+        this.bosses = [
+            new Shaman(11.875, 0.0625)
+        ];
     }
 }

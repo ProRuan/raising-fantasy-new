@@ -1,7 +1,12 @@
+/**
+ * Represents a section 5.
+ */
 class Section5 {
 
 
-    // jsdoc
+    /**
+     * Creates a section 5.
+     */
     constructor() {
         this.setTrees();
         this.setLeaves();
@@ -12,7 +17,9 @@ class Section5 {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the trees of section 5.
+     */
     setTrees() {
         this.trees = [
             new Tree(5.5, 2)
@@ -20,7 +27,9 @@ class Section5 {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the leaves of section 5.
+     */
     setLeaves() {
         this.leaves = [
             new Leaf(6.625, 4, 4), new Leaf(7.25, 4.5, 4), new Leaf(7.75, 4, 4)
@@ -28,7 +37,9 @@ class Section5 {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the flying grass of section 5.
+     */
     setFlyGrass() {
         this.flyGrass = [
             new FlyGrassL(5, 2), new FlyGrassC(6, 2), new FlyGrassC(7, 2), new FlyGrassC(8, 2),
@@ -38,7 +49,9 @@ class Section5 {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the grass of section 5.
+     */
     setGrass() {
         this.grass = [
             new GrassC(0, 0), new GrassC(1, 0), new GrassC(2, 0), new GrassR(3, 0)
@@ -46,7 +59,9 @@ class Section5 {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the coins of section 5.
+     */
     setCoins() {
         this.coins = [
             new Coin(3.25, 1.125), new Coin(11.25, 5.125)
@@ -54,7 +69,9 @@ class Section5 {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the hit points of section 5.
+     */
     setHitPoints() {
         this.hitPoints = [
             new HitPoint(5.25, 3.125), new HitPoint(9.25, 3.125), new HitPoint(13.75, 5.125)
