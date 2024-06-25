@@ -113,7 +113,7 @@ Tasks
   - option: fix jump animation for 'fall after walk' ...
 
 
-Clean Coding (12/12 + 55/56 | 0/12 + 11/56) + (1/5) + review some classes (new code)
+Clean Coding (12/12 + 55/56 | 0/12 + 16/56) + (1/5) + review some classes (new code)
 ------------
   - class Button - simpleCheck
   - class TextButton - simpleCheck
@@ -138,9 +138,9 @@ Clean Coding (12/12 + 55/56 | 0/12 + 11/56) + (1/5) + review some classes (new c
       - class HitPoint - doubleCheck
       - class Star - doubleCheck
       - class Web - doubleCheck
-  - class Grass - simpleCheck
-      - class GrassLeft, GrassCenter, GrassRight - simpleCheck (3x)
-      - class FlyingGrassLeft, FlyingGrassCenter, FlyingGrassRight - simpleCheck (3x)
+  - class Grass - doubleCheck
+      - class GrassLeft, GrassCenter, GrassRight - doubleCheck (3x)
+      - class FlyingGrassLeft, FlyingGrassCenter, FlyingGrassRight - doubleCheck (3x)
   - class (level1)
       - class Level1 - simpleCheck
       - class Section* - simpleCheck*    * check enemies + endboss!
