@@ -6,6 +6,7 @@ class MoveableObject extends DrawableObject {
     groundLevel = 484;
     abyssLevel = 668;
     otherDirection = false;
+    jumped = false;
 
 
     // jsdoc
@@ -168,8 +169,11 @@ class MoveableObject extends DrawableObject {
 
     // jsdoc
     jump() {
-        this.speedY = 12.5;
-        this.jumpCounter = 0;
+        if (!isTrue(this.jumped)) {
+            this.speedY = 12.5;
+            this.jumpCounter = 0;
+            this.jumped = true;
+        }
     }
 
 
