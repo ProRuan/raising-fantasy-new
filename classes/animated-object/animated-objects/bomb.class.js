@@ -1,3 +1,7 @@
+/**
+ * Represents a bomb.
+ * @extends AnimatedObject
+ */
 class Bomb extends AnimatedObject {
     speedY = 12.5;
     acceleration = 0.5;
@@ -9,7 +13,11 @@ class Bomb extends AnimatedObject {
     burstDelay = 2.7;
 
 
-    // jsdoc
+    /**
+     * Creates a bomb.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     */
     constructor(x, y) {
         super(source.bomb, x, y);
         this.splitFlipBook();
@@ -18,20 +26,17 @@ class Bomb extends AnimatedObject {
     }
 
 
-    // jsdoc
+    /**
+     * Provides this body.
+     */
     get body() {
-        return {
-            'xLeft': this.x + this.bodyXY.xLeft,
-            'xCenter': this.x + this.bodyXY.xCenter,
-            'xRight': this.x + this.bodyXY.xRight,
-            'yTop': this.y + this.bodyXY.yTop,
-            'yCenter': this.y + this.bodyXY.yCenter,
-            'yBottom': this.y + this.bodyXY.yBottom
-        };
+        return this.getBody();
     }
 
 
-    // jsdoc
+    /**
+     * Splits the flip book.
+     */
     splitFlipBook() {
         this.flipBook.throw = this.getPages(0, 4);
         this.flipBook.burst = this.getPages(4, 11);
@@ -39,13 +44,18 @@ class Bomb extends AnimatedObject {
     }
 
 
-    // jsdoc
+    /**
+     * Provides the flip book chapter epilog.
+     * @returns {array} - The flip book chapter epilog.
+     */
     getEpilog() {
         return [getLastElement(this.flipBook)];
     }
 
 
-    // jsdoc
+    /**
+     * Throws the bomb.
+     */
     throw() {
         if (!this.collided) {
             this.applySpeedX();
@@ -54,27 +64,38 @@ class Bomb extends AnimatedObject {
     }
 
 
-    // jsdoc
+    /**
+     * Applies the x speed.
+     */
     applySpeedX() {
         let heightFactor = this.getHeightFactor();
-        this.x += canvas.height / UNIT - heightFactor;
+        let speed = canvas.height / UNIT - heightFactor;
+        this.x += speed;
     }
 
 
-    // jsdoc
+    /**
+     * Provides the height factor.
+     * @returns {number} - The height factor.
+     */
     getHeightFactor() {
-        return Math.round((world.hero.basicLevel - world.hero.groundLevel) / 120);
+        let heightDiff = world.hero.basicLevel - world.hero.groundLevel;
+        return Math.round(heightDiff / 120);
     }
 
 
-    // jsdoc
+    /**
+     * Applies the y speed.
+     */
     applySpeedY() {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
     }
 
 
-    // jsdoc
+    /**
+     * Plays the animation.
+     */
     playAnimation() {
         if (this.isImage('bomb11')) {
             super.playAnimation(this.flipBook.epilog);
@@ -88,7 +109,9 @@ class Bomb extends AnimatedObject {
     }
 
 
-    // jsdoc
+    /**
+     * Resets the current image.
+     */
     resetCurrentImage() {
         if (!this.currentImageReset) {
             this.currentImageReset = true;
@@ -97,7 +120,10 @@ class Bomb extends AnimatedObject {
     }
 
 
-    // jsdoc
+    /**
+     * Bursts the bomb.
+     * @param {Enemy} enemy - The enemy.
+     */
     burst(enemy) {
         this.collided = true;
         this.playSound(this.bombBurst, this.burstDelay);

@@ -1,3 +1,7 @@
+/**
+ * Represents a web.
+ * @extends AnimatedObject
+ */
 class Web extends AnimatedObject {
     radDispl = 32;
     thrown = false;
@@ -5,7 +9,12 @@ class Web extends AnimatedObject {
     chapter = 'prolog';
 
 
-    // jsdoc
+    /**
+     * Creates a web.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     * @param {boolean} otherDirection - The other direction.
+     */
     constructor(x, y, otherDirection) {
         super(source.web, x / UNIT, y / UNIT);
         this.setParameters(otherDirection, 128);
@@ -15,31 +24,41 @@ class Web extends AnimatedObject {
     }
 
 
-    // jsdoc
+    /**
+     * Sets parameters.
+     * @param {boolean} otherDirection - The other direction.
+     * @param {number} speed - The speed.
+     */
     setParameters(otherDirection, speed) {
         this.otherDirection = otherDirection;
         this.setSpeed(speed);
     }
 
 
-    // jsdoc
+    /**
+     * Splits the flip book.
+     */
     splitFlipBook() {
         this.flipBook.prolog = this.getPages(0, 1);
         this.flipBook.growth = this.getPages(1, 2);
         this.flipBook.throw = this.getPages(2, 3);
-        this.flipBook.hit = this.getPages(3, 4)
+        this.flipBook.hit = this.getPages(3, 4);
         this.flipBook.epilog = this.getPages(4, 5);
     }
 
 
-    // jsdoc
+    /**
+     * Throws the web.
+     */
     throw() {
         this.applySpeedType('x', this.otherDirection, 'speed');
         this.verifyCollision();
     }
 
 
-    // jsdoc
+    /**
+     * Verifies the collision.
+     */
     verifyCollision() {
         if (world.hero.body && isCollided(world.hero.body, this)) {
             this.collided = true;
@@ -47,7 +66,9 @@ class Web extends AnimatedObject {
     }
 
 
-    // jsdoc
+    /**
+     * Plays the animation.
+     */
     playAnimation() {
         if (isMatch(this.chapter, 'epilog')) {
             this.playWebThrow(this.chapter);
@@ -63,9 +84,22 @@ class Web extends AnimatedObject {
     }
 
 
-    // jsdoc
+    /**
+     * Plays the web throw.
+     * @param {string} chapter - The flip book chapter.
+     * @param {string} next - The next flip book chapter.
+     */
     playWebThrow(chapter, next) {
         super.playAnimation(this.flipBook[chapter]);
+        this.setNextChapter(next);
+    }
+
+
+    /**
+     * Sets the next flip book chapter.
+     * @param {string} next - The next flip book chapter.
+     */
+    setNextChapter(next) {
         if (next) {
             this.chapter = next;
         }

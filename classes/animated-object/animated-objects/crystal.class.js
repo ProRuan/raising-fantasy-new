@@ -1,20 +1,32 @@
+/**
+ * Represents a crystal.
+ * @extends AnimatedObject
+ */
 class Crystal extends AnimatedObject {
 
 
-    // jsdoc
+    /**
+     * Creates a crystal.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     */
     constructor(x, y) {
         super(source.crystal, x, y);
     }
 
 
-    // jsdoc
+    /**
+     * Triggers the effect.
+     */
     triggerEffect() {
         this.release();
         this.stop(true);
     }
 
 
-    // jsdoc
+    /**
+     * Releases hero features.
+     */
     release() {
         world.hero.bombUnlocked = true;
         world.hero.xStopRight = source.endX;

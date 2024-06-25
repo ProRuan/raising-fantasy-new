@@ -1,12 +1,23 @@
+/**
+ * Represents a star.
+ * @extends AnimatedObject
+ */
 class Star extends AnimatedObject {
 
 
-    // jsdoc
+    /**
+     * Creates a star.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     */
     constructor(x, y) {
         super(source.star, x, y);
     }
 
 
+    /**
+     * Triggers the effect.
+     */
     triggerEffect() {
         this.updateScore();
         pauseGame(true);
@@ -15,7 +26,9 @@ class Star extends AnimatedObject {
     }
 
 
-    // jsdoc
+    /**
+     * Updates the score.
+     */
     updateScore() {
         this.setScore(true, 'last');
         this.setScore(this.isHighScore(), 'best');
@@ -23,7 +36,11 @@ class Star extends AnimatedObject {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the score.
+     * @param {boolean} condition - The score condition.
+     * @param {string} key - The score key,
+     */
     setScore(condition, key) {
         if (condition) {
             this.setScoreValue(key, 'coins', this.getCollectedItems('coins'));
@@ -33,19 +50,31 @@ class Star extends AnimatedObject {
     }
 
 
-    // jsdoc
+    /**
+     * Sets a score value.
+     * @param {string} key - The score key.
+     * @param {string} subkey - The score subkey.
+     * @param {function} method - The score method.
+     */
     setScoreValue(key, subkey, method) {
         score[key][subkey] = method;
     }
 
 
-    // jsdoc
+    /**
+     * Provides collected items.
+     * @param {string} key - The item key.
+     * @returns {array} - Collected items.
+     */
     getCollectedItems(key) {
         return world.hero[key];
     }
 
 
-    // jsdoc
+    /**
+     * Provides the play time.
+     * @returns {number} - The play time.
+     */
     getPlaytime() {
         world.hero.endTime = getTime();
         let time = getSum(world.hero.endTime, -world.hero.startTime);
@@ -54,7 +83,10 @@ class Star extends AnimatedObject {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies the high score.
+     * @returns {boolean} - A boolean value.
+     */
     isHighScore() {
         let moreItems = this.isMore('coins') && this.isMore('leaves');
         let moreCoins = this.isMore('coins') && this.isEqual('leaves');
@@ -64,55 +96,87 @@ class Star extends AnimatedObject {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies the improvement of amount.
+     * @param {string} key - The item key.
+     * @returns {boolean} - A boolean value.
+     */
     isMore(key) {
         return isGreater(score.best[key], score.last[key]);
     }
 
 
-    // jsdoc
+    /**
+     * Verifies the equality.
+     * @param {string} key - The item key.
+     * @returns {boolean} - A boolean value.
+     */
     isEqual(key) {
         return isMatch(score.best[key], score.last[key]);
     }
 
 
-    // jsdoc
+    /**
+     * Verifies the score match.
+     * @returns {boolean} - A boolean value.
+     */
     isScoreMatch() {
         return this.isEqual('coins') && this.isEqual('leaves');
     }
 
 
-    // jsdoc
+    /**
+     * Verifies the improvement of speed.
+     * @returns {boolean} - A boolean value.
+     */
     isFaster() {
         return !isGreater(score.best.time, score.last.time, 'tolerant');
     }
 
 
-    // jsdoc
+    /**
+     * Performs the world transit.
+     */
     transit() {
         world.darken();
         this.shiftWorld();
     }
 
 
+    /**
+     * Shifts the world.
+     */
     shiftWorld() {
+        this.setWorldShiftTime();
+        this.goHome();
+    }
+
+
+    /**
+     * Sets the world shift time.
+     */
+    setWorldShiftTime() {
         if (isMatch(world.alpha, 0) && !this.worldShifted) {
             this.worldShifted = true;
-            this.worldShiftTime = world.time + 500;
-        }
-        if (this.worldShiftTime && isGreater(this.worldShiftTime, world.time)) {
-            this.goHome();
+            this.worldShiftTime = getSum(world.time, 500);
         }
     }
 
 
-    // jsdoc
+    /**
+     * Performs the world shift.
+     */
     goHome() {
-        this.leaveWorld();
-        this.showScore();
+        if (this.worldShiftTime && isGreater(this.worldShiftTime, world.time)) {
+            this.leaveWorld();
+            this.showScore();
+        }
     }
 
 
+    /**
+     * Leaves the level world.
+     */
     leaveWorld() {
         this.stop(true);
         world.hero.music.pause();
@@ -122,7 +186,9 @@ class Star extends AnimatedObject {
     }
 
 
-    // jsdoc
+    /**
+     * Shows the score.
+     */
     showScore() {
         setStartWorld();
         world.interacted = true;
