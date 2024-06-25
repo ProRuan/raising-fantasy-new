@@ -274,10 +274,6 @@ function processKeyup(event) {
         setKey(code, 'keydown', false);
         setKey(code, 'doubleClick', false);
         setKey(code, 'lastKeyUp', getTime());
-
-        if (isMatch(currentWorld, 'level') && isMatch(code, 'space')) {
-            world.hero.jumped = false;
-        }
     }
 }
 

@@ -139,6 +139,9 @@ class MoveableObject extends DrawableObject {
                 this.setGroundY();
             } else {
                 this.speedY = 0;
+                if (!isKey('space')) {
+                    this.jumped = false;
+                }
             }
         }
     }
