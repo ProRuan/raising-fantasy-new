@@ -417,7 +417,7 @@ class LevelWorld extends World {
 
     // Clean coding (1 class + 5 js) ...
     // Remove console.logs ...
-    // Jsdoc ... (siehe tasks.txt)
+    // Jsdoc + out (folder) ... (siehe tasks.txt)
 
     // -----------------------------------
 
