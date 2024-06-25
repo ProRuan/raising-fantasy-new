@@ -2,6 +2,7 @@ class World {
     alpha = 1;
     darkSpeed = 0.025;
     cameraX = 0;
+    currentSounds = [];
 
 
     // jsdoc
@@ -135,5 +136,29 @@ class World {
     // jsdoc
     translateCamera(x, y) {
         this.ctx.translate(x, y);
+    }
+
+
+    removeSound() {
+        this.currentSounds.forEach((sound) => {
+            if (sound.ended || isMatch(sound.src, '')) {
+                let id = this.currentSounds.indexOf(sound);
+                this.currentSounds.splice(id, 1);
+                console.log('removed audio', this.currentSounds.length);
+            }
+        });
+    }
+
+
+    pauseSound(logical) {
+        this.currentSounds.forEach((sound) => {
+            if (isTrue(logical)) {
+                sound.pause();
+                console.log('paused sounds: ', sound.currentTime);
+            } else {
+                sound.play();
+                console.log('continuing sounds: ', sound.currentTime);
+            }
+        });
     }
 }

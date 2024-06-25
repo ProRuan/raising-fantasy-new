@@ -317,11 +317,12 @@ class DrawableObject {
     }
 
 
-    // jsdoc
     playSound(path, currentTime) {
         let audio = new Audio(path);
         audio.currentTime = this.getCurrentTime(currentTime);
         audio.volume = this.getSoundVolume();
+        world.currentSounds.push(audio);
+        console.log('added audio', world.currentSounds.length);
         audio.play();
     }
 

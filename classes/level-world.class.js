@@ -177,6 +177,7 @@ class LevelWorld extends World {
         this.ctx.fill();
         this.setGlobalAlpha();
 
+        this.removeSound();
 
         if (paused) {
             this.drawObject(this.pause);
@@ -260,7 +261,7 @@ class LevelWorld extends World {
     }
 
 
-    removeDeadEnemies() {
+    removeDeadEnemies() {    // but not, if game is paused!!!
         let enemy = this.enemies.find(e => e.dead && !e.removable);
         if (enemy) {
             enemy.removable = true;
@@ -406,7 +407,10 @@ class LevelWorld extends World {
     // Fix LevelWorld timeout/next/last + pauseOffset ...
     // Fix pause for touch ... !!!
 
-    // II. Pause sounds (array) ...
+    // II. Music / sound loop + add music to currentSounds ...
+    // III. Pause remove enemies + pause removeSound or pause world ...
+    // IV. Fix game over text for endboss section ...
+    // V. PauseableInterval: pause inner intervals (bomb, web, magic) ...
 
 
     // -----------------------------------

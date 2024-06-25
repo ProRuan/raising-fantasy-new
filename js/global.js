@@ -32,6 +32,8 @@ function pauseGame(logical) {
                 object.stop(logical);
             });
         }
+
+        world.pauseSound(logical);
     }
 }
 
