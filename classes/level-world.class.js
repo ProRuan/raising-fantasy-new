@@ -415,9 +415,13 @@ class LevelWorld extends World {
 
     // VI. StartWorld: Cursor works, but button is still reachable (also for key)!!!
 
+
+    // Still to fix
+    // ------------
     // Fix sequence of level objects ...
     // Provide an async function for image and audio paths ...
     // Fix error of full screen ...
+    // Fix camera after hero death ... !!!
 
 
     // -----------------------------------
