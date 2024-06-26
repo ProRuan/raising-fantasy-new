@@ -11,7 +11,7 @@ class AnimatedObject extends DrawableObject {
 
     /**
      * Creates an animated object.
-     * @param {object} source - The source.
+     * @param {object} source - The source object.
      * @param {number} x - The x value.
      * @param {number} y - The y value.
      */

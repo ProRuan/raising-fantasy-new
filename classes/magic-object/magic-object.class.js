@@ -1,27 +1,46 @@
+/**
+ * Represents a magic object.
+ * @extends AnimatedObject
+ */
 class MagicObject extends AnimatedObject {
     firstPage = 0;
 
 
-    // jsdoc
+    /**
+     * Creates a magic object.
+     * @param {object} source - The source object.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     */
     constructor(source, x, y) {
         super(source, x, y);
         this.setSound(source.sound);
     }
 
 
-    // jsdoc
+    /**
+     * Provides the body.
+     */
     get body() {
         return this.getBody();
     }
 
 
-    // jsdoc
+    /**
+     * Sets the sound.
+     * @param {object} sound - The sound object.
+     */
     setSound(sound) {
         this.sound = sound;
     }
 
 
-    // jsdoc
+    /**
+     * Sets the magic.
+     * @param {boolean} otherDirection - A boolean value.
+     * @param {number} damage - The damage value.
+     * @param {string} epilogKey - The key of the pre-epilog image.
+     */
     setMagic(otherDirection, damage, epilogKey) {
         this.setParameters(otherDirection, damage, epilogKey);
         this.splitFlipBook();
@@ -29,7 +48,12 @@ class MagicObject extends AnimatedObject {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the parameters.
+     * @param {boolean} otherDirection - A boolean value.
+     * @param {number} damage - The damage value.
+     * @param {string} epilogKey - The key of the pre-epilog image.
+     */
     setParameters(otherDirection, damage, epilogKey) {
         this.otherDirection = otherDirection;
         this.damage = damage;
@@ -37,7 +61,9 @@ class MagicObject extends AnimatedObject {
     }
 
 
-    // jsdoc
+    /**
+     * Splits the flip book.
+     */
     splitFlipBook() {
         this.setMagicChapter('move');
         this.setMagicChapter('collided');
@@ -45,7 +71,10 @@ class MagicObject extends AnimatedObject {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the magic chapter.
+     * @param {string} key - The key of the flip book chapter.
+     */
     setMagicChapter(key) {
         let lastPage = this.pages[key];
         this.flipBook[key] = this.getPages(this.firstPage, lastPage);
@@ -53,14 +82,18 @@ class MagicObject extends AnimatedObject {
     }
 
 
-    // jsdoc
+    /**
+     * Moves the magic.
+     */
     move() {
         this.cast();
         this.soundHit();
     }
 
 
-    // jsdoc
+    /**
+     * Plays the animation.
+     */
     playAnimation() {
         if (isTrue(this.finalized)) {
             super.playAnimation(this.flipBook.epilog);
@@ -74,7 +107,9 @@ class MagicObject extends AnimatedObject {
     }
 
 
-    // jsdoc
+    /**
+     * Unlocks the final animation.
+     */
     setFinalized() {
         if (this.isImage(this.epilogKey)) {
             this.finalized = true;
@@ -82,7 +117,9 @@ class MagicObject extends AnimatedObject {
     }
 
 
-    // // jsdoc
+    /**
+     * Sounds the hit.
+     */
     soundHit() {
         if (this.isHit()) {
             this.soundPlayed = true;
@@ -91,7 +128,10 @@ class MagicObject extends AnimatedObject {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the magic hits.
+     * @returns {boolean} - A boolean value.
+     */
     isHit() {
         return this.collided && !this.soundPlayed;
     }
