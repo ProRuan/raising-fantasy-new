@@ -1,3 +1,7 @@
+/**
+ * Represents a boss.
+ * @extends Enemy
+ */
 class Boss extends Enemy {
     chapters = ['epilog', 'death', 'hurt', 'anger', 'castBlade', 'castFire', 'castLightning', 'idle'];
     angerLevel = 0;
@@ -8,33 +12,47 @@ class Boss extends Enemy {
     spellCast = false;
 
 
-    // jsdoc
+    /**
+     * Creates a boss.
+     * @param {object} source - The source object.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     */
     constructor(source, x, y) {
-        super(source, x, y)
+        super(source, x, y);
         this.setEnemy(300, 64, 'move');
     }
 
 
-    // jsdoc
+    /**
+     * Provides a boolean value which triggers the boss battle.
+     */
     get triggered() {
         return world.hero.bossBattleStarted && isMatch(world.cameraX, -6720);
     }
 
 
-    // jsdoc
+    /**
+     * Provides the milliseconds of the cast duration.
+     */
     get ms() {
         let key = this.getCastKey();
         return this.flipBook[key].length * 100;
     }
 
 
-    // jsdoc
+    /**
+     * Provides the key of the cast.
+     * @returns {string} - The key of the cast.
+     */
     getCastKey() {
         return 'cast' + formatInitial(this.magicChapter, 'toUpperCase');
     }
 
 
-    // jsdoc
+    /**
+     * Applies the hurt.
+     */
     hurt() {
         if (this.isBombBurst()) {
             this.applyBombBurst();
@@ -44,13 +62,18 @@ class Boss extends Enemy {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the bomb is burst.
+     * @returns {boolean} - A boolean value.
+     */
     isBombBurst() {
         return world.hero.bomb && isCollided(this.body, world.hero.bomb.body);
     }
 
 
-    // jsdoc
+    /**
+     * Applies the burst of the bomb.
+     */
     applyBombBurst() {
         if (!world.hero.bomb.collided) {
             world.hero.bomb.burst(this);
@@ -58,7 +81,9 @@ class Boss extends Enemy {
     }
 
 
-    // jsdoc
+    /**
+     * Keeps the hurt animation.
+     */
     keepHurt() {
         if (isMatch(this.chapter, 'hurt')) {
             this.currentImage = (isGreater(1, this.currentImage)) ? 1 : this.currentImage;
@@ -66,19 +91,27 @@ class Boss extends Enemy {
     }
 
 
-    // jsdoc
+    /**
+     * Updates the cast.
+     * @param {number} delay - The delay in milliseconds.
+     */
     updateCast(delay) {
         this.nextCast = getSum(world.time, delay);
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the hurt is to play.
+     * @returns 
+     */
     isHurt() {
         return world.hero.bomb && world.hero.bomb.collided;
     }
 
 
-    // jsdoc
+    /**
+     * Resets the magic cast.
+     */
     resetMagicCast() {
         if (this.isMagicCastReset()) {
             this.spellCast = false;
@@ -87,7 +120,10 @@ class Boss extends Enemy {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the magic cast is to reset.
+     * @returns {boolean} - A boolean value.
+     */
     isMagicCastReset() {
         if (this.magic) {
             return this.isOutOfRange() || isGreater(this.magic.time, world.time);
@@ -95,14 +131,19 @@ class Boss extends Enemy {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the magic is out of range.
+     * @returns {boolean} - A boolean value.
+     */
     isOutOfRange() {
         let outX = getSum(this.x, -this.magicRange);
         return isGreater(this.magic.xRight, outX);
     }
 
 
-    // jsdoc
+    /**
+     * Removes the magic.
+     */
     removeMagic() {
         if (this.magic) {
             this.magic.stop(true);
@@ -111,29 +152,40 @@ class Boss extends Enemy {
     }
 
 
+    /**
+     * Applies the damage of the magic.
+     */
     damage() {
-        if (this.isLightning()) {    // apply cast delay depending on flip book length!
+        if (this.isLightning()) {
             this.reduceHeroHp();
-        } else if (this.isCollided()) {    // apply cast delay depending on flip book length!
+        } else if (this.isCollided()) {
             this.magic.collided = true;
             world.hero.damage(this.magic.damage);
         }
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the magic type is 'lightning'.
+     * @returns {boolean} - A boolean value.
+     */
     isLightning() {
         return this.magic instanceof Lightning && isCollided(world.hero.body, this.magic.body);
     }
 
 
-    // jsdoc
+    /**
+     * Reduces the hp of the hero.
+     */
     reduceHeroHp() {
         world.hero.hpPoints.splice(world.hero.hpPoints.length - 1, 1);
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the magic is collided.
+     * @returns {boolean} - A boolean value.
+     */
     isCollided() {
         if (this.magic) {
             return !this.magic.collided && isCollided(world.hero.body, this.magic.body);
@@ -141,7 +193,10 @@ class Boss extends Enemy {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the boss is angry.
+     * @returns {boolean} - A boolean value.
+     */
     isAnger() {
         if (this.triggered) {
             let hp = this.getHp();
@@ -150,7 +205,11 @@ class Boss extends Enemy {
     }
 
 
-    // jsdoc
+    /**
+     * Plays the anger.
+     * @param {number} hp - The hp value of the boss.
+     * @returns {boolean} - A boolean value.
+     */
     playAnger(hp) {
         if (isGreater(70, hp)) {
             return this.playAngerLevel(0);
@@ -164,26 +223,36 @@ class Boss extends Enemy {
     }
 
 
-    // jsdoc
+    /**
+     * Plays the anger level.
+     * @param {number} n - The level of anger.
+     * @returns {boolean} - A boolean value.
+     */
     playAngerLevel(n) {
         if (isMatch(this.angerLevel, n)) {
             this.setAnger();
+            this.calm();
             return true;
         }
     }
 
 
+    /**
+     * Sets the anger.
+     */
     setAnger() {
         if (!isTrue(this.angry)) {
             this.angry = true;
-            this.calmTime = world.time + 1400;
+            this.calmTime = getSum(world.time, 1400);
             this.playSound(this.growl);
             this.updateCast(this.angerDelay);
         }
-        this.calm();
     }
 
 
+    /**
+     * Calms the boss.
+     */
     calm() {
         if (this.calmTime && isGreater(this.calmTime, world.time)) {
             this.angerLevel++;
@@ -194,19 +263,28 @@ class Boss extends Enemy {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the cast type is 'blade'.
+     * @returns {boolean} - A boolean value.
+     */
     isCastBlade() {
         return isMatch(this.magicChapter, 'blade');
     }
 
 
-    // jsdoc
+    /**
+    * Verifies, if the cast type is 'fire'.
+    * @returns {boolean} - A boolean value.
+    */
     isCastFire() {
         return isMatch(this.magicChapter, 'fire');
     }
 
 
-    // jsdoc
+    /**
+    * Verifies, if the cast type is 'lightning'.
+    * @returns {boolean} - A boolean value.
+    */
     isCastLightning() {
         return isMatch(this.magicChapter, 'lightning');
     }
