@@ -1,5 +1,9 @@
+/**
+ * Represents a text button.
+ * @extends Button
+ */
 class TextButton extends Button {
-    indent = -8;    // to set!
+    indent = -8;
     shadowColor = 'lightcyan';
     shadowBlur = '12';
     font = '28px Roboto';
@@ -8,38 +12,55 @@ class TextButton extends Button {
     sound = source.newGame;
 
 
-    // jsdoc
+    /**
+     * Creates a text button.
+     * @param {object} source - The source object.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     */
     constructor(source, x, y) {
         super(source, x, y);
         this.setText(source);
     }
 
 
-    // jsdoc
+    /**
+     * Provides the offset y value.
+     */
     get offsetY() {
         return this.y + 20;
     }
 
 
-    // jsdoc
+    /**
+     * Provides the previous button.
+     */
     get previous() {
         return this.getPrevious();
     }
 
 
-    // jsdoc
+    /**
+     * Provides the next button.
+     */
     get next() {
         return this.getNext();
     }
 
 
-    // jsdoc
+    /**
+     * Sets the text of the button.
+     * @param {object} source - The source object.
+     */
     setText(source) {
         this.text = source.text;
     }
 
 
-    // jsdoc
+    /**
+     * Provides the key of the previous button.
+     * @returns {string} - The key of the previous button.
+     */
     getPrevious() {
         if (isMatch(this.text, 'Quest') && world.questButton.isLocked()) {
             return 'coinButton';
@@ -51,7 +72,10 @@ class TextButton extends Button {
     }
 
 
-    // jsdoc
+    /**
+     * Provides the key of the next button.
+     * @returns {string} - Provides the key of the next button.
+     */
     getNext() {
         if (isMatch(this.text, 'Quest') && world.questButton.isLocked()) {
             return 'coinButton';
@@ -63,71 +87,52 @@ class TextButton extends Button {
     }
 
 
-    // jsdoc
+    /**
+     * Executes the task of the button.
+     */
     execute() {
         this.startNewGame();
         this.openQuestRoll();
     }
 
 
-    // jsdoc
+    /**
+     * Opens the quest roll.
+     */
     openQuestRoll() {
         this.open(world.questButton, world.questRoll);
     }
 
 
+    /**
+     * Starts a new game.
+     */
     startNewGame() {
         if (this.time && isGreater(this.time, world.time)) {
-            // for (const [key] of Object.entries(world)) {
-            //     if (world[key] instanceof Button && key != 'currentButton') {
-            //         clearInterval(world[key].id);
-            //         console.log(key, world[key].id);
-            //     }
-            // }
-
             setCursor('initial');
-
-            world.music.pause();
-            world.stopped = true;
-            setLevelWorld();
-
-            // this.transit();
-        } else if (world.newGameButton.isLocked()) {
-            this.unlock('newGameButton');
-            this.playSound(this.sound);
-
-            this.time = world.time + 750;
-        }
-    }
-
-
-    // move to game.js?
-    transit() {
-        setInterval(() => {
-            this.blackout();
             this.setLevelWorld();
-        }, 1000 / 60);
-    }
-
-
-    blackout() {
-        let tSpeed = 0.01;
-
-        if (world.ctx.globalAlpha != 0 && isMatch(currentWorld, 'start')) {
-            if (world.ctx.globalAlpha - tSpeed < 0) {
-                world.ctx.globalAlpha = 0;
-            } else {
-                world.ctx.globalAlpha -= tSpeed;
-            }
+        } else if (world.newGameButton.isLocked()) {
+            this.setNewGameTimeout();
         }
     }
 
 
+    /**
+     * Sets the level world.
+     */
     setLevelWorld() {
-        if (isMatch(world.ctx.globalAlpha, 0) && !isMatch(currentWorld, 'level')) {
-            world = new LevelWorld(canvas, keyboard);
-            currentWorld = 'level';
-            world.ctx.globalAlpha = 1;
-        }
+        world.music.pause();
+        world.stopped = true;
+        setLevelWorld();
+    }
+
+
+    /**
+     * Sets the timeout of the new game sound.
+     */
+    setNewGameTimeout() {
+        this.unlock('newGameButton');
+        this.playSound(this.sound);
+        this.time = getSum(world.time, 750);
     }
 }
