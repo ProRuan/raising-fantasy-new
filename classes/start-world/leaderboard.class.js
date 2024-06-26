@@ -213,14 +213,23 @@ class Leaderboard extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Draws the text of the result.
+     * @param {string} name - The name of the score item.
+     * @param {number} y - The y value of the text.
+     * @param {string} result - The result of the score item.
+     */
     drawResultText(name, y, result) {
         this.setLeftText(name, y);
         this.setRightText(y, result);
     }
 
 
-    // jsdoc
+    /**
+     * Sets the left text of the leaderboard.
+     * @param {string} name - The name of the score item.
+     * @param {number} y - The y value of the text.
+     */
     setLeftText(name, y) {
         let x = this.getXLeftText();
         world.setTextAlign('left');
@@ -228,13 +237,20 @@ class Leaderboard extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Provides the x value of the left text.
+     * @returns {number} - The x value of the left text.
+     */
     getXLeftText() {
         return this.xLeft + this.xText.left;
     }
 
 
-    // jsdoc
+    /**
+     * Sets the right text of the leaderboard.
+     * @param {number} y - The y value of the text.
+     * @param {string} result - The result of the score item.
+     */
     setRightText(y, result) {
         let x = this.getXRightText();
         world.setTextAlign('center');
@@ -242,13 +258,18 @@ class Leaderboard extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Provides the y value of the right text.
+     * @returns {number} - The y value of the right text.
+     */
     getXRightText() {
         return this.xCenter + this.xText.right;
     }
 
 
-    // jsdoc
+    /**
+     * Draws the volume settings.
+     */
     drawVolume() {
         if (this.isVolume()) {
             this.drawHeadline('white', 'Volume', this.yHeadline.a);
@@ -258,20 +279,32 @@ class Leaderboard extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the volume settings are to draw.
+     * @returns {boolean} - A boolean value.
+     */
     isVolume() {
         return world.settingsButton.isLocked();
     }
 
 
-    // jsdoc
-    drawVolumeText(text, y, type) {
+    /**
+     * Draws the volume text.
+     * @param {string} text - The text of the volume value.
+     * @param {number} y - The y value of the text.
+     * @param {number} value - The volume value.
+     */
+    drawVolumeText(text, y, value) {
         this.drawVolumeName(text, y);
-        this.drawVolumeValue(y, type);
+        this.drawVolumeValue(y, value);
     }
 
 
-    // jsdoc
+    /**
+     * Draws the name of the volume type.
+     * @param {string} text - The name of the volume type.
+     * @param {number} y - The y value of the text.
+     */
     drawVolumeName(text, y) {
         world.setText('20px Roboto', 'left', 'white');
         let x = this.getXLeftText();
@@ -279,10 +312,14 @@ class Leaderboard extends DrawableObject {
     }
 
 
-    // jsdoc
-    drawVolumeValue(y, type) {
+    /**
+     * Draws the value of the volume type.
+     * @param {number} y - The y value of the text.
+     * @param {number} value - The volume value.
+     */
+    drawVolumeValue(y, value) {
         world.setText('20px Roboto', 'center', 'white');
         let x = this.getXRightText();
-        world.drawText(type, x, y);
+        world.drawText(value, x, y);
     }
 }

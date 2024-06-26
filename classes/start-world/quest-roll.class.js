@@ -1,3 +1,7 @@
+/**
+ * Represents a quest roll.
+ * @extends DrawableObject
+ */
 class QuestRoll extends DrawableObject {
     opened = false;
     yHeadline = 160;
@@ -6,32 +10,44 @@ class QuestRoll extends DrawableObject {
     yChallenge = { first: 333, second: 363, third: 393 };
 
 
-    // jsdoc
+    /**
+     * Creates a quest roll.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     */
     constructor(x, y) {
         super(source.questRoll, x, y);
         this.show();
     }
 
 
-    // jsdoc
+    /**
+     * Provides the y value of the headline.
+     */
     get xHeadline() {
         return this.x + this.width / 2;
     }
 
 
-    // jsdoc
+    /**
+     * Provides the x value fo the text.
+     */
     get xText() {
         return this.x + 40;
     }
 
 
-    // jsdoc
+    /**
+     * Shows the quest roll.
+     */
     show() {
         this.setPauseableInterval(() => this.showButtons(), 1000 / 60);
     }
 
 
-    // jsdoc
+    /**
+     * Shows the buttons of the quest roll.
+     */
     showButtons() {
         if (isMatch(currentWorld, 'start')) {
             (this.isOpened()) ? this.setButtons(false) : this.setButtons(true);
@@ -41,7 +57,10 @@ class QuestRoll extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the buttons.
+     * @param {boolean} logical - A boolean value.
+     */
     setButtons(logical) {
         world.setReachable('newGameButton', logical);
         world.setReachable('questButton', logical);
@@ -49,14 +68,19 @@ class QuestRoll extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the coin button.
+     * @param {boolean} logical - A boolean value.
+     */
     setCoinButton(logical) {
         logical = (!logical) ? true : false;
         world.setReachable('coinButton', logical);
     }
 
 
-    // jsdoc
+    /**
+     * Draws the headline 'quest'.
+     */
     drawQuest() {
         this.drawHeadline();
         this.drawStory();
@@ -65,14 +89,18 @@ class QuestRoll extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Draws the headline.
+     */
     drawHeadline() {
         world.setText('bold 28px Amaranth', 'center', 'black');
         world.drawText('Quest', this.xHeadline, this.yHeadline);
     }
 
 
-    // jsdoc
+    /**
+     * Draws the story.
+     */
     drawStory() {
         world.setText('20px Roboto', 'left', 'black');
         world.drawText('Play as a knight and', this.xText, this.yStory.first);
@@ -80,14 +108,18 @@ class QuestRoll extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Draws the subheadline.
+     */
     drawSubheadline() {
         world.setText('bold 22px Roboto', 'left', 'black');
         world.drawText('Challenges', this.xText, this.ySubheadline);
     }
 
 
-    // jsdoc
+    /**
+     * Draws the challenges.
+     */
     drawChallenges() {
         world.setText('20px Roboto', 'left', 'black');
         world.drawText('1. Collect all coins.', this.xText, this.yChallenge.first);
