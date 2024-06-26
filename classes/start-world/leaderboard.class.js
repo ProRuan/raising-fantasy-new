@@ -1,3 +1,7 @@
+/**
+ * Represents a leaderboard.
+ * @extends DrawableObject
+ */
 class Leaderboard extends DrawableObject {
     opened = false;
     xText = { left: 64, right: 80 };
@@ -8,20 +12,28 @@ class Leaderboard extends DrawableObject {
     volumeButtons = ['lowMusicButton', 'highMusicButton', 'lowSoundButton', 'highSoundButton'];
 
 
-    // jsdoc
+    /**
+     * Creates a leaderboard.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     */
     constructor(x, y) {
         super(source.leaderboard, x, y);
         this.show();
     }
 
 
-    // jsdoc
+    /**
+     * Shows the leaderboard.
+     */
     show() {
         this.setPauseableInterval(() => this.showButtons(), 1000 / 60);
     }
 
 
-    // jsdoc
+    /**
+     * Shows the buttons of the leaderboard.
+     */
     showButtons() {
         if (isMatch(currentWorld, 'start')) {
             (this.isOpened()) ? this.setButtons() : this.setVolumeButtons(false);
@@ -31,7 +43,9 @@ class Leaderboard extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the buttons.
+     */
     setButtons() {
         world.setReachable('newGameButton', false);
         world.setReachable('questButton', false);
@@ -42,7 +56,10 @@ class Leaderboard extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the volume buttons.
+     * @param {boolean} value - A boolean value.
+     */
     setVolumeButtons(value) {
         this.volumeButtons.forEach((button) => {
             world.setReachable(button, value);
@@ -50,7 +67,9 @@ class Leaderboard extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Draws the score.
+     */
     drawScore() {
         if (this.isScore()) {
             this.drawHeadline('gold', 'Best Score', this.yHeadline.a);
@@ -61,27 +80,44 @@ class Leaderboard extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the score is to draw.
+     * @returns {boolean} - A boolean value.
+     */
     isScore() {
         return world.cupButton.isLocked();
     }
 
 
-    // jsdoc
+    /**
+     * Draws the headline.
+     * @param {string} color - The color of the text.
+     * @param {string} text - The text to draw.
+     * @param {number} y - The y value of the text.
+     */
     drawHeadline(color, text, y) {
         world.setText('28px Roboto', 'center', color);
         this.setHeadline(text, y);
     }
 
 
-    // jsdoc
+    /**
+     * Sets the headline.
+     * @param {string} text - The text to draw.
+     * @param {number} b - A parameter of the y-axis.
+     */
     setHeadline(text, b) {
         let y = this.yTop + b;
         world.drawText(text, this.xCenter, y);
     }
 
 
-    // jsdoc
+    /**
+     * Draws the chapter.
+     * @param {string} color - The color of the text.
+     * @param {string} key - The key of the score type.
+     * @param {number} y - The y value of the text.
+     */
     drawChapter(color, key, y) {
         world.setText('20px Roboto', 'center', color);
         this.drawCoins(key, y);
@@ -90,7 +126,11 @@ class Leaderboard extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Draws the score of the coins.
+     * @param {string} key - The key of the score type.
+     * @param {number} y - The y value of the text.
+     */
     drawCoins(key, y) {
         y += this.yItem.coins;
         let coins = score[key].coins + ' / 20';
@@ -98,7 +138,11 @@ class Leaderboard extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Draws the score of the leaves.
+     * @param {string} key - The key of the score type.
+     * @param {number} y - The y value of the text.
+     */
     drawLeaves(key, y) {
         y += this.yItem.leaves;
         let leaves = score[key].leaves + ' / 18';
@@ -106,7 +150,11 @@ class Leaderboard extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Draws the required time.
+     * @param {string} key - The key of the score type.
+     * @param {number} y - The y value of the text.
+     */
     drawTime(key, y) {
         y += this.yItem.time;
         let value = score[key].time;
@@ -115,27 +163,45 @@ class Leaderboard extends DrawableObject {
     }
 
 
-    // jsdoc
-    getTime(value) {
-        let min = this.getMin(value);
-        let s = this.getSec(value, min);
+    /**
+     * Provides the required time as formatted string.
+     * @param {number} time - The time as a number.
+     * @returns {string} - The time as a formatted string.
+     */
+    getTime(time) {
+        let min = this.getMin(time);
+        let s = this.getSec(time, min);
         return this.formatTime(min, s);
     }
 
 
-    // jsdoc
-    getMin(value) {
-        return Math.floor(value / 1000 / 60);
+    /**
+     * Provides the required minutes.
+     * @param {number} time - The time as a number.
+     * @returns {number} - The required minutes.
+     */
+    getMin(time) {
+        return Math.floor(time / 1000 / 60);
     }
 
 
-    // jsdoc
-    getSec(value, min) {
-        return Math.floor(value / 1000 - min * 60);
+    /**
+     * Provides the required seconds.
+     * @param {number} time - The time as a number.
+     * @param {number} min - The required minutes.
+     * @returns {number} - The required seconds.
+     */
+    getSec(time, min) {
+        return Math.floor(time / 1000 - min * 60);
     }
 
 
-    // jsdoc
+    /**
+     * Formats the required time.
+     * @param {number} min - The required minutes.
+     * @param {number} s - The required seconds.
+     * @returns {string} - The required time as formatted string.
+     */
     formatTime(min, s) {
         if (isGreater(0, min) && isGreater(0, s)) {
             return `${min} min ${s} s`;
