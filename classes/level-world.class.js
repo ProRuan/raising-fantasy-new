@@ -418,10 +418,11 @@ class LevelWorld extends World {
 
     // Still to fix
     // ------------
+    // Class Character too long ... !!!
+    // ------------
     // Fix sequence of level objects ...
     // Provide an async function for image and audio paths ...
     // Fix error of full screen ...
-    // Fix camera after hero death ... !!!
 
 
     // -----------------------------------

@@ -1,3 +1,7 @@
+/**
+ * Represents a dino.
+ * @extends Enemy
+ */
 class Dino extends Enemy {
     radDispl = 104;
     bodyXY = { xLeft: 4, xCenter: 52, xRight: 100, yTop: 43, yCenter: 65, yBottom: 87 };
@@ -8,14 +12,20 @@ class Dino extends Enemy {
     pursuitStop = 0;
 
 
-    // jsdoc
+    /**
+     * Creates a dino.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     */
     constructor(x, y) {
         super(source.dino, x, y);
         this.setEnemy(90, 64, 'pursue');
     }
 
 
-    // jsdoc
+    /**
+     * Applies the pursuit.
+     */
     pursue() {
         if (this.isWalk() && this.isPeaceful()) {
             this.applySpeedType('x', this.otherDirection, 'speed');
@@ -24,6 +34,9 @@ class Dino extends Enemy {
     }
 
 
+    /**
+     * Applies the gravity.
+     */
     applyGravity() {
         let grassL = world.grass.find(g => isIncluded(g.xLeft, this.body.xRight - 24, g.xRight));
         let grassC = world.grass.find(g => isIncluded(g.xLeft, this.body.xCenter, g.xRight));
@@ -34,13 +47,19 @@ class Dino extends Enemy {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the walk animation is to play.
+     * @returns {boolean} - A boolean value.
+     */
     isWalk() {
         return this.isPursuing();
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the dino is pursuing.
+     * @returns {boolean} - A boolean value.
+     */
     isPursuing() {
         if (this.isTracking(this.xCenter, world.hero.xCenter)) {
             return this.updatePursuitParameters(true);
@@ -56,20 +75,36 @@ class Dino extends Enemy {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the dino is tracking the hero.
+     * @param {number} a - The x value of the object a.
+     * @param {number} b - The x value of the object b.
+     * @returns {boolean} - A boolean value.
+     */
     isTracking(a, b) {
         let biteX = this.getBiteX(a, b);
-        return isIncluded(0, biteX, this.pursuitDistance) && isIncluded(this.yTop, world.hero.yCenter, this.yBottom);
+        let xIncluded = isIncluded(0, biteX, this.pursuitDistance);
+        let yIncluded = isIncluded(this.yTop, world.hero.yCenter, this.yBottom);
+        return xIncluded && yIncluded;
     }
 
 
-    // jsdoc
+    /**
+     * Provides the x value of the dino bite.
+     * @param {number} a - The x value of the object a.
+     * @param {number} b - The x value of the object b.
+     * @returns {boolean} - A boolean value.
+     */
     getBiteX(a, b) {
         return a - b - this.biteDistance;
     }
 
 
-    // jsdoc
+    /**
+     * Updates the parameters of the pursuit.
+     * @param {boolean} logical - A boolean value.
+     * @returns {boolean} - A boolean Value.
+     */
     updatePursuitParameters(logical) {
         this.pursuitStop = getTime();
         this.setOtherDirection(logical);
@@ -77,7 +112,10 @@ class Dino extends Enemy {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the other direction.
+     * @param {boolean} logical - A boolean value.
+     */
     setOtherDirection(logical) {
         if (!isUndefined(logical)) {
             this.otherDirection = logical;
@@ -85,13 +123,21 @@ class Dino extends Enemy {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the dino is to reposition.
+     * @returns {boolean} - A boolean value.
+     */
     isToReposition() {
-        return this.isTrigger(true) && this.isTrigger(false) && isIncluded(this.yTop, world.hero.yCenter, this.yBottom);
+        let triggered = this.isTrigger(true) && this.isTrigger(false);
+        return triggered && isIncluded(this.yTop, world.hero.yCenter, this.yBottom);
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if there is a trigger of reposition.
+     * @param {boolean} logical - A boolean value.
+     * @returns {boolean} - A boolean value.
+     */
     isTrigger(logical) {
         if (isTrue(logical)) {
             let heroX = getSum(world.hero.xCenter, this.biteDistance);
@@ -103,7 +149,10 @@ class Dino extends Enemy {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the dino is searching.
+     * @returns {boolean} - A boolean value.
+     */
     isSearching() {
         return !isOnTime(world.time, this.pursuitStop, 5000);
     }

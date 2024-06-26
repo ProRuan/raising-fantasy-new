@@ -71,12 +71,11 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
     run() {
-        if (isGreater(this.xStopLeft, this.body.xCenter)) {
+        if (isGreater(this.xStopLeft, this.body.xCenter) && !this.isEpilog() && !this.isDeath()) {
             this.runTo('arrowLeft', true);
         }
-        if (isGreater(this.body.xCenter, this.xStopRight)) {
+        if (isGreater(this.body.xCenter, this.xStopRight) && !this.isEpilog() && !this.isDeath()) {
             this.runTo('arrowRight', false);
         }
     }

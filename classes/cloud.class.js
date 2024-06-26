@@ -1,7 +1,14 @@
+/**
+ * Represents a cloud.
+ * @extends DrawableObject
+ */
 class Cloud extends DrawableObject {
 
 
-    // jsdoc
+    /**
+     * Creates a Cloud.
+     * @param {number} x - The x value.
+     */
     constructor(x) {
         super(source.cloud, x * canvas.width, 0);
         this.setSpeed(4);
