@@ -1,3 +1,7 @@
+/**
+ * Represents a coin button.
+ * @extends Button
+ */
 class CoinButton extends Button {
     indent = 2;
     previous = 'settingsButton';
@@ -6,19 +10,27 @@ class CoinButton extends Button {
     shadowBlur = 16;
 
 
-    // jsdoc
+    /**
+     * Creates a coin button.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     */
     constructor(x, y) {
         super(source.coinButton, x - 48, canvas.height - y - 48);
     }
 
 
-    // jsdoc
+    /**
+     * Executes the task of the button.
+     */
     execute() {
         this.closeQuestRoll();
     }
 
 
-    // jsdoc
+    /**
+     * Closes the quest roll.
+     */
     closeQuestRoll() {
         if (this.isLocked()) {
             this.reset();

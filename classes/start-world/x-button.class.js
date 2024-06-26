@@ -1,3 +1,7 @@
+/**
+ * Represents an x button.
+ * @extends Button
+ */
 class XButton extends Button {
     indent = 2;
     previous = 'settingsButton';
@@ -5,19 +9,28 @@ class XButton extends Button {
     shadowBlur = 16;
 
 
-    // jsdoc
+    /**
+     * Creates an x button.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     */
     constructor(x, y) {
         super(source.xButton, x - 35, canvas.height - y - 64);
     }
 
 
-    // jsdoc
+    /**
+     * Provides the next button.
+     */
     get next() {
         return this.getNext();
     }
 
 
-    // jsdoc
+    /**
+     * Provides the key of the next button.
+     * @returns {string} - The key of the next button.
+     */
     getNext() {
         if (world.settingsButton.isLocked()) {
             return 'lowMusicButton';
@@ -27,13 +40,17 @@ class XButton extends Button {
     }
 
 
-    // jsdoc
+    /**
+     * Executes the task of the button.
+     */
     execute() {
         this.closeLeaderboard();
     }
 
 
-    // jsdoc
+    /**
+     * Closes the leaderboard.
+     */
     closeLeaderboard() {
         if (this.isLocked()) {
             this.reset();

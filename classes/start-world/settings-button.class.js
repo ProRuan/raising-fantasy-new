@@ -1,3 +1,7 @@
+/**
+ * Represents a settings button.
+ * @extends Button
+ */
 class SettingsButton extends Button {
     indent = 6;
     previous = 'cupButton';
@@ -5,19 +9,26 @@ class SettingsButton extends Button {
     shadowBlur = 16;
 
 
-    // jsdoc
+    /**
+     * Creates a settings button.
+     */
     constructor() {
         super(source.settingsButton, canvas.width - 98, 32);
     }
 
 
-    // jsdoc
+    /**
+     * Provides the next button.
+     */
     get next() {
         return this.getNext();
     }
 
 
-    // jsdoc
+    /**
+     * Provides the key of the next button.
+     * @returns {string} - The key of the next button.
+     */
     getNext() {
         if (world.leaderboard.isOpened()) {
             return 'xButton';
@@ -29,7 +40,9 @@ class SettingsButton extends Button {
     }
 
 
-    // jsdoc
+    /**
+     * Executes the task of the button.
+     */
     execute() {
         this.open(this, world.leaderboard, world.cupButton);
     }

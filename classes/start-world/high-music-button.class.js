@@ -1,3 +1,7 @@
+/**
+ * Represents a high music button.
+ * @extends Button
+ */
 class HighMusicButton extends Button {
     indent = -6;
     previous = 'lowMusicButton';
@@ -6,13 +10,19 @@ class HighMusicButton extends Button {
     shadowBlur = 16;
 
 
-    // jsdoc
+    /**
+     * Creates a high music butotn.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     */
     constructor(x, y) {
         super(source.arrowRight, x + 125, y - 145.5);
     }
 
 
-    // jsdoc
+    /**
+     * Executes the task of the button.
+     */
     execute() {
         this.setVolume('music', true);
     }

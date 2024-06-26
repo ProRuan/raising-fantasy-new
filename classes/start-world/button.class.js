@@ -1,3 +1,7 @@
+/**
+ * Represents a button.
+ * @extends DrawableObject
+ */
 class Button extends DrawableObject {
     reachable = false;
     targeted = false;
@@ -5,20 +9,29 @@ class Button extends DrawableObject {
     locked = false;
 
 
-    // jsdoc
+    /**
+     * Creates a button.
+     * @param {object} source - The source object.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     */
     constructor(source, x, y) {
         super(source, x, y);
         this.init();
     }
 
 
-    // jsdoc
+    /**
+     * Inits the button.
+     */
     init() {
         this.setPauseableInterval(() => this.trigger(), 1000 / 60);
     }
 
 
-    // jsdoc
+    /**
+     * Triggers the button.
+     */
     trigger() {
         if (isMatch(currentWorld, 'start')) {
             this.setCursor();
@@ -29,7 +42,9 @@ class Button extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the cursor.
+     */
     setCursor() {
         if (this.isTargeted()) {
             setCursor('pointer');
@@ -37,31 +52,48 @@ class Button extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the button is to highlight.
+     * @returns {boolean} - A boolean value.
+     */
     isHighlighted() {
         return this.isTargeted() || this.isLocked() || this.isSelected();
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the button is targeted.
+     * @returns {boolean} - A boolean value.
+     */
     isTargeted() {
-        return this.reachable == true && this.targeted == true;
+        return isTrue(this.reachable) && isTrue(this.targeted);
     }
 
 
-    // jsoc
+    /**
+     * Verifies, if the button is locked.
+     * @returns {boolean} - A boolean value.
+     */
     isLocked() {
-        return this.locked == true;
+        return isTrue(this.locked);
     }
 
 
-    // jsoc
+    /**
+     * Verifies, if the button is selected.
+     * @returns {boolean} - A boolean value.
+     */
     isSelected() {
-        return this.selected == true;
+        return isTrue(this.selected);
     }
 
 
-    // jsdoc
+    /**
+     * Opens a board.
+     * @param {Button} buttonA - The button a.
+     * @param {object} board - The board to open.
+     * @param {Button} buttonB - The botton b.
+     */
     open(buttonA, board, buttonB) {
         if (isMatch(currentWorld, 'start')) {
             if (buttonA.isLocked()) {
@@ -73,13 +105,21 @@ class Button extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if button b keeps the board open.
+     * @param {Button} button - The button b.
+     * @returns {booelan} - A boolean value.
+     */
     isButtonB(button) {
         return (button) ? !button.isLocked() : true;
     }
 
 
-    // jsdoc
+    /**
+     * Sets the volume.
+     * @param {string} key - The key of the volume type.
+     * @param {boolean} logical - A boolean value.
+     */
     setVolume(key, logical) {
         if (this.isLocked()) {
             this.locked = false;
@@ -89,26 +129,38 @@ class Button extends DrawableObject {
     }
 
 
+    /**
+     * Sets the volume value.
+     * @param {string} key - The key of the volume type.
+     * @param {boolean} logical - A boolean value.
+     */
     setVolumeValue(key, logical) {
         if (isTrue(logical) && isGreater(volume[key], 10)) {
             volume[key]++;
-            if (isMatch(key, 'sound')) {    // global function!!!
-                let audio = new Audio(source.swordDraw);
-                audio.volume = volume.sound / 10;
-                audio.play();
-            }
+            this.playSoundSample(key);
         } else if (!isTrue(logical) && isGreater(0, volume[key])) {
             volume[key]--;
-            if (isMatch(key, 'sound')) {    // global function!!!
-                let audio = new Audio(source.swordDraw);
-                audio.volume = volume.sound / 10;
-                audio.play();
-            }
+            this.playSoundSample(key);
         }
     }
 
 
-    // jsdoc
+    /**
+     * Plays a sound sample.
+     * @param {string} key - The key of the volume type.
+     */
+    playSoundSample(key) {
+        if (isMatch(key, 'sound')) {
+            let audio = new Audio(source.swordDraw);
+            audio.volume = volume.sound / 10;
+            audio.play();
+        }
+    }
+
+
+    /**
+     * Resets the button.
+     */
     reset() {
         this.reachable = false;
         this.selected = false;
@@ -116,7 +168,10 @@ class Button extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Unlocks a button.
+     * @param {string} key - The key of the button to unlock.
+     */
     unlock(key) {
         if (world[key].isLocked()) {
             world[key].locked = false;

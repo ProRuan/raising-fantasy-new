@@ -1,3 +1,7 @@
+/**
+ * Represents a cup button.
+ * @extends Button
+ */
 class CupButton extends Button {
     indent = 6;
     next = 'settingsButton';
@@ -5,19 +9,26 @@ class CupButton extends Button {
     shadowBlur = 16;
 
 
-    // jsdoc
+    /**
+     * Creates a cup button.
+     */
     constructor() {
         super(source.cupButton, 32, 32);
     }
 
 
-    // jsdoc
+    /**
+     * Provides the previous button.
+     */
     get previous() {
         return this.getPrevious();
     }
 
 
-    // jsdoc
+    /**
+     * Provides the key of the previous button.
+     * @returns {string} - The key of the previous button.
+     */
     getPrevious() {
         if (world.settingsButton.isLocked()) {
             return 'highSoundButton';
@@ -31,7 +42,9 @@ class CupButton extends Button {
     }
 
 
-    // jsdoc
+    /**
+     * Executes the task of the button.
+     */
     execute() {
         this.open(this, world.leaderboard, world.settingsButton);
     }
