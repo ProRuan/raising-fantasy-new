@@ -1,3 +1,6 @@
+/**
+ * Represents a source.
+ */
 class Source {
     startX = 60;
     crystalXCenter = 6240;
@@ -7,21 +10,27 @@ class Source {
     endX = 7620;
 
 
-    // jsdoc
+    /**
+     * Creates a source.
+     */
     constructor() {
         this.setStartWorld();
         this.setLevelWorld();
     }
 
 
-    // jsdoc
+    /**
+     * Sets the start world.
+     */
     setStartWorld() {
         this.setStartWorldImages();
         this.setStartWorldAudio();
     }
 
 
-    // jsdoc
+    /**
+     * Sets the image sources of the start world.
+     */
     setStartWorldImages() {
         this.mainBg = this.getImageSource(imgMainBg, 960, 540);
         this.questRoll = this.getImageSource(imgQuestRoll, 276, 333);
@@ -35,7 +44,13 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Provides the source of an image.
+     * @param {string} path - The path of the image.
+     * @param {number} width - The width of the image.
+     * @param {number} height - The height of the image.
+     * @returns {object} - The object of the image source.
+     */
     getImageSource(path, width, height) {
         if (!height) {
             return { path: path, size: width };
@@ -45,14 +60,18 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the audio source of the start world.
+     */
     setStartWorldAudio() {
         this.newWorld = audioNewWorld;
         this.newGame = audioNewGame;
     }
 
 
-    // jsdoc
+    /**
+     * Sets the level world.
+     */
     setLevelWorld() {
         this.setLevelWorldImages();
         this.setLevelWorldFlipBooks();
@@ -60,14 +79,18 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the image sources of the level world.
+     */
     setLevelWorldImages() {
         this.setLevelComponents();
         this.setAvatarComponents();
     }
 
 
-    // jsdoc
+    /**
+     * Sets the level components.
+     */
     setLevelComponents() {
         this.setSceneryImages();
         this.setGrassImages();
@@ -79,14 +102,18 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the image sources of the scenery.
+     */
     setSceneryImages() {
         this.background = this.getImageSource(imgBackground, 960, 540);
         this.cloud = this.getImageSource(imgCloud, 960, 540);
     }
 
 
-    // jsdoc
+    /**
+     * Sets the image sources of the grass objects.
+     */
     setGrassImages() {
         this.grassL = this.getImageSource(imgGrassL, 64);
         this.grassC = this.getImageSource(imgGrassC, 64);
@@ -97,7 +124,9 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the image sources of the simple objects,
+     */
     setSimpleObjectImages() {
         this.tree = this.getImageSource(imgTree, 256);
         this.ladderB = this.getImageSource(imgLadderB, 32);
@@ -106,7 +135,9 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the image sources of the animated objects.
+     */
     setAnimatedObjectImages() {
         this.bird = this.getImageSource(imgBird, 64);
         this.bomb = this.getImageSource(imgBomb, 256);
@@ -120,7 +151,9 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the image sources of the enemies.
+     */
     setEnemyImages() {
         this.shaman = this.getImageSource(imgShaman, 256);
         this.dino = this.getImageSource(imgDino, 128);
@@ -129,13 +162,17 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the image source of the hero.
+     */
     setHeroImage() {
         this.knight = this.getImageSource(imgKnight, 128);
     }
 
 
-    // jsdoc
+    /**
+     * Sets the image sources of the magic.
+     */
     setMagicImages() {
         this.blade = this.getImageSource(imgBlade, 256);
         this.fire = this.getImageSource(imgFire, 256);
@@ -143,7 +180,9 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the avatar components.
+     */
     setAvatarComponents() {
         this.setAvatarImages();
         this.setHpBarImages();
@@ -153,7 +192,9 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the image sources of the avatar.
+     */
     setAvatarImages() {
         this.avatarImage = this.getImageSource(imgAvatarImage, 64);
         this.avatarFrame = this.getImageSource(imgAvatarFrame, 76, 79);
@@ -162,14 +203,21 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Adds the coordinates of the image.
+     * @param {string} key - The key of the variable.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     */
     addCoord(key, x, y) {
         this[key].x = x;
         this[key].y = y;
     }
 
 
-    // jsdoc
+    /**
+     * Sets the image sources of the hp bar.
+     */
     setHpBarImages() {
         this.hpBarBg = this.getImageSource(imgHpBarBg, 121, 14);
         this.hpPoint = this.getImageSource(imgHpPoint, 1, 12);
@@ -180,7 +228,9 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the image sources of the energy bar.
+     */
     setEnergyBarImages() {
         this.energyBarBg = this.getImageSource(imgEnergyBarBg, 97, 13);
         this.energyPoint = this.getImageSource(imgEnergyPoint, 1, 10);
@@ -191,7 +241,9 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the image sources of the stamina bar.
+     */
     setStaminaBarImages() {
         this.staminaBarBg = this.getImageSource(imgStaminaBarBg, 97, 13);
         this.staminaPoint = this.getImageSource(imgStaminaPoint, 1, 10);
@@ -202,7 +254,9 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the image sources of the item.
+     */
     setItemImages() {
         this.itemBg = this.getImageSource(imgItemBg, 34, 35);
         this.itemBomb = this.getImageSource(imgItemBomb, 35);
@@ -213,7 +267,9 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the flip books of the moveable objects.
+     */
     setLevelWorldFlipBooks() {
         this.addFlipBook('dino', FLIP_BOOK_DINO);
         this.addFlipBook('ent', FLIP_BOOK_ENT);
@@ -223,13 +279,19 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Adds a flip book to a variable.
+     * @param {string} key - The key of the variable.
+     * @param {array} flipBook - The flip book to add.
+     */
     addFlipBook(key, flipBook) {
         this[key].flipBook = flipBook;
     }
 
 
-    // jsdoc
+    /**
+     * Sets the audio sources of the level world.
+     */
     setLevelWorldAudio() {
         this.setLevelWorldMusic();
         this.setAnimatedObjectAudio();
@@ -239,14 +301,18 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the audio sources of the music.
+     */
     setLevelWorldMusic() {
         this.ambience = audioAmbience;
         this.bossBattle = audioBossBattle;
     }
 
 
-    // jsdoc
+    /**
+     * Sets the audio sources of the animated objects.
+     */
     setAnimatedObjectAudio() {
         this.addAudioSource('coin', audioCoin);
         this.addAudioSource('crystal', audioCrystal);
@@ -258,17 +324,20 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Adds an audio source to an variable.
+     * @param {string} key - The key of the variable.
+     * @param {string} path - The path to add.
+     * @param {string} subkey - The subkey of the audio source.
+     */
     addAudioSource(key, path, subkey) {
-        if (!subkey) {
-            this[key].sound = path;
-        } else {
-            this[key][subkey] = path;
-        }
+        (!subkey) ? this[key].sound = path : this[key][subkey] = path;
     }
 
 
-    // jsdoc
+    /**
+     * Sets the audio sources of the enemies.
+     */
     setEnemyAudio() {
         this.addAudioSource('shaman', audioShamanGrowl, 'growl');
         this.addAudioSource('dino', audioDinoGrowl, 'growl');
@@ -279,7 +348,11 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Adds additional audio sources to the enemies.
+     * @param {string} path - The path to add.
+     * @param {string} subkey - The subkey of the audio source.
+     */
     addEnemyAudio(path, subkey) {
         this.addAudioSource('shaman', path, subkey);
         this.addAudioSource('dino', path, subkey);
@@ -288,7 +361,9 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the audio sources of the hero.
+     */
     setHeroAudio() {
         this.goAway = audioGoAway;
         this.staveStep = audioStaveStep;
@@ -300,7 +375,9 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the audio sources of the magic.
+     */
     setMagicAudio() {
         this.addMagicSound('blade', audioBladeCast, audioBladeHit);
         this.addMagicSound('fire', audioFireCast, audioFireHit);
@@ -308,7 +385,12 @@ class Source {
     }
 
 
-    // jsdoc
+    /**
+     * Adds the audio source to the magic.
+     * @param {string} key - The key of the variable.
+     * @param {string} cast - The path of the cast sound.
+     * @param {string} hit - The path of the hit sound.
+     */
     addMagicSound(key, cast, hit) {
         this[key].sound = { cast: cast, hit: hit };
     }
