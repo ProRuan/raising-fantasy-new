@@ -1,3 +1,7 @@
+/**
+ * Represents a shaman.
+ * @extends Boss
+ */
 class Shaman extends Boss {
     radDispl = 144;
     bodyXY = { xLeft: 56, xCenter: 72, xRight: 88, yTop: 104, yCenter: 154, yBottom: 204 };
@@ -7,14 +11,20 @@ class Shaman extends Boss {
     lightningXY = { xLeft: -130, xRight: 228, yTop: -14 + 96, yBottom: 0 };
 
 
-    // jsdoc
+    /**
+     * Creates a shaman.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     */
     constructor(x, y) {
         super(source.shaman, x, y);
         this.setMusic(source.bossBattle);
     }
 
 
-    // jsdoc
+    /**
+     * Moves the shaman.
+     */
     move() {
         if (this.isCastReady()) {
             this.cast();
@@ -24,12 +34,18 @@ class Shaman extends Boss {
     }
 
 
+    /**
+     * Verifies, if the cast is ready.
+     * @returns {boolean} - A boolean value.
+     */
     isCastReady() {
         return !this.isDeath() && isTrue(this.triggered) && !world.hero.isEpilog();
     }
 
 
-    // jsdoc
+    /**
+     * Controls the magic.
+     */
     cast() {
         this.hurt();
         this.resetMagicCast();
@@ -39,6 +55,9 @@ class Shaman extends Boss {
     }
 
 
+    /**
+     * Recasts the magic.
+     */
     recast() {
         if (this.chapterTime && isGreater(this.chapterTime, world.time)) {
             this.setUndefined('magicChapter');
@@ -54,7 +73,9 @@ class Shaman extends Boss {
     }
 
 
-    // jsdoc
+    /**
+     * Updates the rate of the magic.
+     */
     updateRate() {
         let hp = this.getHp();
         if (isGreater(70, hp)) {
@@ -69,19 +90,29 @@ class Shaman extends Boss {
     }
 
 
-    // jsdoc
+    /**
+     * Provides the hp in percentage terms.
+     * @returns {number} - The hp in percentage terms.
+     */
     getHp() {
         return this.hp / this.hpMax * 100;
     }
 
 
-    // jsdoc
+    /**
+     * Sets the rates of the magic types.
+     * @param {number} a - The magic rate of the blade.
+     * @param {number} b - The magic rate of the fire.
+     * @param {number} c - The magic rate of the lightning.
+     */
     setRate(a, b, c) {
         this.rate = { blade: a, fire: b, lightning: c };
     }
 
 
-    // jsdoc
+    /**
+     * Casts the magic randomly.
+     */
     castRandomly() {
         let number = getRandomNumber(9, 8);
         if (isGreater(this.rate.lightning, number)) {
@@ -94,24 +125,42 @@ class Shaman extends Boss {
     }
 
 
+    /**
+     * Sets the cast.
+     * @param {string} key - The name of the magic chapter.
+     */
     setCast(key) {
         this.magicChapter = key;
-        if (!this.selectionTime) {
-            this.selectionTime = world.time + 300;
-        }
-        if (!this.chapterTime) {
-            this.chapterTime = world.time + this.ms;
+        this.setCastTimeout('selectionTime', 300);
+        this.setCastTimeout('chapterTime', this.ms);
+    }
+
+
+    /**
+     * Sets the timeout of the cast.
+     * @param {string} key - The key of the variable.
+     * @param {number} value - The value to set.
+     */
+    setCastTimeout(key, value) {
+        if (!this[key]) {
+            this[key] = getSum(world.time, value);
         }
     }
 
 
-    // jsdoc
+    /**
+     * Selects the magic.
+     * @param {string} type - The type of the magic.
+     */
     selectMagic(type) {
         (!isMatch(type, 'lighting')) ? this.castMagic(type) : this.castLightning();
     }
 
 
-    // jsdoc
+    /**
+     * Casts the type of the magic.
+     * @param {string} type - The type of the magic.
+     */
     castMagic(type) {
         this.setWeaponXY(type);
         let x = this.getWeaponXY('xLeft');
@@ -120,20 +169,32 @@ class Shaman extends Boss {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the type of the weapon.
+     * @param {string} type - The type of the magic.
+     */
     setWeaponXY(type) {
         let key = type + 'XY';
         this.weaponXY = this[key];
     }
 
 
-    // jsdoc
+    /**
+     * Provides a value of the weapon.
+     * @param {string} key - The key of a weapon value.
+     * @returns {number} - A value of the weapon.
+     */
     getWeaponXY(key) {
         return this.weapon[key] / UNIT;
     }
 
 
-    // jsdoc
+    /**
+     * Sets the magic object.
+     * @param {string} type - The type of the magic.
+     * @param {number} x - The x value of the magic.
+     * @param {number} y - The y value of the magic.
+     */
     setMagicObject(type, x, y) {
         if (isMatch(type, 'blade')) {
             this.setMagic(new Blade(x, y, this.otherDirection));
@@ -145,13 +206,18 @@ class Shaman extends Boss {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the magic.
+     * @param {object} magic - The magic to set.
+     */
     setMagic(magic) {
         this.magic = magic;
     }
 
 
-    // jsdoc
+    /**
+     * Casts the lightning.
+     */
     castLightning() {
         this.setWeaponXY('lightning');
         let x = this.getLightningX();
@@ -160,25 +226,36 @@ class Shaman extends Boss {
     }
 
 
-    // jsdoc
+    /**
+     * Provides the x value of the lightning.
+     * @returns {number} - The x value of the lightning.
+     */
     getLightningX() {
         return (world.hero.body.xCenter + this.weapon.xLeft) / UNIT;
     }
 
 
-    // jsdoc
+    /**
+     * Provides the y value of the lightning.
+     * @returns {number} - The y value of the lightning.
+     */
     getLightningY() {
         return (canvas.height + (world.hero.yBottom - this.weapon.yTop)) / UNIT;
     }
 
 
-    // jsdoc
+    /**
+     * Sets a variable undefined.
+     * @param {string} key - The key of the variable to set.
+     */
     setUndefined(key) {
         this[key] = undefined;
     }
 
 
-    // jsdoc
+    /**
+     * Mutes the ambient sound.
+     */
     muteAmbientSound() {
         if (this.isDeath() && this.music.muted) {
             super.muteAmbientSound(false);
@@ -188,6 +265,9 @@ class Shaman extends Boss {
     }
 
 
+    /**
+     * Applies the victory.
+     */
     win() {
         this.removeMagic();
         this.lowMusic();
@@ -195,15 +275,20 @@ class Shaman extends Boss {
     }
 
 
-    // jsdoc
+    /**
+     * Lows the volume of the music.
+     */
     lowMusic() {
-        let lowerVolume = this.music.volume - 0.001;
+        let lowerVolume = getSum(this.music.volume, -0.001);
         this.setMusicVolume(lowerVolume);
         this.muteAmbientSound();
     }
 
 
-    // jsdoc
+    /**
+     * Sets the volume of the music.
+     * @param {number} lowerVolume - The value of the lower volume.
+     */
     setMusicVolume(lowerVolume) {
         if (isGreater(lowerVolume, 0)) {
             this.music.muted = true;
