@@ -1,9 +1,18 @@
+/**
+ * Represents a state bar.
+ * @extends DrawableObject
+ */
 class StateBar extends DrawableObject {
     points = [];
     pattern = /([a-z]+)_point/;
 
 
-    // jsdoc
+    /**
+     * Creates a state bar.
+     * @param {object} source - The source object.
+     * @param {number} max - The max value of the points.
+     * @param {number} ms - The milliseconds of the interval.
+     */
     constructor(source, max, ms) {
         super(source, 0, 0);
         this.setStateBar(source.path, max, ms);
@@ -12,26 +21,40 @@ class StateBar extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Provides the points of the state bar.
+     */
     get points() {
         return this.points;
     }
 
 
-    // jsdoc
+    /**
+     * Provides the translation.
+     */
     get translation() {
         return this.bg.translation;
     }
 
 
-    // jsdoc
+    /**
+     * Sets the state bar.
+     * @param {string} path - The path of the state bar.
+     * @param {number} max - The max value of the points.
+     * @param {number} ms - The milliseconds of the interval.
+     */
     setStateBar(path, max, ms) {
         this.setParameters(path, max, ms);
         this.setStateBarFrame();
     }
 
 
-    // jsdoc
+    /**
+     * Sets the parameters.
+     * @param {string} path - The path of the state bar.
+     * @param {number} max - The max value of the points.
+     * @param {number} ms - The milliseconds of the interval.
+     */
     setParameters(path, max, ms) {
         this.name = path.match(this.pattern)[1];
         this.max = max;
@@ -39,21 +62,30 @@ class StateBar extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the frame of the state bar.
+     */
     setStateBarFrame() {
         this.bg = this.getAvatarInfo('BarBg');
         this.border = this.getAvatarInfo('BarBorder');
     }
 
 
-    // jsdoc
+    /**
+     * Provides an object of the avatar info.
+     * @param {string} key - The key of the avatar info.
+     * @returns {AvatarInfo} - The avatar info (object).
+     */
     getAvatarInfo(key) {
         let name = this.name + key;
         return new AvatarInfo(source[name]);
     }
 
 
-    // jsdoc
+    /**
+     * Fills the state bar.
+     * @param {number} newMax - The (new) max value of the points.
+     */
     fill(newMax) {
         newMax = this.getMax(newMax);
         for (let i = this.points.length; i < newMax; i++) {
@@ -62,40 +94,52 @@ class StateBar extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Provides the max value of the points.
+     * @param {number} newMax - The (new) max value of the points.
+     * @returns {number} - The max value of the points.
+     */
     getMax(newMax) {
         return (!newMax) ? this.max : newMax;
     }
 
 
-    // jsdoc
+    /**
+     * Adds a new point.
+     */
     addNewPoint() {
-        let x = this.calculateX();
+        let x = getSum(this.translation, this.points.length);
         let point = this.getPoint(x);
         this.points.push(point);
     }
 
 
-    // jsdoc
-    calculateX() {
-        return this.translation + this.points.length;
-    }
-
-
-    // jsdoc
+    /**
+     * Provides a point.
+     * @param {number} x - The x value of the point.
+     * @returns {DrawableObject} - The point as drawable object.
+     */
     getPoint(x) {
         let name = this.getPointName();
         return this.createPoint(name, x);
     }
 
 
-    // jsdoc
+    /**
+     * Provides the name of the point.
+     * @returns {string} - the name of the point.
+     */
     getPointName() {
         return this.name + 'Point';
     }
 
 
-    // jsdoc
+    /**
+     * Creates a point.
+     * @param {string} name - The name of the point.
+     * @param {number} x - The x value of the point.
+     * @returns {DrawableObject} - The point as drawable object.
+     */
     createPoint(name, x) {
         let path = source[name];
         let y = source[name].y;
@@ -103,13 +147,17 @@ class StateBar extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Regenerates the points.
+     */
     regenerate() {
         this.setPauseableInterval(() => this.refill(), this.ms);
     }
 
 
-    // jsdoc
+    /**
+     * Refills the state bar.
+     */
     refill() {
         if (this.isCondition()) {
             this.addNewPoint();
@@ -117,13 +165,19 @@ class StateBar extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies the condition of the point type.
+     * @returns {boolean} - A boolean value.
+     */
     isCondition() {
         return this.getCondition() && isGreater(this.points.length, this.max);
     }
 
 
-    // jsdoc
+    /**
+     * Provides the condition of the point type.
+     * @returns {boolean} - A boolean value.
+     */
     getCondition() {
         if (!world.hero.isDeath()) {
             if (this.isStateBar('hp')) {
@@ -137,7 +191,11 @@ class StateBar extends DrawableObject {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies the name of the state bar.
+     * @param {string} name - The name of the state bar.
+     * @returns {boolean} - A boolean value.
+     */
     isStateBar(name) {
         return isMatch(this.name, name);
     }
