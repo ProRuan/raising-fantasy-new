@@ -1,7 +1,12 @@
+/**
+ * Represents a keyboard.
+ */
 class Keyboard {
 
 
-    // jsdoc
+    /**
+     * Creates a keyboard.
+     */
     constructor() {
         this.setConfirmationKeys();
         this.setArrowKeys();
@@ -9,7 +14,9 @@ class Keyboard {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the keys of confirmation.
+     */
     setConfirmationKeys() {
         this.backspace = new Key('backspace', 8);
         this.enter = new Key('enter', 13);
@@ -18,7 +25,9 @@ class Keyboard {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the arrow keys.
+     */
     setArrowKeys() {
         this.arrowLeft = new Key('arrowLeft', 37);
         this.arrowUp = new Key('arrowUp', 38);
@@ -27,7 +36,9 @@ class Keyboard {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the letter keys.
+     */
     setLetterKeys() {
         this.keyA = new Key('keyA', 65);
         this.keyE = new Key('keyE', 69);

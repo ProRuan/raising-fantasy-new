@@ -55,16 +55,6 @@ class AnimatedObject extends DrawableObject {
 
 
     /**
-     * Provides the id of the animated object.
-     * @param {string} key - The key of the animated object.
-     * @returns {number} - The id of the animated object.
-     */
-    getId(key) {
-        return world[key].findIndex(o => o == this);
-    }
-
-
-    /**
      * Sets the flip book.
      */
     setFlipBook() {

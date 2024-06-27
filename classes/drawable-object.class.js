@@ -337,6 +337,16 @@ class DrawableObject {
 
 
     /**
+    * Provides the id of the object.
+    * @param {string} key - The key of the object.
+    * @returns {number} - The id of the object.
+    */
+    getId(key) {
+        return world[key].findIndex(o => isMatch(o, this));
+    }
+
+
+    /**
      * Sets the speed.
      * @param {value} s - The speed.
      * @param {value} r - The run speed.
