@@ -1,5 +1,7 @@
 class LevelWorld extends World {
     heroX = 384;
+    finalCameraX = -6720;
+    finalCameraSpeed = 4;
     trophyY = 436;
     victorySpeed = 2;
     size = LEVEL_SIZE;

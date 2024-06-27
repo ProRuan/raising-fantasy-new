@@ -1,3 +1,7 @@
+/**
+ * Represents a knight.
+ * @extends Character
+ */
 class Knight extends Character {
     radDispl = 84;
     xStopLeft = source.startX;
@@ -19,7 +23,11 @@ class Knight extends Character {
     skillUpgrade = { path: source.skillUpgrade, startTime: 0 };
 
 
-    // jsdoc
+    /**
+     * Creates a knight.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     */
     constructor(x, y) {
         super(source.knight, x, y);
         this.setSpeed(128, 256);
@@ -28,7 +36,9 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
+    /**
+     * Moves the knight.
+     */
     move() {
         this.applyGravity();
         this.resetJumpCounter();
@@ -43,7 +53,9 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
+    /**
+     * Plays the actions of the knight.
+     */
     act() {
         this.climb();
         this.jump();
@@ -56,14 +68,18 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
+    /**
+     * Applies the climb.
+     */
     climb() {
         this.climbUp();
         this.climbDown();
     }
 
 
-    // jsdoc
+    /**
+     * Applies the jump.
+     */
     jump() {
         if (super.isJump()) {
             super.jump();
@@ -71,17 +87,25 @@ class Knight extends Character {
     }
 
 
+    /**
+     * Applies the run.
+     */
     run() {
-        if (isGreater(this.xStopLeft, this.body.xCenter) && !this.isEpilog() && !this.isDeath()) {
+        let fine = !this.isEpilog() && !this.isDeath();
+        if (isGreater(this.xStopLeft, this.body.xCenter) && fine) {
             this.runTo('arrowLeft', true);
         }
-        if (isGreater(this.body.xCenter, this.xStopRight) && !this.isEpilog() && !this.isDeath()) {
+        if (isGreater(this.body.xCenter, this.xStopRight) && fine) {
             this.runTo('arrowRight', false);
         }
     }
 
 
-    // jsdoc
+    /**
+     * Applies the run to the requested direction.
+     * @param {string} key - The name of the key.
+     * @param {boolean} value - A boolean value.
+     */
     runTo(key, value) {
         if (isKey(key)) {
             super.move(value, key);
@@ -89,7 +113,9 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
+    /**
+     * Applies the throw of the bomb.
+     */
     throw() {
         if (this.bombUnlocked) {
             this.throwBomb();
@@ -98,7 +124,9 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
+    /**
+     * Throws the bomb.
+     */
     throwBomb() {
         if (this.isBombThrow() && !isTrue(this.otherDirection)) {
             let [x, y] = this.getBombCoord();
@@ -108,13 +136,19 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the throw of the bomb is possible.
+     * @returns {boolean} - A boolean value.
+     */
     isBombThrow() {
         return isKey('keyF') && isUndefined(this.bomb) && isMatch(this.energyPoints.length, 100);
     }
 
 
-    // jsdoc
+    /**
+     * Provides the coordinates of the bomb.
+     * @returns {array} - The array with the coordinates of the bomb.
+     */
     getBombCoord() {
         let x = (this.x - this.bombXY.x) / UNIT;
         let tempY = this.y + this.height + this.bombXY.y;
@@ -123,7 +157,9 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
+    /**
+     * Resets the bomb.
+     */
     resetBomb() {
         let bombBurst = this.bomb && isGreater(this.bomb.time, world.time);
         let bombOut = this.bomb && isGreater(this.abyssLevel, this.bomb.y);
@@ -134,14 +170,18 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
+    /**
+     * Applies the attack.
+     */
     attack() {
         this.setWeaponState();
         this.applyStamina();
     }
 
 
-    // jsdoc
+    /**
+     * Sets the state of the weapon.
+     */
     setWeaponState() {
         if (this.isImage('run_attack')) {
             this.setWeaponDamage(this.walkAttackXY, 25);
@@ -153,14 +193,20 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the damage of the weapon.
+     * @param {object} weapon - The weapon object.
+     * @param {number} value - The value of the damage.
+     */
     setWeaponDamage(weapon, value) {
         this.weaponXY = weapon;
         this.weaponDamage = value;
     }
 
 
-    // jsdoc
+    /**
+     * Applies the stamina.
+     */
     applyStamina() {
         if (this.isAttack()) {
             this.staminaPoints.splice(this.staminaPoints.length - 1, 1);
@@ -168,7 +214,9 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
+    /**
+     * Applies the idle.
+     */
     idle() {
         if (this.isIdleUpdate()) {
             let nextIdle = getSum(world.time, this.idleDelay);
@@ -177,7 +225,10 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the time of the idle is to update.
+     * @returns {boolean} - A boolean value.
+     */
     isIdleUpdate() {
         let noIdle = !isMatch(this.chapter, 'idle') && !isMatch(this.chapter, 'cover');
         let idleEnd = isMatch(this.chapter, 'idle') && this.isImage('idle12');
@@ -185,7 +236,9 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
+    /**
+     * Applies the collecting.
+     */
     collect() {
         this.collectItem('coins');
         this.collectItem('crystals');
@@ -196,7 +249,10 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
+    /**
+     * Applies the collecting of items.
+     * @param {string} key - The key of the item group.
+     */
     collectItem(key) {
         let object = this.getObject(key);
         if (object) {
@@ -206,26 +262,38 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
+    /**
+     * Provides the item to collect.
+     * @param {string} key - The key of the item group.
+     * @returns {object} - The item to collect.
+     */
     getObject(key) {
         return world[key].find(o => isCollided(this.body, o));
     }
 
 
-    // jsdoc
+    /**
+     * Removes the collected item.
+     * @param {string} key - The key of the item group.
+     * @param {object} object - The collected item to remove.
+     */
     removeObject(key, object) {
         world[key].splice(object.getId(key), 1);
     }
 
 
-    // jsdoc
+    /**
+     * Plays the animation and the sounds.
+     */
     play() {
         this.playAnimation();
         this.playSoundEffects();
     }
 
 
-    // jsdoc
+    /**
+     * Plays the animation.
+     */
     playAnimation() {
         if (!this.isJump()) {
             super.playAnimation(this.flipBook[this.chapter]);
@@ -235,13 +303,18 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies the jump.
+     * @returns {boolean} - A boolean value.
+     */
     isJump() {
         return isGreater(-1, this.jumpCounter);
     }
 
 
-    // jsdoc
+    /**
+     * Plays the sound effects.
+     */
     playSoundEffects() {
         this.playSound('death6', this.goAway, 'death10');
         this.playSound('climb2', this.staveStep, 'climb4');
@@ -256,24 +329,45 @@ class Knight extends Character {
     }
 
 
+    /**
+     * Starts the boss battle.
+     */
     startBossBattle() {
+        this.setBossBattle();
+        this.setFinalCameraPosition();
+    }
+
+
+    /**
+     * Sets the boss battle.
+     */
+    setBossBattle() {
         if (isGreater(source.bossBattleTriggerX, this.x) && isUndefined(this.bossBattleStarted)) {
             this.bossBattleStarted = true;
             this.xStopLeft = source.bossBattleX;
             world.endboss.nextCast = getSum(world.time, world.endboss.angerDelay);
         }
+    }
 
-        if (this.bossBattleStarted && -6720 < this.world.cameraX) {
-            if (this.world.cameraX - 4 < -6720) {
-                this.world.cameraX = -6720;
+
+    /**
+     * Sets the final position of the camera.
+     */
+    setFinalCameraPosition() {
+        if (this.bossBattleStarted && isGreater(this.world.finalCameraX, this.world.cameraX)) {
+            let cameraDiffX = getSum(this.world.cameraX, -this.world.finalCameraSpeed);
+            if (isGreater(cameraDiffX, this.world.finalCameraX)) {
+                this.world.cameraX = this.world.finalCameraX;
             } else {
-                this.world.cameraX -= 4;
+                this.world.cameraX -= this.world.finalCameraSpeed;
             }
         }
     }
 
 
-    // jsdoc
+    /**
+     * Updates the x value of the camera.
+     */
     updateCameraX() {
         if (isUndefined(this.bossBattleStarted)) {
             let cameraX = this.getCameraX();
@@ -288,13 +382,19 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
+    /**
+     * Provides the x value of the camera.
+     * @returns {number} - The x value of the camera.
+     */
     getCameraX() {
         return canvas.width * (this.world.size - 1) + this.world.heroX;
     }
 
 
-    // jsdoc
+    /**
+     * Sets the x value of the camera.
+     * @param {number} id - The id of the camera position.
+     */
     setCameraX(id) {
         if (isMatch(id, 2)) {
             this.world.cameraX = -canvas.width * (this.world.size - 1);
@@ -306,13 +406,17 @@ class Knight extends Character {
     }
 
 
-    // jsdoc
+    /**
+     * Starts the ambient sound.
+     */
     startAmbientSound() {
         this.startMusic(true, 0);
     }
 
 
-    // jsdoc
+    /**
+     * Sets the start time of the knight.
+     */
     setStartTime() {
         if (!this.startTime) {
             this.startTime = getTime();
