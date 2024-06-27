@@ -1,3 +1,7 @@
+/**
+ * Represents a spider.
+ * @extends Enemy
+ */
 class Spider extends Enemy {
     radDispl = 128;
     bodyXY = { xLeft: 40, xCenter: 64, xRight: 88, yTop: 46, yCenter: 65, yBottom: 84 };
@@ -11,14 +15,20 @@ class Spider extends Enemy {
     ableToFight = false;
 
 
-    // jsdoc
+    /**
+     * Creates a spider.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     */
     constructor(x, y) {
         super(source.spider, x, y);
         this.setEnemy(60, 80, 'throw');
     }
 
 
-    // jsdoc
+    /**
+     * Sets the endpoints of the throw.
+     */
     setThrowMax() {
         if (isUndefined(this.throwMaxRight)) {
             this.throwMaxRight = this.getThrowMax(false, 'xRight');
@@ -27,7 +37,9 @@ class Spider extends Enemy {
     }
 
 
-    // jsdoc
+    /**
+     * Throws the web.
+     */
     throw() {
         this.setThrowMax();
         this.track();
@@ -35,14 +47,21 @@ class Spider extends Enemy {
     }
 
 
-    // jsdoc
+    /**
+     * Provides the endpoint of the throw.
+     * @param {boolean} value - A boolean value.
+     * @param {string} key - The key of the weapon value.
+     * @returns {number} - The endpoint of the throw.
+     */
     getThrowMax(value, key) {
         this.otherDirection = value;
         return this.weapon[key];
     }
 
 
-    // jsdoc
+    /**
+     * Tracks the hero.
+     */
     track() {
         let thisX = this.body.xCenter;
         let heroX = world.hero.body.xCenter;
@@ -50,33 +69,39 @@ class Spider extends Enemy {
     }
 
 
+    /**
+     * Triggers the web throw and the throw reset.
+     */
     trigger() {
         if (this.isThrowTimeout()) {
             this.resetThrowParameters();
-        } else if (this.throwResetTime && isGreater(this.throwResetTime, world.time)) {
-            this.resetThrowParameters();
-            this.webBroken = false;
-            this.nextThrow = world.time + 1000;
-            delete this.throwResetTime;
+        } else if (this.isThrowReset()) {
+            this.resetThrow();
         } else if (this.isWebBurst()) {
             this.processWebBurst();
-        } else if (this.throwDoneTime && isGreater(this.throwDoneTime, world.time)) {
-            this.throwDone = true;
-            delete this.throwDoneTime;
+        } else if (this.isThrowDone()) {
+            this.setThrowDone();
         } else if (this.isThrowTime()) {
-            this.processWebThrow();
-            this.setWeb();
+            this.throwWeb();
         }
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the timeout of the throw is reached.
+     * @returns {boolean} - A boolean value.
+     */
     isThrowTimeout() {
         return this.isThrowMax(this.web, true) || this.isThrowMax(this.web, false);
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the web has reached the endpoint of the throw.
+     * @param {Web} web - The web to verify.
+     * @param {boolean} logical - A boolean value.
+     * @returns {boolean} - A boolean value.
+     */
     isThrowMax(web, logical) {
         if (isTrue(logical)) {
             return this.isWebExisting(web, true) && isGreater(web.x, this.throwMaxLeft);
@@ -86,7 +111,12 @@ class Spider extends Enemy {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if a web exists.
+     * @param {Web} web - The web to verify.
+     * @param {boolean} logical - A boolean value.
+     * @returns {boolean} - A boolean value.
+     */
     isWebExisting(web, logical) {
         if (isTrue(logical)) {
             return !isUndefined(web) && isTrue(web.otherDirection);
@@ -96,7 +126,9 @@ class Spider extends Enemy {
     }
 
 
-    // jsdoc
+    /**
+     * Resets the parameters of the throw.
+     */
     resetThrowParameters() {
         this.removeWeb();
         this.thrown = false;
@@ -104,68 +136,120 @@ class Spider extends Enemy {
     }
 
 
-    removeWeb() {    // double code (bomb and 3 x magic)!?! 
+    /**
+     * Removes the web.
+     */
+    removeWeb() {
         this.web.stop(true);
         delete this.web;
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the throw is to reset.
+     * @returns {boolean} - A boolean value.
+     */
+    isThrowReset() {
+        return this.throwResetTime && isGreater(this.throwResetTime, world.time);
+    }
+
+
+    /**
+     * Resets the throw.
+     */
+    resetThrow() {
+        this.resetThrowParameters();
+        this.webBroken = false;
+        this.nextThrow = getSum(world.time, 1000);
+        delete this.throwResetTime;
+    }
+
+
+    /**
+     * Verifies the burst of the web.
+     * @returns {boolean} - A boolean value.
+     */
     isWebBurst() {
-        return this.isWebHit() && this.isWebBroken();
+        let webHit = !isUndefined(this.web) && isTrue(this.web.collided);
+        let webBroken = !isTrue(this.webBroken);
+        return webHit && webBroken;
     }
 
 
-    // jsdoc
-    isWebHit() {
-        return !isUndefined(this.web) && isTrue(this.web.collided);
-    }
-
-
-    // jsdoc
-    isWebBroken() {
-        return !isTrue(this.webBroken);
-    }
-
-
+    /**
+     * Processes the burst of the web.
+     */
     processWebBurst() {
         this.webBroken = true;
         this.applyDamage(10);
         this.playSound(this.amorHit);
         if (!this.throwResetTime) {
-            this.throwResetTime = world.time + 200;
+            this.throwResetTime = getSum(world.time, 200);
         }
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the throw is done.
+     * @returns {boolean} - A boolean value.
+     */
+    isThrowDone() {
+        return this.throwDoneTime && isGreater(this.throwDoneTime, world.time);
+    }
+
+
+    /**
+     * Sets the throw done.
+     */
+    setThrowDone() {
+        this.throwDone = true;
+        delete this.throwDoneTime;
+    }
+
+
+    /**
+     * Verifies the time of throw.
+     * @returns {boolean} - A boolean value.
+     */
     isThrowTime() {
-        return super.isAttack() && this.isThrowReady();
+        let throwReady = !isTrue(this.thrown) && isGreater(this.nextThrow, world.time);
+        return super.isAttack() && throwReady;
     }
 
 
-    // jsdoc
-    isThrowReady() {
-        return !isTrue(this.thrown) && isGreater(this.nextThrow, world.time);
+    /**
+     * Throws the web of the spider.
+     */
+    throwWeb() {
+        this.processWebThrow();
+        this.setWeb();
     }
 
 
+    /**
+     * Processes the throw of the web.
+     */
     processWebThrow() {
         this.thrown = true;
         this.throwDone = false;
         if (!this.throwDoneTime) {
-            this.throwDoneTime = world.time + this.getMs();
+            this.throwDoneTime = getSum(world.time, this.getMs());
         }
     }
 
 
-    // jsdoc
+    /**
+     * Provides the milliseconds of the throw animation.
+     * @returns {number} - The milliseconds of the throw animation.
+     */
     getMs() {
         return this.flipBook.attack.length * 100;
     }
 
 
-    // jsdoc
+    /**
+     * Sets the web.
+     */
     setWeb() {
         let x = this.getWebX(this.otherDirection);
         let y = this.getWebY(this.otherDirection);
@@ -173,25 +257,38 @@ class Spider extends Enemy {
     }
 
 
-    // jsdoc
+    /**
+     * Provides the x value of the web.
+     * @param {boolean} logical - A boolean value.
+     * @returns {number} - The x value of the web.
+     */
     getWebX(logical) {
         return (logical) ? this.weapon.xRight - 28 : this.weapon.xLeft - 4;
     }
 
 
-    // jsdoc
+    /**
+     * Provides the y value of the web.
+     * @returns {number} - The y value of the web.
+     */
     getWebY() {
         return canvas.height - this.weapon.yBottom - 4;
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the attack animation is to play.
+     * @returns {boolean} - A boolean value.
+     */
     isAttack() {
         return super.isAttack() && !isTrue(this.throwDone);
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the walk animation is to play.
+     * @returns {boolean} - A boolean value.
+     */
     isWalk() {
         return false;
     }
