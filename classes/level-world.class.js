@@ -95,10 +95,9 @@ class LevelWorld extends World {
     }
 
 
-    // jsdoc
     setPause() {
         let pause = source.pause;
-        let x = this.canvas.width / 2 - pause.width / 2;
+        let x = this.canvas.width / 2 - pause.width / 2;    // get centered x!
         let y = this.canvas.height / 2 - pause.height / 2;
         this.pause = new DrawableObject(pause, x, y);
     }
@@ -107,68 +106,108 @@ class LevelWorld extends World {
     draw() {
         this.clearCanvas();
         this.translateCamera(this.cameraX, 0);
+        this.drawLevelObjects();
+        this.drawObject(this.hero);
+        this.drawLevelSubobjects();
+        this.translateCamera(-this.cameraX, 0);
+        this.drawAvatarInfo();
+        this.applyGameOver();
+        this.dimScreen();
+        this.pauseWorld();
+        this.redraw();
+    }
 
 
+    drawLevelObjects() {
         this.drawLevelComponents(this.sceneryKeys);
         this.drawLevelComponents(this.floraKeys);
         this.drawLevelComponents(this.itemKeys);
         this.drawLevelComponents(this.enemyKeys);
         this.drawLevelComponents(this.victoryKeys);
+    }
 
-        this.drawObject(this.hero);
-        if (this.endboss.magic) {
-            this.drawObject(this.endboss.magic);
-        }
-        if (this.hero.bomb) {
-            this.drawObject(this.hero.bomb);
-        }
+
+    drawLevelSubobjects() {
+        this.drawSubobject(this.endboss.magic);
         this.drawSpiderWebs();
-        this.translateCamera(-this.cameraX, 0);
-
-        this.drawGameOver();
-
-        this.drawAvatarInfo();
+        this.drawSubobject(this.hero.bomb);
+    }
 
 
-        this.ctx.globalAlpha = 1 - this.alpha;
-        this.ctx.beginPath();
-        this.ctx.fillStyle = 'black';
-        this.ctx.rect(0, 0, 960, 540);
-        this.ctx.fill();
-        this.setGlobalAlpha();
-
-        this.removeSound();
-
+    pauseWorld() {
         if (paused) {
             this.drawObject(this.pause);
         } else {
             this.removeDeadEnemies();
+            this.removeSound();
         }
-
-        this.redraw();
     }
 
 
-    drawGameOver() {
+    dimScreen() {
+        this.ctx.globalAlpha = getSum(1, -this.alpha);
+        this.drawBlackRectangle();
+        this.setGlobalAlpha();
+    }
+
+
+    drawBlackRectangle() {
+        this.ctx.beginPath();
+        this.ctx.fillStyle = 'black';
+        this.ctx.rect(0, 0, 960, 540);
+        this.ctx.fill();
+    }
+
+
+    drawSubobject(object) {
+        if (object) {
+            this.drawObject(object);
+        }
+    }
+
+
+    applyGameOver() {
         if (this.hero && this.hero.isEpilog()) {
             this.drawGameOverBg();
             this.drawGameOverText();
+            this.transit();
+            this.setTransitTime();
+        }
+    }
 
 
-            if (!this.transitSet) {
-                this.transitSet = true;
-                setTimeout(() => {
-                    this.hero.music.pause();
-                    this.endboss.music.pause();
-                    pauseDisabled = false;
-                    pauseGame(true);
-                    this.stopped = true;
+    transit() {
+        if (this.transitTime && isGreater(this.transitTime, this.time)) {
+            this.stop();
+            this.start();
+        }
+    }
 
-                    setStartWorld();
-                    world.interacted = true;
-                }, 2250);
-                pauseDisabled = true;
-            }
+
+    stop() {
+        this.pauseMusic('hero');
+        this.pauseMusic('endboss');
+        pauseDisabled = false;
+        pauseGame(true);
+        this.stopped = true;
+    }
+
+
+    pauseMusic(key) {
+        this[key].music.pause();
+    }
+
+
+    start() {
+        setStartWorld();
+        world.interacted = true;
+    }
+
+
+    setTransitTime() {
+        if (!this.transitTime) {
+            this.transitTime = getSum(this.time, 2250);
+            pauseDisabled = true;
         }
     }
 
@@ -258,13 +297,10 @@ class LevelWorld extends World {
     }
 
 
-    // jsdoc
     drawSpiderWebs() {
         let spiders = this.getSpiders();
         spiders.forEach((spider) => {
-            if (spider.web) {
-                this.drawObject(spider.web);
-            }
+            this.drawSubobject(spider.web);
         })
     }
 
@@ -469,6 +505,7 @@ class LevelWorld extends World {
     // Fix sequence of level objects ...
     // Provide an async function for image and audio paths ...
     // Fix error of full screen ...
+    // double code of pause delay ... !!!
 
 
     // -----------------------------------

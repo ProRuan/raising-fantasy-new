@@ -5,7 +5,7 @@ class Level1 {
     sceneryKeys = ['background', 'clouds', 'birds'];
     floraKeys = ['trees', 'flyGrass', 'grass', 'ladders'];
     itemKeys = ['coins', 'crystals', 'hearts', 'hitPoints', 'leaves', 'stars'];
-    enemyKeys = ['enemies', 'bosses'];
+    enemyKeys = ['bosses', 'enemies'];
     victoryKeys = ['victoryPodium'];
 
 
