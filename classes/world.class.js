@@ -167,4 +167,9 @@ class World {
             }
         });
     }
+
+
+    getCenteredCoord(key, value) {
+        return this.canvas[key] / 2 - value / 2;
+    }
 }

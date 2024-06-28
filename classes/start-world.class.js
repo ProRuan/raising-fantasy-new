@@ -69,7 +69,7 @@ class StartWorld extends World {
 
     // jsdoc
     getTextCoord(width, height, b) {
-        let x = this.canvas.width / 2 - width / 2;
+        let x = this.getCenteredCoord('width', width);
         let y = this.canvas.height - b - height;
         return [x, y];
     }
@@ -91,8 +91,8 @@ class StartWorld extends World {
 
     // jsdoc
     getBgCoord(key) {
-        let x = this.canvas.width / 2 - source[key].width / 2;
-        let y = this.canvas.height / 2 - source[key].height / 2;
+        let x = this.getCenteredCoord('width', source[key].width);
+        let y = this.getCenteredCoord('height', source[key].height);
         return [x, y];
     }
 
@@ -251,8 +251,8 @@ class StartWorld extends World {
 
     // jsdoc
     drawTitle(title) {
-        let x = this.canvas.width / 2;
-        let y = this.canvas.height / 2 + 8;
+        let x = this.getCenteredCoord('width', 0);
+        let y = this.getCenteredCoord('height', -16);
         this.setShadow('white', 16);
         this.setText(title.font, 'center', 'black');
         super.drawText(title.text, x, y);
@@ -372,8 +372,8 @@ class StartWorld extends World {
 
     // jsdoc
     setFlashText() {
-        let x = this.canvas.width / 2;
-        let y = this.canvas.height / 2 + 126;
+        let x = this.getCenteredCoord('width', 0);
+        let y = this.getCenteredCoord('height', -252);
         this.drawText('Press any key', x, y);
     }
 }

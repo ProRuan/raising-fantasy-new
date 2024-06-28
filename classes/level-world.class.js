@@ -97,8 +97,8 @@ class LevelWorld extends World {
 
     setPause() {
         let pause = source.pause;
-        let x = this.canvas.width / 2 - pause.width / 2;    // get centered x!
-        let y = this.canvas.height / 2 - pause.height / 2;
+        let x = this.getCenteredCoord('width', pause.width);
+        let y = this.getCenteredCoord('height', pause.height);
         this.pause = new DrawableObject(pause, x, y);
     }
 
