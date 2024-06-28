@@ -9,10 +9,13 @@ let lastTime = 0;
 let doubleClick = false;    // rename to run?
 let climb = false;
 let move = false;
+let touchedZone = '';
 
 
 window.addEventListener("touchstart", (event) => {
     if (event && isMatch(currentWorld, 'level')) {
+
+        touchedZone = '';    // move?!
 
         let touchZoneWidth = body.offsetWidth / 3;
         let touchZoneHeight = body.offsetHeight / 3 * 2;
@@ -41,6 +44,7 @@ window.addEventListener("touchstart", (event) => {
         let touch = event.changedTouches[0];    // rename!!!
 
         if (isGreater(body.offsetWidth / 2 - pauseZoneWidth / 2, touch.clientX) && isGreater(touch.clientX, body.offsetWidth / 2 + pauseZoneWidth / 2) && isGreater(touch.clientY, pauseZoneHeight)) {
+            touchedZone = 'exit';
             // if (!paused) {
             //     paused = true;
             //     pauseGame(paused);
@@ -61,6 +65,7 @@ window.addEventListener("touchstart", (event) => {
         }
 
         if (isGreater(body.offsetWidth / 2 - pauseZoneWidth / 2, touch.clientX) && isGreater(touch.clientX, body.offsetWidth / 2 + pauseZoneWidth / 2) && isGreater(body.offsetHeight - pauseZoneHeight, touch.clientY)) {
+            touchedZone = 'pause';
             if (!paused) {
                 paused = true;
                 pauseGame(paused);
@@ -76,6 +81,7 @@ window.addEventListener("touchstart", (event) => {
             currentY = touch.clientY;
             lastTime = currentTime;
             currentTime = getTime();
+            touchedZone = 'control';
 
             if (isGreater(currentTime - lastTime, 500)) {
                 doubleClick = true;
@@ -83,6 +89,7 @@ window.addEventListener("touchstart", (event) => {
 
             console.log('control zone');    // set height as well
         } else if (isGreater(body.offsetWidth - touchZoneWidth, touch.clientX) && isGreater(body.offsetHeight - touchZoneHeight, touch.clientY)) {
+            touchedZone = 'action';
 
             if (isGreater(body.offsetHeight - touchZoneHeight / 2, touch.clientY)) {
                 setKey('space', 'keydown', true);
@@ -224,7 +231,7 @@ window.addEventListener("touchend", (event) => {
 
 
         let touch = event.changedTouches[0];
-        if (isGreater(touch.clientX, touchZoneWidth) && isGreater(body.offsetHeight - touchZoneHeight, touch.clientY)) {
+        if (isGreater(touch.clientX, touchZoneWidth) && isGreater(body.offsetHeight - touchZoneHeight, touch.clientY) || isMatch(touchedZone, 'control')) {
             lastX = 0;
             currentX = 0;
             deltaX = 0;
@@ -240,7 +247,7 @@ window.addEventListener("touchend", (event) => {
             setKey('arrowRight', 'doubleClick', false);
             setKey('arrowLeft', 'keydown', false);
             setKey('arrowRight', 'keydown', false);
-        } else if (isGreater(body.offsetWidth - touchZoneWidth, touch.clientX) && isGreater(body.offsetHeight - touchZoneHeight, touch.clientY)) {
+        } else if (isGreater(body.offsetWidth - touchZoneWidth, touch.clientX) && isGreater(body.offsetHeight - touchZoneHeight, touch.clientY) || isMatch(touchedZone, 'action')) {
             if (isGreater(body.offsetHeight - touchZoneHeight / 2, touch.clientY)) {
                 setKey('space', 'keydown', false);
             } else {

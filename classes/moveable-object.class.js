@@ -425,6 +425,7 @@ class MoveableObject extends DrawableObject {
     setMusic(path) {
         this.music = new Audio(path);
         this.music.volume = volume.music / 10;
+        this.music.loop = true;
     }
 
 

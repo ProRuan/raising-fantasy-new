@@ -156,6 +156,8 @@ class StartWorld extends World {
     setMusic() {
         this.sound = source.newWorld;
         this.music = new Audio(this.sound);
+        this.music.volume = volume.music / 10;
+        this.music.loop = true;
     }
 
 
