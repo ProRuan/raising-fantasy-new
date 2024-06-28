@@ -220,6 +220,9 @@ function processKeydown(event) {    // check doubleClick!!!
                     world.endboss.selectionTime += getSum(pauseEnd, -pauseStart);
                 }
                 world.enemies.forEach((enemy) => {
+                    if (enemy.timeToGo) {
+                        enemy.timeToGo += getSum(pauseEnd, -pauseStart);
+                    }
                     if (enemy.hitTime) {
                         enemy.hitTime += getSum(pauseEnd, -pauseStart);
                     }

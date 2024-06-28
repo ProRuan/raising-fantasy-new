@@ -165,7 +165,6 @@ class LevelWorld extends World {
         this.translateCamera(-this.cameraX, 0);
 
         this.drawAvatarInfo();
-        this.removeDeadEnemies();
 
 
         this.ctx.globalAlpha = 1 - this.alpha;
@@ -179,6 +178,8 @@ class LevelWorld extends World {
 
         if (paused) {
             this.drawObject(this.pause);
+        } else {
+            this.removeDeadEnemies();
         }
 
         this.redraw();
@@ -275,16 +276,41 @@ class LevelWorld extends World {
     }
 
 
-    removeDeadEnemies() {    // but not, if game is paused!!!
-        let enemy = this.enemies.find(e => e.dead && !e.removable);
+    // jsdoc
+    removeDeadEnemies() {
+        this.removeEnemy();
+        this.setTimeToGo();
+    }
+
+
+    // jsdoc
+    removeEnemy() {
+        let enemy = this.getEnemy('timeToGo');
+        if (enemy && isGreater(enemy.timeToGo, world.time)) {
+            let id = world.enemies.indexOf(enemy);
+            world.enemies.splice(id, 1);
+        }
+    }
+
+
+    // jsdoc
+    getEnemy(keyA, keyB) {
+        if (!keyB) {
+            return this.enemies.find(enemy => enemy[keyA]);
+        } else {
+            return this.enemies.find(enemy => enemy[keyA] && !enemy[keyB]);
+        }
+    }
+
+
+    setTimeToGo() {
+        let enemy = this.getEnemy('dead', 'removeable');
         if (enemy) {
             enemy.removable = true;
             enemy.stop(true);
-            console.log(enemy, enemy.interval.stopped, enemy.interval2.stopped);
-            setTimeout(() => {
-                let id = world.enemies.indexOf(enemy);
-                world.enemies.splice(id, 1);
-            }, 2000);
+            if (!enemy.timeToGo) {
+                enemy.timeToGo = getSum(world.time, 2000);
+            }
         }
     }
 
