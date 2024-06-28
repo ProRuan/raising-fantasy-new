@@ -1,3 +1,6 @@
+let buttonSelected = false;
+
+
 // jsdoc
 function getCode(code) {
     return code.replace(code[0], code[0].toLowerCase());

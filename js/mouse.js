@@ -1,3 +1,6 @@
+let targeted = false;
+
+
 processMouse('move', () => processMouseMove(event));
 processMouse('down', () => processMouseDown(event));
 processMouse('up', () => processMouseUp(event));
@@ -10,7 +13,7 @@ function processMouse(key, subfunction) {
 
 
 function processMouseMove(event) {
-    hovered = false;
+    targeted = false;
     if (event && currentWorld == 'start') {
         hover(event, 'xButton');
         hover(event, 'lowMusicButton');
@@ -23,7 +26,7 @@ function processMouseMove(event) {
         hover(event, 'questButton');
         hover(event, 'newGameButton');
     }
-    if (!isTrue(hovered) && isMatch(currentWorld, 'start')) {
+    if (!isTrue(targeted) && isMatch(currentWorld, 'start')) {
         setCursor('initial');
     }
 }
@@ -32,8 +35,8 @@ function processMouseMove(event) {
 function hover(event, key) {
     if (isMouseEvent(event, world[key])) {
         world[key].targeted = true;
-        if (!isTrue(hovered)) {
-            hovered = true;
+        if (!isTrue(targeted)) {
+            targeted = true;
         }
     } else {
         world[key].targeted = false;

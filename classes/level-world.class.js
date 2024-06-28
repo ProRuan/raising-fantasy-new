@@ -487,6 +487,7 @@ class LevelWorld extends World {
 
     // I. Fix pause for touch ... !!! (auto)
     // II. PauseableInterval: pause inner intervals (bomb, web, magic) ... (auto)
+    // III. Fix error of full screen + position of full screen ...
 
 
     // Still to fix
@@ -494,7 +495,6 @@ class LevelWorld extends World {
     // Class Character too long ... !!!
     // ------------
     // Provide an async function for image and audio paths ...
-    // Fix error of full screen ...
 
 
     // -----------------------------------

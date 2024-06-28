@@ -2,119 +2,74 @@ let canvas;
 let currentWidth;
 let currentHeight;
 let keyboard;
-let hovered = false;    // rename?
-let buttonSelected = false;    // move to StartWorld?!
-let mouseClick;    // to edit + to move
-
 let world;
-let inPlay = true;    // set to false!!!
-let currentWorld = 'level';    // condition for mouse and keyboard!!!
-
-let buttons = ['newGame', 'story', 'cup', 'settings', 'coin', 'x', 'lowMusic', 'highMusic', 'lowSound', 'highSound'];
-let storableItems = {};
-
-let tempScore;
-let score = {
-    'best': { coins: 0, leaves: 0, time: 300000 },
-    'last': { coins: 0, leaves: 0, time: 300000 }
-};
-
-
-let result = {
-    'best': {
-        'coins': 19,
-        'leaves': 17,
-        'time': '7 min 13 s'
-    },
-    'last': {
-        'coins': 17,
-        'leaves': 15,
-        'time': '9 min 31 s'
-    }
-};
-
-let counter = 0;    // for start world (necessary?)
-
-let volume = { music: 5, sound: 5 };    // to set in level world!
-pointer = false;
-
-let paused;    // set false?
+let currentWorld = 'level';
+let paused;
 let pauseDisabled = false;
 let pauseStart = 0;
 let pauseEnd = 0;
 let pauseTime = 0;
-
-let source = new Source();
+let storableItems = {};
+let tempScore;
+let score = {};
+let volume = {};
+let source;
 
 
 function init() {
-    loadScore();
-    loadVolume();
+    updateStoreableItems();
+
+    setSource();
     setCanvas();
 
-    if (canvas.offsetWidth != screen.width && canvas.offsetHeight != screen.height) {
+    if (canvas.offsetWidth != screen.width && canvas.offsetHeight != screen.height) {    // depends on final html!
         enableFullscreen(true);
     }
 
     setKeyboard();
-
-    // set class Star!!!
-
-    world = new StartWorld(canvas, keyboard);
-    currentWorld = 'start';    // set start!
-
-    // world = new LevelWorld(canvas, keyboard);    // is working
-    // currentWorld = 'level';    // is working
-
-    // switchWorld();    // necessary? --> menu control!
-
-    setStoreableItems();
+    setStartWorld();
 }
 
 
-function switchWorld() {    // only for testing?
-    setInterval(() => {
-        if (inPlay == true) {
-            world = new LevelWorld(canvas, keyboard);
-            inPlay = null;
-            currentWorld = 'level';
-        } else if (inPlay == false) {
-            world = new StartWorld(canvas, keyboard);
-            inPlay = null;
-            currentWorld = 'start';
-        }
-    }, 1000 / 60);
+// jsdoc
+function updateStoreableItems() {
+    updateScore();
+    updateVolume();
+    storableItems.score = score;
+    storableItems.volume = volume;
+}
+
+
+// jsdoc
+function updateScore() {
+    score.best = getDefaultScore();
+    score.last = getDefaultScore();
+    loadScore();
+}
+
+
+// jsdoc
+function getDefaultScore() {
+    return { coins: 0, leaves: 0, time: 300000 };
+}
+
+
+// jsdoc
+function updateVolume() {
+    volume = { music: 5, sound: 5 };
+    loadVolume();
+}
+
+
+// jsdoc
+function setSource() {
+    source = new Source();
 }
 
 
 // jsdoc
 function setCanvas() {
     canvas = document.getElementById('canvas');
-
-
-    let currentOrientation = screen.orientation.angle;
-
-    if (isMatch(currentOrientation, 90)) {
-        // console.log('landscape: ', currentOrientation);
-    } else if (isMatch(currentOrientation, 0)) {
-        // console.log('protrait: ', currentOrientation);
-    }
-
-    // console.log('canvas (native): ', canvas.width, canvas.height);
-    // console.log('canvas (offset): ', canvas.offsetWidth, canvas.offsetHeight);
-
-    let factor = body.offsetWidth / body.offsetHeight;
-    let nativeFactor = 960 / 540;
-    if (isGreater(nativeFactor, factor)) {
-        let height = Math.floor(body.offsetHeight / 9) * 9;
-        let width = height / 9 * 16;
-        // console.log('init size: ', factor, width, height);
-    } else if (isGreater(factor, nativeFactor)) {
-        let width = Math.floor(body.offsetWidth / 16) * 16;
-        let height = width / 16 * 9;
-        // console.log('init size: ', factor, width, height);
-    }
-
 }
 
 
@@ -136,13 +91,6 @@ function setStartWorld() {
 function setLevelWorld() {
     world = new LevelWorld(canvas, keyboard);
     currentWorld = 'level';
-}
-
-
-// jsdoc
-function setStoreableItems() {
-    storableItems.score = score;
-    storableItems.volume = volume;
 }
 
 
