@@ -78,7 +78,6 @@ class Star extends AnimatedObject {
     getPlaytime() {
         world.hero.endTime = getTime();
         let time = getSum(world.hero.endTime, -world.hero.startTime);
-        console.log(time - pauseTime, time, pauseTime);
         return time - pauseTime;
     }
 
@@ -167,7 +166,7 @@ class Star extends AnimatedObject {
      * Performs the world shift.
      */
     goHome() {
-        if (this.worldShiftTime && isGreater(this.worldShiftTime, world.time)) {
+        if (isTimeout(this.worldShiftTime, world.time)) {
             this.leaveWorld();
             this.showScore();
         }

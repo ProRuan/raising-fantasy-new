@@ -175,7 +175,7 @@ class Enemy extends MoveableObject {
      * Applies the weapon hit.
      */
     applyWeaponHit() {
-        if (this.hitTime && isGreater(this.hitTime, world.time)) {
+        if (isTimeout(this.hitTime, world.time)) {
             this.hp -= world.hero.weaponDamage;
             this.playSound(this.weaponImpact);
             delete this.hitTime;

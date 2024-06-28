@@ -59,10 +59,10 @@ class Shaman extends Boss {
      * Recasts the magic.
      */
     recast() {
-        if (this.chapterTime && isGreater(this.chapterTime, world.time)) {
+        if (isTimeout(this.chapterTime, world.time)) {
             this.setUndefined('magicChapter');
             delete this.chapterTime;
-        } else if (this.selectionTime && isGreater(this.selectionTime, world.time)) {
+        } else if (isTimeout(this.selectionTime, world.time)) {
             this.selectMagic(this.magicChapter);
             delete this.selectionTime;
         } else if (isGreater(this.nextCast, world.time) && !isTrue(this.spellCast)) {

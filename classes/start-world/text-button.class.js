@@ -108,7 +108,7 @@ class TextButton extends Button {
      * Starts a new game.
      */
     startNewGame() {
-        if (this.time && isGreater(this.time, world.time)) {
+        if (isTimeout(this.time, world.time)) {
             setCursor('initial');
             this.setLevelWorld();
         } else if (world.newGameButton.isLocked()) {

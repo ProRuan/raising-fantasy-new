@@ -177,7 +177,7 @@ class LevelWorld extends World {
 
 
     transit() {
-        if (this.transitTime && isGreater(this.transitTime, this.time)) {
+        if (isTimeout(this.transitTime, this.time)) {
             this.stop();
             this.start();
         }
@@ -495,7 +495,8 @@ class LevelWorld extends World {
     // ------------
     // Provide an async function for image and audio paths ...
     // Fix error of full screen ...
-    // double code of pause delay ... !!!
+    // double code of pause delay ... (isTimeout --> til class Leaf)
+    // isTimeout: if-else (boss + levelWorld) ...
 
 
     // -----------------------------------

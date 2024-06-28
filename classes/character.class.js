@@ -289,11 +289,11 @@ class Character extends MoveableObject {
      */
     playJumpNext(i) {
         if (isMatch(i, 0) || isMatch(i, 3)) {
-            if (this.jumpTime && isGreater(this.jumpTime, world.time)) {
+            if (isTimeout(this.jumpTime, world.time)) {
                 this.playJump(++i);
                 delete this.jumpTime;
             } else {
-                this.jumpTime = world.time + 100 / 3;
+                this.jumpTime = getSum(world.time, 100 / 3);
             }
         }
     }

@@ -75,11 +75,11 @@ class Spider extends Enemy {
     trigger() {
         if (this.isThrowTimeout()) {
             this.resetThrowParameters();
-        } else if (this.isThrowReset()) {
+        } else if (isTimeout(this.throwResetTime, world.time)) {
             this.resetThrow();
         } else if (this.isWebBurst()) {
             this.processWebBurst();
-        } else if (this.isThrowDone()) {
+        } else if (isTimeout(this.throwDoneTime, world.time)) {
             this.setThrowDone();
         } else if (this.isThrowTime()) {
             this.throwWeb();
@@ -146,15 +146,6 @@ class Spider extends Enemy {
 
 
     /**
-     * Verifies, if the throw is to reset.
-     * @returns {boolean} - A boolean value.
-     */
-    isThrowReset() {
-        return this.throwResetTime && isGreater(this.throwResetTime, world.time);
-    }
-
-
-    /**
      * Resets the throw.
      */
     resetThrow() {
@@ -186,15 +177,6 @@ class Spider extends Enemy {
         if (!this.throwResetTime) {
             this.throwResetTime = getSum(world.time, 200);
         }
-    }
-
-
-    /**
-     * Verifies, if the throw is done.
-     * @returns {boolean} - A boolean value.
-     */
-    isThrowDone() {
-        return this.throwDoneTime && isGreater(this.throwDoneTime, world.time);
     }
 
 

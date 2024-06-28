@@ -254,7 +254,7 @@ class Boss extends Enemy {
      * Calms the boss.
      */
     calm() {
-        if (this.calmTime && isGreater(this.calmTime, world.time)) {
+        if (isTimeout(this.calmTime, world.time)) {
             this.angerLevel++;
             this.angry = false;
             this.startMusic(this.triggered, 250);

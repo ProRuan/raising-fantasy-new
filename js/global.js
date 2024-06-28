@@ -100,6 +100,12 @@ function checkOrientation() {
 }
 
 
+// jsdoc
+function isTimeout(timeout, time) {
+    return timeout && isGreater(timeout, time);
+}
+
+
 
 
 // screen size not exactly (background gap!) ...
