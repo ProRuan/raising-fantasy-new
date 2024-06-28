@@ -488,8 +488,6 @@ class LevelWorld extends World {
     // I. Fix pause for touch ... !!! (auto)
     // II. PauseableInterval: pause inner intervals (bomb, web, magic) ... (auto)
 
-    // III. StartWorld: Cursor works, but button is still reachable (also for key)!!!
-
 
     // Still to fix
     // ------------

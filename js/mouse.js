@@ -129,7 +129,7 @@ function closeQuestRoll(event) {    // double code?
 function openQuestRoll(event, key) {    // double code?
     if (isNotQuestRoll(event, key)) {
         world[key].locked = false;
-    } else if (isButtonLocked(event, key, false)) {
+    } else if (isButtonLocked(event, key, false) && !world.leaderboard.isOpened()) {
         world[key].locked = true;
     }
 }
@@ -141,9 +141,14 @@ function isNotQuestRoll(event, key) {    // double code?
 
 
 function startNewGame(event) {
-    if (isMouseEvent(event, world.newGameButton)) {
+    if (isMouseEvent(event, world.newGameButton) && !isBoardOpened()) {
         world.newGameButton.locked = true;
     }
+}
+
+
+function isBoardOpened() {
+    return world.leaderboard.isOpened() || world.questRoll.isOpened();
 }
 
 

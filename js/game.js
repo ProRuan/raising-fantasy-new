@@ -154,103 +154,107 @@ let musicButtons = true;
 
 
 function processKeydown(event) {    // check doubleClick!!!
-    if (isMatch(currentWorld, 'start')) {
-        world.currentButton.selected = true;    // newGameButton selected?
-    }
-
-    // console.log(event);
-    let code = getCode(event.code);
-    if (world.keyboard[code]) {
-        setKey(code, 'keydown', true);
-        setKey(code, 'timeStamp', getTime());
-        verifyDoubleClick(code);
-    }
-
-
-    if (isMatch(currentWorld, 'start')) {
-        closeWithKey('backspace', 'leaderboard', 'xButton');
-        closeWithKey('backspace', 'questRoll', 'coinButton');
-        closeWithKey('space', 'leaderboard', 'xButton');
-        closeWithKey('space', 'questRoll', 'coinButton');
-        closeWithKey('keyX', 'leaderboard', 'xButton');
-        closeWithKey('keyX', 'questRoll', 'coinButton');
-    }
-
-    if (isMatch(currentWorld, 'level') && !isTrue(pauseDisabled)) {
-        if (isKey('escape') && paused) {
-            world.stopped = true;
-            setStartWorld();    // compare with other functions!
-            world.interacted = true;
-            world.setCurrentButton('newGameButton');
-
-            // setStartWorld();
+    if (!world.interacted) {
+        interactFirst(event);
+    } else {
+        if (isMatch(currentWorld, 'start')) {
+            world.currentButton.selected = true;    // newGameButton selected?
         }
-        if (isKey('keyP')) {    // or touch in pause zone!!!
-            (!paused) ? pauseGame(true) : pauseGame(false);
-            paused = (!paused) ? true : false;
-            if (paused) {
-                pauseStart = getTime();
-                world.hero.music.pause();    // game.js or global? (double code!)
-                // world.endboss.music.pause();
-            } else {
-                pauseEnd = getTime();
-                pauseTime += getSum(pauseEnd, -pauseStart);
-                console.log('Pause time: ', pauseTime);
-                world.hero.music.play();    // game.js or global? (double code!)
-                // world.endboss.music.play();
+
+        // console.log(event);
+        let code = getCode(event.code);
+        if (world.keyboard[code]) {
+            setKey(code, 'keydown', true);
+            setKey(code, 'timeStamp', getTime());
+            verifyDoubleClick(code);
+        }
 
 
-                if (world.endboss.magic && world.endboss.magic instanceof Lightning) {
-                    let magic = world.endboss.magic;
-                    // console.log(magic.targetingStop, magic.chargingStop);
-                    magic.targetingStop = magic.targetingStop + getSum(pauseEnd, -pauseStart);
-                    magic.chargingStop = magic.chargingStop + getSum(pauseEnd, -pauseStart);
-                    // console.log(magic.targetingStop, magic.chargingStop);
-                }
-                if (world.endboss.calmTime) {
-                    world.endboss.calmTime += getSum(pauseEnd, -pauseStart);
-                }
-                if (world.endboss.nextCast) {
-                    world.endboss.nextCast += getSum(pauseEnd, -pauseStart);
-                }
-                if (world.endboss.chapterTime) {
-                    world.endboss.chapterTime += getSum(pauseEnd, -pauseStart);
-                }
-                if (world.endboss.selectionTime) {
-                    world.endboss.selectionTime += getSum(pauseEnd, -pauseStart);
-                }
-                world.enemies.forEach((enemy) => {
-                    if (enemy.timeToGo) {
-                        enemy.timeToGo += getSum(pauseEnd, -pauseStart);
+        if (isMatch(currentWorld, 'start')) {
+            closeWithKey('backspace', 'leaderboard', 'xButton');
+            closeWithKey('backspace', 'questRoll', 'coinButton');
+            closeWithKey('space', 'leaderboard', 'xButton');
+            closeWithKey('space', 'questRoll', 'coinButton');
+            closeWithKey('keyX', 'leaderboard', 'xButton');
+            closeWithKey('keyX', 'questRoll', 'coinButton');
+        }
+
+        if (isMatch(currentWorld, 'level') && !isTrue(pauseDisabled)) {
+            if (isKey('escape') && paused) {
+                world.stopped = true;
+                setStartWorld();    // compare with other functions!
+                world.interacted = true;
+                world.setCurrentButton('newGameButton');
+
+                // setStartWorld();
+            }
+            if (isKey('keyP')) {    // or touch in pause zone!!!
+                (!paused) ? pauseGame(true) : pauseGame(false);
+                paused = (!paused) ? true : false;
+                if (paused) {
+                    pauseStart = getTime();
+                    world.hero.music.pause();    // game.js or global? (double code!)
+                    // world.endboss.music.pause();
+                } else {
+                    pauseEnd = getTime();
+                    pauseTime += getSum(pauseEnd, -pauseStart);
+                    console.log('Pause time: ', pauseTime);
+                    world.hero.music.play();    // game.js or global? (double code!)
+                    // world.endboss.music.play();
+
+
+                    if (world.endboss.magic && world.endboss.magic instanceof Lightning) {
+                        let magic = world.endboss.magic;
+                        // console.log(magic.targetingStop, magic.chargingStop);
+                        magic.targetingStop = magic.targetingStop + getSum(pauseEnd, -pauseStart);
+                        magic.chargingStop = magic.chargingStop + getSum(pauseEnd, -pauseStart);
+                        // console.log(magic.targetingStop, magic.chargingStop);
                     }
-                    if (enemy.hitTime) {
-                        enemy.hitTime += getSum(pauseEnd, -pauseStart);
+                    if (world.endboss.calmTime) {
+                        world.endboss.calmTime += getSum(pauseEnd, -pauseStart);
                     }
-                });
-                world.enemies.forEach((enemy) => {
-                    if (enemy instanceof Dino) {
-                        enemy.pursuitStop += getSum(pauseEnd, -pauseStart);
+                    if (world.endboss.nextCast) {
+                        world.endboss.nextCast += getSum(pauseEnd, -pauseStart);
                     }
-                    if (enemy instanceof Ent) {
-                        enemy.lastTurn += getSum(pauseEnd, -pauseStart);
+                    if (world.endboss.chapterTime) {
+                        world.endboss.chapterTime += getSum(pauseEnd, -pauseStart);
                     }
-                    if (enemy instanceof Spider) {
-                        enemy.nextThrow += getSum(pauseEnd, -pauseStart);
+                    if (world.endboss.selectionTime) {
+                        world.endboss.selectionTime += getSum(pauseEnd, -pauseStart);
                     }
-                    if (enemy instanceof Spider && enemy.web) {
-                        if (enemy.web.throwResetTime) {
-                            enemy.web.throwResetTime += getSum(pauseEnd, -pauseStart);
+                    world.enemies.forEach((enemy) => {
+                        if (enemy.timeToGo) {
+                            enemy.timeToGo += getSum(pauseEnd, -pauseStart);
                         }
-                        if (enemy.web.throwDoneTime) {
-                            enemy.web.throwDoneTime += getSum(pauseEnd, -pauseStart);
+                        if (enemy.hitTime) {
+                            enemy.hitTime += getSum(pauseEnd, -pauseStart);
                         }
+                    });
+                    world.enemies.forEach((enemy) => {
+                        if (enemy instanceof Dino) {
+                            enemy.pursuitStop += getSum(pauseEnd, -pauseStart);
+                        }
+                        if (enemy instanceof Ent) {
+                            enemy.lastTurn += getSum(pauseEnd, -pauseStart);
+                        }
+                        if (enemy instanceof Spider) {
+                            enemy.nextThrow += getSum(pauseEnd, -pauseStart);
+                        }
+                        if (enemy instanceof Spider && enemy.web) {
+                            if (enemy.web.throwResetTime) {
+                                enemy.web.throwResetTime += getSum(pauseEnd, -pauseStart);
+                            }
+                            if (enemy.web.throwDoneTime) {
+                                enemy.web.throwDoneTime += getSum(pauseEnd, -pauseStart);
+                            }
+                        }
+                    });
+                    if (world.hero.jumpTime) {
+                        world.hero.jumpTime += getSum(pauseEnd, -pauseStart);
                     }
-                });
-                if (world.hero.jumpTime) {
-                    world.hero.jumpTime += getSum(pauseEnd, -pauseStart);
-                }
-                if (world.hero.lastIdle) {
-                    world.hero.lastIdle += getSum(pauseEnd, -pauseStart);
+                    if (world.hero.lastIdle) {
+                        world.hero.lastIdle += getSum(pauseEnd, -pauseStart);
+                    }
                 }
             }
         }
