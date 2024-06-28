@@ -115,48 +115,6 @@ class LevelWorld extends World {
         this.drawLevelComponents(this.enemyKeys);
         this.drawLevelComponents(this.victoryKeys);
 
-        if (this.hero && this.hero.isEpilog()) {
-            this.ctx.font = '64px Bungee Spice';
-            // let text = this.ctx.measureText('Game over').width;
-            // console.log(text);
-            this.ctx.filter = 'blur(12px)';
-            this.ctx.beginPath();
-            this.ctx.fillStyle = 'white';
-            this.ctx.rect(this.hero.x - this.heroX + canvas.width / 2 - 193 - 24, canvas.height / 2 - 24 - 12, 386 + 48, 64 + 24);    // variable!!!
-            this.ctx.fill();
-            this.ctx.filter = 'none';
-
-
-            this.setShadow('white', 16);
-            // this.ctx.font = '64px Bungee Spice';
-            this.ctx.textAlign = 'center';
-            this.ctx.fillStyle = 'steelblue';
-
-            if (isGreater(source.bossBattleTriggerX, this.hero.x)) {
-                this.drawText('Game over', (this.size - 1) * this.canvas.width + this.canvas.width / 2, 270);
-            } else if (isGreater(this.heroX, this.hero.x)) {
-                this.drawText('Game over', this.hero.x + 96, 270 + 32);
-            } else {
-                this.drawText('Game over', 480, 270 + 32);
-            }
-            this.setShadow();
-
-            if (!this.transitSet) {
-                this.transitSet = true;
-                setTimeout(() => {
-                    this.hero.music.pause();
-                    this.endboss.music.pause();
-                    pauseDisabled = false;
-                    pauseGame(true);
-                    this.stopped = true;
-
-                    setStartWorld();
-                    world.interacted = true;
-                }, 2250);
-                pauseDisabled = true;
-            }
-        }
-
         this.drawObject(this.hero);
         if (this.endboss.magic) {
             this.drawObject(this.endboss.magic);
@@ -166,6 +124,8 @@ class LevelWorld extends World {
         }
         this.drawSpiderWebs();
         this.translateCamera(-this.cameraX, 0);
+
+        this.drawGameOver();
 
         this.drawAvatarInfo();
 
@@ -186,6 +146,60 @@ class LevelWorld extends World {
         }
 
         this.redraw();
+    }
+
+
+    drawGameOver() {
+        if (this.hero && this.hero.isEpilog()) {
+            this.drawGameOverBg();
+            this.drawGameOverText();
+
+
+            if (!this.transitSet) {
+                this.transitSet = true;
+                setTimeout(() => {
+                    this.hero.music.pause();
+                    this.endboss.music.pause();
+                    pauseDisabled = false;
+                    pauseGame(true);
+                    this.stopped = true;
+
+                    setStartWorld();
+                    world.interacted = true;
+                }, 2250);
+                pauseDisabled = true;
+            }
+        }
+    }
+
+
+    drawGameOverBg() {
+        this.setText('64px Bungee Spice', 'left', 'white');
+        this.setFilter('blur(12px)');
+        this.drawRectangle();
+        this.setFilter('none');
+    }
+
+
+    drawRectangle() {
+        let rectangle = this.getRectangle();
+        this.ctx.beginPath();
+        this.ctx.rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+        this.ctx.fill();
+    }
+
+
+    getRectangle() {
+        let x = canvas.width / 2 - 217;
+        let y = canvas.height / 2 - 36;
+        return { x: x, y: y, width: 434, height: 88 };
+    }
+
+
+    drawGameOverText() {
+        this.setText('64px Bungee Spice', 'center', 'steelblue');
+        this.drawText('Game over', this.canvas.width / 2, 302);
+        this.setShadow();
     }
 
 

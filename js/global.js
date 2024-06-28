@@ -29,7 +29,9 @@ function pauseGame(logical) {
                 if (object.magic) {
                     object.magic.stop(logical);
                 }
-                object.stop(logical);
+                if (object.interval) {
+                    object.stop(logical);
+                }
             });
         }
 

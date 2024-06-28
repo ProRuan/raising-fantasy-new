@@ -109,6 +109,12 @@ class World {
 
 
     // jsdoc
+    setFilter(value) {
+        this.ctx.filter = value;
+    }
+
+
+    // jsdoc
     setGlobalAlpha() {
         this.ctx.globalAlpha = this.alpha;
     }
