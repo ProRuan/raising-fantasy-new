@@ -23,7 +23,7 @@ function processMouseMove(event) {
         hover(event, 'questButton');
         hover(event, 'newGameButton');
     }
-    if (!isTrue(hovered)) {
+    if (!isTrue(hovered) && isMatch(currentWorld, 'start')) {
         setCursor('initial');
     }
 }
