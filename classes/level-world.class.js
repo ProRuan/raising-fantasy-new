@@ -106,11 +106,14 @@ class LevelWorld extends World {
 
     draw() {
         this.clearCanvas();
-
         this.translateCamera(this.cameraX, 0);
 
 
-        this.drawLevel();
+        this.drawLevelComponents(this.sceneryKeys);
+        this.drawLevelComponents(this.floraKeys);
+        this.drawLevelComponents(this.itemKeys);
+        this.drawLevelComponents(this.enemyKeys);
+        this.drawLevelComponents(this.victoryKeys);
 
         if (this.hero && this.hero.isEpilog()) {
             this.ctx.font = '64px Bungee Spice';
@@ -195,29 +198,11 @@ class LevelWorld extends World {
     }
 
 
-    drawLevel() {
-        // this.drawObjectGroup(this.level.background);
-        // this.drawObjectGroup(this.level.clouds);
-        // this.drawObjectGroup(this.level.birds);
-        // this.drawObjectGroup(this.level.trees);
-        for (const [key] of Object.entries(this.level)) {
+    // jsdoc
+    drawLevelComponents(keys) {
+        keys.forEach((key) => {
             this.drawObjectGroup(this.level[key]);
-
-            this.isMatchGroup(key);
-        }
-    }
-
-
-    isMatchGroup(key) {
-        let objects = ['background', 'clouds', 'birds', 'trees'];
-        objects.forEach((element) => {
-            if (isMatch(element, key)) {
-                // console.log(true);
-                return true;
-            }
-        })
-        // console.log(false);
-        return false;
+        });
     }
 
 
@@ -279,7 +264,7 @@ class LevelWorld extends World {
     // jsdoc
     removeDeadEnemies() {
         this.removeEnemy();
-        this.setTimeToGo();
+        this.setEnemyRemovable();
     }
 
 
@@ -303,14 +288,21 @@ class LevelWorld extends World {
     }
 
 
-    setTimeToGo() {
+    // jsdoc
+    setEnemyRemovable() {
         let enemy = this.getEnemy('dead', 'removeable');
         if (enemy) {
             enemy.removable = true;
             enemy.stop(true);
-            if (!enemy.timeToGo) {
-                enemy.timeToGo = getSum(world.time, 2000);
-            }
+            this.setTimeToGo(enemy);
+        }
+    }
+
+
+    // jsdoc
+    setTimeToGo(enemy) {
+        if (!enemy.timeToGo) {
+            enemy.timeToGo = getSum(world.time, 2000);
         }
     }
 
@@ -338,7 +330,7 @@ class LevelWorld extends World {
 
     // jsdoc
     moveVictoryPodium() {
-        this.vicortyPodium.forEach((element) => {
+        this.victoryPodium.forEach((element) => {
             element.y -= this.victorySpeed;
         });
     }

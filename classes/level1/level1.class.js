@@ -2,6 +2,11 @@
  * Represents a level 1.
  */
 class Level1 {
+    sceneryKeys = ['background', 'clouds', 'birds'];
+    floraKeys = ['trees', 'flyGrass', 'grass', 'ladders'];
+    itemKeys = ['coins', 'crystals', 'hearts', 'hitPoints', 'leaves', 'stars'];
+    enemyKeys = ['enemies', 'bosses'];
+    victoryKeys = ['victoryPodium'];
 
 
     /**
@@ -225,7 +230,7 @@ class Level1 {
      * Loads the victory podium.
      */
     loadVictoryPodium() {
-        this.vicortyPodium = [];
+        this.victoryPodium = [];
         this.addVictoryElement('flyGrass', 3);
         this.addVictoryElement('flyGrass', 2);
         this.addVictoryElement('flyGrass', 1);
@@ -239,7 +244,7 @@ class Level1 {
      */
     addVictoryElement(key, i) {
         let element = this.getVictoryElement(key, i);
-        this.vicortyPodium.push(element);
+        this.victoryPodium.push(element);
     }
 
 
