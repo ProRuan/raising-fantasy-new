@@ -231,3 +231,7 @@ let imgStaminaBarBorder = './img/inner_interface/state_bar_border.png';
 let imgItemBg = './img/inner_interface/item_bg.png';
 let imgItemBomb = './img/inner_interface/item_bomb.png';
 let imgItemBorder = './img/inner_interface/item_border.png';
+
+
+// image path of pause
+let imgPause = './img/inner_interface/pause.png';

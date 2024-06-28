@@ -8,6 +8,10 @@ class Source {
     bossBattleX = 6780;
     bossBattleTriggerX = 6948;
     endX = 7620;
+    newWorld = audioNewWorld;
+    newGame = audioNewGame;
+    ambience = audioAmbience;
+    bossBattle = audioBossBattle;
 
 
     /**
@@ -24,7 +28,6 @@ class Source {
      */
     setStartWorld() {
         this.setStartWorldImages();
-        this.setStartWorldAudio();
     }
 
 
@@ -57,15 +60,6 @@ class Source {
         } else {
             return { path: path, width: width, height: height };
         }
-    }
-
-
-    /**
-     * Sets the audio source of the start world.
-     */
-    setStartWorldAudio() {
-        this.newWorld = audioNewWorld;
-        this.newGame = audioNewGame;
     }
 
 
@@ -189,6 +183,7 @@ class Source {
         this.setEnergyBarImages();
         this.setStaminaBarImages();
         this.setItemImages();
+        this.setPauseImage();
     }
 
 
@@ -293,20 +288,10 @@ class Source {
      * Sets the audio sources of the level world.
      */
     setLevelWorldAudio() {
-        this.setLevelWorldMusic();
         this.setAnimatedObjectAudio();
         this.setEnemyAudio();
         this.setHeroAudio();
         this.setMagicAudio();
-    }
-
-
-    /**
-     * Sets the audio sources of the music.
-     */
-    setLevelWorldMusic() {
-        this.ambience = audioAmbience;
-        this.bossBattle = audioBossBattle;
     }
 
 
@@ -393,5 +378,13 @@ class Source {
      */
     addMagicSound(key, cast, hit) {
         this[key].sound = { cast: cast, hit: hit };
+    }
+
+
+    /**
+     * Sets the image source of the pause.
+     */
+    setPauseImage() {
+        this.pause = this.getImageSource(imgPause, 157, 63);
     }
 }

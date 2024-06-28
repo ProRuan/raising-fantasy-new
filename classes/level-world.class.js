@@ -7,10 +7,7 @@ class LevelWorld extends World {
     size = LEVEL_SIZE;
 
 
-    // Please take care of x, y and UNIT!!!
-    // Fix loading sequence!!!
-
-
+    // jsdoc
     constructor(canvas, keyboard) {
         super(canvas, keyboard);
         this.setLevelWorld();
@@ -30,6 +27,7 @@ class LevelWorld extends World {
     }
 
 
+    // jsdoc
     setLevelWorld() {
         this.setLevel();
         this.setAvatar();
@@ -97,14 +95,12 @@ class LevelWorld extends World {
     }
 
 
-    setPause() {    // set source in class Source!!!
-        let path = './img/inner_interface/pause.png';
-        let width = 157;
-        let height = 63;
-        let source = { path: path, width: width, height: height };
-        let x = this.canvas.width / 2 - width / 2;
-        let y = this.canvas.height / 2 - height / 2;
-        this.pause = new DrawableObject(source, x, y);
+    // jsdoc
+    setPause() {
+        let pause = source.pause;
+        let x = this.canvas.width / 2 - pause.width / 2;
+        let y = this.canvas.height / 2 - pause.height / 2;
+        this.pause = new DrawableObject(pause, x, y);
     }
 
 
@@ -224,6 +220,7 @@ class LevelWorld extends World {
     }
 
 
+    // jsdoc
     drawAvatarInfo() {
         this.drawObjectGroup([this.avatarImage, this.avatarFrame])
         this.drawStateBar('hpBar');
@@ -233,6 +230,7 @@ class LevelWorld extends World {
     }
 
 
+    // jsdoc
     drawStateBar(key) {
         this.drawObject(this[key].bg);
         this.drawObjectGroup(this[key].points);
@@ -244,22 +242,36 @@ class LevelWorld extends World {
     drawThrowableItem() {
         if (this.hero.bombUnlocked) {
             this.drawObject(this.itemBg);
-            if (isMatch(this.hero.energyPoints.length, this.energyBar.max)) {
-                this.drawObject(this.itemBomb);
-            }
+            this.drawItemIfReady();
             this.drawObject(this.itemBorder);
         }
     }
 
 
+    // jsdoc
+    drawItemIfReady() {
+        let points = this.hero.energyPoints.length;
+        let max = this.energyBar.max;
+        if (isMatch(points, max)) {
+            this.drawObject(this.itemBomb);
+        }
+    }
+
+
+    // jsdoc
     drawSpiderWebs() {
-        this.enemies.forEach((enemy) => {
-            if (enemy instanceof Spider) {
-                if (!isUndefined(enemy.web)) {
-                    this.drawObject(enemy.web);
-                }
+        let spiders = this.getSpiders();
+        spiders.forEach((spider) => {
+            if (spider.web) {
+                this.drawObject(spider.web);
             }
         })
+    }
+
+
+    // jsdoc
+    getSpiders() {
+        return this.enemies.filter(enemy => enemy instanceof Spider);
     }
 
 
