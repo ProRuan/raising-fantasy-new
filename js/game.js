@@ -94,38 +94,17 @@ function setLevelWorld() {
 }
 
 
-let mainButtons = ['newGameButton', 'storyButton', 'cupButton', 'settingsButton'];
-let mainButtonCounter = 0;
-let volumeButtons = ['lowMusicButton', 'highMusicButton', 'lowSoundButton', 'highSoundButton'];
-let volumeButtonsId = 0;
-let musicButtons = true;
 
+
+// move to key.js!!!
 
 function processKeydown(event) {    // check doubleClick!!!
     if (!world.interacted) {
         interactFirst(event);
     } else {
-        if (isMatch(currentWorld, 'start')) {
-            world.currentButton.selected = true;    // newGameButton selected?
-        }
-
-        // console.log(event);
-        let code = getCode(event.code);
-        if (world.keyboard[code]) {
-            setKey(code, 'keydown', true);
-            setKey(code, 'timeStamp', getTime());
-            verifyDoubleClick(code);
-        }
-
-
-        if (isMatch(currentWorld, 'start')) {
-            closeWithKey('backspace', 'leaderboard', 'xButton');
-            closeWithKey('backspace', 'questRoll', 'coinButton');
-            closeWithKey('space', 'leaderboard', 'xButton');
-            closeWithKey('space', 'questRoll', 'coinButton');
-            closeWithKey('keyX', 'leaderboard', 'xButton');
-            closeWithKey('keyX', 'questRoll', 'coinButton');
-        }
+        selectCurrentButton();
+        setKeyProperties(event);
+        closeBoard();
 
         if (isMatch(currentWorld, 'level') && !isTrue(pauseDisabled)) {
             if (isKey('escape') && paused) {
@@ -212,6 +191,26 @@ function processKeydown(event) {    // check doubleClick!!!
 
 
 // jsdoc
+function selectCurrentButton() {
+    if (isMatch(currentWorld, 'start')) {
+        world.currentButton.selected = true;
+    }
+}
+
+
+// jsdoc
+function closeBoard() {
+    if (isMatch(currentWorld, 'start')) {
+        let keys = ['backspace', 'space', 'keyX'];
+        keys.forEach((key) => {
+            closeWithKey(key, 'leaderboard', 'xButton');
+            closeWithKey(key, 'questRoll', 'coinButton');
+        })
+    }
+}
+
+
+// jsdoc
 function closeWithKey(key, dialog, button) {
     if (isKey(key) && world[dialog].isOpened()) {
         world[button].locked = true;
@@ -223,13 +222,7 @@ function processKeyup(event) {
     buttonSelected = false;
     keyboard.enter.locked = false;
 
-    // console.log(event);    // to delete!!!
-    let code = getCode(event.code);
-    if (world.keyboard[code]) {
-        setKey(code, 'keydown', false);
-        setKey(code, 'doubleClick', false);
-        setKey(code, 'lastKeyUp', getTime());
-    }
+    setKeyProperties(event);
 }
 
 
@@ -388,13 +381,6 @@ function getSum(summandA, summandB) {
 // jsdoc
 function getRandomNumber(max, dev) {
     return max - Math.round(Math.random() * dev);
-}
-
-
-// jsdoc
-function formatInitial(word, method) {
-    let initial = word[0];
-    return word.replace(initial, initial[method]());
 }
 
 

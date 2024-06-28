@@ -1,3 +1,12 @@
+// jsdoc
+function formatInitial(word, method) {
+    let initial = word[0];
+    return word.replace(initial, initial[method]());
+}
+
+
+
+
 // on testing ...
 
 // set home button and play button ...
