@@ -156,6 +156,11 @@ function isBoardOpened() {
 
 
 function processMouseUp() {
+    unlockMainButtons();
+}
+
+
+function unlockMainButtons() {
     if (currentWorld == 'start') {
         if (world.interacted && !world.mainRevealed) {
             world.mainRevealed = true;

@@ -193,5 +193,6 @@ class Star extends AnimatedObject {
         world.interacted = true;
         world.cupButton.locked = true;
         world.setCurrentButton('cupButton');
+        unlockMainButtons();
     }
 }

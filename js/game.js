@@ -107,27 +107,16 @@ function processKeydown(event) {    // check doubleClick!!!
         closeBoard();
 
         if (isMatch(currentWorld, 'level') && !isTrue(pauseDisabled)) {
-            if (isKey('escape') && paused) {
-                world.stopped = true;
-                setStartWorld();    // compare with other functions!
-                world.interacted = true;
-                world.setCurrentButton('newGameButton');
 
-                // setStartWorld();
-            }
+            exitLevel();
+
             if (isKey('keyP')) {    // or touch in pause zone!!!
                 (!paused) ? pauseGame(true) : pauseGame(false);
                 paused = (!paused) ? true : false;
-                if (paused) {
-                    pauseStart = getTime();
-                    world.hero.music.pause();    // game.js or global? (double code!)
-                    // world.endboss.music.pause();
+                if (isTrue(paused)) {
+                    setPauseStart();
                 } else {
-                    pauseEnd = getTime();
-                    pauseTime += getSum(pauseEnd, -pauseStart);
-                    console.log('Pause time: ', pauseTime);
-                    world.hero.music.play();    // game.js or global? (double code!)
-                    // world.endboss.music.play();
+                    setPauseEnd();
 
 
                     if (world.endboss.magic && world.endboss.magic instanceof Lightning) {
@@ -218,9 +207,46 @@ function closeWithKey(key, dialog, button) {
 }
 
 
+// jsdoc
+function exitLevel() {
+    if (isKey('escape') && paused) {
+        world.stopped = true;
+        setStartWorld();
+        world.interacted = true;
+        world.setCurrentButton('newGameButton');
+    }
+}
+
+
+// jsdoc
+function setPauseStart() {
+    pauseStart = getTime();
+    pauseLevelMusic('pause');
+}
+
+
+// jsdoc
+function pauseLevelMusic(method) {
+    world.hero.music[method]();
+    if (world.endboss.triggered) {
+        world.endboss.music[method]();
+    }
+}
+
+
+// jsdoc
+function setPauseEnd() {
+    pauseEnd = getTime();
+    pauseTime += getSum(pauseEnd, -pauseStart);
+    pauseLevelMusic('play');
+}
+
+
 function processKeyup(event) {
     buttonSelected = false;
     keyboard.enter.locked = false;
+
+    unlockMainButtons();
 
     setKeyProperties(event);
 }
