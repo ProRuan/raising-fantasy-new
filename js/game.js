@@ -116,6 +116,7 @@ function setLevelWorld() {
 
 // move to key.js!!!
 // pause also for mouse and touch!!!
+// exitLevel on another place? ...
 
 
 
@@ -123,33 +124,50 @@ function setLevelWorld() {
 // jsdoc
 function setPause() {
     if (isMatch(currentWorld, 'level') && !isTrue(pauseDisabled)) {
-        exitLevel();
-        pauseLevel();
+        if (isKey('escape') && paused) {
+            exitLevel();
+        } else if (isKey('keyP')) {
+            pauseLevel();
+        }
     }
 }
 
 
 // jsdoc
 function exitLevel() {
-    if (isKey('escape') && paused) {
-        world.stopped = true;
-        setStartWorld();
-        world.interacted = true;
-        world.setCurrentButton('newGameButton');
+    world.stopped = true;
+    setStartWorld();
+    world.interacted = true;
+    world.setCurrentButton('newGameButton');
+}
+
+
+// jsdoc
+function pauseLevel() {
+    setGamePaused();
+    setPauseTime();
+}
+
+
+// jsdoc
+function setGamePaused() {
+    if (!paused) {
+        paused = true;
+        pauseGame(true);
+    } else {
+        paused = false;
+        pauseGame(false);
     }
 }
 
 
-function pauseLevel() {
-    if (isKey('keyP')) {    // or touch in pause zone!!!
-        (!paused) ? pauseGame(true) : pauseGame(false);
-        paused = (!paused) ? true : false;
-        if (isTrue(paused)) {
-            setPauseStart();
-        } else {
-            setPauseEnd();
-            applyPauseOffset();
-        }
+// jsdoc
+function setPauseTime() {
+    if (isTrue(paused)) {
+        setPauseStart();
+    } else {
+        setPauseEnd();
+        applyPauseOffset();
     }
 }
 
