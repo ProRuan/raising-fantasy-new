@@ -75,7 +75,7 @@ function processMouseDown(event) {
 
 // jsdoc
 function interactFirst(event) {
-    if (event && !isTrue(world.interacted)) {
+    if (event) {
         world.interacted = true;
     }
 }
@@ -162,7 +162,7 @@ function processMouseUp() {
 
 function unlockMainButtons() {
     if (currentWorld == 'start') {
-        if (world.interacted && !world.mainRevealed) {
+        if (isTrue(world.interacted) && !world.mainRevealed) {
             world.mainRevealed = true;
             world.newGameButton.reachable = true;
             world.questButton.reachable = true;

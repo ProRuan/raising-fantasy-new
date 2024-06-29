@@ -98,44 +98,18 @@ function setLevelWorld() {
 
 // move to key.js!!!
 
-function processKeydown(event) {    // check doubleClick!!!
+
+
+
+function processKeydown(event) {
     if (!world.interacted) {
         interactFirst(event);
     } else {
         selectCurrentButton();
         setKeyProperties(event);
         closeBoard();
-
-        if (isMatch(currentWorld, 'level') && !isTrue(pauseDisabled)) {
-
-            exitLevel();
-
-            if (isKey('keyP')) {    // or touch in pause zone!!!
-                (!paused) ? pauseGame(true) : pauseGame(false);
-                paused = (!paused) ? true : false;
-                if (isTrue(paused)) {
-                    setPauseStart();
-                } else {
-                    setPauseEnd();
-
-
-                    if (world.endboss.magic && world.endboss.magic instanceof Lightning) {
-                        let magic = world.endboss.magic;
-                        // console.log(magic.targetingStop, magic.chargingStop);
-                        magic.targetingStop = magic.targetingStop + getSum(pauseEnd, -pauseStart);
-                        magic.chargingStop = magic.chargingStop + getSum(pauseEnd, -pauseStart);
-                        // console.log(magic.targetingStop, magic.chargingStop);
-                    }
-
-
-                    addEndbossPauseOffset();
-                    addEnemyPauseOffset();
-                    addHeroPauseOffset();
-                }
-            }
-        }
+        setPause();
     }
-
 }
 
 
@@ -168,12 +142,35 @@ function closeWithKey(key, dialog, button) {
 
 
 // jsdoc
+function setPause() {
+    if (isMatch(currentWorld, 'level') && !isTrue(pauseDisabled)) {
+        exitLevel();
+        pauseLevel();
+    }
+}
+
+
+// jsdoc
 function exitLevel() {
     if (isKey('escape') && paused) {
         world.stopped = true;
         setStartWorld();
         world.interacted = true;
         world.setCurrentButton('newGameButton');
+    }
+}
+
+
+function pauseLevel() {
+    if (isKey('keyP')) {    // or touch in pause zone!!!
+        (!paused) ? pauseGame(true) : pauseGame(false);
+        paused = (!paused) ? true : false;
+        if (isTrue(paused)) {
+            setPauseStart();
+        } else {
+            setPauseEnd();
+            applyPauseOffset();
+        }
     }
 }
 
@@ -199,6 +196,15 @@ function setPauseEnd() {
     pauseEnd = getTime();
     pauseTime += getSum(pauseEnd, -pauseStart);
     pauseLevelMusic('play');
+}
+
+
+// jsdoc
+function applyPauseOffset() {
+    addEndbossPauseOffset();
+    addEnemyPauseOffset();
+    addHeroPauseOffset();
+    addMagicPauseOffset();
 }
 
 
@@ -255,6 +261,16 @@ function addWebPauseOffset(enemy) {
 function addHeroPauseOffset() {
     addPauseOffset(world, 'hero', 'jumpTime');
     addPauseOffset(world, 'hero', 'lastIdle');
+}
+
+
+// jsdoc
+function addMagicPauseOffset() {
+    let magic = world.endboss.magic;
+    if (magic && magic instanceof Lightning) {
+        addPauseOffset(magic, 'targetingStop');
+        addPauseOffset(magic, 'chargingStop');
+    }
 }
 
 
