@@ -1,18 +1,18 @@
 let targeted = false;
 
 
-processMouse('move', () => processMouseMove(event));
-processMouse('down', () => processMouseDown(event));
-processMouse('up', () => processMouseUp(event));
+executeEvent('mousemove', (event) => executeMouseMove(event));
+executeEvent('mousedown', (event) => executeMouseDown(event));
+executeEvent('mouseup', (event) => executeMouseUp(event));
 
 
 // jsdoc
-function processMouse(key, subfunction) {
-    return document.addEventListener(`mouse${key}`, subfunction);
+function executeEvent(key, subfunction) {
+    return document.addEventListener(key, subfunction);
 }
 
 
-function processMouseMove(event) {
+function executeMouseMove(event) {
     targeted = false;
     if (event && currentWorld == 'start') {
         hover(event, 'xButton');
@@ -50,7 +50,7 @@ function setCursor(value) {
 
 
 // Please sort the subsequent functions + rename!!!
-function processMouseDown(event) {
+function executeMouseDown(event) {
     if (event && currentWorld == 'start') {
         if (!world.interacted) {
             interactFirst(event);
@@ -155,7 +155,7 @@ function isBoardOpened() {
 }
 
 
-function processMouseUp() {
+function executeMouseUp() {
     unlockMainButtons();
 }
 

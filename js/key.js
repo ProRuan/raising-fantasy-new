@@ -1,6 +1,31 @@
 let buttonSelected = false;
 
 
+executeEvent('keydown', (event) => executeKeyDown(event));
+executeEvent('keyup', (event) => executeKeyUp(event));
+
+
+// jsdoc
+function executeKeyDown(event) {
+    if (!world.interacted) {
+        interactFirst(event);
+    } else {
+        selectCurrentButton();
+        setKeyProperties(event);
+        closeBoard();
+        setPause();
+    }
+}
+
+
+// jsdoc
+function selectCurrentButton() {
+    if (isMatch(currentWorld, 'start')) {
+        world.currentButton.selected = true;
+    }
+}
+
+
 // jsdoc
 function setKeyProperties(event) {
     let code = formatInitial(event.code, 'toLowerCase');
@@ -65,6 +90,35 @@ function setKeyUp(code) {
 
 
 // jsdoc
+function closeBoard() {
+    if (isMatch(currentWorld, 'start')) {
+        let keys = ['backspace', 'space', 'keyX'];
+        keys.forEach((key) => {
+            closeWithKey(key, 'leaderboard', 'xButton');
+            closeWithKey(key, 'questRoll', 'coinButton');
+        })
+    }
+}
+
+
+// jsdoc
+function closeWithKey(key, dialog, button) {
+    if (isKey(key) && world[dialog].isOpened()) {
+        world[button].locked = true;
+    }
+}
+
+
+// jsdoc
 function isKey(key, subkey) {
     return (subkey) ? keyboard[key][subkey] : keyboard[key].keydown;
+}
+
+
+// jsdoc
+function executeKeyUp(event) {
+    buttonSelected = false;
+    keyboard.enter.locked = false;
+    unlockMainButtons();
+    setKeyProperties(event);
 }

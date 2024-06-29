@@ -1,14 +1,53 @@
 // jsdoc
+function isTimeout(timeout, time) {
+    return timeout && isGreater(timeout, time);
+}
+
+
+// jsdoc
+function load(key) {
+    let valueAsText = localStorage.getItem(key);
+    if (valueAsText) {
+        storableItems[key] = JSON.parse(valueAsText);
+    }
+}
+
+
+// jsdoc
+function save(key) {
+    let value = storableItems[key];
+    let valueAsText = JSON.stringify(value);
+    localStorage.setItem(key, valueAsText);
+}
+
+
+// jsdoc
 function formatInitial(word, method) {
     let initial = word[0];
     return word.replace(initial, initial[method]());
 }
 
 
-// init() ...
-// processKeyDown() ...
+// jsdoc
+function isMatch(a, b) {
+    return a == b;
+}
+
+
+// jsdoc
+function getTime() {
+    return new Date().getTime();
+}
+
+
+
 // set canvas, keyboard, source ...
-// write one processEvent() ...
+
+// init() ...
+// pauseLevel() ...
+// global functions ...
+
+// executeEvent() for touch ...
 
 
 // Review instanceof methods (variable class name) ... !!!
@@ -20,6 +59,9 @@ function formatInitial(word, method) {
 
 // set home button and play button ...
 // set escape and keyP ...
+
+
+
 
 function pauseGame(logical) {
     if (!isTrue(pauseDisabled)) {
@@ -65,41 +107,6 @@ function pauseThrowableObject(o, key, logical) {
 }
 
 
-// jsdoc
-function loadScore() {
-    load('score');
-    if (storableItems.score) {
-        score = storableItems.score;
-    }
-}
-
-
-// jsdoc
-function loadVolume() {
-    load('volume');
-    if (storableItems.volume) {
-        volume = storableItems.volume;
-    }
-}
-
-
-// jsdoc
-function load(key) {
-    let valueAsText = localStorage.getItem(key);
-    if (valueAsText) {
-        storableItems[key] = JSON.parse(valueAsText);
-    }
-}
-
-
-// jsdoc
-function save(key) {
-    let value = storableItems[key];
-    let valueAsText = JSON.stringify(value);
-    localStorage.setItem(key, valueAsText);
-}
-
-
 
 
 // jsdoc
@@ -115,12 +122,6 @@ function checkOrientation() {
     } else if (isMatch(orientation, 'portrait-primary')) {
         console.log(orientation);
     }
-}
-
-
-// jsdoc
-function isTimeout(timeout, time) {
-    return timeout && isGreater(timeout, time);
 }
 
 

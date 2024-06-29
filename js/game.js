@@ -55,9 +55,27 @@ function getDefaultScore() {
 
 
 // jsdoc
+function loadScore() {
+    load('score');
+    if (storableItems.score) {
+        score = storableItems.score;
+    }
+}
+
+
+// jsdoc
 function updateVolume() {
     volume = { music: 5, sound: 5 };
     loadVolume();
+}
+
+
+// jsdoc
+function loadVolume() {
+    load('volume');
+    if (storableItems.volume) {
+        volume = storableItems.volume;
+    }
 }
 
 
@@ -97,48 +115,9 @@ function setLevelWorld() {
 
 
 // move to key.js!!!
+// pause also for mouse and touch!!!
 
 
-
-
-function processKeydown(event) {
-    if (!world.interacted) {
-        interactFirst(event);
-    } else {
-        selectCurrentButton();
-        setKeyProperties(event);
-        closeBoard();
-        setPause();
-    }
-}
-
-
-// jsdoc
-function selectCurrentButton() {
-    if (isMatch(currentWorld, 'start')) {
-        world.currentButton.selected = true;
-    }
-}
-
-
-// jsdoc
-function closeBoard() {
-    if (isMatch(currentWorld, 'start')) {
-        let keys = ['backspace', 'space', 'keyX'];
-        keys.forEach((key) => {
-            closeWithKey(key, 'leaderboard', 'xButton');
-            closeWithKey(key, 'questRoll', 'coinButton');
-        })
-    }
-}
-
-
-// jsdoc
-function closeWithKey(key, dialog, button) {
-    if (isKey(key) && world[dialog].isOpened()) {
-        world[button].locked = true;
-    }
-}
 
 
 // jsdoc
@@ -274,29 +253,8 @@ function addMagicPauseOffset() {
 }
 
 
-function processKeyup(event) {
-    buttonSelected = false;
-    keyboard.enter.locked = false;
-
-    unlockMainButtons();
-
-    setKeyProperties(event);
-}
-
-
-// jsdoc
-function getTime() {
-    return new Date().getTime();
-}
-
-
 
 // Make a class MouseEvent!!!
-
-
-function isMatch(a, b) {
-    return a == b;
-}
 
 
 function isWordMatch(word, subword) {
