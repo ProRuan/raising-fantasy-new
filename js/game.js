@@ -16,6 +16,28 @@ let volume = {};
 let source;
 
 
+
+
+// set canvas, keyboard, source ...
+
+// init() ...
+// pauseLevel() ...
+// global functions ...
+
+// executeEvent() for touch ...
+
+
+// move to key.js!!!
+// pause also for mouse and touch!!!
+// exitLevel on another place? ...
+
+
+// Review instanceof methods (variable class name) ... !!!
+// Review music pause and play conflict ...
+
+
+
+
 function init() {
     updateStoreableItems();
 
@@ -112,15 +134,6 @@ function setLevelWorld() {
 }
 
 
-
-
-// move to key.js!!!
-// pause also for mouse and touch!!!
-// exitLevel on another place? ...
-
-
-
-
 // jsdoc
 function setPause() {
     if (isMatch(currentWorld, 'level') && !isTrue(pauseDisabled)) {
@@ -186,6 +199,8 @@ function pauseLevelMusic(method) {
         world.endboss.music[method]();
     }
 }
+
+
 
 
 // jsdoc

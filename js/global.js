@@ -40,69 +40,54 @@ function getTime() {
 }
 
 
-
-// set canvas, keyboard, source ...
-
-// init() ...
-// pauseLevel() ...
-// global functions ...
-
-// executeEvent() for touch ...
-
-
-// Review instanceof methods (variable class name) ... !!!
-// Review music pause and play conflict ...
-
-
-
-// on testing ...
-
-// set home button and play button ...
-// set escape and keyP ...
-
-
-
-
+// jsdoc
 function pauseGame(logical) {
     if (!isTrue(pauseDisabled)) {
-        if (world.hero.bomb) {
-            world.hero.bomb.stop(logical);
-        }
-
-        world.hero.stop(logical);
-        if (isTrue(logical)) {
-            world.hero.music.pause();
-        } else if (!isTrue()) {
-            world.hero.music.play();
-        }
-
-        world.hpBar.stop(logical);
-        world.energyBar.stop(logical);
-        world.staminaBar.stop(logical);
-
-        for (const [key] of Object.entries(world.level)) {
-            let objectGroup = world.level[key];
-            objectGroup.forEach((object) => {
-                if (object.web) {
-                    object.web.stop(logical);
-                }
-                if (object.magic) {
-                    object.magic.stop(logical);
-                }
-                if (object.interval) {
-                    object.stop(logical);
-                }
-            });
-        }
-
+        pauseHero(logical);
+        pauseStateBars(logical);
+        pauseLevelComponents(logical);
         world.pauseSound(logical);
     }
 }
 
 
-function pauseThrowableObject(o, key, logical) {
-    if (o[key]) {
-        o[key].stop(logical);
+// jsdoc
+function pauseHero(logical) {
+    let hero = world.hero;
+    pauseLevelObject(hero, 'bomb', logical);
+    pauseLevelObject(hero, 'interval', logical);
+}
+
+
+// jsdoc
+function pauseLevelObject(object, key, logical) {
+    if (isMatch(key, 'interval') && object[key]) {
+        object.stop(logical);
+    } else if (object[key]) {
+        object[key].stop(logical);
+    }
+}
+
+
+// jsdoc
+function pauseStateBars(logical) {
+    let keys = ['hpBar', 'energyBar', 'staminaBar'];
+    keys.forEach((key) => {
+        let stateBar = world[key];
+        pauseLevelObject(stateBar, 'interval', logical);
+    });
+}
+
+
+// jsdoc
+function pauseLevelComponents(logical) {
+    for (const [key] of Object.entries(world.level)) {
+        let objectGroup = world.level[key];
+        objectGroup.forEach((object) => {
+            pauseLevelObject(object, 'magic', logical);
+            pauseLevelObject(object, 'web', logical);
+            pauseLevelObject(object, 'interval', logical);
+        });
     }
 }
 
