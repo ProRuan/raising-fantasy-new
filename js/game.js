@@ -126,51 +126,11 @@ function processKeydown(event) {    // check doubleClick!!!
                         magic.chargingStop = magic.chargingStop + getSum(pauseEnd, -pauseStart);
                         // console.log(magic.targetingStop, magic.chargingStop);
                     }
-                    if (world.endboss.calmTime) {
-                        world.endboss.calmTime += getSum(pauseEnd, -pauseStart);
-                    }
-                    if (world.endboss.nextCast) {
-                        world.endboss.nextCast += getSum(pauseEnd, -pauseStart);
-                    }
-                    if (world.endboss.chapterTime) {
-                        world.endboss.chapterTime += getSum(pauseEnd, -pauseStart);
-                    }
-                    if (world.endboss.selectionTime) {
-                        world.endboss.selectionTime += getSum(pauseEnd, -pauseStart);
-                    }
-                    world.enemies.forEach((enemy) => {
-                        if (enemy.timeToGo) {
-                            enemy.timeToGo += getSum(pauseEnd, -pauseStart);
-                        }
-                        if (enemy.hitTime) {
-                            enemy.hitTime += getSum(pauseEnd, -pauseStart);
-                        }
-                    });
-                    world.enemies.forEach((enemy) => {
-                        if (enemy instanceof Dino) {
-                            enemy.pursuitStop += getSum(pauseEnd, -pauseStart);
-                        }
-                        if (enemy instanceof Ent) {
-                            enemy.lastTurn += getSum(pauseEnd, -pauseStart);
-                        }
-                        if (enemy instanceof Spider) {
-                            enemy.nextThrow += getSum(pauseEnd, -pauseStart);
-                        }
-                        if (enemy instanceof Spider && enemy.web) {
-                            if (enemy.web.throwResetTime) {
-                                enemy.web.throwResetTime += getSum(pauseEnd, -pauseStart);
-                            }
-                            if (enemy.web.throwDoneTime) {
-                                enemy.web.throwDoneTime += getSum(pauseEnd, -pauseStart);
-                            }
-                        }
-                    });
-                    if (world.hero.jumpTime) {
-                        world.hero.jumpTime += getSum(pauseEnd, -pauseStart);
-                    }
-                    if (world.hero.lastIdle) {
-                        world.hero.lastIdle += getSum(pauseEnd, -pauseStart);
-                    }
+
+
+                    addEndbossPauseOffset();
+                    addEnemyPauseOffset();
+                    addHeroPauseOffset();
                 }
             }
         }
@@ -239,6 +199,62 @@ function setPauseEnd() {
     pauseEnd = getTime();
     pauseTime += getSum(pauseEnd, -pauseStart);
     pauseLevelMusic('play');
+}
+
+
+// jsdoc
+function addEndbossPauseOffset() {
+    addPauseOffset(world, 'endboss', 'calmTime');
+    addPauseOffset(world, 'endboss', 'nextCast');
+    addPauseOffset(world, 'endboss', 'chapterTime');
+    addPauseOffset(world, 'endboss', 'selectionTime');
+}
+
+
+// jsdoc
+function addPauseOffset(variable, key, subkey) {
+    if (!subkey && variable[key]) {
+        variable[key] += getSum(pauseEnd, -pauseStart);
+    } else if (subkey && variable[key][subkey]) {
+        variable[key][subkey] += getSum(pauseEnd, -pauseStart);
+    }
+}
+
+
+// jsdoc
+function addEnemyPauseOffset() {
+    world.enemies.forEach((enemy) => {
+        addPauseOffset(enemy, 'timeToGo');
+        addPauseOffset(enemy, 'hitTime');
+        addInstancePauseOffset(enemy, Dino, 'pursuitStop');
+        addInstancePauseOffset(enemy, Ent, 'lastTurn');
+        addInstancePauseOffset(enemy, Spider, 'nextThrow');
+    });
+}
+
+
+// jsdoc
+function addInstancePauseOffset(enemy, object, key) {
+    if (enemy instanceof object) {
+        enemy[key] += getSum(pauseEnd, -pauseStart);
+        addWebPauseOffset(enemy);
+    }
+}
+
+
+// jsdoc
+function addWebPauseOffset(enemy) {
+    if (enemy instanceof Spider && enemy.web) {
+        addPauseOffset(enemy, 'web', 'throwResetTime');
+        addPauseOffset(enemy, 'web', 'throwDoneTime');
+    }
+}
+
+
+// jsdoc
+function addHeroPauseOffset() {
+    addPauseOffset(world, 'hero', 'jumpTime');
+    addPauseOffset(world, 'hero', 'lastIdle');
 }
 
 

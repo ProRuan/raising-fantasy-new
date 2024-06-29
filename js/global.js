@@ -5,6 +5,8 @@ function formatInitial(word, method) {
 }
 
 
+// Review instanceof methods (variable class name)!!!F
+
 
 
 // on testing ...
