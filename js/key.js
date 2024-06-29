@@ -21,8 +21,14 @@ function executeKeyDown(event) {
 // jsdoc
 function selectCurrentButton() {
     if (isMatch(currentWorld, 'start')) {
-        world.currentButton.selected = true;
+        setWorldButton('currentButton', 'selected', true);
     }
+}
+
+
+// jsdoc
+function setWorldButton(key, subkey, value) {
+    world[key][subkey] = value;
 }
 
 
@@ -119,6 +125,6 @@ function isKey(key, subkey) {
 function executeKeyUp(event) {
     buttonSelected = false;
     keyboard.enter.locked = false;
-    unlockMainButtons();
+    enableMainButtons();
     setKeyProperties(event);
 }

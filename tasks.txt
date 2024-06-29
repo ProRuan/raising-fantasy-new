@@ -113,7 +113,7 @@ Tasks
   - option: fix jump animation for 'fall after walk' ...
 
 
-Clean Coding (12/12 + 56/56 | 12/12 + 53/56) + (1/6) + (0/1) + (0/1)
+Clean Coding (12/12 + 56/56 | 12/12 + 53/56) + (3/1/6) + (0/1) + (0/1)
 ------------
   - class Button - doubleCheck
   - class TextButton - doubleCheck
@@ -178,6 +178,8 @@ Clean Coding (12/12 + 56/56 | 12/12 + 53/56) + (1/6) + (0/1) + (0/1)
   - class World - simpleCheck
 
 
+  - key.js - simpleCheck
+  - mouse.js - simpleCheck
   - source.js - doubleCheck
 
 

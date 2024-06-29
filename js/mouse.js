@@ -47,7 +47,7 @@ function hover(event, key) {
     if (isMouseEvent(event, world[key])) {
         setGlobalTargeted(key);
     } else {
-        setButtonTargeted(key);
+        setWorldButton(key, 'targeted', false);
     }
 }
 
@@ -77,16 +77,10 @@ function getMouseCoord(mouse, key, size) {
 
 // jsdoc
 function setGlobalTargeted(key) {
-    world[key].targeted = true;
+    setWorldButton(key, 'targeted', true);
     if (!isTrue(targeted)) {
         targeted = true;
     }
-}
-
-
-// jsdoc
-function setButtonTargeted(key) {
-    world[key].targeted = false;
 }
 
 
@@ -104,24 +98,15 @@ function setCursor(value) {
 }
 
 
-// Please sort the subsequent functions + rename!!!
+// jsdoc
 function executeMouseDown(event) {
-    if (event && currentWorld == 'start') {
+    if (event && isMatch(currentWorld, 'start')) {
         if (!world.interacted) {
             interactFirst(event);
         } else {
-            world.currentButton.selected = false;
-
-            closeLeaderboard(event);
-            setVolume(event, 'lowMusicButton');
-            setVolume(event, 'highMusicButton');
-            setVolume(event, 'lowSoundButton');
-            setVolume(event, 'highSoundButton');
-            openLeaderboard(event, 'cupButton');
-            openLeaderboard(event, 'settingsButton');
-
-            closeQuestRoll(event);
-            openQuestRoll(event, 'questButton');
+            setWorldButton('currentButton', 'selected', false);
+            setLeaderboard(event);
+            setQuestRoll(event);
             startNewGame(event);
         }
     }
@@ -136,34 +121,44 @@ function interactFirst(event) {
 }
 
 
-function closeLeaderboard(event) {
-    if (isMouseEvent(event, world.xButton) && world.xButton.reachable) {
-        world.xButton.locked = true;
-    }
+// jsdoc
+function setLeaderboard(event) {
+    closeByMouseClick(event, 'xButton');
+    openLeaderboard(event, 'cupButton');
+    openLeaderboard(event, 'settingsButton');
+    setVolumeButtonGroup(event);
 }
 
 
-function setVolume(event, key) {
-    if (isMouseEvent(event, world[key]) && world[key].reachable) {
-        world[key].locked = true;
-    }
-}
-
-
-function openLeaderboard(event, key) {
-    if (isNotLeaderBoard(event, key)) {
-        world[key].locked = false;
-    } else if (isButtonLocked(event, key, true)) {
-        world[key].locked = false;
-    } else if (isButtonLocked(event, key, false)) {
-        world[key].locked = true;
+// jsdoc
+function closeByMouseClick(event, key) {
+    if (isButtonReachable(event, key)) {
+        setWorldButton(key, 'locked', true);
     }
 }
 
 
 // jsdoc
-function isNotLeaderBoard(event, key) {
-    return !isMouseEvent(event, world[key]) && !isMouseEvent(event, world.leaderboard);
+function isButtonReachable(event, key) {
+    return isMouseEvent(event, world[key]) && world[key].reachable;
+}
+
+
+// jsdoc
+function openLeaderboard(event, key) {
+    if (isNotBoard(event, key, 'leaderboard') || isButtonLocked(event, key, true)) {
+        setWorldButton(key, 'locked', false);
+    } else if (isButtonLocked(event, key, false)) {
+        setWorldButton(key, 'locked', true);
+    }
+}
+
+
+// jsdoc
+function isNotBoard(event, key, board) {
+    let buttonClicked = isMouseEvent(event, world[key]);
+    let boardClicked = isMouseEvent(event, world[board]);
+    return !buttonClicked && !boardClicked;
 }
 
 
@@ -177,52 +172,84 @@ function isButtonLocked(event, key, logical) {
 }
 
 
-function closeQuestRoll(event) {    // double code?
-    if (isMouseEvent(event, world.coinButton) && world.coinButton.reachable) {
-        world.coinButton.locked = true;
+// jsdoc
+function setVolumeButtonGroup(event) {
+    setVolumeButton(event, 'lowMusicButton');
+    setVolumeButton(event, 'highMusicButton');
+    setVolumeButton(event, 'lowSoundButton');
+    setVolumeButton(event, 'highSoundButton');
+}
+
+
+// jsdoc
+function setVolumeButton(event, key) {
+    if (isButtonReachable(event, key)) {
+        setWorldButton(key, 'locked', true);
     }
 }
 
 
-function openQuestRoll(event, key) {    // double code?
-    if (isNotQuestRoll(event, key)) {
-        world[key].locked = false;
+// jsdoc
+function setQuestRoll(event) {
+    closeByMouseClick(event, 'coinButton');
+    openQuestRoll(event, 'questButton');
+}
+
+
+// jsdoc
+function openQuestRoll(event, key) {
+    if (isNotBoard(event, key, 'questRoll')) {
+        setWorldButton(key, 'locked', false);
     } else if (isButtonLocked(event, key, false) && !world.leaderboard.isOpened()) {
-        world[key].locked = true;
+        setWorldButton(key, 'locked', true);
     }
 }
 
 
-function isNotQuestRoll(event, key) {    // double code?
-    return !isMouseEvent(event, world[key]) && !isMouseEvent(event, world.questRoll);
-}
-
-
+// jsdoc
 function startNewGame(event) {
-    if (isMouseEvent(event, world.newGameButton) && !isBoardOpened()) {
-        world.newGameButton.locked = true;
+    if (isNewGame(event)) {
+        setWorldButton('newGameButton', 'locked', true);
     }
 }
 
 
-function isBoardOpened() {
-    return world.leaderboard.isOpened() || world.questRoll.isOpened();
+// jsdoc
+function isNewGame(event) {
+    let clicked = isMouseEvent(event, world.newGameButton);
+    let leaderboardOpened = world.leaderboard.isOpened();
+    let questRollOpened = world.questRoll.isOpened();
+    return clicked && !(leaderboardOpened || questRollOpened);
 }
 
 
+// jsdoc
 function executeMouseUp() {
-    unlockMainButtons();
+    enableMainButtons();
 }
 
 
-function unlockMainButtons() {
-    if (currentWorld == 'start') {
-        if (isTrue(world.interacted) && !world.mainRevealed) {
-            world.mainRevealed = true;
-            world.newGameButton.reachable = true;
-            world.questButton.reachable = true;
-            world.cupButton.reachable = true;
-            world.settingsButton.reachable = true;
-        }
+// jsdoc
+function enableMainButtons() {
+    if (isMainRevealed()) {
+        world.mainRevealed = true;
+        setMainButtonsReachable();
     }
+}
+
+
+// jsdoc
+function isMainRevealed() {
+    let startWorld = isMatch(currentWorld, 'start');
+    let interacted = isTrue(world.interacted);
+    return startWorld && interacted && !world.mainRevealed;
+}
+
+
+// jsdoc
+function setMainButtonsReachable() {
+    let keys = ['newGameButton', 'questButton', 'cupButton', 'settingsButton'];
+    keys.forEach((key) => {
+        setWorldButton(key, 'reachable', true);
+    });
 }
