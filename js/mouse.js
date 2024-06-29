@@ -12,38 +12,93 @@ function executeEvent(key, subfunction) {
 }
 
 
+// jsdoc
 function executeMouseMove(event) {
     targeted = false;
-    if (event && currentWorld == 'start') {
-        hover(event, 'xButton');
-        hover(event, 'lowMusicButton');
-        hover(event, 'highMusicButton');
-        hover(event, 'lowSoundButton');
-        hover(event, 'highSoundButton');
-        hover(event, 'coinButton');
-        hover(event, 'cupButton');
-        hover(event, 'settingsButton');
-        hover(event, 'questButton');
-        hover(event, 'newGameButton');
+    if (isMatch(currentWorld, 'start')) {
+        applyHover(event);
+        setCursorInitial();
     }
-    if (!isTrue(targeted) && isMatch(currentWorld, 'start')) {
+}
+
+
+// jsdoc
+function applyHover(event) {
+    if (event) {
+        let buttons = getButtonRegister();
+        buttons.forEach((button) => {
+            hover(event, button);
+        });
+    }
+}
+
+
+// jsdoc
+function getButtonRegister() {
+    return [
+        'xButton', 'lowMusicButton', 'highMusicButton', 'lowSoundButton', 'highSoundButton',
+        'coinButton', 'cupButton', 'settingsButton', 'questButton', 'newGameButton'
+    ];
+}
+
+
+// jsdoc
+function hover(event, key) {
+    if (isMouseEvent(event, world[key])) {
+        setGlobalTargeted(key);
+    } else {
+        setButtonTargeted(key);
+    }
+}
+
+
+// jsdoc
+function isMouseEvent(mouse, object) {
+    if (mouse && object) {
+        mouse = getMouseXY(mouse);
+        return isIncluded2D(mouse, object);
+    }
+}
+
+
+// jsdoc
+function getMouseXY(mouse) {
+    let offsetX = getMouseCoord(mouse.offsetX, 'offsetWidth', NATIVE_WIDTH);
+    let offsetY = getMouseCoord(mouse.offsetY, 'offsetHeight', NATIVE_HEIGHT);
+    return { x: offsetX, y: offsetY };
+}
+
+
+// jsdoc
+function getMouseCoord(mouse, key, size) {
+    return mouse / canvas[key] * size;
+}
+
+
+// jsdoc
+function setGlobalTargeted(key) {
+    world[key].targeted = true;
+    if (!isTrue(targeted)) {
+        targeted = true;
+    }
+}
+
+
+// jsdoc
+function setButtonTargeted(key) {
+    world[key].targeted = false;
+}
+
+
+// jsdoc
+function setCursorInitial() {
+    if (!isTrue(targeted)) {
         setCursor('initial');
     }
 }
 
 
-function hover(event, key) {
-    if (isMouseEvent(event, world[key])) {
-        world[key].targeted = true;
-        if (!isTrue(targeted)) {
-            targeted = true;
-        }
-    } else {
-        world[key].targeted = false;
-    }
-}
-
-
+// jsdoc
 function setCursor(value) {
     document.getElementById('canvas').style.cursor = value;
 }

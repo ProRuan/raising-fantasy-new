@@ -175,6 +175,58 @@ function setGamePaused() {
 
 
 // jsdoc
+function pauseGame(logical) {
+    if (!isTrue(pauseDisabled)) {
+        pauseHero(logical);
+        pauseStateBars(logical);
+        pauseLevelComponents(logical);
+        world.pauseSound(logical);
+    }
+}
+
+
+// jsdoc
+function pauseHero(logical) {
+    let hero = world.hero;
+    pauseLevelObject(hero, 'bomb', logical);
+    pauseLevelObject(hero, 'interval', logical);
+}
+
+
+// jsdoc
+function pauseLevelObject(object, key, logical) {
+    if (isMatch(key, 'interval') && object[key]) {
+        object.stop(logical);
+    } else if (object[key]) {
+        object[key].stop(logical);
+    }
+}
+
+
+// jsdoc
+function pauseStateBars(logical) {
+    let keys = ['hpBar', 'energyBar', 'staminaBar'];
+    keys.forEach((key) => {
+        let stateBar = world[key];
+        pauseLevelObject(stateBar, 'interval', logical);
+    });
+}
+
+
+// jsdoc
+function pauseLevelComponents(logical) {
+    for (const [key] of Object.entries(world.level)) {
+        let objectGroup = world.level[key];
+        objectGroup.forEach((object) => {
+            pauseLevelObject(object, 'magic', logical);
+            pauseLevelObject(object, 'web', logical);
+            pauseLevelObject(object, 'interval', logical);
+        });
+    }
+}
+
+
+// jsdoc
 function setPauseTime() {
     if (isTrue(paused)) {
         setPauseStart();
@@ -199,8 +251,6 @@ function pauseLevelMusic(method) {
         world.endboss.music[method]();
     }
 }
-
-
 
 
 // jsdoc
@@ -287,31 +337,6 @@ function addMagicPauseOffset() {
 
 
 
-// Make a class MouseEvent!!!
-
-
-function isWordMatch(word, subword) {
-    return word.includes(subword);
-}
-
-
-function isMouseEvent(mouse, object) {
-    if (mouse && object) {
-        let m = getMouseXY(mouse);
-        // console.log(m, object);
-        return isIncluded2D(m, object);
-    }
-}
-
-
-function getMouseXY(m) {
-    let offsetX = m.offsetX / canvas.offsetWidth * NATIVE_WIDTH;
-    let offsetY = m.offsetY / canvas.offsetHeight * NATIVE_HEIGHT;
-    return { x: offsetX, y: offsetY };
-
-    // return { x: m.offsetX, y: m.offsetY };
-}
-
 
 // jsdoc
 function isCollided(a, b) {
@@ -355,24 +380,6 @@ function isCollidedYBottom(a, b) {
 }
 
 
-// jsdoc
-function isIncluded2D(m, o) {
-    return isIncluded(o.xLeft, m.x, o.xRight) && isIncluded(o.yTop, m.y, o.yBottom);
-}
-
-
-// jsdoc
-function isIncluded(a, b, c) {
-    return isGreater(a, b) && isGreater(b, c);
-}
-
-
-// jsdoc
-function isGreater(a, b, tolerant) {    // rename to isGreater()
-    return (!tolerant) ? a < b : a <= b;
-}
-
-
 function formatSplitWord(text) {
     if (text.includes('_')) {
         text = text.split('_');
@@ -388,12 +395,6 @@ function formatSplitWord(text) {
 // jsdoc
 function isUndefined(value) {
     return value === undefined;
-}
-
-
-// jsdoc
-function isTrue(value) {
-    return (value == true) ? true : false;
 }
 
 

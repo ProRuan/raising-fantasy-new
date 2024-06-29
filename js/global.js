@@ -1,10 +1,4 @@
 // jsdoc
-function isTimeout(timeout, time) {
-    return timeout && isGreater(timeout, time);
-}
-
-
-// jsdoc
 function load(key) {
     let valueAsText = localStorage.getItem(key);
     if (valueAsText) {
@@ -40,55 +34,36 @@ function getTime() {
 }
 
 
+
 // jsdoc
-function pauseGame(logical) {
-    if (!isTrue(pauseDisabled)) {
-        pauseHero(logical);
-        pauseStateBars(logical);
-        pauseLevelComponents(logical);
-        world.pauseSound(logical);
-    }
+function isTrue(value) {
+    return (value == true) ? true : false;
 }
 
 
 // jsdoc
-function pauseHero(logical) {
-    let hero = world.hero;
-    pauseLevelObject(hero, 'bomb', logical);
-    pauseLevelObject(hero, 'interval', logical);
+function isIncluded2D(m, o) {
+    let xIncluded = isIncluded(o.xLeft, m.x, o.xRight);
+    let yIncluded = isIncluded(o.yTop, m.y, o.yBottom);
+    return xIncluded && yIncluded;
 }
 
 
 // jsdoc
-function pauseLevelObject(object, key, logical) {
-    if (isMatch(key, 'interval') && object[key]) {
-        object.stop(logical);
-    } else if (object[key]) {
-        object[key].stop(logical);
-    }
+function isIncluded(a, b, c) {
+    return isGreater(a, b) && isGreater(b, c);
 }
 
 
 // jsdoc
-function pauseStateBars(logical) {
-    let keys = ['hpBar', 'energyBar', 'staminaBar'];
-    keys.forEach((key) => {
-        let stateBar = world[key];
-        pauseLevelObject(stateBar, 'interval', logical);
-    });
+function isGreater(a, b, tolerant) {
+    return (!tolerant) ? a < b : a <= b;
 }
 
 
 // jsdoc
-function pauseLevelComponents(logical) {
-    for (const [key] of Object.entries(world.level)) {
-        let objectGroup = world.level[key];
-        objectGroup.forEach((object) => {
-            pauseLevelObject(object, 'magic', logical);
-            pauseLevelObject(object, 'web', logical);
-            pauseLevelObject(object, 'interval', logical);
-        });
-    }
+function isTimeout(timeout, time) {
+    return timeout && isGreater(timeout, time);
 }
 
 
