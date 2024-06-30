@@ -137,7 +137,7 @@ function setLevelWorld() {
 // jsdoc
 function setPause() {
     if (isMatch(currentWorld, 'level') && !isTrue(pauseDisabled)) {
-        if (isKey('escape') && paused) {
+        if (isKey('escape')) {
             exitLevel();
         } else if (isKey('keyP')) {
             pauseLevel();
@@ -148,10 +148,12 @@ function setPause() {
 
 // jsdoc
 function exitLevel() {
-    world.stopped = true;
-    setStartWorld();
-    world.interacted = true;
-    world.setCurrentButton('newGameButton');
+    if (paused) {
+        world.stopped = true;
+        setStartWorld();
+        world.interacted = true;
+        world.setCurrentButton('newGameButton');
+    }
 }
 
 

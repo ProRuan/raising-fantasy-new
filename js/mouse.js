@@ -100,7 +100,7 @@ function setCursor(value) {
 
 // jsdoc
 function executeMouseDown(event) {
-    if (event && isMatch(currentWorld, 'start')) {
+    if (isWorldEvent(event, 'start')) {
         if (!world.interacted) {
             interactFirst(event);
         } else {
@@ -110,6 +110,12 @@ function executeMouseDown(event) {
             startNewGame(event);
         }
     }
+}
+
+
+// jsdoc
+function isWorldEvent(event, name) {
+    return event && isMatch(currentWorld, name);
 }
 
 
