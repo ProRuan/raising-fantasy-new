@@ -25,33 +25,6 @@ executeEvent('touchcancel', (event) => executeTouchCancel(event));
 
 
 // jsdoc
-function setTouchZones() {
-    setTouchZoneSize();
-    setPauseZoneSize();
-}
-
-
-// jsdoc
-function setTouchZoneSize() {
-    touchZoneWidth = getZoneSize('offsetWidth', 3, 1);
-    touchZoneHeight = getZoneSize('offsetHeight', 3, 2);
-}
-
-
-// jsdoc
-function getZoneSize(key, a, b) {
-    return body[key] / a * b
-}
-
-
-// jsdoc
-function setPauseZoneSize() {
-    pauseZoneWidth = getZoneSize('offsetWidth', 16, 3);
-    pauseZoneHeight = getZoneSize('offsetHeight', 9, 2);
-}
-
-
-// jsdoc
 function executeTouchStart(event) {
     if (isWorldEvent(event, 'level')) {
         touchedZone = '';
@@ -81,11 +54,25 @@ function getChangedTouch(event) {
 }
 
 
+// jsdoc
 function isExitZone(touch) {
-    let pauseXLeft = getSum(body.offsetWidth / 2, -pauseZoneWidth / 2);
-    let pauseXRight = getSum(body.offsetWidth / 2, pauseZoneWidth / 2);
-    let pauseZoneTouched = isGreater(pauseXLeft, touch.clientX) && isGreater(touch.clientX, pauseXRight);
-    return pauseZoneTouched && isGreater(touch.clientY, pauseZoneHeight);
+    return isZoneX(touch) && isGreater(touch.clientY, pauseZoneHeight);
+}
+
+
+// jsdoc
+function isZoneX(touch) {
+    let xLeft = getZoneValue('offsetWidth', -pauseZoneWidth);
+    let xRight = getZoneValue('offsetWidth', pauseZoneWidth);
+    return isIncluded(xLeft, touch.clientX, xRight);
+}
+
+
+// jsdoc
+function getZoneValue(key, value) {
+    let halfBodySize = body[key] / 2;
+    let halfZoneSize = value / 2;
+    return getSum(halfBodySize, halfZoneSize);
 }
 
 
@@ -94,18 +81,22 @@ function executeZoneEvent(id) {
 }
 
 
+// jsdoc
 function isPauseZone(touch) {
-    let pauseXLeft = getSum(body.offsetWidth / 2, -pauseZoneWidth / 2);
-    let pauseXRight = getSum(body.offsetWidth / 2, pauseZoneWidth / 2);
-    let deltaY = getSum(body.offsetHeight, -pauseZoneHeight);
-    let pauseZoneTouched = isGreater(pauseXLeft, touch.clientX) && isGreater(touch.clientX, pauseXRight);
-    return pauseZoneTouched && isGreater(deltaY, touch.clientY);
+    return isZoneX(touch) && isZoneY(touch, -pauseZoneHeight);
 }
 
 
+// jsdoc
+function isZoneY(touch, value) {
+    let deltaY = getSum(body.offsetHeight, value);
+    return isGreater(deltaY, touch.clientY);
+}
+
+
+// jsdoc
 function isControlZone(touch) {
-    let deltaY = getSum(body.offsetHeight, -touchZoneHeight);
-    return isGreater(touch.clientX, touchZoneWidth) && isGreater(deltaY, touch.clientY);
+    return isGreater(touch.clientX, touchZoneWidth) && isZoneY(touch, -touchZoneHeight);
 }
 
 
