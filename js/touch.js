@@ -37,13 +37,13 @@ function executeTouchStart(event) {
 // jsdoc
 function startTouchEvent(touch) {
     if (isExitZone(touch)) {
-        executeZoneEvent('exit', exitLevel());
+        executeZoneEvent('exit', 'exitLevel');
     } else if (isPauseZone(touch)) {
-        executeZoneEvent('pause', pauseLevel());
+        executeZoneEvent('pause', 'pauseLevel');
     } else if (isControlZone(touch)) {
-        executeZoneEvent('control', setControl(touch));
+        executeZoneEvent('control', 'setControl', touch);
     } else if (isActionZone(touch)) {
-        executeZoneEvent('action', setAction(touch));
+        executeZoneEvent('action', 'setAction', touch);
     }
 }
 
@@ -76,8 +76,10 @@ function getZoneValue(key, value) {
 }
 
 
-function executeZoneEvent(id) {
+// jsdoc
+function executeZoneEvent(id, method, touch) {
     touchedZone = id;
+    (!touch) ? this[method]() : this[method](touch);
 }
 
 
