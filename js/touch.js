@@ -119,6 +119,7 @@ function enableRun() {
 }
 
 
+// jsdoc
 function isActionZone(touch) {
     let deltaX = getSum(body.offsetWidth, -touchZoneWidth);
     let deltaY = getSum(body.offsetHeight, -touchZoneHeight);
@@ -126,22 +127,26 @@ function isActionZone(touch) {
 }
 
 
+// jsdoc
 function setAction(touch) {
-    if (isJumpZone(touch)) {
+    if (isActionSubzone(touch, 2)) {
         setKey('space', 'keydown', true);
-    } else if (isAttackZone(touch)) {
+    } else if (isActionSubzone(touch, 1)) {
         setAttackKey();
     }
 }
 
 
-function isJumpZone(touch) {
-    return isGreater(body.offsetHeight - touchZoneHeight / 2, touch.clientY);
+// jsdoc
+function isActionSubzone(touch, n) {
+    let startY = getTouchZoneStartY(n);
+    return isGreater(startY, touch.clientY);
 }
 
 
-function isAttackZone(touch) {
-    return isGreater(body.offsetHeight - touchZoneHeight, touch.clientY)
+// jsdoc
+function getTouchZoneStartY(n) {
+    return body.offsetHeight - touchZoneHeight / n;
 }
 
 
