@@ -365,49 +365,49 @@ function addMagicPauseOffset() {
 
 
 function enableFullscreen(logical) {
-    let orientation = screen.orientation.type;
-
     let nativeFactor = 16 / 9;
     let factor = body.offsetWidth / body.offsetHeight;
-    // console.log(factor, isGreater(nativeFactor, factor));
+    // ipad factor, e.g. 4!!! (offset / screen) ...
 
     if (isTrue(logical) && isGreater(nativeFactor, factor)) {
-        currentWidth = canvas.offsetWidth;
-        currentHeight = canvas.offsetHeight;
-        document.getElementById('canvas').style.width = 'unset';
-        document.getElementById('canvas').style.height = '100vh';
+        updateCanvas(true, 'unset', '100vh');
     } else if (isTrue(logical) && isGreater(factor, nativeFactor)) {
-        currentWidth = canvas.offsetWidth;
-        currentHeight = canvas.offsetHeight;
-        document.getElementById('canvas').style.width = '100%';
-        document.getElementById('canvas').style.height = 'unset';
+        updateCanvas(true, '100%', 'unset');
     } else if (isTrue(logical) && isMatch(factor, nativeFactor)) {
+        updateCanvas(true, '100%', '100vh');
+    } else {
+        updateCanvas(false, `${currentWidth}px`, `${currentHeight}px`);
+    }
+}
+
+
+function updateCanvas(logical, width, height) {
+    setCurrentSize(logical);
+    setCanvasSize('width', width);
+    setCanvasSize('height', height);
+}
+
+
+
+// jsdoc
+function setCurrentSize(logical) {
+    if (logical) {
         currentWidth = canvas.offsetWidth;
         currentHeight = canvas.offsetHeight;
-        document.getElementById('canvas').style.width = `100%`;
-        document.getElementById('canvas').style.height = `100vh`;
-    } else {
-        document.getElementById('canvas').style.width = `${currentWidth}px`;
-        document.getElementById('canvas').style.height = `${currentHeight}px`;
     }
+}
 
 
-    // if (isTrue(logical) && window.matchMedia("(orientation: landscape)").matches) {
-    //     currentWidth = canvas.offsetWidth;
-    //     document.getElementById('canvas').style.width = '100%';
-    // } else {
-    //     document.getElementById('canvas').style.width = `${currentWidth}px`;
-    // }
-
-
-    // set logical
-    // save current width
-    // calculate width or height
+// jsdoc
+function setCanvasSize(key, value) {
+    canvas.style[key] = value;
 }
 
 
 window.addEventListener('resize', (event) => {
-    enableFullscreen(true);
+    if (event) {
+        enableFullscreen(true);
+    }
 });
 
 

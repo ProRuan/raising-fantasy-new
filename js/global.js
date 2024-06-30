@@ -157,7 +157,6 @@ function isTimeout(timeout, time) {
 
 
 
-// jsdoc
 function setClass(id, method, className) {
     document.getElementById(id).classList[method](className);
 }

@@ -88,7 +88,7 @@ function setCursorInitial() {
 
 // jsdoc
 function setCursor(value) {
-    document.getElementById('canvas').style.cursor = value;
+    canvas.style.cursor = value;
 }
 
 
