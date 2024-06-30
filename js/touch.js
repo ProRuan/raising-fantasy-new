@@ -20,6 +20,8 @@ let pauseZoneHeight;
 
 executeEvent('touchstart', (event) => executeTouchStart(event));
 executeEvent('touchmove', (event) => executeTouchMove(event));
+executeEvent('touchend', (event) => executeTouchEnd(event));
+executeEvent('touchcancel', (event) => executeTouchCancel(event));
 
 
 // jsdoc
@@ -53,14 +55,14 @@ function setPauseZoneSize() {
 function executeTouchStart(event) {
     if (isWorldEvent(event, 'level')) {
         touchedZone = '';
-        selectZoneEvent(event);
+        let touch = getChangedTouch(event);
+        startTouchEvent(touch);
     }
 }
 
 
 // jsdoc
-function selectZoneEvent(event) {
-    let touch = getChangedTouch(event);
+function startTouchEvent(touch) {
     if (isExitZone(touch)) {
         executeZoneEvent('exit', exitLevel());
     } else if (isPauseZone(touch)) {
@@ -134,11 +136,21 @@ function isActionZone(touch) {
 
 
 function setAction(touch) {
-    if (isGreater(body.offsetHeight - touchZoneHeight / 2, touch.clientY)) {
+    if (isJumpZone(touch)) {
         setKey('space', 'keydown', true);
-    } else if (isGreater(body.offsetHeight - touchZoneHeight, touch.clientY)) {
+    } else if (isAttackZone(touch)) {
         setAttackKey();
     }
+}
+
+
+function isJumpZone(touch) {
+    return isGreater(body.offsetHeight - touchZoneHeight / 2, touch.clientY);
+}
+
+
+function isAttackZone(touch) {
+    return isGreater(body.offsetHeight - touchZoneHeight, touch.clientY)
 }
 
 
@@ -156,9 +168,15 @@ function setAttackKey() {
 function executeTouchMove(event) {
     if (isWorldEvent(event, 'level')) {
         let touch = getChangedTouch(event);
-        if (isControlZone(touch)) {
-            applyControl(touch);
-        }
+        updateTouchEvent(touch);
+    }
+}
+
+
+// jsdoc
+function updateTouchEvent(touch) {
+    if (isControlZone(touch)) {
+        applyControl(touch);
     }
 }
 
@@ -286,111 +304,61 @@ function setWalk() {
 }
 
 
-window.addEventListener("touchend", (event) => {
+// jsdoc
+function executeTouchEnd(event) {
     if (event && isMatch(currentWorld, 'level')) {
-
-        let touchZoneWidth = body.offsetWidth / 3;
-        let touchZoneHeight = body.offsetHeight / 3 * 2;
-
-        if (isGreater(touchZoneWidth, 192)) {
-            touchZoneWidth = 192;
-        }
-        if (isGreater(touchZoneHeight, 192)) {
-            touchZoneHeight = 192;
-        }
-
-        // console.log('touch zone: ', Math.floor(touchZoneWidth), Math.floor(touchZoneHeight));
-
-        let pauseZoneWidth = body.offsetWidth / 16 * 2;
-        let pauseZoneHeight = body.offsetHeight / 9 * 1;
-        if (isGreater(pauseZoneWidth, 128)) {
-            pauseZoneWidth = 128;
-        }
-        if (isGreater(pauseZoneHeight, 72)) {
-            pauseZoneHeight = 72;
-        }
-        // console.log('pause zone: ', Math.floor(pauseZoneWidth), Math.floor(pauseZoneHeight));
-
-
-        let touch = event.changedTouches[0];
-        if (isGreater(touch.clientX, touchZoneWidth) && isGreater(body.offsetHeight - touchZoneHeight, touch.clientY) || isMatch(touchedZone, 'control')) {
-            lastX = 0;
-            currentX = 0;
-            deltaX = 0;
-            lastY = 0;
-            currentY = 0;
-            deltaY = 0;
-            doubleClick = false;
-            climb = false;
-            move = false;
-            setKey('arrowUp', 'keydown', false);
-            setKey('arrowDown', 'keydown', false);
-            setKey('arrowLeft', 'doubleClick', false);
-            setKey('arrowRight', 'doubleClick', false);
-            setKey('arrowLeft', 'keydown', false);
-            setKey('arrowRight', 'keydown', false);
-        } else if (isGreater(body.offsetWidth - touchZoneWidth, touch.clientX) && isGreater(body.offsetHeight - touchZoneHeight, touch.clientY) || isMatch(touchedZone, 'action')) {
-            if (isGreater(body.offsetHeight - touchZoneHeight / 2, touch.clientY)) {
-                setKey('space', 'keydown', false);
-            } else {
-                setKey('keyA', 'keydown', false);
-                setKey('keyF', 'keydown', false);    // condition?
-            }
-        }
+        let touch = getChangedTouch(event);
+        endTouchEvent(touch);
     }
-});
+}
 
 
-window.addEventListener("touchcancel", (event) => {
-    if (event && isMatch(currentWorld, 'level')) {
-
-        lastX = 0;
-        currentX = 0;
-        deltaX = 0;
-        lastY = 0;
-        currentY = 0;
-        deltaY = 0;
-        doubleClick = false;
-        climb = false;
-        move = false;
-
-        setKey('arrowUp', 'keydown', false);
-        setKey('arrowDown', 'keydown', false);
-        setKey('space', 'keydown', false);
-        setKey('arrowLeft', 'doubleClick', false);
-        setKey('arrowRight', 'doubleClick', false);
-        setKey('arrowLeft', 'keydown', false);
-        setKey('arrowRight', 'keydown', false);
-        setKey('keyA', 'keydown', false);
-        setKey('keyF', 'keydown', false);
-
-        console.log('canceled all');
+// jsdoc
+function endTouchEvent(touch) {
+    if (isControlZone(touch) || isMatch(touchedZone, 'control')) {
+        resetTouch();
+        resetControlKeys();
+    } else if (isActionZone(touch) || isMatch(touchedZone, 'action')) {
+        resetActionKeys();
     }
-});
+}
 
 
+// jsdoc
+function resetTouch() {
+    lastX = 0;
+    currentX = 0;
+    deltaX = 0;
+    lastY = 0;
+    currentY = 0;
+    deltaY = 0;
+    doubleClick = false;
+    climb = false;
+    move = false;
+}
 
 
-// zone left, right, pause, touch zone switcher ...
-// climb (reset x speed) ... ?
+// jsdoc
+function resetControlKeys() {
+    setVertArrow('keydown', false, false);
+    setHorizArrow('doubleClick', false, false);
+    setHorizArrow('keydown', false, false);
+}
 
 
-// touch events (5/7)
-// ------------
-// climb - check
-// jump - check
-// runAttack - check
-// run - check
-// walkAttack - check
-// walk - check
-// attack - check
+// jsdoc
+function resetActionKeys() {
+    setKey('space', 'keydown', false);
+    setKey('keyA', 'keydown', false);
+    setKey('keyF', 'keydown', false);
+}
 
-// optimize touch control ... !!!
-// make two or three touch zones ...
-// make two or three touch arrays ...
-// think about touch array reset ...
-// make circles for touch zones ...
-// set conditions for touch events (control, attack, jump) ...
-// make (own) touchEvent (left/control and right/action) ...
 
-// canvas - size dividable by 4, 8, 16, 64 ... ?
+// jsdoc
+function executeTouchCancel(event) {
+    if (isWorldEvent(event, 'level')) {
+        resetTouch();
+        resetControlKeys();
+        resetActionKeys();
+    }
+}
