@@ -50,6 +50,7 @@ function init() {
 
     setKeyboard();
     setStartWorld();
+    setTouchZones();
 }
 
 

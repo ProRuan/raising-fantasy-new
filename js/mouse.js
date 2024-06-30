@@ -7,12 +7,6 @@ executeEvent('mouseup', (event) => executeMouseUp(event));
 
 
 // jsdoc
-function executeEvent(key, subfunction) {
-    return document.addEventListener(key, subfunction);
-}
-
-
-// jsdoc
 function executeMouseMove(event) {
     targeted = false;
     if (isMatch(currentWorld, 'start')) {

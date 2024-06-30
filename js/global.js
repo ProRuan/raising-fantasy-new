@@ -16,6 +16,12 @@ function save(key) {
 
 
 // jsdoc
+function executeEvent(key, subfunction) {
+    return document.addEventListener(key, subfunction);
+}
+
+
+// jsdoc
 function formatInitial(word, method) {
     let initial = word[0];
     return word.replace(initial, initial[method]());
