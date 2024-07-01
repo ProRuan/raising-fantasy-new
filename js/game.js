@@ -40,9 +40,9 @@ function init() {
     setSource();
     setCanvas();
 
-    if (canvas.offsetWidth != screen.width && canvas.offsetHeight != screen.height) {    // depends on final html!
-        enableFullscreen(true);
-    }
+    // if (canvas.offsetWidth != screen.width && canvas.offsetHeight != screen.height) {    // depends on final html!
+    //     enableFullscreen(true);
+    // }
 
     setKeyboard();
     setStartWorld();
@@ -404,31 +404,31 @@ function setCanvasSize(key, value) {
 }
 
 
-window.addEventListener('resize', (event) => {
-    if (event) {
-        enableFullscreen(true);
-    }
-});
+// window.addEventListener('resize', (event) => {
+//     if (event) {
+//         enableFullscreen(true);
+//     }
+// });
 
 
-window.addEventListener("orientationchange", (event) => {
-    let currentOrientation = event.target.screen.orientation.angle;
+// window.addEventListener("orientationchange", (event) => {
+//     let currentOrientation = event.target.screen.orientation.angle;
 
-    if (isMatch(currentOrientation, 90)) {
-        if (isMatch(currentWorld, 'start')) {    // pause music of start world at least
-            world.music.play();
-        }
-        if (isMatch(currentWorld, 'level') && !isTrue(paused)) {    // pause music of start world at least
-            pauseGame(false);
-        }
-        // console.log('landscape: ', currentOrientation);
-    } else if (isMatch(currentOrientation, 0)) {
-        if (isMatch(currentWorld, 'start')) {    // pause music of start world at least
-            world.music.pause();
-        }
-        if (isMatch(currentWorld, 'level') && !isTrue(paused)) {    // pause music of start world at least
-            pauseGame(true);
-        }
-        // console.log('protrait: ', currentOrientation);
-    }
-});
+//     if (isMatch(currentOrientation, 90)) {
+//         if (isMatch(currentWorld, 'start')) {    // pause music of start world at least
+//             world.music.play();
+//         }
+//         if (isMatch(currentWorld, 'level') && !isTrue(paused)) {    // pause music of start world at least
+//             pauseGame(false);
+//         }
+//         // console.log('landscape: ', currentOrientation);
+//     } else if (isMatch(currentOrientation, 0)) {
+//         if (isMatch(currentWorld, 'start')) {    // pause music of start world at least
+//             world.music.pause();
+//         }
+//         if (isMatch(currentWorld, 'level') && !isTrue(paused)) {    // pause music of start world at least
+//             pauseGame(true);
+//         }
+//         // console.log('protrait: ', currentOrientation);
+//     }
+// });

@@ -7,10 +7,62 @@ body {
     background-size: cover;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    gap: 64px;
     overflow-x: hidden;
 }
+
+
+header {
+    box-sizing: border-box;
+    padding: 24px 32px;
+    width: 100%;
+    height: 72px;
+    font-family: 'Trade Winds', Arial, Helvetica, sans-serif;
+    font-size: 32px;
+    background-color: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 4px 4px white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.body-btn {
+    box-sizing: border-box;
+    padding: 4px;
+    width: 48px;
+    height: 48px;
+    font-family: 'Amaranth', Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    color: #382914;
+    background-image: url('./img/header/ball3.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 4px white;
+}
+
+
+/* #full-screen-btn {
+    box-sizing: border-box;
+    padding: 4px;
+    width: 48px;
+    height: 48px;
+    font-family: 'Amaranth', Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    color: #382914;
+    background-image: url('./img/header/ball3.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 4px white;
+} */
 
 
 #canvas {
@@ -25,6 +77,27 @@ body {
     width: 50%;
     background-color: white;
     border-radius: 10%;
+}
+
+
+footer {
+    box-sizing: border-box;
+    padding: 24px 32px;
+    width: 100%;
+    height: 72px;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    background-color: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 -4px 4px white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 96px;
+}
+
+
+.mobile {
+    display: none;
 }
 
 
@@ -54,9 +127,45 @@ body {
 }
 
 
+@media (max-width: 640px) {
+    header {
+        font-size: 28px;
+    }
+
+
+    footer {
+        font-size: 18px;
+        justify-content: space-around;
+        gap: unset;
+    }
+}
+
+
 @media (max-height: 540px) {
     #canvas {
         width: unset;
         height: 100vh;
+    }
+}
+
+
+@media (max-width: 480px) {
+    header {
+        font-size: 24px;
+    }
+
+    .footer-link {
+        display: none;
+    }
+
+    .mobile {
+        display: unset;
+    }
+}
+
+
+@media (max-width: 360px) {
+    header {
+        font-size: 20px;
     }
 }
