@@ -172,6 +172,21 @@ function checkOrientation() {
 }
 
 
+async function includeHTML() {
+    let inclusion = document.querySelectorAll('[pokecard]');
+    for (let i = 0; i < inclusion.length; i++) {
+        const element = inclusion[i];
+        file = element.getAttribute("pokecard");
+        let response = await fetch(file);
+        if (response.ok) {
+            element.innerHTML = await response.text();
+        } else {
+            element.innerHTML = 'Page not found.';
+        }
+    }
+}
+
+
 
 
 // screen size not exactly (background gap!) ...

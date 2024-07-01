@@ -120,6 +120,69 @@ footer {
 }
 
 
+
+
+/* imprint */
+main {
+    box-sizing: border-box;
+    padding: 0 32px;
+    width: 100%;
+    height: calc(100vh - 144px);
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    background-color: rgba(255, 255, 255, 0.9);
+    overflow-y: scroll;
+}
+
+
+h1 {
+    margin: 24px 0;
+    font-size: 32px;
+}
+
+
+p {
+    margin: 0 0 32px 0;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: justify;
+}
+
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+
+a:hover {
+    text-decoration: underline;
+    color: steelblue;
+}
+
+
+h2 {
+    margin: 16px 0;
+    font-size: 24px;
+}
+
+
+h3 {
+    margin: 16px 0;
+    font-size: 20px;
+}
+
+
+h4 {
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+
+
+
+/* privacy policy */
+
+
 @media (orientation: portrait) {
     #full-screen-btn {
         display: none;

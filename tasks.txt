@@ -203,8 +203,13 @@ Clean Coding (12/12 + 56/56 | 12/12 + 53/56) + (4/1/6) + (0/1) + (0/1)
       --> global functions ...
       --> key function ...
 
-      --> button functions ... (2/5)
+      --> button functions + home-btn (header) ... (2/5)
       --> full screen as "full screen" ... ?
+
+      --> prepared links (including home link) ... (2/4)
+      --> imprint + game sources ...
+      --> set main height for index, imprint, privacy policy, game manuel ... (0/4)
+      --> templates, style, media ...
 
 
 
