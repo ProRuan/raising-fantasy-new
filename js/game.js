@@ -114,8 +114,10 @@ function setCanvas() {
 
 // jsdoc
 function setCurrentSize() {
-    currentWidth = canvas.offsetWidth;
-    currentHeight = canvas.offsetHeight;
+    if (canvas) {
+        currentWidth = canvas.offsetWidth;
+        currentHeight = canvas.offsetHeight;
+    }
 }
 
 
