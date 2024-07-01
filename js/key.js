@@ -5,7 +5,6 @@ executeEvent('keydown', (event) => executeKeyDown(event));
 executeEvent('keyup', (event) => executeKeyUp(event));
 
 
-// jsdoc
 function executeKeyDown(event) {
     if (!world.interacted) {
         interactFirst(event);
@@ -14,6 +13,25 @@ function executeKeyDown(event) {
         setKeyProperties(event);
         closeBoard();
         setPause();
+    }
+
+
+    let orientation = screen.orientation.type;
+    if (orientation.includes('landscape') && isGreater(body.offsetHeight, body.offsetWidth)) {
+        if (event.code == 'Digit2') {
+            fullScreenEnabled = false;
+            setClass('body', 'remove', 'jc-center');
+            setClass('header', 'remove', 'display-none');
+            setClass('footer', 'remove', 'display-none');
+            enableFullscreen(false);
+        } else if (event.code == 'Digit1') {
+            fullScreenEnabled = true;
+            setClass('body', 'add', 'jc-center');
+            setClass('header', 'add', 'display-none');
+            setClass('footer', 'add', 'display-none');
+            enableFullscreen(true);
+        }
+        console.log(orientation);
     }
 }
 

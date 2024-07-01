@@ -14,6 +14,11 @@ body {
 }
 
 
+.jc-center {
+    justify-content: center;
+}
+
+
 header {
     box-sizing: border-box;
     padding: 24px 32px;
@@ -44,25 +49,8 @@ header {
     border: none;
     border-radius: 50%;
     box-shadow: 0 0 4px white;
+    cursor: pointer;
 }
-
-
-/* #full-screen-btn {
-    box-sizing: border-box;
-    padding: 4px;
-    width: 48px;
-    height: 48px;
-    font-family: 'Amaranth', Arial, Helvetica, sans-serif;
-    font-size: 24px;
-    color: #382914;
-    background-image: url('./img/header/ball3.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    border: none;
-    border-radius: 50%;
-    box-shadow: 0 0 4px white;
-} */
 
 
 #canvas {
@@ -96,12 +84,27 @@ footer {
 }
 
 
+.footer-link {
+    cursor: pointer;
+}
+
+
 .mobile {
     display: none;
 }
 
 
+.display-none {
+    display: none;
+}
+
+
 @media (orientation: portrait) {
+    .jc-center {
+        justify-content: space-between;
+    }
+
+
     #canvas {
         display: none;
     }
@@ -109,6 +112,11 @@ footer {
 
     #rotation-img {
         display: block;
+    }
+
+
+    .display-none {
+        display: flex;
     }
 }
 
@@ -122,7 +130,7 @@ footer {
 
 @media (max-width: 960px) {
     #canvas {
-        width: 100%;
+        width: 100% !important;
     }
 }
 

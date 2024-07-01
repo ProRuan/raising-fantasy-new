@@ -14,6 +14,7 @@ let tempScore;
 let score = {};
 let volume = {};
 let source;
+let fullScreenEnabled = false;
 
 
 
@@ -107,6 +108,14 @@ function setSource() {
 // jsdoc
 function setCanvas() {
     canvas = document.getElementById('canvas');
+    setCurrentSize();
+}
+
+
+// jsdoc
+function setCurrentSize() {
+    currentWidth = canvas.offsetWidth;
+    currentHeight = canvas.offsetHeight;
 }
 
 
@@ -362,39 +371,32 @@ function addMagicPauseOffset() {
 }
 
 
-
-
+// jsdoc
 function enableFullscreen(logical) {
-    let nativeFactor = 16 / 9;
+    let nativeFactor = NATIVE_WIDTH / NATIVE_HEIGHT;
     let factor = body.offsetWidth / body.offsetHeight;
-    // ipad factor, e.g. 4!!! (offset / screen) ...
-
-    if (isTrue(logical) && isGreater(nativeFactor, factor)) {
-        updateCanvas(true, 'unset', '100vh');
-    } else if (isTrue(logical) && isGreater(factor, nativeFactor)) {
-        updateCanvas(true, '100%', 'unset');
-    } else if (isTrue(logical) && isMatch(factor, nativeFactor)) {
-        updateCanvas(true, '100%', '100vh');
-    } else {
-        updateCanvas(false, `${currentWidth}px`, `${currentHeight}px`);
-    }
+    updateCanvasSize(logical, nativeFactor, factor);
 }
-
-
-function updateCanvas(logical, width, height) {
-    setCurrentSize(logical);
-    setCanvasSize('width', width);
-    setCanvasSize('height', height);
-}
-
 
 
 // jsdoc
-function setCurrentSize(logical) {
-    if (logical) {
-        currentWidth = canvas.offsetWidth;
-        currentHeight = canvas.offsetHeight;
+function updateCanvasSize() {
+    if (isTrue(logical) && isGreater(nativeFactor, factor)) {
+        updateCanvas('unset', '100vh');
+    } else if (isTrue(logical) && isGreater(factor, nativeFactor)) {
+        updateCanvas('100%', 'unset');
+    } else if (isTrue(logical) && isMatch(factor, nativeFactor)) {
+        updateCanvas('100%', '100vh');
+    } else {
+        updateCanvas('unset', 'unset');
     }
+}
+
+
+// jsdoc
+function updateCanvas(width, height) {
+    setCanvasSize('width', width);
+    setCanvasSize('height', height);
 }
 
 
@@ -404,11 +406,12 @@ function setCanvasSize(key, value) {
 }
 
 
-// window.addEventListener('resize', (event) => {
-//     if (event) {
-//         enableFullscreen(true);
-//     }
-// });
+window.addEventListener('resize', (event) => {    // window (not document)
+    if (event && !isTrue(fullScreenEnabled)) {    // executeEvent with 3 param
+        setCurrentSize();
+        console.log(currentWidth, currentHeight);
+    }
+});
 
 
 // window.addEventListener("orientationchange", (event) => {
