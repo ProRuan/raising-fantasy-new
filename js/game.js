@@ -380,7 +380,7 @@ function enableFullscreen(logical) {
 
 
 // jsdoc
-function updateCanvasSize() {
+function updateCanvasSize(logical, nativeFactor, factor) {
     if (isTrue(logical) && isGreater(nativeFactor, factor)) {
         updateCanvas('unset', '100vh');
     } else if (isTrue(logical) && isGreater(factor, nativeFactor)) {
@@ -409,7 +409,8 @@ function setCanvasSize(key, value) {
 window.addEventListener('resize', (event) => {    // window (not document)
     if (event && !isTrue(fullScreenEnabled)) {    // executeEvent with 3 param
         setCurrentSize();
-        console.log(currentWidth, currentHeight);
+    } else if (event && isTrue(fullScreenEnabled)) {
+        enableFullscreen(true);
     }
 });
 
