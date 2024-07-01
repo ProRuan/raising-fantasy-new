@@ -18,17 +18,19 @@ function executeKeyDown(event) {
 
     let orientation = screen.orientation.type;
     if (orientation.includes('landscape') && isGreater(body.offsetHeight, body.offsetWidth)) {
-        if (event.code == 'Digit2') {
+        if (event.code == 'Digit2' || event.code == 'Escape') {
             fullScreenEnabled = false;
             setClass('body', 'remove', 'jc-center');
             setClass('header', 'remove', 'display-none');
             setClass('footer', 'remove', 'display-none');
+            setClass('exit-full-screen-btn', 'add', 'hide');
             enableFullscreen(false);
         } else if (event.code == 'Digit1') {
             fullScreenEnabled = true;
             setClass('body', 'add', 'jc-center');
             setClass('header', 'add', 'display-none');
             setClass('footer', 'add', 'display-none');
+            setClass('exit-full-screen-btn', 'remove', 'hide');
             enableFullscreen(true);
         }
         console.log(orientation);
