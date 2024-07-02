@@ -69,7 +69,7 @@ header {
     margin: 12px 12px;
     position: absolute;
     top: 0;
-    right: calc(calc(100% / 2) - 36px);
+    right: 20px;
 }
 
 
