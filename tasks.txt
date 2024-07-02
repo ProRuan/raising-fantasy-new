@@ -210,6 +210,7 @@ Clean Coding (12/12 + 56/56 | 12/12 + 53/56) + (4/1/6) + (0/1) + (0/1)
       --> imprint + game sources ...
       --> set main height for index, imprint, privacy policy, game manuel ... (0/4)
       --> templates, style, media ...
+      --> responsiveness of templates ... (0/3)
 
 
 

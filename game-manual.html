@@ -24,38 +24,193 @@
     <main>
         <h1>Game Manual</h1>
 
-        <p>Rudolf Johann Sachslehner<br />
-            Wiener Stra&szlig;e 6-8/1/21<br />
-            3430 Tulln an der Donau</p>
+        <h2>1. Story</h2>
 
-        <h2>Steuerung (Level - h3)</h2>
-
-        <!-- Please make a table + use images + text!!! -->
         <p>
-            <b>Klettern</b>: obere/untere Pfeiltaste<br>
-            <b>Springen</b>: Leertaste<br>
-            <b>Laufattacke</b>: linke/rechte Pfeiltaste (2x) + A-Taste<br>
-            <b>Laufen</b>: linke/rechte Pfeiltaste (2x)<br>
-            <b>Gehattacke</b>: linke/rechte Pfeiltaste + A-Taste<br>
-            <b>Gehen</b>: linke/rechte Pfeiltaste<br>
-            <b>Angreifen</b>: A-Taste<br>
-            <b>Bombe werfen</b>: F-Taste<br>
-            <br>
-            <b>Spiel pausieren</b>: P-Taste<br>
-            <b>Spiel beenden</b>: Spiel pausieren + Escape<br>
+            Spiele einen Ritter und erkunde die Waldwelt dieses Spiels.
         </p>
 
-        <!-- test ... -->
-        <button class="body-btn header-btn">A</button>
-        <button class="body-btn header-btn">
-            <img src="./img/start_screen/arrow_left.png" alt="">
-        </button>
-        <button class="body-btn header-btn">
-            <img src="./img/start_screen/arrow_right.png" alt="">
-        </button>
+        <h3>Quests</h3>
 
-        <p><b>Quelle</b>: <a href="https://www.e-recht24.de">eRecht24</a></p>
-        <!-- Add game sources!!! -->
+        <ul>
+            <li>Sammle alle Münzen.</li>
+            <li>Sammle alle Blätter.</li>
+            <li>Überbiete die aktuelle Bestzeit.</li>
+        </ul>
+
+        <h4>Neuer Rekord</h4>
+
+        <p>
+            Um einen neuen Rekord aufzustellen, müssen mehr Münzen und mehr Blätter als in der aktuellen Bestwertung
+            gesammelt werden. Zusätzlich muss die gegenwärtige Bestzeit überboten werden. Nach dem Erreichen der
+            maximalen Bestwertung, kann immer noch einer neuer Zeitrekord aufgestellt werden.
+        </p>
+
+        <h2>2. Steuerung</h2>
+
+        <h3>Menüsteuerung</h3>
+
+        <p>
+            Das Startmenü kann über Keyboard, Maus oder Touchscreen bedient werden.
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Steuerung</th>
+                    <td>Keyboard</td>
+                    <td>Mouse</td>
+                    <td>Touchscreen</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Auswählen</th>
+                    <td>links/rechts</td>
+                    <td>anvisieren</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <th>Bestätigen/Öffnen</th>
+                    <td>Enter</td>
+                    <td>klicken</td>
+                    <td>tippen</td>
+                </tr>
+                <tr>
+                    <th>Abbrechen/Schließen</th>
+                    <td>Backspace/Enter/X</td>
+                    <td>Enter</td>
+                    <td>tippen</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>Vollbildmodus</h4>
+
+        <p>
+            Dieses Spiel unterstützt das Spielen im Vollbildmodus.<br>
+            Klicke 1, um diesen zu aktivieren bzw. klicke 2, um diesen zu deaktivieren.
+        </p>
+
+        <h3>Levelsteuerung</h3>
+
+        <p>
+            Der Hauptcharakter lässt sich über das Keyboard bzw. den Touchscreen steuern.<br>
+            Einige Aktionen lassen sich nur ausführen, wenn die zugehörige Bedingung erfüllt ist.
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Steuerung</th>
+                    <td>Keyboard</td>
+                    <td>Touchscreen</td>
+                    <td>Bedingung</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Klettern</th>
+                    <td>oben/unten</td>
+                    <td>nach oben/unten</td>
+                    <td>Leiter</td>
+                </tr>
+                <tr>
+                    <th>Springen</th>
+                    <td>Leertaste</td>
+                    <td>rechts unten</td>
+                    <td>Bodenkontakt</td>
+                </tr>
+                <tr>
+                    <th>Laufattacke</th>
+                    <td>Laufen + Angreifen</td>
+                    <td>Laufen + Angreifen</td>
+                    <td>Stamina</td>
+                </tr>
+                <tr>
+                    <th>Laufen</th>
+                    <td>
+                        links + links<br>
+                        rechts + rechts
+                    </td>
+                    <td>
+                        2-mal tippen + nach links<br>
+                        2-mal tippen + nach rechts
+                    </td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <th>Gehattacke</th>
+                    <td>Gehen + Angreifen</td>
+                    <td>Gehen + Angreifen</td>
+                    <td>Stamina</td>
+                </tr>
+                <tr>
+                    <th>Gehen</th>
+                    <td>links/rechts</td>
+                    <td>nach links/rechts</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <th>Anreifen</th>
+                    <td>A</td>
+                    <td>rechts mittig</td>
+                    <td>Stamina</td>
+                </tr>
+                <tr>
+                    <th>Bombe werfen</th>
+                    <td>F</td>
+                    <td>rechts mittig</td>
+                    <td>Kristall</td>
+                </tr>
+                <tr>
+                    <th>Spiel pausieren</th>
+                    <td>P</td>
+                    <td>unten mittig</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <th>Spiel beenden</th>
+                    <td>Escape</td>
+                    <td>oben mittig</td>
+                    <td>Pause</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Touchzonen</h3>
+
+        <p>
+            Die folgende Abbildung zeigt die Belegung der Touchzonen:
+        </p>
+
+        <div class="touch-figure">
+            <div id="touch-container" class="touch-container">
+                <div class="touch-width-element">
+                    <div class="control-zone">Bewegen</div>
+                </div>
+                <div class="touch-width-element">
+                    <div class="middle-zone">
+                        <div class="pause-zone">Exit</div>
+                        <div class="pause-zone">Pause</div>
+                    </div>
+                </div>
+                <div class="touch-width-element">
+                    <div class="action-zone">
+                        <div class="attack-zone">Angreifen</div>
+                        <div class="attack-zone">Springen</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p>
+            Links ist die Bewegungssteuerung für das Gehen, Laufen und Klettern untergebracht.<br>
+            Oben mittig befindet sich die Zone für das Verlassen, unten mittig die Zone für das Pausieren des
+            Spiels.<br>
+            Rechts liegen die beiden Zonen für das Angreifen und Springen.
+        </p>
+
     </main>
 
     <!-- template!!! -->

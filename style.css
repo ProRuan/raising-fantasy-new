@@ -142,6 +142,29 @@ main {
 }
 
 
+h1,
+h2,
+h3,
+h4 {
+    max-width: 640px;
+}
+
+
+/* format ul and li!!! */
+ul {
+    margin: 0 0 32px 0;
+    max-width: 600px;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: justify;
+}
+
+
+li {
+    margin: 0 0 8px 0;
+}
+
+
 h1 {
     margin: 24px 0;
     font-size: 32px;
@@ -150,6 +173,7 @@ h1 {
 
 p {
     margin: 0 0 32px 0;
+    max-width: 768px;
     font-size: 16px;
     line-height: 24px;
     text-align: justify;
@@ -174,6 +198,9 @@ h2 {
 }
 
 
+
+
+/* privacy policy */
 h3 {
     margin: 16px 0;
     font-size: 20px;
@@ -188,7 +215,128 @@ h4 {
 
 
 
-/* privacy policy */
+/* game manual */
+table {
+    margin: 0 0 32px 0;
+    width: 100%;
+    max-width: 768px;
+    font-size: 16px;
+    line-height: 20px;
+    border-spacing: 0;
+}
+
+
+thead {
+    font-weight: bold;
+    background-color: rgba(70, 130, 180, 0.3);
+}
+
+
+tr:nth-child(2n) {
+    background-color: rgba(70, 130, 180, 0.1);
+}
+
+
+thead th,
+thead td {
+    border-bottom: 1px solid steelblue;
+}
+
+
+th {
+    padding: 4px 0;
+    text-align: left;
+    border-right: 1px solid steelblue;
+}
+
+
+td {
+    padding: 4px 0;
+    text-align: center;
+}
+
+
+.touch-figure {
+    margin-bottom: 32px;
+    max-width: 768px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.touch-container {
+    width: fit-content;
+    border: 3px solid steelblue;
+    border-radius: 12px;
+    display: flex;
+}
+
+
+.touch-width-element {
+    box-sizing: border-box;
+    margin: 4px;
+    width: 160px;
+    height: 270px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: flex-end;
+}
+
+
+.control-zone {
+    margin: 8px;
+    width: calc(100% - 16px);
+    height: calc(180px - 24px);
+    background-color: rgba(70, 130, 180, 0.3);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.middle-zone {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.pause-zone {
+    margin: 8px;
+    width: calc(120px - 16px);
+    height: calc(60px - 12px);
+    background-color: rgba(70, 130, 180, 0.3);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.action-zone {
+    width: 100%;
+    height: 180px;
+    border-radius: 12px;
+}
+
+
+.attack-zone {
+    margin: 8px;
+    width: calc(100% - 16px);
+    height: calc(50% - 12px);
+    background-color: rgba(70, 130, 180, 0.3);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 @media (orientation: portrait) {
