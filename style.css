@@ -142,6 +142,42 @@ main {
 }
 
 
+.pinboard {
+    margin: 0 0 32px 0;
+    max-width: 768px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+
+article {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0 16px;
+    width: fit-content;
+    height: fit-content;
+    border: 3px solid steelblue;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+article h3 {
+    margin: 16px 0 8px 0;
+}
+
+
+article p {
+    margin: 0 0 16px 0;
+    text-align: center;
+}
+
+
 h1,
 h2,
 h3,
