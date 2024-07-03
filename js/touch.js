@@ -24,7 +24,10 @@ executeEvent('touchend', (event) => executeTouchEnd(event));
 executeEvent('touchcancel', (event) => executeTouchCancel(event));
 
 
-// jsdoc
+/**
+ * Executes the touch start.
+ * @param {event} event - The event of the touch start.
+ */
 function executeTouchStart(event) {
     if (isWorldEvent(event, 'level')) {
         setTouchZones();
@@ -34,7 +37,9 @@ function executeTouchStart(event) {
 }
 
 
-// jsdoc
+/**
+ * Sets the touch zones.
+ */
 function setTouchZones() {
     touchedZone = '';
     setTouchZoneSize();
@@ -42,27 +47,40 @@ function setTouchZones() {
 }
 
 
-// jsdoc
+/**
+ * Sets the sizes of the touch zones.
+ */
 function setTouchZoneSize() {
     touchZoneWidth = getZoneSize('offsetWidth', 3, 1);
     touchZoneHeight = getZoneSize('offsetHeight', 3, 2);
 }
 
 
-// jsdoc
+/**
+ * Provides a size value of the touch zone.
+ * @param {string} key - The size value of the body.
+ * @param {number} a - The basic quantity.
+ * @param {number} b - The proportion.
+ * @returns {number} - The size value of the touch zone.
+ */
 function getZoneSize(key, a, b) {
-    return body[key] / a * b
+    return body[key] / a * b;
 }
 
 
-// jsdoc
+/**
+ * Sets the size of the pause zone.
+ */
 function setPauseZoneSize() {
     pauseZoneWidth = getZoneSize('offsetWidth', 16, 3);
     pauseZoneHeight = getZoneSize('offsetHeight', 9, 2);
 }
 
 
-// jsdoc
+/**
+ * Starts the touch event.
+ * @param {touch} touch - The touch object.
+ */
 function startTouchEvent(touch) {
     if (isExitZone(touch)) {
         executeZoneEvent('exit', 'exitLevel');
@@ -76,20 +94,32 @@ function startTouchEvent(touch) {
 }
 
 
-// jsdoc
+/**
+ * Provides the changed touch.
+ * @param {event} event - The event of the touch start.
+ * @returns {object} - The changed touch.
+ */
 function getChangedTouch(event) {
     return event.changedTouches[0];
 }
 
 
-// jsdoc
+/**
+ * Verifies the exit zone.
+ * @param {object} touch - The touch object.
+ * @returns {boolean} - A boolean value.
+ */
 function isExitZone(touch) {
     let inZone = isZoneX(touch) && isGreater(touch.clientY, pauseZoneHeight);
     return inZone && isTrue(fullScreenEnabled);
 }
 
 
-// jsdoc
+/**
+ * Verifies the x value of the touch zone.
+ * @param {object} touch - The touch object.
+ * @returns {boolean} - The boolean value.
+ */
 function isZoneX(touch) {
     let xLeft = getZoneValue('offsetWidth', -pauseZoneWidth);
     let xRight = getZoneValue('offsetWidth', pauseZoneWidth);
@@ -97,7 +127,12 @@ function isZoneX(touch) {
 }
 
 
-// jsdoc
+/**
+ * Provides a value of the touch zone.
+ * @param {string} key - The size value of the body.
+ * @param {number} value - The size value of the touch zone.
+ * @returns {number} - A value of the touch zone.
+ */
 function getZoneValue(key, value) {
     let halfBodySize = body[key] / 2;
     let halfZoneSize = value / 2;
@@ -105,34 +140,55 @@ function getZoneValue(key, value) {
 }
 
 
-// jsdoc
+/**
+ * Executes the zone event.
+ * @param {string} id - The id of the touch zone.
+ * @param {string} method - The method to apply.
+ * @param {object} touch - The touch object.
+ */
 function executeZoneEvent(id, method, touch) {
     touchedZone = id;
     (!touch) ? this[method]() : this[method](touch);
 }
 
 
-// jsdoc
+/**
+ * Verifies the pause zone.
+ * @param {object} touch - The touch object.
+ * @returns {boolean} - A boolean value.
+ */
 function isPauseZone(touch) {
     let inZone = isZoneX(touch) && isZoneY(touch, -pauseZoneHeight);
     return inZone && isTrue(fullScreenEnabled);
 }
 
 
-// jsdoc
-function isZoneY(touch, value) {
-    let deltaY = getSum(body.offsetHeight, value);
+/**
+ * Verifies the y value of the touch zone.
+ * @param {object} touch - The touch object.
+ * @param {number} height - The height of the touch zone.
+ * @returns {number} - The y value of the touch zone.
+ */
+function isZoneY(touch, height) {
+    let deltaY = getSum(body.offsetHeight, height);
     return isGreater(deltaY, touch.clientY);
 }
 
 
-// jsdoc
+/**
+ * Verifies the control zone.
+ * @param {object} touch - The touch object.
+ * @returns {boolean} - A boolean value.
+ */
 function isControlZone(touch) {
     return isGreater(touch.clientX, touchZoneWidth) && isZoneY(touch, -touchZoneHeight);
 }
 
 
-// jsdoc
+/**
+ * Sets the control.
+ * @param {object} touch - The touch object.
+ */
 function setControl(touch) {
     currentX = touch.clientX;
     currentY = touch.clientY;
@@ -142,7 +198,9 @@ function setControl(touch) {
 }
 
 
-// jsdoc
+/**
+ * Enables the run.
+ */
 function enableRun() {
     let timeDiff = getSum(currentTime, -lastTime);
     if (isGreater(timeDiff, 500)) {
@@ -151,7 +209,11 @@ function enableRun() {
 }
 
 
-// jsdoc
+/**
+ * Verifies the action zone.
+ * @param {object} touch - The touch object.
+ * @returns {boolean} - A boolean value.
+ */
 function isActionZone(touch) {
     let deltaX = getSum(body.offsetWidth, -touchZoneWidth);
     let deltaY = getSum(body.offsetHeight, -touchZoneHeight);
@@ -159,7 +221,10 @@ function isActionZone(touch) {
 }
 
 
-// jsdoc
+/**
+ * Sets the action.
+ * @param {object} touch - The touch object.
+ */
 function setAction(touch) {
     if (isActionSubzone(touch, 2)) {
         setKey('space', 'keydown', true);
@@ -169,20 +234,31 @@ function setAction(touch) {
 }
 
 
-// jsdoc
+/**
+ * Verifies the subzone of the action zone.
+ * @param {object} touch - The touch object.
+ * @param {number} n - The id of the subzone.
+ * @returns {boolean} - A boolean value.
+ */
 function isActionSubzone(touch, n) {
     let startY = getTouchZoneStartY(n);
     return isGreater(startY, touch.clientY);
 }
 
 
-// jsdoc
+/**
+ * Provides the start y value of the touch zone.
+ * @param {number} n - The id of the touch zone.
+ * @returns {number} - The start y value.
+ */
 function getTouchZoneStartY(n) {
     return body.offsetHeight - touchZoneHeight / n;
 }
 
 
-// jsdoc
+/**
+ * Sets the attack key.
+ */
 function setAttackKey() {
     if (!world.hero.bombUnlocked) {
         setKey('keyA', 'keydown', true);
@@ -192,7 +268,10 @@ function setAttackKey() {
 }
 
 
-// jsdoc
+/**
+ * Executes the touch move.
+ * @param {event} event - The event of the touch move.
+ */
 function executeTouchMove(event) {
     if (isWorldEvent(event, 'level')) {
         let touch = getChangedTouch(event);
@@ -201,7 +280,10 @@ function executeTouchMove(event) {
 }
 
 
-// jsdoc
+/**
+ * Updates the touch event.
+ * @param {object} touch - The touch object.
+ */
 function updateTouchEvent(touch) {
     if (isControlZone(touch)) {
         applyControl(touch);
@@ -209,7 +291,10 @@ function updateTouchEvent(touch) {
 }
 
 
-// jsdoc
+/**
+ * Applies the control.
+ * @param {object} touch - The touch object.
+ */
 function applyControl(touch) {
     calculateTouchMove(touch);
     calculateMoveDirection();
@@ -218,14 +303,20 @@ function applyControl(touch) {
 }
 
 
-// jsdoc
+/**
+ * Calculates the touch move.
+ * @param {object} touch - The touch object.
+ */
 function calculateTouchMove(touch) {
     calculateDeltaΧ(touch);
     calculateDeltaY(touch);
 }
 
 
-// jsdoc
+/**
+ * Calculates the delta x value of the touch move.
+ * @param {object} touch - The touch object.
+ */
 function calculateDeltaΧ(touch) {
     lastX = currentX;
     currentX = touch.clientX;
@@ -233,7 +324,10 @@ function calculateDeltaΧ(touch) {
 }
 
 
-// jsdoc
+/**
+ * Calculates the delta y value of the touch move.
+ * @param {object} touch - The touch object.
+ */
 function calculateDeltaY(touch) {
     lastY = currentY;
     currentY = touch.clientY;
@@ -241,14 +335,20 @@ function calculateDeltaY(touch) {
 }
 
 
-// jsdoc
+/**
+ * Calculates the direction of the touch move.
+ */
 function calculateMoveDirection() {
     absDeltaX = getAbsoluteValue(deltaX);
     absDeltaY = getAbsoluteValue(deltaY);
 }
 
 
-// jsdoc
+/**
+ * Provides the absoulte value.
+ * @param {number} value - The input value.
+ * @returns {number} - The absolute value.
+ */
 function getAbsoluteValue(value) {
     if (isGreater(value, 0)) {
         return value * value / (value * -1);
@@ -258,7 +358,9 @@ function getAbsoluteValue(value) {
 }
 
 
-// jsdoc
+/**
+ * Sets the direction of the move.
+ */
 function setMoveDirection() {
     if (isDirection(absDeltaX, absDeltaY)) {
         move = false;
@@ -270,13 +372,20 @@ function setMoveDirection() {
 }
 
 
-// jsdoc
+/**
+ * Verifies the direction of the touch move.
+ * @param {number} valueA - The value a to compare.
+ * @param {number} valueB - The value b to compare.
+ * @returns {boolean} - A boolean value.
+ */
 function isDirection(valueA, valueB) {
     return isGreater(valueA, valueB) && isGreater(4, valueB);
 }
 
 
-// jsdoc
+/**
+ * Sets the move of the hero.
+ */
 function setMove() {
     if (isTrue(climb)) {
         setClimb();
@@ -287,7 +396,9 @@ function setMove() {
 }
 
 
-// jsdoc
+/**
+ * Sets the climb.
+ */
 function setClimb() {
     setHorizArrow('keydown', false, false);
     if (isGreater(currentY, lastY)) {
@@ -298,21 +409,33 @@ function setClimb() {
 }
 
 
-// jsdoc
+/**
+ * Sets the horizontal arrow keys.
+ * @param {string} subkey - The property of the key.
+ * @param {any} valueA - The value a to set.
+ * @param {any} valueB - The value b to set.
+ */
 function setHorizArrow(subkey, valueA, valueB) {
     setKey('arrowLeft', subkey, valueA);
     setKey('arrowRight', subkey, valueB);
 }
 
 
-// jsdoc
+/**
+ * Sets the vertical arrow keys.
+ * @param {string} subkey - The property of the key.
+ * @param {any} valueA - The value a to set.
+ * @param {any} valueB - The value b to set.
+ */
 function setVertArrow(subkey, valueA, valueB) {
     setKey('arrowUp', subkey, valueA);
     setKey('arrowDown', subkey, valueB);
 }
 
 
-// jsdoc
+/**
+ * Sets the run.
+ */
 function setRun() {
     if (isGreater(currentX, lastX) && isTrue(doubleClick)) {
         setHorizArrow('doubleClick', true, false);
@@ -322,7 +445,9 @@ function setRun() {
 }
 
 
-// jsdoc
+/**
+ * Sets the walk.
+ */
 function setWalk() {
     if (isGreater(currentX, lastX)) {
         setHorizArrow('keydown', true, false);
@@ -332,7 +457,10 @@ function setWalk() {
 }
 
 
-// jsdoc
+/**
+ * Executes the touch end.
+ * @param {event} event - The event of the touch end.
+ */
 function executeTouchEnd(event) {
     if (event && isMatch(currentWorld, 'level')) {
         let touch = getChangedTouch(event);
@@ -341,7 +469,10 @@ function executeTouchEnd(event) {
 }
 
 
-// jsdoc
+/**
+ * Ends the touch event.
+ * @param {object} touch - The touch object.
+ */
 function endTouchEvent(touch) {
     if (isControlZone(touch) || isMatch(touchedZone, 'control')) {
         resetTouch();
@@ -353,7 +484,9 @@ function endTouchEvent(touch) {
 }
 
 
-// jsdoc
+/**
+ * Resets the parameters of the touch.
+ */
 function resetTouch() {
     lastX = 0;
     currentX = 0;
@@ -367,7 +500,9 @@ function resetTouch() {
 }
 
 
-// jsdoc
+/**
+ * Resets the control keys.
+ */
 function resetControlKeys() {
     setVertArrow('keydown', false, false);
     setHorizArrow('doubleClick', false, false);
@@ -375,7 +510,9 @@ function resetControlKeys() {
 }
 
 
-// jsdoc
+/**
+ * Resets the action keys.
+ */
 function resetActionKeys() {
     setKey('space', 'keydown', false);
     setKey('keyA', 'keydown', false);
@@ -383,7 +520,10 @@ function resetActionKeys() {
 }
 
 
-// jsdoc
+/**
+ * Executes the touch cancel event.
+ * @param {event} event - The event of the touch cancel.
+ */
 function executeTouchCancel(event) {
     if (isWorldEvent(event, 'level')) {
         resetTouch();
