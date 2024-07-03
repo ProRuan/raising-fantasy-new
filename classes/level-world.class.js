@@ -181,10 +181,26 @@ class LevelWorld extends World {
      */
     pauseWorld() {
         if (paused) {
+            this.setExitButton('remove');
             this.drawObject(this.pause);
+
         } else {
+            this.setExitButton('add');
             this.removeDeadEnemies();
             this.removeSound();
+        }
+    }
+
+
+    /**
+     * Sets the exit button of the full screen mode.
+     * @param {string} method - The method to apply.
+     */
+    setExitButton(method) {
+        let header = document.getElementById('header');
+        let classValue = header.classList.value;
+        if (classValue.includes('display-none')) {
+            setClass('exit-full-screen-btn', method, 'hide');
         }
     }
 

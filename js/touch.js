@@ -27,10 +27,38 @@ executeEvent('touchcancel', (event) => executeTouchCancel(event));
 // jsdoc
 function executeTouchStart(event) {
     if (isWorldEvent(event, 'level')) {
-        touchedZone = '';
+        setTouchZones();
         let touch = getChangedTouch(event);
         startTouchEvent(touch);
     }
+}
+
+
+// jsdoc
+function setTouchZones() {
+    touchedZone = '';
+    setTouchZoneSize();
+    setPauseZoneSize();
+}
+
+
+// jsdoc
+function setTouchZoneSize() {
+    touchZoneWidth = getZoneSize('offsetWidth', 3, 1);
+    touchZoneHeight = getZoneSize('offsetHeight', 3, 2);
+}
+
+
+// jsdoc
+function getZoneSize(key, a, b) {
+    return body[key] / a * b
+}
+
+
+// jsdoc
+function setPauseZoneSize() {
+    pauseZoneWidth = getZoneSize('offsetWidth', 16, 3);
+    pauseZoneHeight = getZoneSize('offsetHeight', 9, 2);
 }
 
 
@@ -56,7 +84,8 @@ function getChangedTouch(event) {
 
 // jsdoc
 function isExitZone(touch) {
-    return isZoneX(touch) && isGreater(touch.clientY, pauseZoneHeight);
+    let inZone = isZoneX(touch) && isGreater(touch.clientY, pauseZoneHeight);
+    return inZone && isTrue(fullScreenEnabled);
 }
 
 
@@ -85,7 +114,8 @@ function executeZoneEvent(id, method, touch) {
 
 // jsdoc
 function isPauseZone(touch) {
-    return isZoneX(touch) && isZoneY(touch, -pauseZoneHeight);
+    let inZone = isZoneX(touch) && isZoneY(touch, -pauseZoneHeight);
+    return inZone && isTrue(fullScreenEnabled);
 }
 
 
@@ -316,7 +346,8 @@ function endTouchEvent(touch) {
     if (isControlZone(touch) || isMatch(touchedZone, 'control')) {
         resetTouch();
         resetControlKeys();
-    } else if (isActionZone(touch) || isMatch(touchedZone, 'action')) {
+    }
+    if (isActionZone(touch) || isMatch(touchedZone, 'action')) {
         resetActionKeys();
     }
 }

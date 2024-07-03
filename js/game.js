@@ -148,33 +148,6 @@ function setLevelWorld() {
 
 
 // jsdoc
-function setTouchZones() {
-    setTouchZoneSize();
-    setPauseZoneSize();
-}
-
-
-// jsdoc
-function setTouchZoneSize() {
-    touchZoneWidth = getZoneSize('offsetWidth', 3, 1);
-    touchZoneHeight = getZoneSize('offsetHeight', 3, 2);
-}
-
-
-// jsdoc
-function getZoneSize(key, a, b) {
-    return body[key] / a * b
-}
-
-
-// jsdoc
-function setPauseZoneSize() {
-    pauseZoneWidth = getZoneSize('offsetWidth', 16, 3);
-    pauseZoneHeight = getZoneSize('offsetHeight', 9, 2);
-}
-
-
-// jsdoc
 function setPause() {
     if (isMatch(currentWorld, 'level') && !isTrue(pauseDisabled)) {
         if (isKey('escape')) {
