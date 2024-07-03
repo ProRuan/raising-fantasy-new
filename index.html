@@ -108,10 +108,10 @@
 
     <header id="header">
         <a href="./index.html">Raising Fantasy</a>
-        <button id="full-screen-btn" class="body-btn" onclick="enterFullScreen()">FS</button>
+        <button id="full-screen-btn" class="body-btn" onclick="fillScreen(true, 'add', 'remove')">FS</button>
     </header>
 
-    <button id="exit-full-screen-btn" class="body-btn hide" onclick="exitFullScreen()">EX</button>
+    <button id="exit-full-screen-btn" class="body-btn hide" onclick="fillScreen(false, 'remove', 'add')">EX</button>
 
     <canvas id="canvas" width="960" height="540"></canvas>
 

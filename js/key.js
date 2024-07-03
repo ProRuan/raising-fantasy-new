@@ -194,36 +194,26 @@ function adjustFullScreen(event) {
  */
 function setFullScreen(event) {
     if (isMatch(event.code, 'Digit2')) {
-        exitFullScreen();
+        fillScreen(false, 'remove', 'add');
     } else if (isMatch(event.code, 'Digit1')) {
-        enterFullScreen();
+        fillScreen(true, 'add', 'remove');
     }
 }
 
 
 /**
- * Exits the full screen mode.
+ * Uses the entire screen.
+ * @param {boolean} logical - A boolean value.
+ * @param {string} methodA - The key of method a.
+ * @param {string} methodB - The key of method b.
  */
-function exitFullScreen() {
-    fullScreenEnabled = false;
-    setClass('body', 'remove', 'jc-center');
-    setClass('header', 'remove', 'display-none');
-    setClass('footer', 'remove', 'display-none');
-    setClass('exit-full-screen-btn', 'add', 'hide');
-    enableFullscreen(false);
-}
-
-
-/**
- * Enters the full screen mode.
- */
-function enterFullScreen() {
-    fullScreenEnabled = true;
-    setClass('body', 'add', 'jc-center');
-    setClass('header', 'add', 'display-none');
-    setClass('footer', 'add', 'display-none');
-    setClass('exit-full-screen-btn', 'remove', 'hide');
-    enableFullscreen(true);
+function fillScreen(logical, methodA, methodB) {
+    fullScreenEnabled = logical;
+    setClass('body', methodA, 'jc-center');
+    setClass('header', methodA, 'display-none');
+    setClass('footer', methodA, 'display-none');
+    setClass('exit-full-screen-btn', methodB, 'hide');
+    enableFullscreen(logical);
 }
 
 
