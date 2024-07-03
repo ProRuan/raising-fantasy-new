@@ -17,6 +17,8 @@ let source;
 let fullScreenEnabled = false;
 
 
+// fix exit button (disturbs the touch) ... !!!
+// fix header, main and footer (including rotation hint) ...
 
 
 // set canvas, keyboard, source ...
