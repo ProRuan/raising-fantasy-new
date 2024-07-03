@@ -1,3 +1,7 @@
+/**
+ * Represents a level world.
+ * @extends World
+ */
 class LevelWorld extends World {
     heroX = 384;
     finalCameraX = -6720;
@@ -7,7 +11,11 @@ class LevelWorld extends World {
     size = LEVEL_SIZE;
 
 
-    // jsdoc
+    /**
+     * Creates a level world.
+     * @param {element} canvas - The canvas to use.
+     * @param {Keyboard} keyboard - The keyboard to apply.
+     */
     constructor(canvas, keyboard) {
         super(canvas, keyboard);
         this.setLevelWorld();
@@ -15,19 +23,25 @@ class LevelWorld extends World {
     }
 
 
-    // jsdoc
+    /**
+     * Provides the endboss of the level.
+     */
     get endboss() {
         return this.level.bosses[0];
     }
 
 
-    // jsdoc
+    /**
+     * Provides the star of the level.
+     */
     get star() {
         return this.level.stars[0];
     }
 
 
-    // jsdoc
+    /**
+     * Sets the level world.
+     */
     setLevelWorld() {
         this.setLevel();
         this.setAvatar();
@@ -37,14 +51,18 @@ class LevelWorld extends World {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the level.
+     */
     setLevel() {
         this.level = new Level1();
         this.setLevelObjects();
     }
 
 
-    // jsdoc
+    /**
+     * Sets the objects of the level.
+     */
     setLevelObjects() {
         for (const [key, value] of Object.entries(this.level)) {
             this[key] = value;
@@ -52,7 +70,9 @@ class LevelWorld extends World {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the avatar.
+     */
     setAvatar() {
         this.setAvatarProfile();
         this.setAvatarStateBar();
@@ -60,14 +80,18 @@ class LevelWorld extends World {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the profile of the avatar.
+     */
     setAvatarProfile() {
         this.avatarImage = new AvatarInfo(source.avatarImage);
         this.avatarFrame = new AvatarInfo(source.avatarFrame);
     }
 
 
-    // jsdoc
+    /**
+     * Sets the state bar of the avatar.
+     */
     setAvatarStateBar() {
         this.hpBar = new StateBar(source.hpPoint, 120, 600);
         this.energyBar = new StateBar(source.energyPoint, 100, 48);
@@ -75,7 +99,9 @@ class LevelWorld extends World {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the item of the avatar.
+     */
     setAvatarItem() {
         this.itemBg = new AvatarInfo(source.itemBg);
         this.itemBomb = new AvatarInfo(source.itemBomb);
@@ -83,18 +109,25 @@ class LevelWorld extends World {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the hero.
+     */
     setHero() {
         this.hero = new Knight(this.heroX, 38);
     }
 
 
-    // jsdoc
+    /**
+     * Connects the world and the hero.
+     */
     connectWorld() {
         this.hero.world = this;
     }
 
 
+    /**
+     * Sets the pause.
+     */
     setPause() {
         let pause = source.pause;
         let x = this.getCenteredCoord('width', pause.width);
@@ -103,6 +136,9 @@ class LevelWorld extends World {
     }
 
 
+    /**
+     * Draws the level world.
+     */
     draw() {
         this.clearCanvas();
         this.translateCamera(this.cameraX, 0);
@@ -118,6 +154,9 @@ class LevelWorld extends World {
     }
 
 
+    /**
+     * Draws the objects of the level world.
+     */
     drawLevelObjects() {
         this.drawLevelComponents(this.sceneryKeys);
         this.drawLevelComponents(this.floraKeys);
@@ -127,6 +166,9 @@ class LevelWorld extends World {
     }
 
 
+    /**
+     * Draws the subobjects of the level world.
+     */
     drawLevelSubobjects() {
         this.drawSubobject(this.endboss.magic);
         this.drawSpiderWebs();
@@ -134,6 +176,9 @@ class LevelWorld extends World {
     }
 
 
+    /**
+     * Pauses the level world.
+     */
     pauseWorld() {
         if (paused) {
             this.drawObject(this.pause);
@@ -144,6 +189,9 @@ class LevelWorld extends World {
     }
 
 
+    /**
+     * Dims the screen.
+     */
     dimScreen() {
         this.ctx.globalAlpha = getSum(1, -this.alpha);
         this.drawBlackRectangle();
@@ -151,6 +199,9 @@ class LevelWorld extends World {
     }
 
 
+    /**
+     * Draws a black rectangle.
+     */
     drawBlackRectangle() {
         this.ctx.beginPath();
         this.ctx.fillStyle = 'black';
@@ -159,6 +210,10 @@ class LevelWorld extends World {
     }
 
 
+    /**
+     * Draws a subobject.
+     * @param {object} object - The subobject to draw.
+     */
     drawSubobject(object) {
         if (object) {
             this.drawObject(object);
@@ -166,6 +221,9 @@ class LevelWorld extends World {
     }
 
 
+    /**
+     * Applies the game over.
+     */
     applyGameOver() {
         if (this.hero && this.hero.isEpilog()) {
             this.drawGameOverBg();
@@ -176,6 +234,9 @@ class LevelWorld extends World {
     }
 
 
+    /**
+     * Applies the transit.
+     */
     transit() {
         if (isTimeout(this.transitTime, this.time)) {
             this.stop();
@@ -184,6 +245,9 @@ class LevelWorld extends World {
     }
 
 
+    /**
+     * Stops the level world.
+     */
     stop() {
         this.pauseMusic('hero');
         this.pauseMusic('endboss');
@@ -193,17 +257,27 @@ class LevelWorld extends World {
     }
 
 
+    /**
+     * Pauses the music.
+     * @param {string} key - The object key.
+     */
     pauseMusic(key) {
         this[key].music.pause();
     }
 
 
+    /**
+     * Starts the start world.
+     */
     start() {
         setStartWorld();
         world.interacted = true;
     }
 
 
+    /**
+     * Sets the time of transit.
+     */
     setTransitTime() {
         if (!this.transitTime) {
             this.transitTime = getSum(this.time, 2250);
@@ -212,6 +286,9 @@ class LevelWorld extends World {
     }
 
 
+    /**
+     * Draws the background of the game over.
+     */
     drawGameOverBg() {
         this.setText('64px Bungee Spice', 'left', 'white');
         this.setFilter('blur(12px)');
@@ -220,6 +297,7 @@ class LevelWorld extends World {
     }
 
 
+    // Draws a rectangle.
     drawRectangle() {
         let rectangle = this.getRectangle();
         this.ctx.beginPath();
@@ -228,6 +306,10 @@ class LevelWorld extends World {
     }
 
 
+    /**
+     * Provides a rectangle.
+     * @returns {object} - The values of the rectangle.
+     */
     getRectangle() {
         let x = canvas.width / 2 - 217;
         let y = canvas.height / 2 - 36;
@@ -235,6 +317,9 @@ class LevelWorld extends World {
     }
 
 
+    /**
+     * Draws the game over text.
+     */
     drawGameOverText() {
         this.setText('64px Bungee Spice', 'center', 'steelblue');
         this.drawText('Game over', this.canvas.width / 2, 302);
@@ -242,16 +327,10 @@ class LevelWorld extends World {
     }
 
 
-    // to delete!!!
-    drawTouchButton(x, y, width, height) {
-        this.ctx.beginPath();
-        this.ctx.strokeStyle = 'steelblue';
-        this.ctx.rect(x, y - height, width, height);
-        this.ctx.stroke();
-    }
-
-
-    // jsdoc
+    /**
+     * Draws the level components.
+     * @param {array} keys - The keys of the level components.
+     */
     drawLevelComponents(keys) {
         keys.forEach((key) => {
             this.drawObjectGroup(this.level[key]);
@@ -259,9 +338,11 @@ class LevelWorld extends World {
     }
 
 
-    // jsdoc
+    /**
+     * Draws the avatar info.
+     */
     drawAvatarInfo() {
-        this.drawObjectGroup([this.avatarImage, this.avatarFrame])
+        this.drawObjectGroup([this.avatarImage, this.avatarFrame]);
         this.drawStateBar('hpBar');
         this.drawStateBar('energyBar');
         this.drawStateBar('staminaBar');
@@ -269,7 +350,10 @@ class LevelWorld extends World {
     }
 
 
-    // jsdoc
+    /**
+     * Draws a state bar.
+     * @param {string} key - The key of the state bar.
+     */
     drawStateBar(key) {
         this.drawObject(this[key].bg);
         this.drawObjectGroup(this[key].points);
@@ -277,7 +361,9 @@ class LevelWorld extends World {
     }
 
 
-    // jsdoc
+    /**
+     * Draws a throwable item.
+     */
     drawThrowableItem() {
         if (this.hero.bombUnlocked) {
             this.drawObject(this.itemBg);
@@ -287,7 +373,9 @@ class LevelWorld extends World {
     }
 
 
-    // jsdoc
+    /**
+     * Draws the item on condition.
+     */
     drawItemIfReady() {
         let points = this.hero.energyPoints.length;
         let max = this.energyBar.max;
@@ -297,6 +385,9 @@ class LevelWorld extends World {
     }
 
 
+    /**
+     * Draws a spider web.
+     */
     drawSpiderWebs() {
         let spiders = this.getSpiders();
         spiders.forEach((spider) => {
@@ -305,20 +396,27 @@ class LevelWorld extends World {
     }
 
 
-    // jsdoc
+    /**
+     * Provides the spiders.
+     * @returns {array} - The spiders.
+     */
     getSpiders() {
         return this.enemies.filter(enemy => enemy instanceof Spider);
     }
 
 
-    // jsdoc
+    /**
+     * Removes dead enemies.
+     */
     removeDeadEnemies() {
         this.removeEnemy();
         this.setEnemyRemovable();
     }
 
 
-    // jsdoc
+    /**
+     * Removes an enemy.
+     */
     removeEnemy() {
         let enemy = this.getEnemy('timeToGo');
         if (enemy && isGreater(enemy.timeToGo, world.time)) {
@@ -328,7 +426,12 @@ class LevelWorld extends World {
     }
 
 
-    // jsdoc
+    /**
+     * Provides an enemy.
+     * @param {string} keyA - The key of the value a.
+     * @param {string} keyB - The key of the value b.
+     * @returns {Enemy} - The enemy.
+     */
     getEnemy(keyA, keyB) {
         if (!keyB) {
             return this.enemies.find(enemy => enemy[keyA]);
@@ -338,7 +441,9 @@ class LevelWorld extends World {
     }
 
 
-    // jsdoc
+    /**
+     * Sets an enemy removeable.
+     */
     setEnemyRemovable() {
         let enemy = this.getEnemy('dead', 'removeable');
         if (enemy) {
@@ -349,7 +454,10 @@ class LevelWorld extends World {
     }
 
 
-    // jsdoc
+    /**
+     * Sets the time to go.
+     * @param {Enemy} enemy - The enemy to set.
+     */
     setTimeToGo(enemy) {
         if (!enemy.timeToGo) {
             enemy.timeToGo = getSum(world.time, 2000);
@@ -357,7 +465,9 @@ class LevelWorld extends World {
     }
 
 
-    // jsdoc
+    /**
+     * Raises the victory podium.
+     */
     raiseVictoryPodium() {
         if (this.isStarHidden()) {
             this.moveStar();
@@ -366,19 +476,26 @@ class LevelWorld extends World {
     }
 
 
-    // jsdoc
+    /**
+     * Verifies, if the star is hidden.
+     * @returns {boolean} - A boolean value.
+     */
     isStarHidden() {
         return this.star && isGreater(this.trophyY, this.star.y)
     }
 
 
-    // jsdoc
+    /**
+     * Moves the star.
+     */
     moveStar() {
         this.star.y -= this.victorySpeed;
     }
 
 
-    // jsdoc
+    /**
+     * Moves the victory podium.
+     */
     moveVictoryPodium() {
         this.victoryPodium.forEach((element) => {
             element.y -= this.victorySpeed;

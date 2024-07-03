@@ -47,7 +47,7 @@ class World {
 
 
     /**
-     * Redraws the canvas.
+     * Redraws the world.
      */
     redraw() {
         if (isUndefined(this.stopped)) {

@@ -231,7 +231,7 @@ class StartWorld extends World {
 
 
     /**
-     * Draws the objects.
+     * Draws the start world.
      */
     draw() {
         this.clearCanvas();

@@ -17,6 +17,9 @@ let source;
 let fullScreenEnabled = false;
 
 
+// remove comments of the level world ...
+
+
 // fix exit button (disturbs the touch) ... !!!
 // fix header, main and footer (including rotation hint) ...
 
