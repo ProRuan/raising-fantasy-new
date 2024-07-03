@@ -242,4 +242,17 @@ class World {
             (isTrue(logical)) ? sound.pause() : sound.play();
         });
     }
+
+
+    /**
+     * Sets the exit button of the full screen mode.
+     * @param {string} method - The method to apply.
+     */
+    setExitButton(method) {
+        let header = document.getElementById('header');
+        let classValue = header.classList.value;
+        if (classValue.includes('display-none')) {
+            setClass('exit-full-screen-btn', method, 'hide');
+        }
+    }
 }
