@@ -1,4 +1,7 @@
-// jsdoc
+/**
+ * Loads a storable item.
+ * @param {string} key - The key of the storable item.
+ */
 function load(key) {
     let valueAsText = localStorage.getItem(key);
     if (valueAsText) {
@@ -7,7 +10,10 @@ function load(key) {
 }
 
 
-// jsdoc
+/**
+ * Saves a storable item.
+ * @param {string} key - The key of the storable item.
+ */
 function save(key) {
     let value = storableItems[key];
     let valueAsText = JSON.stringify(value);
@@ -15,50 +21,85 @@ function save(key) {
 }
 
 
-// jsdoc
+/**
+ * Executes an event.
+ * @param {string} key - The key of the event.
+ * @param {function} subfunction - The subfunction to execute.
+ */
 function executeEvent(key, subfunction) {
-    return document.addEventListener(key, subfunction);
+    document.addEventListener(key, subfunction);
 }
 
 
-// jsdoc
+/**
+ * Formats the initial of a word.
+ * @param {string} word - The word to format.
+ * @param {string} method - The method to apply.
+ * @returns {string} - The formatted word.
+ */
 function formatInitial(word, method) {
     let initial = word[0];
     return word.replace(initial, initial[method]());
 }
 
 
-// jsdoc
+/**
+ * Verifies a match.
+ * @param {any} a - The value a to compare.
+ * @param {any} b - The value b to compare.
+ * @returns {boolean} - A boolean value.
+ */
 function isMatch(a, b) {
     return a == b;
 }
 
 
-// jsdoc
+/**
+ * Provides the time.
+ * @returns {number} - The time.
+ */
 function getTime() {
     return new Date().getTime();
 }
 
 
-// jsdoc
+/**
+ * Verifies, if the value is undefined.
+ * @param {any} value - The value to verify.
+ * @returns {boolean} - A boolean value.
+ */
 function isUndefined(value) {
     return value === undefined;
 }
 
 
-// jsdoc
+/**
+ * Verifies, if the value is true.
+ * @param {any} value - The value to verify.
+ * @returns {boolean} - A boolean value.
+ */
 function isTrue(value) {
     return (value == true) ? true : false;
 }
 
 
-// jsdoc
+/**
+ * Verifies, if two objects are collided.
+ * @param {object} a - The object a to compare.
+ * @param {object} b - The object b to compare.
+ * @returns {boolean} - A boolean value.
+ */
 function isCollided(a, b) {
     return isCollidedX(a, b) && isCollidedY(a, b);
 }
 
 
-// jsdoc
+/**
+ * Verifies the collision on the x-axis.
+ * @param {object} a - The object a to compare.
+ * @param {object} b - The object b to compare.
+ * @returns {boolean} - A boolean value.
+ */
 function isCollidedX(a, b) {
     let aLeft = isIncluded(b.xLeft, a.xLeft, b.xRight);
     let bLeft = isIncluded(a.xLeft, b.xLeft, a.xRight);
@@ -68,7 +109,12 @@ function isCollidedX(a, b) {
 }
 
 
-// jsdoc
+/**
+ * Verifies the collision on the y-axis.
+ * @param {object} a - The object a to compare.
+ * @param {object} b - The object b to compare.
+ * @returns {boolean} - A boolean value.
+ */
 function isCollidedY(a, b) {
     let aTop = isIncluded(b.yTop, a.yTop, b.yBottom);
     let bTop = isIncluded(a.yTop, b.yTop, a.yBottom);
@@ -78,7 +124,12 @@ function isCollidedY(a, b) {
 }
 
 
-// jsdoc
+/**
+ * Verifies, if the (mouse) object is included.
+ * @param {object} m - The (mouse) object to compare.
+ * @param {object} o - The object to compare.
+ * @returns {boolean} - A boolean value.
+ */
 function isIncluded2D(m, o) {
     let xIncluded = isIncluded(o.xLeft, m.x, o.xRight);
     let yIncluded = isIncluded(o.yTop, m.y, o.yBottom);
@@ -86,19 +137,35 @@ function isIncluded2D(m, o) {
 }
 
 
-// jsdoc
+/**
+ * Verifies, if the middle value is included.
+ * @param {number} a - The value a to compare.
+ * @param {number} b - The value b to compare.
+ * @param {number} c - The value c to compare.
+ * @returns {boolean} - A boolean value.
+ */
 function isIncluded(a, b, c) {
     return isGreater(a, b) && isGreater(b, c);
 }
 
 
-// jsdoc
+/**
+ * Verifies, if the value b is greater than the value a.
+ * @param {number} a - The value a to compare.
+ * @param {number} b - The value b to compare.
+ * @param {string} tolerant - The parameter of strictness.
+ * @returns {boolean} - A boolean value.
+ */
 function isGreater(a, b, tolerant) {
     return (!tolerant) ? a < b : a <= b;
 }
 
 
-// jsdoc
+/**
+ * Formats a word which includes an underscore.
+ * @param {string} text - The text to format.
+ * @returns {string} - The formatted text.
+ */
 function formatSplitWord(text) {
     if (text.includes('_')) {
         let formattedText = getFormattedSplitWord(text);
@@ -109,7 +176,11 @@ function formatSplitWord(text) {
 }
 
 
-// jsdoc
+/**
+ * Provides a formatted split word.
+ * @param {string} text - The text to format.
+ * @returns {string} - The formatted split word.
+ */
 function getFormattedSplitWord(text) {
     text = text.split('_');
     let firstWord = text[0];
@@ -118,79 +189,79 @@ function getFormattedSplitWord(text) {
 }
 
 
-// jsdoc
+/**
+ * Provides the last element of an array.
+ * @param {array} array - The providing array.
+ * @returns {any} - The last element of the array.
+ */
 function getLastElement(array) {
     return array[array.length - 1];
 }
 
 
-// jsdoc
+/**
+ * Provides a random number.
+ * @param {number} max - The max value.
+ * @param {number} dev - The dispersion.
+ * @returns {number} - The random number.
+ */
 function getRandomNumber(max, dev) {
     return max - Math.round(Math.random() * dev);
 }
 
 
-// jsdoc
+/**
+ * Provides the sum.
+ * @param {number} summandA - The summand a.
+ * @param {number} summandB - The summand b.
+ * @returns {number} - The sum.
+ */
 function getSum(summandA, summandB) {
     return summandA + summandB;
 }
 
 
-// jsdoc
+/**
+ * Provides a verified value.
+ * @param {number} valueA - The value a to verify.
+ * @param {number} valueB - The value b to verify.
+ * @returns {number} - The verified value.
+ */
 function getVerifiedValue(valueA, valueB) {
     return isGreater(valueA, valueB) ? valueA : valueB;
 }
 
 
-// jsdoc
+/**
+ * Verifies a time trigger.
+ * @param {number} current - The current time.
+ * @param {number} last - The last time.
+ * @param {number} value - The value to compare.
+ * @returns {boolean} - A boolean value.
+ */
 function isOnTime(current, last, value) {
     let timeDiff = current - last;
     return isGreater(value, timeDiff);
 }
 
 
-// jsdoc
+/**
+ * Verifies a timeout.
+ * @param {number} timeout - The value of the timeout.
+ * @param {number} time - The current time.
+ * @returns {boolean} - A boolean value.
+ */
 function isTimeout(timeout, time) {
     return timeout && isGreater(timeout, time);
 }
 
 
-
-
+/**
+ * Sets the class of an element.
+ * @param {string} id - The id of the element.
+ * @param {string} method - The method to apply.
+ * @param {string} className - The name of the class.
+ */
 function setClass(id, method, className) {
     document.getElementById(id).classList[method](className);
 }
-
-
-function checkOrientation() {
-    let orientation = screen.orientation.type;
-    if (isMatch(orientation, 'landscape-primary')) {
-        console.log(orientation);
-    } else if (isMatch(orientation, 'portrait-primary')) {
-        console.log(orientation);
-    }
-}
-
-
-async function includeHTML() {
-    let inclusion = document.querySelectorAll('[pokecard]');
-    for (let i = 0; i < inclusion.length; i++) {
-        const element = inclusion[i];
-        file = element.getAttribute("pokecard");
-        let response = await fetch(file);
-        if (response.ok) {
-            element.innerHTML = await response.text();
-        } else {
-            element.innerHTML = 'Page not found.';
-        }
-    }
-}
-
-
-
-
-// screen size not exactly (background gap!) ...
-// white line below game screen (depends on phone size) ...
-// buttons / touch events ...
-// await loading of images (progress bar?) ...
-// answers and questions ...

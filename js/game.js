@@ -18,6 +18,7 @@ let fullScreenEnabled = false;
 
 
 // remove comments of the level world ...
+// getElement function ... !
 
 
 // fix exit button (disturbs the touch) ... !!!
@@ -416,3 +417,20 @@ window.addEventListener("orientationchange", (event) => {
         // console.log('protrait: ', currentOrientation);
     }
 });
+
+
+
+
+async function includeHTML() {
+    let inclusion = document.querySelectorAll('[pokecard]');
+    for (let i = 0; i < inclusion.length; i++) {
+        const element = inclusion[i];
+        file = element.getAttribute("pokecard");
+        let response = await fetch(file);
+        if (response.ok) {
+            element.innerHTML = await response.text();
+        } else {
+            element.innerHTML = 'Page not found.';
+        }
+    }
+}
