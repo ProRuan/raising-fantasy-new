@@ -56,10 +56,6 @@
 
         <span>Dieses Phänomen tritt ein, wenn</span>
 
-        <!-- <p>
-            Dieses Phänomen tritt ein, wenn
-        </p> -->
-
         <ul>
             <li>der Charakter in den Abgrund fällt oder</li>
             <li>die Gesundheitsleiste des Charakters auf 0 steht.</li>
@@ -104,75 +100,8 @@
             </tbody>
         </table>
 
-        <section class="mobile-table-group">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Steuerung</th>
-                        <td>Keyboard</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>Auswählen</th>
-                        <td>links/rechts</td>
-                    </tr>
-                    <tr>
-                        <th>Bestätigen, Öffnen</th>
-                        <td>Enter</td>
-                    </tr>
-                    <tr>
-                        <th>Abbrechen, Schließen</th>
-                        <td>Backspace, Enter, X</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Steuerung</th>
-                        <td>Mouse</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>Auswählen</th>
-                        <td>anvisieren</td>
-                    </tr>
-                    <tr>
-                        <th>Bestätigen, Öffnen</th>
-                        <td>klicken</td>
-                    </tr>
-                    <tr>
-                        <th>Abbrechen, Schließen</th>
-                        <td>klicken</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Steuerung</th>
-                        <td>Touchscreen</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>Auswählen</th>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <th>Bestätigen, Öffnen</th>
-                        <td>tippen</td>
-                    </tr>
-                    <tr>
-                        <th>Abbrechen, Schließen</th>
-                        <td>tippen</td>
-                    </tr>
-                </tbody>
-            </table>
+        <section class="mobile-table-group" template="./templates/menu-control.html">
+            <!-- load template -->
         </section>
 
         <h4>Vollbildmodus</h4>
@@ -191,83 +120,8 @@
             Einige Aktionen lassen sich nur ausführen, wenn die zugehörige Bedingung erfüllt ist.
         </p>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Steuerung</th>
-                    <td>Keyboard</td>
-                    <td>Touchscreen</td>
-                    <td>Bedingung</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th>Klettern</th>
-                    <td>oben/unten</td>
-                    <td>nach oben/unten</td>
-                    <td>Leiter</td>
-                </tr>
-                <tr>
-                    <th>Springen</th>
-                    <td>Leertaste</td>
-                    <td>rechts unten</td>
-                    <td>Bodenkontakt</td>
-                </tr>
-                <tr>
-                    <th>Laufattacke</th>
-                    <td>Laufen + Angreifen</td>
-                    <td>Laufen + Angreifen</td>
-                    <td>Stamina</td>
-                </tr>
-                <tr>
-                    <th>Laufen</th>
-                    <td>
-                        links + links<br>
-                        rechts + rechts
-                    </td>
-                    <td>
-                        2-mal tippen + nach links<br>
-                        2-mal tippen + nach rechts
-                    </td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <th>Gehattacke</th>
-                    <td>Gehen + Angreifen</td>
-                    <td>Gehen + Angreifen</td>
-                    <td>Stamina</td>
-                </tr>
-                <tr>
-                    <th>Gehen</th>
-                    <td>links/rechts</td>
-                    <td>nach links/rechts</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <th>Angreifen</th>
-                    <td>A</td>
-                    <td>rechts mittig</td>
-                    <td>Stamina</td>
-                </tr>
-                <tr>
-                    <th>Bombe werfen</th>
-                    <td>F</td>
-                    <td>rechts mittig</td>
-                    <td>Kristall</td>
-                </tr>
-                <tr>
-                    <th>Spiel pausieren</th>
-                    <td>P</td>
-                    <td>unten mittig</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <th>Spiel beenden</th>
-                    <td>Escape</td>
-                    <td>oben mittig</td>
-                    <td>Pause</td>
-                </tr>
-            </tbody>
+        <table id="level-control-table" template="./templates/level-control.html">
+            <!-- load template -->
         </table>
 
         <h3>Touchzonen</h3>

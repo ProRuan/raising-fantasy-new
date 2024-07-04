@@ -511,6 +511,16 @@ td {
     }
 
 
+    #level-control-table {
+        max-width: 520px;
+    }
+
+
+    .no-keyboard {
+        display: none;
+    }
+
+
     th {
         width: 104px;
     }
