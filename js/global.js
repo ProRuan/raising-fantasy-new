@@ -1,4 +1,22 @@
 /**
+ * Includes another html.
+ */
+async function includeHTML() {
+    let inclusion = document.querySelectorAll('[template]');
+    for (let i = 0; i < inclusion.length; i++) {
+        const element = inclusion[i];
+        file = element.getAttribute("template");
+        let response = await fetch(file);
+        if (response.ok) {
+            element.innerHTML = await response.text();
+        } else {
+            element.innerHTML = 'Page not found.';
+        }
+    }
+}
+
+
+/**
  * Loads a storable item.
  * @param {string} key - The key of the storable item.
  */

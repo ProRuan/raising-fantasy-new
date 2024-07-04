@@ -106,9 +106,8 @@
 
 <body id="body" onload="init()">
 
-    <header id="header">
-        <a href="./index.html">Raising Fantasy</a>
-        <button id="full-screen-btn" class="body-btn" onclick="fillScreen(true, 'add', 'remove')">FS</button>
+    <header id="header" template="./templates/header.html">
+        <!-- load template -->
     </header>
 
     <button id="exit-full-screen-btn" class="body-btn hide" onclick="fillScreen(false, 'remove', 'add')">EX</button>
@@ -117,14 +116,8 @@
 
     <img id="rotation-img" src="./img/cycle.png" alt="cycle">
 
-    <footer id="footer">
-        <a href="./imprint.html" target="_blank" class="footer-link">Imprint</a>
-        <a href="./privacy-policy.html" target="_blank" class="footer-link">Privacy Policy</a>
-        <a href="./game-manual.html" class="footer-link">Game Manual</a>
-
-        <button id="imprint-btn" href="./imprint.html" class="body-btn mobile">I</button>
-        <button id="privacy-btn" href="./privacy-policy.html" class="body-btn mobile">PP</button>
-        <button id="game-manual-btn" href="./game-manual.html" class="body-btn mobile">M</button>
+    <footer id="footer" template="./templates/footer.html">
+        <!-- load template -->
     </footer>
 
 </body>

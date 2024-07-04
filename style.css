@@ -52,6 +52,40 @@ header {
 }
 
 
+.link-btn {
+    box-sizing: border-box;
+    padding: 4px;
+    width: 48px;
+    height: 48px;
+    font-family: 'Amaranth', Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    text-align: center;
+    color: #382914;
+    background-image: url('./img/header/ball3.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 4px white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.link-btn:hover {
+    color: #382914;
+    text-decoration: none;
+    box-shadow: 0 0 8px 2px goldenrod;
+}
+
+
+.link-btn-text {
+    padding-top: 5px;
+}
+
+
 .header-btn {
     width: 32px;
     height: 32px;

@@ -11,14 +11,14 @@
     <link rel="stylesheet" href="./fonts/roboto.css">
     <link rel="stylesheet" href="./fonts/trade_winds.css">
     <link rel="stylesheet" href="./style.css">
+
+    <script src="./js/global.js"></script>
 </head>
 
-<body>
+<body onload="includeHTML()">
 
-    <!-- template!!! -->
-    <header id="header">
-        <a href="./index.html">Raising Fantasy</a>
-        <button id="full-screen-btn" class="body-btn" onclick="enterFullScreen()">FS</button>
+    <header id="header" template="./templates/header.html">
+        <!-- load template -->
     </header>
 
     <main>
