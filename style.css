@@ -358,6 +358,13 @@ td {
 }
 
 
+#touch-figure-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 .touch-figure-mobile {
     display: none;
 }
@@ -530,6 +537,11 @@ td {
 
 
 @media (max-width: 590px) {
+    .touch-figure {
+        margin-bottom: 16px;
+    }
+
+
     .touch-figure-desktop {
         display: none;
     }

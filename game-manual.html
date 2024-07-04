@@ -312,57 +312,9 @@
             </li>
         </ul>
 
-        <div class="touch-figure touch-figure-mobile">
-            <div class="touch-container">
-                <div class="touch-width-element">
-                    <div class="zone-label">Steuerzone</div>
-                    <div class="control-zone">Bewegen</div>
-                </div>
-            </div>
-        </div>
-
-        <ul class="touch-figure-mobile">
-            <li>
-                Links ist die Steuerung für das Gehen, Laufen und Klettern untergebracht.
-            </li>
-        </ul>
-
-        <div class="touch-figure touch-figure-mobile">
-            <div class="touch-container">
-                <div class="touch-width-element">
-                    <div class="middle-zone">
-                        <div class="pause-zone">Exit</div>
-                        <div class="zone-label">Mittlere Zone</div>
-                        <div class="pause-zone">Pause</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <ul class="touch-figure-mobile">
-            <li>
-                Oben mittig befindet sich die Zone für das Verlassen, unten mittig die Zone für das Pausieren des
-                Spiels.
-            </li>
-        </ul>
-
-        <div class="touch-figure touch-figure-mobile">
-            <div class="touch-container">
-                <div class="touch-width-element">
-                    <div class="zone-label">Aktionszone</div>
-                    <div class="action-zone">
-                        <div class="attack-zone">Angreifen</div>
-                        <div class="attack-zone">Springen</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <ul class="touch-figure-mobile">
-            <li>
-                Rechts liegen die beiden Zonen für das Angreifen und Springen.
-            </li>
-        </ul>
+        <section id="touch-figure-mobile" template="./templates/touch-figure.html">
+            <!-- load template -->
+        </section>
 
         <h4>Exitbutton des Vollbildmodus</h4>
 
@@ -372,15 +324,8 @@
 
     </main>
 
-    <!-- template!!! -->
-    <footer id="footer">
-        <a href="./imprint.html" target="_blank" class="footer-link">Imprint</a>
-        <a href="./privacy-policy.html" target="_blank" class="footer-link">Privacy Policy</a>
-        <a href="./game-manual.html" class="footer-link">Game Manual</a>
-
-        <button id="imprint-btn" href="./imprint.html" class="body-btn mobile">I</button>
-        <button id="privacy-btn" href="./privacy-policy.html" class="body-btn mobile">PP</button>
-        <button id="game-manual-btn" href="./game-manual.html" class="body-btn mobile">M</button>
+    <footer id="footer" template="./templates/footer.html">
+        <!-- load template -->
     </footer>
 
 </body>
