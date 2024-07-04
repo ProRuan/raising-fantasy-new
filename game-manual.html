@@ -276,18 +276,21 @@
             Die folgende Abbildung zeigt die Belegung der Touchzonen:
         </p>
 
-        <div class="touch-figure">
+        <div id="touch-figure" class="touch-figure touch-figure-desktop">
             <div id="touch-container" class="touch-container">
                 <div class="touch-width-element">
+                    <div class="zone-label">Steuerzone</div>
                     <div class="control-zone">Bewegen</div>
                 </div>
                 <div class="touch-width-element">
                     <div class="middle-zone">
                         <div class="pause-zone">Exit</div>
+                        <div class="zone-label">Mittlere Zone</div>
                         <div class="pause-zone">Pause</div>
                     </div>
                 </div>
                 <div class="touch-width-element">
+                    <div class="zone-label">Aktionszone</div>
                     <div class="action-zone">
                         <div class="attack-zone">Angreifen</div>
                         <div class="attack-zone">Springen</div>
@@ -296,11 +299,75 @@
             </div>
         </div>
 
+        <ul class="touch-figure-desktop">
+            <li>
+                Links ist die Steuerung für das Gehen, Laufen und Klettern untergebracht.
+            </li>
+            <li>
+                Oben mittig befindet sich die Zone für das Verlassen, unten mittig die Zone für das Pausieren des
+                Spiels.
+            </li>
+            <li>
+                Rechts liegen die beiden Zonen für das Angreifen und Springen.
+            </li>
+        </ul>
+
+        <div class="touch-figure touch-figure-mobile">
+            <div class="touch-container">
+                <div class="touch-width-element">
+                    <div class="zone-label">Steuerzone</div>
+                    <div class="control-zone">Bewegen</div>
+                </div>
+            </div>
+        </div>
+
+        <ul class="touch-figure-mobile">
+            <li>
+                Links ist die Steuerung für das Gehen, Laufen und Klettern untergebracht.
+            </li>
+        </ul>
+
+        <div class="touch-figure touch-figure-mobile">
+            <div class="touch-container">
+                <div class="touch-width-element">
+                    <div class="middle-zone">
+                        <div class="pause-zone">Exit</div>
+                        <div class="zone-label">Mittlere Zone</div>
+                        <div class="pause-zone">Pause</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ul class="touch-figure-mobile">
+            <li>
+                Oben mittig befindet sich die Zone für das Verlassen, unten mittig die Zone für das Pausieren des
+                Spiels.
+            </li>
+        </ul>
+
+        <div class="touch-figure touch-figure-mobile">
+            <div class="touch-container">
+                <div class="touch-width-element">
+                    <div class="zone-label">Aktionszone</div>
+                    <div class="action-zone">
+                        <div class="attack-zone">Angreifen</div>
+                        <div class="attack-zone">Springen</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ul class="touch-figure-mobile">
+            <li>
+                Rechts liegen die beiden Zonen für das Angreifen und Springen.
+            </li>
+        </ul>
+
+        <h4>Exitbutton des Vollbildmodus</h4>
+
         <p>
-            Links ist die Bewegungssteuerung für das Gehen, Laufen und Klettern untergebracht.<br>
-            Oben mittig befindet sich die Zone für das Verlassen, unten mittig die Zone für das Pausieren des
-            Spiels.<br>
-            Rechts liegen die beiden Zonen für das Angreifen und Springen.
+            Aktiviere die Pause, um den Exitbutton einzublenden.
         </p>
 
     </main>
