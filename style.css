@@ -147,7 +147,7 @@ main {
 
 .pinboard {
     margin: 0 0 32px 0;
-    max-width: 768px;
+    max-width: 640px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -186,7 +186,7 @@ h2,
 h3,
 h4 {
     width: 100%;
-    max-width: 768px;
+    max-width: 640px;
 }
 
 
@@ -195,7 +195,7 @@ ul {
     box-sizing: border-box;
     margin: 0 0 32px 0;
     width: 100%;
-    max-width: 768px;
+    max-width: 640px;
     font-size: 16px;
     line-height: 24px;
     text-align: justify;
@@ -216,7 +216,7 @@ h1 {
 span {
     margin-bottom: 8px;
     width: 100%;
-    max-width: 768px;
+    max-width: 640px;
     line-height: 24px;
 }
 
@@ -224,7 +224,7 @@ span {
 p {
     margin: 0 0 32px 0;
     width: 100%;
-    max-width: 768px;
+    max-width: 640px;
     font-size: 16px;
     line-height: 24px;
     text-align: justify;
@@ -270,10 +270,15 @@ h4 {
 table {
     margin: 0 0 32px 0;
     width: 100%;
-    max-width: 768px;
-    font-size: 16px;
+    max-width: 640px;
+    font-size: 15px;
     line-height: 20px;
     border-spacing: 0;
+}
+
+
+.mobile-table-group {
+    display: none;
 }
 
 
@@ -295,6 +300,7 @@ thead td {
 
 
 th {
+    box-sizing: border-box;
     padding: 4px 8px;
     text-align: left;
     border-right: 1px solid steelblue;
@@ -302,14 +308,15 @@ th {
 
 
 td {
-    padding: 4px 0;
+    box-sizing: border-box;
+    padding: 4px 8px;
     text-align: center;
 }
 
 
 .touch-figure {
     margin-bottom: 32px;
-    max-width: 768px;
+    max-width: 640px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -428,6 +435,28 @@ td {
     #canvas {
         max-width: 100%;
         max-height: 100vh;
+    }
+}
+
+
+@media (max-width: 688px) {
+    .desktop-table {
+        display: none;
+    }
+
+
+    .mobile-table-group {
+        display: unset;
+    }
+
+
+    th {
+        width: 104px;
+    }
+
+
+    td {
+        width: 151px;
     }
 }
 
