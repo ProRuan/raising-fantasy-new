@@ -295,7 +295,7 @@ thead td {
 
 
 th {
-    padding: 4px 0;
+    padding: 4px 8px;
     text-align: left;
     border-right: 1px solid steelblue;
 }
