@@ -113,7 +113,7 @@ Tasks
   - option: fix jump animation for 'fall after walk' ...
 
 
-Clean Coding (12/12 + 56/56 | 12/12 + 56/56) + (5/5/6) + (0/1) + (0/1 + 1/1/3 + 0/? templates)
+Clean Coding (12/12 + 56/56 | 12/12 + 56/56) + (5/5/6) + (0/1) + (0/1 + 1/1/3 + 0/? (5) templates)
 ------------
   - class Button - doubleCheck
   - class TextButton - doubleCheck
@@ -218,3 +218,8 @@ Clean Coding (12/12 + 56/56 | 12/12 + 56/56) + (5/5/6) + (0/1) + (0/1 + 1/1/3 + 
 
   - Classes too long ... (0/6 + 1 file)
   - Think about folder structure ...
+
+
+  --> imprint.html ...
+  - Fix FS button and EX button ....
+  - Fix header for html links ...

@@ -1,4 +1,4 @@
-body {
+.body {
     margin: 0;
     height: 100vh;
     background-image: url('./img/background.png');
@@ -15,7 +15,23 @@ body {
 }
 
 
-header {
+.link-body {
+    margin: 0;
+    height: 100vh;
+    background-image: url('./img/background.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* justify-content: space-between; */
+    align-items: center;
+    overflow-x: hidden;
+}
+
+
+.header {
     box-sizing: border-box;
     padding: 24px 32px;
     width: 100%;
@@ -30,6 +46,20 @@ header {
     position: fixed;
     left: 0;
     top: 0;
+}
+
+.link-header {
+    box-sizing: border-box;
+    padding: 24px 32px;
+    width: 100%;
+    height: 72px;
+    font-family: 'Trade Winds', Arial, Helvetica, sans-serif;
+    font-size: 32px;
+    background-color: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 4px 4px white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 
@@ -128,7 +158,7 @@ header {
 }
 
 
-footer {
+.footer {
     box-sizing: border-box;
     padding: 24px 32px;
     width: 100%;
@@ -144,6 +174,22 @@ footer {
     position: fixed;
     left: 0;
     bottom: 0;
+}
+
+
+.link-footer {
+    box-sizing: border-box;
+    padding: 24px 32px;
+    width: 100%;
+    height: 72px;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    background-color: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 -4px 4px white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 96px;
 }
 
 
@@ -533,12 +579,24 @@ td {
 
 
 @media (max-width: 640px) {
-    header {
+    .header {
         font-size: 28px;
     }
 
 
-    footer {
+    .link-header {
+        font-size: 28px;
+    }
+
+
+    .footer {
+        font-size: 18px;
+        justify-content: space-around;
+        gap: unset;
+    }
+
+
+    .link-footer {
         font-size: 18px;
         justify-content: space-around;
         gap: unset;
@@ -572,7 +630,12 @@ td {
 
 
 @media (max-width: 480px) {
-    header {
+    .header {
+        font-size: 24px;
+    }
+
+
+    .link-header {
         font-size: 24px;
     }
 
@@ -587,19 +650,24 @@ td {
 
 
 @media (max-height: 464px) {
-    header {
+    .header {
         background-color: rgba(255, 255, 255, 1);
     }
 
 
-    footer {
+    .footer {
         background-color: rgba(255, 255, 255, 1);
     }
 }
 
 
 @media (max-width: 360px) {
-    header {
+    .header {
+        font-size: 20px;
+    }
+
+
+    .link-header {
         font-size: 20px;
     }
 }
