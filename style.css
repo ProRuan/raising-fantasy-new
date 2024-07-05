@@ -361,6 +361,11 @@ table {
 }
 
 
+.mobile-control {
+    display: none;
+}
+
+
 thead {
     font-weight: bold;
     background-color: rgba(70, 130, 180, 0.3);
@@ -546,9 +551,6 @@ td {
 
 
 @media (max-width: 688px) {
-    .desktop-table {
-        display: none;
-    }
 
 
     .mobile-table-group {
@@ -642,6 +644,21 @@ td {
         display: none;
     }
 
+
+    #menu-control-table {
+        max-width: 238px;
+    }
+
+    .desktop-control {
+        display: none;
+    }
+
+
+    .mobile-control {
+        display: unset;
+    }
+
+
     .mobile {
         display: unset;
     }
@@ -668,5 +685,12 @@ td {
 
     .link-header {
         font-size: 20px;
+    }
+}
+
+
+@media (max-width: 320px) {
+    table {
+        font-size: 14px;
     }
 }

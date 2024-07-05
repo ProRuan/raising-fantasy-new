@@ -65,44 +65,44 @@
 
         <h3>Menüsteuerung</h3>
 
-        <p>
+        <p class="desktop-control">
             Das Startmenü kann über Keyboard, Maus oder Touchscreen bedient werden.
         </p>
 
-        <table class="desktop-table">
+        <p class="mobile-control">
+            Das Startmenü kann über den Touchscreen bedient werden.
+        </p>
+
+        <table id="menu-control-table">
             <thead>
                 <tr>
                     <th>Steuerung</th>
-                    <td>Keyboard</td>
-                    <td>Mouse</td>
+                    <td class="desktop-control">Keyboard</td>
+                    <td class="desktop-control">Mouse</td>
                     <td>Touchscreen</td>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <th>Auswählen</th>
-                    <td>links/rechts</td>
-                    <td>anvisieren</td>
+                    <td class="desktop-control">links/rechts</td>
+                    <td class="desktop-control">anvisieren</td>
                     <td>-</td>
                 </tr>
                 <tr>
                     <th>Bestätigen, Öffnen</th>
-                    <td>Enter</td>
-                    <td>klicken</td>
+                    <td class="desktop-control">Enter</td>
+                    <td class="desktop-control">klicken</td>
                     <td>tippen</td>
                 </tr>
                 <tr>
                     <th>Abbrechen, Schließen</th>
-                    <td>Backspace, Enter, X</td>
-                    <td>klicken</td>
+                    <td class="desktop-control">Backspace, Enter, X</td>
+                    <td class="desktop-control">klicken</td>
                     <td>tippen</td>
                 </tr>
             </tbody>
         </table>
-
-        <section class="mobile-table-group" template="./templates/menu-control.html">
-            <!-- load template -->
-        </section>
 
         <h4>Vollbildmodus</h4>
 
@@ -115,8 +115,13 @@
 
         <h3>Levelsteuerung</h3>
 
-        <p>
-            Der Hauptcharakter lässt sich über das Keyboard bzw. den Touchscreen steuern.<br>
+        <p class="desktop-control">
+            Der Hauptcharakter lässt sich über das Keyboard bzw. den Touchscreen steuern.
+            Einige Aktionen lassen sich nur ausführen, wenn die zugehörige Bedingung erfüllt ist.
+        </p>
+
+        <p class="mobile-control">
+            Der Hauptcharakter lässt sich über den Touchscreen steuern.
             Einige Aktionen lassen sich nur ausführen, wenn die zugehörige Bedingung erfüllt ist.
         </p>
 
@@ -126,7 +131,7 @@
 
         <h3>Touchzonen</h3>
 
-        <p>
+        <p class="touch-figure-desktop">
             Die folgende Abbildung zeigt die Belegung der Touchzonen:
         </p>
 
