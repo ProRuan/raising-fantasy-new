@@ -79,36 +79,9 @@
                     Das Startmenü kann über den Touchscreen bedient werden.
                 </p>
 
-                <table id="menu-control-table">
-                    <thead>
-                        <tr>
-                            <th>Steuerung</th>
-                            <td class="desktop-control">Keyboard</td>
-                            <td class="desktop-control">Mouse</td>
-                            <td>Touchscreen</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th>Auswählen</th>
-                            <td class="desktop-control">links/rechts</td>
-                            <td class="desktop-control">anvisieren</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <th>Bestätigen, Öffnen</th>
-                            <td class="desktop-control">Enter</td>
-                            <td class="desktop-control">klicken</td>
-                            <td>tippen</td>
-                        </tr>
-                        <tr>
-                            <th>Abbrechen, Schließen</th>
-                            <td class="desktop-control">Backspace, Enter, X</td>
-                            <td class="desktop-control">klicken</td>
-                            <td>tippen</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-cont" template="./templates/menu-control.html">
+                    <!-- load template -->
+                </div>
 
                 <h4>Vollbildmodus</h4>
                 <p class="p-single">
@@ -131,9 +104,9 @@
                     Einige Aktionen lassen sich nur ausführen, wenn die zugehörige Bedingung erfüllt ist.
                 </p>
 
-                <table id="level-control-table" template="./templates/level-control.html">
+                <div class="table-cont" template="./templates/level-control.html">
                     <!-- load template -->
-                </table>
+                </div>
             </article>
 
             <article>
@@ -179,7 +152,7 @@
                     </li>
                 </ul>
 
-                <section id="touch-figure-mobile" template="./templates/touch-figure.html">
+                <section id="touch-figure-mobile" template="./templates/touch-figure-mobile.html">
                     <!-- load template -->
                 </section>
 
