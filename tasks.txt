@@ -113,7 +113,7 @@ Tasks
   - option: fix jump animation for 'fall after walk' ...
 
 
-Clean Coding (12/12 + 56/56 | 12/12 + 56/56 classes) + (7/7/7 js) + (1/1 style) + (1/1 media) + (1/1 + 3/3/3 + 5/5 templates)
+Clean Coding (12/12 + 56/56 | 12/12 + 58/58 classes) + (7/7/7 js) + (1/1 style) + (1/1 media) + (1/1 + 3/3/3 + 5/5 templates)
 ------------
   - class Button - doubleCheck
   - class TextButton - doubleCheck
@@ -167,13 +167,15 @@ Clean Coding (12/12 + 56/56 | 12/12 + 56/56 classes) + (7/7/7 js) + (1/1 style) 
   - class Keyboard - doubleCheck
   - class Knight - doubleCheck*    * too long!!!
   - class Leaf - doubleCheck
-  - class LevelWorld - doubleCheck    * too long!!!
+  - class LevelWorldSetter - doubleCheck
+  - class LevelWorld - doubleCheck
   - class MoveableObject - doubleCheck*    * too long!!!
   - class PauseableInterval - doubleCheck
   - class Shaman - doubleCheck
   - class Source - doubleCheck
   - class Spider - doubleCheck
-  - class StartWorld - doubleCheck*    * too long!!!
+  - class StartWorldSetter - doubleCheck
+  - class StartWorld - doubleCheck
   - class StateBar - doubleCheck
   - class World - doubleCheck
 
@@ -233,7 +235,7 @@ Templates (5/5)
   - touch-figure-mobile.html - doubleCheck
 
 
-  - Classes too long ... (0/6 + 1 file)
+  - Classes too long ... (2/6 classes + 0/1 js)
   - Think about folder structure ...
 
 
