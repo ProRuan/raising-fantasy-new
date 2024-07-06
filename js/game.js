@@ -17,48 +17,23 @@ let source;
 let fullScreenEnabled = false;
 
 
-// remove comments of the level world ...
-// getElement function ... !
-
-
-// fix exit button (disturbs the touch) ... !!!
-// fix header, main and footer (including rotation hint) ...
-
-
-// set canvas, keyboard, source ...
-
-// init() ...
-// global functions ...
-
-
-// move to key.js!!!
-// pause also for mouse and touch!!!
-
-
-// Review instanceof methods (variable class name) ... !!!
-// Review music pause and play conflict ...
-
-
-
-
+/**
+ * Initializes the game.
+ */
 async function init() {
     updateStoreableItems();
     await includeHTML();
-
     setSource();
     setCanvas();
-
-    // if (canvas.offsetWidth != screen.width && canvas.offsetHeight != screen.height) {    // depends on final html!
-    //     enableFullscreen(true);
-    // }
-
     setKeyboard();
     setStartWorld();
     setTouchZones();
 }
 
 
-// jsdoc
+/**
+ * Updates the values of the storable items.
+ */
 function updateStoreableItems() {
     updateScore();
     updateVolume();
@@ -67,7 +42,9 @@ function updateStoreableItems() {
 }
 
 
-// jsdoc
+/**
+ * Updates the score.
+ */
 function updateScore() {
     score.best = getDefaultScore();
     score.last = getDefaultScore();
@@ -75,13 +52,18 @@ function updateScore() {
 }
 
 
-// jsdoc
+/**
+ * Provides the default score.
+ * @returns {object} - The default score.
+ */
 function getDefaultScore() {
     return { coins: 0, leaves: 0, time: 300000 };
 }
 
 
-// jsdoc
+/**
+ * Loads the score.
+ */
 function loadScore() {
     load('score');
     if (storableItems.score) {
@@ -90,14 +72,18 @@ function loadScore() {
 }
 
 
-// jsdoc
+/**
+ * Updates the volume.
+ */
 function updateVolume() {
     volume = { music: 5, sound: 5 };
     loadVolume();
 }
 
 
-// jsdoc
+/**
+ * Loads the volume.
+ */
 function loadVolume() {
     load('volume');
     if (storableItems.volume) {
@@ -106,20 +92,26 @@ function loadVolume() {
 }
 
 
-// jsdoc
+/**
+ * Sets the source.
+ */
 function setSource() {
     source = new Source();
 }
 
 
-// jsdoc
+/**
+ * Sets the canvas.
+ */
 function setCanvas() {
     canvas = document.getElementById('canvas');
     setCurrentSize();
 }
 
 
-// jsdoc
+/**
+ * Sets the current size of the canvas.
+ */
 function setCurrentSize() {
     if (canvas) {
         currentWidth = canvas.offsetWidth;
@@ -128,13 +120,17 @@ function setCurrentSize() {
 }
 
 
-// jsdoc
+/**
+ * Sets the keyboard.
+ */
 function setKeyboard() {
     keyboard = new Keyboard();
 }
 
 
-// jsdoc
+/**
+ * Sets the start world.
+ */
 function setStartWorld() {
     world = new StartWorld(canvas, keyboard);
     currentWorld = 'start';
@@ -142,14 +138,18 @@ function setStartWorld() {
 }
 
 
-// jsdoc
+/**
+ * Sets the level world.
+ */
 function setLevelWorld() {
     world = new LevelWorld(canvas, keyboard);
     currentWorld = 'level';
 }
 
 
-// jsdoc
+/**
+ * Sets the pause.
+ */
 function setPause() {
     if (isMatch(currentWorld, 'level') && !isTrue(pauseDisabled)) {
         if (isKey('escape')) {
@@ -161,7 +161,9 @@ function setPause() {
 }
 
 
-// jsdoc
+/**
+ * Exits the level.
+ */
 function exitLevel() {
     if (paused) {
         world.stopped = true;
@@ -172,14 +174,18 @@ function exitLevel() {
 }
 
 
-// jsdoc
+/**
+ * Pause the level.
+ */
 function pauseLevel() {
     setGamePaused();
     setPauseTime();
 }
 
 
-// jsdoc
+/**
+ * Set game paused.
+ */
 function setGamePaused() {
     if (!paused) {
         paused = true;
@@ -191,7 +197,10 @@ function setGamePaused() {
 }
 
 
-// jsdoc
+/**
+ * Pauses the game.
+ * @param {boolean} logical - A boolean value.
+ */
 function pauseGame(logical) {
     if (!isTrue(pauseDisabled)) {
         pauseHero(logical);
@@ -202,7 +211,10 @@ function pauseGame(logical) {
 }
 
 
-// jsdoc
+/**
+ * Pauses the hero.
+ * @param {boolean} logical - A boolean value.
+ */
 function pauseHero(logical) {
     let hero = world.hero;
     pauseLevelObject(hero, 'bomb', logical);
@@ -210,7 +222,12 @@ function pauseHero(logical) {
 }
 
 
-// jsdoc
+/**
+ * Pauses a level object.
+ * @param {object} object - The object to pause.
+ * @param {string} key - The key of the subobject.
+ * @param {boolean} logical - A boolean value.
+ */
 function pauseLevelObject(object, key, logical) {
     if (isMatch(key, 'interval') && object[key]) {
         object.stop(logical);
@@ -220,7 +237,10 @@ function pauseLevelObject(object, key, logical) {
 }
 
 
-// jsdoc
+/**
+ * Pauses the state bars.
+ * @param {boolean} logical - A boolean value.
+ */
 function pauseStateBars(logical) {
     let keys = ['hpBar', 'energyBar', 'staminaBar'];
     keys.forEach((key) => {
@@ -230,7 +250,10 @@ function pauseStateBars(logical) {
 }
 
 
-// jsdoc
+/**
+ * Pauses the level components.
+ * @param {boolean} logical - A boolean value.
+ */
 function pauseLevelComponents(logical) {
     for (const [key] of Object.entries(world.level)) {
         let objectGroup = world.level[key];
@@ -243,7 +266,9 @@ function pauseLevelComponents(logical) {
 }
 
 
-// jsdoc
+/**
+ * Sets the time of the pause.
+ */
 function setPauseTime() {
     if (isTrue(paused)) {
         setPauseStart();
@@ -254,14 +279,19 @@ function setPauseTime() {
 }
 
 
-// jsdoc
+/**
+ * Sets the start time of the pause.
+ */
 function setPauseStart() {
     pauseStart = getTime();
     pauseLevelMusic('pause');
 }
 
 
-// jsdoc
+/**
+ * Pauses the level music.
+ * @param {string} method - The method to apply.
+ */
 function pauseLevelMusic(method) {
     world.hero.music[method]();
     if (world.endboss.triggered) {
@@ -270,7 +300,9 @@ function pauseLevelMusic(method) {
 }
 
 
-// jsdoc
+/**
+ * Sets the end time of the pause.
+ */
 function setPauseEnd() {
     pauseEnd = getTime();
     pauseTime += getSum(pauseEnd, -pauseStart);
@@ -278,7 +310,9 @@ function setPauseEnd() {
 }
 
 
-// jsdoc
+/**
+ * Applies the pause offset.
+ */
 function applyPauseOffset() {
     addEndbossPauseOffset();
     addEnemyPauseOffset();
@@ -287,7 +321,9 @@ function applyPauseOffset() {
 }
 
 
-// jsdoc
+/**
+ * Adds the pause offset of the endboss.
+ */
 function addEndbossPauseOffset() {
     addPauseOffset(world, 'endboss', 'calmTime');
     addPauseOffset(world, 'endboss', 'nextCast');
@@ -296,7 +332,12 @@ function addEndbossPauseOffset() {
 }
 
 
-// jsdoc
+/**
+ * Adds the pause offset.
+ * @param {object} variable - The providing object.
+ * @param {string} key - The key of the object to update.
+ * @param {string} subkey - The key of the subobject to update.
+ */
 function addPauseOffset(variable, key, subkey) {
     if (!subkey && variable[key]) {
         variable[key] += getSum(pauseEnd, -pauseStart);
@@ -306,7 +347,9 @@ function addPauseOffset(variable, key, subkey) {
 }
 
 
-// jsdoc
+/**
+ * Adds the pause offset of the enemies.
+ */
 function addEnemyPauseOffset() {
     world.enemies.forEach((enemy) => {
         addPauseOffset(enemy, 'timeToGo');
@@ -318,7 +361,12 @@ function addEnemyPauseOffset() {
 }
 
 
-// jsdoc
+/**
+ * Adds the pause offset of an enemy.
+ * @param {Enemy} enemy - The enemy object.
+ * @param {instance} object - The instance of the enemy.
+ * @param {string} key - The key of the value to update.
+ */
 function addInstancePauseOffset(enemy, object, key) {
     if (enemy instanceof object) {
         enemy[key] += getSum(pauseEnd, -pauseStart);
@@ -327,7 +375,10 @@ function addInstancePauseOffset(enemy, object, key) {
 }
 
 
-// jsdoc
+/**
+ * Adds the pause offset to a web.
+ * @param {Enemy} enemy - The enemy object.
+ */
 function addWebPauseOffset(enemy) {
     if (enemy instanceof Spider && enemy.web) {
         addPauseOffset(enemy, 'web', 'throwResetTime');
@@ -336,14 +387,18 @@ function addWebPauseOffset(enemy) {
 }
 
 
-// jsdoc
+/**
+ * Adds the pause offset of the hero.
+ */
 function addHeroPauseOffset() {
     addPauseOffset(world, 'hero', 'jumpTime');
     addPauseOffset(world, 'hero', 'lastIdle');
 }
 
 
-// jsdoc
+/**
+ * Adds the pause offset of the magic.
+ */
 function addMagicPauseOffset() {
     let magic = world.endboss.magic;
     if (magic && magic instanceof Lightning) {
@@ -353,7 +408,10 @@ function addMagicPauseOffset() {
 }
 
 
-// jsdoc
+/**
+ * Enables the full screen.
+ * @param {boolean} logical - A boolean value.
+ */
 function enableFullscreen(logical) {
     let nativeFactor = NATIVE_WIDTH / NATIVE_HEIGHT;
     let factor = body.offsetWidth / body.offsetHeight;
@@ -361,7 +419,12 @@ function enableFullscreen(logical) {
 }
 
 
-// jsdoc
+/**
+ * Updates the canvas size.
+ * @param {boolean} logical - A boolean value.
+ * @param {number} nativeFactor - The native aspect ratio of the canvas.
+ * @param {number} factor - The apsect ratio of the body.
+ */
 function updateCanvasSize(logical, nativeFactor, factor) {
     if (isTrue(logical) && isGreater(nativeFactor, factor)) {
         updateCanvas('unset', '100vh');
@@ -375,21 +438,29 @@ function updateCanvasSize(logical, nativeFactor, factor) {
 }
 
 
-// jsdoc
+/**
+ * Updates the size values of the canvas.
+ * @param {number} width - The width to set.
+ * @param {number} height - The height to set.
+ */
 function updateCanvas(width, height) {
     setCanvasSize('width', width);
     setCanvasSize('height', height);
 }
 
 
-// jsdoc
+/**
+ * Sets the style value of the canvas.
+ * @param {string} key - The key of the style value.
+ * @param {string} value - The style value to set.
+ */
 function setCanvasSize(key, value) {
     canvas.style[key] = value;
 }
 
 
-window.addEventListener('resize', (event) => {    // window (not document)
-    if (event && !isTrue(fullScreenEnabled)) {    // executeEvent with 3 param
+window.addEventListener('resize', (event) => {
+    if (event && !isTrue(fullScreenEnabled)) {
         setCurrentSize();
     } else if (event && isTrue(fullScreenEnabled)) {
         enableFullscreen(true);
@@ -418,3 +489,33 @@ window.addEventListener("orientationchange", (event) => {
         // console.log('protrait: ', currentOrientation);
     }
 });
+
+
+
+
+// sort this js file ...
+// out folger ...
+// Remove console.logs ...
+// final check on browser ...
+
+
+// remove comments of the level world ...
+// getElement function ... !
+
+
+// fix exit button (disturbs the touch) ... !!!
+// fix header, main and footer (including rotation hint) ...
+
+
+// set canvas, keyboard, source ...
+
+// init() ...
+// global functions ...
+
+
+// move to key.js!!!
+// pause also for mouse and touch!!!
+
+
+// Review instanceof methods (variable class name) ... !!!
+// Review music pause and play conflict ...
