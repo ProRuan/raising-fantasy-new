@@ -209,7 +209,6 @@ function setFullScreen(event) {
  */
 function fillScreen(logical, methodA, methodB) {
     fullScreenEnabled = logical;
-    setClass('body', methodA, 'jc-center');
     setClass('header', methodA, 'display-none');
     setClass('footer', methodA, 'display-none');
     setClass('exit-full-screen-btn', methodB, 'hide');

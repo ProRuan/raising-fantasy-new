@@ -41,6 +41,11 @@
 }
 
 
+.display-none {
+    display: none !important;
+}
+
+
 .btn {
     box-sizing: border-box;
     padding: 4px;
