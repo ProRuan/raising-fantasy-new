@@ -113,7 +113,7 @@ Tasks
   - option: fix jump animation for 'fall after walk' ...
 
 
-Clean Coding (12/12 + 56/56 | 12/12 + 61/61 classes) + (7/7/7 js) + (1/1 style) + (1/1 media) + (1/1 + 3/3/3 + 5/5 templates)
+Clean Coding (12/12 + 56/56 | 12/12 + 61/61 classes) + (7/8/8 js) + (1/1 style) + (1/1 media) + (1/1 + 3/3/3 + 5/5 templates)
 ------------
   - class Button - doubleCheck
   - class TextButton - doubleCheck
@@ -189,7 +189,8 @@ Clean Coding (12/12 + 56/56 | 12/12 + 61/61 classes) + (7/7/7 js) + (1/1 style) 
   - mouse.js - doubleCheck
   - pause.js - doubleCheck
   - source.js - doubleCheck
-  - touch.js - doubleCheck*    * too long!!!
+  - touch-start.js - doubleCheck
+  - touch-move.js - doubleCheck
 
 
   - clean coding: 2 files ...
@@ -238,11 +239,13 @@ Templates (5/5)
   - touch-figure-mobile.html - doubleCheck
 
 
-  - Classes too long ... (6/6 classes + 0/1 js)
+  - Classes too long ... (6/6 classes + 2/2 js)
   - Think about folder structure ...
 
 
---> long classes ...
+Final Tasks
+-----------
+--> long classes - check
 --> folder structure ...
 --> game title ...
 --> canvas with rounded border ...
