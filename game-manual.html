@@ -24,163 +24,170 @@
     <main class="link-main">
         <h1>Game Manual</h1>
 
-        <h2>1. Story</h2>
+        <section>
+            <h2>1. Story</h2>
 
-        <p>
-            Spiele einen Ritter und erkunde die Waldwelt dieses Spiels.
-        </p>
+            <p>
+                Spiele einen Ritter und erkunde die Waldwelt dieses Spiels.
+            </p>
 
-        <h3>Quests</h3>
+            <article>
+                <h3>Quests</h3>
+                <ul>
+                    <li>Sammle alle Münzen.</li>
+                    <li>Sammle alle Blätter.</li>
+                    <li>Überbiete die Bestzeit.</li>
+                </ul>
+                <h4>Neuer Rekord</h4>
+                <p>
+                    Um einen neuen Rekord aufzustellen, müssen mehr Münzen und mehr Blätter als in der aktuellen
+                    Bestwertung
+                    gesammelt werden. Zusätzlich muss die gegenwärtige Bestzeit überboten werden. Nach dem Erreichen der
+                    maximalen Bestwertung, kann immer noch einer neuer Zeitrekord aufgestellt werden.
+                </p>
+            </article>
 
-        <ul>
-            <li>Sammle alle Münzen.</li>
-            <li>Sammle alle Blätter.</li>
-            <li>Überbiete die Bestzeit.</li>
-        </ul>
+            <article>
+                <h3>Spielende</h3>
+                <p>
+                    Das Spiel endet, nachdem der Levelstern berührt wurde.
+                </p>
+            </article>
 
-        <h4>Neuer Rekord</h4>
-
-        <p>
-            Um einen neuen Rekord aufzustellen, müssen mehr Münzen und mehr Blätter als in der aktuellen Bestwertung
-            gesammelt werden. Zusätzlich muss die gegenwärtige Bestzeit überboten werden. Nach dem Erreichen der
-            maximalen Bestwertung, kann immer noch einer neuer Zeitrekord aufgestellt werden.
-        </p>
-
-        <h3>Spielende</h3>
-
-        <p>
-            Das Spiel endet, nachdem der Levelstern berührt wurde.
-        </p>
-
-        <h3>Game over</h3>
-
-        <span>Dieses Phänomen tritt ein, wenn</span>
-
-        <ul>
-            <li>der Charakter in den Abgrund fällt oder</li>
-            <li>die Gesundheitsleiste des Charakters auf 0 steht.</li>
-        </ul>
-
-        <h2>2. Steuerung</h2>
-
-        <h3>Menüsteuerung</h3>
-
-        <p class="desktop-control">
-            Das Startmenü kann über Keyboard, Maus oder Touchscreen bedient werden.
-        </p>
-
-        <p class="mobile-control">
-            Das Startmenü kann über den Touchscreen bedient werden.
-        </p>
-
-        <table id="menu-control-table">
-            <thead>
-                <tr>
-                    <th>Steuerung</th>
-                    <td class="desktop-control">Keyboard</td>
-                    <td class="desktop-control">Mouse</td>
-                    <td>Touchscreen</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th>Auswählen</th>
-                    <td class="desktop-control">links/rechts</td>
-                    <td class="desktop-control">anvisieren</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <th>Bestätigen, Öffnen</th>
-                    <td class="desktop-control">Enter</td>
-                    <td class="desktop-control">klicken</td>
-                    <td>tippen</td>
-                </tr>
-                <tr>
-                    <th>Abbrechen, Schließen</th>
-                    <td class="desktop-control">Backspace, Enter, X</td>
-                    <td class="desktop-control">klicken</td>
-                    <td>tippen</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h4>Vollbildmodus</h4>
-
-        <span> Dieses Spiel unterstützt das Spielen im Vollbildmodus.</span>
-
-        <ul>
-            <li>Klicke 1, um diesen zu aktivieren bzw. klicke 2, um diesen zu deaktivieren.</li>
-            <li>Alternativ können der FS-Button bzw. der EX-Button betätigt werden.</li>
-        </ul>
-
-        <h3>Levelsteuerung</h3>
-
-        <p class="desktop-control">
-            Der Hauptcharakter lässt sich über das Keyboard bzw. den Touchscreen steuern.
-            Einige Aktionen lassen sich nur ausführen, wenn die zugehörige Bedingung erfüllt ist.
-        </p>
-
-        <p class="mobile-control">
-            Der Hauptcharakter lässt sich über den Touchscreen steuern.
-            Einige Aktionen lassen sich nur ausführen, wenn die zugehörige Bedingung erfüllt ist.
-        </p>
-
-        <table id="level-control-table" template="./templates/level-control.html">
-            <!-- load template -->
-        </table>
-
-        <h3>Touchzonen</h3>
-
-        <p class="touch-figure-desktop">
-            Die folgende Abbildung zeigt die Belegung der Touchzonen:
-        </p>
-
-        <div id="touch-figure" class="touch-figure touch-figure-desktop">
-            <div id="touch-container" class="touch-container">
-                <div class="touch-width-element">
-                    <div class="zone-label">Steuerzone</div>
-                    <div class="control-zone">Bewegen</div>
-                </div>
-                <div class="touch-width-element">
-                    <div class="middle-zone">
-                        <div class="pause-zone">Exit</div>
-                        <div class="zone-label">Mittlere Zone</div>
-                        <div class="pause-zone">Pause</div>
-                    </div>
-                </div>
-                <div class="touch-width-element">
-                    <div class="zone-label">Aktionszone</div>
-                    <div class="action-zone">
-                        <div class="attack-zone">Angreifen</div>
-                        <div class="attack-zone">Springen</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <ul class="touch-figure-desktop">
-            <li>
-                Links ist die Steuerung für das Gehen, Laufen und Klettern untergebracht.
-            </li>
-            <li>
-                Oben mittig befindet sich die Zone für das Verlassen, unten mittig die Zone für das Pausieren des
-                Spiels.
-            </li>
-            <li>
-                Rechts liegen die beiden Zonen für das Angreifen und Springen.
-            </li>
-        </ul>
-
-        <section id="touch-figure-mobile" template="./templates/touch-figure.html">
-            <!-- load template -->
+            <article>
+                <h3>Game over</h3>
+                <p class="p-single">
+                    Dieses Phänomen tritt ein, wenn
+                </p>
+                <ul>
+                    <li>der Charakter in den Abgrund fällt oder</li>
+                    <li>die Gesundheitsleiste des Charakters auf 0 steht.</li>
+                </ul>
+            </article>
         </section>
 
-        <h4>Exitbutton des Vollbildmodus</h4>
+        <section>
+            <h2>2. Steuerung</h2>
 
-        <p>
-            Aktiviere die Pause, um den Exitbutton einzublenden.
-        </p>
+            <article>
+                <h3>Menüsteuerung</h3>
+                <p class="desktop-control">
+                    Das Startmenü kann über Keyboard, Maus oder Touchscreen bedient werden.
+                </p>
+                <p class="mobile-control">
+                    Das Startmenü kann über den Touchscreen bedient werden.
+                </p>
 
+                <table id="menu-control-table">
+                    <thead>
+                        <tr>
+                            <th>Steuerung</th>
+                            <td class="desktop-control">Keyboard</td>
+                            <td class="desktop-control">Mouse</td>
+                            <td>Touchscreen</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Auswählen</th>
+                            <td class="desktop-control">links/rechts</td>
+                            <td class="desktop-control">anvisieren</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <th>Bestätigen, Öffnen</th>
+                            <td class="desktop-control">Enter</td>
+                            <td class="desktop-control">klicken</td>
+                            <td>tippen</td>
+                        </tr>
+                        <tr>
+                            <th>Abbrechen, Schließen</th>
+                            <td class="desktop-control">Backspace, Enter, X</td>
+                            <td class="desktop-control">klicken</td>
+                            <td>tippen</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Vollbildmodus</h4>
+                <p class="p-single">
+                    Dieses Spiel unterstützt das Spielen im Vollbildmodus.
+                </p>
+                <ul>
+                    <li>Klicke 1, um diesen zu aktivieren bzw. klicke 2, um diesen zu deaktivieren.</li>
+                    <li>Alternativ können der FS-Button bzw. der EX-Button betätigt werden.</li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Levelsteuerung</h3>
+                <p class="desktop-control">
+                    Der Hauptcharakter lässt sich über das Keyboard bzw. den Touchscreen steuern.
+                    Einige Aktionen lassen sich nur ausführen, wenn die zugehörige Bedingung erfüllt ist.
+                </p>
+                <p class="mobile-control">
+                    Der Hauptcharakter lässt sich über den Touchscreen steuern.
+                    Einige Aktionen lassen sich nur ausführen, wenn die zugehörige Bedingung erfüllt ist.
+                </p>
+
+                <table id="level-control-table" template="./templates/level-control.html">
+                    <!-- load template -->
+                </table>
+            </article>
+
+            <article>
+                <h3>Touchzonen</h3>
+                <p class="touch-figure-desktop">
+                    Die folgende Abbildung zeigt die Belegung der Touchzonen:
+                </p>
+
+                <div id="touch-figure" class="touch-figure touch-figure-desktop">
+                    <div id="touch-screen" class="touch-screen">
+                        <div class="touch-third">
+                            <div class="zone-label">Steuerzone</div>
+                            <div class="control-zone">Bewegen</div>
+                        </div>
+                        <div class="touch-third">
+                            <div class="middle-zone">
+                                <div class="pause-zone">Exit</div>
+                                <div class="zone-label">Mittlere Zone</div>
+                                <div class="pause-zone">Pause</div>
+                            </div>
+                        </div>
+                        <div class="touch-third">
+                            <div class="zone-label">Aktionszone</div>
+                            <div class="action-zone">
+                                <div class="action-subzone">Angreifen</div>
+                                <div class="action-subzone">Springen</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="touch-figure-desktop">
+                    <li>
+                        Links ist die Steuerung für das Gehen, Laufen und Klettern untergebracht.
+                    </li>
+                    <li>
+                        Oben mittig befindet sich die Zone für das Verlassen, unten mittig die Zone für das Pausieren
+                        des
+                        Spiels.
+                    </li>
+                    <li>
+                        Rechts liegen die beiden Zonen für das Angreifen und Springen.
+                    </li>
+                </ul>
+
+                <section id="touch-figure-mobile" template="./templates/touch-figure.html">
+                    <!-- load template -->
+                </section>
+
+                <h4>Exitbutton des Vollbildmodus</h4>
+                <p>
+                    Aktiviere die Pause, um den Exitbutton einzublenden.
+                </p>
+            </article>
+        </section>
     </main>
 
     <footer id="footer" class="footer" template="./templates/footer.html">

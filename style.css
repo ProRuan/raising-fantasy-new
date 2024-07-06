@@ -142,6 +142,11 @@
 }
 
 
+.mobile-btn {
+    display: none;
+}
+
+
 /* link-html */
 .link-main {
     box-sizing: border-box;
@@ -153,6 +158,15 @@
     flex-direction: column;
     align-items: center;
     overflow-y: scroll;
+}
+
+
+h1,
+h2,
+h3,
+h4 {
+    width: 100%;
+    max-width: 640px;
 }
 
 
@@ -200,41 +214,130 @@
 }
 
 
-
-
-/* to verify */
-
-.header-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 20px;
-    background-image: url('./img/header/ball1.png');
+/* game manual */
+.p-single {
+    margin-bottom: 8px;
 }
 
 
-.mobile-btn {
+.mobile-control {
     display: none;
 }
 
 
-.display-none {
-    display: none;
-}
-
-
-
-
-/* imprint */
-
-
-h1,
-h2,
-h3,
-h4 {
-    width: 100%;
+.touch-figure {
+    margin-bottom: 32px;
     max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
+
+.touch-screen {
+    width: fit-content;
+    border: 3px solid steelblue;
+    border-radius: 12px;
+    display: flex;
+}
+
+
+.touch-third {
+    box-sizing: border-box;
+    margin: 4px;
+    width: 160px;
+    height: 270px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.zone-label {
+    margin: 8px;
+    width: calc(120px - 16px);
+    height: calc(60px - 12px);
+    font-weight: bold;
+    color: steelblue;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.control-zone {
+    margin: 8px;
+    width: calc(100% - 16px);
+    height: calc(180px - 24px);
+    background-color: rgba(70, 130, 180, 0.3);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.middle-zone {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.pause-zone {
+    margin: 8px;
+    width: calc(120px - 16px);
+    height: calc(60px - 12px);
+    background-color: rgba(70, 130, 180, 0.3);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.action-zone {
+    width: 100%;
+    height: 180px;
+    border-radius: 12px;
+}
+
+
+.action-subzone {
+    margin: 8px;
+    width: calc(100% - 16px);
+    height: calc(50% - 12px);
+    background-color: rgba(70, 130, 180, 0.3);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#touch-figure-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.touch-figure-mobile {
+    display: none;
+}
+
+
+
+
+/* to verify!!! */
 
 /* format ul and li!!! */
 ul {
@@ -328,9 +431,7 @@ table {
 }
 
 
-.mobile-control {
-    display: none;
-}
+
 
 
 thead {
@@ -365,116 +466,6 @@ td {
 }
 
 
-.touch-figure {
-    margin-bottom: 32px;
-    max-width: 640px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-
-#touch-figure-mobile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-
-.touch-figure-mobile {
-    display: none;
-}
-
-
-.touch-container {
-    width: fit-content;
-    border: 3px solid steelblue;
-    border-radius: 12px;
-    display: flex;
-}
-
-
-.touch-width-element {
-    box-sizing: border-box;
-    margin: 4px;
-    width: 160px;
-    height: 270px;
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
-.control-zone {
-    margin: 8px;
-    width: calc(100% - 16px);
-    height: calc(180px - 24px);
-    background-color: rgba(70, 130, 180, 0.3);
-    border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.middle-zone {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
-.pause-zone {
-    margin: 8px;
-    width: calc(120px - 16px);
-    height: calc(60px - 12px);
-    background-color: rgba(70, 130, 180, 0.3);
-    border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.action-zone {
-    width: 100%;
-    height: 180px;
-    border-radius: 12px;
-}
-
-
-.attack-zone {
-    margin: 8px;
-    width: calc(100% - 16px);
-    height: calc(50% - 12px);
-    background-color: rgba(70, 130, 180, 0.3);
-    border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.zone-label {
-    margin: 8px;
-    width: calc(120px - 16px);
-    height: calc(60px - 12px);
-    font-weight: bold;
-    color: steelblue;
-    border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
 @media (orientation: portrait) {
     #full-screen-btn {
         display: none;
@@ -493,11 +484,6 @@ td {
 
     #rotation-img {
         display: block;
-    }
-
-
-    .display-none {
-        display: flex;
     }
 }
 
@@ -518,13 +504,6 @@ td {
 
 
 @media (max-width: 688px) {
-
-
-    .mobile-table-group {
-        display: unset;
-    }
-
-
     #level-control-table {
         max-width: 520px;
     }
@@ -532,6 +511,13 @@ td {
 
     .no-keyboard {
         display: none;
+    }
+
+
+
+
+    .mobile-table-group {
+        display: unset;
     }
 
 
@@ -561,13 +547,13 @@ td {
 
 
 @media (max-width: 590px) {
-    .touch-figure {
-        margin-bottom: 16px;
+    .touch-figure-desktop {
+        display: none;
     }
 
 
-    .touch-figure-desktop {
-        display: none;
+    .touch-figure {
+        margin-bottom: 16px;
     }
 
 
@@ -596,12 +582,12 @@ td {
     }
 
 
-
-
-    #menu-control-table {
-        max-width: 238px;
+    .mobile-btn {
+        display: unset;
     }
 
+
+    /* link / game manual */
     .desktop-control {
         display: none;
     }
@@ -612,8 +598,8 @@ td {
     }
 
 
-    .mobile-btn {
-        display: unset;
+    #menu-control-table {
+        max-width: 238px;
     }
 }
 
