@@ -6,6 +6,7 @@ let world;
 let currentWorld = 'level';
 let paused;
 let pauseDisabled = false;
+let forcedBreak = false;
 let pauseStart = 0;
 let pauseEnd = 0;
 let pauseTime = 0;
@@ -148,17 +149,6 @@ function setLevelWorld() {
 
 
 /**
- * Enables the full screen.
- * @param {boolean} logical - A boolean value.
- */
-function enableFullscreen(logical) {
-    let nativeFactor = NATIVE_WIDTH / NATIVE_HEIGHT;
-    let factor = body.offsetWidth / body.offsetHeight;
-    updateCanvasSize(logical, nativeFactor, factor);
-}
-
-
-/**
  * Updates the canvas size.
  * @param {boolean} logical - A boolean value.
  * @param {number} nativeFactor - The native aspect ratio of the canvas.
@@ -207,54 +197,58 @@ window.addEventListener('resize', (event) => {
 });
 
 
-window.addEventListener("orientationchange", (event) => {
-    let currentOrientation = event.target.screen.orientation.angle;
+/**
+ * Enables the full screen.
+ * @param {boolean} logical - A boolean value.
+ */
+function enableFullscreen(logical) {
+    let nativeFactor = NATIVE_WIDTH / NATIVE_HEIGHT;
+    let factor = body.offsetWidth / body.offsetHeight;
+    updateCanvasSize(logical, nativeFactor, factor);
+}
 
+
+window.addEventListener("orientationchange", (event) => {
+    let currentOrientation = getCurrentOrientation(event);
     if (isMatch(currentOrientation, 90)) {
-        if (isMatch(currentWorld, 'start')) {    // pause music of start world at least
-            world.music.play();
-        }
-        if (isMatch(currentWorld, 'level') && !isTrue(paused)) {    // pause music of start world at least
-            pauseGame(false);
-        }
-        // console.log('landscape: ', currentOrientation);
+        switchStartMusic('play');
+        pauseOnRotation(forcedBreak, false);
     } else if (isMatch(currentOrientation, 0)) {
-        if (isMatch(currentWorld, 'start')) {    // pause music of start world at least
-            world.music.pause();
-        }
-        if (isMatch(currentWorld, 'level') && !isTrue(paused)) {    // pause music of start world at least
-            pauseGame(true);
-        }
-        // console.log('protrait: ', currentOrientation);
+        switchStartMusic('pause');
+        pauseOnRotation(!paused, true);
     }
 });
 
 
+/**
+ * Provides the current orientation.
+ * @param {event} event - The event of the orientation change.
+ * @returns {string} - The current orientation.
+ */
+function getCurrentOrientation(event) {
+    return event.target.screen.orientation.angle;
+}
 
 
-// sort this js file ...
-// out folger ...
-// Remove console.logs ...
-// final check on browser ...
+/**
+ * Switches the start music.
+ * @param {string} method - The method to apply.
+ */
+function switchStartMusic(method) {
+    if (isMatch(currentWorld, 'start')) {
+        world.music[method]();
+    }
+}
 
 
-// remove comments of the level world ...
-// getElement function ... !
-
-
-// fix exit button (disturbs the touch) ... !!!
-// fix header, main and footer (including rotation hint) ...
-
-
-// set canvas, keyboard, source ...
-
-// init() ...
-// global functions ...
-
-
-// move to key.js!!!
-// pause also for mouse and touch!!!
-
-
-// Review instanceof methods (variable class name) ... !!!
-// Review music pause and play conflict ...
+/**
+ * Pauses the game on rotation.
+ * @param {boolean} condition - The pause condition.
+ * @param {boolean} logical - A boolean value.
+ */
+function pauseOnRotation(condition, logical) {
+    if (isMatch(currentWorld, 'level') && condition) {
+        forcedBreak = logical;
+        pauseLevel();
+    }
+}
