@@ -1,6 +1,6 @@
+/* index.html */
 .body {
     margin: 0;
-    height: 100vh;
     background-image: url('./img/background.png');
     background-position: center;
     background-repeat: no-repeat;
@@ -9,8 +9,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 64px;
     overflow-x: hidden;
+}
+
+
+.main-body {
+    height: 100vh;
+    gap: 64px;
 }
 
 
@@ -26,6 +31,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+
+.main-header {
     position: fixed;
     left: 0;
     top: 0;
@@ -129,38 +138,32 @@
 }
 
 
+/* link-html */
+.link-main {
+    box-sizing: border-box;
+    padding: 24px 24px 12px 24px;
+    width: 100%;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+
+.link-section {
+    width: 100%;
+    max-width: 640px;
+}
+
+
+/* imprint.html */
+
+
 
 
 /* to verify */
-
-.link-body {
-    margin: 0;
-    background-image: url('./img/background.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /* justify-content: space-between; */
-    align-items: center;
-    overflow-x: hidden;
-}
-
-
-.link-header {
-    box-sizing: border-box;
-    padding: 24px 32px;
-    width: 100%;
-    height: 72px;
-    font-family: 'Trade Winds', Arial, Helvetica, sans-serif;
-    font-size: 32px;
-    background-color: rgba(255, 255, 255, 0.75);
-    box-shadow: 0 4px 4px white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
 
 .header-btn {
@@ -200,18 +203,6 @@
 
 
 /* imprint */
-main {
-    box-sizing: border-box;
-    padding: 24px 24px 12px 24px;
-    width: 100%;
-    /* height: calc(100vh - 144px); */
-    font-family: 'Roboto', Arial, Helvetica, sans-serif;
-    background-color: rgba(255, 255, 255, 0.9);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-y: scroll;
-}
 
 
 .pinboard {
@@ -584,11 +575,6 @@ td {
 
 
 
-    .link-header {
-        font-size: 28px;
-    }
-
-
     .link-footer {
         font-size: 18px;
         justify-content: space-around;
@@ -635,13 +621,6 @@ td {
 
 
 
-    .link-header {
-        font-size: 24px;
-    }
-
-
-
-
     #menu-control-table {
         max-width: 238px;
     }
@@ -676,11 +655,6 @@ td {
 
 @media (max-width: 360px) {
     .header {
-        font-size: 20px;
-    }
-
-
-    .link-header {
         font-size: 20px;
     }
 }
