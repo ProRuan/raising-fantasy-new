@@ -243,12 +243,12 @@ Templates (5/5)
   - Think about folder structure ...
 
 
-Final Tasks (4/7 finished + 0/2 open)
+Final Tasks (5/7 finished + 0/3 open)
 -----------
 --> long classes - check
 --> folder structure - check
 --> game title - open
 --> canvas with rounded border - open
---> out folder ...
+--> out folder - open
 --> check on browser ...
 --> share project ...
