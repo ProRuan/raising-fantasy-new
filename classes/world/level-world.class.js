@@ -28,12 +28,9 @@ class LevelWorld extends LevelWorldSetter {
      */
     draw() {
         this.clearCanvas();
-        this.translateCamera(this.cameraX, 0);
-        this.drawLevelObjects();
-        this.drawObject(this.hero);
-        this.drawLevelSubobjects();
-        this.translateCamera(-this.cameraX, 0);
+        this.playCanvas();
         this.drawAvatarInfo();
+        this.drawTouchZoneGroup();
         this.applyGameOver();
         this.dimScreen();
         this.pauseWorld();
