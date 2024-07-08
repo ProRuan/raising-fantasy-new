@@ -84,7 +84,18 @@
 }
 
 
+.main {
+    width: 100%;
+    height: calc(100vh - 144px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 #canvas {
+    height: calc(100vh - 144px);
+    max-height: 768px;
     display: block;
     background-color: black;
     box-shadow: 0 0 32px 32px white;

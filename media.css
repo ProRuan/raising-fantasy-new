@@ -27,6 +27,31 @@
 }
 
 
+@media (max-width: 1364px) {
+    .main {
+        overflow: unset;
+    }
+
+
+    #canvas {
+        width: 100%;
+        height: unset;
+    }
+}
+
+
+@media (max-width: 960px) and (max-height: 540px) and (orientation: landscape) {
+    .header {
+        display: none;
+    }
+
+
+    .footer {
+        display: none;
+    }
+}
+
+
 @media (max-width: 960px) {
     #canvas {
         max-width: 100%;
