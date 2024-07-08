@@ -52,7 +52,7 @@ class StartWorldSetter extends World {
      * Sets the text buttons.
      */
     setTextButtons() {
-        this.newGameButton = this.getTextButton('New Game', 340);
+        this.newGameButton = this.getTextButton('Neues Spiel', 340);
         this.questButton = this.getTextButton('Quest', 412);
         this.setCurrentButton('newGameButton');
     }

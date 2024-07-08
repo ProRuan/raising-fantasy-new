@@ -72,9 +72,9 @@ class Leaderboard extends DrawableObject {
      */
     drawScore() {
         if (this.isScore()) {
-            this.drawHeadline('gold', 'Best Score', this.yHeadline.a);
+            this.drawHeadline('gold', 'Rekord', this.yHeadline.a);
             this.drawChapter('gold', 'best', this.yTop + this.yScore.best);
-            this.drawHeadline('white', 'Last Score', this.yHeadline.b);
+            this.drawHeadline('white', 'Zuletzt', this.yHeadline.b);
             this.drawChapter('white', 'last', this.yTop + this.yScore.last);
         }
     }
@@ -134,7 +134,7 @@ class Leaderboard extends DrawableObject {
     drawCoins(key, y) {
         y += this.yItem.coins;
         let coins = score[key].coins + ' / 20';
-        this.drawResultText('Coins:', y, coins);
+        this.drawResultText('Münzen:', y, coins);
     }
 
 
@@ -146,7 +146,7 @@ class Leaderboard extends DrawableObject {
     drawLeaves(key, y) {
         y += this.yItem.leaves;
         let leaves = score[key].leaves + ' / 18';
-        this.drawResultText('Leaves:', y, leaves);
+        this.drawResultText('Blätter:', y, leaves);
     }
 
 
@@ -159,7 +159,7 @@ class Leaderboard extends DrawableObject {
         y += this.yItem.time;
         let value = score[key].time;
         let time = this.getTime(value);
-        this.drawResultText('Time:', y, time);
+        this.drawResultText('Zeit:', y, time);
     }
 
 
@@ -272,8 +272,8 @@ class Leaderboard extends DrawableObject {
      */
     drawVolume() {
         if (this.isVolume()) {
-            this.drawHeadline('white', 'Volume', this.yHeadline.a);
-            this.drawVolumeText('Music', this.yTop + this.yVolume.music, volume.music);
+            this.drawHeadline('white', 'Volumen', this.yHeadline.a);
+            this.drawVolumeText('Musik', this.yTop + this.yVolume.music, volume.music);
             this.drawVolumeText('Sound', this.yTop + this.yVolume.sound, volume.sound);
         }
     }

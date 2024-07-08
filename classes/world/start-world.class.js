@@ -295,6 +295,6 @@ class StartWorld extends StartWorldSetter {
     setFlashText() {
         let x = this.getCenteredCoord('width', 0);
         let y = this.getCenteredCoord('height', -252);
-        this.drawText('Press any key', x, y);
+        this.drawText('Interagieren', x, y);
     }
 }
