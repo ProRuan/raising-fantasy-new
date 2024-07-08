@@ -99,21 +99,18 @@
     <script src="./js/key.js"></script>
 </head>
 
-<body id="body" class="body main-body" onload="init()">
+<body id="body" class="body" onload="init()">
 
-    <header id="header" class="header main-header">
-        <a href="./index.html" translate="no">Raising Fantasy</a>
-        <button id="full-screen-btn" class="btn" onclick="fillScreen(true, 'add', 'remove')">FS</button>
+    <header id="header" class="header" template="./templates/header.html">
+        <!-- load template -->
     </header>
-
-    <button id="exit-full-screen-btn" class="btn hide" onclick="fillScreen(false, 'remove', 'add')">EX</button>
 
     <main id="main" class="main">
         <img id="rotation-img" src="./img/cycle.png" alt="cycle">
         <canvas id="canvas" width="960" height="540"></canvas>
     </main>
 
-    <footer id="footer" class="footer main-footer" template="./templates/footer.html">
+    <footer id="footer" class="footer" template="./templates/footer.html">
         <!-- load template -->
     </footer>
 

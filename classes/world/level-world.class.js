@@ -68,11 +68,9 @@ class LevelWorld extends LevelWorldSetter {
      */
     pauseWorld() {
         if (paused) {
-            this.setExitButton('remove');
             this.drawObject(this.pause);
 
         } else {
-            this.setExitButton('add');
             this.removeDeadEnemies();
             this.removeSound();
         }

@@ -1,6 +1,7 @@
 /* global html */
 .body {
     margin: 0;
+    height: 100vh;
     background-image: url('./img/background.png');
     background-position: center;
     background-repeat: no-repeat;
@@ -10,12 +11,6 @@
     justify-content: center;
     align-items: center;
     overflow-x: hidden;
-}
-
-
-.main-body {
-    height: 100vh;
-    gap: 64px;
 }
 
 
@@ -31,13 +26,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-
-.main-header {
-    position: fixed;
-    left: 0;
-    top: 0;
 }
 
 
@@ -71,14 +59,6 @@
 }
 
 
-#exit-full-screen-btn {
-    margin: 12px 12px;
-    position: absolute;
-    top: 0;
-    right: 20px;
-}
-
-
 .hide {
     display: none;
 }
@@ -98,7 +78,7 @@
     max-height: 768px;
     display: block;
     background-color: black;
-    box-shadow: 0 0 32px 32px white;
+    box-shadow: 0 0 16px 16px white;
 }
 
 
@@ -124,13 +104,6 @@
     justify-content: center;
     align-items: center;
     gap: 96px;
-}
-
-
-.main-footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
 }
 
 

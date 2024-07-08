@@ -131,7 +131,6 @@ class StartWorld extends StartWorldSetter {
         this.drawObject(this.background);
         this.drawTitle(this.title);
         this.drawMainButtons();
-        this.setExitButton('remove');
     }
 
 

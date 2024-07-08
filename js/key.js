@@ -17,7 +17,6 @@ function executeKeyDown(event) {
         setKeyProperties(event);
         closeBoard();
         setPause();
-        adjustFullScreen(event);
     }
 }
 
@@ -173,46 +172,6 @@ function closeWithKey(key, board, button) {
  */
 function isKey(key, subkey) {
     return (subkey) ? keyboard[key][subkey] : keyboard[key].keydown;
-}
-
-
-/**
- * Adjust full screen mode.
- * @param {event} event - The event of the key down.
- */
-function adjustFullScreen(event) {
-    let orientation = screen.orientation.type;
-    if (orientation.includes('landscape') && isGreater(body.offsetHeight, body.offsetWidth)) {
-        setFullScreen(event);
-    }
-}
-
-
-/**
- * Sets the full screen mode.
- * @param {event} event - The event of the key down.
- */
-function setFullScreen(event) {
-    if (isMatch(event.code, 'Digit2')) {
-        fillScreen(false, 'remove', 'add');
-    } else if (isMatch(event.code, 'Digit1')) {
-        fillScreen(true, 'add', 'remove');
-    }
-}
-
-
-/**
- * Uses the entire screen.
- * @param {boolean} logical - A boolean value.
- * @param {string} methodA - The key of method a.
- * @param {string} methodB - The key of method b.
- */
-function fillScreen(logical, methodA, methodB) {
-    fullScreenEnabled = logical;
-    setClass('header', methodA, 'display-none');
-    setClass('footer', methodA, 'display-none');
-    setClass('exit-full-screen-btn', methodB, 'hide');
-    enableFullscreen(logical);
 }
 
 

@@ -15,7 +15,6 @@ let tempScore;
 let score = {};
 let volume = {};
 let source;
-let fullScreenEnabled = false;
 
 
 /**
@@ -145,66 +144,6 @@ function setStartWorld() {
 function setLevelWorld() {
     world = new LevelWorld(canvas, keyboard);
     currentWorld = 'level';
-}
-
-
-/**
- * Updates the canvas size.
- * @param {boolean} logical - A boolean value.
- * @param {number} nativeFactor - The native aspect ratio of the canvas.
- * @param {number} factor - The apsect ratio of the body.
- */
-function updateCanvasSize(logical, nativeFactor, factor) {
-    if (isTrue(logical) && isGreater(nativeFactor, factor)) {
-        updateCanvas('unset', '100vh');
-    } else if (isTrue(logical) && isGreater(factor, nativeFactor)) {
-        updateCanvas('100%', 'unset');
-    } else if (isTrue(logical) && isMatch(factor, nativeFactor)) {
-        updateCanvas('100%', '100vh');
-    } else {
-        updateCanvas('unset', 'unset');
-    }
-}
-
-
-/**
- * Updates the size values of the canvas.
- * @param {number} width - The width to set.
- * @param {number} height - The height to set.
- */
-function updateCanvas(width, height) {
-    setCanvasSize('width', width);
-    setCanvasSize('height', height);
-}
-
-
-/**
- * Sets the style value of the canvas.
- * @param {string} key - The key of the style value.
- * @param {string} value - The style value to set.
- */
-function setCanvasSize(key, value) {
-    canvas.style[key] = value;
-}
-
-
-window.addEventListener('resize', (event) => {
-    if (event && !isTrue(fullScreenEnabled)) {
-        setCurrentSize();
-    } else if (event && isTrue(fullScreenEnabled)) {
-        enableFullscreen(true);
-    }
-});
-
-
-/**
- * Enables the full screen.
- * @param {boolean} logical - A boolean value.
- */
-function enableFullscreen(logical) {
-    let nativeFactor = NATIVE_WIDTH / NATIVE_HEIGHT;
-    let factor = body.offsetWidth / body.offsetHeight;
-    updateCanvasSize(logical, nativeFactor, factor);
 }
 
 

@@ -110,8 +110,7 @@ function getChangedTouch(event) {
  * @returns {boolean} - A boolean value.
  */
 function isExitZone(touch) {
-    let inZone = isZoneX(touch) && isGreater(touch.clientY, pauseZoneHeight);
-    return inZone && isTrue(fullScreenEnabled);
+    return isZoneX(touch) && isGreater(touch.clientY, pauseZoneHeight);
 }
 
 
@@ -158,8 +157,7 @@ function executeZoneEvent(id, method, touch) {
  * @returns {boolean} - A boolean value.
  */
 function isPauseZone(touch) {
-    let inZone = isZoneX(touch) && isZoneY(touch, -pauseZoneHeight);
-    return inZone && isTrue(fullScreenEnabled);
+    return isZoneX(touch) && isZoneY(touch, -pauseZoneHeight);
 }
 
 
