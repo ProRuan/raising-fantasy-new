@@ -146,8 +146,11 @@ function getZoneValue(key, value) {
  * @param {object} touch - The touch object.
  */
 function executeZoneEvent(id, method, touch) {
-    touchedZone = id;
-    (!touch) ? this[method]() : this[method](touch);
+    let orientation = screen.orientation.type;
+    if (orientation.includes('landscape')) {
+        touchedZone = id;
+        (!touch) ? this[method]() : this[method](touch);
+    }
 }
 
 
