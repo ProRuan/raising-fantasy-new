@@ -32,7 +32,28 @@
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
     background-color: white;
     border-radius: 12px;
+    position: relative;
     overflow-y: scroll;
+}
+
+
+.close-btn {
+    box-sizing: border-box;
+    padding: 0;
+    width: 28px;
+    height: 28px;
+    background-image: url('./img/start_screen/x_button.png');
+    border: unset;
+    border-radius: 50%;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    cursor: pointer;
+}
+
+
+.close-btn:hover {
+    box-shadow: 0 0 8px 2px steelblue;
 }
 
 
@@ -467,4 +488,24 @@ tr:nth-child(2n) {
 
 .touch-figure-mobile {
     display: none;
+}
+
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: rgba(70, 130, 180, 0.7);
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(70, 130, 180, 1);
 }
