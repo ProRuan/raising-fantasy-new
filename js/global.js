@@ -1,11 +1,30 @@
 /**
+ * Initializes a link html.
+ */
+async function initLink() {
+    await includeHTML('template');
+    removeElement('game-manual-link');
+    removeElement('game-manual-btn');
+}
+
+
+/**
+ * Removes an element.
+ * @param {string} id - The id of the element.
+ */
+function removeElement(id) {
+    document.getElementById(id).remove();
+}
+
+
+/**
  * Includes another html.
  */
-async function includeHTML() {
-    let inclusion = document.querySelectorAll('[template]');
+async function includeHTML(template) {
+    let inclusion = document.querySelectorAll(`[${template}]`);
     for (let i = 0; i < inclusion.length; i++) {
         const element = inclusion[i];
-        file = element.getAttribute("template");
+        file = element.getAttribute(`${template}`);
         let response = await fetch(file);
         if (response.ok) {
             element.innerHTML = await response.text();
@@ -275,6 +294,16 @@ function isTimeout(timeout, time) {
 
 
 /**
+ * Opens the dialog.
+ * @param {string} id - The id of the dialog.
+ * @param {boolean} value - A boolean value.
+ */
+function openDialog(id, value) {
+    document.getElementById(id).open = value;
+}
+
+
+/**
  * Sets the class of an element.
  * @param {string} id - The id of the element.
  * @param {string} method - The method to apply.
@@ -282,4 +311,13 @@ function isTimeout(timeout, time) {
  */
 function setClass(id, method, className) {
     document.getElementById(id).classList[method](className);
+}
+
+
+/**
+ * Stops the event.
+ * @param {event} event - The event to stop.
+ */
+function stop(event) {
+    event.stopPropagation();
 }

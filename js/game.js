@@ -22,7 +22,8 @@ let source;
  */
 async function init() {
     updateStoreableItems();
-    await includeHTML();
+    await includeHTML('template');
+    await includeHTML('subtemplate');
     setSource();
     setCanvas();
     setKeyboard();

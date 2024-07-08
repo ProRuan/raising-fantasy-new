@@ -101,6 +101,12 @@
 
 <body id="body" class="body" onload="init()">
 
+    <dialog id="game-manual" class="dialog" onclick="openDialog('game-manual', false)">
+        <section class="dialog-box" template="./templates/game-manual.html" onclick="stop(event)">
+            <!-- load template -->
+        </section>
+    </dialog>
+
     <header id="header" class="header" template="./templates/header.html">
         <!-- load template -->
     </header>

@@ -1,0 +1,125 @@
+<h1>Game Manual</h1>
+
+<section>
+    <h2>1. Story</h2>
+
+    <p>
+        Spiele einen Ritter und erkunde die Waldwelt dieses Spiels.
+    </p>
+
+    <article>
+        <h3>Quests</h3>
+        <ul>
+            <li>Sammle alle Münzen.</li>
+            <li>Sammle alle Blätter.</li>
+            <li>Überbiete die Bestzeit.</li>
+        </ul>
+        <h4>Neuer Rekord</h4>
+        <p>
+            Um einen neuen Rekord aufzustellen, müssen mehr Münzen und mehr Blätter als in der aktuellen
+            Bestwertung
+            gesammelt werden. Zusätzlich muss die gegenwärtige Bestzeit überboten werden. Nach dem Erreichen der
+            maximalen Bestwertung, kann immer noch einer neuer Zeitrekord aufgestellt werden.
+        </p>
+    </article>
+
+    <article>
+        <h3>Spielende</h3>
+        <p>
+            Das Spiel endet, nachdem der Levelstern berührt wurde.
+        </p>
+    </article>
+
+    <article>
+        <h3>Game over</h3>
+        <p class="p-single">
+            Dieses Phänomen tritt ein, wenn
+        </p>
+        <ul>
+            <li>der Charakter in den Abgrund fällt oder</li>
+            <li>die Gesundheitsleiste des Charakters auf 0 steht.</li>
+        </ul>
+    </article>
+</section>
+
+<section>
+    <h2>2. Steuerung</h2>
+
+    <article>
+        <h3>Menüsteuerung</h3>
+        <p class="desktop-control">
+            Das Startmenü kann über Keyboard, Maus oder Touchscreen bedient werden.
+        </p>
+        <p class="mobile-control">
+            Das Startmenü kann über den Touchscreen bedient werden.
+        </p>
+
+        <div class="table-cont" subtemplate="./templates/menu-control.html">
+            <!-- load template -->
+        </div>
+    </article>
+
+    <article>
+        <h3>Levelsteuerung</h3>
+        <p class="desktop-control">
+            Der Hauptcharakter lässt sich über das Keyboard bzw. den Touchscreen steuern.
+            Einige Aktionen lassen sich nur ausführen, wenn die zugehörige Bedingung erfüllt ist.
+        </p>
+        <p class="mobile-control">
+            Der Hauptcharakter lässt sich über den Touchscreen steuern.
+            Einige Aktionen lassen sich nur ausführen, wenn die zugehörige Bedingung erfüllt ist.
+        </p>
+
+        <div class="table-cont" subtemplate="./templates/level-control.html">
+            <!-- load template -->
+        </div>
+    </article>
+
+    <article>
+        <h3>Touchzonen</h3>
+        <p class="touch-figure-desktop">
+            Die folgende Abbildung zeigt die Belegung der Touchzonen:
+        </p>
+
+        <div id="touch-figure" class="touch-figure touch-figure-desktop">
+            <div id="touch-screen" class="touch-screen">
+                <div class="touch-third">
+                    <div class="zone-label">Steuerzone</div>
+                    <div class="control-zone">Bewegen</div>
+                </div>
+                <div class="touch-third">
+                    <div class="middle-zone">
+                        <div class="pause-zone">Exit</div>
+                        <div class="zone-label">Mittlere Zone</div>
+                        <div class="pause-zone">Pause</div>
+                    </div>
+                </div>
+                <div class="touch-third">
+                    <div class="zone-label">Aktionszone</div>
+                    <div class="action-zone">
+                        <div class="action-subzone">Angreifen</div>
+                        <div class="action-subzone">Springen</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ul class="touch-figure-desktop">
+            <li>
+                Links ist die Steuerung für das Gehen, Laufen und Klettern untergebracht.
+            </li>
+            <li>
+                Oben mittig befindet sich die Zone für das Verlassen, unten mittig die Zone für das Pausieren
+                des
+                Spiels.
+            </li>
+            <li>
+                Rechts liegen die beiden Zonen für das Angreifen und Springen.
+            </li>
+        </ul>
+
+        <section id="touch-figure-mobile" subtemplate="./templates/touch-figure-mobile.html">
+            <!-- load template -->
+        </section>
+    </article>
+</section>
