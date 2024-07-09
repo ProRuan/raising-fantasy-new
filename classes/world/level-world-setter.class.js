@@ -211,12 +211,13 @@ class LevelWorldSetter extends World {
      * Draws the touch zone of the control.
      */
     drawControlZone() {
-        if (!paused) {
+        if (!paused && !runChecked) {
             let x = 16;
             let y = canvas.height / 3 + 16;
             let width = canvas.width / 3 - 2 * 16;
             let height = canvas.height / 3 * 2 - 2 * 16;
             this.drawTouchZone(x, y, width, height);
+            this.drawControlZoneText(x, y, width, height);
         }
     }
 
@@ -231,9 +232,41 @@ class LevelWorldSetter extends World {
     drawTouchZone(x, y, width, height) {
         this.ctx.beginPath();
         this.ctx.lineWidth = 2;
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
         this.ctx.strokeStyle = 'steelblue';
         this.ctx.rect(x, y, width, height);
         this.ctx.stroke();
+        this.ctx.fill();
+    }
+
+
+    /**
+     * Draws the text of the control zone.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     * @param {number} width - The width value.
+     * @param {number} height - The height value.
+     */
+    drawControlZoneText(x, y, width, height) {
+        this.drawTouchZoneText('Laufen', x, y - 72, width, height);
+        this.drawTouchZoneText('(2-mal tippen)', x, y - 36, width, height);
+        this.drawTouchZoneText('+', x, y, width, height);
+        this.drawTouchZoneText('Gehen / Klettern', x, y + 36, width, height);
+        this.drawTouchZoneText('(wischen)', x, y + 72, width, height);
+    }
+
+
+    /**
+     * Draws the text of the touch zone.
+     * @param {string} text - The text to draw.
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     * @param {number} width - The width value.
+     * @param {number} height - The height value.
+     */
+    drawTouchZoneText(text, x, y, width, height) {
+        this.setText('24px Roboto', 'center', 'steelblue');
+        this.drawText(text, x + width / 2, y + height / 2 + 12);
     }
 
 
@@ -243,20 +276,22 @@ class LevelWorldSetter extends World {
     drawExitZone() {
         if (paused) {
             let y = 16;
-            this.drawMiddleTouchZone(y);
+            this.drawMiddleTouchZone('Exit', y);
         }
     }
 
 
     /**
      * Draws a touch zone in the middle.
+     * @param {string} - The text to draw.
      * @param {number} y - The y value.
      */
-    drawMiddleTouchZone(y) {
+    drawMiddleTouchZone(text, y) {
         let x = canvas.width / 2 - canvas.width / 16 * 3 / 2 + 16;
         let width = canvas.width / 16 * 3 - 2 * 16;
         let height = canvas.height / 9 * 2 - 2 * 16;
         this.drawTouchZone(x, y, width, height);
+        this.drawTouchZoneText(text, x, y, width, height);
     }
 
 
@@ -264,8 +299,10 @@ class LevelWorldSetter extends World {
      * Draws the touch zone of the pause.
      */
     drawPauseZone() {
-        let y = canvas.height - canvas.height / 9 * 2 + 16;
-        this.drawMiddleTouchZone(y);
+        if (!pauseChecked) {
+            let y = canvas.height - canvas.height / 9 * 2 + 16;
+            this.drawMiddleTouchZone('Pause', y);
+        }
     }
 
 
@@ -273,21 +310,26 @@ class LevelWorldSetter extends World {
      * Draws the touch zone of the attack.
      */
     drawAttackZone() {
-        let y = canvas.height / 3 + 16;
-        this.drawRightTouchZone(y);
+        if (!attackChecked) {
+            let y = canvas.height / 3 + 16;
+            this.drawRightTouchZone('Angreifen', y, '(halten)');
+        }
     }
 
 
     /**
      * Draws a touch zone on the right side.
+     * @param {string} - The text to draw.
      * @param {number} y - The y value.
      */
-    drawRightTouchZone(y) {
+    drawRightTouchZone(text, y, subtext) {
         if (!paused) {
             let x = canvas.width / 3 * 2 + 16;
             let width = canvas.width / 3 - 2 * 16;
             let height = canvas.height / 3 - 2 * 16;
             this.drawTouchZone(x, y, width, height);
+            this.drawTouchZoneText(text, x, y - 18, width, height);
+            this.drawTouchZoneText(subtext, x, y + 18, width, height);
         }
     }
 
@@ -296,7 +338,9 @@ class LevelWorldSetter extends World {
      * Draws the touch zone of the jump.
      */
     drawJumpZone() {
-        let y = canvas.height / 3 * 2 + 16;
-        this.drawRightTouchZone(y);
+        if (!jumpChecked) {
+            let y = canvas.height / 3 * 2 + 16;
+            this.drawRightTouchZone('Springen', y, '(tippen)');
+        }
     }
 }

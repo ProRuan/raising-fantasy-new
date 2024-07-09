@@ -16,6 +16,10 @@ let touchZoneWidth;
 let touchZoneHeight;
 let pauseZoneWidth;
 let pauseZoneHeight;
+let runChecked = false;
+let pauseChecked = false;
+let attackChecked = false;
+let jumpChecked = false;
 
 
 executeEvent('touchstart', (event) => executeTouchStart(event));
@@ -149,7 +153,18 @@ function executeZoneEvent(id, method, touch) {
     let orientation = screen.orientation.type;
     if (orientation.includes('landscape')) {
         touchedZone = id;
+        checkPauseTutorial();
         (!touch) ? this[method]() : this[method](touch);
+    }
+}
+
+
+/**
+ * Verifies, if the pause tutorial is done.
+ */
+function checkPauseTutorial() {
+    if (isMatch(touchedZone, 'pause') && paused && !pauseChecked) {
+        pauseChecked = true;
     }
 }
 
@@ -229,6 +244,9 @@ function isActionZone(touch) {
 function setAction(touch) {
     if (isActionSubzone(touch, 2)) {
         setKey('space', 'keydown', true);
+        if (!jumpChecked) {
+            jumpChecked = true;
+        }
     } else if (isActionSubzone(touch, 1)) {
         setAttackKey();
     }
@@ -263,6 +281,9 @@ function getTouchZoneStartY(n) {
 function setAttackKey() {
     if (!world.hero.bombUnlocked) {
         setKey('keyA', 'keydown', true);
+        if (!attackChecked) {
+            attackChecked = true;
+        }
     } else {
         setKey('keyF', 'keydown', true);
     }

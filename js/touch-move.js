@@ -171,6 +171,9 @@ function setRun() {
         setHorizArrow('doubleClick', true, false);
     } else if (isGreater(lastX, currentX) && isTrue(doubleClick)) {
         setHorizArrow('doubleClick', false, true);
+        if (!runChecked) {
+            runChecked = true;
+        }
     }
 }
 
