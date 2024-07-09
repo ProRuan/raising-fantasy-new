@@ -221,9 +221,9 @@ class DrawableObject extends DrawableObjectSetter {
      * @param {value} y - The y speed.
      */
     setSpeed(s, r, y) {
-        this.speed = s / 60;
-        (r) ? this.runSpeed = r / 60 : false;
-        (y) ? this.speedY = y / 60 : false;
+        this.speed = s / 64;
+        (r) ? this.runSpeed = r / 64 : false;
+        (y) ? this.speedY = y / 64 : false;
     }
 
 
